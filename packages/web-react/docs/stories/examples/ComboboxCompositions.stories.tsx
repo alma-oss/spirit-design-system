@@ -82,7 +82,6 @@ export const ExternalTagsBelow = () => {
   return (
     <Stack hasSpacing>
       <UNSTABLE_Combobox
-        emptySelectionLabel="Languages"
         hasEmptyState={filteredOptions.length === 0}
         helperText="Selection appears as tags below the field, not inside the Combobox."
         id="composition-combobox-external-tags"

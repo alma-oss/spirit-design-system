@@ -11,9 +11,9 @@ const meta: Meta<typeof ModalHeader> = {
     children: {
       control: 'text',
     },
-    closeLabel: {
-      control: 'text',
-      description: 'The label for the close button',
+    strings: {
+      control: 'object',
+      description: 'Component string overrides',
       table: {
         defaultValue: { summary: 'Close' },
       },
@@ -28,7 +28,7 @@ const meta: Meta<typeof ModalHeader> = {
   },
   args: {
     children: 'Modal Header',
-    closeLabel: 'Close',
+    strings: { ariaLabel: { close: 'Close' } },
     hasCloseButton: true,
   },
 };

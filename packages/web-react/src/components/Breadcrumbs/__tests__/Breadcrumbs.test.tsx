@@ -37,4 +37,59 @@ describe('Breadcrumbs', () => {
 
     expect(element).toHaveTextContent('test_title');
   });
+
+  it('should resolve strings.label.back from a translation reference', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+        strings={{ label: { back: { key: 'breadcrumbs.back' } } }}
+      />,
+    );
+
+    expect(dom.container.querySelectorAll('ol > li > a')[0]).toHaveTextContent('Go back');
+  });
+
+  it('should use the default aria-label on the root element', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+      />,
+    );
+
+    expect(dom.container.querySelector('nav')).toHaveAttribute('aria-label', 'Breadcrumb');
+  });
+
+  it('should resolve strings.ariaLabel for the root aria-label', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+        strings={{ ariaLabel: { nav: 'Drobečková navigace' } }}
+      />,
+    );
+
+    expect(dom.container.querySelector('nav')).toHaveAttribute('aria-label', 'Drobečková navigace');
+  });
+
+  it('should render the default back item from the translation catalog', () => {
+    const dom = render(
+      <Breadcrumbs
+        items={[
+          { title: 'test', url: '/test' },
+          { title: 'test_2', url: '/test_2' },
+        ]}
+      />,
+    );
+
+    expect(dom.container.querySelectorAll('ol > li > a')[0]).toHaveTextContent('Go back');
+    expect(dom.container.querySelectorAll('ol > li')).toHaveLength(3);
+  });
 });

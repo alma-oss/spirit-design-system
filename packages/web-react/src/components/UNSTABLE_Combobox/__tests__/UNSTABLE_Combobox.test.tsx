@@ -771,13 +771,15 @@ describe('UNSTABLE_Combobox', () => {
   });
 
   it('should set input min-width from the empty-selection placeholder length', () => {
-    const { container } = render(<TestCombobox emptySelectionLabel="Languages" />);
+    const { container } = render(<TestCombobox strings={{ label: { emptySelection: 'Languages' } }} />);
 
     expect(container.firstChild).toHaveStyle({ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '9ch' });
   });
 
   it('should set input min-width from the add-more placeholder when items are selected', () => {
-    const { container } = render(<TestCombobox selectedKeys={['cs']} addMoreLabel="+ Add more…" />);
+    const { container } = render(
+      <TestCombobox selectedKeys={['cs']} strings={{ label: { addMore: '+ Add more…' } }} />,
+    );
 
     expect(container.firstChild).toHaveStyle({ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '11ch' });
   });
@@ -791,7 +793,7 @@ describe('UNSTABLE_Combobox', () => {
   it('should respect a consumer override of the input min-width CSS variable', () => {
     const { container } = render(
       <TestCombobox
-        emptySelectionLabel="Languages"
+        strings={{ label: { emptySelection: 'Languages' } }}
         UNSAFE_style={{ [COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR]: '18ch' } as CSSProperties}
       />,
     );

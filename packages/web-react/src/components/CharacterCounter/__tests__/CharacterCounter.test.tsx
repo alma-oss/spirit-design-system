@@ -191,6 +191,20 @@ describe('CharacterCounter', () => {
       expect(screenReaderMessage).toHaveTextContent('6 characters over limit');
     });
 
+    it('should resolve strings overrides for screen reader messages', () => {
+      render(
+        <CharacterCounter
+          {...defaultProps}
+          counterThreshold={200}
+          strings={{ ariaLabel: { canEnterUpTo: 'Up to {maxLength} chars' } }}
+        />,
+      );
+
+      const screenReaderMessage = document.getElementById('test-counter-screen-reader-message');
+
+      expect(screenReaderMessage).toHaveTextContent('Up to 200 chars');
+    });
+
     it('should use singular form for 1 character over limit', () => {
       render(<CharacterCounter {...defaultProps} counterThreshold={5} currentLength={6} />);
 

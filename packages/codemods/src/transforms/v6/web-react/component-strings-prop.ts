@@ -1,0 +1,440 @@
+import { API, ASTPath, FileInfo, JSXAttribute, JSXOpeningElement, ObjectExpression, ObjectProperty } from 'jscodeshift';
+import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
+
+type PropertyMigration = { from: string; to: string };
+type ObjectFoldMigration = { from: string; keys: PropertyMigration[] };
+type ComponentMigration = {
+  fold?: PropertyMigration[];
+  foldObject?: ObjectFoldMigration;
+  rename?: PropertyMigration[];
+};
+
+const MIGRATIONS: Record<string, ComponentMigration> = {
+  Breadcrumbs: { fold: [{ from: 'goBackTitle', to: 'label.back' }] },
+  CloseButton: { fold: [{ from: 'label', to: 'ariaLabel.close' }] },
+  File: {
+    fold: [
+      { from: 'editText', to: 'ariaLabel.edit' },
+      { from: 'removeText', to: 'ariaLabel.remove' },
+    ],
+  },
+  FileUpload: {
+    fold: [
+      { from: 'buttonText', to: 'label.button' },
+      { from: 'inputUploadText', to: 'label.upload' },
+      { from: 'inputDragAndDropText', to: 'label.dragAndDrop' },
+    ],
+  },
+  ModalHeader: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
+  PaginationLink: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel.page' }] },
+  PaginationLinkNext: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel.next' }] },
+  PaginationLinkPrevious: { fold: [{ from: 'accessibilityLabel', to: 'ariaLabel.previous' }] },
+  ToastBar: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
+  Tooltip: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
+  UncontrolledPagination: {
+    fold: [
+      { from: 'accessibilityLabel', to: 'ariaLabel.page' },
+      { from: 'accessibilityLabelPrevious', to: 'ariaLabel.previous' },
+      { from: 'accessibilityLabelNext', to: 'ariaLabel.next' },
+    ],
+  },
+  UncontrolledSplitButton: {
+    rename: [{ from: 'buttonLabel', to: 'labelButton' }],
+    fold: [{ from: 'dropdownTriggerLabel', to: 'label.dropdown.trigger' }],
+  },
+  UncontrolledToast: { fold: [{ from: 'closeLabel', to: 'ariaLabel.close' }] },
+  ScrollView: {
+    foldObject: {
+      from: 'ariaLabelControls',
+      keys: [
+        { from: 'start', to: 'ariaLabel.start' },
+        { from: 'end', to: 'ariaLabel.end' },
+        { from: 'top', to: 'ariaLabel.top' },
+        { from: 'bottom', to: 'ariaLabel.bottom' },
+      ],
+    },
+  },
+  ScrollViewControls: {
+    foldObject: {
+      from: 'ariaLabelControls',
+      keys: [
+        { from: 'start', to: 'ariaLabel.start' },
+        { from: 'end', to: 'ariaLabel.end' },
+        { from: 'top', to: 'ariaLabel.top' },
+        { from: 'bottom', to: 'ariaLabel.bottom' },
+      ],
+    },
+  },
+  UNSTABLE_Picker: {
+    fold: [
+      { from: 'addButtonLabel', to: 'ariaLabel.add' },
+      { from: 'closeButtonLabel', to: 'ariaLabel.close' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
+    ],
+  },
+  UNSTABLE_UncontrolledPicker: {
+    fold: [
+      { from: 'addButtonLabel', to: 'ariaLabel.add' },
+      { from: 'closeButtonLabel', to: 'ariaLabel.close' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
+    ],
+  },
+  UNSTABLE_Combobox: {
+    fold: [
+      { from: 'addMoreLabel', to: 'label.addMore' },
+      { from: 'addMoreDescriptionText', to: 'ariaLabel.addMoreDescription' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'selectionCountLabel', to: 'ariaLabel.selectionCount' },
+      { from: 'selectionCountLabelSingular', to: 'ariaLabel.selectionCountSingular' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
+    ],
+  },
+  UNSTABLE_UncontrolledCombobox: {
+    fold: [
+      { from: 'addMoreLabel', to: 'label.addMore' },
+      { from: 'addMoreDescriptionText', to: 'ariaLabel.addMoreDescription' },
+      { from: 'emptySelectionLabel', to: 'label.emptySelection' },
+      { from: 'removeAllLabel', to: 'ariaLabel.removeAll' },
+      { from: 'removeItemLabel', to: 'ariaLabel.removeItem' },
+      { from: 'selectionAriaLabel', to: 'ariaLabel.selection' },
+      { from: 'selectionCountLabel', to: 'ariaLabel.selectionCount' },
+      { from: 'selectionCountLabelSingular', to: 'ariaLabel.selectionCountSingular' },
+      { from: 'tagDescriptionText', to: 'ariaLabel.tagDescription' },
+    ],
+  },
+};
+
+const findAttribute = (element: JSXOpeningElement, name: string): JSXAttribute | undefined =>
+  element.attributes?.find(
+    (attribute): attribute is JSXAttribute =>
+      attribute.type === 'JSXAttribute' && attribute.name.type === 'JSXIdentifier' && attribute.name.name === name,
+  );
+
+const getAttributeExpression = (
+  j: API['jscodeshift'],
+  attribute: JSXAttribute,
+): ObjectProperty['value'] | undefined => {
+  if (attribute.value?.type === 'StringLiteral' || attribute.value?.type === 'Literal') {
+    return j.stringLiteral(String(attribute.value.value));
+  }
+
+  if (attribute.value?.type === 'JSXExpressionContainer' && attribute.value.expression.type !== 'JSXEmptyExpression') {
+    return attribute.value.expression as ObjectProperty['value'];
+  }
+
+  return undefined;
+};
+
+const hasObjectProperty = (object: ObjectExpression, name: string): boolean =>
+  object.properties.some(
+    (property) =>
+      'key' in property &&
+      ((property.key.type === 'Identifier' && property.key.name === name) ||
+        ((property.key.type === 'StringLiteral' || property.key.type === 'Literal') && property.key.value === name)),
+  );
+
+/**
+ * Returns a mutable object only when `strings` can be merged without guessing
+ * runtime values or spread precedence.
+ *
+ * @param element - JSX element whose `strings` attribute is inspected.
+ * @returns {object | undefined} The object literal when it is safe to mutate.
+ */
+const getStringsObject = (element: JSXOpeningElement): ObjectExpression | undefined => {
+  const stringsAttribute = findAttribute(element, 'strings');
+
+  if (!stringsAttribute) {
+    return undefined;
+  }
+
+  if (
+    stringsAttribute.value?.type !== 'JSXExpressionContainer' ||
+    stringsAttribute.value.expression.type !== 'ObjectExpression' ||
+    stringsAttribute.value.expression.properties.some((property) => property.type === 'SpreadElement')
+  ) {
+    return undefined;
+  }
+
+  return stringsAttribute.value.expression;
+};
+
+const getObjectProperty = (object: ObjectExpression, name: string): ObjectProperty | undefined =>
+  object.properties.find(
+    (property): property is ObjectProperty =>
+      property.type === 'ObjectProperty' &&
+      ((property.key.type === 'Identifier' && property.key.name === name) ||
+        ((property.key.type === 'StringLiteral' || property.key.type === 'Literal') && property.key.value === name)),
+  );
+
+const hasNestedObjectProperty = (object: ObjectExpression, path: string): boolean => {
+  const segments = path.split('.');
+  let current: ObjectExpression | undefined = object;
+
+  return segments.every((segment, index) => {
+    if (!current) {
+      return false;
+    }
+
+    const property = getObjectProperty(current, segment);
+
+    if (!property) {
+      return false;
+    }
+
+    if (index === segments.length - 1) {
+      return true;
+    }
+
+    if (property.value.type !== 'ObjectExpression') {
+      current = undefined;
+
+      return false;
+    }
+
+    current = property.value;
+
+    return true;
+  });
+};
+
+const getOrCreateNestedObject = (j: API['jscodeshift'], parent: ObjectExpression, name: string): ObjectExpression => {
+  const existing = getObjectProperty(parent, name);
+
+  if (existing?.value.type === 'ObjectExpression') {
+    return existing.value;
+  }
+
+  const nestedObject = j.objectExpression([]);
+
+  if (existing) {
+    existing.value = nestedObject;
+  } else {
+    parent.properties.push(j.objectProperty(j.identifier(name), nestedObject));
+  }
+
+  return nestedObject;
+};
+
+const setNestedObjectProperty = (
+  j: API['jscodeshift'],
+  object: ObjectExpression,
+  path: string,
+  value: ObjectProperty['value'],
+) => {
+  const segments = path.split('.');
+  const leafName = segments[segments.length - 1];
+  const parent = segments
+    .slice(0, -1)
+    .reduce((current, segment) => getOrCreateNestedObject(j, current, segment), object);
+
+  if (!hasObjectProperty(parent, leafName)) {
+    parent.properties.push(j.objectProperty(j.identifier(leafName), value));
+  }
+};
+
+const migrateRenames = (element: JSXOpeningElement, migrations: PropertyMigration[]): boolean => {
+  let hasChanges = false;
+
+  migrations.forEach(({ from, to }) => {
+    const oldAttribute = findAttribute(element, from);
+
+    if (!oldAttribute) {
+      return;
+    }
+
+    if (findAttribute(element, to)) {
+      element.attributes = element.attributes?.filter((attribute) => attribute !== oldAttribute);
+    } else if (oldAttribute.name.type === 'JSXIdentifier') {
+      oldAttribute.name.name = to;
+    }
+    hasChanges = true;
+  });
+
+  return hasChanges;
+};
+
+/**
+ * Folds deprecated attributes into an object-literal `strings` prop. Dynamic
+ * values and spread objects are left unchanged because their keys are unknown.
+ *
+ * @param j - JSCodeshift factory used to create new AST nodes.
+ * @param element - JSX element to migrate.
+ * @param migrations - Deprecated-to-current key mappings for the component.
+ * @returns {boolean} Whether at least one deprecated attribute was migrated or dropped as a duplicate.
+ */
+const migrateFoldedProperties = (
+  j: API['jscodeshift'],
+  element: JSXOpeningElement,
+  migrations: PropertyMigration[],
+): boolean => {
+  if (element.attributes?.some((attribute) => attribute.type === 'JSXSpreadAttribute')) {
+    return false;
+  }
+
+  const oldAttributes = migrations
+    .map((migration) => ({ migration, attribute: findAttribute(element, migration.from) }))
+    .filter((entry): entry is { migration: PropertyMigration; attribute: JSXAttribute } => Boolean(entry.attribute));
+
+  if (oldAttributes.length === 0) {
+    return false;
+  }
+
+  const existingStringsAttribute = findAttribute(element, 'strings');
+  let stringsObject = getStringsObject(element);
+
+  if (existingStringsAttribute && !stringsObject) {
+    return false;
+  }
+
+  let didChange = false;
+
+  oldAttributes.forEach(({ migration, attribute }) => {
+    const expression = getAttributeExpression(j, attribute);
+
+    if (stringsObject && hasNestedObjectProperty(stringsObject, migration.to)) {
+      element.attributes = element.attributes?.filter((item) => item !== attribute);
+      didChange = true;
+    } else if (expression) {
+      if (!stringsObject) {
+        stringsObject = j.objectExpression([]);
+        element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
+      }
+
+      setNestedObjectProperty(j, stringsObject, migration.to, expression);
+      element.attributes = element.attributes?.filter((item) => item !== attribute);
+      didChange = true;
+    }
+  });
+
+  return didChange;
+};
+
+/**
+ * Folds a nested object-literal prop (e.g. `ariaLabelControls`) into `strings`.
+ *
+ * @param j - JSCodeshift factory used to create new AST nodes.
+ * @param element - JSX element to migrate.
+ * @param migration - Source attribute and nested key mappings.
+ * @returns {boolean} Whether the nested object was eligible for migration.
+ */
+const migrateFoldedObject = (
+  j: API['jscodeshift'],
+  element: JSXOpeningElement,
+  migration?: ObjectFoldMigration,
+): boolean => {
+  if (!migration) {
+    return false;
+  }
+
+  const oldAttribute = findAttribute(element, migration.from);
+
+  if (!oldAttribute) {
+    return false;
+  }
+
+  if (
+    oldAttribute.value?.type !== 'JSXExpressionContainer' ||
+    oldAttribute.value.expression.type !== 'ObjectExpression' ||
+    oldAttribute.value.expression.properties.some((property) => property.type === 'SpreadElement')
+  ) {
+    return false;
+  }
+
+  const existingStringsAttribute = findAttribute(element, 'strings');
+  let stringsObject = getStringsObject(element);
+
+  if (existingStringsAttribute && !stringsObject) {
+    return false;
+  }
+
+  const nestedObject = oldAttribute.value.expression;
+
+  migration.keys.forEach(({ from, to }) => {
+    const nestedProperty = getObjectProperty(nestedObject, from);
+
+    if (!nestedProperty || (stringsObject && hasNestedObjectProperty(stringsObject, to))) {
+      return;
+    }
+
+    if (!stringsObject) {
+      stringsObject = j.objectExpression([]);
+      element.attributes?.push(j.jsxAttribute(j.jsxIdentifier('strings'), j.jsxExpressionContainer(stringsObject)));
+    }
+
+    setNestedObjectProperty(j, stringsObject, to, nestedProperty.value);
+  });
+
+  element.attributes = element.attributes?.filter((item) => item !== oldAttribute);
+
+  return true;
+};
+
+const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
+  const j = api.jscodeshift;
+  const root = j(fileInfo.source);
+  const isSpiritImport = createImportSourceMatcher(getImportSources(options));
+  const localComponents = new Map<string, ComponentMigration>();
+  let hasChanges = false;
+
+  root
+    .find(j.ImportDeclaration, { source: { value: (value: string) => isSpiritImport(value) } })
+    .forEach((importPath) => {
+      importPath.node.specifiers?.forEach((specifier) => {
+        if (specifier.type === 'ImportDefaultSpecifier') {
+          const migration = MIGRATIONS[specifier.local?.name ?? ''];
+
+          if (migration && specifier.local) {
+            localComponents.set(specifier.local.name, migration);
+          }
+
+          return;
+        }
+
+        if (specifier.type !== 'ImportSpecifier' || specifier.imported.type !== 'Identifier') {
+          return;
+        }
+
+        const migration = MIGRATIONS[specifier.imported.name];
+
+        if (migration) {
+          localComponents.set(specifier.local?.name ?? specifier.imported.name, migration);
+        }
+      });
+    });
+
+  root.find(j.JSXOpeningElement).forEach((elementPath: ASTPath<JSXOpeningElement>) => {
+    if (elementPath.node.name.type !== 'JSXIdentifier') {
+      return;
+    }
+
+    const migration = localComponents.get(elementPath.node.name.name);
+
+    if (!migration) {
+      return;
+    }
+
+    if (elementPath.node.attributes?.some((attribute) => attribute.type === 'JSXSpreadAttribute')) {
+      return;
+    }
+
+    const hasRenamedProps = migrateRenames(elementPath.node, migration.rename ?? []);
+    const hasFoldedProps = migrateFoldedProperties(j, elementPath.node, migration.fold ?? []);
+    const hasFoldedObject = migrateFoldedObject(j, elementPath.node, migration.foldObject);
+    hasChanges = hasRenamedProps || hasFoldedProps || hasFoldedObject || hasChanges;
+  });
+
+  return finishTransform(fileInfo, root, hasChanges, { quote: 'double' });
+};
+
+export default transform;

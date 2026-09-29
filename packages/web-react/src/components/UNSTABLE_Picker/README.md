@@ -375,11 +375,11 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 
 | Name                  | Type                                                      | Default                            | Required | Description                                                                                                                                                                                 |
 | --------------------- | --------------------------------------------------------- | ---------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `addButtonLabel`      | `string`                                                  | i18n `picker.add`                  | ✕        | Visually hidden label for the trigger when the popover is closed                                                                                                                            |
 | `children`            | `ReactNode`                                               | —                                  | ✓        | Popover content (for example `UNSTABLE_PickerGroup` with `UNSTABLE_PickerItem`)                                                                                                             |
-| `closeButtonLabel`    | `string`                                                  | i18n `common.close`                | ✕        | Visually hidden label for the trigger when the popover is open                                                                                                                              |
 | `dropdownProps`       | `UnstablePickerDropdownProps`                             | —                                  | ✕        | Alignment and dropdown behavior for the inner `Dropdown`; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops)          |
-| `emptySelectionLabel` | `string`                                                  | —                                  | ✕        | Placeholder when nothing is selected; supports `{label}`                                                                                                                                    |
+| `addButtonLabel`      | `string`                                                  | i18n `picker.add`                  | ✕        | _Deprecated, use `strings.ariaLabel.add`_                                                                                                                                                   |
+| `closeButtonLabel`    | `string`                                                  | i18n `common.close`                | ✕        | _Deprecated, use `strings.ariaLabel.close`_                                                                                                                                                 |
+| `emptySelectionLabel` | `string`                                                  | —                                  | ✕        | _Deprecated, use `strings.label.emptySelection`_                                                                                                                                            |
 | `hasValidationIcon`   | `bool`                                                    | `false`                            | ✕        | Whether to show the validation icon                                                                                                                                                         |
 | `helperText`          | `ReactNode`                                               | —                                  | ✕        | Helper text below the field                                                                                                                                                                 |
 | `id`                  | `string`                                                  | —                                  | ✓        | Stable id for the picker and related elements                                                                                                                                               |
@@ -394,14 +394,15 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `onToggle`            | `() => void`                                              | —                                  | ✓        | Toggle callback; parent updates `isOpen`                                                                                                                                                    |
 | `popoverProps`        | `StyleProps`                                              | `{ theme: 'theme-light-default' }` | ✕        | [Style props][readme-style-props] for the inner `DropdownPopover`; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops) |
 | `tagProps`            | `StyleProps`                                              | —                                  | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [`dropdownProps`, `popoverProps`, `labelProps`, and `tagProps`](#dropdownprops-popoverprops-labelprops-and-tagprops)  |
-| `removeAllLabel`      | `string`                                                  | i18n `picker.removeAll`            | ✕        | Remove control label for aggregated tag                                                                                                                                                     |
-| `removeItemLabel`     | `string`                                                  | i18n `picker.removeItemLabel`      | ✕        | Template for default per-item remove control; supports `{itemLabel}`                                                                                                                        |
+| `removeAllLabel`      | `string`                                                  | i18n `picker.removeAll`            | ✕        | _Deprecated, use `strings.ariaLabel.removeAll`_                                                                                                                                             |
+| `removeItemLabel`     | `string`                                                  | i18n `picker.removeItemLabel`      | ✕        | _Deprecated, use `strings.ariaLabel.removeItem`_                                                                                                                                            |
 | `renderTags`          | `(options: UnstablePickerRenderTagsOptions) => ReactNode` | —                                  | ✕        | Custom selection UI; see [Custom Selection UI (renderTags)](#custom-selection-ui-rendertags)                                                                                                |
 | `selectedKeys`        | `string[]`                                                | —                                  | ✓        | Selected item values                                                                                                                                                                        |
-| `selectionAriaLabel`  | `string`                                                  | i18n `picker.selectionAriaLabel`   | ✕        | `aria-label` for the selection region; supports `{label}`                                                                                                                                   |
+| `selectionAriaLabel`  | `string`                                                  | i18n `picker.selectionAriaLabel`   | ✕        | _Deprecated, use `strings.ariaLabel.selection`_                                                                                                                                             |
 | `selectionMode`       | `'single'` \| `'multiple'`                                | `multiple`                         | ✕        | Radio vs checkbox behavior for `UNSTABLE_PickerItem`                                                                                                                                        |
 | `size`                | [Size dictionary][dictionary-size]                        | `medium`                           | ✕        | Size of the picker shell                                                                                                                                                                    |
-| `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText`   | ✕        | Hidden text for screen readers (tag removal hint)                                                                                                                                           |
+| `strings`             | `UnstablePickerStrings`                                   | —                                  | ✕        | Optional copy overrides; see [Translations](#translations)                                                                                                                                  |
+| `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText`   | ✕        | _Deprecated, use `strings.ariaLabel.tagDescription`_                                                                                                                                        |
 | `validationState`     | [Validation dictionary][dictionary-validation]            | —                                  | ✕        | Validation state                                                                                                                                                                            |
 | `validationText`      | `ReactNode` \| `ReactNode[]`                              | —                                  | ✕        | Validation message                                                                                                                                                                          |
 | `variant`             | [Fill Variants dictionary][dictionary-variant]            | `fill`                             | ✕        | InputContainer variant                                                                                                                                                                      |
@@ -409,6 +410,31 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default unless noted.
+
+| Key                        | Default key                 | English default                       | Description             |
+| -------------------------- | --------------------------- | ------------------------------------- | ----------------------- |
+| `ariaLabel.add`            | `picker.add`                | `Add`                                 | Open / add control      |
+| `ariaLabel.close`          | `common.close`              | `Close`                               | Close popover           |
+| `ariaLabel.removeAll`      | `picker.removeAll`          | `Remove all`                          | Clear all               |
+| `ariaLabel.removeItem`     | `picker.removeItemLabel`    | `Remove {itemLabel}`                  | Remove one tag          |
+| `ariaLabel.selection`      | `picker.selectionAriaLabel` | `Selected {label}`                    | Selection summary       |
+| `ariaLabel.tagDescription` | `picker.tagDescriptionText` | `Press Delete or Backspace to remove` | Tag hint                |
+| `label.emptySelection`     | —                           | field `label`                         | Empty-field placeholder |
+
+### Deprecation Notice
+
+The flat translation props are deprecated and will be removed in v6. Use `strings` instead.
+
+### Migration Guide
+
+```diff
+- <UNSTABLE_Picker addButtonLabel="Add" emptySelectionLabel="Languages" />
++ <UNSTABLE_Picker strings={{ ariaLabel: { add: 'Add' }, label: { emptySelection: 'Languages' } }} />
+```
 
 ## UNSTABLE_UncontrolledPicker
 
@@ -526,6 +552,7 @@ and [escape hatches][readme-escape-hatches].
 [picker-web]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md
 [radio-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Radio/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [tag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Tag/README.md

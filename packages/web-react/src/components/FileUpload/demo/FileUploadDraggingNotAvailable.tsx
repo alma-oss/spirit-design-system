@@ -12,8 +12,10 @@ const FileUploadDraggingNotAvailable = () => (
       isDragAndDropSupported={false}
       isRequired
       label="Label"
-      inputUploadText="Upload your file"
       name="attachment-no-drag-standard"
+      strings={{
+        label: { upload: 'Upload your file' },
+      }}
     />
     <FileUpload
       rootId="example-no-drag-compact"
@@ -23,8 +25,10 @@ const FileUploadDraggingNotAvailable = () => (
       isDragAndDropSupported={false}
       isRequired
       label="Label"
-      inputUploadText="Upload your file"
       name="attachment-no-drag-compact"
+      strings={{
+        label: { upload: 'Upload your file' },
+      }}
     />
   </Grid>
 );

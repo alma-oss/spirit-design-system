@@ -3,8 +3,8 @@
 import React, { type ElementType, type ForwardedRef, type RefObject, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
-import { useAriaDescribedBy, useI18n, useStyleProps } from '../../hooks';
-import { type ForwardRefComponent, type SpiritTextFieldBaseProps } from '../../types';
+import { useAriaDescribedBy, useStringProp, useStyleProps } from '../../hooks';
+import { type ForwardRefComponent, type SpiritTextFieldBaseProps, type TextFieldStrings } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { CharacterCounter } from '../CharacterCounter';
 import { ControlButton } from '../ControlButton';
@@ -19,6 +19,7 @@ import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { usePasswordToggle } from './usePasswordToggle';
 
 const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>) => {
+  const { strings, ...propsWithoutStrings } = props as SpiritTextFieldBaseProps & { strings?: TextFieldStrings };
   const {
     'aria-describedby': ariaDescribedBy = '',
     counterProps,
@@ -40,8 +41,11 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     validationState,
     validationText,
     ...restProps
-  } = props;
-  const { t } = useI18n();
+  } = propsWithoutStrings;
+  const { hide: ariaLabelHide, show: ariaLabelShow } = useStringProp({
+    hide: { value: strings?.ariaLabel?.hide, key: 'textField.password.hide' },
+    show: { value: strings?.ariaLabel?.show, key: 'textField.password.show' },
+  });
   const { isPasswordShown, passwordToggle } = usePasswordToggle();
   const hasPasswordToggleAddon = Boolean(hasPasswordToggle && !isMultiline);
   let inputType = type;
@@ -80,7 +84,7 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     <InputAddon>
       <ControlButton
         aria-checked={isPasswordShown}
-        aria-label={isPasswordShown ? t('textField.password.hide') : t('textField.password.show')}
+        aria-label={isPasswordShown ? ariaLabelHide : ariaLabelShow}
         data-spirit-toggle="password"
         isDisabled={isDisabled}
         isSubtle
