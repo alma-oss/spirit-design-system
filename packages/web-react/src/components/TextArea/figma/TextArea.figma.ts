@@ -1,0 +1,51 @@
+// url=<FIGMA_FILE_ID>?node-id=41283%3A4546
+// source=https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/TextArea/TextArea.tsx
+// component=TextArea
+
+import figma from 'figma';
+import { getInstance } from '../../../figma/helpers';
+
+const instance = getInstance();
+
+const variant = instance.getEnum('Variant', { Outline: 'outline', Fill: undefined });
+const size = instance.getEnum('Size', { Small: 'small', Medium: undefined, Large: 'large' });
+const isDisabled = instance.getBoolean('Disabled');
+const validationState = instance.getEnum('Validation State', {
+  None: undefined,
+  Success: 'success',
+  Warning: 'warning',
+  Danger: 'danger',
+});
+
+const hasLabel = instance.getBoolean('Label');
+const isLabelHidden = !hasLabel;
+const labelHandle = instance.findText('Label', { traverseInstances: true });
+const label = hasLabel && labelHandle.type !== 'ERROR' ? labelHandle.textContent : 'Fill accessible label';
+
+const showHelper = instance.getBoolean('Helper');
+const helperHandle = instance.findText('Helper text', { traverseInstances: true });
+const helperText = showHelper && helperHandle.type !== 'ERROR' ? helperHandle.textContent : undefined;
+
+const validationTextHandle = instance.findText('Validation text', {
+  traverseInstances: true,
+  path: ['Validation text'],
+});
+const validationText =
+  validationState && validationTextHandle.type !== 'ERROR' ? validationTextHandle.textContent : undefined;
+
+export default {
+  id: 'TextArea',
+  imports: ["import { TextArea } from '@alma-oss/spirit-web-react';"],
+  example: figma.code`
+    <TextArea
+      id="textarea-default"
+      label="${label}"
+      ${isLabelHidden ? 'isLabelHidden' : ''}
+      ${isDisabled ? 'isDisabled' : ''}
+      ${variant ? figma.code`variant="${variant}"` : ''}
+      ${size ? figma.code`size="${size}"` : ''}
+      ${helperText ? figma.code`helperText="${helperText}"` : ''}
+      ${validationState ? figma.code`validationState="${validationState}"` : ''}
+      ${validationText ? figma.code`validationText="${validationText}"` : ''}
+    />`,
+};
