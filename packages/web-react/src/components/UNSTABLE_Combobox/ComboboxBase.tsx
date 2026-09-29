@@ -11,8 +11,15 @@ import React, {
   useRef,
 } from 'react';
 import { ContextPropsProvider, FormFieldsContext, UniversalProvider } from '../../context';
-import { useAriaDescribedBy, useDeprecationMessage, useI18n, useSelectionAria, useStyleProps } from '../../hooks';
-import { resolveComponentString, resolveComponentStrings } from '../../translations';
+import {
+  useAriaDescribedBy,
+  useDeprecationMessage,
+  useI18n,
+  useSelectionAria,
+  useStringProp,
+  useStyleProps,
+} from '../../hooks';
+import { resolveComponentString } from '../../translations';
 import { Dropdown } from '../Dropdown';
 import { HelperText } from '../HelperText';
 import { Label } from '../Label';
@@ -100,44 +107,51 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   const {
     addMoreDescriptionText: resolvedAddMoreDescriptionText,
     addMoreLabel: resolvedAddMoreLabel,
+    emptySelectionLabel: resolvedEmptySelectionLabel,
     removeAllLabel: resolvedRemoveAllLabel,
     selectionAriaLabel: resolvedSelectionAriaLabel,
     selectionCountLabel: resolvedSelectionCountLabel,
     selectionCountLabelSingular: resolvedSelectionCountLabelSingular,
     tagDescriptionText: resolvedTagDescriptionText,
-  } = resolveComponentStrings(
-    {
-      addMoreDescriptionText: {
-        value: strings?.ariaLabel?.addMoreDescription ?? addMoreDescriptionText,
-        key: 'combobox.addMoreDescription',
-        params: { label },
-      },
-      addMoreLabel: { value: strings?.label?.addMore ?? addMoreLabel, key: 'combobox.addMore' },
-      removeAllLabel: { value: strings?.ariaLabel?.removeAll ?? removeAllLabel, key: 'combobox.removeAll' },
-      selectionAriaLabel: {
-        value: strings?.ariaLabel?.selection ?? selectionAriaLabel,
-        key: 'combobox.selectionAriaLabel',
-        params: { label },
-      },
-      selectionCountLabel: {
-        value: strings?.ariaLabel?.selectionCount ?? selectionCountLabel,
-        key: 'combobox.selectionCountLabel',
-      },
-      selectionCountLabelSingular: {
-        value: strings?.ariaLabel?.selectionCountSingular ?? selectionCountLabelSingular,
-        key: 'combobox.selectionCountLabelSingular',
-      },
-      tagDescriptionText: {
-        value: strings?.ariaLabel?.tagDescription ?? tagDescriptionText,
-        key: 'combobox.tagDescriptionText',
-      },
+  } = useStringProp({
+    addMoreDescriptionText: {
+      value: strings?.ariaLabel?.addMoreDescription,
+      deprecated: addMoreDescriptionText,
+      key: 'combobox.addMoreDescription',
+      params: { label },
     },
-    t,
-  );
+    addMoreLabel: { value: strings?.label?.addMore, deprecated: addMoreLabel, key: 'combobox.addMore' },
+    emptySelectionLabel: {
+      value: strings?.label?.emptySelection,
+      deprecated: emptySelectionLabel,
+      params: { label },
+    },
+    removeAllLabel: { value: strings?.ariaLabel?.removeAll, deprecated: removeAllLabel, key: 'combobox.removeAll' },
+    selectionAriaLabel: {
+      value: strings?.ariaLabel?.selection,
+      deprecated: selectionAriaLabel,
+      key: 'combobox.selectionAriaLabel',
+      params: { label },
+    },
+    selectionCountLabel: {
+      value: strings?.ariaLabel?.selectionCount,
+      deprecated: selectionCountLabel,
+      key: 'combobox.selectionCountLabel',
+    },
+    selectionCountLabelSingular: {
+      value: strings?.ariaLabel?.selectionCountSingular,
+      deprecated: selectionCountLabelSingular,
+      key: 'combobox.selectionCountLabelSingular',
+    },
+    tagDescriptionText: {
+      value: strings?.ariaLabel?.tagDescription,
+      deprecated: tagDescriptionText,
+      key: 'combobox.tagDescriptionText',
+    },
+  });
   const resolvedEmptyStateLabel = emptyStateLabel ?? t('combobox.emptyState');
   const resolvedLoadingLabel = loadingLabel ?? t('combobox.loading');
   const resolvedRemoveItemLabel = strings?.ariaLabel?.removeItem ?? removeItemLabel;
-  const emptySelectionValue = strings?.label?.emptySelection ?? emptySelectionLabel;
 
   useDeprecationMessage({
     method: 'custom',
@@ -278,7 +292,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     [activateOption, close, focusInput, selectedKeys],
   );
 
-  const emptyPlaceholder = emptySelectionValue ? resolveComponentString(emptySelectionValue, t, { label }) : label;
+  const emptyPlaceholder = resolvedEmptySelectionLabel || label;
 
   const inputPlaceholder = (() => {
     if (selectedKeys.length === 0) {

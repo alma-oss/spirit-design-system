@@ -1,8 +1,7 @@
 'use client';
 
 import React, { type ElementType, Fragment } from 'react';
-import { useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { useDeprecationMessage, useStringProp, useStyleProps } from '../../hooks';
 import { type SpiritBreadcrumbsProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import BreadcrumbsItem from './BreadcrumbsItem';
@@ -20,12 +19,10 @@ const Breadcrumbs = <E extends ElementType = 'nav'>(props: SpiritBreadcrumbsProp
   const { classProps, props: modifiedProps } = useBreadcrumbsStyleProps({ ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps });
-  const { t } = useI18n();
-  const resolvedBackLabel = resolveComponentString(
-    strings?.label?.back ?? goBackTitle ?? { key: 'breadcrumbs.back' },
-    t,
-  );
-  const resolvedAriaLabel = resolveComponentString(strings?.ariaLabel?.nav ?? { key: 'breadcrumbs.ariaLabel' }, t);
+  const { back: resolvedBackLabel, nav: resolvedAriaLabel } = useStringProp({
+    back: { value: strings?.label?.back, deprecated: goBackTitle, key: 'breadcrumbs.back' },
+    nav: { value: strings?.ariaLabel?.nav, key: 'breadcrumbs.ariaLabel' },
+  });
 
   useDeprecationMessage({
     method: 'property',

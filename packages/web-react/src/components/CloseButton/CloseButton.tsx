@@ -1,8 +1,7 @@
 'use client';
 
 import React, { forwardRef } from 'react';
-import { useDeprecationMessage, useI18n } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { useDeprecationMessage, useStringProp } from '../../hooks';
 import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -15,8 +14,9 @@ const defaultProps: Partial<CloseButtonProps> = {
 const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { label, strings, ...restProps } = propsWithDefaults;
-  const { t } = useI18n();
-  const closeLabel = resolveComponentString(strings?.ariaLabel?.close ?? label ?? { key: 'common.close' }, t);
+  const { closeLabel } = useStringProp({
+    closeLabel: { value: strings?.ariaLabel?.close, deprecated: label, key: 'common.close' },
+  });
 
   useDeprecationMessage({
     method: 'custom',

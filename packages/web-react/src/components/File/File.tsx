@@ -3,8 +3,7 @@
 import classNames from 'classnames';
 import React, { type ElementType } from 'react';
 import { ContextPropsProvider } from '../../context';
-import { useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
-import { resolveComponentStrings } from '../../translations';
+import { useDeprecationMessage, useStringProp, useStyleProps } from '../../hooks';
 import { CloseButton } from '../CloseButton';
 import { ControlButton } from '../ControlButton';
 import { Flex } from '../Flex';
@@ -24,7 +23,6 @@ const defaultProps = {
 
 const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { t } = useI18n();
   const {
     children,
     editText,
@@ -45,13 +43,10 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
     ...restProps
   } = propsWithDefaults;
 
-  const { edit: resolvedEditText, remove: resolvedRemoveText } = resolveComponentStrings(
-    {
-      edit: { value: strings?.ariaLabel?.edit ?? editText, key: 'attachment.edit' },
-      remove: { value: strings?.ariaLabel?.remove ?? removeText, key: 'attachment.remove' },
-    },
-    t,
-  );
+  const { edit: resolvedEditText, remove: resolvedRemoveText } = useStringProp({
+    edit: { value: strings?.ariaLabel?.edit, deprecated: editText, key: 'attachment.edit' },
+    remove: { value: strings?.ariaLabel?.remove, deprecated: removeText, key: 'attachment.remove' },
+  });
   const { classProps } = useFileStyleProps({ isDisabled, validationState });
   const { styleProps, props: transferProps } = useStyleProps(restProps);
   const validationTextRole = useValidationTextRole({

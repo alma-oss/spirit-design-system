@@ -1,8 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useDeprecationMessage, useI18n } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { useDeprecationMessage, useStringProp } from '../../hooks';
 import {
   type PolymorphicComponent,
   type PolymorphicRef,
@@ -16,11 +15,9 @@ const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
   { accessibilityLabel, strings, ...restProps }: SpiritPaginationLinkPreviousNextProps<E>,
   ref: PolymorphicRef<E>,
 ) => {
-  const { t } = useI18n();
-  const label = resolveComponentString(
-    strings?.ariaLabel?.previous ?? accessibilityLabel ?? { key: 'pagination.previous' },
-    t,
-  );
+  const { label } = useStringProp({
+    label: { value: strings?.ariaLabel?.previous, deprecated: accessibilityLabel, key: 'pagination.previous' },
+  });
 
   useDeprecationMessage({
     method: 'custom',

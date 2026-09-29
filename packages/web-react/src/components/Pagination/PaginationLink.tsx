@@ -1,8 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useClick, useDeprecationMessage, useI18n, useLinkClick, useStyleProps } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { useClick, useDeprecationMessage, useI18n, useLinkClick, useStringProp, useStyleProps } from '../../hooks';
 import { type PolymorphicComponent, type PolymorphicRef, type SpiritPaginationLinkProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -23,10 +22,10 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
     ...restProps
   } = props;
   const isButtonElement = elementType === 'button';
-  const labelOverride = strings?.ariaLabel?.page ?? accessibilityLabel;
-  const visuallyHiddenLabel = labelOverride
-    ? resolveComponentString(labelOverride, t)
-    : `${t('pagination.goToPage')} ${pageNumber}`;
+  const { pageLabel } = useStringProp({
+    pageLabel: { value: strings?.ariaLabel?.page, deprecated: accessibilityLabel },
+  });
+  const visuallyHiddenLabel = pageLabel || `${t('pagination.goToPage')} ${pageNumber}`;
 
   useDeprecationMessage({
     method: 'custom',

@@ -9,13 +9,12 @@ import {
   useAriaDescribedBy,
   useCollection,
   useDeprecationMessage,
-  useI18n,
   useOpenOnArrowDown,
   useSelectionAria,
   useSelectionManager,
+  useStringProp,
   useStyleProps,
 } from '../../hooks';
-import { resolveComponentString, resolveComponentStrings } from '../../translations';
 import { type ForwardRefComponent } from '../../types';
 import { Dropdown, DropdownPopover } from '../Dropdown';
 import { HelperText } from '../HelperText';
@@ -43,8 +42,6 @@ import {
 
 // eslint-disable-next-line camelcase
 const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<SpiritUnstablePickerRef>) => {
-  const { t } = useI18n();
-
   const {
     'aria-describedby': ariaDescribedBy = '',
     addButtonLabel,
@@ -84,28 +81,32 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
   const {
     addButtonLabel: resolvedAddButtonLabel,
     closeButtonLabel: resolvedCloseButtonLabel,
+    emptySelectionLabel: resolvedEmptySelectionLabel,
     removeAllLabel: resolvedRemoveAllLabel,
     selectionAriaLabel: resolvedSelectionAriaLabel,
     tagDescriptionText: resolvedTagDescriptionText,
-  } = resolveComponentStrings(
-    {
-      addButtonLabel: { value: strings?.ariaLabel?.add ?? addButtonLabel, key: 'picker.add' },
-      closeButtonLabel: { value: strings?.ariaLabel?.close ?? closeButtonLabel, key: 'common.close' },
-      removeAllLabel: { value: strings?.ariaLabel?.removeAll ?? removeAllLabel, key: 'picker.removeAll' },
-      selectionAriaLabel: {
-        value: strings?.ariaLabel?.selection ?? selectionAriaLabel,
-        key: 'picker.selectionAriaLabel',
-        params: { label },
-      },
-      tagDescriptionText: {
-        value: strings?.ariaLabel?.tagDescription ?? tagDescriptionText,
-        key: 'picker.tagDescriptionText',
-      },
+  } = useStringProp({
+    addButtonLabel: { value: strings?.ariaLabel?.add, deprecated: addButtonLabel, key: 'picker.add' },
+    closeButtonLabel: { value: strings?.ariaLabel?.close, deprecated: closeButtonLabel, key: 'common.close' },
+    emptySelectionLabel: {
+      value: strings?.label?.emptySelection,
+      deprecated: emptySelectionLabel,
+      params: { label },
     },
-    t,
-  );
-  const emptySelectionValue = strings?.label?.emptySelection ?? emptySelectionLabel;
-  const emptyLabel = emptySelectionValue ? resolveComponentString(emptySelectionValue, t, { label }) : label;
+    removeAllLabel: { value: strings?.ariaLabel?.removeAll, deprecated: removeAllLabel, key: 'picker.removeAll' },
+    selectionAriaLabel: {
+      value: strings?.ariaLabel?.selection,
+      deprecated: selectionAriaLabel,
+      key: 'picker.selectionAriaLabel',
+      params: { label },
+    },
+    tagDescriptionText: {
+      value: strings?.ariaLabel?.tagDescription,
+      deprecated: tagDescriptionText,
+      key: 'picker.tagDescriptionText',
+    },
+  });
+  const emptyLabel = resolvedEmptySelectionLabel || label;
   const resolvedRemoveItemLabel = strings?.ariaLabel?.removeItem ?? removeItemLabel;
 
   useDeprecationMessage({

@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useDeprecationMessage, useI18n } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { useDeprecationMessage, useStringProp } from '../../hooks';
 import { type UncontrolledSplitButtonProps } from '../../types';
 import { Button } from '../Button';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../Dropdown';
@@ -16,7 +15,6 @@ const defaultProps: Partial<UncontrolledSplitButtonProps> = {
 };
 
 const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
-  const { t } = useI18n();
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     buttonIconName,
@@ -34,12 +32,15 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
     strings,
     ...restProps
   } = propsWithDefaults;
-  const buttonLabelValue = labelButton ?? buttonLabel;
-  const resolvedButtonLabel = buttonLabelValue ? resolveComponentString(buttonLabelValue, t) : '';
-  const resolvedDropdownTriggerLabel = resolveComponentString(
-    strings?.label?.dropdown?.trigger ?? dropdownTriggerLabel ?? { key: 'splitButton.dropdown' },
-    t,
-  );
+  const { buttonLabel: buttonLabelValue, dropdownTriggerLabel: resolvedDropdownTriggerLabel } = useStringProp({
+    buttonLabel: { value: labelButton, deprecated: buttonLabel },
+    dropdownTriggerLabel: {
+      value: strings?.label?.dropdown?.trigger,
+      deprecated: dropdownTriggerLabel,
+      key: 'splitButton.dropdown',
+    },
+  });
+  const resolvedButtonLabel = buttonLabelValue ?? '';
   const [openDropdownState, setOpenDropdownState] = useState(false);
 
   useDeprecationMessage({

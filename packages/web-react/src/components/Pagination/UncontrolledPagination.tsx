@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useDeprecationMessage, useI18n } from '../../hooks';
-import { resolveComponentString } from '../../translations';
+import { useDeprecationMessage, useStringProp } from '../../hooks';
 import { type ClickEvent, type SpiritUncontrolledPaginationProps } from '../../types';
 import Pagination from './Pagination';
 import PaginationItem from './PaginationItem';
@@ -12,7 +11,6 @@ import PaginationLinkPrevious from './PaginationLinkPrevious';
 import { usePagination } from './usePagination';
 
 const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.Element => {
-  const { t } = useI18n();
   const {
     accessibilityLabel,
     accessibilityLabelPrevious,
@@ -24,10 +22,9 @@ const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.E
     visiblePages = 5,
     ...rest
   } = props;
-  const resolvedAccessibilityLabel = resolveComponentString(
-    strings?.ariaLabel?.page ?? accessibilityLabel ?? { key: 'pagination.goToPage' },
-    t,
-  );
+  const { page: resolvedAccessibilityLabel } = useStringProp({
+    page: { value: strings?.ariaLabel?.page, deprecated: accessibilityLabel, key: 'pagination.goToPage' },
+  });
   const { currentPage, pages, handlePageChange } = usePagination({
     defaultPage,
     onChange,

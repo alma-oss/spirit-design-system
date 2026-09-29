@@ -1,5 +1,4 @@
-import { useDeprecationMessage, useI18n } from '../../hooks';
-import { resolveComponentStrings } from '../../translations';
+import { useDeprecationMessage, useStringProp } from '../../hooks';
 import {
   type ScrollViewControlsAriaLabelType,
   type ScrollViewControlsScrollStepType,
@@ -20,8 +19,6 @@ export const useScrollViewControls = (
   scrollStep: ScrollViewControlsScrollStepType = 300,
   strings?: ScrollViewStrings,
 ): UseScrollViewControlsReturn => {
-  const { t } = useI18n();
-
   useDeprecationMessage({
     method: 'custom',
     trigger: ariaLabelControls != null,
@@ -35,15 +32,12 @@ export const useScrollViewControls = (
     end: endLabel,
     top: topLabel,
     bottom: bottomLabel,
-  } = resolveComponentStrings(
-    {
-      start: { value: strings?.ariaLabel?.start ?? ariaLabelControls?.start, key: 'scrollView.ariaStart' },
-      end: { value: strings?.ariaLabel?.end ?? ariaLabelControls?.end, key: 'scrollView.ariaEnd' },
-      top: { value: strings?.ariaLabel?.top ?? ariaLabelControls?.top, key: 'scrollView.ariaTop' },
-      bottom: { value: strings?.ariaLabel?.bottom ?? ariaLabelControls?.bottom, key: 'scrollView.ariaBottom' },
-    },
-    t,
-  );
+  } = useStringProp({
+    start: { value: strings?.ariaLabel?.start, deprecated: ariaLabelControls?.start, key: 'scrollView.ariaStart' },
+    end: { value: strings?.ariaLabel?.end, deprecated: ariaLabelControls?.end, key: 'scrollView.ariaEnd' },
+    top: { value: strings?.ariaLabel?.top, deprecated: ariaLabelControls?.top, key: 'scrollView.ariaTop' },
+    bottom: { value: strings?.ariaLabel?.bottom, deprecated: ariaLabelControls?.bottom, key: 'scrollView.ariaBottom' },
+  });
 
   const controls = [
     {

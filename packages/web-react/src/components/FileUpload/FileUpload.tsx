@@ -3,8 +3,7 @@
 import classNames from 'classnames';
 import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
 import { ContextPropsProvider } from '../../context';
-import { useAriaDescribedBy, useDeprecationMessage, useI18n, useStyleProps } from '../../hooks';
-import { resolveComponentStrings } from '../../translations';
+import { useAriaDescribedBy, useDeprecationMessage, useStringProp, useStyleProps } from '../../hooks';
 import { Button } from '../Button';
 import { HelperText } from '../HelperText';
 import { Icon } from '../Icon';
@@ -16,7 +15,6 @@ import { useFileUploadStyleProps } from './useFileUploadStyleProps';
 
 const FileUpload = (props: FileUploadProps) => {
   const [isDragAndDropDetected, setIsDragAndDropDetected] = useState(false);
-  const { t } = useI18n();
   const {
     'aria-describedby': ariaDescribedBy = '',
     accept,
@@ -50,14 +48,15 @@ const FileUpload = (props: FileUploadProps) => {
     button: resolvedButtonText,
     upload: resolvedInputUploadText,
     dragAndDrop: resolvedInputDragAndDropText,
-  } = resolveComponentStrings(
-    {
-      button: { value: strings?.label?.button ?? buttonText, key: 'fileUploader.browse' },
-      upload: { value: strings?.label?.upload ?? inputUploadText, key: 'fileUploader.inputUpload' },
-      dragAndDrop: { value: strings?.label?.dragAndDrop ?? inputDragAndDropText, key: 'fileUploader.inputDragAndDrop' },
+  } = useStringProp({
+    button: { value: strings?.label?.button, deprecated: buttonText, key: 'fileUploader.browse' },
+    upload: { value: strings?.label?.upload, deprecated: inputUploadText, key: 'fileUploader.inputUpload' },
+    dragAndDrop: {
+      value: strings?.label?.dragAndDrop,
+      deprecated: inputDragAndDropText,
+      key: 'fileUploader.inputDragAndDrop',
     },
-    t,
-  );
+  });
 
   const hasInput = name !== undefined;
   const isUploadInteractionDisabled = isDisabled || isUploadDisabled;
