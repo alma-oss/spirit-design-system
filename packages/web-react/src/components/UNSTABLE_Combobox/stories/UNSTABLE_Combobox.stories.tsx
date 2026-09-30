@@ -26,16 +26,12 @@ const meta = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp'] },
+    controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp', 'startSlot', 'endSlot'] },
   },
   argTypes: {
     showContextualHelp: {
       control: 'boolean',
       description: 'Shows `ContextualHelp` next to the label.',
-      table: { defaultValue: { summary: 'false' } },
-    },
-    hasClearButton: {
-      control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
     },
     hasValidationIcon: {
@@ -88,7 +84,6 @@ const meta = {
     id: PLAYGROUND_COMBOBOX_ID,
     label: 'Languages',
     helperText: 'You can select multiple languages.',
-    hasClearButton: false,
     isDisabled: false,
     isLoading: false,
     isRequired: false,

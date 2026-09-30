@@ -32,7 +32,6 @@ describe('deprecated translation keys', () => {
 
     expect(resolveTranslation(merged, 'combobox.addMore.label')).toBe('Přidat další');
     expect(resolveTranslation(merged, 'combobox.addMore.descriptionAria')).toBe('Přidat {label}');
-    expect(resolveTranslation(merged, 'combobox.removeAllAria')).toBe('Remove all');
     expect(resolveTranslation(merged, 'splitButton.dropdown.trigger')).toBe('Více');
     expect(resolveTranslation(merged, 'splitButton.dropdown')).toBe('Více');
     expect(resolveTranslation(merged, 'textField.showAria')).toBe('Zobrazit');

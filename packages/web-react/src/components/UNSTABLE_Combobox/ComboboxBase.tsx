@@ -31,7 +31,6 @@ import ComboboxInput from './ComboboxInput';
 import ComboboxPopoverContent from './ComboboxPopoverContent';
 import {
   COMBOBOX_INPUT_MIN_WIDTH_CSS_VAR,
-  COMBOBOX_NESTED_CONTROL_BUTTON_SIZE_MAP,
   COMBOBOX_NESTED_SIZE_MAP,
   DEFAULT_OPTIONS_ROLE,
   DEFAULT_POPOVER_PROPS,
@@ -71,8 +70,8 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     contextualHelp,
     emptySelectionLabel,
     emptyStateLabel,
+    endSlot,
     forwardedRef,
-    hasClearButton = false,
     hasEmptyState = false,
     hasValidationIcon,
     helperText,
@@ -90,13 +89,13 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     optionsRole = DEFAULT_OPTIONS_ROLE,
     popoverProps = DEFAULT_POPOVER_PROPS,
     tagProps,
-    removeAllLabel,
     removeItemLabel,
     renderTags,
     selectionAriaLabel,
     selectionCountLabel,
     selectionCountLabelSingular,
     size = DEFAULT_SIZE,
+    startSlot,
     state,
     strings,
     tagDescriptionText,
@@ -112,7 +111,6 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     emptySelectionLabel: resolvedEmptySelectionLabel,
     emptyState: resolvedEmptyStateText,
     loading: resolvedLoadingText,
-    removeAllLabel: resolvedRemoveAllLabel,
     selectionAriaLabel: resolvedSelectionAriaLabel,
     selectionCountLabel: resolvedSelectionCountLabel,
     selectionCountLabelSingular: resolvedSelectionCountLabelSingular,
@@ -132,7 +130,6 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     },
     emptyState: { value: strings?.emptyState, key: 'combobox.emptyState' },
     loading: { value: strings?.loading, key: 'combobox.loading' },
-    removeAllLabel: { value: strings?.removeAllAria, deprecated: removeAllLabel, key: 'combobox.removeAllAria' },
     selectionAriaLabel: {
       value: strings?.selection?.labelAria,
       deprecated: selectionAriaLabel,
@@ -165,7 +162,6 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
       addMoreLabel != null ||
       addMoreDescriptionText != null ||
       emptySelectionLabel != null ||
-      removeAllLabel != null ||
       removeItemLabel != null ||
       selectionAriaLabel != null ||
       selectionCountLabel != null ||
@@ -302,9 +298,10 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
       activateOption,
       close,
       focus: focusInput,
+      removeAll,
       selectedKeys,
     }),
-    [activateOption, close, focusInput, selectedKeys],
+    [activateOption, close, focusInput, removeAll, selectedKeys],
   );
 
   const emptyPlaceholder = resolvedEmptySelectionLabel || label;
@@ -371,9 +368,6 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
           color: 'selected',
           size: COMBOBOX_NESTED_SIZE_MAP[size],
         },
-        controlButton: {
-          size: COMBOBOX_NESTED_CONTROL_BUTTON_SIZE_MAP[size],
-        },
         contextualHelp: {
           id: contextualHelpId,
         },
@@ -417,10 +411,10 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
                 addMoreDescriptionText={resolvedAddMoreDescriptionText}
                 addMoreHelperId={addMoreHelperId}
                 describedByIds={describedByIds}
+                endSlot={endSlot}
                 getKeyboardGridRowProps={getKeyboardGridRowProps}
                 handleGroupClick={handleGroupClick}
                 handleInputChange={handleInputChange}
-                hasClearButton={hasClearButton}
                 inputAriaLabel={inputAriaLabel}
                 inputClassName={classProps.input}
                 inputId={inputId}
@@ -436,20 +430,17 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
                 onInputKeyDown={onInputKeyDown}
                 open={open}
                 optionsRole={optionsRole}
-                removeAll={removeAll}
-                removeAllLabel={resolvedRemoveAllLabel}
                 removeItem={removeItem}
                 removeItemLabel={resolvedRemoveItemLabel}
                 removeTagAtIndex={removeTagAtIndex}
                 renderTags={renderTags}
                 selectedItems={selectedItems}
-                selectedKeysCount={selectedKeys.length}
                 selectionAriaLabel={resolvedSelectionAriaLabel}
                 selectionGridRef={selectionGridRef}
                 selectionId={selectionId}
                 shouldRenderOptions={shouldRenderOptions}
                 showAddMore={showAddMore}
-                size={size}
+                startSlot={startSlot}
                 tagProps={tagProps}
               />
               <ComboboxPopoverContent

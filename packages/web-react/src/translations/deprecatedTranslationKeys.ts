@@ -9,7 +9,6 @@ export const deprecatedTranslationKeys: Record<string, string> = {
   'attachment.remove': 'attachment.removeAria',
   'combobox.addMore': 'combobox.addMore.label',
   'combobox.addMoreDescription': 'combobox.addMore.descriptionAria',
-  'combobox.removeAll': 'combobox.removeAllAria',
   'combobox.removeItemLabel': 'combobox.tag.removeAria',
   'combobox.selectionAriaLabel': 'combobox.selection.labelAria',
   'combobox.selectionCountLabel': 'combobox.selection.countAria.plural',
