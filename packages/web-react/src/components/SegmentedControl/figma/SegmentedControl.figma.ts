@@ -16,12 +16,16 @@ const renderItem = (layerName: string, value: string) => {
     return undefined;
   }
   const { metadata } = item.executeTemplate();
-  const { iconCode, labelText, isDisabled } = metadata?.props ?? {};
+  const { iconCode, actionText, hasLabel, isDisabled } = metadata?.props ?? {};
 
   return figma.code`
     <SegmentedControlItem id="segmented-control-example-${value}" value="${value}"${isDisabled ? ' isDisabled' : ''}>
       ${iconCode}
-      ${labelText ? figma.code`<Truncate mode="lines" limit={1}>${labelText}</Truncate>` : ''}
+      ${
+        hasLabel
+          ? figma.code`<Truncate mode="lines" limit={1}>${actionText}</Truncate>`
+          : figma.code`<VisuallyHidden>${actionText}</VisuallyHidden>`
+      }
     </SegmentedControlItem>`;
 };
 
@@ -33,7 +37,9 @@ const item5 = renderItem('Item 05', 'value-5');
 
 export default {
   id: 'SegmentedControl',
-  imports: ["import { Icon, SegmentedControl, SegmentedControlItem, Truncate } from '@alma-oss/spirit-web-react';"],
+  imports: [
+    "import { Icon, SegmentedControl, SegmentedControlItem, Truncate, VisuallyHidden } from '@alma-oss/spirit-web-react';",
+  ],
   example: figma.code`
     <SegmentedControl
       label="Fill accessible label"

@@ -52,26 +52,30 @@ export default {
             {/* Product logo */}
             <div className="text-desktop-left">
               <Link href="https://www.example.com">
-                <ProductLogo>{/*defaultSvgLogo*/}</ProductLogo>
+                <ProductLogo>
+                  <svg width="178" height="44" viewBox="0 0 178 44" role="img" aria-label="Product logo">
+                    <rect width="178" height="44" rx="4" fill="currentColor" />
+                  </svg>
+                </ProductLogo>
               </Link>
             </div>
 
             {/* Flex with social media links */}
             <Flex elementType="ul" alignmentX="center" alignmentY="center">
               <li>
-                <ButtonLink color="tertiary" isSymmetrical>
+                <ButtonLink href="https://www.example.com" color="tertiary" isSymmetrical>
                   <VisuallyHidden>Facebook</VisuallyHidden>
                   <Icon name="logo-facebook" />
                 </ButtonLink>
               </li>
               <li>
-                <ButtonLink color="tertiary" isSymmetrical>
+                <ButtonLink href="https://www.example.com" color="tertiary" isSymmetrical>
                   <VisuallyHidden>X</VisuallyHidden>
                   <Icon name="logo-x" />
                 </ButtonLink>
               </li>
               <li>
-                <ButtonLink color="tertiary" isSymmetrical>
+                <ButtonLink href="https://www.example.com" color="tertiary" isSymmetrical>
                   <VisuallyHidden>YouTube</VisuallyHidden>
                   <Icon name="logo-youtube" />
                 </ButtonLink>

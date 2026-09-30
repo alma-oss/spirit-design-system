@@ -18,18 +18,22 @@ if (icon && icon.type === 'INSTANCE') {
 
 const hasLabel = instance.getBoolean('Label');
 const action = instance.findText('Action');
-const labelText = hasLabel && action.type !== 'ERROR' ? action.textContent : undefined;
+const actionText = action.type !== 'ERROR' ? action.textContent : 'Label';
 
 export default {
   id: 'SegmentedControlItem',
-  imports: ["import { SegmentedControlItem, Truncate } from '@alma-oss/spirit-web-react';"],
+  imports: ["import { SegmentedControlItem, Truncate, VisuallyHidden } from '@alma-oss/spirit-web-react';"],
   example: figma.code`
     <SegmentedControlItem id="segmented-control-item" value="value-1"${isDisabled ? ' isDisabled' : ''}>
       ${iconCode}
-      ${labelText ? figma.code`<Truncate mode="lines" limit={1}>${labelText}</Truncate>` : ''}
+      ${
+        hasLabel
+          ? figma.code`<Truncate mode="lines" limit={1}>${actionText}</Truncate>`
+          : figma.code`<VisuallyHidden>${actionText}</VisuallyHidden>`
+      }
     </SegmentedControlItem>`,
   metadata: {
     nestable: true,
-    props: { iconCode, labelText, isDisabled },
+    props: { iconCode, actionText, hasLabel, isDisabled },
   },
 };
