@@ -3075,7 +3075,7 @@
 <section class="py-900 py-tablet-1000">
   <div class="Container">
 
-    <h2 class="docs-Heading">With Clear Button</h2>
+    <h2 class="docs-Heading">Addons</h2>
 
     <div class="docs-Stack docs-Stack--stretch">
 
@@ -3095,6 +3095,22 @@
               role="group"
               aria-label="Languages"
             >
+              {{!-- Start addon: composed the same way as the end addon below, not a built-in feature --}}
+              <label
+                class="InputAddon InputAddon--medium"
+                for="combobox-addon-input"
+              >
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#search" />
+                </svg>
+                <span class="accessibility-hidden">Search languages</span>
+              </label>
+
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="group"
@@ -3121,7 +3137,7 @@
                 />
               </div>
 
-              {{!-- Clear-all addon: shown by JS when ≥1 item is selected --}}
+              {{!-- End addon: clear-all, built from generic InputAddon/ControlButton markup and shown by JS when ≥1 item is selected --}}
               <div
                 class="InputAddon InputAddon--medium d-none"
                 hidden

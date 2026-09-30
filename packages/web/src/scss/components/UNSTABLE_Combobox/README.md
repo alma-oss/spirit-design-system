@@ -488,10 +488,33 @@ and the `disabled` attribute on the input to disable the Combobox. Disable the c
 </div>
 ```
 
-## With Clear Button
+## Addons
 
-Place a clear-all `InputAddon` after the selection wrapper, inside the `InputContainer`.
-Hide it with `hidden` and the `d-none` utility when nothing is selected (`InputAddon` uses
+Combobox has no built-in start/end slot — compose one yourself with a plain `InputAddon`, placed as a
+direct sibling of the `UNSTABLE_ComboboxSelection` wrapper, inside the `InputContainer`. Position (start
+or end) is just DOM order, exactly like `TextField`'s addons (see [TextField's README][textfield-readme]).
+
+A start addon (e.g. a decorative icon) can sit before `UNSTABLE_ComboboxSelection`:
+
+```html
+<div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
+  <label class="InputAddon InputAddon--medium" for="combobox-input">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#search" />
+    </svg>
+    <span class="accessibility-hidden">Search languages</span>
+  </label>
+
+  <div class="UNSTABLE_ComboboxSelection">
+    <!-- … selection grid and input … -->
+  </div>
+</div>
+```
+
+### With Clear Button
+
+A clear-all button is not a built-in feature — build it as an end `InputAddon` after the selection
+wrapper. Hide it with `hidden` and the `d-none` utility when nothing is selected (`InputAddon` uses
 `display: flex`, which would otherwise override the `[hidden]` attribute).
 
 ```html
@@ -684,5 +707,6 @@ input for option navigation; Space and printable characters type into the filter
 [smashing-magazine-placeholder]: https://www.smashingmagazine.com/2018/06/placeholder-attribute/
 [splittag]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_SplitTag/README.md
 [tag]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Tag/README.md
+[textfield-readme]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/TextField/README.md
 [w3-combobox-grid-popup]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/grid-combo/
 [w3-combobox-list-autocomplete]: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
