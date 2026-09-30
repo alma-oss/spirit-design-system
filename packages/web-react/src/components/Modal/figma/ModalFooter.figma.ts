@@ -11,11 +11,11 @@ const hasDescription = instance.getBoolean('Description');
 const descriptionText = hasDescription ? instance.getString('Description Text') : undefined;
 const alignmentX = instance.getEnum('Alignment X', { Left: 'left', Center: 'center', Right: undefined });
 
-const button = instance.findInstance('Button', { traverseInstances: true });
-let buttonCode;
-if (button && button.type === 'INSTANCE') {
-  buttonCode = button.executeTemplate().example;
-}
+const buttons = instance.findConnectedInstances((node) => node.codeConnectId() === 'Button', {
+  traverseInstances: true,
+});
+const button1 = buttons[0]?.executeTemplate().example;
+const button2 = buttons[1]?.executeTemplate().example;
 
 export default {
   id: 'ModalFooter',
@@ -25,7 +25,8 @@ export default {
       ${descriptionText ? figma.code`description="${descriptionText}"` : ''}
       ${alignmentX ? figma.code`alignmentX="${alignmentX}"` : ''}
     >
-      ${buttonCode}
+      ${button1}
+      ${button2}
     </ModalFooter>`,
   metadata: {
     nestable: true,
