@@ -41,6 +41,12 @@ export const createFigmaFetch = () => async (input: RequestInfo | URL) => {
                 type: 'COMPONENT',
                 children: [{ id: '3:2', name: 'Vector', type: 'VECTOR' }],
               },
+              {
+                id: '4:1',
+                name: 'Icons/flag-cz',
+                type: 'COMPONENT',
+                children: [{ id: '4:2', name: 'Vector', type: 'VECTOR' }],
+              },
             ],
           },
         ],
@@ -55,6 +61,7 @@ export const createFigmaFetch = () => async (input: RequestInfo | URL) => {
         '1:2': 'https://assets.example/add.svg',
         '2:2': 'https://assets.example/logo.svg',
         '3:1': 'https://assets.example/benefit.svg',
+        '4:1': 'https://assets.example/flag-cz.svg',
       },
     });
   }
@@ -69,6 +76,10 @@ export const createFigmaFetch = () => async (input: RequestInfo | URL) => {
 
   if (url === 'https://assets.example/benefit.svg') {
     return new Response('<svg viewBox="0 0 24 24"><circle /></svg>');
+  }
+
+  if (url === 'https://assets.example/flag-cz.svg') {
+    return new Response('<svg viewBox="0 0 24 24"><rect /></svg>');
   }
 
   return new Response('Not found', { status: 404 });
