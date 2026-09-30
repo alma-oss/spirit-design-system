@@ -238,6 +238,60 @@ values Combobox does not set itself.
 </UNSTABLE_UncontrolledCombobox>
 ```
 
+### Addons
+
+Use [InputAddon][readme-input-addon] with `startSlot` and `endSlot` to render non-input content
+(icons, a clear-all button, …) inside the same input row. Slots are rendered as direct siblings of
+`UNSTABLE_ComboboxSelection` (which contains both the selection tags and the filter input) — use
+`InputAddon` as the wrapper for consistent spacing, sizing, and alignment.
+
+There is no built-in clear-all button: build one yourself and pass it via `endSlot` and call
+[`removeAll()`](#ref) on the Combobox ref. It clears the selection and moves focus back to the filter
+input, so focus is not lost when the button unmounts together with the selection.
+
+The field row (`InputContainer`) has its own `onClick` that focuses the filter input and opens the
+popover on any click inside it (except on selection tags). A purely decorative addon, like the
+search icon below, should leave that click alone — clicking it opens the popover like clicking any
+other blank part of the field. An addon with its own interactive control (a button, a link) should
+stop the click from bubbling there instead, on both the `InputAddon` itself (covers clicks on its
+padding) and inside the control (covers the click before it bubbles past the control) — otherwise
+clicking "Remove all" also reopens/refocuses the popover as an unwanted side effect.
+
+```tsx
+<UNSTABLE_Combobox
+  ref={comboboxRef}
+  id="combobox-example"
+  label="Languages"
+  startSlot={
+    <InputAddon>
+      <Icon name="search" />
+      <VisuallyHidden>Search languages</VisuallyHidden>
+    </InputAddon>
+  }
+  endSlot={
+    selectedKeys.length > 0 && (
+      // Interactive control: stop propagation so clicking it doesn't also
+      // reopen/refocus the popover.
+      <InputAddon onClick={(event) => event.stopPropagation()}>
+        <CloseButton
+          label="Remove all"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            comboboxRef.current?.removeAll();
+          }}
+        />
+      </InputAddon>
+    )
+  }
+  {/* ...other props */}
+>
+  {/* UNSTABLE_ComboboxOption children */}
+</UNSTABLE_Combobox>
+```
+
+See the [Addons demo][combobox-addons-demo] and [With Clear Button demo][combobox-clear-button-demo].
+
 ### API
 
 #### Ref
@@ -247,6 +301,7 @@ values Combobox does not set itself.
 | `activateOption(optionId)` | Visually activate an option by value, or pass `null` to clear; focuses the filter input |
 | `close()`                  | Closes the popover (via `onToggle`)                                                     |
 | `focus()`                  | Focuses the combobox filter input                                                       |
+| `removeAll()`              | Clears the current selection; use to build a custom clear-all control via `endSlot`     |
 | `selectedKeys`             | Current selected keys (mirrors the `selectedKeys` prop)                                 |
 
 | Name                          | Type                                                        | Default                                     | Required | Description                                                                                                                          |
@@ -259,7 +314,7 @@ values Combobox does not set itself.
 | `dropdownProps`               | `DropdownBaseProps`                                         | —                                           | ✕        | Alignment and dropdown behavior for the inner `Dropdown`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)          |
 | `emptySelectionLabel`         | `string`                                                    | —                                           | ✕        | Input placeholder when nothing selected; supports `{label}`                                                                          |
 | `emptyStateLabel`             | `ReactNode`                                                 | i18n `combobox.emptyState`                  | ✕        | Empty-state slot content                                                                                                             |
-| `hasClearButton`              | `bool`                                                      | `false`                                     | ✕        | Clear-all addon when selection is non-empty                                                                                          |
+| `endSlot`                     | `ReactNode`                                                 | —                                           | ✕        | Content rendered as a sibling of the selection wrapper; see [Addons](#addons)                                                        |
 | `hasEmptyState`               | `bool`                                                      | `false`                                     | ✕        | Enables empty-state slot; shown when there are no option children                                                                    |
 | `hasValidationIcon`           | `bool`                                                      | `false`                                     | ✕        | Whether to show the validation icon                                                                                                  |
 | `helperText`                  | `ReactNode`                                                 | —                                           | ✕        | Helper text below the field                                                                                                          |
@@ -279,7 +334,6 @@ values Combobox does not set itself.
 | `optionKeys`                  | `string[]`                                                  | from children                               | ✕        | Full option id set for all-selected / add-more; required when filtered options unmount                                               |
 | `optionsRole`                 | `'listbox'` \| `'grid'` \| `null`                           | `listbox`                                   | ✕        | Options widget pattern; see [Options Popup: Listbox or Grid](#options-popup-listbox-or-grid)                                         |
 | `popoverProps`                | `StyleProps`                                                | `{ theme: 'theme-light-default' }`          | ✕        | [Style props][readme-style-props] for the inner `DropdownPopover`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts) |
-| `removeAllLabel`              | `string`                                                    | i18n `combobox.removeAll`                   | ✕        | Accessible label for clear-all                                                                                                       |
 | `removeItemLabel`             | `string`                                                    | i18n `combobox.removeItemLabel`             | ✕        | Template for per-tag remove; supports `{itemLabel}`                                                                                  |
 | `renderTags`                  | `(options: UnstableComboboxRenderTagsOptions) => ReactNode` | —                                           | ✕        | Custom selection UI; see [Custom Selection UI (renderTags)](#custom-selection-ui-rendertags)                                         |
 | `selectedKeys`                | `string[]`                                                  | —                                           | ✓        | Selected option ids (insertion order)                                                                                                |
@@ -287,6 +341,7 @@ values Combobox does not set itself.
 | `selectionCountLabel`         | `string`                                                    | i18n `combobox.selectionCountLabel`         | ✕        | Input `aria-label` when multiple selected; supports `{label}`, `{count}`                                                             |
 | `selectionCountLabelSingular` | `string`                                                    | i18n `combobox.selectionCountLabelSingular` | ✕        | Input `aria-label` when one selected; supports `{label}`, `{count}`                                                                  |
 | `size`                        | [Size dictionary][dictionary-size]                          | `medium`                                    | ✕        | Size of the field shell                                                                                                              |
+| `startSlot`                   | `ReactNode`                                                 | —                                           | ✕        | Content rendered as a sibling of the selection wrapper; see [Addons](#addons)                                                        |
 | `tagDescriptionText`          | `string`                                                    | i18n `combobox.tagDescriptionText`          | ✕        | Hidden SR hint for tag removal                                                                                                       |
 | `tagProps`                    | `StyleProps`                                                | —                                           | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)  |
 | `validationState`             | [Validation dictionary][dictionary-validation]              | —                                           | ✕        | Validation state                                                                                                                     |
@@ -465,6 +520,8 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+[combobox-addons-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxAddons.tsx
+[combobox-clear-button-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxWithClearButton.tsx
 [combobox-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxThemes.tsx
 [combobox-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_Combobox/README.md
 [contextual-help]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ContextualHelp/README.md
@@ -477,6 +534,7 @@ and [escape hatches][readme-escape-hatches].
 [picker-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/InputAddon/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [splittag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_SplitTag/README.md
 [tag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Tag/README.md

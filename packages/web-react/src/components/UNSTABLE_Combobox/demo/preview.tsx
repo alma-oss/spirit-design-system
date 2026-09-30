@@ -4,6 +4,7 @@ import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
+import ComboboxAddons from './ComboboxAddons';
 import ComboboxContextualHelp from './ComboboxContextualHelp';
 import ComboboxCustomContent from './ComboboxCustomContent';
 import ComboboxDefault from './ComboboxDefault';
@@ -56,6 +57,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="With Clear Button" stackAlignment="stretch">
         <ComboboxWithClearButton />
+      </DocsSection>
+      <DocsSection title="Addons" stackAlignment="stretch">
+        <ComboboxAddons />
       </DocsSection>
       <DocsSection title="Full Width Dropdown" stackAlignment="stretch">
         <ComboboxFullWidth />

@@ -51,16 +51,3 @@ export const COMBOBOX_NESTED_SIZE_MAP: Record<ComboboxShellSize, SizeExtendedDic
   [Sizes.MEDIUM]: SizesExtended.SMALL,
   [Sizes.LARGE]: SizesExtended.MEDIUM,
 };
-
-/** Maps combobox shell size to ControlButton size inside nested tags / clear addon. */
-export const COMBOBOX_NESTED_CONTROL_BUTTON_SIZE_MAP: Record<ComboboxShellSize, SizeExtendedDictionaryType> = {
-  [Sizes.SMALL]: SizesExtended.XSMALL,
-  [Sizes.MEDIUM]: SizesExtended.XSMALL,
-  [Sizes.LARGE]: SizesExtended.XSMALL,
-};
-
-export const COMBOBOX_CLEAR_CONTROL_BUTTON_SIZE_MAP: Record<ComboboxShellSize, SizeExtendedDictionaryType> = {
-  [Sizes.SMALL]: SizesExtended.SMALL,
-  [Sizes.MEDIUM]: SizesExtended.MEDIUM,
-  [Sizes.LARGE]: SizesExtended.LARGE,
-};

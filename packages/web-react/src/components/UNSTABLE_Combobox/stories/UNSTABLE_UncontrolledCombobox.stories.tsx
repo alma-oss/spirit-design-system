@@ -15,15 +15,11 @@ const meta: Meta<typeof UNSTABLE_UncontrolledCombobox> = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['children', 'hasValidationIcon'] },
+    controls: { exclude: ['children', 'hasValidationIcon', 'startSlot', 'endSlot'] },
   },
   argTypes: {
     addMoreLabel: { control: 'text' },
     emptySelectionLabel: { control: 'text' },
-    hasClearButton: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
-    },
     hasValidationIcon: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
@@ -47,7 +43,6 @@ const meta: Meta<typeof UNSTABLE_UncontrolledCombobox> = {
       table: { defaultValue: { summary: 'false' } },
     },
     label: { control: 'text' },
-    removeAllLabel: { control: 'text' },
     removeItemLabel: { control: 'text' },
     selectionAriaLabel: { control: 'text' },
     size: {
@@ -76,7 +71,6 @@ const meta: Meta<typeof UNSTABLE_UncontrolledCombobox> = {
     id: UNCONTROLLED_COMBOBOX_ID,
     label: 'Languages',
     helperText: 'You can select multiple languages.',
-    hasClearButton: false,
     isDisabled: false,
     isLoading: false,
     isRequired: false,
