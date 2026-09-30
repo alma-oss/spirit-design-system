@@ -78,7 +78,6 @@
     "csstype": "catalog:types",
     "eslint": "catalog:lint",
     "eslint-config-spirit": "workspace:^",
-    "glob": "catalog:script",
     "jest": "catalog:test",
     "npm-run-all2": "catalog:script",
     "postcss": "catalog:build",
