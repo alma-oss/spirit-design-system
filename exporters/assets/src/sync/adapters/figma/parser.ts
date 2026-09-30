@@ -1,5 +1,5 @@
 import { toAssetFileName } from '../../../assetFileName';
-import { ASSET_DISCOVERY } from '../../../constants';
+import { ASSET_DISCOVERY, ICONS_EXCLUDED_ASSET_TYPES } from '../../../constants';
 import { AssetDiscoveryError } from '../../../errors';
 import type { AssetType } from '../../../types';
 
@@ -51,7 +51,11 @@ const matchesDiscoveryRule = (node: FigmaNode, assetType: AssetType): boolean =>
     return false;
   }
 
-  return !(assetType === 'icons' && node.name.startsWith(ASSET_DISCOVERY['benefit-icons'].matchPrefix));
+  if (assetType !== 'icons') {
+    return true;
+  }
+
+  return !ICONS_EXCLUDED_ASSET_TYPES.some((excluded) => node.name.startsWith(ASSET_DISCOVERY[excluded].matchPrefix));
 };
 
 export const discoverAssetNodes = (document: FigmaNode, brand: string, assets: AssetType[]): AssetVariant[] => {
