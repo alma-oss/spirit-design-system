@@ -44,7 +44,6 @@ export const defaultTranslations = {
     },
     emptyState: 'Nothing found',
     loading: 'Loading…',
-    removeAllAria: 'Remove all',
     selection: {
       labelAria: 'Selected {label}',
       countAria: {

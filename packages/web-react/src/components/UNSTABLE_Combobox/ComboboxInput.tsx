@@ -1,13 +1,12 @@
 'use client';
 
 import React, { type KeyboardEvent, type MouseEvent, type ReactNode, type RefObject } from 'react';
+import { SizesExtended } from '../../constants';
+import { ContextPropsProvider } from '../../context';
 import type { SelectionGridRowProps } from '../../hooks';
-import type { SizesDictionaryType, StyleProps, TranslatableString } from '../../types';
-import { CloseButton } from '../CloseButton';
-import { InputAddon } from '../InputAddon';
+import type { StyleProps, TranslatableString } from '../../types';
 import { InputContainer } from '../InputContainer';
 import { VisuallyHidden } from '../VisuallyHidden';
-import { COMBOBOX_CLEAR_CONTROL_BUTTON_SIZE_MAP } from './constants';
 import type { ComboboxOptionsRole, UnstableComboboxRenderTagsOptions } from './types';
 import UNSTABLE_ComboboxSelection from './UNSTABLE_ComboboxSelection';
 import UNSTABLE_ComboboxTag from './UNSTABLE_ComboboxTag';
@@ -18,10 +17,10 @@ export interface ComboboxInputProps {
   addMoreDescriptionText: string;
   addMoreHelperId: string;
   describedByIds: string;
+  endSlot?: ReactNode;
   getKeyboardGridRowProps: (index: number) => SelectionGridRowProps;
   handleGroupClick: (event: MouseEvent<HTMLElement>) => void;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  hasClearButton: boolean;
   inputAriaLabel?: string;
   inputClassName: string;
   inputId: string;
@@ -37,20 +36,17 @@ export interface ComboboxInputProps {
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
   open: () => void;
   optionsRole: ComboboxOptionsRole | null;
-  removeAll: () => void;
-  removeAllLabel: string;
   removeItem: (key: string) => void;
   removeItemLabel?: TranslatableString;
   removeTagAtIndex: (index: number) => void;
   renderTags?: (options: UnstableComboboxRenderTagsOptions) => ReactNode;
   selectedItems: ComboboxSelectedItem[];
-  selectedKeysCount: number;
   selectionAriaLabel: string;
   selectionGridRef: RefObject<HTMLDivElement>;
   selectionId: string;
   shouldRenderOptions: boolean;
   showAddMore: boolean;
-  size: NonNullable<SizesDictionaryType>;
+  startSlot?: ReactNode;
   tagProps?: StyleProps;
 }
 
@@ -65,10 +61,10 @@ const ComboboxInput = (props: ComboboxInputProps) => {
     addMoreDescriptionText,
     addMoreHelperId,
     describedByIds,
+    endSlot,
     getKeyboardGridRowProps,
     handleGroupClick,
     handleInputChange,
-    hasClearButton,
     inputAriaLabel,
     inputClassName,
     inputId,
@@ -84,20 +80,17 @@ const ComboboxInput = (props: ComboboxInputProps) => {
     onInputKeyDown,
     open,
     optionsRole,
-    removeAll,
-    removeAllLabel,
     removeItem,
     removeItemLabel,
     removeTagAtIndex,
     renderTags,
     selectedItems,
-    selectedKeysCount,
     selectionAriaLabel,
     selectionGridRef,
     selectionId,
     shouldRenderOptions,
     showAddMore,
-    size,
+    startSlot,
     tagProps,
   } = props;
 
@@ -134,6 +127,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
 
   return (
     <InputContainer role="group" aria-label={label} onClick={handleGroupClick}>
+      {startSlot}
       <UNSTABLE_ComboboxSelection isDisabled={isDisabled}>
         <div
           ref={selectionGridRef}
@@ -145,7 +139,11 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           aria-atomic={false}
           aria-relevant="additions"
         >
-          {selectionContent}
+          {selectionContent && (
+            <ContextPropsProvider value={{ controlButton: { size: SizesExtended.XSMALL } }}>
+              {selectionContent}
+            </ContextPropsProvider>
+          )}
         </div>
         <input
           ref={inputRef}
@@ -174,23 +172,7 @@ const ComboboxInput = (props: ComboboxInputProps) => {
           {addMoreDescriptionText}
         </VisuallyHidden>
       </UNSTABLE_ComboboxSelection>
-      {hasClearButton && (
-        <InputAddon
-          onClick={(event: MouseEvent<HTMLElement>) => event.stopPropagation()}
-          {...(selectedKeysCount === 0 ? { hidden: true, UNSAFE_className: 'd-none' } : {})}
-        >
-          <CloseButton
-            strings={{ closeAria: removeAllLabel }}
-            onClick={(event: MouseEvent<HTMLButtonElement>) => {
-              event.preventDefault();
-              event.stopPropagation();
-              removeAll();
-            }}
-            size={COMBOBOX_CLEAR_CONTROL_BUTTON_SIZE_MAP[size]}
-            isDisabled={isDisabled}
-          />
-        </InputAddon>
-      )}
+      {endSlot}
     </InputContainer>
   );
 };
