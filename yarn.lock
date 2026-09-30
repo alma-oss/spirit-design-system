@@ -35587,7 +35587,6 @@ __metadata:
     "@omlet/cli": "catalog:design-tools"
     "@playwright/test": "catalog:test"
     conventional-changelog-conventionalcommits: "catalog:lint"
-    dotenv: "catalog:script"
     eslint: "catalog:lint"
     eslint-config-spirit: "workspace:^"
     eslint-plugin-prettier: "catalog:lint"
