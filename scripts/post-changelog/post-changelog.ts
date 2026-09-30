@@ -3,7 +3,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import { fileURLToPath } from 'url';
-import { config as dotenvConfig } from 'dotenv-safe';
 import gitDiffParser from 'gitdiff-parser';
 import { simpleGit } from 'simple-git';
 import slackifyMarkdown from 'slackify-markdown';
@@ -262,16 +261,19 @@ async function postSlackNotification(changelog: string, packageName: string): Pr
  */
 async function configureWebhookURL() {
   try {
-    dotenvConfig({
-      allowEmptyValues: true,
-      example: '.env.example',
-    });
-    SLACK_CHANGELOG_WEBHOOK_URL = process.env.SLACK_CHANGELOG_WEBHOOK_URL as string;
+    process.loadEnvFile();
   } catch (err) {
-    if (/SLACK_CHANGELOG_WEBHOOK_URL/g.test(err.message)) {
-      throw new Error('SLACK_CHANGELOG_WEBHOOK_URL is not set');
+    // The .env file is optional, the variable may come from the environment.
+    if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
+      throw err;
     }
   }
+
+  if (process.env.SLACK_CHANGELOG_WEBHOOK_URL === undefined) {
+    throw new Error('SLACK_CHANGELOG_WEBHOOK_URL is not set');
+  }
+
+  SLACK_CHANGELOG_WEBHOOK_URL = process.env.SLACK_CHANGELOG_WEBHOOK_URL;
 }
 
 /**
