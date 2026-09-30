@@ -700,6 +700,7 @@ function initCombobox(comboboxEl) {
   const popupEl = comboboxEl.querySelector(SELECTOR_POPUP);
   const selectionEl = comboboxEl.querySelector(SELECTOR_SELECTION);
   const clearBtn = comboboxEl.querySelector(SELECTOR_CLEAR);
+  const clearBtnContainer = clearBtn?.parentElement;
 
   if (!inputEl || !popupEl || !selectionEl) return;
 
@@ -769,9 +770,12 @@ function initCombobox(comboboxEl) {
     const showAddMore = totalSelected > 0 && !allSelected;
 
     if (clearBtn) {
-      // `d-none` is required because InputAddon sets `display: flex`, which overrides [hidden].
-      clearBtn.hidden = totalSelected === 0;
-      clearBtn.classList.toggle('d-none', totalSelected === 0);
+      // Keep the DOM in sync with React: the clear addon exists only while something is selected.
+      if (totalSelected === 0) {
+        clearBtn.remove();
+      } else if (!clearBtn.isConnected) {
+        clearBtnContainer.append(clearBtn);
+      }
     }
 
     if (totalSelected === 0) {
