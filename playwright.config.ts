@@ -1,11 +1,14 @@
-import dotenv from 'dotenv';
 import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from a `.env` file.
- * https://github.com/motdotla/dotenv
+ * https://nodejs.org/api/process.html#processloadenvfilepath
  */
-dotenv.config({ path: '.env.local.playwright', quiet: true });
+try {
+  process.loadEnvFile('.env.local.playwright');
+} catch {
+  // The file is optional.
+}
 
 /**
  * Parses a string value into a number for worker configuration.
