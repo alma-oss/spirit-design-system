@@ -20,8 +20,6 @@
     "types": "tsc"
   },
   "dependencies": {
-    "dotenv": "catalog:script",
-    "dotenv-safe": "catalog:script",
     "gitdiff-parser": "catalog:script",
     "simple-git": "catalog:script",
     "slackify-markdown": "catalog:script",
@@ -29,7 +27,6 @@
     "zx": "catalog:script"
   },
   "devDependencies": {
-    "@types/dotenv-safe": "catalog:types",
     "typescript": "catalog:types"
   }
 }
