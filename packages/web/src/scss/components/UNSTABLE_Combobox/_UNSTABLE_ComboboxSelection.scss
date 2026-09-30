@@ -1,4 +1,7 @@
 // 1. Elevate interactive elements above the trigger overlay.
+// 2. Only pad the start when nothing precedes this element in InputContainer
+//    (no startSlot InputAddon) — a leading addon supplies its own spacing.
+// 3. Likewise, skip the end padding when an endSlot InputAddon follows.
 
 @use '@tokens' as tokens;
 @use '../../tools/nested-radius';
@@ -24,8 +27,18 @@
     align-items: center;
     box-sizing: border-box;
     min-height: theme.$selection-min-height;
-    padding-inline: theme.$padding-x;
+    padding-inline-end: theme.$padding-x;
     padding-block: theme.$padding-y;
+
+    // 2.
+    &:first-child {
+        padding-inline-start: theme.$padding-x;
+    }
+
+    // 3.
+    &:has(~ .InputAddon) {
+        padding-inline-end: 0;
+    }
 }
 
 // 1.
