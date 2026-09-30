@@ -60,7 +60,7 @@ if (variant === 'Logged in NEW') {
         <DrawerPanelBody hasSpacing>
         <Stack hasIntermediateDividers hasSpacing spacing="space-900">
           <StackItem>
-            <Navigation aria-label="Main Navigation" direction="vertical">
+            <Navigation aria-label="Main" direction="vertical">
               <NavigationItem>
                 <NavigationAction href="#" isSelected>Item</NavigationAction>
               </NavigationItem>

@@ -29,15 +29,15 @@ export default {
           <Container>
             <Flex alignmentX="left" alignmentY="stretch" spacing="space-1000">
               ${logoSlot}
-              <Navigation aria-label="Main Navigation" hideOn={['mobile', 'tablet']}>
+              <Navigation aria-label="Main" hideOn={['mobile', 'tablet']}>
                 ${menuItemsDesktop}
               </Navigation>
-              <Navigation marginLeft="auto" aria-label="Secondary Navigation">
+              <Navigation marginLeft="auto" aria-label="Secondary">
                 <NavigationItem hideOn={['mobile', 'tablet']}>
                   ${actionsSlot}
                 </NavigationItem>
                 <NavigationItem hideOn="desktop">
-                  <Button color="tertiary" isSymmetrical aria-label="Toggle Menu" onClick={() => setDrawerOpen(true)}>
+                  <Button color="tertiary" isSymmetrical aria-label="Toggle Menu" aria-controls="drawer-navigation" aria-expanded={isDrawerOpen} onClick={() => setDrawerOpen(true)}>
                     <Icon name="hamburger" />
                   </Button>
                 </NavigationItem>
@@ -52,7 +52,9 @@ export default {
               <CloseButton size="large" onClick={() => setDrawerOpen(false)} />
             </DrawerPanelHeader>
             <DrawerPanelBody>
-              ${menuItemsDesktop}
+              <Navigation direction="vertical" aria-label="Main">
+                ${menuItemsDesktop}
+              </Navigation>
             </DrawerPanelBody>
           </DrawerPanel>
         </Drawer>

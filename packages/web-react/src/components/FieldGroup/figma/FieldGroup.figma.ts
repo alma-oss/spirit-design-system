@@ -8,6 +8,8 @@ import { getInstance } from '../../../figma/helpers';
 const instance = getInstance();
 
 const contentSlot = instance.getSlot('Content Slot');
+const labelHandle = instance.findText('Label', { traverseInstances: true });
+const labelText = labelHandle.type !== 'ERROR' ? labelHandle.textContent : 'Field Group Label';
 const isDisabled = instance.getEnum('Disabled', { False: false, True: true });
 const validationState = instance.getEnum('Validation State', {
   Default: undefined,
@@ -23,7 +25,8 @@ export default {
   example: figma.code`
     <FieldGroup
       id="fieldgroup-example"
-      label="Field Group Label"
+      label="${labelText}"
+      isRequired
       ${isDisabled ? 'isDisabled' : ''}
       ${validationState ? figma.code`validationState="${validationState}"` : ''}
       ${showHelperText ? 'helperText="Helper text"' : ''}
