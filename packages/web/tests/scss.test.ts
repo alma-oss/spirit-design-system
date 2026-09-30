@@ -1,8 +1,8 @@
 /* @jest-environment node */
 
+import { globSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import { sync } from 'glob';
 import { runSass } from 'sass-true';
 
 // Jest runners (VS Code / Cursor) may execute tests with a different CWD than the package root.
@@ -34,7 +34,7 @@ const customLogger = {
 };
 
 describe('Sass', () => {
-  const sassTestFiles = sync(resolve(packageRoot, 'src/**/*.test.scss'));
+  const sassTestFiles = globSync(resolve(packageRoot, 'src/**/*.test.scss'));
 
   sassTestFiles.forEach((file) => runSass({ describe, it }, file, { importers, logger: customLogger }));
 });
