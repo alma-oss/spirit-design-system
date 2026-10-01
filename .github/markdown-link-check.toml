@@ -1,0 +1,48 @@
+#############################  Display  #############################
+
+verbose = "error"
+no_progress = true
+
+#############################  Cache  ###############################
+
+cache = true
+max_cache_age = "1d"
+# Rate-limit and server errors are accepted only for this run. Recheck them
+# next time instead of remembering a temporary response as a healthy link.
+cache_exclude_status = "429,999,500..=599"
+
+#############################  Requests  ############################
+
+# Keep the previous alive status codes, plus the normal success range.
+# 429: GitHub and other hosts rate-limit anonymous traffic.
+# 999: LinkedIn answers bot traffic with this code.
+accept = ["100..=103", "200..=299", "429", "999"]
+
+# Skip `#section` anchors and mailto addresses. Verifying anchors means
+# downloading every linked page, which is the expensive part of a full check.
+include_fragments = "none"
+include_mail = false
+
+# `.github` and `.agents` hold Markdown too.
+hidden = true
+
+#############################  Exclusions  ##########################
+
+# A fresh CI checkout has no node_modules,
+# but local installs do, and their READMEs are not this repo's links.
+exclude_path = ['(^|/)node_modules/']
+
+exclude = [
+  '^https://github\.com/(alma-oss|lmc-eu)/spirit-design-system/(pull|issues|commit|compare)/',
+  '^https://jira\.lmc\.cz/',
+  '^https://jira\.almacareer\.tech/',
+  '^http://localhost',
+  '^https://figma\.com/',
+  # First-party sites. Netlify previews expire, and the Supernova export
+  # lists hundreds of pages on hosts we publish ourselves.
+  '^https://spirit\.design',
+  '^https://spirit\.supernova-docs\.io',
+  '^https://([a-z0-9-]+--)?spirit-design-system(-[a-z0-9-]+)?\.netlify\.app',
+  '^#unstable-*',
+  '^#commit-*',
+]
