@@ -3077,7 +3077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@conventional-changelog/template@npm:^1.2.1, @conventional-changelog/template@npm:^1.3.0, @conventional-changelog/template@npm:^1.4.0":
+"@conventional-changelog/template@npm:^1.2.1, @conventional-changelog/template@npm:^1.3.0":
   version: 1.4.0
   resolution: "@conventional-changelog/template@npm:1.4.0"
   checksum: 10/dac527b0eb01ff4b2457b560f3fb61e24c8797cd5e7cafe4d4561454352714d8aec4d39092a15da068fc082878b1713a589cfd8471267f340f9a78c28057d74b
@@ -16201,12 +16201,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:10.4.0":
-  version: 10.4.0
-  resolution: "conventional-changelog-conventionalcommits@npm:10.4.0"
+"conventional-changelog-conventionalcommits@npm:10.3.0":
+  version: 10.3.0
+  resolution: "conventional-changelog-conventionalcommits@npm:10.3.0"
   dependencies:
-    "@conventional-changelog/template": "npm:^1.4.0"
-  checksum: 10/e277c5e7226fc108478d5b67c6a581673b3443e022cfa3eea300e6ddf2683a93690048f9f07fb4e24b01ef174ab77c6cf04406b21afb70f9de5a7a61cb6acecf
+    "@conventional-changelog/template": "npm:^1.3.0"
+  checksum: 10/3c6381a0522fa8eaffb7fe1a013e25ece342dbd650071f63d0c3de24a2365ca0d13069287a32d39ef6696698b9fc47930d0986be3b011760f2f500505f9d3789
   languageName: node
   linkType: hard
 
