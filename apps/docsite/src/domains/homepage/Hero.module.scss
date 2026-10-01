@@ -1,0 +1,22 @@
+@use '@tokens' as tokens;
+
+// The background and the highlight colors are not tokenized in Spirit, so they use raw values taken from the design.
+.Hero {
+    background-color: #eeeaf2;
+}
+
+.Highlight {
+    padding-inline: tokens.$space-400;
+    color: #4e2ea6;
+    background-color: #d9c5f5;
+    box-decoration-break: clone;
+}
+
+.Search {
+    width: 100%;
+    max-width: tokens.$container-small-max-width;
+}
+
+.SearchForm {
+    width: 100%;
+}
