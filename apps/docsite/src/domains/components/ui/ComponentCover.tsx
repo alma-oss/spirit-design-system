@@ -8,12 +8,14 @@ import React from 'react';
 const ComponentCover = () => {
   const { breadcrumbs, currentPage } = useBreadcrumbs();
   const isComponentUnstable = useIsComponentUnstable(currentPage.slug);
+  const isListPage = breadcrumbs.length === 1;
+  const title = isListPage ? 'Component List' : currentPage.name;
 
   return (
     <Section size="xlarge">
       <Heading elementType="h1" size="xlarge" fontWeight="bold">
         <Flex elementType="span" alignmentX="stretch" alignmentY="center" spacing="space-1000">
-          {currentPage.name}
+          {title}
           {isComponentUnstable && (
             <Tag size="large" color="warning">
               Unstable
