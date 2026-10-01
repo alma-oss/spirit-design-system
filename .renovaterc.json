@@ -93,6 +93,13 @@
       "matchManagers": ["npm"],
       "matchPackageNames": ["html-react-parser"],
       "allowedVersions": "5.1.1"
+    },
+    {
+      "groupName": "Lock conventional-changelog-conventionalcommits on 10.3.0",
+      "description": "Prevent updates to conventional-changelog-conventionalcommits until a lerna release containing https://github.com/lerna/lerna/pull/4415 is available (lerna 10.0.1 breaks with preset 10.4.0, see https://github.com/lerna/lerna/issues/4414)",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["conventional-changelog-conventionalcommits"],
+      "allowedVersions": "10.3.0"
     }
   ]
 }
