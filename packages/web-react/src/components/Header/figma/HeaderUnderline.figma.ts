@@ -37,7 +37,7 @@ export default {
                   ${actionsSlot}
                 </NavigationItem>
                 <NavigationItem hideOn="desktop">
-                  <Button color="tertiary" isSymmetrical aria-label="Toggle Menu" onClick={() => setDrawerOpen(true)}>
+                  <Button color="tertiary" isSymmetrical aria-label="Toggle Menu" aria-controls="drawer-navigation" aria-expanded={isDrawerOpen} onClick={() => setDrawerOpen(true)}>
                     <Icon name="hamburger" />
                   </Button>
                 </NavigationItem>
@@ -52,7 +52,9 @@ export default {
               <CloseButton size="large" onClick={() => setDrawerOpen(false)} />
             </DrawerPanelHeader>
             <DrawerPanelBody>
-              ${menuItemsDesktop}
+              <Navigation direction="vertical" aria-label="Main Navigation">
+                ${menuItemsDesktop}
+              </Navigation>
             </DrawerPanelBody>
           </DrawerPanel>
         </Drawer>

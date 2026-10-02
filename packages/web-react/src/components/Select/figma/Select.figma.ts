@@ -7,7 +7,7 @@ import { getInstance } from '../../../figma/helpers';
 
 const instance = getInstance();
 
-const variant = instance.getEnum('Variant', { Outline: undefined, Fill: 'fill' });
+const variant = instance.getEnum('Variant', { Outline: 'outline', Fill: undefined });
 const size = instance.getEnum('Size', { Small: 'small', Medium: undefined, Large: 'large' });
 const isDisabled = instance.getBoolean('Disabled');
 const validationState = instance.getEnum('Validation State', {
@@ -26,7 +26,10 @@ const showHelper = instance.getBoolean('Helper');
 const helperHandle = instance.findText('Helper text', { traverseInstances: true });
 const helperText = showHelper && helperHandle.type !== 'ERROR' ? helperHandle.textContent : undefined;
 
-const validationTextHandle = instance.findText('Validation text', { traverseInstances: true });
+const validationTextHandle = instance.findText('Validation text', {
+  traverseInstances: true,
+  path: ['Validation text'],
+});
 const validationText =
   validationState && validationTextHandle.type !== 'ERROR' ? validationTextHandle.textContent : undefined;
 
