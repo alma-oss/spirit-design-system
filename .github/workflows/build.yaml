@@ -12,7 +12,7 @@ env:
   NX_NO_CLOUD: true
 
 jobs:
-  build:
+  build-packages:
     name: 👷 Building on Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -40,3 +40,45 @@ jobs:
             git status
             exit 1
           fi
+
+  build-apps:
+    name: 📦 Building ${{ matrix.app.title }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - { title: 'Demo', package: '@lmc-eu/spirit-demo-app', artifact: 'demo-build', path: 'apps/demo/build/' }
+          - {
+              title: 'Docsite',
+              package: '@alma-oss/spirit-docsite',
+              artifact: 'docsite-build',
+              path: 'apps/docsite/.next/',
+            }
+          - {
+              title: 'Storybook',
+              package: '@alma-oss/spirit-storybook',
+              artifact: 'storybook-build',
+              path: 'apps/storybook/build/',
+            }
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Build app
+        run: yarn nx run ${{ matrix.app.package }}:build
+
+      # The demo build is shared with the Deploy workflow, so it is not built again
+      - name: Upload app build
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ${{ matrix.app.artifact }}
+          path: ${{ matrix.app.path }}
+          retention-days: 1
+          include-hidden-files: true
+          if-no-files-found: error
