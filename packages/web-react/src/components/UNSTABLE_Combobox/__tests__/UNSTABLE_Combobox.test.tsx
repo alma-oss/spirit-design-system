@@ -213,25 +213,66 @@ describe('UNSTABLE_Combobox', () => {
     expect(optionLabel).not.toHaveClass('accessibility-hidden');
   });
 
-  it('should show clear button when hasClearButton and selection is non-empty', () => {
-    const onSelectionChange = jest.fn();
+  it('should render startSlot content before the filter input', () => {
+    const { container } = render(
+      <TestCombobox
+        startSlot={
+          <span role="img" aria-label="search">
+            🔍
+          </span>
+        }
+      />,
+    );
 
-    render(<TestCombobox selectedKeys={['cs']} hasClearButton onSelectionChange={onSelectionChange} />);
+    const startSlot = screen.getByRole('img', { name: 'search' });
+    const input = screen.getByRole('combobox');
+    const elements = Array.from(container.querySelectorAll('*'));
+
+    expect(startSlot).toBeInTheDocument();
+    expect(elements.indexOf(startSlot)).toBeLessThan(elements.indexOf(input));
+  });
+
+  it('should render endSlot content after the filter input', () => {
+    const { container } = render(<TestCombobox endSlot={<button type="button">Remove all</button>} />);
+
+    const input = screen.getByRole('combobox');
+    const endSlotButton = screen.getByRole('button', { name: 'Remove all' });
+    const elements = Array.from(container.querySelectorAll('*'));
+
+    expect(endSlotButton).toBeInTheDocument();
+    expect(elements.indexOf(input)).toBeLessThan(elements.indexOf(endSlotButton));
+  });
+
+  it('should clear selection via ref.removeAll for a consumer-built endSlot clear button', () => {
+    const onSelectionChange = jest.fn();
+    const comboboxRef = createRef<SpiritUnstableComboboxRef>();
+
+    render(
+      <UNSTABLE_Combobox
+        {...defaultProps}
+        ref={comboboxRef}
+        isOpen
+        onToggle={jest.fn()}
+        selectedKeys={['cs']}
+        onSelectionChange={onSelectionChange}
+        endSlot={
+          <button type="button" onClick={() => comboboxRef.current?.removeAll()}>
+            Remove all
+          </button>
+        }
+      >
+        <UNSTABLE_ComboboxOption value="cs">
+          <Label>Czech</Label>
+        </UNSTABLE_ComboboxOption>
+        <UNSTABLE_ComboboxOption value="en">
+          <Label>English</Label>
+        </UNSTABLE_ComboboxOption>
+      </UNSTABLE_Combobox>,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: 'Remove all' }));
 
     expect(onSelectionChange).toHaveBeenCalledWith([]);
-  });
-
-  it('should keep clear addon hidden when hasClearButton and selection is empty', () => {
-    render(<TestCombobox selectedKeys={[]} hasClearButton />);
-
-    const clearButton = screen.getByRole('button', { name: 'Remove all', hidden: true });
-    const clearAddon = clearButton.closest('[hidden]');
-
-    expect(clearButton).toBeInTheDocument();
-    expect(clearAddon).not.toBeNull();
-    expect(clearAddon).toHaveClass('d-none');
   });
 
   it('should not open on keyboard focus alone', () => {

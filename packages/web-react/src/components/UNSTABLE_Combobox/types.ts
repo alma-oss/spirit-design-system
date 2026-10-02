@@ -22,7 +22,6 @@ export interface UnstableComboboxTranslations {
   emptySelectionLabel?: string;
   emptyStateLabel?: ReactNode;
   loadingLabel?: ReactNode;
-  removeAllLabel?: string;
   removeItemLabel?: string;
   selectionAriaLabel?: string;
   selectionCountLabel?: string;
@@ -67,8 +66,6 @@ export interface UnstableComboboxBaseProps<S = void>
    * (tips, custom blocks — never inside `role="listbox"` / `role="grid"`).
    */
   auxiliaryContent?: ReactNode;
-  /** Clear-all addon when selection is non-empty. @default false */
-  hasClearButton?: boolean;
   /**
    * Enables the empty-state slot (sibling of the options widget).
    * Shown when there are no option children; copy from `emptyStateLabel`.
@@ -95,6 +92,10 @@ export interface UnstableComboboxBaseProps<S = void>
   /** Props for the inner `Tag` elements (style props; `UNSAFE_className` is merged with tag classes). */
   tagProps?: StyleProps;
   renderTags?: (options: UnstableComboboxRenderTagsOptions) => ReactNode;
+  /** Content rendered before the input, e.g. an icon. Provide full markup, usually an `InputAddon`. */
+  startSlot?: ReactNode;
+  /** Content rendered after the input. Provide full markup, usually an `InputAddon` (e.g. a clear-all button). */
+  endSlot?: ReactNode;
   size?: SizesDictionaryType<S>;
   variant?: FillVariantDictionaryType;
 }
@@ -170,6 +171,8 @@ export interface UnstableComboboxRef {
   activateOption: (optionId: string | null) => void;
   close: () => void;
   focus: () => void;
+  /** Clears the current selection. Use this to build a custom clear-all control via `endSlot`. */
+  removeAll: () => void;
   selectedKeys: string[];
 }
 

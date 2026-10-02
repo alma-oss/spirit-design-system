@@ -34,7 +34,6 @@ export const defaultTranslations = {
     addMoreDescription: 'Add more {label}',
     emptyState: 'Nothing found',
     loading: 'Loading…',
-    removeAll: 'Remove all',
     removeItemLabel: 'Remove {itemLabel}',
     selectionAriaLabel: 'Selected {label}',
     selectionCountLabel: '{label}, {count} items selected',

@@ -1,35 +1,20 @@
 'use client';
 
 import React from 'react';
-import { CloseButton } from '../../CloseButton';
+import { Icon } from '../../Icon';
 import { InputAddon } from '../../InputAddon';
+import { VisuallyHidden } from '../../VisuallyHidden';
 import { UNSTABLE_Combobox } from '..';
 import { renderComboboxLanguageItems } from './ComboboxLanguageItems';
 import { useComboboxDemoState } from './useComboboxDemoState';
 
-const ComboboxWithClearButton = () => {
+const ComboboxAddons = () => {
   const state = useComboboxDemoState();
-
-  // Stop propagation on the addon and the button: InputContainer's own onClick
-  // would otherwise reopen/refocus the popover when "Remove all" is clicked.
-  const endSlot = state.selectedKeys.length > 0 && (
-    <InputAddon onClick={(event) => event.stopPropagation()}>
-      <CloseButton
-        label="Remove all"
-        onClick={(event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          state.onSelectionChange([]);
-        }}
-      />
-    </InputAddon>
-  );
 
   return (
     <UNSTABLE_Combobox
-      endSlot={endSlot}
       hasEmptyState={state.hasEmptyState}
-      id="demo-combobox-with-clear-button"
+      id="demo-combobox-addons"
       inputValue={state.inputValue}
       isOpen={state.isOpen}
       label="Languages"
@@ -38,10 +23,16 @@ const ComboboxWithClearButton = () => {
       onToggle={state.onToggle}
       optionKeys={state.optionKeys}
       selectedKeys={state.selectedKeys}
+      startSlot={
+        <InputAddon>
+          <Icon name="search" />
+          <VisuallyHidden>Search languages</VisuallyHidden>
+        </InputAddon>
+      }
     >
       {renderComboboxLanguageItems(state.filteredOptions)}
     </UNSTABLE_Combobox>
   );
 };
 
-export default ComboboxWithClearButton;
+export default ComboboxAddons;
