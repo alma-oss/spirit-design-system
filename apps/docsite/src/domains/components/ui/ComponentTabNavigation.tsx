@@ -1,6 +1,6 @@
 import { Container, Section, ScrollView } from '@alma-oss/spirit-web-react';
 import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
-import ComponentTabNavItems, { type TabItem } from '@local/domains/components/ui/ComponentTabNavItems';
+import ComponentTabNavigationItems, { type TabItem } from '@local/domains/components/ui/ComponentTabNavigationItems';
 import { getComponentTabAvailability } from '@local/domains/content/componentDocs';
 import { routes, componentSegments } from '@local/domains/routing/routes';
 import { type ReactNode } from 'react';
@@ -64,7 +64,7 @@ const ComponentTabNavigation = async ({ views, component }: ComponentTabNavigati
       <Container>
         <div className="d-grid">
           <ScrollView direction="horizontal" isScrollbarDisabled>
-            <ComponentTabNavItems items={items} />
+            <ComponentTabNavigationItems items={items} />
           </ScrollView>
         </div>
       </Container>
