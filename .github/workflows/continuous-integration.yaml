@@ -6,6 +6,7 @@ on:
     branches:
       - main
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
   schedule:
     - cron: '0 9 * * *' # every day at 9:00
 
@@ -37,6 +38,24 @@ jobs:
       actions: write
       contents: read
 
+  deploy:
+    name: 🚀 Deploy
+    needs: build
+    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets
+    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
+    uses: ./.github/workflows/deploy.yaml
+    secrets: inherit
+
+  e2e-tests:
+    name: 🤖 End-to-End Tests
+    needs: deploy
+    # Runs on main and on PRs labeled `run-visual-tests`
+    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests'))
+    uses: ./.github/workflows/e2e.yml
+    with:
+      url: ${{ needs.deploy.outputs.url }}
+    secrets: inherit
+
   docs-reviews:
     name: 📄 Docs Reviews
     uses: ./.github/workflows/docs-review.yaml
@@ -63,7 +82,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build, code-quality-gate]
+    needs: [git-checks, build, deploy, e2e-tests, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:

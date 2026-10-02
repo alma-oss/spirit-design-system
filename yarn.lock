@@ -7050,6 +7050,7 @@ __metadata:
     "@rollup/plugin-typescript": "catalog:build"
     autoprefixer: "catalog:build"
     clean-css-cli: "catalog:build"
+    netlify-cli: "catalog:script"
     npm-run-all2: "catalog:script"
     postcss: "catalog:build"
     rollup: "catalog:build"

@@ -1,41 +1,18 @@
 name: 🤖 End-to-End Tests
 on:
-  push:
-    branches: [main]
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - labeled
+  workflow_call:
+    inputs:
+      url:
+        description: 'URL of the deployed demo app to run the tests against'
+        required: true
+        type: string
 
 env:
   NODE_ENV: testing
-  PR_NUMBER: ${{ github.event.pull_request.number }}
-  NETLIFY_MAIN_URL: 'https://spirit-design-system.netlify.app/'
-  NETLIFY_DEPLOY_PREVIEW_URL: 'https://deploy-preview-${{ github.event.pull_request.number }}--spirit-design-system.netlify.app/'
 
 jobs:
-  has-label:
-    name: 🏷️ Analyzing Labels
-    runs-on: ubuntu-24.04
-    outputs:
-      e2e: ${{ steps.has-label.outputs.labeled-run-visual-tests }}
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@d07a454dad7609a92316b57b23c9ccfd4f59af66 # 0.13.1
-        with:
-          access_token: ${{ github.token }}
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Labeled to e2e
-        id: has-label
-        uses: DanielTamkin/HasLabel@eb337eaf9036a5408ddd8ebc3e9ac540d74d2ae0 # v1.0.4
-        with:
-          contains: 'run-visual-tests'
-
   test:
     name: 🖥️ End-to-End Testing
-    needs: has-label
-    if: ${{ needs.has-label.outputs.e2e || (github.ref == 'refs/heads/main') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
@@ -48,30 +25,11 @@ jobs:
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
 
-      # Wait for the Netlify preview URL to be ready
-      - name: Wait for Netlify Deploy
-        uses: mmazzarolo/wait-for-netlify-action@8a7a8d8cf5b313c916d805b76cc498380062d268
-        id: get-netlify-preview-url
-        with:
-          site_id: ${{ secrets.NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM }}
-          max_timeout: 1
-        env:
-          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-      # The Netlify preview URL is now available
-      # as `steps.get-netlify-preview-url.outputs.url`
-
       - name: Get Playwright Version
         id: playwright-version
         run: |
           PW_VERSION=$(yq '.catalogs.test["@playwright/test"]' .yarnrc.yml)
           echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Validate Netlify URL
-        run: |
-          if [ -z "${{ steps.get-netlify-preview-url.outputs.url }}" ]; then
-            echo "Missing Netlify deploy URL output from wait-for-netlify-action."
-            exit 1
-          fi
 
       - name: Run Playwright tests
         run: |
@@ -82,7 +40,7 @@ jobs:
             -e NODE_ENV="${{ env.NODE_ENV }}" \
             -e PW_WORKERS="${{ vars.PW_WORKERS || '1' }}" \
             -e PW_PAGE_RETRIES="${{ vars.PW_PAGE_RETRIES || '5' }}" \
-            -e WEBSITE_URL="${{ steps.get-netlify-preview-url.outputs.url }}" \
+            -e WEBSITE_URL="${{ inputs.url }}" \
             mcr.microsoft.com/playwright:v${{ steps.playwright-version.outputs.version }}-noble \
             sh -c "corepack install && corepack enable && yarn test:e2e"
 

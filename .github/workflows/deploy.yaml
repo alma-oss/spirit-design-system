@@ -1,0 +1,60 @@
+name: 🚀 Deploy
+
+on:
+  workflow_call:
+    outputs:
+      url:
+        description: 'URL of the Netlify deploy of the demo app'
+        value: ${{ jobs.deploy.outputs.url }}
+
+jobs:
+  deploy:
+    name: 🚀 Deploying
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    # Netlify credentials (NETLIFY_TOKEN, NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM) live in this environment
+    environment:
+      name: netlify
+      # Shown as the "View deployment" link on the pull request
+      url: ${{ steps.netlify-deploy.outputs.url }}
+    permissions:
+      contents: read
+    outputs:
+      url: ${{ steps.netlify-deploy.outputs.url }}
+    steps:
+      # Reuse the demo app built by the Build job instead of building it again.
+      # The repository is deliberately not checked out and no dependencies are installed: no PR-controlled
+      # script or config runs while the Netlify credentials are available.
+      - name: Download demo app build
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: demo-build
+          path: build/
+
+      # The CLI is synchronous, returns the exact deploy URL (no SHA lookup race) and exits non-zero
+      # on a deploy failure, so infra problems fail here and not in the test job.
+      # The version is kept in sync with the `script` catalog in .yarnrc.yml.
+      - name: Deploy to Netlify
+        id: netlify-deploy
+        run: |
+          ALIAS_ARGS=()
+          if [ -n "$PR_NUMBER" ]; then
+            ALIAS_ARGS=(--alias "deploy-preview-${PR_NUMBER}")
+          fi
+          OUTPUT=$(npx --yes netlify-cli@17.38.1 deploy \
+            --dir build \
+            "${ALIAS_ARGS[@]}" \
+            --message "E2E ${GITHUB_SHA}" \
+            --json)
+          echo "$OUTPUT"
+          DEPLOY_URL=$(echo "$OUTPUT" | jq -r '.deploy_url // empty')
+          if [ -z "$DEPLOY_URL" ]; then
+            echo "Netlify CLI did not return a deploy URL."
+            exit 1
+          fi
+          echo "url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
+        env:
+          # Same URL shape as the Netlify deploy preview of a PR; empty on main, where the deploy URL is used
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM }}
