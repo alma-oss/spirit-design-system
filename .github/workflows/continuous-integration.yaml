@@ -34,8 +34,6 @@ jobs:
   build-checks:
     name: 🏗️ Build Checks
     uses: ./.github/workflows/build.yaml
-    with:
-      build-demo: ${{ github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests')) }}
 
   e2e-deploy:
     name: 🚀 E2E Deploy
