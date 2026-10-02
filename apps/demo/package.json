@@ -13,7 +13,8 @@
   "scripts": {
     "start": "vite --host --config config/vite/app.ts",
     "build": "vite build --config config/vite/app.ts",
-    "preview": "vite preview --config config/vite/app.ts"
+    "preview": "vite preview --config config/vite/app.ts",
+    "deploy": "netlify deploy --dir build"
   },
   "devDependencies": {
     "@alma-oss/spirit-common": "workspace:^",
@@ -21,6 +22,7 @@
     "@rollup/plugin-typescript": "catalog:build",
     "autoprefixer": "catalog:build",
     "clean-css-cli": "catalog:build",
+    "netlify-cli": "catalog:script",
     "npm-run-all2": "catalog:script",
     "postcss": "catalog:build",
     "rollup": "catalog:build",

@@ -44,6 +44,16 @@ jobs:
       - name: Check for clean working directory
         uses: ./.github/actions/check-clean-tree
 
+      # The demo build is shared with the Deploy workflow, so it is not built again
+      - name: Cache App Build (demo)
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: demo-build
+          path: apps/demo/build/
+          retention-days: 1
+          include-hidden-files: true
+          if-no-files-found: error
+
       - name: Save Nx cache
         uses: ./.github/actions/nx-cache-save
         with:
