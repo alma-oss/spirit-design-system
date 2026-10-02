@@ -42,7 +42,7 @@ jobs:
     needs: build-checks
     # Runs on main and on PRs labeled `run-visual-tests`
     if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests'))
-    uses: ./.github/workflows/netlify-deploy.yaml
+    uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
   e2e-tests:
@@ -79,7 +79,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build-checks, code-quality-gate]
+    needs: [git-checks, build-checks, e2e-deploy, e2e-tests, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:
