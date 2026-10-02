@@ -1,10 +1,12 @@
-import { type Dirent, readdirSync } from 'fs';
-import { fetchAllComponents } from '../componentsRepository';
+import { type Dirent, existsSync, readdirSync } from 'fs';
+import { fetchAllComponents, getComponentViewsAvailability } from '../componentsRepository';
 
 jest.mock('fs', () => ({
+  existsSync: jest.fn(),
   readdirSync: jest.fn(),
 }));
 
+const existsSyncMock = existsSync as jest.Mock;
 const readdirSyncMock = readdirSync as jest.Mock;
 
 const makeDirent = (name: string, isDir: boolean): Dirent =>
@@ -65,5 +67,36 @@ describe('fetchAllComponents', () => {
     });
 
     expect(() => fetchAllComponents()).toThrow('ENOENT');
+  });
+});
+
+describe('getComponentViewsAvailability', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should report which component view sources exist', () => {
+    existsSyncMock.mockImplementation(
+      (path: string) =>
+        path.endsWith('packages/web-react/src/components/ActionGroup/README.md') ||
+        path.endsWith('packages/web-react/src/components/ActionGroup/preview/index.ts'),
+    );
+
+    expect(getComponentViewsAvailability('action-group')).toEqual({
+      web: false,
+      react: true,
+      webPreview: false,
+      reactPreview: true,
+    });
+  });
+
+  it('should report no views for an invalid component slug', () => {
+    expect(getComponentViewsAvailability('../button')).toEqual({
+      web: false,
+      react: false,
+      webPreview: false,
+      reactPreview: false,
+    });
+    expect(existsSyncMock).not.toHaveBeenCalled();
   });
 });
