@@ -5,12 +5,12 @@ import { getComponentTabAvailability } from '@local/domains/content/componentDoc
 import { routes, componentSegments } from '@local/domains/routing/routes';
 import { type ReactNode } from 'react';
 
-interface ComponentTabNavProps {
+interface ComponentTabNavigationProps {
   views: ReactNode;
   component: string;
 }
 
-const ComponentTabNav = async ({ views, component }: ComponentTabNavProps) => {
+const ComponentTabNavigation = async ({ views, component }: ComponentTabNavigationProps) => {
   const tabs = await getComponentTabAvailability(component);
   const sources = getComponentViewsAvailability(component);
 
@@ -73,4 +73,4 @@ const ComponentTabNav = async ({ views, component }: ComponentTabNavProps) => {
   );
 };
 
-export default ComponentTabNav;
+export default ComponentTabNavigation;
