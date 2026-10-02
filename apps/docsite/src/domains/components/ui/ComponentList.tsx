@@ -8,15 +8,16 @@ import React from 'react';
 
 interface ComponentListProps {
   components: string[];
+  previews: Record<string, string>;
 }
 
-const ComponentList = ({ components }: ComponentListProps) => {
+const ComponentList = ({ components, previews }: ComponentListProps) => {
   const [sort] = useComponentsSortQueryState();
 
   return sort === SORT_OPTIONS.CATEGORICAL ? (
-    <CategoricalComponentList components={components} />
+    <CategoricalComponentList components={components} previews={previews} />
   ) : (
-    <AlphabeticalComponentList components={components} />
+    <AlphabeticalComponentList components={components} previews={previews} />
   );
 };
 
