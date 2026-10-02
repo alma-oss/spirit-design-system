@@ -12,13 +12,13 @@ export interface TabItem {
   segment: string;
 }
 
-interface ComponentTabNavItemsProps {
+interface ComponentTabNavigationItemsProps {
   items: TabItem[];
 }
 
 const viewSegments = Object.values(componentSegments).filter((segment) => segment !== componentSegments.guidelines);
 
-const ComponentTabNavItems = ({ items }: ComponentTabNavItemsProps) => {
+const ComponentTabNavigationItems = ({ items }: ComponentTabNavigationItemsProps) => {
   const selectedSegment = useSelectedLayoutSegment('views') || '';
   const selectedNav = viewSegments.includes(selectedSegment) ? selectedSegment : componentSegments.guidelines;
 
@@ -40,4 +40,4 @@ const ComponentTabNavItems = ({ items }: ComponentTabNavItemsProps) => {
   );
 };
 
-export default ComponentTabNavItems;
+export default ComponentTabNavigationItems;
