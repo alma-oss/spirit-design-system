@@ -3,6 +3,7 @@ node_modules
 
 # Caches
 .cache
+.lycheecache
 
 # Code coverage
 .coverage
