@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-docsite%400.6.0...%40alma-oss%2Fspirit-docsite%400.7.0) (2026-10-02)
+
+### Features
+
+- **docsite:** add `UNSTABLE_Tile` to component categories #DS-2785 ([4794a08](https://github.com/alma-oss/spirit-design-system/commit/4794a08926cea0d39e299ae8931f7d277242c0d7)), references [#DS-2785](https://github.com/alma-oss/spirit-design-system/issues/DS-2785)
+- **docsite:** add the Alma Career corporate footer #DS-2457 ([cb921f7](https://github.com/alma-oss/spirit-design-system/commit/cb921f7832c5bdc82f2a353b9c209ba3918c8bd5)), references [#DS-2457](https://github.com/alma-oss/spirit-design-system/issues/DS-2457)
+- **docsite:** publish Canonical Pages in the documentation site #DS-2778 ([fc9608c](https://github.com/alma-oss/spirit-design-system/commit/fc9608c00f7084fb2562cd3eba56402b461031d3)), references [#DS-2778](https://github.com/alma-oss/spirit-design-system/issues/DS-2778)
+- **web-react:** introduce `ContextualHelp` component #DS-2794 ([d154408](https://github.com/alma-oss/spirit-design-system/commit/d15440868a133378aedc1cb3592f901fd2f0686d)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+
+### Bug Fixes
+
+- **docsite:** fix WebPreview Strict Mode re-execution and Heading deprecation ([b952a15](https://github.com/alma-oss/spirit-design-system/commit/b952a152b81d032654abd75bed9e445943ffe051))
+- **docsite:** load missing typefaces and italics ([39ddd9f](https://github.com/alma-oss/spirit-design-system/commit/39ddd9fe8322273892ce3b1570a2640511bfff2f))
+- **docsite:** load Spirit JS components in Web Preview after Handlebars render ([5c564f3](https://github.com/alma-oss/spirit-design-system/commit/5c564f39f7f9bcd4a603f93a866bed46edfee2b5))
+- **docsite:** render Handlebars, icons, and JS in Web Preview tab ([9eeca58](https://github.com/alma-oss/spirit-design-system/commit/9eeca5887172a2bb37e96a27aa200db36ba466b4))
+
+### Documentation
+
+- **docsite:** add icons and helpers pages #DS-2777 ([d011d94](https://github.com/alma-oss/spirit-design-system/commit/d011d946fe2d7a3eafb1cf6fe1a66a8c8bcbb022)), references [#DS-2777](https://github.com/alma-oss/spirit-design-system/issues/DS-2777)
+
 ## [0.6.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-docsite%400.5.3...%40alma-oss%2Fspirit-docsite%400.6.0) (2026-09-02)
 
 ### Features

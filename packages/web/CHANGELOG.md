@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.1.0...%40alma-oss%2Fspirit-web%405.2.0) (2026-10-02)
+
+### Features
+
+- **web,web-react:** add `Label` size variants and deprecate bare typography #DS-2651 ([49b156f](https://github.com/alma-oss/spirit-design-system/commit/49b156ffa131e17396d79402d8b0d01d827f5e52)), references [#DS-2651](https://github.com/alma-oss/spirit-design-system/issues/DS-2651)
+- **web,web-react:** allow pixel or percentage `Skeleton` dimensions #DS-2517 ([0d2e3d5](https://github.com/alma-oss/spirit-design-system/commit/0d2e3d5b14e253fd781837dfb3e999b38422fa85)), references [#DS-2517](https://github.com/alma-oss/spirit-design-system/issues/DS-2517)
+- **web,web-react:** introduce sizes for `Item` #DS-2812 ([cfbd322](https://github.com/alma-oss/spirit-design-system/commit/cfbd322527b3f894c8fa91e68b49f33aef5d59a9)), references [#DS-2812](https://github.com/alma-oss/spirit-design-system/issues/DS-2812)
+- **web:** add component radius overrides #DS-2713 ([61a931c](https://github.com/alma-oss/spirit-design-system/commit/61a931c10aa30e38520bff8d3fb8ae2e930ff5b2)), references [#DS-2713](https://github.com/alma-oss/spirit-design-system/issues/DS-2713)
+- **web:** add event delegation support to EventHandler.on ([2054054](https://github.com/alma-oss/spirit-design-system/commit/205405427f133638ea1baf9e008f144d3fafba3f))
+- **web:** add isDisabled helper to Elements utils ([60c1af0](https://github.com/alma-oss/spirit-design-system/commit/60c1af01bd3e5ee42ceadd484e62ed4077ab5cb6))
+- **web:** delegate toggle/dismiss triggers on document ([62d93ac](https://github.com/alma-oss/spirit-design-system/commit/62d93ace4b5d54ffb15c2c9e58f9098c173ddb48))
+- **web:** document contextual help in `UNSTABLE_Combobox` #DS-2794 ([a0518e8](https://github.com/alma-oss/spirit-design-system/commit/a0518e880a618e30d6cd0667e78db15e27b08eb7)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web:** document contextual help in `UNSTABLE_Picker` #DS-2794 ([30764bf](https://github.com/alma-oss/spirit-design-system/commit/30764bf3adb1bc3376f3af919b13cd5777f23227)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web:** expose both color intensities in color schemes #DS-2402 ([71c3b38](https://github.com/alma-oss/spirit-design-system/commit/71c3b38a984aa68680f08181196eb5e2f2b4029e)), references [#DS-2402](https://github.com/alma-oss/spirit-design-system/issues/DS-2402)
+- **web:** introduce `ContextualHelp` component #DS-2794 ([6fadf2f](https://github.com/alma-oss/spirit-design-system/commit/6fadf2f74865d9808ca553ed505b251804901f0a)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web:** introduce `ProgressBar` component #DS-2402 ([df2a979](https://github.com/alma-oss/spirit-design-system/commit/df2a9796441b59df753468d9277d49789141d2bb)), references [#DS-2402](https://github.com/alma-oss/spirit-design-system/issues/DS-2402)
+- **web:** introduce `UNSTABLE_Tile` component #DS-2785 ([48748ad](https://github.com/alma-oss/spirit-design-system/commit/48748ad6954f25642df1ec16c9e6820a4b582c72)), references [#DS-2785](https://github.com/alma-oss/spirit-design-system/issues/DS-2785)
+- **web:** shorten ProgressBar fill transition #DS-2724 ([0f353cf](https://github.com/alma-oss/spirit-design-system/commit/0f353cf0d456c0c82e717dcf03e623820f44c9d1)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+
+### Bug Fixes
+
+- **docsite:** render Handlebars, icons, and JS in Web Preview tab ([9eeca58](https://github.com/alma-oss/spirit-design-system/commit/9eeca5887172a2bb37e96a27aa200db36ba466b4))
+- **web-react:** add default type for button for TooltipTrigger #DS-2772 ([13bfca3](https://github.com/alma-oss/spirit-design-system/commit/13bfca376d8fbf84eb49002d6d205d9e5d02ba12)), references [#DS-2772](https://github.com/alma-oss/spirit-design-system/issues/DS-2772)
+- **web:** add missing preview.html for components with index.html ([a666632](https://github.com/alma-oss/spirit-design-system/commit/a6666325f986ec88b9953cd7429a2eef20081801)), references [#2812](https://github.com/alma-oss/spirit-design-system/issues/2812)
+- **web:** apply aria-selected only to role=tab elements in Tabs ([1d2d7b4](https://github.com/alma-oss/spirit-design-system/commit/1d2d7b48e482b87fe4dbc180e9f633679632d056))
+- **web:** fix test fixtures exposed by real toggle-trigger delegation ([1906348](https://github.com/alma-oss/spirit-design-system/commit/19063488c43c2545bdd0afef1af9b1c756cfd3e7))
+- **web:** prevent long options from overflowing full-width `DropdownPopover` ([8ab56d8](https://github.com/alma-oss/spirit-design-system/commit/8ab56d85fa52bc4e36ac25da85af8deab09ceed5))
+- **web:** raise `TooltipPopover` above dropdown content #DS-2794 ([f69729f](https://github.com/alma-oss/spirit-design-system/commit/f69729f1dffabeffe0a09f07e9d781e5de97d2b9)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web:** raise `UNSTABLE_Combobox` stacking when popover is open #DS-2771 ([a71fd0d](https://github.com/alma-oss/spirit-design-system/commit/a71fd0da75dca22df4b62f78bed4560a8c4f4b14)), references [#DS-2771](https://github.com/alma-oss/spirit-design-system/issues/DS-2771)
+- **web:** resolve Modal's dismiss target via closest() ([5fa760f](https://github.com/alma-oss/spirit-design-system/commit/5fa760f8591a66c2fe2744959778fc55d9eda0fa))
+- **web:** resolve Modal's dismiss target via closest() in onClick too ([6af2777](https://github.com/alma-oss/spirit-design-system/commit/6af27777f9633c91c835a3fa509adb5c26a0d74e))
+- **web:** resolve pre-existing TypeScript errors in SegmentedControl and Config ([26b84bf](https://github.com/alma-oss/spirit-design-system/commit/26b84bf651b3320ff7d27c07cbdec85564ed9239))
+- **web:** scan autoloaders on DOMContentLoaded when readyState is 'interactive' ([d0f4af1](https://github.com/alma-oss/spirit-design-system/commit/d0f4af1dfef91e2f54d2b918fe47d88379d2b7bc))
+
+### Documentation
+
+- **repo:** document Figma icon sync and register commit scope ([6bb18c8](https://github.com/alma-oss/spirit-design-system/commit/6bb18c814b18fa29c0c9b551824c96c8bc2879ab))
+- **web-react:** add `File` uploading progress demo #DS-2724 ([c8c0685](https://github.com/alma-oss/spirit-design-system/commit/c8c068557690ad87f9300ad95be7e3335fec7c4a)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** group Card, FileUpload, and Footer composition stories #DS-2724 ([52bc129](https://github.com/alma-oss/spirit-design-system/commit/52bc129ec1cef129c6a297e6477c6560ef0d2f67)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web:** add listbox presentation to `UNSTABLE_Picker` ([60894c9](https://github.com/alma-oss/spirit-design-system/commit/60894c954c283b0ba8d2ff698c196f4091cb63c9))
+
+### Code Refactoring
+
+- **web:** extract helper demo content to preview.html #DS-2777 ([b27eae6](https://github.com/alma-oss/spirit-design-system/commit/b27eae69cf280072148806956475a4c73e5e650c)), references [#DS-2777](https://github.com/alma-oss/spirit-design-system/issues/DS-2777)
+- **web:** remove unused _method param from enableToggleAutoloader ([060725e](https://github.com/alma-oss/spirit-design-system/commit/060725e0fc1fee4d3425ac46f0ce5a0624c892bf)), references [PR#2911-c-PRRC_kwDOFqk-Ps7v_W3e](https://github.com/PR/issues/2911-c-PRRC_kwDOFqk-Ps7v_W3e)
+- **web:** reuse kebabToTitleCase from common package ([c93964e](https://github.com/alma-oss/spirit-design-system/commit/c93964e4144003d896ad1deace7c8d4e8f659627))
+- **web:** use built-in globSync in scss tests ([1adc211](https://github.com/alma-oss/spirit-design-system/commit/1adc211da261a4302ad9bc4a9719dc0e22d5d009))
+
+### Tests
+
+- **web:** add regression test for aria-selected not leaking onto tabpanel ([ae0d044](https://github.com/alma-oss/spirit-design-system/commit/ae0d04472f05f2859756a1746f37a9c518864d7b))
+- **web:** verify Dropdown auto-close ordering under delegation ([711ce30](https://github.com/alma-oss/spirit-design-system/commit/711ce302bfa4ea3df00dff190a24a6f64a363166))
+
 ## [5.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.0.3...%40alma-oss%2Fspirit-web%405.1.0) (2026-09-02)
 
 ### Features

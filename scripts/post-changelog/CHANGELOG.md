@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-post-changelog%402.0.3...%40alma-oss%2Fspirit-post-changelog%402.0.4) (2026-10-02)
+
+### Code Refactoring
+
+- **post-changelog:** replace dotenv-safe with loadEnvFile ([c7083a7](https://github.com/alma-oss/spirit-design-system/commit/c7083a7b578f815d7593593a99c4b449be109f1c))
+
 ## [2.0.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-post-changelog@2.0.2...@alma-oss/spirit-post-changelog@2.0.3) (2026-03-04)
 
 ### Chores

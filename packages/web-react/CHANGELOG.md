@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.3.0...%40alma-oss%2Fspirit-web-react%405.4.0) (2026-10-02)
+
+### Features
+
+- **web-react:** add `contextualHelp` prop to `UNSTABLE_Combobox` #DS-2794 ([9d7b0f7](https://github.com/alma-oss/spirit-design-system/commit/9d7b0f7c4444f44d5c8606b0ebb47b2d54b95936)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web-react:** add `contextualHelp` prop to `UNSTABLE_Picker` #DS-2794 ([c0749f9](https://github.com/alma-oss/spirit-design-system/commit/c0749f966384fef5ea73bb3f8f820f928c674ffb)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web-react:** add `useThrottledValue` hook #DS-2724 ([b80cdb2](https://github.com/alma-oss/spirit-design-system/commit/b80cdb2014b6ed52c3354ccb0398aa1a7d66eb2f)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** add ModalHeader/ModalFooter Code Connect templates #DS-2701 ([ad8d4cc](https://github.com/alma-oss/spirit-design-system/commit/ad8d4ccccb311b398210505053ff490d47cc7035)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+- **web-react:** compose File extra content via children #DS-2724 ([00cfd5c](https://github.com/alma-oss/spirit-design-system/commit/00cfd5cbb9ab670dc6a7e92f74812fc1f219dc01)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** introduce `ContextualHelp` component #DS-2794 ([d154408](https://github.com/alma-oss/spirit-design-system/commit/d15440868a133378aedc1cb3592f901fd2f0686d)), references [#DS-2794](https://github.com/alma-oss/spirit-design-system/issues/DS-2794)
+- **web-react:** introduce `ProgressBar` component #DS-2724 ([e883291](https://github.com/alma-oss/spirit-design-system/commit/e883291b6595711bc7d752211a29f2b6cd4539e3)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** introduce `UNSTABLE_Tile` component #DS-2785 ([c66bc61](https://github.com/alma-oss/spirit-design-system/commit/c66bc61dd60b67da6ce2db73c9da884af9c3b1e1)), references [#DS-2785](https://github.com/alma-oss/spirit-design-system/issues/DS-2785)
+- **web,web-react:** add `Label` size variants and deprecate bare typography #DS-2651 ([49b156f](https://github.com/alma-oss/spirit-design-system/commit/49b156ffa131e17396d79402d8b0d01d827f5e52)), references [#DS-2651](https://github.com/alma-oss/spirit-design-system/issues/DS-2651)
+- **web,web-react:** allow pixel or percentage `Skeleton` dimensions #DS-2517 ([0d2e3d5](https://github.com/alma-oss/spirit-design-system/commit/0d2e3d5b14e253fd781837dfb3e999b38422fa85)), references [#DS-2517](https://github.com/alma-oss/spirit-design-system/issues/DS-2517)
+- **web,web-react:** introduce sizes for `Item` #DS-2812 ([cfbd322](https://github.com/alma-oss/spirit-design-system/commit/cfbd322527b3f894c8fa91e68b49f33aef5d59a9)), references [#DS-2812](https://github.com/alma-oss/spirit-design-system/issues/DS-2812)
+
+### Bug Fixes
+
+- **web-react:** add default type for button for TooltipTrigger #DS-2772 ([13bfca3](https://github.com/alma-oss/spirit-design-system/commit/13bfca376d8fbf84eb49002d6d205d9e5d02ba12)), references [#DS-2772](https://github.com/alma-oss/spirit-design-system/issues/DS-2772)
+- **web-react:** add missing preview/index.ts for 4 components ([5a68d3d](https://github.com/alma-oss/spirit-design-system/commit/5a68d3d63147737ac82bed8229aa93baba5d2a7b)), references [#2812](https://github.com/alma-oss/spirit-design-system/issues/2812)
+- **web-react:** replace deprecated props and inline css in layout templates #DS-2788 ([1773915](https://github.com/alma-oss/spirit-design-system/commit/1773915cba1bf2912bb504a2e259d9cdc246b784)), references [#DS-2788](https://github.com/alma-oss/spirit-design-system/issues/DS-2788)
+
+### Documentation
+
+- **docsite:** add Canonical Pages extracted from supernova #DS-2778 ([e13ecc9](https://github.com/alma-oss/spirit-design-system/commit/e13ecc9b2cd15fc12b474a8f9f0d828286636b51)), references [#DS-2778](https://github.com/alma-oss/spirit-design-system/issues/DS-2778)
+- **repo:** refresh `figma-to-code` skill for current v5 APIs ([3f35de5](https://github.com/alma-oss/spirit-design-system/commit/3f35de5edafc26103c12fddff63b062db401c2af))
+- **web-react:** add `File` uploading progress demo #DS-2724 ([c8c0685](https://github.com/alma-oss/spirit-design-system/commit/c8c068557690ad87f9300ad95be7e3335fec7c4a)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** add CV editor driving license and work experience pages #DS-2769 ([2c22cc0](https://github.com/alma-oss/spirit-design-system/commit/2c22cc08a29a22226f3db507de417f3e6f9e8924)), references [#DS-2769](https://github.com/alma-oss/spirit-design-system/issues/DS-2769)
+- **web-react:** add draft CV builder edit screen example page #DS-2746 ([433c525](https://github.com/alma-oss/spirit-design-system/commit/433c525093254dc4330b0506982027697cf41cf1)), references [#DS-2746](https://github.com/alma-oss/spirit-design-system/issues/DS-2746)
+- **web-react:** add draft CV builder publish screen example page #DS-2765 ([6e86974](https://github.com/alma-oss/spirit-design-system/commit/6e8697446913f1531bc83c711b70bf72e0f00781)), references [#DS-2765](https://github.com/alma-oss/spirit-design-system/issues/DS-2765)
+- **web-react:** add simulated validation errors to CV editor #DS-2766 ([6f17f60](https://github.com/alma-oss/spirit-design-system/commit/6f17f60a50ea0d0d4579c73d34a7672798ecd455)), references [#DS-2766](https://github.com/alma-oss/spirit-design-system/issues/DS-2766)
+- **web-react:** add upload progress variants to modal crop FileUpload example #DS-2724 ([395dd07](https://github.com/alma-oss/spirit-design-system/commit/395dd07a607af4fd9a7b467e156dc5ae190e6042)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** group Card, FileUpload, and Footer composition stories #DS-2724 ([52bc129](https://github.com/alma-oss/spirit-design-system/commit/52bc129ec1cef129c6a297e6477c6560ef0d2f67)), references [#DS-2724](https://github.com/alma-oss/spirit-design-system/issues/DS-2724)
+- **web-react:** introduce layout templates generated from figma ([74fadaf](https://github.com/alma-oss/spirit-design-system/commit/74fadaf6ec51127124bf74403c325a953c67ff78))
+
+### Chores
+
+- **web-react:** fix figma module resolution for TypeScript and ESLint #DS-2701 ([c72472c](https://github.com/alma-oss/spirit-design-system/commit/c72472cba445298dd6ef29696798da498dff64d7)), closes [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+
+### Code Refactoring
+
+- **web-react:** migrate Accordion–Card Code Connect files to Template API #DS-2701 ([64b57ee](https://github.com/alma-oss/spirit-design-system/commit/64b57ee210689e3aa4f0c605274e5c0d00e71bcd)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+- **web-react:** migrate Checkbox–HelperText Code Connect files to Template API #DS-2701 ([14eb3c1](https://github.com/alma-oss/spirit-design-system/commit/14eb3c1b57d18427e24e5708141a82fa1dd85ed0)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+- **web-react:** migrate Icon–Modal Code Connect files to Template API #DS-2701 ([910fb6b](https://github.com/alma-oss/spirit-design-system/commit/910fb6b1544694236fae9aa8c965817c5240a684)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+- **web-react:** migrate Pagination–Slider Code Connect files to Template API #DS-2701 ([20e88c7](https://github.com/alma-oss/spirit-design-system/commit/20e88c7d44fb1b219f2cfb20ff8eb6c4a9092d55)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+- **web-react:** update figma config #DS-2701 ([9b27a0d](https://github.com/alma-oss/spirit-design-system/commit/9b27a0d3d7a0a41ee219f8db32331e4616e585b6)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+
 ## [5.3.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.2.1...%40alma-oss%2Fspirit-web-react%405.3.0) (2026-09-02)
 
 ### Features

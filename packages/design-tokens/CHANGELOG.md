@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.1.0...%40alma-oss%2Fspirit-design-tokens%405.2.0) (2026-10-02)
+
+### Features
+
+- **design-tokens:** update design tokens ([16996c0](https://github.com/alma-oss/spirit-design-system/commit/16996c030da8feb007c75ccfee2e7257c1808b33))
+- **web:** add component radius overrides #DS-2713 ([61a931c](https://github.com/alma-oss/spirit-design-system/commit/61a931c10aa30e38520bff8d3fb8ae2e930ff5b2)), references [#DS-2713](https://github.com/alma-oss/spirit-design-system/issues/DS-2713)
+
 ## [5.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.0.1...%40alma-oss%2Fspirit-design-tokens%405.1.0) (2026-09-02)
 
 ### Features

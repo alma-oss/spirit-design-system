@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.1.0...%40lmc-eu%2Fspirit-demo-app%403.2.0) (2026-10-02)
+
+### Features
+
+- **web,web-react:** add `Label` size variants and deprecate bare typography #DS-2651 ([49b156f](https://github.com/alma-oss/spirit-design-system/commit/49b156ffa131e17396d79402d8b0d01d827f5e52)), references [#DS-2651](https://github.com/alma-oss/spirit-design-system/issues/DS-2651)
+
+### Code Refactoring
+
+- **web:** extract helper demo content to preview.html #DS-2777 ([b27eae6](https://github.com/alma-oss/spirit-design-system/commit/b27eae69cf280072148806956475a4c73e5e650c)), references [#DS-2777](https://github.com/alma-oss/spirit-design-system/issues/DS-2777)
+
 ## [3.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.0.2...%40lmc-eu%2Fspirit-demo-app%403.1.0) (2026-09-02)
 
 ### Features

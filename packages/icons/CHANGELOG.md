@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-icons%404.0.1...%40alma-oss%2Fspirit-icons%404.1.0) (2026-10-02)
+
+### Features
+
+- **exporter-assets:** add direct Figma icon synchronization ([8728204](https://github.com/alma-oss/spirit-design-system/commit/87282049048c8a1f2957f2d0bf3a93cc28df43e6))
+- **exporter-assets:** discover opted-in repositories and confine outputs ([f53ab01](https://github.com/alma-oss/spirit-design-system/commit/f53ab01ebafa9ee82d752a70ba49842a1528f038))
+- **icons:** move assets config to the repository root ([458fec8](https://github.com/alma-oss/spirit-design-system/commit/458fec837f8cf4b659eeaff7c967b41b43ab4e53))
+
+### Documentation
+
+- **repo:** document Figma icon sync and register commit scope ([6bb18c8](https://github.com/alma-oss/spirit-design-system/commit/6bb18c814b18fa29c0c9b551824c96c8bc2879ab))
+
+### Chores
+
+- **icons:** sync Spirit icons from Figma ([008d518](https://github.com/alma-oss/spirit-design-system/commit/008d518909796d50778c696eada18f3fc60129b6))
+
 ## [4.0.1](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-icons@4.0.0...@alma-oss/spirit-icons@4.0.1) (2026-08-07)
 
 **Note:** Version bump only for package @alma-oss/spirit-icons

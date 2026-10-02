@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-supernova-extract",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Extract hardcoded Supernova documentation pages to markdown for apps/docsite migration",
   "type": "module",
   "private": true,

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-common%400.6.3...%40alma-oss%2Fspirit-common%400.7.0) (2026-10-02)
+
+### Features
+
+- **common:** add kebabToTitleCase utility ([22aabe7](https://github.com/alma-oss/spirit-design-system/commit/22aabe74e623f28e4f5a13406a5fcc3d1f2f94cc))
+
 ## [0.6.3](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-common@0.6.2...@alma-oss/spirit-common@0.6.3) (2026-07-08)
 
 **Note:** Version bump only for package @alma-oss/spirit-common

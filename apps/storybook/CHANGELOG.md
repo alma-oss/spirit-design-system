@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.6.0...%40alma-oss%2Fspirit-storybook%400.6.1) (2026-10-02)
+
+### Code Refactoring
+
+- **storybook:** reuse kebabToTitleCase from common package ([35f34a7](https://github.com/alma-oss/spirit-design-system/commit/35f34a7895b36d61dded19899501e2ff950aacdc))
+
 ## [0.6.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.5.8...%40alma-oss%2Fspirit-storybook%400.6.0) (2026-09-02)
 
 ### Features
