@@ -1,0 +1,59 @@
+@use '@tokens' as tokens;
+
+$_page-left: calc(72 / 1024 * 100%);
+$_page-width: calc(880 / 1024 * 100%);
+
+// The background is not tokenized in Spirit, so it uses a raw value taken from the design.
+.PageShowcase {
+    position: relative;
+    aspect-ratio: 1024 / 580;
+    overflow: hidden;
+    background-color: #e0dfef;
+}
+
+.Page {
+    position: absolute;
+    bottom: 0;
+    left: $_page-left;
+    display: block;
+    width: $_page-width;
+    border-top-left-radius: tokens.$radius-500;
+    border-top-right-radius: tokens.$radius-500;
+}
+
+.Annotation {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.Highlight {
+    position: absolute;
+    pointer-events: auto;
+    background-color: color-mix(in srgb, var(--spirit-color-accent-02-background-basic) 20%, transparent);
+    border: tokens.$border-width-100 solid var(--spirit-color-accent-02-border-basic);
+    transition: background-color 0.25s ease-in-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+.Stamp {
+    transition: transform 0.25s ease-in-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+// Hovering a highlight or its note emphasizes the whole annotation.
+.Annotation:has(.Highlight:hover, .Stamp:hover) {
+    .Highlight {
+        background-color: color-mix(in srgb, var(--spirit-color-accent-02-background-basic) 35%, transparent);
+    }
+
+    .Stamp {
+        transform: scale(1.06);
+    }
+}

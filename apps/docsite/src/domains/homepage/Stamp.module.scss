@@ -1,0 +1,75 @@
+@use '@tokens' as tokens;
+
+$_point-size: 0.6875rem;
+
+.Stamp {
+    --stamp-color: var(--spirit-color-accent-02-background-basic);
+    --stamp-line-color: var(--spirit-color-accent-02-border-basic);
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+    filter: drop-shadow(tokens.$shadow-200);
+}
+
+.Stamp--success {
+    --stamp-color: var(--spirit-color-emotion-success-background-basic);
+    --stamp-line-color: var(--spirit-color-emotion-success-border-basic);
+}
+
+.Label {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    white-space: nowrap;
+    background-color: var(--stamp-color);
+    border: tokens.$border-width-100 solid #fff;
+}
+
+.Line {
+    flex: 1;
+    border: 0 dashed var(--stamp-line-color);
+}
+
+.Point {
+    flex-shrink: 0;
+    width: $_point-size;
+    height: $_point-size;
+    background-color: var(--stamp-color);
+    border: tokens.$border-width-100 solid #fff;
+    border-radius: 50%;
+}
+
+// The sticky note and its point are placed along the line, in the direction the note points to.
+.Stamp--right {
+    flex-direction: row;
+
+    .Line {
+        border-top-width: tokens.$border-width-100;
+    }
+}
+
+.Stamp--left {
+    flex-direction: row-reverse;
+
+    .Line {
+        border-top-width: tokens.$border-width-100;
+    }
+}
+
+.Stamp--down {
+    flex-direction: column-reverse;
+
+    .Line {
+        border-left-width: tokens.$border-width-100;
+    }
+}
+
+.Stamp--up {
+    flex-direction: column;
+
+    .Line {
+        border-left-width: tokens.$border-width-100;
+    }
+}
