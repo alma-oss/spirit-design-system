@@ -6,6 +6,7 @@ on:
     branches:
       - main
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
   schedule:
     - cron: '0 9 * * *' # every day at 9:00
 
@@ -33,6 +34,16 @@ jobs:
   build-checks:
     name: 🏗️ Build Checks
     uses: ./.github/workflows/build.yaml
+    with:
+      build-demo: ${{ github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests')) }}
+
+  e2e-tests:
+    name: 🤖 End-to-End Tests
+    needs: build-checks
+    # Runs on main and on PRs labeled `run-visual-tests`
+    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests'))
+    uses: ./.github/workflows/e2e.yml
+    secrets: inherit
 
   docs-reviews:
     name: 📄 Docs Reviews

@@ -2,6 +2,12 @@ name: 🏗️ Build
 
 on:
   workflow_call:
+    inputs:
+      build-demo:
+        description: 'Build the demo app and upload it as the `demo-build` artifact (used by E2E tests)'
+        required: false
+        type: boolean
+        default: false
 
 env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
@@ -29,6 +35,20 @@ jobs:
 
       - name: Build packages
         run: yarn build
+
+      # Built once on the Node.js version used by Netlify and reused by the E2E deploy job
+      - name: Build demo app
+        if: inputs.build-demo && matrix.node-version == 22
+        run: yarn nx run @lmc-eu/spirit-demo-app:build
+
+      - name: Upload demo app build
+        if: inputs.build-demo && matrix.node-version == 22
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: demo-build
+          path: apps/demo/build/
+          retention-days: 1
+          if-no-files-found: error
 
       - name: Check for clean working directory
         run: |
