@@ -1,0 +1,70 @@
+.frame {
+  --preview-frame-padding: 32px;
+  --preview-frame-guide-gap: 12px; // distance between the guides and the component edges
+  --preview-frame-guide-color: rgb(0 0 0 / 16%);
+  --preview-frame-guide-fade: rgb(0 0 0 / 0%);
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background-color: var(--spirit-color-background-primary, #fdfdfc);
+  border: 1px solid var(--spirit-color-border-basic, #dcdcdc);
+  border-radius: var(--spirit-radius-400, 12px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.content {
+  --preview-scale: 1;
+
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  transform: scale(var(--preview-scale));
+  transform-origin: center;
+}
+
+.placeholder {
+  width: 112px;
+  height: 28px;
+  background-color: rgb(0 0 0 / 10%);
+}
+
+// Guides run along the edges of the content box across the whole frame and fade out towards the frame edges.
+.guide {
+  position: absolute;
+  background-repeat: no-repeat;
+}
+
+.guideVertical {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--preview-frame-guide-fade),
+    var(--preview-frame-guide-color) 50%,
+    var(--preview-frame-guide-fade)
+  );
+}
+
+.guideHorizontal {
+  right: 0;
+  left: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    var(--preview-frame-guide-fade),
+    var(--preview-frame-guide-color) 50%,
+    var(--preview-frame-guide-fade)
+  );
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
