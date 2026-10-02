@@ -19,6 +19,7 @@ export default [
       '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
+      '**/.icons-tmp/**',
       '**/.nx/**',
       '**/.yarn/**',
       // Ignore the playwright-report directory

@@ -25,18 +25,22 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "development": "./.icons-tmp/index.ts",
       "import": "./dist/index.js"
     },
     "./icons": {
       "types": "./dist/icons.d.ts",
+      "development": "./.icons-tmp/icons.ts",
       "import": "./dist/icons.js"
     },
     "./react": {
       "types": "./dist/react/index.d.ts",
+      "development": "./.icons-tmp/react/index.ts",
       "import": "./dist/react/index.js"
     },
     "./react/*": {
       "types": "./dist/react/*.d.ts",
+      "development": "./.icons-tmp/react/*.tsx",
       "import": "./dist/react/*.js"
     },
     "./svg/*": "./dist/svg/*.svg"
@@ -47,8 +51,11 @@
     "build:verify": "tsx ./scripts/verifyBuild.ts",
     "build": "npm-run-all --serial build:clean build:compile build:verify",
     "dev": "vite build --watch",
+    "generate": "tsx --conditions=development ./scripts/generate.ts",
     "sync": "yarn workspace @alma-oss/spirit-assets-exporter sync --config ../../spirit.config.json",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "prepack": "tsx ../vite-plugin-spirit-icons/scripts/stripDevelopmentExports.ts --strip",
+    "postpack": "tsx ../vite-plugin-spirit-icons/scripts/stripDevelopmentExports.ts --restore"
   },
   "devDependencies": {
     "@alma-oss/spirit-assets-exporter": "workspace:^",
