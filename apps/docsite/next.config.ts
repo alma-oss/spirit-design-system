@@ -30,6 +30,12 @@ const nextConfig: NextConfig = {
     // exists here because Nx's default `build: { dependsOn: ['^build'] }` (nx.json) builds
     // @alma-oss/spirit-web (a docsite dependency) before docsite, populating it first.
     '/assets/icons/svg/sprite.svg': ['../../packages/web/public/icons/svg/sprite.svg'],
+    '/components/**': [
+      '../../packages/web/src/scss/components/**/README.md',
+      '../../packages/web/src/scss/components/**/preview.html',
+      '../../packages/web-react/src/components/**/README.md',
+      '../../packages/web-react/src/components/**/preview/index.ts',
+    ],
     '/components/[component]/web-preview': [
       '../../packages/web/src/scss/components/**/preview.html',
       // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
