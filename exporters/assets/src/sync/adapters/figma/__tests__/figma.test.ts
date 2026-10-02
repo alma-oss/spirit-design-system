@@ -97,6 +97,58 @@ describe('exportAssets', () => {
     expect(assets).toEqual([{ name: 'keep', svg: '<svg />\n' }]);
   });
 
+  it('combines branded icons with shared flag icons', async () => {
+    const assets = await exportAssets('figma-file', 'Spirit', ['icons', 'flag-icons'], 'token', createFigmaFetch());
+
+    expect(assets.map(({ name }) => name)).toEqual(['add-item', 'flag-cz', 'logo-colored']);
+  });
+
+  it('requires the flag icon components to be present', async () => {
+    await expect(exportAssets('file', 'Spirit', ['flag-icons'], 'token', createExportFetch())).rejects.toThrow(
+      /No Icons\/flag-\* components/,
+    );
+  });
+
+  it('does not let the generic "icons" type also claim flag icon components', async () => {
+    const assets = await exportAssets(
+      'file',
+      'Spirit',
+      ['icons'],
+      'token',
+      createExportFetch({
+        file: {
+          document: {
+            id: '0:0',
+            name: 'Document',
+            type: 'DOCUMENT',
+            children: [
+              {
+                id: '1:1',
+                name: 'Icons/flag-skip',
+                type: 'COMPONENT_SET',
+                children: [{ id: '1:2', name: 'Brand=Spirit', type: 'COMPONENT' }],
+              },
+              {
+                id: '2:1',
+                name: 'Icons/Keep',
+                type: 'COMPONENT_SET',
+                children: [{ id: '2:2', name: 'Brand=Spirit', type: 'COMPONENT' }],
+              },
+            ],
+          },
+        },
+        images: {
+          err: null,
+          images: {
+            '2:2': 'https://assets.example/test.svg',
+          },
+        },
+      }),
+    );
+
+    expect(assets).toEqual([{ name: 'keep', svg: '<svg />\n' }]);
+  });
+
   it('skips branded component sets that do not contain the requested brand', async () => {
     const assets = await exportAssets(
       'file',

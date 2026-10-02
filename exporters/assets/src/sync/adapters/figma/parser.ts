@@ -44,6 +44,10 @@ const isBrandVariant = (node: FigmaNode, brand: string): boolean => {
     .some((property) => property === `Brand=${brand}`);
 };
 
+// Sub-groups such as benefit-icons or flag-icons live under the generic `Icons/` prefix, so the
+// generic `icons` type must not also claim their nodes.
+const ICONS_EXCLUDED_PREFIXES: AssetType[] = ['benefit-icons', 'flag-icons'];
+
 const matchesDiscoveryRule = (node: FigmaNode, assetType: AssetType): boolean => {
   const rule = ASSET_DISCOVERY[assetType];
 
@@ -51,7 +55,11 @@ const matchesDiscoveryRule = (node: FigmaNode, assetType: AssetType): boolean =>
     return false;
   }
 
-  return !(assetType === 'icons' && node.name.startsWith(ASSET_DISCOVERY['benefit-icons'].matchPrefix));
+  if (assetType !== 'icons') {
+    return true;
+  }
+
+  return !ICONS_EXCLUDED_PREFIXES.some((excluded) => node.name.startsWith(ASSET_DISCOVERY[excluded].matchPrefix));
 };
 
 export const discoverAssetNodes = (document: FigmaNode, brand: string, assets: AssetType[]): AssetVariant[] => {

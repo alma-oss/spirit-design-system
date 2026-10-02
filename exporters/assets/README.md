@@ -41,6 +41,7 @@ that is not part of the current export is deleted. Each target selects one or mo
 
 - `icons`: Brand-specific variants from `Icons/{icon-name}` component sets
 - `benefit-icons`: shared, unbranded `Icons/benefit-*` components
+- `flag-icons`: shared, unbranded `Icons/flag-*` components
 - `illustrations`: Brand-specific variants from `Illustration/{illustration-name}` component sets
 
 Multiple asset types in one target share the same output directory and are treated as one complete set:
@@ -61,8 +62,9 @@ Multiple asset types in one target share the same output directory and are treat
 ```
 
 Branded icon and illustration component sets are exported only when they include a `Brand` variant matching the
-configured target. Sets without that brand are skipped. Benefit icons do not have a Brand variant and are exported
-unchanged into every target that selects them.
+configured target. Sets without that brand are skipped. Benefit icons and flag icons do not have a Brand variant and
+are exported unchanged into every target that selects them, so adding a new country flag in Figma needs no exporter
+config change.
 
 Illustrations should use a separate target because they are not part of the 24×24 icon set:
 

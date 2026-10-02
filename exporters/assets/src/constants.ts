@@ -1,4 +1,4 @@
-export const ASSET_TYPES = ['benefit-icons', 'icons', 'illustrations'] as const;
+export const ASSET_TYPES = ['benefit-icons', 'flag-icons', 'icons', 'illustrations'] as const;
 
 export const CHANGE_TYPES = {
   ADDED: 'added',
@@ -33,11 +33,28 @@ export const DEFAULT_GIT_TEMPLATES = {
 
 export const SVG_EXTENSION = '.svg';
 
-export const ASSET_DISCOVERY = {
+type DiscoveryAssetType = (typeof ASSET_TYPES)[number];
+
+interface AssetDiscoveryRule {
+  branded: boolean;
+  matchPrefix: string;
+  missingError: (brand: string) => string;
+  namePrefix: string;
+  nodeType: 'COMPONENT' | 'COMPONENT_SET';
+}
+
+export const ASSET_DISCOVERY: Record<DiscoveryAssetType, AssetDiscoveryRule> = {
   'benefit-icons': {
     branded: false,
     matchPrefix: 'Icons/benefit-',
     missingError: (_brand: string) => 'No Icons/benefit-* components were found in the Figma file.',
+    namePrefix: 'Icons/',
+    nodeType: 'COMPONENT',
+  },
+  'flag-icons': {
+    branded: false,
+    matchPrefix: 'Icons/flag-',
+    missingError: (_brand: string) => 'No Icons/flag-* components were found in the Figma file.',
     namePrefix: 'Icons/',
     nodeType: 'COMPONENT',
   },
@@ -56,4 +73,4 @@ export const ASSET_DISCOVERY = {
     namePrefix: 'Illustration/',
     nodeType: 'COMPONENT_SET',
   },
-} as const;
+};
