@@ -37,12 +37,20 @@ jobs:
     with:
       build-demo: ${{ github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests')) }}
 
-  e2e-tests:
-    name: 🤖 End-to-End Tests
+  e2e-deploy:
+    name: 🚀 E2E Deploy
     needs: build-checks
     # Runs on main and on PRs labeled `run-visual-tests`
     if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests'))
+    uses: ./.github/workflows/netlify-deploy.yaml
+    secrets: inherit
+
+  e2e-tests:
+    name: 🤖 End-to-End Tests
+    needs: e2e-deploy
     uses: ./.github/workflows/e2e.yml
+    with:
+      url: ${{ needs.e2e-deploy.outputs.url }}
     secrets: inherit
 
   docs-reviews:
