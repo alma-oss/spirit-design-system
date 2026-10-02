@@ -1,19 +1,23 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import { buildConstants } from '../steps/buildConstants';
 
 // Make filterSvgFiles resilient to undefined to avoid CI edge case crashes
 jest.mock('../steps/shared', () => {
-  const path = require('path');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires -- jest.mock factories can't reference outer-scope imports
+  const pathModule = require('path');
+
   return {
-    filterSvgFiles: (fileNames: string[] | undefined) =>
-      Array.isArray(fileNames)
-        ? fileNames.filter((fileName) => path.extname(fileName) === '.svg' && fileName !== 'sprite.svg')
-        : [],
+    filterSvgFiles: (fileNames: string[] | undefined) => {
+      if (!Array.isArray(fileNames)) {
+        return [];
+      }
+
+      return fileNames.filter((fileName) => pathModule.extname(fileName) === '.svg' && fileName !== 'sprite.svg');
+    },
   };
 });
-
-import { buildConstants } from '../steps/buildConstants';
 
 // Helper to create a temp workspace with svg files
 const setupTemp = (svgs: Record<string, string>) => {
@@ -34,8 +38,14 @@ const waitForFile = async (filePath: string, timeoutMs = 2000) => {
   const start = Date.now();
 
   while (Date.now() - start <= timeoutMs) {
-    if (fs.existsSync(filePath)) return true;
-    await new Promise((r) => setTimeout(r, 10));
+    if (fs.existsSync(filePath)) {
+      return true;
+    }
+
+    // eslint-disable-next-line no-await-in-loop -- polling must wait between checks
+    await new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
   }
 
   return false;
@@ -99,6 +109,7 @@ describe('buildConstants', () => {
     const result = buildConstants(tmpRoot, distFile);
 
     const created = await waitForFile(distFile, 200);
+
     expect(result).toBe(false);
     expect(created).toBe(false);
 

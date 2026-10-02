@@ -2,10 +2,14 @@ import { join, resolve } from 'path';
 import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 // Vite config cannot import untranspiled ES modules
-// so `import { SERVERS } from '@alma-oss/spirit-commmon';` will not work
+// so `import { SERVERS } from '@alma-oss/spirit-common';` will not work
 // to make it work the package must be transpiled into CommonJS
 // as a workaround, we can import the file directly
+// A package-specifier import (e.g. '@alma-oss/spirit-common/constants/servers') gets externalized by
+// Vite's config bundler and then resolved natively by Node, which fails on the extensionless relative
+// imports inside that source file, so a direct relative import is required here instead
 // @see: https://github.com/vitejs/vite/issues/5370
+// eslint-disable-next-line import/no-relative-packages
 import { SERVERS } from '../../../../packages/common/src/constants/servers';
 import { getNestedDirs, mapKeys } from '../../scripts/prepareDist';
 import { getListOfIcons, getListOfNestedDirectories } from '../../scripts/utils';
@@ -41,6 +45,7 @@ export default defineConfig({
         setVar: (...data) => {
           const varName = data.shift();
           const options = data.pop();
+
           if (!options.data.root) {
             options.data.root = {};
           }
@@ -101,9 +106,9 @@ export default defineConfig({
         webReactIcons: join(pathRelativeToRepositoryRoot, 'packages/web-react/src/icons/index.html'),
       },
       output: {
-        entryFileNames: `assets/spirit-entry.[hash].js`,
-        chunkFileNames: `assets/spirit-chunk.[hash].js`,
-        assetFileNames: `assets/spirit-asset.[hash].[ext]`,
+        entryFileNames: 'assets/spirit-entry.[hash].js',
+        chunkFileNames: 'assets/spirit-chunk.[hash].js',
+        assetFileNames: 'assets/spirit-asset.[hash].[ext]',
       },
       external: ['floating-ui-example.js'],
     },

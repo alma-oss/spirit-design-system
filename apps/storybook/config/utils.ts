@@ -1,4 +1,4 @@
-import type { SelectEntry } from './types';
+import { type SelectEntry } from './types';
 
 export { kebabToTitleCase as toTitleCase } from '@alma-oss/spirit-common/utilities/kebabToTitleCase';
 

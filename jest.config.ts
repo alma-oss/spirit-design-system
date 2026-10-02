@@ -1,4 +1,4 @@
-import type { Config } from 'jest';
+import { type Config } from 'jest';
 
 /**
  * Root Jest config for the monorepo.
@@ -23,4 +23,3 @@ const config: Config = {
 };
 
 export default config;
-

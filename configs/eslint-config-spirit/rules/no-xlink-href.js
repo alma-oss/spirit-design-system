@@ -1,5 +1,5 @@
 /**
- * @fileoverview ESLint rule to disallow deprecated xlink:href attribute.
+ * @file ESLint rule to disallow deprecated xlink:href attribute.
  *
  * The xlink:href attribute was deprecated in SVG 2.0 in favor of plain `href`.
  * This rule detects its usage across:
@@ -10,47 +10,31 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/xlink:href
  */
 
-"use strict";
-
 /** @type {import('eslint').Rule.RuleModule} */
 const rule = {
   meta: {
-    type: "problem",
+    type: 'problem',
     docs: {
-      description: "Disallow deprecated xlink:href attribute in favor of href",
-      category: "Best Practices",
+      description: 'Disallow deprecated xlink:href attribute in favor of href',
+      category: 'Best Practices',
       recommended: true,
-      url: "https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/xlink:href",
+      url: 'https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/xlink:href',
     },
-    fixable: "code",
+    fixable: 'code',
     schema: [],
     messages: {
       jsxNamespacedAttr:
-        "Deprecated SVG attribute 'xlink:href' found. Use 'href' instead.",
+        'Deprecated SVG attribute \'xlink:href\' found. Use \'href\' instead.',
       jsxCamelCaseAttr:
-        "Deprecated SVG attribute 'xlinkHref' (camelCase form of xlink:href) found. Use 'href' instead.",
+        'Deprecated SVG attribute \'xlinkHref\' (camelCase form of xlink:href) found. Use \'href\' instead.',
       htmlNamespacedAttr:
-        "Deprecated SVG attribute 'xlink:href' found. Use 'href' instead.",
+        'Deprecated SVG attribute \'xlink:href\' found. Use \'href\' instead.',
       stringLiteral:
-        "Deprecated SVG attribute 'xlink:href' found in string. Use 'href' instead.",
+        'Deprecated SVG attribute \'xlink:href\' found in string. Use \'href\' instead.',
     },
   },
 
   create(context) {
-    /**
-     * Checks a string value for xlink:href occurrences and reports them.
-     * @param {import('eslint').Rule.Node} node
-     * @param {string} value
-     */
-    function checkStringForXlinkHref(node, value) {
-      if (/xlink:href/i.test(value)) {
-        context.report({
-          node,
-          messageId: "stringLiteral",
-        });
-      }
-    }
-
     return {
       // ── JSX: xlink:href="..." ──────────────────────────────────────────────
       JSXAttribute(node) {
@@ -58,47 +42,48 @@ const rule = {
 
         // Namespaced attribute: xlink:href
         if (
-          name.type === "JSXNamespacedName" &&
-          name.namespace.name === "xlink" &&
-          name.name.name === "href"
+          name.type === 'JSXNamespacedName'
+          && name.namespace.name === 'xlink'
+          && name.name.name === 'href'
         ) {
           context.report({
             node,
-            messageId: "jsxNamespacedAttr",
+            messageId: 'jsxNamespacedAttr',
             fix(fixer) {
               // Replace the whole attribute name (xlink:href) with href.
               // Preserve the value expression as-is.
-              const value = node.value;
+              const { value } = node;
               const valueSource = value
                 ? context.getSourceCode().getText(value)
                 : null;
 
               return fixer.replaceText(
                 node,
-                valueSource ? `href=${valueSource}` : "href"
+                valueSource ? `href=${valueSource}` : 'href',
               );
             },
           });
+
           return;
         }
 
         // camelCase form used in React: xlinkHref
         if (
-          name.type === "JSXIdentifier" &&
-          name.name === "xlinkHref"
+          name.type === 'JSXIdentifier'
+          && name.name === 'xlinkHref'
         ) {
           context.report({
             node,
-            messageId: "jsxCamelCaseAttr",
+            messageId: 'jsxCamelCaseAttr',
             fix(fixer) {
-              const value = node.value;
+              const { value } = node;
               const valueSource = value
                 ? context.getSourceCode().getText(value)
                 : null;
 
               return fixer.replaceText(
                 node,
-                valueSource ? `href=${valueSource}` : "href"
+                valueSource ? `href=${valueSource}` : 'href',
               );
             },
           });
@@ -107,7 +92,7 @@ const rule = {
 
       // ── String literals ────────────────────────────────────────────────────
       Literal(node) {
-        if (typeof node.value === "string") {
+        if (typeof node.value === 'string') {
           checkStringForXlinkHref(node, node.value);
         }
       },
@@ -122,22 +107,38 @@ const rule = {
       // ── HTML (via @html-eslint/parser) ───────────────
       Attribute(node) {
         const key = node && node.key;
+
         if (
-          key &&
-          typeof key.value === "string" &&
-          key.value.toLowerCase() === "xlink:href"
+          key
+          && typeof key.value === 'string'
+          && key.value.toLowerCase() === 'xlink:href'
         ) {
           context.report({
             node,
-            messageId: "htmlNamespacedAttr",
+            messageId: 'htmlNamespacedAttr',
             fix(fixer) {
-              return fixer.replaceText(key, "href");
+              return fixer.replaceText(key, 'href');
             },
           });
         }
       },
     };
+
+    /**
+     * Checks a string value for xlink:href occurrences and reports them.
+     *
+     * @param {import('eslint').Rule.Node} node
+     * @param {string} value
+     */
+    function checkStringForXlinkHref(node, value) {
+      if ((/xlink:href/i).test(value)) {
+        context.report({
+          node,
+          messageId: 'stringLiteral',
+        });
+      }
+    }
   },
 };
 
-module.exports = rule;
+export default rule;

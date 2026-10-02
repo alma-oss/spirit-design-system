@@ -1,9 +1,9 @@
-import type { Decorator } from '@storybook/react';
 import { themes } from '@alma-oss/spirit-design-tokens';
 import { camelCaseToKebabCase } from '@alma-oss/spirit-web-react';
+import { type Decorator } from '@storybook/react';
 import { DEFAULT_BODY_CLASS, DEFAULT_THEME_FALLBACK } from '../constants';
+import { type PreviewGlobals, type ThemeEntry } from './types';
 import { makeSelectMap, toTitleCase } from './utils';
-import type { PreviewGlobals, ThemeEntry } from './types';
 
 // Theme entries
 const createThemeEntries = (): ThemeEntry[] =>
@@ -20,7 +20,7 @@ const THEME_TOOLBAR_ITEMS = THEME_ENTRIES.map(({ label, value }) => ({ title: la
 const DEFAULT_THEME = THEME_ENTRIES[0]?.value ?? DEFAULT_THEME_FALLBACK;
 
 export const THEME_CONTROL_OPTIONS = {
-  undefined: undefined,
+  undefined,
   ...THEME_OPTIONS,
 } satisfies Record<string, string | undefined>;
 
@@ -57,7 +57,7 @@ const updateThemeClassList = (theme: string | undefined) => {
 
 // Global theme
 const getPreviewTheme = (globals: PreviewGlobals) =>
-  typeof globals.previewTheme === 'string' ? globals.previewTheme : undefined;
+  (typeof globals.previewTheme === 'string' ? globals.previewTheme : undefined);
 
 // Story decorator
 const withBodyTheme: Decorator = (Story, context) => {
@@ -72,7 +72,7 @@ export const themeDecorators = [withBodyTheme];
 export const themeArgType = {
   control: { type: 'select' },
   options: THEME_CONTROL_OPTIONS,
-  description: `Applies theme class to the rendered component.\n\n⚠️ **Some themes may have poor visibility. Use the toolbar to change the global preview theme if needed.**`,
+  description: 'Applies theme class to the rendered component.\n\n⚠️ **Some themes may have poor visibility. Use the toolbar to change the global preview theme if needed.**',
   table: {
     type: { summary: 'string | undefined' },
     defaultValue: { summary: 'undefined' },

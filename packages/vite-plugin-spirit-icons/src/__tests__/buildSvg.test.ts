@@ -1,4 +1,9 @@
+import fs from 'fs';
 import path from 'path';
+// Import mocked modules
+import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
+// Now we can safely import buildSvg after all mocks are in place
+import { normalizeSvgColors, normalizeAndCopySvg, buildSvg, DUALTONE_COLOR_BACKGROUND_DEFAULT, DUALTONE_COLOR_BORDER_DEFAULT } from '../steps/buildSvg';
 
 // Mock fs before importing the module to suppress side effects from the bottom call in buildSvg.ts
 const readdirMock = jest.fn();
@@ -10,13 +15,6 @@ jest.mock('@alma-oss/spirit-design-tokens', () => ({
   cssVariablePrefix: 'spirit-',
 }));
 
-// Import mocked modules
-import fs from 'fs';
-import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
-
-// Now we can safely import buildSvg after all mocks are in place
-import { normalizeSvgColors, normalizeAndCopySvg, buildSvg, DUALTONE_COLOR_BACKGROUND_DEFAULT, DUALTONE_COLOR_BORDER_DEFAULT } from '../steps/buildSvg';
-
 // Setup the mocks
 const mockFs = fs as jest.Mocked<typeof fs>;
 mockFs.readdirSync = readdirMock;
@@ -25,19 +23,14 @@ mockFs.writeFileSync = writeFileSyncMock;
 
 describe('buildSvg', () => {
   describe('normalizeSvgColors', () => {
-
     it('should replace dualtone default colors with CSS variables', () => {
       const svgName = 'user-dualtone.svg';
       const svgContent = `<?xml version="1.0"?><svg viewBox="0 0 24 24"><rect fill="${DUALTONE_COLOR_BACKGROUND_DEFAULT}" /><path fill="${DUALTONE_COLOR_BORDER_DEFAULT}" /></svg>`;
 
       const output = normalizeSvgColors(svgName, svgContent);
 
-      expect(output).toContain(
-        `var(--${cssVariablePrefix}icon-dualtone-color-background, ${DUALTONE_COLOR_BACKGROUND_DEFAULT})`,
-      );
-      expect(output).toContain(
-        `var(--${cssVariablePrefix}icon-dualtone-color-border, ${DUALTONE_COLOR_BORDER_DEFAULT})`,
-      );
+      expect(output).toContain(`var(--${cssVariablePrefix}icon-dualtone-color-background, ${DUALTONE_COLOR_BACKGROUND_DEFAULT})`);
+      expect(output).toContain(`var(--${cssVariablePrefix}icon-dualtone-color-border, ${DUALTONE_COLOR_BORDER_DEFAULT})`);
       expect(output.startsWith('<?xml')).toBe(true);
     });
 
@@ -52,8 +45,8 @@ describe('buildSvg', () => {
 
     it('should normalize default icons to use currentColor and ignore fill="none"', () => {
       const svgName = 'close.svg';
-      const svgContent =
-        '<svg viewBox="0 0 24 24"><path fill="#000000" /><path fill="black" /><path fill="none" stroke="#FF0000" /><circle fill="#ABCDEF" /></svg>';
+      const svgContent
+        = '<svg viewBox="0 0 24 24"><path fill="#000000" /><path fill="black" /><path fill="none" stroke="#FF0000" /><circle fill="#ABCDEF" /></svg>';
 
       const output = normalizeSvgColors(svgName, svgContent);
 
@@ -82,15 +75,19 @@ describe('buildSvg', () => {
       // Provide file contents depending on file name
       (readFileSyncMock as jest.Mock).mockImplementation((filePath: string) => {
         const name = path.basename(filePath);
+
         if (name === 'alpha.svg') {
           return '<svg viewBox="0 0 24 24"><defs><clipPath id="clip"><rect width="24" height="24" /></clipPath></defs><g clip-path="url(#clip)"><path fill="#000000" /></g></svg>';
         }
+
         if (name === 'beta-dualtone.svg') {
           return `<svg viewBox="0 0 24 24"><rect fill="${DUALTONE_COLOR_BACKGROUND_DEFAULT}" /><path fill="${DUALTONE_COLOR_BORDER_DEFAULT}" /></svg>`;
         }
+
         if (name === 'gamma-colored.svg') {
           return '<svg viewBox="0 0 24 24"><path fill="#FF0000" /><path fill="#00FF00" /></svg>';
         }
+
         return '';
       });
 
@@ -116,9 +113,7 @@ describe('buildSvg', () => {
       expect(spriteContent).not.toContain('<clipPath');
       expect(spriteContent).not.toContain('clip-path=');
 
-      const alphaContent = (writeFileSyncMock as jest.Mock).mock.calls.find(
-        ([filePath]) => filePath === path.join(distDir, 'alpha.svg'),
-      )[1];
+      const alphaContent = (writeFileSyncMock as jest.Mock).mock.calls.find(([filePath]) => filePath === path.join(distDir, 'alpha.svg'))[1];
 
       expect(alphaContent).not.toContain('<clipPath');
       expect(alphaContent).not.toContain('clip-path=');

@@ -3,11 +3,10 @@
  * Pattern: ESLint `lintText` with `overrideConfig`, similar in spirit to upstream rule tests
  * (e.g. html-eslint `no-accesskey-attrs` tests), but against the full config object.
  */
-const assert = require('node:assert/strict');
-const { describe, it } = require('node:test');
-
-const { ESLint } = require('eslint');
-const htmlConfig = require('../html.js');
+import assert from 'node:assert/strict';
+import { describe, it } from 'node:test';
+import { ESLint } from 'eslint';
+import htmlConfig from '../html.js';
 
 describe('eslint-config-spirit/html', () => {
   it('exports a non-empty flat config array', () => {
@@ -21,7 +20,7 @@ describe('eslint-config-spirit/html', () => {
     const [result] = await eslint.lintText(code, { filePath: 'fixture.html' });
 
     assert.ok(
-      result.messages.some((m) => m.ruleId === '@html-eslint/attrs-newline'),
+      result.messages.some((message) => message.ruleId === '@html-eslint/attrs-newline'),
       `Expected attrs-newline; got: ${JSON.stringify(result.messages)}`,
     );
   });
@@ -32,18 +31,18 @@ describe('eslint-config-spirit/html', () => {
     const [result] = await eslint.lintText(code, { filePath: 'fixture.html' });
 
     assert.ok(
-      result.messages.some((m) => m.ruleId === '@html-eslint/no-trailing-spaces'),
+      result.messages.some((message) => message.ruleId === '@html-eslint/no-trailing-spaces'),
       `Expected no-trailing-spaces; got: ${JSON.stringify(result.messages)}`,
     );
   });
 
   it('reports quotes when single quotes are used for attribute values', async () => {
     const eslint = new ESLint({ overrideConfig: htmlConfig });
-    const code = "<div class='a'></div>\n";
+    const code = '<div class=\'a\'></div>\n';
     const [result] = await eslint.lintText(code, { filePath: 'fixture.html' });
 
     assert.ok(
-      result.messages.some((m) => m.ruleId === '@html-eslint/quotes'),
+      result.messages.some((message) => message.ruleId === '@html-eslint/quotes'),
       `Expected quotes; got: ${JSON.stringify(result.messages)}`,
     );
   });
