@@ -4,6 +4,8 @@ import icons from '@alma-oss/spirit-icons/icons';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { getRepoRoot } from '@local/domains/content/paths';
 
+const { error: logError } = console;
+
 const CARD_PREVIEW_FILE = 'doc-preview-card.html';
 
 // Components that exist only in React have no `packages/web` folder, so their preview lives next to the React source.
@@ -28,7 +30,12 @@ const readCardPreview = (component: string): string | undefined => {
 
     try {
       return readFileSync(join(getRepoRoot(), directory, component, CARD_PREVIEW_FILE), 'utf-8');
-    } catch {
+    } catch (error) {
+      // A component without a preview is expected (ENOENT), anything else is worth knowing about.
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+        logError(`[ComponentCard] Failed to read the card preview of "${component}":`, error);
+      }
+
       return undefined;
     }
   }, undefined);
