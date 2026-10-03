@@ -1,0 +1,46 @@
+.card {
+    --card-padding: var(--spirit-space-500, 8px);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-700, 16px);
+    padding: var(--spirit-space-500, 8px) var(--spirit-space-500, 8px) var(--spirit-space-800, 20px);
+    background-color: var(--spirit-color-background-secondary, #f4f4f4);
+    border: 1px solid var(--spirit-color-border-basic, #dcdcdc);
+    border-radius: var(--spirit-radius-500, 16px);
+}
+
+.body {
+    padding: 0 var(--spirit-space-700, 16px);
+}
+
+// Status badge is revealed only when the card is hovered or focused.
+.badge {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+.card:hover .badge,
+.card:focus-within .badge {
+    opacity: 1;
+}
+
+// Preview is grayscale until the card is hovered or focused.
+.preview {
+    filter: grayscale(1);
+    transition: filter 0.2s ease-in-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+.card:hover .preview,
+.card:focus-within .preview {
+    filter: none;
+}

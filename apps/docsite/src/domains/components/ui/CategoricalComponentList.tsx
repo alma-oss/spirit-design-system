@@ -6,9 +6,10 @@ import ComponentCard from './ComponentCard';
 
 interface CategoricalComponentListProps {
   components: string[];
+  previews: Record<string, string>;
 }
 
-const CategoricalComponentList = ({ components }: CategoricalComponentListProps) => {
+const CategoricalComponentList = ({ components, previews }: CategoricalComponentListProps) => {
   const categories = groupComponentsByCategory(components);
 
   return categories.map(({ category, components: filtered }) => (
@@ -18,7 +19,7 @@ const CategoricalComponentList = ({ components }: CategoricalComponentListProps)
       </Heading>
       <ComponentGrid>
         {filtered.map((component) => (
-          <ComponentCard key={component} component={component} />
+          <ComponentCard key={component} component={component} previewHtml={previews[component]} />
         ))}
       </ComponentGrid>
     </Section>

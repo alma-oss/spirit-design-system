@@ -1,0 +1,31 @@
+<style>
+  /* Static preview of the hover state (Accordion__itemHeader:hover). */
+  .card-accordion-hover .Accordion__itemHeader::before {
+    border-bottom-color: transparent;
+  }
+
+  .card-accordion-hover .Accordion__itemToggle:first-of-type::before {
+    background-color: var(--spirit-color-background-interactive-state-hover);
+  }
+</style>
+<section class="Accordion card-accordion-hover" style="width: 280px;">
+  <article class="Accordion__item">
+    <h3 id="card-accordion-header" class="Accordion__itemHeader">
+      <button type="button" class="Accordion__itemToggle" aria-expanded="false" aria-controls="card-accordion-collapse">
+        Accordion item
+      </button>
+      <span class="Accordion__itemSide">
+        <span class="Accordion__itemIcon">
+          <svg class="Icon" width="24" height="24" aria-hidden="true">
+            <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+          </svg>
+        </span>
+      </span>
+    </h3>
+    <div id="card-accordion-collapse" class="Collapse" aria-labelledby="card-accordion-header">
+      <div class="Collapse__content">
+        <div class="Accordion__content">Short content of the item.</div>
+      </div>
+    </div>
+  </article>
+</section>

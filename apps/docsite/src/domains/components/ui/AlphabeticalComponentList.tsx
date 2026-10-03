@@ -4,15 +4,16 @@ import ComponentCard from './ComponentCard';
 
 interface AlphabeticalComponentListProps {
   components: string[];
+  previews: Record<string, string>;
 }
 
-const AlphabeticalComponentList = ({ components }: AlphabeticalComponentListProps) => {
+const AlphabeticalComponentList = ({ components, previews }: AlphabeticalComponentListProps) => {
   const sorted = [...components].sort();
 
   return (
     <ComponentGrid>
       {sorted.map((component) => (
-        <ComponentCard key={component} component={component} />
+        <ComponentCard key={component} component={component} previewHtml={previews[component]} />
       ))}
     </ComponentGrid>
   );
