@@ -29,6 +29,17 @@
     transform-origin: center;
 }
 
+.content {
+    // Static preview of the Accordion hover state, which can't be enabled by a class (Accordion__itemHeader:hover).
+    :global(.card-accordion-hover .Accordion__itemHeader)::before {
+        border-bottom-color: transparent;
+    }
+
+    :global(.card-accordion-hover .Accordion__itemToggle:first-of-type)::before {
+        background-color: var(--spirit-color-background-interactive-state-hover);
+    }
+}
+
 .placeholder {
     width: 112px;
     height: 28px;
