@@ -46,3 +46,14 @@
 .card:focus-within .preview {
     filter: none;
 }
+
+// Touch devices can't hover, so show the status badge and the colors of the preview all the time.
+@media (hover: none) {
+    .badge {
+        opacity: 1;
+    }
+
+    .preview {
+        filter: none;
+    }
+}
