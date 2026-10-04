@@ -1,14 +1,14 @@
 <!-- doc-preview-guides: vertical -->
-<section class="Accordion" style="width: 280px;">
+<section class="Accordion" style="width: 320px;">
   <article class="Accordion__item">
-    <h3 id="card-accordion-header" class="Accordion__itemHeader">
+    <h3 id="card-accordion-1-header" class="Accordion__itemHeader">
       <button
         type="button"
         class="Accordion__itemToggle"
-        aria-expanded="false"
-        aria-controls="card-accordion-collapse"
+        aria-expanded="true"
+        aria-controls="card-accordion-1-collapse"
       >
-        Accordion item
+        How do I get started?
       </button>
       <span class="Accordion__itemSide">
         <span class="Accordion__itemIcon">
@@ -24,12 +24,45 @@
       </span>
     </h3>
     <div
-      id="card-accordion-collapse"
-      class="Collapse"
-      aria-labelledby="card-accordion-header"
+      id="card-accordion-1-collapse"
+      class="Collapse is-open"
+      aria-labelledby="card-accordion-1-header"
     >
       <div class="Collapse__content">
-        <div class="Accordion__content">Short content of the item.</div>
+        <div class="Accordion__content">Create an account and follow the short setup guide.</div>
+      </div>
+    </div>
+  </article>
+  <article class="Accordion__item">
+    <h3 id="card-accordion-2-header" class="Accordion__itemHeader">
+      <button
+        type="button"
+        class="Accordion__itemToggle"
+        aria-expanded="false"
+        aria-controls="card-accordion-2-collapse"
+      >
+        Can I change my plan later?
+      </button>
+      <span class="Accordion__itemSide">
+        <span class="Accordion__itemIcon">
+          <svg
+            class="Icon"
+            width="24"
+            height="24"
+            aria-hidden="true"
+          >
+            <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+          </svg>
+        </span>
+      </span>
+    </h3>
+    <div
+      id="card-accordion-2-collapse"
+      class="Collapse"
+      aria-labelledby="card-accordion-2-header"
+    >
+      <div class="Collapse__content">
+        <div class="Accordion__content">Yes, you can switch plans at any time.</div>
       </div>
     </div>
   </article>
