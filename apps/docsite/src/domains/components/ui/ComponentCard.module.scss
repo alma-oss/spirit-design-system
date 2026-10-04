@@ -12,6 +12,8 @@
 
 .body {
     padding: 0 var(--spirit-space-700, 16px);
+    // Long component names (e.g. UNSTABLE_DisplayHeading) must not overflow narrow cards.
+    overflow-wrap: anywhere;
 }
 
 // Status badge is revealed only when the card is hovered or focused.
