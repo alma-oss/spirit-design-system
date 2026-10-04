@@ -10,6 +10,9 @@ interface PreviewFrameProps {
   contentClassName?: string;
 }
 
+// Add `<!-- doc-preview-guides: vertical -->` to `doc-preview-card.html` to draw only the vertical guides.
+const VERTICAL_GUIDES_ONLY_PATTERN = /<!--\s*doc-preview-guides:\s*vertical\s*-->/;
+
 interface Guides {
   left: number;
   right: number;
@@ -22,6 +25,7 @@ const PreviewFrame = ({ html = undefined, badge = undefined, contentClassName = 
   const contentRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [guides, setGuides] = useState<Guides | null>(null);
+  const hasHorizontalGuides = !(html && VERTICAL_GUIDES_ONLY_PATTERN.test(html));
 
   useIsomorphicLayoutEffect(() => {
     const frame = frameRef.current;
@@ -80,8 +84,12 @@ const PreviewFrame = ({ html = undefined, badge = undefined, contentClassName = 
         <>
           <span className={`${styles.guide} ${styles.guideVertical}`} style={{ left: guides.left }} />
           <span className={`${styles.guide} ${styles.guideVertical}`} style={{ left: guides.right }} />
-          <span className={`${styles.guide} ${styles.guideHorizontal}`} style={{ top: guides.top }} />
-          <span className={`${styles.guide} ${styles.guideHorizontal}`} style={{ top: guides.bottom }} />
+          {hasHorizontalGuides && (
+            <>
+              <span className={`${styles.guide} ${styles.guideHorizontal}`} style={{ top: guides.top }} />
+              <span className={`${styles.guide} ${styles.guideHorizontal}`} style={{ top: guides.bottom }} />
+            </>
+          )}
         </>
       )}
       <div

@@ -19,10 +19,13 @@
 .content {
     --preview-scale: 1;
 
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     z-index: 1;
-    display: inline-block;
-    transform: scale(var(--preview-scale));
+    // Natural size of the content, even if it is wider than the frame – it gets scaled down afterwards.
+    width: max-content;
+    transform: translate(-50%, -50%) scale(var(--preview-scale));
     transform-origin: center;
 }
 
