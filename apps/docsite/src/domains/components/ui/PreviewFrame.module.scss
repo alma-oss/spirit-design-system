@@ -27,6 +27,12 @@
     width: max-content;
     transform: translate(-50%, -50%) scale(var(--preview-scale));
     transform-origin: center;
+
+    // Some components re-enable pointer events on their own; the preview must never react to the mouse.
+    &,
+    & * {
+        pointer-events: none !important;
+    }
 }
 
 .placeholder {

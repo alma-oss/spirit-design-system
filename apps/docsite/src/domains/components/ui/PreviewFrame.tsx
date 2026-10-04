@@ -96,7 +96,8 @@ const PreviewFrame = ({ html = undefined, badge = undefined, contentClassName = 
         ref={contentRef}
         className={contentClassName ? `${styles.content} ${contentClassName}` : styles.content}
         style={{ '--preview-scale': scale } as CSSProperties}
-        aria-hidden="true"
+        // The preview is a picture only – `inert` removes it from hover, focus and the accessibility tree.
+        inert
       >
         {html ? (
           // eslint-disable-next-line react/no-danger -- compiled static card preview
