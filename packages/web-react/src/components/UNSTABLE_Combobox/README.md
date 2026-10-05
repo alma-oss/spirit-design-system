@@ -251,7 +251,7 @@ values Combobox does not set itself.
 
 | Name                          | Type                                                        | Default                                     | Required | Description                                                                                                                          |
 | ----------------------------- | ----------------------------------------------------------- | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `addMoreDescriptionText`      | `string`                                                    | i18n `combobox.addMoreDescription`          | ✕        | _Deprecated, use `strings.ariaLabel.addMoreDescription`_                                                                             |
+| `addMoreDescriptionText`      | `string`                                                    | i18n `combobox.addMoreDescription`          | ✕        | _Deprecated, use `strings.ariaLabel.addMore.description`_                                                                             |
 | `addMoreLabel`                | `string`                                                    | i18n `combobox.addMore`                     | ✕        | _Deprecated, use `strings.label.addMore`_                                                                                            |
 | `auxiliaryContent`            | `ReactNode`                                                 | —                                           | ✕        | Extra popover content sibling of the options widget                                                                                  |
 | `children`                    | `ReactNode`                                                 | —                                           | ✕        | Options inside the popover widget (optional for tip-only / `auxiliaryContent`)                                                       |
@@ -284,11 +284,11 @@ values Combobox does not set itself.
 | `renderTags`                  | `(options: UnstableComboboxRenderTagsOptions) => ReactNode` | —                                           | ✕        | Custom selection UI; see [Custom Selection UI (renderTags)](#custom-selection-ui-rendertags)                                         |
 | `selectedKeys`                | `string[]`                                                  | —                                           | ✓        | Selected option ids (insertion order)                                                                                                |
 | `selectionAriaLabel`          | `string`                                                    | i18n `combobox.selectionAriaLabel`          | ✕        | _Deprecated, use `strings.ariaLabel.selection`_                                                                                      |
-| `selectionCountLabel`         | `string`                                                    | i18n `combobox.selectionCountLabel`         | ✕        | _Deprecated, use `strings.ariaLabel.selectionCount`_                                                                                 |
-| `selectionCountLabelSingular` | `string`                                                    | i18n `combobox.selectionCountLabelSingular` | ✕        | _Deprecated, use `strings.ariaLabel.selectionCountSingular`_                                                                         |
+| `selectionCountLabel`         | `string`                                                    | i18n `combobox.selectionCountLabel`         | ✕        | _Deprecated, use `strings.ariaLabel.count.plural`_                                                                                 |
+| `selectionCountLabelSingular` | `string`                                                    | i18n `combobox.selectionCountLabelSingular` | ✕        | _Deprecated, use `strings.ariaLabel.count.singular`_                                                                         |
 | `size`                        | [Size dictionary][dictionary-size]                          | `medium`                                    | ✕        | Size of the field shell                                                                                                              |
 | `strings`                     | `UnstableComboboxStrings`                                   | —                                           | ✕        | Optional copy overrides; see [Translations](#translations)                                                                           |
-| `tagDescriptionText`          | `string`                                                    | i18n `combobox.tagDescriptionText`          | ✕        | _Deprecated, use `strings.ariaLabel.tagDescription`_                                                                                 |
+| `tagDescriptionText`          | `string`                                                    | i18n `combobox.tagDescriptionText`          | ✕        | _Deprecated, use `strings.ariaLabel.tag.description`_                                                                                 |
 | `tagProps`                    | `StyleProps`                                                | —                                           | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)  |
 | `validationState`             | [Validation dictionary][dictionary-validation]              | —                                           | ✕        | Validation state                                                                                                                     |
 | `validationText`              | `ReactNode` \| `ReactNode[]`                                | —                                           | ✕        | Validation message                                                                                                                   |
@@ -307,13 +307,13 @@ Override optional copy with [`strings`][readme-component-strings]. Omitted keys 
 | ---------------------------------- | -------------------------------------- | ------------------------------------- | ------------------------ |
 | `label.addMore`                    | `combobox.addMore`                     | `+ Add more…`                         | Visible add-more prompt  |
 | `label.emptySelection`             | —                                      | field `label`                         | Empty-field placeholder  |
-| `ariaLabel.addMoreDescription`     | `combobox.addMoreDescription`          | `Add more {label}`                    | Add-more accessible name |
+| `ariaLabel.addMore.description`     | `combobox.addMoreDescription`          | `Add more {label}`                    | Add-more accessible name |
 | `ariaLabel.removeAll`              | `combobox.removeAll`                   | `Remove all`                          | Clear all                |
 | `ariaLabel.removeItem`             | `combobox.removeItemLabel`             | `Remove {itemLabel}`                  | Remove one tag           |
 | `ariaLabel.selection`              | `combobox.selectionAriaLabel`          | `Selected {label}`                    | Selection summary        |
-| `ariaLabel.selectionCount`         | `combobox.selectionCountLabel`         | `{label}, {count} items selected`     | Count (plural)           |
-| `ariaLabel.selectionCountSingular` | `combobox.selectionCountLabelSingular` | `{label}, {count} item selected`      | Count (singular)         |
-| `ariaLabel.tagDescription`         | `combobox.tagDescriptionText`          | `Press Delete or Backspace to remove` | Tag hint                 |
+| `ariaLabel.count.plural`         | `combobox.selectionCountLabel`         | `{label}, {count} items selected`     | Count (plural)           |
+| `ariaLabel.count.singular` | `combobox.selectionCountLabelSingular` | `{label}, {count} item selected`      | Count (singular)         |
+| `ariaLabel.tag.description`         | `combobox.tagDescriptionText`          | `Press Delete or Backspace to remove` | Tag hint                 |
 
 ### Deprecation Notice
 

@@ -403,7 +403,7 @@ The trigger uses [Icon][web-react-icon-documentation] (`chevron-down` when close
 | `selectionMode`       | `'single'` \| `'multiple'`                                | `multiple`                         | ✕        | Radio vs checkbox behavior for `UNSTABLE_PickerItem`                                                                                                                                        |
 | `size`                | [Size dictionary][dictionary-size]                        | `medium`                           | ✕        | Size of the picker shell                                                                                                                                                                    |
 | `strings`             | `UnstablePickerStrings`                                   | —                                  | ✕        | Optional copy overrides; see [Translations](#translations)                                                                                                                                  |
-| `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText`   | ✕        | _Deprecated, use `strings.ariaLabel.tagDescription`_                                                                                                                                        |
+| `tagDescriptionText`  | `string`                                                  | i18n `picker.tagDescriptionText`   | ✕        | _Deprecated, use `strings.ariaLabel.tag.description`_                                                                                                                                        |
 | `validationState`     | [Validation dictionary][dictionary-validation]            | —                                  | ✕        | Validation state                                                                                                                                                                            |
 | `validationText`      | `ReactNode` \| `ReactNode[]`                              | —                                  | ✕        | Validation message                                                                                                                                                                          |
 | `variant`             | [Fill Variants dictionary][dictionary-variant]            | `fill`                             | ✕        | InputContainer variant                                                                                                                                                                      |
@@ -423,7 +423,7 @@ Override optional copy with [`strings`][readme-component-strings]. Omitted keys 
 | `ariaLabel.removeAll`      | `picker.removeAll`          | `Remove all`                          | Clear all               |
 | `ariaLabel.removeItem`     | `picker.removeItemLabel`    | `Remove {itemLabel}`                  | Remove one tag          |
 | `ariaLabel.selection`      | `picker.selectionAriaLabel` | `Selected {label}`                    | Selection summary       |
-| `ariaLabel.tagDescription` | `picker.tagDescriptionText` | `Press Delete or Backspace to remove` | Tag hint                |
+| `ariaLabel.tag.description` | `picker.tagDescriptionText` | `Press Delete or Backspace to remove` | Tag hint                |
 | `label.emptySelection`     | —                           | field `label`                         | Empty-field placeholder |
 
 ### Deprecation Notice
