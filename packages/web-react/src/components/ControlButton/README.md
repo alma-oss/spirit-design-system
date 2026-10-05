@@ -80,6 +80,10 @@ ControlButton resolves `size` in this order:
 
 This lets composed components share size through context while standalone usage can still set size explicitly.
 
+### Icon Size
+
+An Icon without `boxSize` inherits this size from the ControlButton. You can always set your desired size with the [`boxSize`][readme-icon-api] prop.
+
 ## Symmetrical ControlButton
 
 Use the `isSymmetrical` prop to make the control button have equal width and height. This is typically used for icon-only buttons.
@@ -283,6 +287,7 @@ export const Example = () => {
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-icon-api]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#api
 [readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [web-control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md

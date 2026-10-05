@@ -75,3 +75,11 @@ If only tablet or desktop is set, width and height is used for smaller breakpoin
   <use href="/assets/icons/svg/sprite.svg#info" />
 </svg>
 ```
+
+## Size Fallback
+
+The Icon `width` and `height` are resolved in this order:
+
+1. `--spirit-icon-size` set on the Icon,
+2. `--spirit-icon-composition-size` set by a parent component (for example Button, ControlButton, or InputAddon),
+3. The default Icon size.

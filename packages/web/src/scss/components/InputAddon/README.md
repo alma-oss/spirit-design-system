@@ -54,6 +54,7 @@ InputAddon supports the following size modifiers:
 ### Text and Icon Size
 
 Based on the size of the InputAddon, the size of the icon and text will be set to the size of the text in the InputAddon.
+You can always set your desired size of the Icon with the [`--spirit-icon-size`][readme-icon-size] property.
 
 ```html
 <div class="InputAddon InputAddon--small">
@@ -174,5 +175,6 @@ When `InputAddon` is a `<label>`, keep visual symbols and icons decorative and p
 - Wrap the visual symbol/icon in an element with `aria-hidden="true"`.
 - Add a sibling `<span class="accessibility-hidden">…</span>` that names the addon meaning (for example `Search`, `in EUR`, `Username`).
 
+[readme-icon-size]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Icon/README.md#responsive-size
 [readme-input-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputContainer/README.md
 [readme-text-field]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/TextField/README.md

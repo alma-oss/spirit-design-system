@@ -39,7 +39,9 @@ InputAddon resolves `size` in this order:
 This keeps addon content visually aligned with the surrounding InputContainer in composed form-field components,
 while standalone usage can still set size explicitly.
 
-ℹ️ Nested `Icon` and `ControlButton` components use the resolved InputAddon size by default, so explicit `boxSize` of the `Icon` or `size` of the `ControlButton` is usually unnecessary when the addon is inside a form field.
+An Icon without `boxSize` inherits this size from the InputAddon. You can always set your desired size with the [`boxSize`][readme-icon-api] prop.
+
+ℹ️ Nested [`ControlButton`][readme-control-button] components also use the resolved InputAddon size by default, so explicit `size` of the `ControlButton` is usually unnecessary when the addon is inside a form field.
 
 ## API
 
@@ -60,7 +62,9 @@ For detailed information see [InputAddon][web-input-addon] in the web package.
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [mdn-label-htmlfor]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ControlButton/README.md
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-icon-api]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Icon/README.md#api
 [readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [web-input-addon]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/InputAddon/README.md

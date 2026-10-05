@@ -80,9 +80,11 @@ Button automatically sets a default size for the [Icon][readme-icon] component u
 
 | Button Size | Icon Size |
 | ----------- | --------- |
-| small       | 20 px     |
+| small       | 16 px     |
 | medium      | 20 px     |
 | large       | 24 px     |
+
+An Icon without `--spirit-icon-size` inherits this size from the Button. You can always set your desired size with the [`--spirit-icon-size`][readme-icon-size] property.
 
 ## Responsive Button
 
@@ -374,4 +376,5 @@ Custom spacing for each breakpoint:
 
 [readme-grid]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-icon]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Icon/README.md
+[readme-icon-size]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Icon/README.md#responsive-size
 [readme-tooltip]: https://github.com/lmc-eu/spirit-design-system/blob/main/packages/web/src/scss/components/Tooltip/README.md

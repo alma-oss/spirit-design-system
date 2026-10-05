@@ -68,11 +68,11 @@ Button automatically sets a default size for the [Icon][readme-icon] component u
 
 | Button Size | Icon Size |
 | ----------- | --------- |
-| small       | 20 px     |
+| small       | 16 px     |
 | medium      | 20 px     |
 | large       | 24 px     |
 
-You can always set your desired size of an Icon with the [`boxSize`][readme-icon-api] prop.
+An Icon without `boxSize` inherits this size from the Button. You can always set your desired size with the [`boxSize`][readme-icon-api] prop.
 
 ## Responsive Button
 
