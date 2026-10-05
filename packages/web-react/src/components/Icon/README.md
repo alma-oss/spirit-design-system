@@ -90,6 +90,14 @@ so the icon scales with the user's root font-size preference.
 <Icon name="info" boxSize={{ mobile: 20, tablet: 30, desktop: 40 }} />
 ```
 
+## Size Fallback
+
+The `boxSize` prop sets the `--spirit-icon-size` custom property. The Icon `width` and `height` are resolved in this order:
+
+1. `boxSize` of the Icon,
+2. The parent component's default icon size (e.g., Button, ControlButton, InputAddon automatically size their icons),
+3. The default `boxSize`.
+
 ## API
 
 | Name      | Type                                                                                                                                                               | Default      | Required | Description                                                                                                                                        |

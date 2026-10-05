@@ -126,6 +126,8 @@ The following sizes are available:
 | Large  | `ControlButton--large`  | 32px   | 16px      |
 | XLarge | `ControlButton--xlarge` | 40px   | 20px      |
 
+An Icon without `--spirit-icon-size` inherits this size from the ControlButton. You can always set your desired size with the [`--spirit-icon-size`][readme-icon-size] property.
+
 ## Symmetrical ControlButton
 
 A symmetrical control button has equal width and height, typically used with icon-only buttons.
@@ -332,3 +334,4 @@ the tap target size of ControlButton is large enough.
 
 [button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Button/README.md
 [dynamic-color]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/helpers/dynamic-color/README.md
+[readme-icon-size]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Icon/README.md#responsive-size
