@@ -53,16 +53,16 @@ The file will be parsed into native Canvas blocks with proper formatting.
 
 ## What the Skill Does
 
-| Step | Action                                                                                                    |
-| ---- | --------------------------------------------------------------------------------------------------------- |
-| 1    | Finds the latest release commit from `git log`                                                            |
-| 2    | Reads the latest version section from each of 6 package CHANGELOGs                                        |
-| 3    | Keeps only Features and Bug Fixes; warns about notable omissions (breaking changes, public API refactors) |
-| 4    | Formats per-package blocks with linked commit hashes                                                      |
-| 5    | Synthesizes a multi-paragraph General Changes summary in the team's tone of voice                         |
-| 6    | Fetches upcoming work from the active and next Jira sprint (project: DS)                                  |
-| 7    | Assembles the full document                                                                               |
-| 8    | Writes to `docs/release-notes/YYYY-MM-DD.md`                                                              |
+| Step | Action                                                                                                                                                        |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Finds the latest release commit from `git log`                                                                                                                |
+| 2    | Reads the latest version section from each of 6 package CHANGELOGs                                                                                            |
+| 3    | Keeps only Features and Bug Fixes, then shortens each list to consumer-facing changes; warns about notable omissions (breaking changes, public API refactors) |
+| 4    | Formats per-package blocks with linked commit hashes                                                                                                          |
+| 5    | Synthesizes a multi-paragraph General Changes summary in the team's tone of voice                                                                             |
+| 6    | Fetches upcoming work from the active and next Jira sprint (project: DS)                                                                                      |
+| 7    | Assembles the full document                                                                                                                                   |
+| 8    | Writes to `docs/release-notes/YYYY-MM-DD.md`                                                                                                                  |
 
 ## Symlink Setup
 

@@ -11,7 +11,8 @@ Generate a Slack-ready release notes document from the latest lerna publish, inc
 
 - **Human tone, not a changelog dump.** The summary paragraph should read like a newsletter, not a list of commit messages.
 - **Only Features and Bug Fixes in the package sections.** Other sections are noise for consumers.
-- **Warn, don't silently drop.** Flag anything potentially important that was filtered out.
+- **Short lists for consumers.** Those sections are a selection of changes a consumer can use or see, not a copy of the changelog. The full changelog link keeps the rest.
+- **Warn, don't silently drop.** Flag anything potentially important that was filtered out. Intentional cuts from Step 3c are not warnings.
 - **Slack Canvas format.** Use Unicode emoji directly (not `:emoji:` codes). Use `#` for the document title, `##` for top-level sections, `###` for subsections (Features, Bug Fixes) — Canvas renders these as proper headers when pasted. Emoji mapping: 📢 loudspeaker, 🚀 rocket, 🎉 tada, 📦 package, 🔮 crystal ball, 🎯 dart, 💬 slack, 🐙 github.
 
 ---
@@ -84,6 +85,26 @@ If there are no warnings, print: `✅ No notable omissions detected.`
 
 ---
 
+### Step 3c — Shorten to What Consumers Need
+
+After Step 3, drop entries a Slack reader cannot act on. Do this before writing the file. These cuts are intentional — do not list them as omission warnings.
+
+Drop an entry when it is:
+
+- An internal helper, hook, or script detail that is not a documented public API (event delegation, autoloaders, test fixtures, typecheck cleanup, implementation hooks such as `useThrottledValue`).
+- Maintainer tooling (Code Connect templates, Figma sync pipelines, asset exporters). If published assets themselves changed, mention that asset update instead of the pipeline.
+- A documentation-only commit that restates a feature already listed in this release.
+- A generic token refresh whose description is only "update design tokens" or "update tokens", with no named consumer-facing change. Keep named token changes, such as radius overrides.
+- Scoped to another package (`**web-react:**` inside the web changelog). List it only under the package that owns the change.
+
+For `@alma-oss/spirit-web` bug fixes, keep style changes that React consumers inherit. Drop web-only script internals even when the changelog calls them bug fixes.
+
+When the same user-facing change lands on several components (same prop, same ticket), write **one** bullet that names every component and links every commit.
+
+Skip a package when this cut leaves it with no entries — same as a version-bump-only release. Do not skip a package that still has a consumer-facing entry. Design Tokens in particular is easy to miss when its only useful line is a radius or token rename.
+
+---
+
 ### Step 4 — Build Per-Package Blocks
 
 Format each included package as:
@@ -122,6 +143,8 @@ Write 1–2 short paragraphs (not a list, not a single block of text) that summa
 - If there are breaking changes or security improvements, call them out as a separate sentence or short paragraph — do not bury them.
 - **Omit internal migrations** (px→rem, refactors) from the narrative — they belong in the package changelog, not the newsletter summary.
 - **Do not split by framework** — avoid phrases like "vanilla web", "vanilla side", or "both React and web"; describe features uniformly.
+- **Match the public API.** Describe only supported usage. If a component README requires a prop, do not advertise the unsupported alternative.
+- **Name the thing correctly.** A progress indicator is a component, not a surface.
 
 **Tone of voice:**
 
@@ -144,6 +167,8 @@ Use the Jira MCP to find upcoming work:
 3. `jira_get_sprint_issues` — for each relevant sprint, fetch issues
 
 From the issues, select only items that represent **user-visible new features or components** (new components, new props/variants, stabilization of UNSTABLE components). Skip infrastructure, testing, documentation, and tooling work.
+
+If a prop shipped in this release on only some components in a family, and the team plans to add it to the others, include that extension here even when Jira has not split it into its own issue yet.
 
 Format as a bulleted list:
 
