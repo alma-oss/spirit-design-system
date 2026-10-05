@@ -19,23 +19,25 @@ jobs:
     outputs:
       url: ${{ steps.netlify-deploy.outputs.url }}
     steps:
-      # Reuse the demo app built by the Build job instead of building it again.
-      # The repository is deliberately not checked out: no PR-controlled script or config runs
-      # while the Netlify credentials are available.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      # Reuse the demo app built by the Build job instead of building it again
       - name: Download demo app build
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: demo-build
-          path: build/
+          path: apps/demo/build/
 
       # The CLI is synchronous, returns the exact deploy URL (no SHA lookup race) and exits non-zero
       # on a deploy failure, so infra problems fail here and not in the test job.
       - name: Deploy to Netlify
         id: netlify-deploy
         run: |
-          DEPLOY_JSON=$(npx --yes netlify-cli@17.38.1 deploy \
-            --dir build \
-            --no-build \
+          DEPLOY_JSON=$(yarn netlify deploy \
+            --dir apps/demo/build \
             --message "E2E ${GITHUB_SHA}" \
             --json)
           echo "$DEPLOY_JSON"
