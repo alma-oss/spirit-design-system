@@ -37,9 +37,14 @@ jobs:
       - name: Deploy to Netlify
         id: netlify-deploy
         run: |
+          ALIAS_ARGS=()
+          if [ -n "$PR_NUMBER" ]; then
+            ALIAS_ARGS=(--alias "deploy-preview-${PR_NUMBER}")
+          fi
           DEPLOY_JSON=$(yarn netlify deploy \
             --filter @lmc-eu/spirit-demo-app \
             --dir apps/demo/build \
+            "${ALIAS_ARGS[@]}" \
             --message "E2E ${GITHUB_SHA}" \
             --json)
           echo "$DEPLOY_JSON"
@@ -50,6 +55,8 @@ jobs:
           fi
           echo "url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
         env:
+          # Same URL shape as the Netlify deploy preview of a PR; empty on main, where the deploy URL is used
+          PR_NUMBER: ${{ github.event.pull_request.number }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM }}
 
