@@ -65,11 +65,7 @@ const GridShowcase = () => {
   }, []);
 
   return (
-    <Box
-      borderRadius="400"
-      paddingTop="space-1200"
-      UNSAFE_className={`${styles.GridShowcase} breakout-container-tablet`}
-    >
+    <Box borderRadius="400" paddingTop="space-1200" UNSAFE_className={styles.GridShowcase}>
       <Flex direction="vertical" spacing="space-1100">
         <Flex direction="vertical" spacing="space-600" UNSAFE_className={styles.Intro}>
           <Heading elementType="h2" size="medium" textAlignment="center">

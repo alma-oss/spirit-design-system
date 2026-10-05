@@ -1,20 +1,17 @@
 @use '@tokens' as tokens;
 
-.Headline {
-    flex: 1 1 30rem;
-    max-width: 43.5rem;
-}
-
-.Intro {
-    flex: 1 1 20rem;
-    max-width: tokens.$container-xsmall-max-width;
-}
-
 .Tile {
     display: flex;
     align-items: center;
 
     > * {
         flex: 1;
+        min-width: 0;
     }
+}
+
+// The content of a tile must not stretch the grid track beyond the screen, e.g. an input with its intrinsic width.
+.Item,
+.Shell {
+    min-width: 0;
 }

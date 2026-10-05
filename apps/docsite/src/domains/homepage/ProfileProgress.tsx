@@ -28,7 +28,7 @@ const ProfileProgress = () => {
       borderColor="basic"
       borderWidth="100"
       borderRadius="500"
-      padding="space-1000"
+      padding={{ mobile: 'space-700', tablet: 'space-1000' }}
       UNSAFE_className={styles.Card}
     >
       <Stack spacing="space-800">

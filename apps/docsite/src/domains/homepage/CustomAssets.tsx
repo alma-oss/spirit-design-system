@@ -1,8 +1,9 @@
 'use client';
 
-import { Box, Flex, Heading, Section, Text } from '@alma-oss/spirit-web-react';
+import { Box, Flex, Heading, Text } from '@alma-oss/spirit-web-react';
 import { type CSSProperties } from 'react';
 import styles from './CustomAssets.module.scss';
+import PageSection from './PageSection';
 
 const ASSETS_PATH = '/custom-assets';
 const CODE_TEXT_CLASS = 'typography-code-small-regular';
@@ -102,19 +103,8 @@ const IllustrationTile = ({ caption, children }: { caption: string; children: Re
 );
 
 const CustomAssets = () => (
-  <Section
-    size="large"
-    paddingTop={{ mobile: 'space-0', tablet: 'space-0' }}
-    paddingBottom={{ mobile: 'space-0', tablet: 'space-0' }}
-    backgroundColor="primary"
-    containerProps={{ size: 'large' }}
-  >
-    <Box
-      borderRadius="400"
-      paddingX="space-800"
-      paddingY="space-1200"
-      UNSAFE_className={`${styles.CustomAssets} breakout-container-tablet`}
-    >
+  <PageSection size="xlarge" hasTopLine backgroundColor="primary">
+    <Box borderRadius="400" paddingX="space-800" paddingY="space-1200" UNSAFE_className={styles.CustomAssets}>
       <Flex direction="vertical" alignmentX="center" spacing="space-1200">
         <Flex direction="vertical" spacing="space-600" UNSAFE_className={styles.Intro}>
           <Heading elementType="h2" size="medium" textAlignment="center">
@@ -161,7 +151,7 @@ const CustomAssets = () => (
         </Flex>
       </Flex>
     </Box>
-  </Section>
+  </PageSection>
 );
 
 export default CustomAssets;

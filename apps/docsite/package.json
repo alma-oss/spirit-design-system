@@ -25,6 +25,7 @@
     "@next/mdx": "catalog:content",
     "classnames": "catalog:frontend",
     "handlebars": "catalog:build",
+    "lottie-react": "catalog:frontend",
     "next": "catalog:frontend",
     "next-mdx-remote": "catalog:content",
     "nuqs": "catalog:frontend",

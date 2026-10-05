@@ -64,14 +64,13 @@ const FilesCard = () => {
       borderColor="basic"
       borderWidth="100"
       borderRadius="500"
-      padding="space-1000"
+      padding={{ mobile: 'space-700', tablet: 'space-1000' }}
       UNSAFE_className={styles.Card}
     >
       <Stack spacing="space-900">
         <SegmentedControl
           label="Files view"
           name="building-blocks-files-view"
-          variant="fill"
           isFluid
           selectedValue={view}
           setSelectedValue={(value) => setView(value as View)}
@@ -124,11 +123,11 @@ const FilesCard = () => {
                 id="building-blocks-upload"
                 name="buildingBlocksUpload"
                 label="Attachments"
+                isLabelHidden
                 inputUploadText="Drop files here to upload…"
                 helperText="Max file size is 10MB"
                 buttonText="Browse"
                 isCompact
-                isRequired
               />
             </div>
 

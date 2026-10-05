@@ -1,0 +1,59 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@tokens' as tokens;
+@use './variables';
+
+// The vertical paddings of the Section sizes, mobile and tablet up.
+$_paddings: (
+    'small': (
+        tokens.$space-1000,
+        tokens.$space-1100,
+    ),
+    'medium': (
+        tokens.$space-1100,
+        tokens.$space-1300,
+    ),
+    'large': (
+        tokens.$space-1200,
+        tokens.$space-1400,
+    ),
+    'xlarge': (
+        tokens.$space-1400,
+        tokens.$space-1600,
+    ),
+    'none': (
+        0,
+        0,
+    ),
+);
+
+// All the sections share the same container, which is bounded by thin lines at its edges.
+// The paddings of the sections are moved into the container, so the lines run through the whole section.
+.Container {
+    border-inline: tokens.$border-width-100 solid #{variables.$line-color};
+}
+
+.Container--withoutRails {
+    border-inline: 0;
+}
+
+.TopLine {
+    border-top: tokens.$border-width-100 solid #{variables.$line-color};
+}
+
+@each $name, $values in $_paddings {
+    .PaddingTop--#{$name} {
+        padding-top: nth($values, 1);
+
+        @include breakpoint.up(tokens.$breakpoint-tablet) {
+            padding-top: nth($values, 2);
+        }
+    }
+
+    .PaddingBottom--#{$name} {
+        padding-bottom: nth($values, 1);
+
+        @include breakpoint.up(tokens.$breakpoint-tablet) {
+            padding-bottom: nth($values, 2);
+        }
+    }
+}

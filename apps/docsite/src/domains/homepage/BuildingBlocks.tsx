@@ -1,15 +1,17 @@
 'use client';
 
-import { Box, Flex, Grid, GridItem, Heading, Link, Section, Stack, Text } from '@alma-oss/spirit-web-react';
+import { Box, ButtonLink, Flex, Grid, GridItem, Heading, Stack, Text } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { type ReactNode } from 'react';
 import { routes } from '../routing/routes';
 import styles from './BuildingBlocks.module.scss';
 import EducationForm from './EducationForm';
 import FilesCard from './FilesCard';
+import PageSection from './PageSection';
 import PageShowcase from './PageShowcase';
 import ProfileProgress from './ProfileProgress';
 import SearchHistory from './SearchHistory';
+import Stats from './Stats';
 import TechStackCard from './TechStackCard';
 
 // The tile height from the design includes the border and the `space-1000` padding (in px).
@@ -83,27 +85,46 @@ const rows: Tile[][] = [
 ];
 
 const BuildingBlocks = () => (
-  <Section size="xlarge" backgroundColor="primary">
+  <PageSection size="xlarge" hasTopLine backgroundColor="primary">
     <Stack spacing="space-1100">
-      <Flex isWrapping alignmentX="space-between" alignmentY="top" spacing="space-1000">
-        <Heading elementType="h2" size="medium" UNSAFE_className={styles.Headline}>
-          The Building Blocks of Your UI
-        </Heading>
-        <Flex direction="vertical" spacing="space-700" UNSAFE_className={styles.Intro}>
-          <Text textColor="secondary">
-            Over 40+ production-ready, accessible, and customizable components designed for every interaction.
-          </Text>
-          <Link elementType={NextLink} href={routes.components}>
-            View components
-          </Link>
-        </Flex>
-      </Flex>
+      <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-800" spacingY="space-900">
+        <GridItem columnStart={{ tablet: 1 }} columnEnd={{ tablet: 6 }} UNSAFE_className={styles.Item}>
+          <Stack spacing="space-800">
+            <Heading elementType="h2" size="large">
+              From a single component to a whole page
+            </Heading>
+            <Text>
+              You build from parts that have already survived design, development and testing. No wondering whether it
+              will work, just what you will make with it.
+            </Text>
+          </Stack>
+        </GridItem>
+        <GridItem columnStart={{ tablet: 6 }} columnEnd={{ tablet: 13 }} UNSAFE_className={styles.Item}>
+          <Flex alignmentX={{ mobile: 'left', tablet: 'right' }}>
+            <ButtonLink elementType={NextLink} href={routes.components} color="secondary">
+              View components
+            </ButtonLink>
+          </Flex>
+        </GridItem>
+      </Grid>
+
+      <Stats />
 
       <Stack spacing="space-1100">
         {rows.map((row) => (
-          <Grid key={row[0].caption} cols={12} spacing="space-800">
+          <Grid
+            key={row[0].caption}
+            cols={{ mobile: 1, tablet: 12 }}
+            spacingX="space-800"
+            spacingY={{ mobile: 'space-1100', tablet: 'space-800' }}
+          >
             {row.map(({ caption, height, columnStart, columnEnd, content, hasOwnFrame }) => (
-              <GridItem key={caption} columnStart={columnStart} columnEnd={columnEnd}>
+              <GridItem
+                key={caption}
+                columnStart={{ tablet: columnStart }}
+                columnEnd={{ tablet: columnEnd }}
+                UNSAFE_className={styles.Item}
+              >
                 <Stack spacing="space-600">
                   {hasOwnFrame ? (
                     content
@@ -113,7 +134,8 @@ const BuildingBlocks = () => (
                       borderColor="basic"
                       borderWidth="100"
                       borderRadius="500"
-                      padding="space-1000"
+                      padding={{ mobile: 'space-700', tablet: 'space-1000' }}
+                      UNSAFE_className={styles.Shell}
                     >
                       <div className={styles.Tile} style={{ minHeight: height - TILE_PADDING * 2 }}>
                         {content ?? (
@@ -135,7 +157,7 @@ const BuildingBlocks = () => (
         ))}
       </Stack>
     </Stack>
-  </Section>
+  </PageSection>
 );
 
 export default BuildingBlocks;

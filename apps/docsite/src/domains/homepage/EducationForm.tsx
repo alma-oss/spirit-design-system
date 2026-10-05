@@ -15,7 +15,13 @@ import {
 
 // The form is only a demonstration, the buttons neither cancel nor save anything.
 const EducationForm = () => (
-  <Box backgroundColor="primary" borderColor="basic" borderWidth="100" borderRadius="500" padding="space-1000">
+  <Box
+    backgroundColor="primary"
+    borderColor="basic"
+    borderWidth="100"
+    borderRadius="500"
+    padding={{ mobile: 'space-700', tablet: 'space-1000' }}
+  >
     <Stack spacing="space-900">
       <Heading elementType="h3" size="xsmall">
         Education
@@ -41,7 +47,7 @@ const EducationForm = () => (
           />
         </Grid>
 
-        <Grid cols={{ mobile: 1, tablet: 2 }} spacing="space-700" alignmentY="bottom">
+        <Grid cols={2} spacing="space-700" alignmentY="bottom">
           <Select
             id="building-blocks-from"
             name="buildingBlocksFrom"

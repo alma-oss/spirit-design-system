@@ -1,10 +1,11 @@
 'use client';
 
-import { Flex, Heading, IconBox, Section, Stack, Text } from '@alma-oss/spirit-web-react';
+import { Flex, Heading, IconBox, Stack, Text } from '@alma-oss/spirit-web-react';
 import { routes } from '../routing/routes';
 import styles from './ComponentsOverview.module.scss';
 import FeatureGrid, { type Feature } from './FeatureGrid';
 import GridShowcase from './GridShowcase';
+import PageSection from './PageSection';
 
 // The subpages are not available yet, so every card links to the components page for now.
 const features: Feature[] = [
@@ -35,12 +36,7 @@ const features: Feature[] = [
 ];
 
 const ComponentsOverview = () => (
-  <Section
-    size="large"
-    paddingBottom={{ mobile: 'space-1300', tablet: 'space-1300' }}
-    backgroundColor="primary"
-    containerProps={{ size: 'large' }}
-  >
+  <PageSection size="xlarge" hasTopLine backgroundColor="primary">
     <Stack spacing="space-1200">
       <Flex direction="vertical" alignmentX="center" spacing="space-700" UNSAFE_className={styles.Intro}>
         <IconBox iconName="placeholder" color="success" shape="circle" size="large" />
@@ -59,7 +55,7 @@ const ComponentsOverview = () => (
         <FeatureGrid features={features} />
       </Stack>
     </Stack>
-  </Section>
+  </PageSection>
 );
 
 export default ComponentsOverview;

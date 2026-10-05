@@ -57,7 +57,13 @@ const TechStackCard = () => {
   };
 
   return (
-    <Box backgroundColor="primary" borderColor="basic" borderWidth="100" borderRadius="500" padding="space-1000">
+    <Box
+      backgroundColor="primary"
+      borderColor="basic"
+      borderWidth="100"
+      borderRadius="500"
+      padding={{ mobile: 'space-700', tablet: 'space-1000' }}
+    >
       <Stack spacing="space-900">
         <Stack spacing="space-500">
           <Heading elementType="h3" size="small">

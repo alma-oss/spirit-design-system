@@ -1,8 +1,8 @@
 'use client';
 
-import { Divider, Section, Stack } from '@alma-oss/spirit-web-react';
 import { routes } from '../routing/routes';
 import FeatureGrid, { type Feature } from './FeatureGrid';
+import PageSection from './PageSection';
 
 const features: Feature[] = [
   {
@@ -29,18 +29,9 @@ const features: Feature[] = [
 ];
 
 const Customization = () => (
-  <Section
-    size="large"
-    paddingTop={{ mobile: 'space-0', tablet: 'space-0' }}
-    backgroundColor="primary"
-    containerProps={{ size: 'large' }}
-  >
-    <Stack spacing="space-1300">
-      <Divider />
-
-      <FeatureGrid features={features} />
-    </Stack>
-  </Section>
+  <PageSection size="xlarge" hasTopLine backgroundColor="primary">
+    <FeatureGrid features={features} />
+  </PageSection>
 );
 
 export default Customization;
