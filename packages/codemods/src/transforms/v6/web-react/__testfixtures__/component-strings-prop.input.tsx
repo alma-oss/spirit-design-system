@@ -6,6 +6,7 @@ import {
   PaginationButtonLink,
   ScrollView,
   Tooltip,
+  UNSTABLE_Combobox,
   UNSTABLE_Picker,
   UncontrolledPagination,
   UncontrolledSplitButton,
@@ -40,8 +41,14 @@ export const Example = () => (
     >
       Menu
     </UncontrolledSplitButton>
-    <UNSTABLE_Picker addButtonLabel="Add" emptySelectionLabel="Languages" />
+    <UNSTABLE_Picker addButtonLabel="Add" emptySelectionLabel="Languages" tagDescriptionText="Remove hint" />
     <UNSTABLE_Picker addButtonLabel="Old" strings={{ ariaLabel: { add: "Current" } }} />
+    <UNSTABLE_Combobox
+      addMoreDescriptionText="Add more languages"
+      selectionCountLabel="{count} items"
+      selectionCountLabelSingular="{count} item"
+      tagDescriptionText="Remove hint"
+    />
     <ScrollView hasControls ariaLabelControls={{ start: "Left", end: "Right" }} />
     <ScrollView hasControls ariaLabelControls={{ start: "Old" }} strings={{ ariaLabel: { start: "Current" } }} />
     <ScrollView hasControls ariaLabelControls={{}} />
