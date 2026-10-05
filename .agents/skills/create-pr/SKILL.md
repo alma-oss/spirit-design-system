@@ -125,6 +125,17 @@ Add `--draft` if the user answered **Yes** to the draft question in Step 5.
 
 After the command succeeds, print the PR URL.
 
+### Step 7: Offer the QA Transition
+
+After the PR is created (not when only updating an existing PR's body) and a Jira issue ID is known, offer to move the issue to QA. Never transition it without the user's answer.
+
+1. Call `jira_get_transitions` for the issue and pick the transition that leads to QA/testing (in the DS project it is named `Test`, resulting in the `Testing` status).
+2. If no transition clearly matches, or several do, ask the user which one to use with `AskUserQuestion`. Never guess.
+3. Ask with `AskUserQuestion` (single-select): **Yes** — move the issue to QA / **No** — leave the status unchanged.
+4. On **Yes**, call `jira_transition_issue` with the chosen transition ID. Then check the returned issue — the transition may clear the assignee. If it did, tell the user.
+
+Skip this step when there is no Jira issue (the user answered "none" in Step 3) or the Jira tools are not available.
+
 ---
 
 ## Template Reference
