@@ -31,12 +31,14 @@ jobs:
           name: demo-build
           path: apps/demo/build/
 
+      # `--filter` is required in a monorepo, otherwise the CLI stops asking which project to use.
       # The CLI is synchronous, returns the exact deploy URL (no SHA lookup race) and exits non-zero
       # on a deploy failure, so infra problems fail here and not in the test job.
       - name: Deploy to Netlify
         id: netlify-deploy
         run: |
           DEPLOY_JSON=$(yarn netlify deploy \
+            --filter @lmc-eu/spirit-demo-app \
             --dir apps/demo/build \
             --message "E2E ${GITHUB_SHA}" \
             --json)
