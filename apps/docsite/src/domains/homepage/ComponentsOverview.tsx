@@ -5,7 +5,6 @@ import { routes } from '../routing/routes';
 import styles from './ComponentsOverview.module.scss';
 import FeatureGrid, { type Feature } from './FeatureGrid';
 import GridShowcase from './GridShowcase';
-import PageShowcase from './PageShowcase';
 
 // The subpages are not available yet, so every card links to the components page for now.
 const features: Feature[] = [
@@ -55,8 +54,6 @@ const ComponentsOverview = () => (
       </Flex>
 
       <Stack spacing="space-1300">
-        <PageShowcase />
-
         <GridShowcase />
 
         <FeatureGrid features={features} />

@@ -1,0 +1,16 @@
+@use '@tokens' as tokens;
+
+// The search is as wide as in the design (592 px).
+.SearchHistory {
+    width: 100%;
+    max-width: 37rem;
+    margin-inline: auto;
+
+    // The open dropdown takes no space in the tile, so the search sticks to the top and leaves room below.
+    align-self: flex-start;
+    margin-top: tokens.$space-500;
+}
+
+.Title {
+    padding: tokens.$space-500;
+}

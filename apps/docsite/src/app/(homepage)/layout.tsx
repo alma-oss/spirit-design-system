@@ -1,3 +1,4 @@
+import BuildingBlocks from '@local/domains/homepage/BuildingBlocks';
 import ComponentShowcase from '@local/domains/homepage/ComponentShowcase';
 import ComponentsOverview from '@local/domains/homepage/ComponentsOverview';
 import CustomAssets from '@local/domains/homepage/CustomAssets';
@@ -14,6 +15,7 @@ const HomepageLayout = async ({ children }: HomepageLayoutProps) => (
     <Customization />
     <CustomAssets />
     <ComponentsOverview />
+    <BuildingBlocks />
     {children}
   </>
 );

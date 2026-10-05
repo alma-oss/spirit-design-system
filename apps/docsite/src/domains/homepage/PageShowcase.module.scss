@@ -1,22 +1,21 @@
 @use '@tokens' as tokens;
 
-$_page-left: calc(72 / 1024 * 100%);
-$_page-width: calc(880 / 1024 * 100%);
-
 // The background is not tokenized in Spirit, so it uses a raw value taken from the design.
 .PageShowcase {
-    position: relative;
-    aspect-ratio: 1024 / 580;
     overflow: hidden;
-    background-color: #e0dfef;
+    background-color: #d7d8f5;
+}
+
+.Stage {
+    position: relative;
+    max-width: 55rem;
+    margin-inline: auto;
 }
 
 .Page {
-    position: absolute;
-    bottom: 0;
-    left: $_page-left;
     display: block;
-    width: $_page-width;
+    width: 100%;
+    height: auto;
     border-top-left-radius: tokens.$radius-500;
     border-top-right-radius: tokens.$radius-500;
 }

@@ -1,0 +1,16 @@
+// The card is narrower than the tile, it is as wide as its progress bar (343 px) plus the padding.
+.Card {
+    width: 100%;
+    max-width: 25.5625rem;
+    margin-inline: auto;
+}
+
+// The option labels use the Regular weight. Label has no such variant yet, so its weight variable is set to the body one.
+.Options :global(.Label) {
+    --spirit-label-font-weight: var(--spirit-typography-body-medium-regular-mobile-font-weight);
+}
+
+// Radio inherits the required marker from its FieldGroup, but only the group label should show it.
+.Options :global(.Label--required)::after {
+    content: none;
+}

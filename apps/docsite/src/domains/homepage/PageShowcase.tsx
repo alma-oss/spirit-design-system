@@ -5,8 +5,10 @@ import { type CSSProperties } from 'react';
 import styles from './PageShowcase.module.scss';
 import Stamp, { type StampDirection } from './Stamp';
 
-// All geometry below comes from the design: the showcase is 1024 x 580 and the page screenshot sits in it.
-const SHOWCASE = { width: 1024, height: 580 };
+// All geometry below comes from the design, where the page screenshot (880 x 535) sits at 72, 45 in a 1024 x 580 frame.
+// The positions are kept as designed and converted to percentages of the screenshot.
+const PAGE = { width: 880, height: 535 };
+const PAGE_OFFSET = { x: 72, y: 45 };
 
 interface Rect {
   x: number;
@@ -59,28 +61,37 @@ const annotations: Annotation[] = [
 const toPercent = (value: number, total: number) => `${(value / total) * 100}%`;
 
 const toStyle = ({ x, y, width, height }: Rect): CSSProperties => ({
-  left: toPercent(x, SHOWCASE.width),
-  top: toPercent(y, SHOWCASE.height),
-  width: toPercent(width, SHOWCASE.width),
-  height: toPercent(height, SHOWCASE.height),
+  left: toPercent(x - PAGE_OFFSET.x, PAGE.width),
+  top: toPercent(y - PAGE_OFFSET.y, PAGE.height),
+  width: toPercent(width, PAGE.width),
+  height: toPercent(height, PAGE.height),
 });
 
 const PageShowcase = () => (
-  <Box borderRadius="400" UNSAFE_className={`${styles.PageShowcase} breakout-container-tablet`}>
-    <img
-      className={styles.Page}
-      src="/components-overview/jobs-page.webp"
-      alt="A Jobs.cz page built from Spirit Design System components: navigation, search with filters and a list of job offers."
-    />
+  <Box
+    borderColor="basic"
+    borderWidth="100"
+    borderRadius="500"
+    paddingTop="space-1100"
+    paddingX={{ mobile: 'space-700', tablet: 'space-1200' }}
+    UNSAFE_className={styles.PageShowcase}
+  >
+    <div className={styles.Stage}>
+      <img
+        className={styles.Page}
+        src="/components-overview/jobs-page.webp"
+        alt="A Jobs.cz page built from Spirit Design System components: navigation, search with filters and a list of job offers."
+      />
 
-    <Hidden on={['mobile', 'tablet']}>
-      {annotations.map(({ label, target, stamp }) => (
-        <div key={label} className={styles.Annotation}>
-          <div className={styles.Highlight} style={toStyle(target)} />
-          <Stamp label={label} direction={stamp.direction} style={toStyle(stamp)} className={styles.Stamp} />
-        </div>
-      ))}
-    </Hidden>
+      <Hidden on={['mobile', 'tablet']}>
+        {annotations.map(({ label, target, stamp }) => (
+          <div key={label} className={styles.Annotation}>
+            <div className={styles.Highlight} style={toStyle(target)} />
+            <Stamp label={label} direction={stamp.direction} style={toStyle(stamp)} className={styles.Stamp} />
+          </div>
+        ))}
+      </Hidden>
+    </div>
   </Box>
 );
 
