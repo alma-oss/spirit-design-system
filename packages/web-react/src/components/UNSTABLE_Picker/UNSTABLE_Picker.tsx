@@ -103,7 +103,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       params: { label },
     },
     tagDescriptionText: {
-      value: strings?.ariaLabel?.tagDescription,
+      value: strings?.ariaLabel?.tag?.description,
       deprecated: tagDescriptionText,
       key: 'picker.tagDescriptionText',
     },

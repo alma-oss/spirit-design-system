@@ -98,7 +98,7 @@ describe('UNSTABLE_Picker accessibility', () => {
     });
 
     it('exposes tag instruction text in a hidden element', () => {
-      render(<PickerTest strings={{ ariaLabel: { tagDescription: 'Custom remove hint' } }} />);
+      render(<PickerTest strings={{ ariaLabel: { tag: { description: 'Custom remove hint' } } }} />);
       const el = document.getElementById(tagDescriptionDomId);
 
       expect(el).toBeInTheDocument();

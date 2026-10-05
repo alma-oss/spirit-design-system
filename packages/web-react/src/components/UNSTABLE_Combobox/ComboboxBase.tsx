@@ -117,7 +117,7 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     tagDescriptionText: resolvedTagDescriptionText,
   } = useStringsProp({
     addMoreDescriptionText: {
-      value: strings?.ariaLabel?.addMoreDescription,
+      value: strings?.ariaLabel?.addMore?.description,
       deprecated: addMoreDescriptionText,
       key: 'combobox.addMoreDescription',
       params: { label },
@@ -136,17 +136,17 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
       params: { label },
     },
     selectionCountLabel: {
-      value: strings?.ariaLabel?.selectionCount,
+      value: strings?.ariaLabel?.count?.plural,
       deprecated: selectionCountLabel,
       key: 'combobox.selectionCountLabel',
     },
     selectionCountLabelSingular: {
-      value: strings?.ariaLabel?.selectionCountSingular,
+      value: strings?.ariaLabel?.count?.singular,
       deprecated: selectionCountLabelSingular,
       key: 'combobox.selectionCountLabelSingular',
     },
     tagDescriptionText: {
-      value: strings?.ariaLabel?.tagDescription,
+      value: strings?.ariaLabel?.tag?.description,
       deprecated: tagDescriptionText,
       key: 'combobox.tagDescriptionText',
     },

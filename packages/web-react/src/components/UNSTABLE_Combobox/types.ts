@@ -20,13 +20,19 @@ export type ComboboxOptionsRole = 'listbox' | 'grid';
 
 export type UnstableComboboxStrings = {
   ariaLabel?: {
-    addMoreDescription?: TranslatableString;
+    addMore?: {
+      description?: TranslatableString;
+    };
+    count?: {
+      plural?: TranslatableString;
+      singular?: TranslatableString;
+    };
     removeAll?: TranslatableString;
     removeItem?: TranslatableString;
     selection?: TranslatableString;
-    selectionCount?: TranslatableString;
-    selectionCountSingular?: TranslatableString;
-    tagDescription?: TranslatableString;
+    tag?: {
+      description?: TranslatableString;
+    };
   };
   label?: {
     addMore?: TranslatableString;
@@ -37,7 +43,7 @@ export type UnstableComboboxStrings = {
 export interface UnstableComboboxTranslations {
   /** @deprecated Use `strings.label.addMore` instead. */
   addMoreLabel?: string;
-  /** @deprecated Use `strings.ariaLabel.addMoreDescription` instead. */
+  /** @deprecated Use `strings.ariaLabel.addMore.description` instead. */
   addMoreDescriptionText?: string;
   /** @deprecated Use `strings.label.emptySelection` instead. */
   emptySelectionLabel?: string;
@@ -49,11 +55,11 @@ export interface UnstableComboboxTranslations {
   removeItemLabel?: string;
   /** @deprecated Use `strings.ariaLabel.selection` instead. */
   selectionAriaLabel?: string;
-  /** @deprecated Use `strings.ariaLabel.selectionCount` instead. */
+  /** @deprecated Use `strings.ariaLabel.count.plural` instead. */
   selectionCountLabel?: string;
-  /** @deprecated Use `strings.ariaLabel.selectionCountSingular` instead. */
+  /** @deprecated Use `strings.ariaLabel.count.singular` instead. */
   selectionCountLabelSingular?: string;
-  /** @deprecated Use `strings.ariaLabel.tagDescription` instead. */
+  /** @deprecated Use `strings.ariaLabel.tag.description` instead. */
   tagDescriptionText?: string;
 }
 

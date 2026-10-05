@@ -26,7 +26,9 @@ export type UnstablePickerStrings = {
     removeAll?: TranslatableString;
     removeItem?: TranslatableString;
     selection?: TranslatableString;
-    tagDescription?: TranslatableString;
+    tag?: {
+      description?: TranslatableString;
+    };
   };
   label?: {
     emptySelection?: TranslatableString;
@@ -46,7 +48,7 @@ export interface UnstablePickerTranslations {
   removeItemLabel?: string;
   /** @deprecated Use `strings.ariaLabel.selection` instead. */
   selectionAriaLabel?: string;
-  /** @deprecated Use `strings.ariaLabel.tagDescription` instead. */
+  /** @deprecated Use `strings.ariaLabel.tag.description` instead. */
   tagDescriptionText?: string;
 }
 
