@@ -1,0 +1,165 @@
+@mixin code-small-regular {
+    font-family: var(--spirit-typography-code-small-regular-mobile-font-family);
+    font-size: var(--spirit-typography-code-small-regular-mobile-font-size);
+    font-weight: var(--spirit-typography-code-small-regular-mobile-font-weight);
+    line-height: var(--spirit-typography-code-small-regular-mobile-line-height);
+}
+
+@mixin body-small-regular {
+    font-family: var(--spirit-typography-body-small-regular-mobile-font-family);
+    font-size: var(--spirit-typography-body-small-regular-mobile-font-size);
+    font-weight: var(--spirit-typography-body-small-regular-mobile-font-weight);
+    line-height: var(--spirit-typography-body-small-regular-mobile-line-height);
+}
+
+.ComponentPlayground {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    border: 1px solid var(--spirit-color-border-basic);
+    border-radius: var(--spirit-radius-500);
+    background-color: var(--spirit-color-background-primary);
+
+    @media (min-width: 64rem) {
+        grid-template-columns: minmax(0, 1fr) 25.875rem;
+    }
+}
+
+.ComponentPlayground__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-800);
+    min-width: 0;
+    padding: var(--spirit-space-1000);
+}
+
+.ComponentPlayground__devices {
+    display: flex;
+    justify-content: center;
+}
+
+.ComponentPlayground__preview {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    min-height: 16rem;
+}
+
+.ComponentPlayground__stage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    transition: max-width 0.2s ease;
+}
+
+.ComponentPlayground__code {
+    position: relative;
+    padding: var(--spirit-space-800);
+    border-radius: var(--spirit-radius-500);
+    background-color: var(--spirit-color-background-secondary);
+
+    > button {
+        position: absolute;
+        top: var(--spirit-space-700);
+        right: var(--spirit-space-700);
+    }
+}
+
+.ComponentPlayground .ComponentPlayground__snippet {
+    @include code-small-regular;
+
+    margin: 0;
+    padding: 0;
+    padding-inline-end: 7rem; // keeps the code clear of the Copy code button
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--spirit-color-text-primary);
+    background: none;
+}
+
+.ComponentPlayground__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-1000);
+    min-width: 0;
+    padding: var(--spirit-space-1000);
+    border-top: 1px solid var(--spirit-color-border-basic);
+
+    @media (min-width: 64rem) {
+        border-top: 0;
+        border-left: 1px solid var(--spirit-color-border-basic);
+    }
+}
+
+.ComponentPlayground__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-900);
+}
+
+.ComponentPlayground__panelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ComponentPlayground__panelTitle {
+    @include body-small-regular;
+
+    margin: 0;
+    color: var(--spirit-color-text-secondary);
+}
+
+
+.ComponentPlayground__reset {
+    @include body-small-regular;
+}
+
+.ComponentPlayground__controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-700);
+}
+
+.ComponentPlayground__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spirit-space-800);
+    min-height: 2.5rem;
+}
+
+.ComponentPlayground__label {
+    @include code-small-regular;
+
+    color: var(--spirit-color-text-primary);
+}
+
+.ComponentPlayground__field {
+    width: 8.5rem;
+    flex-shrink: 0;
+
+    input {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+.ComponentPlayground__divider {
+    margin: 0;
+}
+
+.ComponentPlayground__links {
+    @include body-small-regular;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-700);
+    align-items: center;
+}
+
+// Full width is a layout decision, so the button stretches through its grid wrapper.
+.ComponentPlayground__action {
+    display: grid;
+    width: 100%;
+}
