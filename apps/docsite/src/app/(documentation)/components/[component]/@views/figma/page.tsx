@@ -1,6 +1,6 @@
 import { isValidComponentSlug } from '@local/domains/components/utils/componentSlug';
 import CanonicalMarkdown from '@local/domains/content/CanonicalMarkdown';
-import { getComponentTabAvailability, resolveComponentTabFile } from '@local/domains/content/componentDocs';
+import { getComponentTabAvailability, resolveComponentTabFile } from '@local/domains/content/componentDocsRepository';
 import { notFound } from 'next/navigation';
 
 interface FigmaTabPageProps {

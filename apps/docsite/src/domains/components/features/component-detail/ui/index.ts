@@ -1,0 +1,1 @@
+export { ComponentHeader } from './ComponentHeader';

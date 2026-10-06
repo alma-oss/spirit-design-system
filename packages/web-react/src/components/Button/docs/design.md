@@ -2,38 +2,6 @@
 title: Button
 ---
 
-![Button](https://studio-assets.supernova.io/design-systems/10180/01da359b-8b2c-4bb1-9b45-6266e315e163.png)
-
-Color Primary
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/4ce5d31d-4c9f-4e47-9e65-7c69e309e60a.png)
-
-Color Plain
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/2ea20651-d0e0-4168-a20a-71d263494f42.png)
-
-Color Secondary
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/92a565df-6e11-4d39-ae06-6776a8d77660.png)
-
-Color Danger
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/a9c698b0-77a1-4cf4-a1ce-3afc5589aa8d.png)
-
-Color Informative
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/666f4e79-fdac-4d6e-81bc-c11e7ba6e01a.png)
-
-Color Tertiary
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/a6302322-5272-4645-bf3e-56e3d4e0e8dd.png)
-
-Color Success
-
-![Button](https://studio-assets.supernova.io/design-systems/10180/9d79dbb9-8f62-4a69-9b2c-76e4d8711e6e.png)
-
-Color Warning
-
 Button
 
 | Property          | Values                                                                                   | Default           |
