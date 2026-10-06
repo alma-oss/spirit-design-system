@@ -1,3 +1,4 @@
+import ComponentBand from '@local/domains/components/ui/ComponentBand';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
 import { notFound } from 'next/navigation';
@@ -22,9 +23,11 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
     );
 
     return (
-      <MarkdownContent>
-        <ReadMe />
-      </MarkdownContent>
+      <ComponentBand>
+        <MarkdownContent>
+          <ReadMe />
+        </MarkdownContent>
+      </ComponentBand>
     );
   } catch (error) {
     logError(`[ComponentView] Failed to load React README for "${component}":`, error);

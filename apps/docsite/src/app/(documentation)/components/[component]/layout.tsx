@@ -11,7 +11,12 @@ const ComponentViewsLayout = async ({ views, params }: ComponentViewsLayoutProps
   const { component } = await params;
   const tabs = await getComponentTabAvailability(component);
 
-  return <ComponentTabNav views={views} component={component} tabs={tabs} />;
+  return (
+    <>
+      <ComponentTabNav component={component} tabs={tabs} />
+      {views}
+    </>
+  );
 };
 
 export default ComponentViewsLayout;

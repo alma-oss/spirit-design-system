@@ -1,0 +1,10 @@
+.ComponentTabNav {
+    display: grid;
+}
+
+// Keep the tabs centered, but let them scroll from the start when they do not fit.
+.ComponentTabNav__list {
+    justify-content: flex-start;
+    width: max-content;
+    margin-inline: auto;
+}

@@ -1,0 +1,42 @@
+.ComponentBand {
+    background-color: var(--spirit-color-background-primary);
+    border-bottom: 1px solid var(--spirit-color-border-basic);
+}
+
+.ComponentBand__container {
+    box-sizing: border-box;
+    border-inline: 1px solid var(--spirit-color-border-basic);
+}
+
+.ComponentBand--header {
+    border-bottom: 0;
+
+    .ComponentBand__container {
+        padding-top: var(--spirit-space-1400);
+    }
+}
+
+.ComponentBand--tabs .ComponentBand__container {
+    padding-block: var(--spirit-space-1000);
+}
+
+.ComponentBand--content .ComponentBand__container {
+    padding-top: var(--spirit-space-1400);
+    padding-bottom: var(--spirit-space-1100);
+}
+
+// Dividers between content blocks stay inside the container. The last block has no divider of its own: the page
+// footer draws the full-width line.
+.ComponentBand--content {
+    border-bottom: 0;
+
+    &:not(:last-child) .ComponentBand__container {
+        border-bottom: 1px solid var(--spirit-color-border-basic);
+    }
+}
+
+// The block padding provides the space above the first heading of a block; block titles are Heading/Small/Semibold.
+.ComponentBand--content h2:first-child {
+    margin-top: 0 !important;
+    font-weight: var(--spirit-typography-heading-small-semibold-desktop-font-weight);
+}
