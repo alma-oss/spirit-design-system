@@ -1,16 +1,16 @@
-import { Container, Section, ScrollView } from '@alma-oss/spirit-web-react';
 import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
+import ComponentBand from '@local/domains/components/ui/ComponentBand';
 import ComponentTabNavigationItems, { type TabItem } from '@local/domains/components/ui/ComponentTabNavigationItems';
 import { getComponentTabAvailability } from '@local/domains/content/componentDocs';
 import { routes, componentSegments } from '@local/domains/routing/routes';
-import { type ReactNode } from 'react';
 
 interface ComponentTabNavigationProps {
-  views: ReactNode;
   component: string;
+  /** Route segments of tabs that are not offered for this component. */
+  hiddenTabs?: string[];
 }
 
-const ComponentTabNavigation = async ({ views, component }: ComponentTabNavigationProps) => {
+const ComponentTabNavigation = async ({ component, hiddenTabs = [] }: ComponentTabNavigationProps) => {
   const tabs = await getComponentTabAvailability(component);
   const sources = getComponentViewsAvailability(component);
 
@@ -60,16 +60,9 @@ const ComponentTabNavigation = async ({ views, component }: ComponentTabNavigati
   ];
 
   return (
-    <>
-      <Container>
-        <div className="d-grid">
-          <ScrollView direction="horizontal" isScrollbarDisabled>
-            <ComponentTabNavigationItems items={items} />
-          </ScrollView>
-        </div>
-      </Container>
-      <Section size="xlarge">{views}</Section>
-    </>
+    <ComponentBand variant="tabs">
+      <ComponentTabNavigationItems items={items.filter((item) => !hiddenTabs.includes(item.segment))} />
+    </ComponentBand>
   );
 };
 
