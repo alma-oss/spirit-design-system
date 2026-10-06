@@ -103,6 +103,28 @@ describe('UNSTABLE_Picker', () => {
     );
   });
 
+  it('should keep a hidden label out of the flex row', () => {
+    render(<TestPicker isLabelHidden emptySelectionLabel="Select" />);
+
+    const label = screen.getByText('Languages');
+
+    expect(label).toHaveClass('accessibility-hidden');
+    expect(label.parentElement).not.toHaveClass('Flex');
+  });
+
+  it('should omit contextual help when the label is hidden', () => {
+    render(
+      <TestPicker
+        isLabelHidden
+        emptySelectionLabel="Select"
+        contextualHelp={<ContextualHelp>Help content</ContextualHelp>}
+      />,
+    );
+
+    expect(screen.getByText('Languages')).toHaveClass('accessibility-hidden');
+    expect(screen.queryByRole('button', { name: 'More information', hidden: true })).not.toBeInTheDocument();
+  });
+
   it('should render selected tags and toggle items', () => {
     const onSelectionChange = jest.fn();
     render(<TestPicker selectedKeys={['cs']} onSelectionChange={onSelectionChange} />);

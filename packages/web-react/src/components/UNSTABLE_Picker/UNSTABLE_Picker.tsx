@@ -217,6 +217,12 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     [close, selectedKeys],
   );
 
+  const labelElement = (
+    <Label {...labelProps} id={labelId} elementType="span">
+      {label}
+    </Label>
+  );
+
   return (
     <ContextPropsProvider
       value={{
@@ -239,12 +245,14 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
       >
         <div {...styleProps} className={classNames(classProps.root, styleProps.className)} {...transferProps}>
           <Stack spacing="space-400">
-            <Flex alignmentY="center" spacingX="space-100">
-              <Label {...labelProps} id={labelId} elementType="span">
-                {label}
-              </Label>
-              {contextualHelp}
-            </Flex>
+            {isLabelHidden ? (
+              labelElement
+            ) : (
+              <Flex alignmentY="center" spacingX="space-100">
+                {labelElement}
+                {contextualHelp}
+              </Flex>
+            )}
             <Dropdown {...dropdownProps} id={popoverId} isOpen={isOpen} onToggle={onToggle} triggerRef={triggerRef}>
               <InputContainer role="group" aria-label={label}>
                 <UNSTABLE_PickerSelection

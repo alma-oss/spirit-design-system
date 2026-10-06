@@ -266,6 +266,11 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
   const hasOptionChildren = Children.toArray(children).length > 0;
   const showEmptyState = !isLoading && hasEmptyState && !hasOptionChildren;
   const shouldRenderOptions = optionsRole != null && (hasOptionChildren || hasEmptyState);
+  const labelElement = (
+    <Label {...labelProps} id={labelId} htmlFor={inputId}>
+      {label}
+    </Label>
+  );
 
   return (
     <ContextPropsProvider
@@ -306,12 +311,14 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
           {...transferProps}
         >
           <Stack spacing="space-400">
-            <Flex alignmentY="center" spacingX="space-100">
-              <Label {...labelProps} id={labelId} htmlFor={inputId}>
-                {label}
-              </Label>
-              {contextualHelp}
-            </Flex>
+            {isLabelHidden ? (
+              labelElement
+            ) : (
+              <Flex alignmentY="center" spacingX="space-100">
+                {labelElement}
+                {contextualHelp}
+              </Flex>
+            )}
             <Dropdown
               {...dropdownProps}
               id={popoverId}

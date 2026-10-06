@@ -88,8 +88,9 @@ control must match a larger field:
 
 ## With Form Fields
 
-Place ContextualHelp next to the field [Label][label] in a horizontal Flex. Set a specific accessible name on the
-trigger. `More information` is only the fallback when none is provided.
+Place ContextualHelp next to a visible field [Label][label] in a horizontal Flex. Set a specific accessible name on the
+trigger. `More information` is only the fallback when none is provided. When the field label is visually hidden, omit
+ContextualHelp from the markup.
 
 Prefer visible [HelperText][helper-text] whenever the information can be shown persistently. Hidden contextual help can
 be overlooked, so use ContextualHelp only when HelperText is not suitable.
