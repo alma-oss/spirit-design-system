@@ -17,7 +17,10 @@ const rehypePrettyCodeOptions = {
 
 const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: StringPluginTuple[] } = {
   remarkPlugins: [['remark-gfm']],
-  rehypePlugins: [['rehype-pretty-code', rehypePrettyCodeOptions]],
+  rehypePlugins: [
+    [join(pathDir, 'src/domains/content/plugins/rehypeNormalizeHeadings.mjs')],
+    ['rehype-pretty-code', rehypePrettyCodeOptions],
+  ],
 };
 
 const nextConfig: NextConfig = {

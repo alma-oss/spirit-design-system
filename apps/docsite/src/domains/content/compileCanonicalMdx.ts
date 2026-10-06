@@ -1,3 +1,4 @@
+import rehypeNormalizeHeadings from '@local/domains/content/plugins/rehypeNormalizeHeadings.mjs';
 import { useMDXComponents as getMDXComponents } from '@local/mdx-components';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -23,7 +24,11 @@ export const compileCanonicalSource = async (source: string, isCanonical = true)
       mdxOptions: {
         format: isCanonical ? 'mdx' : 'md',
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [...(isCanonical ? [] : [rehypeRaw]), [rehypePrettyCode, { theme: 'tokyo-night' }]],
+        rehypePlugins: [
+          ...(isCanonical ? [] : [rehypeRaw]),
+          rehypeNormalizeHeadings,
+          [rehypePrettyCode, { theme: 'tokyo-night' }],
+        ],
       },
     },
   });
