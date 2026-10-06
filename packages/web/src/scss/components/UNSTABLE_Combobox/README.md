@@ -37,6 +37,9 @@ UNSTABLE_Combobox
     └── ValidationText                                (optional)
 ```
 
+When the label is visually hidden, omit the Flex and ContextualHelp. Place the label directly in the Stack with
+`accessibility-hidden`.
+
 Combobox always supports **multi-select** (tags in the field). The options widget role only chooses how the
 **popover options** are marked up for accessibility — not single vs multiple selection. Use **listbox** (default)
 when each row only toggles selection. For options with one or more interactive elements (e.g. link + remove), use
@@ -324,8 +327,9 @@ The demo script reads `data-spirit-combobox-tag-template` on `.UNSTABLE_Combobox
 
 ## Contextual Help
 
-Place [ContextualHelp][contextual-help] next to the Label in a horizontal Flex. Use an accessible name that includes
-the field label:
+Place [ContextualHelp][contextual-help] next to a visible Label in a horizontal Flex. Use an accessible name that
+includes the field label. When the label is visually hidden, leave ContextualHelp out of the markup so it is neither
+shown nor available to assistive technology.
 
 ```html
 <div class="UNSTABLE_Combobox">
@@ -356,6 +360,20 @@ the field label:
         </div>
       </div>
     </div>
+    <div class="Dropdown"><!-- … --></div>
+  </div>
+</div>
+```
+
+## Hidden Label
+
+Use the `accessibility-hidden` helper to visually hide the label while keeping it accessible to screen readers. Do not
+wrap that label in the Flex, and do not include ContextualHelp.
+
+```html
+<div class="UNSTABLE_Combobox">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <label class="Label Label--medium accessibility-hidden" id="combobox-label" for="combobox-input">Languages</label>
     <div class="Dropdown"><!-- … --></div>
   </div>
 </div>

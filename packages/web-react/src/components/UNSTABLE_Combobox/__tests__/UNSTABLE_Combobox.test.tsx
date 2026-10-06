@@ -126,6 +126,22 @@ describe('UNSTABLE_Combobox', () => {
     );
   });
 
+  it('should keep a hidden label out of the flex row', () => {
+    render(<TestCombobox isLabelHidden />);
+
+    const label = screen.getByText('Languages');
+
+    expect(label).toHaveClass('accessibility-hidden');
+    expect(label.parentElement).not.toHaveClass('Flex');
+  });
+
+  it('should omit contextual help when the label is hidden', () => {
+    render(<TestCombobox isLabelHidden contextualHelp={<ContextualHelp>Help content</ContextualHelp>} />);
+
+    expect(screen.getByText('Languages')).toHaveClass('accessibility-hidden');
+    expect(screen.queryByRole('button', { name: 'More information', hidden: true })).not.toBeInTheDocument();
+  });
+
   it('should expose combobox ARIA on the input', () => {
     render(<TestCombobox isOpen />);
 

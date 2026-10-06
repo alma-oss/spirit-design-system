@@ -37,6 +37,9 @@ Stack                                         space-400
 └── ValidationText                            (optional)
 ```
 
+When the label is visually hidden, omit the Flex and ContextualHelp. Place the label directly in the Stack with
+`accessibility-hidden`.
+
 ⚠️ The DropdownPopover is rendered using absolute positioning relative to the trigger. Make sure there is
 enough space below the Picker (or around it, depending on the popover placement) so the popover does not
 overflow its scrollable container or get clipped.
@@ -240,8 +243,9 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
 
 ## Contextual Help
 
-Place [ContextualHelp][contextual-help] next to the Label in a horizontal Flex. Use an accessible name that includes
-the field label:
+Place [ContextualHelp][contextual-help] next to a visible Label in a horizontal Flex. Use an accessible name that
+includes the field label. When the label is visually hidden, leave ContextualHelp out of the markup so it is neither
+shown nor available to assistive technology.
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
@@ -278,7 +282,7 @@ the field label:
 ## Hidden Label
 
 Use the `accessibility-hidden` helper to visually hide the label while keeping it
-accessible to screen readers.
+accessible to screen readers. Do not wrap that label in the Flex, and do not include ContextualHelp.
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">

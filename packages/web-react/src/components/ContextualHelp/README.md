@@ -42,6 +42,8 @@ Placement defaults to `top`. The tooltip opens on click, hover, and focus.
 
 Pass a `ContextualHelp` element to [UNSTABLE_Combobox][combobox] or [UNSTABLE_Picker][picker] via `contextualHelp`.
 The field provides the tooltip `id` through context. When the field is disabled, the trigger inherits `isDisabled`.
+When `isLabelHidden` is set, the field does not render contextual help, so it is neither shown nor exposed to
+assistive technology.
 
 Prefer visible [HelperText][helper-text] whenever the information can be shown persistently. Hidden contextual help can
 be overlooked, so use ContextualHelp only when HelperText is not suitable.
