@@ -12,6 +12,9 @@ playwright-report
 test-results
 docs/release-notes
 
+# Next.js agent rules (rewritten by `next dev`)
+apps/docsite/AGENTS.md
+
 # Heading capitalization problems
 migration-*
 
