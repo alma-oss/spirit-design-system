@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Grid, GridItem, Heading, Item, Link, Stack, Text } from '@alma-oss/spirit-web-react';
+import { Box, Flex, Grid, GridItem, Heading, Item, Link, Stack, Text } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { type KeyboardEvent, useState } from 'react';
 import { routes } from '../routing/routes';
@@ -162,14 +162,15 @@ const ProcessTabs = () => {
                       </Heading>
                       <Text textColor="secondary">{activeStep.content.description}</Text>
                     </Stack>
-                    <Stack spacing="space-500">
+                    {/* The vertical Flex does not stretch its items, so the clickable area of a link is only as wide as its text. */}
+                    <Flex direction="vertical" alignmentX="left" spacing="space-500">
                       <Text textColor="secondary">Docs</Text>
                       {activeStep.content.links.map(({ label, href }) => (
                         <Link key={label} elementType={NextLink} href={href}>
                           {label}
                         </Link>
                       ))}
-                    </Stack>
+                    </Flex>
                   </Stack>
                 </GridItem>
               ) : (

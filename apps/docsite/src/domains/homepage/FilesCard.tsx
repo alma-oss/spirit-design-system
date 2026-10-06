@@ -14,7 +14,6 @@ import {
   Truncate,
 } from '@alma-oss/spirit-web-react';
 import { type DragEvent, type MouseEvent, useState } from 'react';
-import styles from './FilesCard.module.scss';
 
 type View = 'files' | 'upload';
 
@@ -29,6 +28,7 @@ const FILE_SIZE = '8.5 kB';
 const initialPhotos: FileItem[] = [
   { id: 'photo', hasImagePreview: true },
   { id: 'document', hasImagePreview: false },
+  { id: 'report', hasImagePreview: false },
 ];
 
 const noop = () => {};
@@ -65,7 +65,6 @@ const FilesCard = () => {
       borderWidth="100"
       borderRadius="500"
       padding={{ mobile: 'space-700', tablet: 'space-1000' }}
-      UNSAFE_className={styles.Card}
     >
       <Stack spacing="space-900">
         <SegmentedControl
@@ -116,7 +115,7 @@ const FilesCard = () => {
             </Stack>
           </Stack>
         ) : (
-          <Stack spacing="space-700">
+          <Stack spacing="space-900">
             {/* Capturing the events keeps the file picker from opening and the drops from being handled. */}
             <div onClickCapture={blockFilePicker} onDropCapture={blockFilePicker}>
               <FileUpload

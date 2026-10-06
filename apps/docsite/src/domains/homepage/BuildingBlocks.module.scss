@@ -10,6 +10,11 @@
     }
 }
 
+// The content fills the whole tile, e.g. a card with the same side spacing as the tile.
+.Tile--filled {
+    align-items: stretch;
+}
+
 // The content of a tile must not stretch the grid track beyond the screen, e.g. an input with its intrinsic width.
 .Item,
 .Shell {

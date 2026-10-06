@@ -1,0 +1,7 @@
+// The card fills the tile: the form is on the top and the actions stick to the bottom.
+.Card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}

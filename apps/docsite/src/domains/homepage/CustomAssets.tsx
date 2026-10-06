@@ -1,8 +1,9 @@
 'use client';
 
 import { Box, Flex, Heading, Text } from '@alma-oss/spirit-web-react';
-import { type CSSProperties } from 'react';
+import { type CSSProperties, useState } from 'react';
 import styles from './CustomAssets.module.scss';
+import HoverLottie from './HoverLottie';
 import PageSection from './PageSection';
 
 const ASSETS_PATH = '/custom-assets';
@@ -31,21 +32,19 @@ const starIcons: Glyph[] = [
   { src: 'star-4.svg', size: 25, inset: '9.38% 7.33% 8.9% 7.34%', bleed: '-3.5% -3.35%' },
 ];
 
-interface IllustrationLayer {
-  src: string;
-  inset: string;
+interface Illustration {
+  /** A static illustration, exported from the design. */
+  src?: string;
+  /** Path to a Lottie animation in the `public` folder, it plays once on hover. */
+  animation?: string;
 }
 
-// The first illustration is exported from the design as separately positioned layers.
-const layeredIllustration: IllustrationLayer[] = [
-  { src: 'password-1-screen.svg', inset: '19.27% 2.24% 5.77% 16.15%' },
-  { src: 'password-1-locker.svg', inset: '39.15% 8.32% 31.68% 65.56%' },
-  { src: 'password-1-password.svg', inset: '25.8% 8.49% 66.37% 55.43%' },
-  { src: 'password-1-character.svg', inset: '9.67% 32.3% 9.2% 14.28%' },
-  { src: 'password-1-elements.svg', inset: '6.15% 5.59% 10.51% 2.69%' },
+const illustrations: Illustration[] = [
+  { animation: '/lottie/secure-password.json' },
+  { src: 'password-2.svg' },
+  { animation: '/lottie/safety-access.json' },
+  { src: 'password-4.svg' },
 ];
-
-const singleIllustrations = ['password-2.svg', 'password-3.svg', 'password-4.svg'];
 
 const asStyle = (inset?: string) => (inset ? ({ inset } as CSSProperties) : undefined);
 
@@ -65,13 +64,12 @@ const IconGroup = ({ name, glyphs }: { name: string; glyphs: Glyph[] }) => (
   <Flex direction="vertical" alignmentX="left" spacing="space-700">
     <AssetLabel>{name}</AssetLabel>
     <Box
-      backgroundColor="tertiary"
+      backgroundColor="primary"
       borderStyle="dashed"
       borderWidth="200"
       borderColor="accent-02-basic"
       borderRadius="300"
-      paddingX="space-700"
-      paddingY="space-800"
+      padding="space-900"
     >
       <Flex direction="vertical" spacing="space-500">
         {glyphs.map(({ src, size, inset, bleed }, index) => (
@@ -93,13 +91,61 @@ const IconGroup = ({ name, glyphs }: { name: string; glyphs: Glyph[] }) => (
   </Flex>
 );
 
-const IllustrationTile = ({ caption, children }: { caption: string; children: React.ReactNode }) => (
-  <Box borderRadius="400" padding="space-600" UNSAFE_className={styles.Tile}>
-    <Flex direction="vertical" alignmentX="center" spacing="space-700">
-      <div className={styles.Illustration}>{children}</div>
-      <AssetCaption>{caption}</AssetCaption>
+const IllustrationTile = ({ caption, src = undefined, animation = undefined }: Illustration & { caption: string }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <Box
+      borderRadius="400"
+      padding="space-600"
+      UNSAFE_className={styles.Tile}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Flex direction="vertical" alignmentX="center" spacing="space-700">
+        <div className={styles.Illustration}>
+          {animation ? (
+            <HoverLottie path={animation} isHovered={isHovered} className={styles.IllustrationImage} />
+          ) : (
+            <img className={styles.IllustrationImage} src={`${ASSETS_PATH}/illustrations/${src}`} alt="" />
+          )}
+        </div>
+        <AssetCaption>{caption}</AssetCaption>
+      </Flex>
+    </Box>
+  );
+};
+
+// The three groups of the custom assets: home icons, password illustrations and star icons.
+export const AssetGroups = () => (
+  <Flex isWrapping alignmentX="space-between" alignmentY="stretch" spacing="space-1000">
+    <IconGroup name="icon-home" glyphs={homeIcons} />
+
+    <Flex direction="vertical" alignmentX="left" spacing="space-700" UNSAFE_className={styles.IllustrationsGroup}>
+      <AssetLabel>illustration-password</AssetLabel>
+      <Box
+        backgroundColor="primary"
+        borderStyle="dashed"
+        borderWidth="200"
+        borderColor="accent-02-basic"
+        borderRadius="300"
+        paddingX="space-800"
+        UNSAFE_className={styles.IllustrationsBox}
+      >
+        <Flex isWrapping alignmentX="center" alignmentY="center" spacing="space-700">
+          {illustrations.map((illustration, index) => (
+            <IllustrationTile
+              key={illustration.src ?? illustration.animation}
+              caption={`brand 0${index + 1}`}
+              {...illustration}
+            />
+          ))}
+        </Flex>
+      </Box>
     </Flex>
-  </Box>
+
+    <IconGroup name="icon-star-dualtone" glyphs={starIcons} />
+  </Flex>
 );
 
 const CustomAssets = () => (
@@ -116,39 +162,7 @@ const CustomAssets = () => (
           </Text>
         </Flex>
 
-        <Flex isWrapping alignmentX="center" alignmentY="stretch" spacing="space-800">
-          <IconGroup name="icon-home" glyphs={homeIcons} />
-
-          <Flex direction="vertical" alignmentX="left" spacing="space-700" UNSAFE_className={styles.IllustrationsGroup}>
-            <AssetLabel>illustration-password</AssetLabel>
-            <Box
-              backgroundColor="tertiary"
-              borderStyle="dashed"
-              borderWidth="200"
-              borderColor="accent-02-basic"
-              borderRadius="300"
-              paddingX="space-800"
-              UNSAFE_className={styles.IllustrationsBox}
-            >
-              <Flex isWrapping alignmentX="center" alignmentY="center" spacing="space-0">
-                <IllustrationTile caption="brand 01">
-                  {layeredIllustration.map(({ src, inset }) => (
-                    <span key={src} className={styles.IllustrationLayer} style={asStyle(inset)}>
-                      <img className={styles.IllustrationImage} src={`${ASSETS_PATH}/illustrations/${src}`} alt="" />
-                    </span>
-                  ))}
-                </IllustrationTile>
-                {singleIllustrations.map((src, index) => (
-                  <IllustrationTile key={src} caption={`brand 0${index + 2}`}>
-                    <img className={styles.IllustrationImage} src={`${ASSETS_PATH}/illustrations/${src}`} alt="" />
-                  </IllustrationTile>
-                ))}
-              </Flex>
-            </Box>
-          </Flex>
-
-          <IconGroup name="icon-star-dualtone" glyphs={starIcons} />
-        </Flex>
+        <AssetGroups />
       </Flex>
     </Box>
   </PageSection>

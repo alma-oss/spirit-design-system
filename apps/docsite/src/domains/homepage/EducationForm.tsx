@@ -5,13 +5,14 @@ import {
   Box,
   Button,
   Checkbox,
-  Divider,
   Grid,
   Heading,
   Select,
   Stack,
+  Text,
   TextField,
 } from '@alma-oss/spirit-web-react';
+import styles from './EducationForm.module.scss';
 
 // The form is only a demonstration, the buttons neither cancel nor save anything.
 const EducationForm = () => (
@@ -21,11 +22,17 @@ const EducationForm = () => (
     borderWidth="100"
     borderRadius="500"
     padding={{ mobile: 'space-700', tablet: 'space-1000' }}
+    UNSAFE_className={styles.Card}
   >
     <Stack spacing="space-900">
-      <Heading elementType="h3" size="xsmall">
-        Education
-      </Heading>
+      <Stack spacing="space-500">
+        <Heading elementType="h3" size="xsmall" marginBottom="space-0">
+          Education
+        </Heading>
+        <Text textColor="secondary" marginBottom="space-0">
+          Tell employers where you studied and what you focused on.
+        </Text>
+      </Stack>
 
       <Stack spacing="space-800">
         <Grid cols={{ mobile: 1, tablet: 2 }} spacing="space-700">
@@ -55,6 +62,7 @@ const EducationForm = () => (
             variant="fill"
             isRequired
           >
+            <option value="2017">2017</option>
             <option value="2018">2018</option>
             <option value="2019">2019</option>
             <option value="2020">2020</option>
@@ -69,14 +77,12 @@ const EducationForm = () => (
 
         <Checkbox id="building-blocks-studying" name="buildingBlocksStudying" label="I still study here" />
       </Stack>
-
-      <Divider />
-
-      <ActionGroup>
-        <Button color="secondary">Cancel</Button>
-        <Button>Save</Button>
-      </ActionGroup>
     </Stack>
+
+    <ActionGroup>
+      <Button color="secondary">Cancel</Button>
+      <Button>Save</Button>
+    </ActionGroup>
   </Box>
 );
 

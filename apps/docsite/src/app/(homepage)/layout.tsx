@@ -1,7 +1,5 @@
 import BuildingBlocks from '@local/domains/homepage/BuildingBlocks';
-import ComponentsOverview from '@local/domains/homepage/ComponentsOverview';
-import CustomAssets from '@local/domains/homepage/CustomAssets';
-import Customization from '@local/domains/homepage/Customization';
+import DesignTeaser from '@local/domains/homepage/DesignTeaser';
 import Hero from '@local/domains/homepage/Hero';
 import LogoStrip from '@local/domains/homepage/LogoStrip';
 import ProcessTabs from '@local/domains/homepage/ProcessTabs';
@@ -15,9 +13,7 @@ const HomepageLayout = async ({ children }: HomepageLayoutProps) => (
     <LogoStrip />
     <ProcessTabs />
     <BuildingBlocks />
-    <Customization />
-    <CustomAssets />
-    <ComponentsOverview />
+    <DesignTeaser />
     {children}
   </>
 );

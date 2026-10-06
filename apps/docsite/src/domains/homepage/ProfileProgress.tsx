@@ -14,7 +14,7 @@ const contactOptions = [
 
 // Each group counts as a single step, no matter how many checkboxes are ticked.
 const ProfileProgress = () => {
-  const [contacts, setContacts] = useState<string[]>([]);
+  const [contacts, setContacts] = useState<string[]>(['freelancer']);
   const [visibility, setVisibility] = useState<string>('public');
 
   const toggleContact = (id: string) =>
@@ -33,6 +33,23 @@ const ProfileProgress = () => {
     >
       <Stack spacing="space-800">
         <Stack spacing="space-700">
+          <FieldGroup id="building-blocks-contact" label="Who can contact you?" isRequired>
+            <Stack spacing="space-500" UNSAFE_className={styles.Options}>
+              {contactOptions.map(({ id, label }) => (
+                <Checkbox
+                  key={id}
+                  id={`building-blocks-contact-${id}`}
+                  name="buildingBlocksContact"
+                  label={label}
+                  isChecked={contacts.includes(id)}
+                  onChange={() => toggleContact(id)}
+                />
+              ))}
+            </Stack>
+          </FieldGroup>
+
+          <Divider />
+
           <FieldGroup id="building-blocks-visibility" label="CV visibility" isRequired>
             <Stack spacing="space-500" UNSAFE_className={styles.Options}>
               <Radio
@@ -50,23 +67,6 @@ const ProfileProgress = () => {
                 isChecked={visibility === 'hidden'}
                 onChange={() => setVisibility('hidden')}
               />
-            </Stack>
-          </FieldGroup>
-
-          <Divider />
-
-          <FieldGroup id="building-blocks-contact" label="Who can contact you?" isRequired>
-            <Stack spacing="space-500" UNSAFE_className={styles.Options}>
-              {contactOptions.map(({ id, label }) => (
-                <Checkbox
-                  key={id}
-                  id={`building-blocks-contact-${id}`}
-                  name="buildingBlocksContact"
-                  label={label}
-                  isChecked={contacts.includes(id)}
-                  onChange={() => toggleContact(id)}
-                />
-              ))}
             </Stack>
           </FieldGroup>
         </Stack>
