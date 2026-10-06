@@ -17,3 +17,26 @@ export const markdownHeadingPropsByTag: Record<MarkdownHeadingTag, MarkdownHeadi
   h5: { size: 'xsmall', marginTop: 'space-700', marginBottom: 'space-400' },
   h6: { size: 'xsmall', marginTop: 'space-600', marginBottom: 'space-400', fontWeight: 'regular' },
 };
+
+/**
+ * Component pages keep the smaller heading scale they had before the shared markdown scale.
+ * The block's own padding supplies the space above its first heading.
+ */
+const componentBlockHeadingSpacing = {
+  marginTop: 'space-1200',
+  marginBottom: 'space-600',
+} as const satisfies MarkdownHeadingProps;
+
+export const componentBlockHeadingPropsByTag: Record<MarkdownHeadingTag, MarkdownHeadingProps> = {
+  h2: { size: 'small', ...componentBlockHeadingSpacing },
+  h3: { size: 'xsmall', ...componentBlockHeadingSpacing },
+  h4: { size: 'xsmall', ...componentBlockHeadingSpacing },
+  h5: { size: 'xsmall', ...componentBlockHeadingSpacing },
+  h6: { size: 'xsmall', ...componentBlockHeadingSpacing },
+};
+
+// The first heading of a block sits in the block padding. Later headings keep the block scale.
+export const componentBlockHeadingProps = (tag: MarkdownHeadingTag, isBlockTitle = false): MarkdownHeadingProps =>
+  isBlockTitle
+    ? { ...componentBlockHeadingPropsByTag[tag], fontWeight: 'semibold', marginTop: 'space-0' }
+    : componentBlockHeadingPropsByTag[tag];

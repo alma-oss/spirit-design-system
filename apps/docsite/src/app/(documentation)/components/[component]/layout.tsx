@@ -13,7 +13,8 @@ const ComponentViewsLayout = async ({ views, params }: ComponentViewsLayoutProps
   return (
     <>
       <ComponentCover />
-      <ComponentTabNavigation views={views} component={component} />
+      <ComponentTabNavigation component={component} />
+      {views}
     </>
   );
 };

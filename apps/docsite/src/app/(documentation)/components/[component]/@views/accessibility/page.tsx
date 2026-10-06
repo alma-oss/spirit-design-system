@@ -20,7 +20,7 @@ const AccessibilityTabPage = async ({ params }: AccessibilityTabPageProps) => {
     notFound();
   }
 
-  return <CanonicalMarkdown isCanonical filePath={filePath} missing="not-found" />;
+  return <CanonicalMarkdown asBlocks isCanonical filePath={filePath} missing="not-found" />;
 };
 
 export default AccessibilityTabPage;

@@ -1,12 +1,12 @@
 'use client';
 
 import { Text } from '@alma-oss/spirit-web-react';
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/ui/ComponentsBand';
 import React from 'react';
 import { filterComponents, useComponentsSearchQueryState } from '../../../component-list-search';
 import { SORT_OPTIONS, useComponentsSortQueryState } from '../../../component-list-sort';
 import { AlphabeticalComponentList } from '../AlphabeticalComponentList';
 import { CategoricalComponentList } from '../CategoricalComponentList';
-import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '../ComponentsBand';
 
 interface ComponentListProps {
   components: string[];
