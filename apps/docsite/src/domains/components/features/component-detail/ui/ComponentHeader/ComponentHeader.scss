@@ -1,0 +1,32 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+
+.ComponentHeader {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spirit-space-800);
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.ComponentHeader__text {
+    display: flex;
+    flex: 1 1 units.px-to-rem(384);
+    flex-direction: column;
+    gap: var(--spirit-space-1000);
+    min-width: 0;
+}
+
+.ComponentHeader__title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-700);
+}
+
+.ComponentHeader__actions {
+    // Keep Copy page on the right edge even when it wraps onto its own line.
+    margin-left: auto;
+}
+
+.ComponentHeader__content {
+    margin-top: var(--spirit-space-1200);
+}
