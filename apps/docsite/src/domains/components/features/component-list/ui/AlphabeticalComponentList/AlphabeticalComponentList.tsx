@@ -1,8 +1,8 @@
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/ui/ComponentsBand';
 import React from 'react';
 import { ComponentCard } from '../../../component-card';
 import { fetchComponentsCatalog } from '../../../component-catalog';
 import { ComponentGrid } from '../ComponentGrid';
-import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '../ComponentsBand';
 
 interface AlphabeticalComponentListProps {
   components: string[];

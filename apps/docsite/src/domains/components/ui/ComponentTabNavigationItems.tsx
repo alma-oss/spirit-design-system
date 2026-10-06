@@ -23,7 +23,7 @@ const ComponentTabNavigationItems = ({ items }: ComponentTabNavigationItemsProps
   const selectedNav = viewSegments.includes(selectedSegment) ? selectedSegment : componentSegments.guidelines;
 
   return (
-    <Navigation aria-label="Component documentation">
+    <Navigation aria-label="Component documentation" UNSAFE_style={{ whiteSpace: 'nowrap' }}>
       {items.map((item) => (
         <NavigationItem key={item.segment}>
           <NavigationAction

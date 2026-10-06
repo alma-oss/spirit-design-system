@@ -1,7 +1,7 @@
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/ui/ComponentsBand';
 import React from 'react';
 import { ComponentCardSkeleton } from '../../../component-card';
 import { ComponentGrid } from '../ComponentGrid';
-import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '../ComponentsBand';
 
 const SKELETON_ITEMS_COUNT = 9;
 const SKELETON_ITEMS = Array.from({ length: SKELETON_ITEMS_COUNT }, (_, index) => `component-skeleton-${index}`);
