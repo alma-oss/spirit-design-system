@@ -25,8 +25,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Computes which apps are affected by the change. Nothing gates on it yet — the outputs
-  # (demo / docsite / storybook) are consumed by the build → deploy → e2e chain in a later change.
+  # Computes which apps are affected by the change; the build job builds only those apps.
   affected:
     name: 🎯 Affected
     uses: ./.github/workflows/affected.yaml
@@ -41,10 +40,15 @@ jobs:
 
   build-checks:
     name: 🏗️ Build Checks
+    needs: affected
     uses: ./.github/workflows/build.yaml
     permissions:
       actions: write
       contents: read
+    with:
+      affected-demo: ${{ needs.affected.outputs.demo }}
+      affected-docsite: ${{ needs.affected.outputs.docsite }}
+      affected-storybook: ${{ needs.affected.outputs.storybook }}
 
   docs-reviews:
     name: 📄 Docs Reviews
