@@ -20,7 +20,7 @@ const GuidelinesPage = async ({ params }: GuidelinesPageProps) => {
     notFound();
   }
 
-  return <CanonicalMarkdown isCanonical filePath={filePath} />;
+  return <CanonicalMarkdown asBlocks isCanonical filePath={filePath} />;
 };
 
 export default GuidelinesPage;

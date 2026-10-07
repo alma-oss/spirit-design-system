@@ -1,11 +1,5 @@
-import ComponentCover from '@local/domains/components/ui/ComponentCover';
 import { type ChildrenProps } from '@local/types';
 
-const ComponentsLayout = ({ children }: ChildrenProps) => (
-  <>
-    <ComponentCover />
-    {children}
-  </>
-);
+const ComponentsLayout = ({ children }: ChildrenProps) => children;
 
 export default ComponentsLayout;

@@ -1,23 +1,20 @@
 'use client';
 
-import {
-  Container,
-  Navigation,
-  NavigationAction,
-  NavigationItem,
-  Section,
-  ScrollView,
-} from '@alma-oss/spirit-web-react';
+import { ScrollView } from '@alma-oss/spirit-web-react';
 import type { ComponentTabAvailability } from '@local/domains/content/componentDocs';
 import { routes, componentSegments } from '@local/domains/routing/routes';
+import classNames from 'classnames';
 import NextLink from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { type ReactNode } from 'react';
+import ComponentBand from './ComponentBand';
+import styles from './ComponentTabNav.module.scss';
 
 interface ComponentTabNavProps {
-  views: ReactNode;
   component: string;
   tabs: ComponentTabAvailability;
+  /** Route segments of tabs that are not offered for this component. */
+  hiddenTabs?: string[];
 }
 
 interface TabItem {
@@ -28,7 +25,7 @@ interface TabItem {
 
 const viewSegments = Object.values(componentSegments).filter((segment) => segment !== componentSegments.guidelines);
 
-const ComponentTabNav = ({ views, component, tabs }: ComponentTabNavProps) => {
+const ComponentTabNav = ({ component, tabs, hiddenTabs = [] }: ComponentTabNavProps) => {
   const selectedSegment = useSelectedLayoutSegment('views') || '';
   const selectedNav = viewSegments.includes(selectedSegment) ? selectedSegment : componentSegments.guidelines;
 
@@ -66,29 +63,28 @@ const ComponentTabNav = ({ views, component, tabs }: ComponentTabNavProps) => {
   ];
 
   return (
-    <>
-      <Container>
-        <div className="d-grid">
-          <ScrollView direction="horizontal" isScrollbarDisabled>
-            <Navigation aria-label="Component documentation">
-              {items.map((item) => (
-                <NavigationItem key={item.segment}>
-                  <NavigationAction
-                    elementType={NextLink}
+    <ComponentBand variant="tabs">
+      <nav aria-label="Component documentation" className={styles.ComponentTabNav}>
+        <ScrollView direction="horizontal" isScrollbarDisabled>
+          {/* Spirit Tabs styling applied to route links; the React Tabs component only supports in-page panes. */}
+          <ul className={classNames('Tabs', styles.ComponentTabNav__list)}>
+            {items
+              .filter((item) => !hiddenTabs.includes(item.segment))
+              .map((item) => (
+                <li key={item.segment} className="Tabs__item">
+                  <NextLink
                     href={item.href}
-                    {...{ 'aria-current': selectedNav === item.segment ? 'page' : undefined }}
-                    isSelected={selectedNav === item.segment}
+                    className={classNames('Tabs__link', { 'is-selected': selectedNav === item.segment })}
+                    aria-current={selectedNav === item.segment ? 'page' : undefined}
                   >
                     {item.label}
-                  </NavigationAction>
-                </NavigationItem>
+                  </NextLink>
+                </li>
               ))}
-            </Navigation>
-          </ScrollView>
-        </div>
-      </Container>
-      <Section size="xlarge">{views}</Section>
-    </>
+          </ul>
+        </ScrollView>
+      </nav>
+    </ComponentBand>
   );
 };
 

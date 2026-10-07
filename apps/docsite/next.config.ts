@@ -47,6 +47,10 @@ const nextConfig: NextConfig = {
       '../../packages/web/CHANGELOG.md',
       '../../packages/web-react/CHANGELOG.md',
       '../../packages/web-react/src/components/**/docs/*.md',
+      // The component header and playground read these at runtime: the README for the description and
+      // docs/playground.json for the playground, so they must ship with the built app.
+      '../../packages/web-react/src/components/**/docs/*.json',
+      '../../packages/web-react/src/components/*/README.md',
     ],
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],

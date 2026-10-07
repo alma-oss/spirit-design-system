@@ -1,5 +1,11 @@
+import ComponentHeader from '@local/domains/components/ui/ComponentHeader';
 import ComponentTabNav from '@local/domains/components/ui/ComponentTabNav';
-import { getComponentTabAvailability } from '@local/domains/content/componentDocs';
+import {
+  getComponentDescription,
+  getComponentPlayground,
+  getComponentTabAvailability,
+} from '@local/domains/content/componentDocs';
+import ComponentPlayground, { type PlaygroundConfig } from '@local/domains/content/ui/ComponentPlayground';
 import { type ReactNode } from 'react';
 
 interface ComponentViewsLayoutProps {
@@ -9,9 +15,23 @@ interface ComponentViewsLayoutProps {
 
 const ComponentViewsLayout = async ({ views, params }: ComponentViewsLayoutProps) => {
   const { component } = await params;
-  const tabs = await getComponentTabAvailability(component);
+  const [tabs, description, playgroundFile] = await Promise.all([
+    getComponentTabAvailability(component),
+    getComponentDescription(component),
+    getComponentPlayground(component),
+  ]);
 
-  return <ComponentTabNav views={views} component={component} tabs={tabs} />;
+  const { hiddenTabs = [], ...playground } = playgroundFile ?? {};
+
+  return (
+    <>
+      <ComponentHeader description={description}>
+        {playgroundFile && <ComponentPlayground {...(playground as PlaygroundConfig)} />}
+      </ComponentHeader>
+      <ComponentTabNav component={component} tabs={tabs} hiddenTabs={hiddenTabs} />
+      {views}
+    </>
+  );
 };
 
 export default ComponentViewsLayout;
