@@ -1,5 +1,6 @@
 import BuildingBlocks from '@local/domains/homepage/BuildingBlocks';
 import DesignTeaser from '@local/domains/homepage/DesignTeaser';
+import FaqSection from '@local/domains/homepage/FaqSection';
 import Hero from '@local/domains/homepage/Hero';
 import LogoStrip from '@local/domains/homepage/LogoStrip';
 import ProcessTabs from '@local/domains/homepage/ProcessTabs';
@@ -15,6 +16,7 @@ const HomepageLayout = async ({ children }: HomepageLayoutProps) => (
     <WorkflowScroll />
     <BuildingBlocks />
     <DesignTeaser />
+    <FaqSection />
     <ProcessTabs />
     {children}
   </>
