@@ -80,6 +80,7 @@
     "html-element-attributes": "catalog:build",
     "jest": "catalog:test",
     "jest-axe": "catalog:test",
+    "jest-config-spirit": "workspace:^",
     "npm-run-all2": "catalog:script",
     "nx": "catalog:script",
     "react": "catalog:frontend",

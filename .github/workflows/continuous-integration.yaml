@@ -26,6 +26,17 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Computes which apps are affected by the change and whether the deploy → e2e chain should run, for the jobs
+  # that cannot ask Nx themselves (deploy and e2e). Unit tests resolve what is affected inside their own job.
+  # Build, lint, types and format run in full: the Nx cache already skips their unchanged work, so affected would
+  # add little for its clone overhead.
+  affected:
+    name: 🎯 Affected
+    uses: ./.github/workflows/affected.yaml
+    permissions:
+      contents: read
+      actions: read
+
   git-checks:
     name: 🚦 Git Checks
     if: github.event_name == 'pull_request'
@@ -38,17 +49,11 @@ jobs:
       actions: write
       contents: read
 
-  e2e-affected:
-    name: 🔎 E2E Affected
-    uses: ./.github/workflows/e2e-affected.yaml
-    permissions:
-      pull-requests: read
-
   announce-deploy:
     name: 📣 Announce Deploy
-    needs: e2e-affected
+    needs: affected
     # Only when the deploy can follow, otherwise the comment would stay in progress forever; there is no PR to comment on for main
-    if: ${{ github.event_name == 'pull_request' && needs.e2e-affected.outputs.run == 'true' }}
+    if: ${{ github.event_name == 'pull_request' && needs.affected.outputs.e2e == 'true' }}
     uses: ./.github/workflows/announce-deploy.yaml
     secrets: inherit
 
@@ -64,16 +69,16 @@ jobs:
 
   deploy:
     name: 🚀 Deploy
-    needs: [build, e2e-affected, announce-deploy]
+    needs: [affected, build, announce-deploy]
     # The announcement is optional: a skipped (main) or failed one must not block the deploy
-    if: ${{ !cancelled() && needs.build.result == 'success' && needs.e2e-affected.outputs.run == 'true' }}
+    if: ${{ !cancelled() && needs.build.result == 'success' && needs.affected.outputs.e2e == 'true' }}
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
   e2e-tests:
     name: 🤖 End-to-End Tests
-    needs: [deploy, e2e-affected]
-    if: ${{ !cancelled() && needs.deploy.result == 'success' && needs.e2e-affected.outputs.run == 'true' }}
+    needs: [deploy, affected]
+    if: ${{ !cancelled() && needs.deploy.result == 'success' && needs.affected.outputs.e2e == 'true' }}
     uses: ./.github/workflows/e2e.yml
     with:
       url: ${{ needs.deploy.outputs.url }}
@@ -93,6 +98,9 @@ jobs:
   tests:
     name: 🧪 Tests
     uses: ./.github/workflows/test.yaml
+    permissions:
+      contents: read
+      actions: read
 
   code-quality-gate:
     name: 📊 Code Quality Gate
@@ -105,7 +113,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build, e2e-affected, deploy, e2e-tests, code-quality-gate]
+    needs: [git-checks, affected, build, deploy, e2e-tests, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:
