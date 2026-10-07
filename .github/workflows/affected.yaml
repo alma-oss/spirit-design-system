@@ -1,0 +1,91 @@
+name: 🎯 Affected
+
+# Computes which apps are affected by the current change, using Nx's project graph.
+# The outputs let downstream jobs (build-apps → deploy → e2e) run only for what changed.
+# This workflow changes no behaviour on its own; it exposes outputs and a job summary.
+
+on:
+  workflow_call:
+    outputs:
+      demo:
+        description: 'Whether the demo app is affected (or e2e infrastructure changed)'
+        value: ${{ jobs.affected.outputs.demo }}
+      docsite:
+        description: 'Whether the docsite app is affected'
+        value: ${{ jobs.affected.outputs.docsite }}
+      storybook:
+        description: 'Whether the storybook app is affected'
+        value: ${{ jobs.affected.outputs.storybook }}
+
+permissions:
+  contents: read
+  # nx-set-shas reads the last successful run of this workflow to derive the base SHA on `main`
+  actions: read
+
+env:
+  NX_NO_CLOUD: true
+
+jobs:
+  affected:
+    name: 🎯 Computing Affected Projects
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      demo: ${{ steps.calc.outputs.demo }}
+      docsite: ${{ steps.calc.outputs.docsite }}
+      storybook: ${{ steps.calc.outputs.storybook }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # `nx affected` and the path-override diff need full history to resolve the base
+          fetch-depth: 0
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      # Sets NX_BASE / NX_HEAD. On a PR it is the merge-base with the target branch; on a push
+      # to `main` it is the last successful run of this workflow (falls back to HEAD~1 on first run).
+      - name: Derive base and head SHAs
+        uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Compute affected projects
+        id: calc
+        run: |
+          set -euo pipefail
+
+          AFFECTED=$(yarn nx show projects --affected --base="$NX_BASE" --head="$NX_HEAD" -t build --json)
+          echo "Affected projects (build target): $AFFECTED"
+
+          has() { echo "$AFFECTED" | jq -e --arg p "$1" 'index($p)' >/dev/null && echo true || echo false; }
+          demo=$(has '@lmc-eu/spirit-demo-app')
+          docsite=$(has '@alma-oss/spirit-docsite')
+          storybook=$(has '@alma-oss/spirit-storybook')
+
+          # The root Playwright config/specs and the deploy/e2e workflows live outside any Nx
+          # project, so a change to them marks nothing affected. Force a demo run in that case,
+          # otherwise e2e would be skipped exactly when the e2e setup itself changed.
+          demo_note=''
+          if git diff --name-only "$NX_BASE" "$NX_HEAD" \
+            | grep -qE '^(tests/e2e/|playwright\.config\.|\.github/workflows/(e2e|deploy)\.ya?ml$)'; then
+            demo=true
+            demo_note=' (e2e-infra override)'
+          fi
+
+          {
+            echo "demo=$demo"
+            echo "docsite=$docsite"
+            echo "storybook=$storybook"
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### 🎯 Affected apps"
+            echo ""
+            echo "| App | Affected |"
+            echo "| :-- | :-- |"
+            echo "| Demo | \`$demo\`$demo_note |"
+            echo "| Docsite | \`$docsite\` |"
+            echo "| Storybook | \`$storybook\` |"
+            echo ""
+            echo "<sub>base: \`$NX_BASE\` · head: \`$NX_HEAD\`</sub>"
+          } >> "$GITHUB_STEP_SUMMARY"
