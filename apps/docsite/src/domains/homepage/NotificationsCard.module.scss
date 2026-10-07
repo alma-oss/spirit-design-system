@@ -1,0 +1,31 @@
+@use '@tokens' as tokens;
+
+// The tile is as high as the neighbouring tile in the design (532 px).
+.Tile {
+    display: flex;
+    height: 33.25rem;
+    min-width: 0;
+    overflow: hidden;
+}
+
+// The card fills the tile and its bottom corners are cut off by the edge of the tile.
+.Card {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding: tokens.$space-1000;
+    background-color: var(--spirit-color-background-primary);
+    border: tokens.$border-width-100 solid var(--spirit-color-border-basic);
+    border-bottom: 0;
+    border-radius: tokens.$radius-500 tokens.$radius-500 0 0;
+}
+
+// The Toast is fixed to the screen edge by default, here it is placed over the bottom of the card instead.
+.Toasts :global(.Toast) {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    height: auto;
+    padding: tokens.$space-1000;
+    overflow: visible;
+}

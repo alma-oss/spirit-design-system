@@ -1,0 +1,51 @@
+@use '@tokens' as tokens;
+
+.Cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 2.75rem;
+}
+
+// Both versions of a logo lie on top of each other and the color one fades in on hover.
+.Logo {
+    display: grid;
+    justify-items: center;
+
+    > img {
+        grid-area: 1 / 1;
+        transition: opacity 0.25s ease-in-out;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+    }
+}
+
+.Color {
+    opacity: 0;
+}
+
+.Cell:hover {
+    .Color {
+        opacity: 1;
+    }
+
+    .Grey {
+        opacity: 0;
+    }
+}
+
+// The logos have their own heights in the design.
+.Logo.HeightAlma > img {
+    height: 1.7857rem;
+}
+
+.Logo.HeightProduct > img {
+    height: 1.875rem;
+}
+
+.Logo.HeightPrace > img {
+    height: 1.835rem;
+}

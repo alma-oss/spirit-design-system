@@ -1,0 +1,167 @@
+@use '@tokens' as tokens;
+
+// The decorative colors below are not tokenized in Spirit, so they use raw values taken from the design.
+$_column-gradient: linear-gradient(to bottom, #7e9cff, #f4f4f4);
+$_column-active-gradient: linear-gradient(to bottom, #7c6cb8, #c77ad3);
+$_column-border: #8061ac;
+$_column-active-border: #6e2fc5;
+$_container-edge: #e887e1;
+$_section-band: rgb(35 204 223 / 14%);
+$_section-band-border: #1c8598;
+
+.GridShowcase {
+    overflow: hidden;
+    background-color: #eef2f8;
+}
+
+.Intro {
+    max-width: tokens.$container-small-max-width;
+    margin-inline: auto;
+}
+
+.WindowArea {
+    position: relative;
+    width: calc(884 / 1024 * 100%);
+    margin-inline: auto;
+}
+
+.WindowClip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-top-left-radius: tokens.$radius-400;
+    border-top-right-radius: tokens.$radius-400;
+    background-color: var(--spirit-color-background-primary);
+}
+
+.Window {
+    transform-origin: top left;
+}
+
+.Toolbar {
+    display: flex;
+    gap: tokens.$space-900;
+    align-items: center;
+    height: 2.5rem;
+    padding-inline: 1.125rem;
+}
+
+.ToolbarDot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--spirit-color-border-basic);
+    border-radius: 50%;
+}
+
+.Browser {
+    width: 55rem;
+    height: 22.375rem;
+    margin-inline: 0.125rem;
+    overflow: hidden;
+    background-color: var(--spirit-color-background-secondary);
+}
+
+.Page {
+    transform-origin: top left;
+}
+
+.Section {
+    position: relative;
+
+    // The real vertical padding of the Section is the highlighted band.
+    &::before {
+        position: absolute;
+        inset: 0 0 auto;
+        height: tokens.$space-1400;
+        content: '';
+        background-color: $_section-band;
+        border-bottom: tokens.$border-width-100 solid $_section-band-border;
+    }
+}
+
+.SectionHotspot {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+    height: tokens.$space-1400;
+}
+
+.Container {
+    position: relative;
+}
+
+.ContainerEdge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: tokens.$space-700;
+    border: 0 solid $_container-edge;
+}
+
+.ContainerEdgeStart {
+    left: 0;
+    border-left-width: tokens.$border-width-100;
+}
+
+.ContainerEdgeEnd {
+    right: 0;
+    border-right-width: tokens.$border-width-100;
+}
+
+.Layers {
+    position: relative;
+}
+
+.Blocks {
+    position: absolute;
+    inset: 0;
+    grid-template-rows: 7.9375rem 3.25rem 4.125rem 12.0625rem;
+}
+
+.Block {
+    background-color: #eaeaea;
+    border: tokens.$border-width-100 solid #dadada;
+    border-radius: tokens.$radius-300;
+}
+
+.Column {
+    position: relative;
+    height: 33.5rem; // Reaches the bottom of the browser window.
+    background-image: $_column-gradient;
+    border: 0 dashed $_column-border;
+    border-inline-width: tokens.$border-width-100;
+    opacity: 0.8;
+    transition: opacity 0.25s ease-in-out;
+}
+
+.ColumnActive {
+    background-image: $_column-active-gradient;
+    border-color: $_column-active-border;
+}
+
+.Stamp {
+    transition: transform 0.25s ease-in-out;
+}
+
+// Hovering an element of the grid emphasizes it and its note.
+.WindowArea:has(.ColumnActive:hover) .StampColumn,
+.WindowArea:has(.SectionHotspot:hover) .StampSection,
+.WindowArea:has(.ContainerEdge:hover) .StampContainer {
+    transform: scale(1.06);
+}
+
+.Column:hover {
+    opacity: 1;
+}
+
+.Section:has(.SectionHotspot:hover)::before {
+    background-color: rgb(35 204 223 / 28%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Stamp,
+    .Column {
+        transition: none;
+    }
+}
