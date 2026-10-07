@@ -25,6 +25,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Computes which apps are affected by the change. Nothing gates on it yet — the outputs
+  # (demo / docsite / storybook) are consumed by the build → deploy → e2e chain in a later change.
+  affected:
+    name: 🎯 Affected
+    uses: ./.github/workflows/affected.yaml
+    permissions:
+      contents: read
+      actions: read
+
   git-checks:
     name: 🚦 Git Checks
     if: github.event_name == 'pull_request'
