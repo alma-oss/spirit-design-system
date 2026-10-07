@@ -1,0 +1,32 @@
+@use '@alma-oss/spirit-web/src/scss/settings/transitions';
+
+// The number counts up in pure CSS: the registered integer property is animated and printed via a counter.
+@property --stat-value {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+}
+
+@keyframes stat-count-up {
+    from {
+        --stat-value: 0;
+    }
+
+    to {
+        --stat-value: var(--stat-target);
+    }
+}
+
+.StatValue {
+    --stat-value: var(--stat-target);
+
+    counter-reset: stat var(--stat-value);
+
+    &::before {
+        content: counter(stat);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: stat-count-up transitions.$duration-600 transitions.$timing-eased-out;
+    }
+}

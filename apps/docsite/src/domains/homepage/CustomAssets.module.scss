@@ -1,0 +1,62 @@
+@use '@tokens' as tokens;
+
+$_glyph-bleed: 0;
+
+// The background is not tokenized in Spirit, so it uses a raw value taken from the design.
+.CustomAssets {
+    background-color: #eef2f8;
+}
+
+.Intro {
+    max-width: tokens.$container-small-max-width;
+}
+
+.Glyph {
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+}
+
+.GlyphInset,
+.GlyphBleed {
+    position: absolute;
+    inset: $_glyph-bleed;
+}
+
+.GlyphBleed img,
+.IllustrationImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+// The vertical Flex is a grid, so the illustrations box takes the free height instead of the label.
+.IllustrationsGroup {
+    grid-template-rows: auto 1fr;
+}
+
+.IllustrationsBox {
+    display: flex;
+    align-items: center;
+}
+
+.Tile {
+    background-color: var(--spirit-color-background-interactive-state-default);
+    transition: background-color 0.25s ease-in-out;
+
+    &:hover {
+        background-color: var(--spirit-color-background-interactive-state-hover);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+.Illustration {
+    position: relative;
+    width: 7.125rem;
+    height: 7.125rem;
+    overflow: hidden;
+    border-radius: tokens.$radius-400;
+}

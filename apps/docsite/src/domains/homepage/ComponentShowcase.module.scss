@@ -1,0 +1,52 @@
+@use '@alma-oss/spirit-web/src/scss/settings/transitions';
+@use '@tokens' as tokens;
+
+// The gradient is not tokenized in Spirit, so it uses raw values taken from the design.
+.ComponentShowcase {
+    background: linear-gradient(to top, #fdfdfc, #eee9f3);
+}
+
+.Column {
+    flex: 0 1 20rem;
+    min-width: 0;
+    max-width: 20rem;
+}
+
+.ButtonColumn {
+    flex: 0 0 auto;
+}
+
+.Panel {
+    box-shadow: tokens.$shadow-100;
+}
+
+// The number counts up in pure CSS: the registered integer property is animated and printed via a counter.
+@property --stat-value {
+    syntax: '<integer>';
+    inherits: false;
+    initial-value: 0;
+}
+
+@keyframes stat-count-up {
+    from {
+        --stat-value: 0;
+    }
+
+    to {
+        --stat-value: var(--stat-target);
+    }
+}
+
+.StatValue {
+    --stat-value: var(--stat-target);
+
+    counter-reset: stat var(--stat-value);
+
+    &::before {
+        content: counter(stat);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: stat-count-up transitions.$duration-600 transitions.$timing-eased-out;
+    }
+}

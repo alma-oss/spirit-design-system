@@ -1,0 +1,29 @@
+@use '@tokens' as tokens;
+
+// The headline is as wide as in the design (488 px).
+.Headline {
+    max-width: 30.5rem;
+}
+
+// The step is a bordered tab; the active one is also filled with the interactive color.
+.Step {
+    border-color: var(--spirit-color-border-basic);
+    border-style: solid;
+
+    // The content of the step takes the whole width of the tab.
+    > * {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+.Description {
+    padding-top: tokens.$space-1000;
+}
+
+.Image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26.25rem;
+}
