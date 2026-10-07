@@ -1,0 +1,37 @@
+// The tile is 340 px high in the design, the text is inside of it.
+.Tile {
+    display: flex;
+    min-height: 21.25rem;
+}
+
+// The background is not tokenized in Spirit, so it uses a raw value taken from the design.
+.AssetsTile {
+    background-color: #f5f3f2;
+}
+
+// The vertical Stack is a grid, so the placeholder has a fixed height and the titles of the tiles line up.
+.TileContent {
+    flex: 1;
+    grid-template-rows: 11rem auto;
+    align-content: start;
+    min-width: 0;
+}
+
+// The assets tile has the text first and the assets below it.
+.AssetsTile .TileContent {
+    grid-template-rows: auto auto;
+}
+
+.TopicTitle {
+    color: var(--spirit-color-link-primary-state-default);
+}
+
+.Topic {
+    display: flex;
+    min-width: 0;
+
+    // The tiles in a row are equally high, whichever has the longest text.
+    > * {
+        flex: 1;
+    }
+}
