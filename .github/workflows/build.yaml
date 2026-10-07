@@ -2,6 +2,18 @@ name: 🏗️ Build
 
 on:
   workflow_call:
+    inputs:
+      # Which apps are affected by the change (from the 🎯 Affected workflow). Each app is built
+      # only when affected, reusing the packages built once by `build-packages`.
+      affected-demo:
+        type: string
+        default: 'false'
+      affected-docsite:
+        type: string
+        default: 'false'
+      affected-storybook:
+        type: string
+        default: 'false'
 
 permissions:
   actions: write
@@ -12,17 +24,75 @@ env:
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
   CACHE_KEY: repository-cache-key-${{ github.run_id }}
+  # Tarball of every package's declared Nx build output, handed to the app jobs so they build
+  # only themselves instead of rebuilding the whole dependency graph.
+  PACKAGES_DIST_ARCHIVE: packages-dist.tar.gz
 
 jobs:
-  build:
-    name: 👷 Building on Node.js ${{ matrix.node-version }})
+  # Node 22 is the published baseline: it builds the packages once, caches the workspace for
+  # lint.yaml, and archives the built packages for the app jobs to reuse.
+  build-packages:
+    name: 👷 Building on Node.js 22
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+        with:
+          node-version: 22
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Check for clean working directory
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Error: Git working directory is not clean"
+            git status
+            exit 1
+          fi
+
+      # lint.yaml restores this cache to reuse the already-built workspace packages instead of
+      # building them again.
+      - name: Save Repository to Cache
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ./
+          key: ${{ env.CACHE_KEY }}
+
+      # The app jobs download this to build only themselves (`--excludeTaskDependencies`),
+      # so each package is compiled once per run instead of once per app.
+      - name: Archive built packages
+        run: |
+          tar -czf "$PACKAGES_DIST_ARCHIVE" \
+            packages/*/dist \
+            packages/design-tokens/esm \
+            packages/design-tokens/cjs \
+            packages/design-tokens/scss \
+            packages/design-tokens/types \
+            exporters/*/dist
+
+      - name: Upload built packages
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: packages-dist
+          path: ${{ env.PACKAGES_DIST_ARCHIVE }}
+          retention-days: 1
+          if-no-files-found: error
+
+  # Current LTS and next active release line, as a compatibility check. These do not feed the
+  # app builds, so they run in parallel with everything downstream of `build-packages`.
+  build-packages-compat:
+    name: 👷 Building on Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
+      fail-fast: false
       matrix:
-        # minimum required, current LTS, and next active release line
-        node-version: [22, 24, 26]
-
+        node-version: [24, 26]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -43,11 +113,89 @@ jobs:
             exit 1
           fi
 
-      # Node 22 is the minimum supported version; lint.yaml restores this cache to reuse
-      # the already-built workspace packages instead of building them again.
-      - name: Save Repository to Cache
-        if: matrix.node-version == 22
-        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+  build-demo:
+    name: 📦 Building Demo
+    needs: build-packages
+    if: inputs.affected-demo == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      # `copy-icons` is a same-project build dependency, so `--excludeTaskDependencies` skips it;
+      # run it explicitly (icons `dist` is already restored, so it does not rebuild the package).
+      - name: Copy icons
+        run: yarn nx run @lmc-eu/spirit-demo-app:copy-icons --excludeTaskDependencies
+
+      - name: Build demo app
+        run: yarn nx run @lmc-eu/spirit-demo-app:build --excludeTaskDependencies
+
+      # Shared with the Deploy workflow, so the demo app is not built again there.
+      - name: Upload demo app build
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: demo-build
+          path: apps/demo/build/
+          retention-days: 1
+          include-hidden-files: true
+          if-no-files-found: error
+
+  build-docsite:
+    name: 📦 Building Docsite
+    needs: build-packages
+    if: inputs.affected-docsite == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      - name: Build docsite
+        run: yarn nx run @alma-oss/spirit-docsite:build --excludeTaskDependencies
+
+  build-storybook:
+    name: 📦 Building Storybook
+    needs: build-packages
+    if: inputs.affected-storybook == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      - name: Build storybook
+        run: yarn nx run @alma-oss/spirit-storybook:build --excludeTaskDependencies
