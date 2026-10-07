@@ -6,26 +6,13 @@
       "name": "color",
       "type": "select",
       "defaultValue": "primary",
-      "options": [
-        "primary",
-        "secondary",
-        "tertiary",
-        "plain",
-        "success",
-        "informative",
-        "warning",
-        "danger"
-      ]
+      "options": ["primary", "secondary", "tertiary", "plain", "success", "informative", "warning", "danger"]
     },
     {
       "name": "size",
       "type": "select",
       "defaultValue": "large",
-      "options": [
-        "large",
-        "medium",
-        "small"
-      ]
+      "options": ["large", "medium", "small"]
     },
     {
       "name": "children",
@@ -42,8 +29,5 @@
     }
   ],
   "figmaUrl": "https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/Spirit-UI-KIT?node-id=13994-7255",
-  "hiddenTabs": [
-    "web-preview",
-    "react-preview"
-  ]
+  "hiddenTabs": ["web-preview", "react-preview"]
 }
