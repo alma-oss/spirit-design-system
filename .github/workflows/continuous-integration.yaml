@@ -27,9 +27,9 @@ concurrency:
 
 jobs:
   # Computes which apps are affected by the change and whether the deploy → e2e chain should run, for the jobs
-  # that cannot ask Nx themselves (deploy and e2e). Unit tests resolve what is affected inside their own job.
-  # Build, lint, types and format run in full: the Nx cache already skips their unchanged work, so affected would
-  # add little for its clone overhead.
+  # that cannot ask Nx themselves (build of the apps, deploy and e2e). Unit tests resolve what is affected inside
+  # their own job. Package build, lint, types and format run in full: the Nx cache already skips their unchanged
+  # work, so affected would add little for its clone overhead.
   affected:
     name: 🎯 Affected
     uses: ./.github/workflows/affected.yaml
@@ -44,10 +44,17 @@ jobs:
 
   build:
     name: 🏗️ Build
+    needs: affected
     uses: ./.github/workflows/build.yaml
     permissions:
       actions: write
       contents: read
+    with:
+      # The deploy needs the demo build, and `main` always deploys, so the demo is built whenever e2e will run
+      affected-demo: ${{ (needs.affected.outputs.demo == 'true' || needs.affected.outputs.e2e == 'true') && 'true' || 'false' }}
+      affected-docsite: ${{ needs.affected.outputs.docsite }}
+      affected-storybook: ${{ needs.affected.outputs.storybook }}
+      affected-examples: ${{ needs.affected.outputs.examples }}
 
   announce-deploy:
     name: 📣 Announce Deploy

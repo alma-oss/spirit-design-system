@@ -2,6 +2,21 @@ name: 🏗️ Build
 
 on:
   workflow_call:
+    inputs:
+      # Which apps to build, from the 🎯 Affected workflow. Each app is built only when requested, reusing the
+      # packages built once by the `build` job.
+      affected-demo:
+        type: string
+        default: 'false'
+      affected-docsite:
+        type: string
+        default: 'false'
+      affected-storybook:
+        type: string
+        default: 'false'
+      affected-examples:
+        type: string
+        default: 'false'
 
 permissions:
   actions: write
@@ -15,6 +30,9 @@ env:
   # Keep the Nx cache and its task index in the workspace so they can be saved and restored.
   NX_CACHE_DIRECTORY: .nx/cache
   NX_WORKSPACE_DATA_DIRECTORY: .nx/workspace-data
+  # Tarball of every package's declared Nx build output, handed to the app jobs so they build only
+  # themselves instead of rebuilding the whole dependency graph.
+  PACKAGES_DIST_ARCHIVE: packages-dist.tar.gz
 
 jobs:
   build:
@@ -38,20 +56,27 @@ jobs:
       - name: Build packages
         run: yarn build:packages
 
-      - name: Build apps
-        run: yarn build:apps
-
       - name: Check for clean working directory
         uses: ./.github/actions/check-clean-tree
 
-      # The demo build is shared with the Deploy workflow, so it is not built again
-      - name: Cache App Build (demo)
+      # The app jobs download this to build only themselves (`--excludeTaskDependencies`), so each package
+      # is compiled once per run instead of once per app.
+      - name: Archive built packages
+        run: |
+          tar -czf "$PACKAGES_DIST_ARCHIVE" \
+            packages/*/dist \
+            packages/design-tokens/esm \
+            packages/design-tokens/cjs \
+            packages/design-tokens/scss \
+            packages/design-tokens/types \
+            exporters/*/dist
+
+      - name: Upload built packages
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: demo-build
-          path: apps/demo/build/
+          name: packages-dist
+          path: ${{ env.PACKAGES_DIST_ARCHIVE }}
           retention-days: 1
-          include-hidden-files: true
           if-no-files-found: error
 
       - name: Save Nx cache
@@ -82,6 +107,132 @@ jobs:
       # so a cache hit would skip the very compatibility check this job exists for.
       - name: Build packages
         run: yarn build
+
+      - name: Check for clean working directory
+        uses: ./.github/actions/check-clean-tree
+
+  build-demo:
+    name: 📦 Build Demo
+    needs: build
+    if: inputs.affected-demo == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      # `copy-icons` is a same-project build dependency, so `--excludeTaskDependencies` skips it;
+      # run it explicitly (icons `dist` is already restored, so it does not rebuild the package).
+      - name: Copy icons
+        run: yarn nx run @lmc-eu/spirit-demo-app:copy-icons --excludeTaskDependencies
+
+      - name: Build demo app
+        run: yarn nx run @lmc-eu/spirit-demo-app:build --excludeTaskDependencies
+
+      # The demo build is shared with the Deploy workflow, so it is not built again
+      - name: Cache App Build (demo)
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: demo-build
+          path: apps/demo/build/
+          retention-days: 1
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Check for clean working directory
+        uses: ./.github/actions/check-clean-tree
+
+  build-docsite:
+    name: 📦 Build Docsite
+    needs: build
+    if: inputs.affected-docsite == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      - name: Build docsite
+        run: yarn nx run @alma-oss/spirit-docsite:build --excludeTaskDependencies
+
+      - name: Check for clean working directory
+        uses: ./.github/actions/check-clean-tree
+
+  build-storybook:
+    name: 📦 Build Storybook
+    needs: build
+    if: inputs.affected-storybook == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      - name: Build storybook
+        run: yarn nx run @alma-oss/spirit-storybook:build --excludeTaskDependencies
+
+      - name: Check for clean working directory
+        uses: ./.github/actions/check-clean-tree
+
+  build-examples:
+    name: 📦 Build Next.js Examples
+    needs: build
+    if: inputs.affected-examples == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Download built packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: packages-dist
+
+      - name: Restore built packages
+        run: tar -xzf "$PACKAGES_DIST_ARCHIVE"
+
+      - name: Build Next.js examples
+        run: >-
+          yarn nx run-many --target=build
+          --projects=@alma-oss/spirit-example-next-with-app-router,@alma-oss/spirit-example-next-with-pages-router
+          --excludeTaskDependencies
 
       - name: Check for clean working directory
         uses: ./.github/actions/check-clean-tree
