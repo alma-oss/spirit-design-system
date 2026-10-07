@@ -8,7 +8,8 @@
     "build": {
       "outputs": ["{projectRoot}/build"],
       "cache": true,
-      "dependsOn": ["^build", "copy-icons"]
+      "dependsOn": ["^build", "copy-icons"],
+      "inputs": ["default", "^default", "{workspaceRoot}/index.html", "{workspaceRoot}/static/**/*"]
     },
     "copy-icons": {
       "executor": "nx:run-commands",
@@ -20,6 +21,23 @@
     },
     "start": {
       "dependsOn": ["copy-icons"]
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn playwright test",
+        "cwd": "{workspaceRoot}"
+      },
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/tests/**/*",
+        "{workspaceRoot}/playwright.config.ts",
+        "{workspaceRoot}/playwright.d.ts",
+        "{workspaceRoot}/.github/actions/**/*",
+        "{workspaceRoot}/.github/workflows/{build,continuous-integration,e2e,deploy}.y*ml"
+      ],
+      "cache": false
     }
   }
 }
