@@ -22,13 +22,15 @@ const defaultStats: Stat[] = [
 
 interface StatsProps {
   stats?: Stat[];
+  /** The size of the numbers. */
+  size?: 'small' | 'medium';
 }
 
-const Stats = ({ stats = defaultStats }: StatsProps) => (
+const Stats = ({ stats = defaultStats, size = 'medium' }: StatsProps) => (
   <Grid cols={{ mobile: 2, tablet: 4 }} spacing="space-1000">
     {stats.map(({ value, suffix = '', text, label }) => (
       <Stack key={label} spacing="space-500">
-        <Heading elementType="p" size="medium" marginBottom="space-0">
+        <Heading elementType="p" size={size} marginBottom="space-0">
           {value === undefined ? (
             text
           ) : (

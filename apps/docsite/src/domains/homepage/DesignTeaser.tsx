@@ -60,17 +60,19 @@ const topics: Topic[] = [
 // The teaser of the Design section. The tiles are placeholders until the visuals are ready.
 const DesignTeaser = () => (
   <PageSection size="xlarge" paddingBottom="small" hasTopLine backgroundColor="primary">
-    <Stack spacing="space-1200">
+    <Stack spacing="space-1300">
       <SectionHeader
-        title="A complete design language."
+        eyebrow="DESIGN"
+        title="Create consistency without losing character."
         description="A scalable foundation of tokens, colors, typography, and visual styles — thoughtfully designed to bring consistency, flexibility, and character to every product."
+        descriptionSize="large"
         actionLabel="Learn more"
         actionHref={routes.design}
       />
 
-      <Stats stats={stats} />
+      <Stats stats={stats} size="small" />
 
-      <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-800" spacingY="space-800">
+      <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-1000" spacingY="space-1000">
         {topics.map(({ title, description, columnStart, columnEnd, hasAssets }) => (
           <GridItem
             key={title}

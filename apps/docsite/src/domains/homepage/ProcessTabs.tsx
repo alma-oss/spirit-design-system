@@ -4,6 +4,7 @@ import { Box, Flex, Grid, GridItem, Heading, Item, Link, Stack, Text } from '@al
 import NextLink from 'next/link';
 import { type KeyboardEvent, useState } from 'react';
 import { routes } from '../routing/routes';
+import Eyebrow from './Eyebrow';
 import PageSection from './PageSection';
 import styles from './ProcessTabs.module.scss';
 
@@ -114,9 +115,12 @@ const ProcessTabs = () => {
   return (
     <PageSection size="xlarge" hasTopLine backgroundColor="primary">
       <Stack spacing="space-1200">
-        <Heading elementType="h2" size="large" UNSAFE_className={styles.Headline}>
-          From first frame to production. And back.
-        </Heading>
+        <Stack spacing="space-500">
+          <Eyebrow>(BACKUP)</Eyebrow>
+          <Heading elementType="h2" size="large" marginBottom="space-0" UNSAFE_className={styles.Headline}>
+            From first frame to production. And back.
+          </Heading>
+        </Stack>
 
         <Stack spacing="space-1100">
           {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}

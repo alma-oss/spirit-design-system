@@ -47,7 +47,7 @@ const rows: Tile[][] = [
   [
     {
       caption: 'A composition of form elements for picking education',
-      height: 532,
+      height: 530,
       columnStart: 1,
       columnEnd: 8,
       content: <EducationForm />,
@@ -55,7 +55,7 @@ const rows: Tile[][] = [
     },
     {
       caption: 'Tracking progress while creating an account',
-      height: 532,
+      height: 530,
       columnStart: 8,
       columnEnd: 13,
       content: <ProfileProgress />,
@@ -100,23 +100,25 @@ const rows: Tile[][] = [
 
 const BuildingBlocks = () => (
   <PageSection size="xlarge" hasTopLine backgroundColor="primary">
-    <Stack spacing="space-1100">
+    <Stack spacing="space-1300">
       <SectionHeader
-        title="From a single component to a whole page"
-        description="You build from parts that have already survived design, development and testing. No wondering whether it will work, just what you will make with it."
+        eyebrow="COMPONENTS"
+        title="Turn components into experiences."
+        description="Open, adjust, select, and interact. Every example works like the real thing."
+        descriptionSize="large"
         actionLabel="View components"
         actionHref={routes.components}
       />
 
-      <Stats />
+      <Stats size="small" />
 
-      <Stack spacing="space-1100">
+      <Stack spacing="space-1200">
         {rows.map((row) => (
           <Grid
             key={row[0].caption}
             cols={{ mobile: 1, tablet: 12 }}
-            spacingX="space-800"
-            spacingY={{ mobile: 'space-1100', tablet: 'space-800' }}
+            spacingX="space-1000"
+            spacingY={{ mobile: 'space-1100', tablet: 'space-1000' }}
           >
             {row.map(({ caption, height, columnStart, columnEnd, content, hasOwnFrame, isFilled }) => (
               <GridItem
@@ -125,7 +127,7 @@ const BuildingBlocks = () => (
                 columnEnd={{ tablet: columnEnd }}
                 UNSAFE_className={styles.Item}
               >
-                <Stack spacing="space-600">
+                <Stack spacing="space-700">
                   {hasOwnFrame ? (
                     content
                   ) : (
@@ -152,7 +154,9 @@ const BuildingBlocks = () => (
                       </div>
                     </Box>
                   )}
-                  <Text textColor="secondary">{caption}</Text>
+                  <Text size="small" textColor="secondary">
+                    {caption}
+                  </Text>
                 </Stack>
               </GridItem>
             ))}

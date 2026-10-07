@@ -9,12 +9,14 @@ import {
   Icon,
   InputAddon,
   Link,
+  Stack,
   Text,
   TextField,
 } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { useState } from 'react';
 import { routes } from '../routing/routes';
+import Eyebrow from './Eyebrow';
 import styles from './Hero.module.scss';
 import HoverLottie from './HoverLottie';
 import PageSection from './PageSection';
@@ -74,7 +76,7 @@ const PersonaCard = ({ title, description, animation }: PersonaCardProps) => {
         <div className={styles.PersonaAnimation}>
           <HoverLottie path={animation} isHovered={isHovered} className={styles.PersonaLottie} />
         </div>
-        <Text emphasis="semibold" marginBottom="space-0" UNSAFE_className={styles.PersonaTitle}>
+        <Text size="large" emphasis="semibold" marginBottom="space-0" UNSAFE_className={styles.PersonaTitle}>
           {title}
         </Text>
         <Text size="small" textColor="secondary" marginBottom="space-0">
@@ -91,18 +93,21 @@ const Hero = () => (
       <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-800">
         <GridItem columnStart={{ tablet: 3 }} columnEnd={{ tablet: 11 }} UNSAFE_className={styles.Intro}>
           <Flex direction="vertical" alignmentX="center" spacing="space-1000">
-            <Heading elementType="h2" size="xlarge" textAlignment="center" marginBottom="space-0">
-              Design consistently.
-              <br />
-              Ship faster. Include everyone.
-            </Heading>
+            <Stack spacing="space-500">
+              <Eyebrow isCentered>MEET SPIRIT</Eyebrow>
+              <Heading elementType="h2" size="xlarge" textAlignment="center" marginBottom="space-0">
+                Design consistently.
+                <br />
+                Ship faster. Include everyone.
+              </Heading>
+            </Stack>
 
-            <Text textAlignment="center" marginBottom="space-0">
-              The design system powering digital experiences across Alma Career. Seamlessly connecting Figma design
-              tokens to production-ready React components, Twig templates, and web standards.
+            <Text size="large" textColor="secondary" textAlignment="center" marginBottom="space-0">
+              Spirit is Alma Career’s design system. Components, tokens and guidelines to design in Figma, build in HTML
+              or React, and adapt to any brand.
             </Text>
 
-            <Flex direction="vertical" alignmentX="center" spacing="space-700" UNSAFE_className={styles.Search}>
+            <Flex direction="vertical" alignmentX="left" spacing="space-700" UNSAFE_className={styles.Search}>
               <form role="search" className={styles.SearchForm} onSubmit={(event) => event.preventDefault()}>
                 <TextField
                   id="docs-search"
@@ -125,19 +130,32 @@ const Hero = () => (
                 />
               </form>
 
-              <Flex isWrapping alignmentX="center" alignmentY="center" spacingX="space-700" spacingY="space-300">
-                <Text elementType="span" textColor="secondary">
+              <Flex isWrapping alignmentX="left" alignmentY="center" spacingX="space-700" spacingY="space-300">
+                <Text elementType="span" size="small" textColor="secondary">
                   Popular:
                 </Text>
-                <Flex isWrapping alignmentX="center" alignmentY="center" spacing="space-400">
+                <Flex isWrapping alignmentX="left" alignmentY="center" spacing="space-300">
                   {popularLinks.map(({ label, href }, index) => (
-                    <Flex key={label} alignmentY="center" spacing="space-400">
-                      <Link elementType={NextLink} href={href} underlined="hover">
-                        {label}
-                      </Link>
+                    <Flex key={label} alignmentY="center" spacing="space-0">
+                      <Text elementType="span" size="small" marginBottom="space-0">
+                        <Link
+                          elementType={NextLink}
+                          href={href}
+                          underlined="hover"
+                          UNSAFE_className={styles.PopularLink}
+                        >
+                          {label}
+                        </Link>
+                      </Text>
                       {index < popularLinks.length - 1 && (
-                        <Text elementType="span" textColor="secondary" aria-hidden="true">
-                          ·
+                        <Text
+                          elementType="span"
+                          size="small"
+                          marginBottom="space-0"
+                          UNSAFE_className={styles.PopularSeparator}
+                          aria-hidden="true"
+                        >
+                          ,
                         </Text>
                       )}
                     </Flex>
@@ -157,7 +175,9 @@ const Hero = () => (
         </Grid>
       </div>
 
-      <Text textColor="secondary">A shared visual language powering products used by 100,000+ people every day.</Text>
+      <Text size="large" textColor="secondary">
+        A shared visual language powering products used by 100,000+ people every day.
+      </Text>
     </Flex>
   </PageSection>
 );

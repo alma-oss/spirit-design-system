@@ -82,3 +82,13 @@
         }
     }
 }
+
+// The popular links have the small body size, like the label before them.
+.PopularLink {
+    font: inherit;
+}
+
+// The commas between the links have the color of the links, as in the design.
+.PopularSeparator {
+    color: var(--spirit-color-link-primary-state-default);
+}
