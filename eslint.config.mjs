@@ -41,6 +41,7 @@ export default [
       'packages/common',
       'packages/design-tokens',
       'packages/web',
+      'packages/vite-plugin-spirit-icons',
       'packages/web-react',
       'scripts',
 

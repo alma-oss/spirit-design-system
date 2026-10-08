@@ -552,8 +552,12 @@ __metadata:
   resolution: "@alma-oss/vite-plugin-spirit-icons@workspace:packages/vite-plugin-spirit-icons"
   dependencies:
     "@alma-oss/spirit-design-tokens": "npm:4.0.3"
+    "@eslint/compat": "catalog:lint"
+    "@eslint/eslintrc": "catalog:lint"
     "@types/jest": "catalog:types"
     "@types/node": "catalog:types"
+    eslint: "catalog:lint"
+    eslint-config-spirit: "workspace:^"
     jest: "catalog:test"
     jest-config-spirit: "workspace:^"
     jsdom: "catalog:build"
