@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@alma-oss/vite-plugin-spirit-icons": ["../vite-plugin-spirit-icons/src/index.ts"]
+    }
+  },
+  "include": ["./", "./eslint.config.js"]
+}
