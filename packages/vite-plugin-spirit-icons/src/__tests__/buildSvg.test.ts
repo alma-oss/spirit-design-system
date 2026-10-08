@@ -3,7 +3,13 @@ import path from 'path';
 // Import mocked modules
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 // Now we can safely import buildSvg after all mocks are in place
-import { normalizeSvgColors, normalizeAndCopySvg, buildSvg, DUALTONE_COLOR_BACKGROUND_DEFAULT, DUALTONE_COLOR_BORDER_DEFAULT } from '../steps/buildSvg';
+import {
+  normalizeSvgColors,
+  normalizeAndCopySvg,
+  buildSvg,
+  DUALTONE_COLOR_BACKGROUND_DEFAULT,
+  DUALTONE_COLOR_BORDER_DEFAULT,
+} from '../steps/buildSvg';
 
 // Mock fs before importing the module to suppress side effects from the bottom call in buildSvg.ts
 const readdirMock = jest.fn();
@@ -29,8 +35,12 @@ describe('buildSvg', () => {
 
       const output = normalizeSvgColors(svgName, svgContent);
 
-      expect(output).toContain(`var(--${cssVariablePrefix}icon-dualtone-color-background, ${DUALTONE_COLOR_BACKGROUND_DEFAULT})`);
-      expect(output).toContain(`var(--${cssVariablePrefix}icon-dualtone-color-border, ${DUALTONE_COLOR_BORDER_DEFAULT})`);
+      expect(output).toContain(
+        `var(--${cssVariablePrefix}icon-dualtone-color-background, ${DUALTONE_COLOR_BACKGROUND_DEFAULT})`,
+      );
+      expect(output).toContain(
+        `var(--${cssVariablePrefix}icon-dualtone-color-border, ${DUALTONE_COLOR_BORDER_DEFAULT})`,
+      );
       expect(output.startsWith('<?xml')).toBe(true);
     });
 
@@ -45,8 +55,8 @@ describe('buildSvg', () => {
 
     it('should normalize default icons to use currentColor and ignore fill="none"', () => {
       const svgName = 'close.svg';
-      const svgContent
-        = '<svg viewBox="0 0 24 24"><path fill="#000000" /><path fill="black" /><path fill="none" stroke="#FF0000" /><circle fill="#ABCDEF" /></svg>';
+      const svgContent =
+        '<svg viewBox="0 0 24 24"><path fill="#000000" /><path fill="black" /><path fill="none" stroke="#FF0000" /><circle fill="#ABCDEF" /></svg>';
 
       const output = normalizeSvgColors(svgName, svgContent);
 
@@ -113,7 +123,9 @@ describe('buildSvg', () => {
       expect(spriteContent).not.toContain('<clipPath');
       expect(spriteContent).not.toContain('clip-path=');
 
-      const alphaContent = (writeFileSyncMock as jest.Mock).mock.calls.find(([filePath]) => filePath === path.join(distDir, 'alpha.svg'))[1];
+      const alphaContent = (writeFileSyncMock as jest.Mock).mock.calls.find(
+        ([filePath]) => filePath === path.join(distDir, 'alpha.svg'),
+      )[1];
 
       expect(alphaContent).not.toContain('<clipPath');
       expect(alphaContent).not.toContain('clip-path=');

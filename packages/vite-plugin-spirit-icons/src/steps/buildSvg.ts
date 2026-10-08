@@ -1,7 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
-import { filterSvgFiles, getIconType, ICON_TYPE_DUALTONE, ICON_TYPE_COLORED, Logger, stripSvgClipPaths } from './shared';
+import {
+  filterSvgFiles,
+  getIconType,
+  ICON_TYPE_DUALTONE,
+  ICON_TYPE_COLORED,
+  Logger,
+  stripSvgClipPaths,
+} from './shared';
 
 const consoleLogger: Logger = {
   info: (msg) => console.log(msg),

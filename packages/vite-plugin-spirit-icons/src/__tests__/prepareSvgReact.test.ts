@@ -8,7 +8,6 @@ jest.mock('../steps/shared', () => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires -- jest.mock factories can't reference outer-scope imports
   const pathModule = require('path');
 
-
   return {
     filterSvgFiles: (fileNames: string[] | undefined) => {
       if (!Array.isArray(fileNames)) {
