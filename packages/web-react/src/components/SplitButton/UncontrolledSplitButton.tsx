@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useI18n } from '../../hooks';
+import { useDeprecationMessage, useStringsProp } from '../../hooks';
 import { type UncontrolledSplitButtonProps } from '../../types';
 import { Button } from '../Button';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../Dropdown';
@@ -15,11 +15,11 @@ const defaultProps: Partial<UncontrolledSplitButtonProps> = {
 };
 
 const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
-  const { t } = useI18n();
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     buttonIconName,
     buttonLabel,
+    labelButton,
     buttonOnClick,
     children,
     dropdownTriggerIconName,
@@ -29,16 +29,39 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
     isButtonLabelHidden,
     isDisabled,
     isDropdownTriggerLabelHidden,
+    strings,
     ...restProps
   } = propsWithDefaults;
-  const resolvedDropdownTriggerLabel = dropdownTriggerLabel ?? t('splitButton.dropdown');
+  const { buttonLabel: buttonLabelValue, dropdownTriggerLabel: resolvedDropdownTriggerLabel } = useStringsProp({
+    buttonLabel: { value: labelButton, deprecated: buttonLabel },
+    dropdownTriggerLabel: {
+      value: strings?.label?.dropdown?.trigger,
+      deprecated: dropdownTriggerLabel,
+      key: 'splitButton.dropdown',
+    },
+  });
+  const resolvedButtonLabel = buttonLabelValue ?? '';
   const [openDropdownState, setOpenDropdownState] = useState(false);
+
+  useDeprecationMessage({
+    method: 'property',
+    trigger: buttonLabel != null,
+    componentName: 'UncontrolledSplitButton',
+    propertyProps: { deprecatedName: 'buttonLabel', newName: 'labelButton' },
+  });
+  useDeprecationMessage({
+    method: 'custom',
+    trigger: dropdownTriggerLabel != null,
+    componentName: 'UncontrolledSplitButton',
+    customText:
+      'The "dropdownTriggerLabel" property is deprecated and will be removed in the next major version. Use "strings.label.dropdown.trigger" instead.',
+  });
 
   return (
     <SplitButton {...restProps} id={id} isDisabled={isDisabled}>
       <Button onClick={buttonOnClick}>
         {buttonIconName && <Icon name={buttonIconName} />}
-        {isButtonLabelHidden ? <VisuallyHidden>{buttonLabel}</VisuallyHidden> : buttonLabel}
+        {isButtonLabelHidden ? <VisuallyHidden>{resolvedButtonLabel}</VisuallyHidden> : resolvedButtonLabel}
       </Button>
       <Dropdown
         id={`${id}-dropdown`}

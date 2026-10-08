@@ -12,6 +12,7 @@ import { useScrollViewStyleProps } from './useScrollViewStyleProps';
 const ScrollView = (props: SpiritScrollViewProps) => {
   const {
     ariaLabelControls,
+    strings,
     controlsScrollStep = 300,
     children,
     direction = SCROLL_VIEW_DEFAULT_DIRECTION,
@@ -55,6 +56,7 @@ const ScrollView = (props: SpiritScrollViewProps) => {
       {hasControls && (
         <ScrollViewControls
           ariaLabelControls={ariaLabelControls}
+          strings={strings}
           direction={direction}
           scrollStep={controlsScrollStep}
           viewportRef={viewportReference}

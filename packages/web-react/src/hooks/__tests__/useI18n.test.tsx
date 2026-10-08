@@ -39,6 +39,30 @@ describe('useI18n', () => {
     expect(typeof result.current.t).toBe('function');
   });
 
+  it('should keep t referentially stable when translations do not change', () => {
+    const { result, rerender } = renderHook(() => useI18n());
+    const firstT = result.current.t;
+
+    rerender();
+
+    expect(result.current.t).toBe(firstT);
+  });
+
+  it('should return a new t when provider translations change', () => {
+    let translations: I18nProviderProps['translations'] = { common: { close: 'Zavřít' } };
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <I18nProvider translations={translations}>{children}</I18nProvider>
+    );
+    const { result, rerender } = renderHook(() => useI18n(), { wrapper });
+    const firstT = result.current.t;
+
+    translations = { common: { close: 'Zavři' } };
+    rerender();
+
+    expect(result.current.t).not.toBe(firstT);
+    expect(result.current.t('common.close')).toBe('Zavři');
+  });
+
   it('should return default value for known key', () => {
     const { result } = renderHook(() => useI18n());
     const { t } = result.current;
@@ -133,7 +157,7 @@ describe('useI18n', () => {
       const wrapper = createProviderWrapper({
         translations: {
           test: { greeting: 'Ahoj, {name}!' },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
@@ -146,7 +170,7 @@ describe('useI18n', () => {
         translations: {
           en: { common: { close: 'Close EN' } },
           cs: { common: { close: 'Zavřít' } },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
@@ -158,7 +182,7 @@ describe('useI18n', () => {
         translations: {
           en: { common: { close: 'Close EN' } },
           cs: { common: { close: 'Zavřít' } },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
@@ -169,12 +193,38 @@ describe('useI18n', () => {
       const wrapper = createProviderWrapper({
         locale: 'de',
         translations: {
+          en: { common: { close: 'Close EN' } },
           cs: { common: { close: 'Zavřít' } },
-        } as unknown as NonNullable<I18nProviderProps['translations']>,
+        },
       });
       const { result } = renderHook(() => useI18n(), { wrapper });
 
       expect(result.current.t('common.close')).toBe('Close');
+      expect(result.current.t('cs.common.close')).toBe('cs.common.close');
+    });
+
+    it('should resolve arbitrary application keys from a direct translation tree', () => {
+      const wrapper = createProviderWrapper({
+        translations: {
+          modal: { close: 'Close {name}' },
+        },
+      });
+      const { result } = renderHook(() => useI18n(), { wrapper });
+
+      expect(result.current.t('modal.close', { name: 'Settings' })).toBe('Close Settings');
+    });
+
+    it('should resolve arbitrary application keys from a locale catalog', () => {
+      const wrapper = createProviderWrapper({
+        locale: 'cs',
+        translations: {
+          en: { modal: { close: 'Close' } },
+          cs: { modal: { close: 'Zavřít' } },
+        },
+      });
+      const { result } = renderHook(() => useI18n(), { wrapper });
+
+      expect(result.current.t('modal.close')).toBe('Zavřít');
     });
   });
 });

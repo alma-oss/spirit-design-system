@@ -9,11 +9,15 @@ const FileUploadInputDisabled = () => (
       id="file-uploader-disabled-standard"
       helperText="Max file size is 10 MB"
       label="Label"
-      inputUploadText="Upload your file"
-      inputDragAndDropText="or drag and drop here"
       name="attachment-disabled-standard"
       isDisabled
       isRequired
+      strings={{
+        label: {
+          upload: 'Upload your file',
+          dragAndDrop: 'or drag and drop here',
+        },
+      }}
     />
     <FileUpload
       rootId="example-disabled-compact"
@@ -21,11 +25,15 @@ const FileUploadInputDisabled = () => (
       helperText="Max file size is 10 MB"
       isCompact
       label="Label"
-      inputUploadText="Upload your file"
-      inputDragAndDropText="or drag and drop here"
       name="attachment-disabled-compact"
       isDisabled
       isRequired
+      strings={{
+        label: {
+          upload: 'Upload your file',
+          dragAndDrop: 'or drag and drop here',
+        },
+      }}
     />
   </Grid>
 );

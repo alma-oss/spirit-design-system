@@ -29,6 +29,7 @@ export * from './useOverlay';
 export * from './useResizeObserver';
 export * from './useScrollControl';
 export * from './useSpacingStyle';
+export * from './useStringsProp';
 export * from './useSymmetry';
 export * from './useThrottledValue';
 export * from './useToggle';

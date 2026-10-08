@@ -61,12 +61,41 @@ describe('FileUpload', () => {
       expect(inputBlock).toBeInTheDocument();
     });
 
+    it('should render dictionary defaults for component strings', () => {
+      render(<FileUpload {...defaultPropsWithInput} />);
+
+      expect(screen.getByText('Browse')).toBeInTheDocument();
+      expect(screen.getByText('Upload your file')).toBeInTheDocument();
+      expect(screen.getByText('or drag and drop here')).toBeInTheDocument();
+    });
+
+    it('should resolve partial strings overrides without removing other defaults', () => {
+      const { container } = render(
+        <FileUpload
+          {...defaultPropsWithInput}
+          strings={{ label: { button: 'Select', upload: { key: 'fileUploader.inputUpload' } } }}
+        />,
+      );
+
+      expect(screen.getByText('Select')).toBeInTheDocument();
+      expect(screen.getByText('Upload your file')).toBeInTheDocument();
+      expect(screen.getByText('or drag and drop here')).toBeInTheDocument();
+      expect(container.querySelector('[strings]')).not.toBeInTheDocument();
+    });
+
     it('should omit drag-and-drop class when isDragAndDropSupported is false', () => {
       const { container } = render(
         <FileUpload {...defaultPropsWithInput} isDragAndDropSupported={false} data-testid="test" />,
       );
 
       expect(container.querySelector('.has-drag-and-drop')).not.toBeInTheDocument();
+    });
+
+    it('should hide the drag-and-drop suffix when isDragAndDropSupported is false', () => {
+      render(<FileUpload {...defaultPropsWithInput} isDragAndDropSupported={false} />);
+
+      expect(screen.getByText('Upload your file')).toBeInTheDocument();
+      expect(screen.queryByText('or drag and drop here')).not.toBeInTheDocument();
     });
 
     it('should not have drag-and-drop class in Server component', () => {

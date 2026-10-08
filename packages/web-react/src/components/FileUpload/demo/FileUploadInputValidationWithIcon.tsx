@@ -15,13 +15,17 @@ const FileUploadInputValidationWithIcon = () => {
             id={`file-uploader-icon-standard-${state}`}
             helperText="Max file size is 10 MB"
             label="Label"
-            inputUploadText="Upload your file"
-            inputDragAndDropText="or drag and drop here"
             name={`attachment-icon-standard-${state}`}
             validationText={`This is ${state} validation text. Long validation text to show how it wraps.`}
             validationState={state}
             hasValidationIcon
             isRequired
+            strings={{
+              label: {
+                upload: 'Upload your file',
+                dragAndDrop: 'or drag and drop here',
+              },
+            }}
           />
           <FileUpload
             rootId={`example-validation-icon-compact-${state}`}
@@ -29,13 +33,17 @@ const FileUploadInputValidationWithIcon = () => {
             helperText="Max file size is 10 MB"
             isCompact
             label="Label"
-            inputUploadText="Upload your file"
-            inputDragAndDropText="or drag and drop here"
             name={`attachment-icon-compact-${state}`}
             validationText={`This is ${state} validation text. Long validation text to show how it wraps.`}
             validationState={state}
             hasValidationIcon
             isRequired
+            strings={{
+              label: {
+                upload: 'Upload your file',
+                dragAndDrop: 'or drag and drop here',
+              },
+            }}
           />
         </Grid>
       ))}

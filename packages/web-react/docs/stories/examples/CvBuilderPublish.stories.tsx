@@ -30,6 +30,7 @@ import {
   VisuallyHidden,
 } from '../../../src/components';
 import { useToggle } from '../../../src/hooks';
+import CvExampleI18n from './CvExampleI18n';
 
 export default {
   title: 'Examples/Pages',
@@ -100,11 +101,10 @@ export const CvBuilderPublish = () => {
   // @ts-ignore
   // @ts-ignore
   return (
-    <>
+    <CvExampleI18n>
       <Section elementType="div" containerProps={{ size: 'large' }} paddingTop="space-1000">
         <Stack spacing="space-1000">
           <Breadcrumbs
-            goBackTitle="Zpět"
             items={[
               { title: 'Můj Jobs.cz', url: '#' },
               { title: 'Životopis', url: '#' },
@@ -139,7 +139,7 @@ export const CvBuilderPublish = () => {
                   <UNSTABLE_Combobox
                     id="publish-job-search"
                     label="Jakou práci hledáte?"
-                    emptySelectionLabel="Zadejte obor, profesi,…"
+                    strings={{ label: { emptySelection: 'Zadejte obor, profesi,…' } }}
                     isRequired
                     isOpen={isJobOpen}
                     onToggle={onJobToggle}
@@ -159,7 +159,7 @@ export const CvBuilderPublish = () => {
                   <UNSTABLE_Combobox
                     id="publish-location-search"
                     label="Ve kterém městě nebo kraji chcete pracovat?"
-                    emptySelectionLabel="Jihlava"
+                    strings={{ label: { emptySelection: 'Jihlava' } }}
                     isRequired
                     isOpen={isLocationOpen}
                     onToggle={onLocationToggle}
@@ -322,7 +322,7 @@ export const CvBuilderPublish = () => {
                     TS2322: Type 'Element' is not assignable to type 'string'. Suppressed until fixed. */}
                 <UNSTABLE_Combobox
                   id="publish-hide-companies"
-                  emptySelectionLabel="Uveďte název firmy"
+                  strings={{ label: { emptySelection: 'Uveďte název firmy' } }}
                   /* @ts-ignore – ReactNode isn't supported by the `label` -- @see https://jira.almacareer.tech/browse/DS-2790 */
                   label={
                     <>
@@ -386,6 +386,6 @@ export const CvBuilderPublish = () => {
           </Box>
         </Stack>
       </Section>
-    </>
+    </CvExampleI18n>
   );
 };

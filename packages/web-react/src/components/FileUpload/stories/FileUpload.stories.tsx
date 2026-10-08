@@ -26,11 +26,10 @@ const meta: Meta<typeof FileUpload> = {
       description: 'Comma-separated file types for the native file picker (`input accept`).',
       table: { defaultValue: { summary: '—' } },
     },
-    buttonText: {
-      control: 'text',
-      description:
-        'Decorative button label (`aria-hidden`; use `inputUploadText` / `label` for the primary accessible name).',
-      table: { defaultValue: { summary: 'Browse' } },
+    strings: {
+      control: 'object',
+      description: 'Component string overrides.',
+      table: { defaultValue: { summary: '—' } },
     },
     hasValidationIcon: {
       control: 'boolean',
@@ -50,14 +49,6 @@ const meta: Meta<typeof FileUpload> = {
     id: {
       control: 'text',
       description: 'File input id (label / `aria-describedby` linkage).',
-    },
-    inputDragAndDropText: {
-      control: 'text',
-      description: 'Drag-and-drop suffix in the drop zone.',
-    },
-    inputUploadText: {
-      control: 'text',
-      description: 'Primary label in the drop zone.',
     },
     isCompact: {
       control: 'boolean',
@@ -129,12 +120,16 @@ const meta: Meta<typeof FileUpload> = {
   },
   args: {
     accept: '',
-    buttonText: 'Browse',
+    strings: {
+      label: {
+        button: 'Browse',
+        dragAndDrop: 'or drag and drop here',
+        upload: 'Upload your file(s)',
+      },
+    },
     hasValidationIcon: false,
     helperText: 'Max file size is 10 MB',
     id: 'file-uploader',
-    inputDragAndDropText: 'or drag and drop here',
-    inputUploadText: 'Upload your file(s)',
     isCompact: false,
     isDisabled: false,
     isLabelHidden: false,

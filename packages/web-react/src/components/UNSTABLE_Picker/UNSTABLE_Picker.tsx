@@ -8,13 +8,13 @@ import {
   getSelectedKeys,
   useAriaDescribedBy,
   useCollection,
-  useI18n,
+  useDeprecationMessage,
   useOpenOnArrowDown,
   useSelectionAria,
   useSelectionManager,
+  useStringsProp,
   useStyleProps,
 } from '../../hooks';
-import { replaceTranslationParams } from '../../translations';
 import { type ForwardRefComponent } from '../../types';
 import { Dropdown, DropdownPopover } from '../Dropdown';
 import { Flex } from '../Flex';
@@ -43,13 +43,11 @@ import {
 
 // eslint-disable-next-line camelcase
 const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<SpiritUnstablePickerRef>) => {
-  const { t } = useI18n();
-
   const {
     'aria-describedby': ariaDescribedBy = '',
-    addButtonLabel = t('picker.add'),
+    addButtonLabel,
     children,
-    closeButtonLabel = t('common.close'),
+    closeButtonLabel,
     contextualHelp,
     emptySelectionLabel,
     hasValidationIcon,
@@ -67,18 +65,66 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     onToggle,
     popoverProps = DEFAULT_POPOVER_PROPS,
     tagProps,
-    removeAllLabel = t('picker.removeAll'),
+    removeAllLabel,
+    removeItemLabel,
     renderTags,
     selectedKeys,
-    selectionAriaLabel = t('picker.selectionAriaLabel'),
+    selectionAriaLabel,
     selectionMode = MULTIPLE_SELECTION_MODE,
     size = DEFAULT_SIZE,
-    tagDescriptionText = t('picker.tagDescriptionText'),
+    strings,
+    tagDescriptionText,
     validationState,
     validationText,
     variant,
     ...restProps
   } = props;
+
+  const {
+    addButtonLabel: resolvedAddButtonLabel,
+    closeButtonLabel: resolvedCloseButtonLabel,
+    emptySelectionLabel: resolvedEmptySelectionLabel,
+    removeAllLabel: resolvedRemoveAllLabel,
+    selectionAriaLabel: resolvedSelectionAriaLabel,
+    tagDescriptionText: resolvedTagDescriptionText,
+  } = useStringsProp({
+    addButtonLabel: { value: strings?.ariaLabel?.add, deprecated: addButtonLabel, key: 'picker.add' },
+    closeButtonLabel: { value: strings?.ariaLabel?.close, deprecated: closeButtonLabel, key: 'common.close' },
+    emptySelectionLabel: {
+      value: strings?.label?.emptySelection,
+      deprecated: emptySelectionLabel,
+      params: { label },
+    },
+    removeAllLabel: { value: strings?.ariaLabel?.removeAll, deprecated: removeAllLabel, key: 'picker.removeAll' },
+    selectionAriaLabel: {
+      value: strings?.ariaLabel?.selection,
+      deprecated: selectionAriaLabel,
+      key: 'picker.selectionAriaLabel',
+      params: { label },
+    },
+    tagDescriptionText: {
+      value: strings?.ariaLabel?.tag?.description,
+      deprecated: tagDescriptionText,
+      key: 'picker.tagDescriptionText',
+    },
+  });
+  const emptyLabel = resolvedEmptySelectionLabel || label;
+  const resolvedRemoveItemLabel = strings?.ariaLabel?.removeItem ?? removeItemLabel;
+
+  useDeprecationMessage({
+    method: 'custom',
+    trigger:
+      addButtonLabel != null ||
+      closeButtonLabel != null ||
+      emptySelectionLabel != null ||
+      removeAllLabel != null ||
+      removeItemLabel != null ||
+      selectionAriaLabel != null ||
+      tagDescriptionText != null,
+    componentName: 'UNSTABLE_Picker',
+    customText:
+      'The flat translation properties are deprecated and will be removed in the next major version. Use "strings" instead.',
+  });
 
   const [ariaDescribedByProp, register] = useAriaDescribedBy(ariaDescribedBy);
   const validationTextRole = useValidationTextRole({
@@ -152,7 +198,6 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     tagCount: selectionGridKeyboardRowCount,
   });
 
-  const emptyLabel = emptySelectionLabel ? replaceTranslationParams(emptySelectionLabel, { label }) : label;
   const aggregatedTagLabel = getAggregatedTagLabel(label, selectedPickerItems);
 
   const selectionContent = (() => {
@@ -180,7 +225,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
           isDisabled={isDisabled}
           label={aggregatedTagLabel}
           onRemove={() => removeTagAtIndex(0)}
-          removeLabel={removeAllLabel}
+          removeLabel={resolvedRemoveAllLabel}
         />
       );
     }
@@ -193,6 +238,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
         isDisabled={isDisabled}
         label={item.label}
         onRemove={() => removeTagAtIndex(index)}
+        removeLabel={resolvedRemoveItemLabel}
       />
     ));
   })();
@@ -253,7 +299,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
                   id={selectionId}
                   isDisabled={isDisabled}
                   role={selectedPickerItems.length ? 'grid' : 'group'}
-                  aria-label={replaceTranslationParams(selectionAriaLabel, { label })}
+                  aria-label={resolvedSelectionAriaLabel}
                   aria-live="off"
                   aria-atomic={false}
                   aria-relevant="additions"
@@ -269,7 +315,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
                   onKeyDown={handleTriggerKeyDown}
                   disabled={isDisabled}
                 >
-                  <VisuallyHidden>{isOpen ? closeButtonLabel : addButtonLabel}</VisuallyHidden>
+                  <VisuallyHidden>{isOpen ? resolvedCloseButtonLabel : resolvedAddButtonLabel}</VisuallyHidden>
                   <Icon name={`chevron-${isOpen ? 'up' : 'down'}`} boxSize={20} />
                 </UNSTABLE_PickerTrigger>
               </InputContainer>
@@ -289,7 +335,7 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
             )}
           </Stack>
           <span id={tagDescriptionId} hidden>
-            {tagDescriptionText}
+            {resolvedTagDescriptionText}
           </span>
         </div>
       </UniversalProvider>

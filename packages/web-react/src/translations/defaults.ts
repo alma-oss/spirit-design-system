@@ -10,12 +10,16 @@ export const defaultTranslations = {
     remove: 'Remove',
   },
   breadcrumbs: {
+    ariaLabel: 'Breadcrumb',
     back: 'Go back',
   },
   fileUploader: {
     edit: 'Edit',
     remove: 'Remove',
     attachments: 'Attachments',
+    browse: 'Browse',
+    inputUpload: 'Upload your file',
+    inputDragAndDrop: 'or drag and drop here',
   },
   pagination: {
     next: 'Next',
@@ -61,5 +65,11 @@ export const defaultTranslations = {
   },
   splitButton: {
     dropdown: 'More',
+  },
+  scrollView: {
+    ariaStart: 'Scroll left',
+    ariaEnd: 'Scroll right',
+    ariaTop: 'Scroll up',
+    ariaBottom: 'Scroll down',
   },
 };
