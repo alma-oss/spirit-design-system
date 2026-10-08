@@ -15,6 +15,9 @@
 .container--heading {
     padding-top: var(--spirit-space-1400);
     padding-bottom: var(--spirit-space-1100);
+
+    // Closes the heading of a category. Without headings (alphabetical sort) the line of the page header is used.
+    border-bottom: 1px solid var(--spirit-color-border-basic);
 }
 
 .band--header {
