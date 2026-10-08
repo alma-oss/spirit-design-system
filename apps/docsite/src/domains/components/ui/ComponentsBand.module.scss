@@ -20,3 +20,8 @@
 .band--header {
     border-bottom: 1px solid var(--spirit-color-border-basic);
 }
+
+// The grid fills the whole container, so its lines meet the vertical lines of the page. The cells have their own padding.
+.container.container--grid {
+    padding-inline: 0;
+}
