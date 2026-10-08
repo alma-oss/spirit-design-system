@@ -15,9 +15,15 @@
     margin: 0;
 }
 
-// Status badge is revealed only when the card is hovered or focused.
+// Status badge sits in the corner of the cell, over the corner of the preview. It is revealed only when the card is
+// hovered or focused.
 .badge {
+    position: absolute;
+    top: var(--spirit-space-800);
+    right: var(--spirit-space-800);
+    z-index: 2;
     display: block;
+    pointer-events: none;
     opacity: 0;
     transition: opacity 0.15s ease-in-out;
 

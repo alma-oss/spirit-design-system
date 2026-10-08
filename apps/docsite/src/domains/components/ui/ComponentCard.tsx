@@ -19,17 +19,12 @@ const ComponentCard = ({ component, previewHtml = undefined }: ComponentCardProp
 
   return (
     <li className={styles.card}>
-      <PreviewFrame
-        html={previewHtml}
-        contentClassName={styles.preview}
-        badge={
-          <span className={styles.badge}>
-            <Tag size="xsmall" color={isUnstable ? 'warning' : 'success'} isSubtle>
-              {isUnstable ? 'Unstable' : 'Stable'}
-            </Tag>
-          </span>
-        }
-      />
+      <PreviewFrame html={previewHtml} contentClassName={styles.preview} />
+      <span className={styles.badge}>
+        <Tag size="xsmall" color={isUnstable ? 'warning' : 'success'} isSubtle>
+          {isUnstable ? 'Unstable' : 'Stable'}
+        </Tag>
+      </span>
       <div className={styles.text}>
         <Link
           elementType={NextLink}
