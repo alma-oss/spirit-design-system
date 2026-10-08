@@ -26,7 +26,7 @@ const meta = {
     docs: {
       page: () => <Markdown>{ReadMe}</Markdown>,
     },
-    controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp'] },
+    controls: { exclude: ['children', 'hasValidationIcon', 'contextualHelp', 'startSlot', 'endSlot'] },
   },
   argTypes: {
     addMoreLabel: { control: 'text' },
@@ -36,10 +36,6 @@ const meta = {
       table: { defaultValue: { summary: 'false' } },
     },
     emptySelectionLabel: { control: 'text' },
-    hasClearButton: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
-    },
     hasValidationIcon: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' } },
@@ -63,7 +59,6 @@ const meta = {
       table: { defaultValue: { summary: 'false' } },
     },
     label: { control: 'text' },
-    removeAllLabel: { control: 'text' },
     removeItemLabel: { control: 'text' },
     selectionAriaLabel: { control: 'text' },
     size: {
@@ -93,7 +88,6 @@ const meta = {
     id: PLAYGROUND_COMBOBOX_ID,
     label: 'Languages',
     helperText: 'You can select multiple languages.',
-    hasClearButton: false,
     isDisabled: false,
     isLoading: false,
     isRequired: false,
