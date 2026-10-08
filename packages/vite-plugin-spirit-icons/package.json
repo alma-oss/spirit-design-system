@@ -28,6 +28,8 @@
     }
   },
   "scripts": {
+    "lint": "eslint ./",
+    "lint:fix": "yarn lint --fix",
     "build:clean": "shx rm -rf dist",
     "build:compile": "tsup --config ./config/tsup.config.ts",
     "build": "npm-run-all --serial build:clean build:compile",
@@ -43,8 +45,12 @@
     "svg2react-icon": "catalog:script"
   },
   "devDependencies": {
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
     "@types/jest": "catalog:types",
     "@types/node": "catalog:types",
+    "eslint": "catalog:lint",
+    "eslint-config-spirit": "workspace:^",
     "jest": "catalog:test",
     "jest-config-spirit": "workspace:^",
     "npm-run-all2": "catalog:script",
