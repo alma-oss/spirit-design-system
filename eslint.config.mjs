@@ -40,6 +40,7 @@ export default [
       'packages/codemods',
       'packages/common',
       'packages/design-tokens',
+      'packages/icons',
       'packages/web',
       'packages/vite-plugin-spirit-icons',
       'packages/web-react',
