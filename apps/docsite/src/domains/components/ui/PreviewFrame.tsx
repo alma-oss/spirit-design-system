@@ -1,12 +1,11 @@
 'use client';
 
 import { useIsomorphicLayoutEffect } from '@alma-oss/spirit-web-react';
-import React, { CSSProperties, ReactNode, useRef, useState } from 'react';
+import React, { CSSProperties, useRef, useState } from 'react';
 import styles from './PreviewFrame.module.scss';
 
 interface PreviewFrameProps {
   html?: string;
-  badge?: ReactNode;
   contentClassName?: string;
 }
 
@@ -21,7 +20,7 @@ interface Guides {
   bottom: number;
 }
 
-const PreviewFrame = ({ html = undefined, badge = undefined, contentClassName = undefined }: PreviewFrameProps) => {
+const PreviewFrame = ({ html = undefined, contentClassName = undefined }: PreviewFrameProps) => {
   const frameRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -113,7 +112,6 @@ const PreviewFrame = ({ html = undefined, badge = undefined, contentClassName = 
           <div className={styles.placeholder} />
         )}
       </div>
-      {badge && <div className={styles.badge}>{badge}</div>}
     </div>
   );
 };
