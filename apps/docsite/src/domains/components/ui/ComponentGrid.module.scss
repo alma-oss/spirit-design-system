@@ -5,6 +5,7 @@
     grid-template-columns: 1fr;
     padding: 0;
     margin: 0;
+    overflow: clip; // cuts off the extended lines of the cells
     list-style: none;
 
     > li {
@@ -14,6 +15,18 @@
         gap: var(--spirit-space-700);
         padding: var(--spirit-space-1000);
         border-bottom: 1px solid var(--spirit-color-border-basic);
+
+        // Continues the bottom line to the right, so an incomplete last row has the line across the whole grid. The part
+        // outside the grid is clipped. Where the neighbor cell has the same line, the two overlap.
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 100%;
+            width: 100vw;
+            pointer-events: none;
+            border-bottom: 1px solid var(--spirit-color-border-basic);
+        }
     }
 
     @media (min-width: 48rem) {
