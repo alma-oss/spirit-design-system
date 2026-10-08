@@ -55,11 +55,9 @@ export const Preview = () => (
       <DocsSection title="Disabled" stackAlignment="stretch">
         <ComboboxDisabled />
       </DocsSection>
-      <DocsSection title="With Clear Button" stackAlignment="stretch">
-        <ComboboxWithClearButton />
-      </DocsSection>
       <DocsSection title="Addons" stackAlignment="stretch">
         <ComboboxAddons />
+        <ComboboxWithClearButton />
       </DocsSection>
       <DocsSection title="Full Width Dropdown" stackAlignment="stretch">
         <ComboboxFullWidth />

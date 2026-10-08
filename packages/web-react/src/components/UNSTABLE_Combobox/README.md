@@ -245,21 +245,8 @@ Use [InputAddon][readme-input-addon] with `startSlot` and `endSlot` to render no
 `UNSTABLE_ComboboxSelection` (which contains both the selection tags and the filter input) — use
 `InputAddon` as the wrapper for consistent spacing, sizing, and alignment.
 
-There is no built-in clear-all button: build one yourself and pass it via `endSlot` and call
-[`removeAll()`](#ref) on the Combobox ref. It clears the selection and moves focus back to the filter
-input, so focus is not lost when the button unmounts together with the selection.
-
-The field row (`InputContainer`) has its own `onClick` that focuses the filter input and opens the
-popover on any click inside it (except on selection tags). A purely decorative addon, like the
-search icon below, should leave that click alone — clicking it opens the popover like clicking any
-other blank part of the field. An addon with its own interactive control (a button, a link) should
-stop the click from bubbling there instead, on both the `InputAddon` itself (covers clicks on its
-padding) and inside the control (covers the click before it bubbles past the control) — otherwise
-clicking "Remove all" also reopens/refocuses the popover as an unwanted side effect.
-
 ```tsx
 <UNSTABLE_Combobox
-  ref={comboboxRef}
   id="combobox-example"
   label="Languages"
   startSlot={
@@ -268,6 +255,36 @@ clicking "Remove all" also reopens/refocuses the popover as an unwanted side eff
       <VisuallyHidden>Search languages</VisuallyHidden>
     </InputAddon>
   }
+  endSlot={
+    <InputAddon>
+      <Icon name="globe" />
+    </InputAddon>
+  }
+  {/* ...other props */}
+>
+  {/* UNSTABLE_ComboboxOption children */}
+</UNSTABLE_Combobox>
+```
+
+The field row (`InputContainer`) has its own `onClick` that focuses the filter input and opens the
+popover on any click inside it (except on selection tags). A purely decorative addon, like the icons
+above, should leave that click alone — clicking it opens the popover like clicking any other blank part
+of the field. An addon with its own interactive control (a button, a link) should stop the click from
+bubbling there instead, on both the `InputAddon` itself (covers clicks on its padding) and inside the
+control (covers the click before it bubbles past the control).
+
+#### With Clear Button
+
+A clear-all button is not a built-in feature — build it as an `endSlot` addon and call
+[`removeAll()`](#ref) on the Combobox ref. It clears the selection and moves focus back to the filter
+input, so focus is not lost when the button unmounts together with the selection. Stop the click from
+bubbling, otherwise clicking "Remove all" also reopens/refocuses the popover as an unwanted side effect.
+
+```tsx
+<UNSTABLE_Combobox
+  ref={comboboxRef}
+  id="combobox-example"
+  label="Languages"
   endSlot={
     selectedKeys.length > 0 && (
       // Interactive control: stop propagation so clicking it doesn't also
@@ -289,8 +306,6 @@ clicking "Remove all" also reopens/refocuses the popover as an unwanted side eff
   {/* UNSTABLE_ComboboxOption children */}
 </UNSTABLE_Combobox>
 ```
-
-See the [Addons demo][combobox-addons-demo] and [With Clear Button demo][combobox-clear-button-demo].
 
 ### API
 
@@ -520,8 +535,6 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-[combobox-addons-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxAddons.tsx
-[combobox-clear-button-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxWithClearButton.tsx
 [combobox-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxThemes.tsx
 [combobox-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_Combobox/README.md
 [contextual-help]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ContextualHelp/README.md

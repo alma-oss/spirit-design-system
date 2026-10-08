@@ -35,7 +35,7 @@ const ComboboxWithClearButton = () => {
       id="demo-combobox-with-clear-button"
       inputValue={state.inputValue}
       isOpen={state.isOpen}
-      label="Languages"
+      label="Languages with clear button"
       onInputChange={state.onInputChange}
       onSelectionChange={state.onSelectionChange}
       onToggle={state.onToggle}

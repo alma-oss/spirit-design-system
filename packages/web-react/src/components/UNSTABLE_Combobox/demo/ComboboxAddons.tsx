@@ -13,6 +13,11 @@ const ComboboxAddons = () => {
 
   return (
     <UNSTABLE_Combobox
+      endSlot={
+        <InputAddon>
+          <Icon name="globe" />
+        </InputAddon>
+      }
       hasEmptyState={state.hasEmptyState}
       id="demo-combobox-addons"
       inputValue={state.inputValue}
