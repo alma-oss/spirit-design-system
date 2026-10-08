@@ -20,6 +20,11 @@
     border-bottom: 1px solid var(--spirit-color-border-basic);
 }
 
+// The page footer draws its own line over the whole width, so the last block lets it overlap its bottom line.
+.band:last-child {
+    margin-bottom: -1px;
+}
+
 .band--header {
     border-bottom: 1px solid var(--spirit-color-border-basic);
 }
