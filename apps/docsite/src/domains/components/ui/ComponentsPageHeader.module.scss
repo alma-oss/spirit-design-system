@@ -12,6 +12,12 @@
     justify-content: space-between;
 }
 
+.top > :last-child,
+.toolbar > :last-child {
+    // Keep the Copy page button and the search on the right edge even when they wrap onto their own line.
+    margin-left: auto;
+}
+
 .text {
     display: flex;
     flex: 1 1 24rem;
