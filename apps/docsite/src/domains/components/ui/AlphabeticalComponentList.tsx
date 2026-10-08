@@ -1,6 +1,7 @@
-import ComponentGrid from '@local/domains/components/ui/ComponentGrid';
 import React from 'react';
 import ComponentCard from './ComponentCard';
+import ComponentGrid from './ComponentGrid';
+import ComponentsBand from './ComponentsBand';
 
 interface AlphabeticalComponentListProps {
   components: string[];
@@ -11,11 +12,13 @@ const AlphabeticalComponentList = ({ components, previews }: AlphabeticalCompone
   const sorted = [...components].sort();
 
   return (
-    <ComponentGrid>
-      {sorted.map((component) => (
-        <ComponentCard key={component} component={component} previewHtml={previews[component]} />
-      ))}
-    </ComponentGrid>
+    <ComponentsBand variant="grid">
+      <ComponentGrid>
+        {sorted.map((component) => (
+          <ComponentCard key={component} component={component} previewHtml={previews[component]} />
+        ))}
+      </ComponentGrid>
+    </ComponentsBand>
   );
 };
 
