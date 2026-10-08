@@ -1,0 +1,39 @@
+// Cells are separated by 1px lines. The outer vertical lines belong to the page container, so the last cell of a row
+// has no right line.
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-top: 1px solid var(--spirit-color-border-basic);
+
+    > li {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spirit-space-700);
+        padding: var(--spirit-space-1000);
+        border-bottom: 1px solid var(--spirit-color-border-basic);
+    }
+
+    @media (min-width: 48rem) {
+        grid-template-columns: repeat(2, 1fr);
+
+        > li:not(:nth-child(2n)) {
+            border-right: 1px solid var(--spirit-color-border-basic);
+        }
+    }
+
+    @media (min-width: 80rem) {
+        grid-template-columns: repeat(3, 1fr);
+
+        > li:nth-child(2n):not(:nth-child(3n)) {
+            border-right: 1px solid var(--spirit-color-border-basic);
+        }
+
+        > li:nth-child(3n) {
+            border-right: 0;
+        }
+    }
+}

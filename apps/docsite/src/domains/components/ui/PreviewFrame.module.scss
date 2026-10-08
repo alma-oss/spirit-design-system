@@ -9,9 +9,7 @@
     place-items: center;
     aspect-ratio: 2 / 1;
     overflow: hidden;
-    background-color: var(--spirit-color-background-primary, #fdfdfc);
-    border: 1px solid var(--spirit-color-border-basic, #dcdcdc);
-    border-radius: var(--spirit-radius-400, 12px);
+    background-color: var(--spirit-color-background-secondary, #f4f4f4);
     pointer-events: none;
     user-select: none;
 }

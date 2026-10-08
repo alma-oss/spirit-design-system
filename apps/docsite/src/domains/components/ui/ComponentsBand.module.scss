@@ -1,0 +1,22 @@
+.band {
+    background-color: var(--spirit-color-background-primary);
+}
+
+.container {
+    box-sizing: border-box;
+    border-inline: 1px solid var(--spirit-color-border-basic);
+}
+
+.container--header {
+    padding-top: var(--spirit-space-1400);
+    padding-bottom: var(--spirit-space-1100);
+}
+
+.container--heading {
+    padding-top: var(--spirit-space-1400);
+    padding-bottom: var(--spirit-space-1100);
+}
+
+.band--header {
+    border-bottom: 1px solid var(--spirit-color-border-basic);
+}

@@ -1,19 +1,18 @@
-.card {
-    --card-padding: var(--spirit-space-500, 8px);
-
+.text {
     display: flex;
     flex-direction: column;
-    gap: var(--spirit-space-700, 16px);
-    padding: var(--spirit-space-500, 8px) var(--spirit-space-500, 8px) var(--spirit-space-800, 20px);
-    background-color: var(--spirit-color-background-secondary, #f4f4f4);
-    border: 1px solid var(--spirit-color-border-basic, #dcdcdc);
-    border-radius: var(--spirit-radius-500, 16px);
+    gap: var(--spirit-space-500);
+    min-height: 4.5rem; // keeps the cards of a row aligned for one- and two-line descriptions
+    overflow-wrap: anywhere; // long names (e.g. UNSTABLE_DisplayHeading) must not overflow narrow cards
 }
 
-.body {
-    padding: 0 var(--spirit-space-700, 16px);
-    // Long component names (e.g. UNSTABLE_DisplayHeading) must not overflow narrow cards.
-    overflow-wrap: anywhere;
+.name {
+    // The whole card is the link.
+    font-weight: 600;
+}
+
+.description {
+    margin: 0;
 }
 
 // Status badge is revealed only when the card is hovered or focused.
@@ -27,11 +26,6 @@
     }
 }
 
-.card:hover .badge,
-.card:focus-within .badge {
-    opacity: 1;
-}
-
 // Preview is grayscale until the card is hovered or focused.
 .preview {
     filter: grayscale(1);
@@ -40,6 +34,11 @@
     @media (prefers-reduced-motion: reduce) {
         transition: none;
     }
+}
+
+.card:hover .badge,
+.card:focus-within .badge {
+    opacity: 1;
 }
 
 .card:hover .preview,
