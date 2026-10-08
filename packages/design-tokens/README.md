@@ -47,7 +47,20 @@ These tokens are shared globally and independently on themes.
 
 ### Theme Tokens
 
-Currently, only tokens in the 🎨 Colors group are themeable.
+The category consists of these groups:
+
+- 🎨 Colors
+- 🏖️ Shadow lengths
+
+Each theme directory contains the theme values (e.g. `_colors.scss`, `_shadows.scss`) together with a mixin
+that sets them as CSS variables (`color-css-variables`, `shadow-css-variables`). The `_color-tokens.scss` and
+`_shadow-tokens.scss` files in the `scss/themes` directory reference these CSS variables, so the values follow
+the theme applied to the element.
+
+Shadow lengths are the `offset-x`, `offset-y`, `blur-radius`, and `spread-radius` parts of the global
+🏖️ Shadows tokens. Each length is a separate CSS variable suffixed with the shadow layer number,
+e.g. `--spirit-shadow-100-offset-y-01`, so the themes can override the shape of a shadow while the shadow
+itself stays a global token. The original lengths serve as fallbacks when a theme does not set the variable.
 
 ## Themes
 
