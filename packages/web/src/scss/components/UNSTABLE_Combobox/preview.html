@@ -3079,13 +3079,17 @@
 
     <div class="docs-Stack docs-Stack--stretch">
 
-      <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+      <div
+        class="UNSTABLE_Combobox"
+        style="--spirit-combobox-input-min-width: 9ch;"
+        data-spirit-element="combobox"
+      >
 
         <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
           <label
             class="Label Label--medium"
-            id="combobox-addon-label"
-            for="combobox-addon-input"
+            id="combobox-addons-label"
+            for="combobox-addons-input"
           >Languages</label>
 
           <div class="Dropdown">
@@ -3095,7 +3099,7 @@
               role="group"
               aria-label="Languages"
             >
-              {{!-- Start addon: composed the same way as the end addon below, not a built-in feature --}}
+              {{!-- Start addon: static, decorative --}}
               <div class="InputAddon InputAddon--medium">
                 <svg
                   class="Icon"
@@ -3111,7 +3115,7 @@
               <div class="UNSTABLE_ComboboxSelection">
                 <div
                   role="group"
-                  id="combobox-addon-selection"
+                  id="combobox-addons-selection"
                   class="d-contents"
                   aria-label="Selected Languages"
                   aria-live="off"
@@ -3121,11 +3125,11 @@
                 ></div>
                 <input
                   type="text"
-                  id="combobox-addon-input"
+                  id="combobox-addons-input"
                   role="combobox"
                   aria-haspopup="listbox"
                   aria-expanded="false"
-                  aria-controls="combobox-addon-listbox"
+                  aria-controls="combobox-addons-listbox"
                   aria-autocomplete="list"
                   autocomplete="off"
                   placeholder="Languages"
@@ -3134,7 +3138,136 @@
                 />
               </div>
 
-              {{!-- End addon: clear-all, built from generic InputAddon/ControlButton markup and shown by JS when ≥1 item is selected --}}
+              {{!-- End addon: static, decorative --}}
+              <div class="InputAddon InputAddon--medium">
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#globe" />
+                </svg>
+              </div>
+
+            </div>
+
+            <div
+              class="DropdownPopover placement-bottom-start"
+              role="dialog"
+              aria-labelledby="combobox-addons-label"
+              data-spirit-combobox-listbox
+            >
+              <div
+                class="Stack Stack--spacing"
+                style="--stack-spacing: var(--spirit-space-300);"
+                role="listbox"
+                id="combobox-addons-listbox"
+                aria-labelledby="combobox-addons-label"
+                aria-multiselectable="true"
+              >
+                <div
+                  role="option"
+                  id="combobox-addons-cs"
+                  aria-selected="false"
+                  class="Item Item--medium"
+                >
+                  <span class="Label Label--medium element-stretched cursor-pointer">Czech</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-addons-da"
+                  aria-selected="false"
+                  class="Item Item--medium"
+                >
+                  <span class="Label Label--medium element-stretched cursor-pointer">Danish</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-addons-en"
+                  aria-selected="false"
+                  class="Item Item--medium"
+                >
+                  <span class="Label Label--medium element-stretched cursor-pointer">English</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-addons-fi"
+                  aria-selected="false"
+                  class="Item Item--medium"
+                >
+                  <span class="Label Label--medium element-stretched cursor-pointer">Finnish</span>
+                </div>
+                <div
+                  role="option"
+                  id="combobox-addons-sk"
+                  aria-selected="false"
+                  class="Item Item--medium"
+                >
+                  <span class="Label Label--medium element-stretched cursor-pointer">Slovak</span>
+                </div>
+              </div>
+
+              <div
+                data-spirit-combobox-empty-state
+                role="status"
+                aria-live="polite"
+                class="UNSTABLE_Combobox__emptyState"
+                hidden
+              >Nothing found</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="UNSTABLE_Combobox"
+        style="--spirit-combobox-input-min-width: 27ch;"
+        data-spirit-element="combobox"
+      >
+
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+          <label
+            class="Label Label--medium"
+            id="combobox-clear-button-label"
+            for="combobox-clear-button-input"
+          >Languages with clear button</label>
+
+          <div class="Dropdown">
+
+            <div
+              class="InputContainer InputContainer--fill InputContainer--medium"
+              role="group"
+              aria-label="Languages with clear button"
+            >
+              <div class="UNSTABLE_ComboboxSelection">
+                <div
+                  role="group"
+                  id="combobox-clear-button-selection"
+                  class="d-contents"
+                  aria-label="Selected Languages"
+                  aria-live="off"
+                  aria-atomic="false"
+                  aria-relevant="additions"
+                  data-spirit-combobox-selection
+                ></div>
+                <input
+                  type="text"
+                  id="combobox-clear-button-input"
+                  role="combobox"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="combobox-clear-button-listbox"
+                  aria-autocomplete="list"
+                  autocomplete="off"
+                  placeholder="Languages with clear button"
+                  class="UNSTABLE_Combobox__input"
+                  data-spirit-combobox-input
+                />
+              </div>
+
+              {{!-- Clear-all addon: shown by JS when ≥1 item is selected --}}
               <div
                 class="InputAddon InputAddon--medium d-none"
                 hidden
@@ -3161,20 +3294,20 @@
             <div
               class="DropdownPopover placement-bottom-start"
               role="dialog"
-              aria-labelledby="combobox-addon-label"
+              aria-labelledby="combobox-clear-button-label"
               data-spirit-combobox-listbox
             >
               <div
                 class="Stack Stack--spacing"
                 style="--stack-spacing: var(--spirit-space-300);"
                 role="listbox"
-                id="combobox-addon-listbox"
-                aria-labelledby="combobox-addon-label"
+                id="combobox-clear-button-listbox"
+                aria-labelledby="combobox-clear-button-label"
                 aria-multiselectable="true"
               >
                 <div
                   role="option"
-                  id="combobox-addon-cs"
+                  id="combobox-clear-button-cs"
                   aria-selected="false"
                   class="Item Item--medium"
                 >
@@ -3182,7 +3315,7 @@
                 </div>
                 <div
                   role="option"
-                  id="combobox-addon-da"
+                  id="combobox-clear-button-da"
                   aria-selected="false"
                   class="Item Item--medium"
                 >
@@ -3190,7 +3323,7 @@
                 </div>
                 <div
                   role="option"
-                  id="combobox-addon-en"
+                  id="combobox-clear-button-en"
                   aria-selected="false"
                   class="Item Item--medium"
                 >
@@ -3198,7 +3331,7 @@
                 </div>
                 <div
                   role="option"
-                  id="combobox-addon-fi"
+                  id="combobox-clear-button-fi"
                   aria-selected="false"
                   class="Item Item--medium"
                 >
@@ -3206,7 +3339,7 @@
                 </div>
                 <div
                   role="option"
-                  id="combobox-addon-sk"
+                  id="combobox-clear-button-sk"
                   aria-selected="false"
                   class="Item Item--medium"
                 >

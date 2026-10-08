@@ -494,19 +494,23 @@ Combobox has no built-in start/end slot — compose one yourself with a plain `I
 direct sibling of the `UNSTABLE_ComboboxSelection` wrapper, inside the `InputContainer`. Position (start
 or end) is just DOM order, exactly like `TextField`'s addons (see [TextField's README][textfield-readme]).
 
-A start addon (e.g. a decorative icon) can sit before `UNSTABLE_ComboboxSelection`:
-
 ```html
 <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
-  <label class="InputAddon InputAddon--medium" for="combobox-input">
+  <div class="InputAddon InputAddon--medium">
     <svg class="Icon" width="20" height="20" aria-hidden="true">
       <use href="/icons/svg/sprite.svg#search" />
     </svg>
     <span class="accessibility-hidden">Search languages</span>
-  </label>
+  </div>
 
   <div class="UNSTABLE_ComboboxSelection">
     <!-- … selection grid and input … -->
+  </div>
+
+  <div class="InputAddon InputAddon--medium">
+    <svg class="Icon" width="20" height="20" aria-hidden="true">
+      <use href="/icons/svg/sprite.svg#globe" />
+    </svg>
   </div>
 </div>
 ```
