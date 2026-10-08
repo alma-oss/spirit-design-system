@@ -22,6 +22,7 @@ const ComponentSortToggle = () => {
       name="component-sort"
       selectedValue={sort}
       setSelectedValue={handleSelectionChange}
+      variant="fill"
     >
       <SegmentedControlItem id="sort-alphabetical" value={SORT_OPTIONS.ALPHABETICAL}>
         Alphabetical

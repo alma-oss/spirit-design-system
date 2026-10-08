@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-1300);
+}
+
+.top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spirit-space-800);
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.text {
+    display: flex;
+    flex: 1 1 24rem;
+    flex-direction: column;
+    gap: var(--spirit-space-1000);
+    min-width: 0;
+    max-width: 37rem; // 592px
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-700);
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spirit-space-800);
+    align-items: center;
+    justify-content: space-between;
+}
