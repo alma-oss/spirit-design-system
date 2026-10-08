@@ -41,6 +41,12 @@ const nextConfig: NextConfig = {
       // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
       './src/domains/components/ui/partials/**/*',
     ],
+    '/components': [
+      '../../packages/web/src/scss/components/**/doc-preview-card.html',
+      '../../packages/web-react/src/components/**/doc-preview-card.html',
+      // Path is hardcoded in compilePreview.ts as `PARTIALS_DIR` — update both if this moves.
+      './src/domains/components/ui/partials/**/*',
+    ],
     '/helpers/[helper]': ['../../packages/web/src/scss/helpers/**/preview.html'],
     '/*': [
       '../../docs/introduction/**/*.md',

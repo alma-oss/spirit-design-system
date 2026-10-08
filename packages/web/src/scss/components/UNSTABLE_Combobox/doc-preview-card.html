@@ -1,0 +1,65 @@
+<div class="UNSTABLE_Combobox" style="width: 320px;">
+  <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+    <label class="Label Label--medium" for="card-combobox-input">Role</label>
+    <div
+      class="InputContainer InputContainer--fill InputContainer--medium"
+      role="group"
+      aria-label="Role"
+    >
+      <div class="UNSTABLE_ComboboxSelection">
+        <div
+          role="grid"
+          class="d-contents"
+          aria-label="Selected roles"
+        >
+          <div role="row" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+            <div role="gridcell" class="d-contents">
+              <span>UI Designer</span>
+              <button
+                type="button"
+                class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                aria-label="Remove UI Designer"
+                tabindex="-1"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div role="row" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+            <div role="gridcell" class="d-contents">
+              <span>UX Designer</span>
+              <button
+                type="button"
+                class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical text-color-scheme dynamic-color-background-interactive dynamic-color-border accessibility-tap-target"
+                aria-label="Remove UX Designer"
+                tabindex="-1"
+              >
+                <svg
+                  class="Icon"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#close" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <input
+          type="text"
+          id="card-combobox-input"
+          class="UNSTABLE_Combobox__input"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+  </div>
+</div>
