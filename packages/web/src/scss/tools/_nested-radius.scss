@@ -1,22 +1,12 @@
 // Nested radius.
 //
 // Parents may set `--{infix}-border-radius` to
-// `container-radius - border-width - container-padding`. CSS has no `if`, so
-// `nested()` is equivalent to: use the inherited value when it is positive,
-// otherwise keep the default.
+// `container-radius - border-width - container-padding`. They must not reference
+// the child's own radius; the child decides how that inset combines with its default.
 //
-// 1. `var(--{infix}-border-radius, 1px)` inside `sign()`: dummy 1px so `sign()`
-//    always receives a dimension. An unset custom property would invalidate the
-//    whole `calc()`. This fallback is not the visible radius; when the property
-//    is unset, `sign(1px)` is 1 and the next `var()` supplies `$default`.
-// 2. `sign()`: -1 if negative, 0 if zero, 1 if positive.
-// 3. `max(0, sign(...))`: 1 only when the inherited radius is positive, otherwise 0.
-//    This is the switch used by both products below.
-// 4. First product: `switch * var(--{infix}-border-radius, default)` — inherited
-//    radius when the switch is 1 (or the default, when the property is unset and
-//    the dummy 1px made the switch 1).
-// 5. Second product: `(1 - switch) * default` — default radius when the switch is
-//    0 (explicit 0 or a negative inset from a container tighter than the child).
+// `nested()` is `max(inherited, default)`. A tighter, zero, negative, or unset inset
+// stays at the child's default. A larger inherited value can still increase the radius.
+// Both arguments are the same CSS value, so a dynamic default is compared at computed-value time.
 
 @use '@tokens' as tokens;
 
@@ -28,17 +18,15 @@
 //
 // Parameters are:
 // * $infix: custom-property infix, e.g. `tag` → `--tag-border-radius`
-// * $default: radius used when the parent value is unset, 0, or negative
+// * $default: radius used when the parent value is unset or smaller
 @function nested($infix, $default) {
     $property: -property($infix);
 
-    @return calc(
-        max(0, sign(var(#{$property}, 1px))) * var(#{$property}, #{$default}) +
-            (1 - max(0, sign(var(#{$property}, 1px)))) * #{$default}
-    );
+    @return max(var(#{$property}, #{$default}), #{$default});
 }
 
 // Parent: expose an inset radius to nested children.
+// Pass the container's own radius, border, and padding. Do not pass the child's radius.
 //
 // Parameters are:
 // * $infix: custom-property infix, e.g. `tag` → `--tag-border-radius`
