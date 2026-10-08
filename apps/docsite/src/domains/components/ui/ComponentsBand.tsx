@@ -19,6 +19,7 @@ const ComponentsBand = ({ variant = 'grid', children }: ComponentsBandProps) => 
       UNSAFE_className={classNames(styles.container, {
         [styles['container--header']]: variant === 'header',
         [styles['container--heading']]: variant === 'heading',
+        [styles['container--grid']]: variant === 'grid',
       })}
     >
       {children}
