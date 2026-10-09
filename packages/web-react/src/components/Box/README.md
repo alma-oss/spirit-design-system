@@ -45,6 +45,24 @@ If you need set responsive border radius, you can use an object:
 <Box borderRadius={{ mobile: '200', tablet: '300', desktop: '400' }}>{/* Content goes here */}</Box>
 ```
 
+To set the radius per corner, pass an object with the `topStart`, `topEnd`, `bottomEnd` and `bottomStart` keys.
+Each corner accepts a single value or a responsive object. Corners use logical directions, so they flip in RTL.
+
+```tsx
+<Box borderRadius={{ topStart: '0', topEnd: '0', bottomEnd: '300', bottomStart: '300' }}>{/* Content goes here */}</Box>
+```
+
+Use the `all` key to set a radius for all corners and override only some of them. A corner value takes precedence over `all` for that corner only.
+
+```tsx
+<Box borderRadius={{ all: '300', topStart: '0', bottomEnd: { mobile: '100', tablet: '500' } }}>
+  {/* Content goes here */}
+</Box>
+```
+
+⚠️ At the same breakpoint, a corner value overrides the uniform radius. A uniform radius set for a larger breakpoint
+overrides a corner value set for a smaller one, so set the corner value for that breakpoint too.
+
 The borderColor, borderRadius, and borderStyle props are applied only if borderWidth is greater than `0`.
 
 ## Padding
@@ -115,7 +133,7 @@ You can define text color using the `textColor` prop. Use it to override the tex
 | `backgroundColor`    | \[[Background Color dictionary][dictionary-color] \| `neutral` ✕ [Intensity dictionary][dictionary-intensity] \| [AccentColorNamesType][readme-generated-types] ✕ [Intensity dictionary][dictionary-intensity] \| [EmotionColorNamesType][readme-generated-types] ✕ [Intensity dictionary][dictionary-intensity]] | -       | ✕        | Background color of the Box    |
 | `backgroundGradient` | [Background Gradient dictionary][dictionary-gradient]                                                                                                                                                                                                                                                             | -       | ✕        | Background gradient of the Box |
 | `borderColor`        | \[[Border Color dictionary][dictionary-border] \| [AccentColorNamesType][readme-generated-types] ✕ [Intensity dictionary][dictionary-intensity] \| [EmotionColorNamesType][readme-generated-types] ✕ [Intensity dictionary][dictionary-intensity]]                                                                | -       | ✕        | Border color of the Box        |
-| `borderRadius`       | \[[BorderRadiiTokenType][readme-generated-types] \| `Responsive<BorderRadiiTokenType>`]                                                                                                                                                                                                                           | -       | ✕        | Border radius of the Box       |
+| `borderRadius`       | \[[BorderRadiiTokenType][readme-generated-types] \| `Responsive<BorderRadiiTokenType>` \| `BoxBorderRadiusCornersType`]                                                                                                                                                                                           | -       | ✕        | Border radius of the Box       |
 | `borderStyle`        | [Border Style dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | `solid` | ✕        | Border style of the Box        |
 | `borderWidth`        | [Border Width dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | -       | ✕        | Border width of the Box        |
 | `colorScheme`        | `ColorSchemeType`                                                                                                                                                                                                                                                                                                 | -       | ✕        | Semantic color scheme surface  |

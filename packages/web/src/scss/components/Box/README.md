@@ -33,6 +33,24 @@ and radius using utility class `rounded-<radius>`. Use `rounded-<breakpoint>-<ra
 <div class="border-basic border-100 rounded-200 border-solid border-dashed">Without radius</div>
 ```
 
+To set the radius per corner, use `rounded-top-start-<radius>`, `rounded-top-end-<radius>`, `rounded-bottom-end-<radius>`
+and `rounded-bottom-start-<radius>`. Add the breakpoint the same way as for the uniform radius, e.g. `rounded-bottom-end-tablet-<radius>`.
+Corners use logical directions, so they flip in RTL.
+
+```html
+<div class="rounded-top-start-0 rounded-top-end-0 rounded-bottom-end-300 rounded-bottom-start-300">
+  Radius per corner
+</div>
+```
+
+A corner class overrides the uniform `rounded-<radius>` at the same breakpoint, so you can combine them:
+
+```html
+<div class="rounded-300 rounded-top-start-0">Only the top-start corner has no radius</div>
+```
+
+⚠️ A uniform radius set for a larger breakpoint overrides a corner radius set for a smaller one, so set the corner radius for that breakpoint too.
+
 ⚠️ When you apply `border-<style>` without defining `border-<width>` or `border-<color>`, browsers automatically
 set `border-color: currentColor` and `border-width: medium`.
 

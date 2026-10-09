@@ -4,6 +4,10 @@ export const BackgroundStyleProps = {
 
 export const BorderRadiusStyleProps = {
   borderRadius: 'rounded',
+  borderRadiusTopStart: 'rounded-top-start',
+  borderRadiusTopEnd: 'rounded-top-end',
+  borderRadiusBottomEnd: 'rounded-bottom-end',
+  borderRadiusBottomStart: 'rounded-bottom-start',
 } as const;
 
 export const SpacingStyleProp = {

@@ -18,6 +18,28 @@ describe('useBoxStyleProps', () => {
     expect(result.current.classProps).toBe('');
   });
 
+  it('should keep a uniform border radius as it is', () => {
+    const props: BoxProps = { borderRadius: { mobile: '100', tablet: '200' } };
+    const { result } = renderHook(() => useBoxStyleProps(props));
+
+    expect(result.current.props).toEqual({ borderRadius: { mobile: '100', tablet: '200' } });
+  });
+
+  it('should flatten per-corner border radius into style props', () => {
+    const props: BoxProps = {
+      borderRadius: { all: '300', topStart: '0', bottomEnd: { mobile: '100', tablet: '500' } },
+    };
+    const { result } = renderHook(() => useBoxStyleProps(props));
+
+    expect(result.current.props).toEqual({
+      borderRadius: '300',
+      borderRadiusTopStart: '0',
+      borderRadiusTopEnd: undefined,
+      borderRadiusBottomEnd: { mobile: '100', tablet: '500' },
+      borderRadiusBottomStart: undefined,
+    });
+  });
+
   it('should return background classProps', () => {
     const props: BoxProps = {
       backgroundColor: 'secondary',

@@ -176,6 +176,22 @@ describe('Box', () => {
     expect(screen.getByTestId('Box')).toHaveClass('rounded-100 rounded-tablet-200 rounded-desktop-400');
   });
 
+  it('should render with per-corner border radius', () => {
+    render(
+      <Box
+        borderRadius={{ all: '300', topStart: '0', bottomEnd: { mobile: '100', tablet: '500' } }}
+        borderWidth="100"
+        data-testid="Box"
+      >
+        Content
+      </Box>,
+    );
+
+    expect(screen.getByTestId('Box')).toHaveClass(
+      'rounded-300 rounded-top-start-0 rounded-bottom-end-100 rounded-bottom-end-tablet-500',
+    );
+  });
+
   it('should render border style', () => {
     render(
       <Box borderStyle="dashed" borderWidth="100" data-testid="Box">

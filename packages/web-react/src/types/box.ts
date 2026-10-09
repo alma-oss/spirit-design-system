@@ -26,6 +26,16 @@ export type BoxBackgroundColorsType =
   | BackgroundEmotionColorsType
   | BackgroundNeutralColorsType;
 
+/** Per-corner border radius. Corners use logical directions (`start`/`end`), so they flip in RTL. */
+export type BoxBorderRadiusCornersType = {
+  /** Radius applied to all corners; per-corner values override it. */
+  all?: SingleOrResponsive<BorderRadiiTokenType>;
+  topStart?: SingleOrResponsive<BorderRadiiTokenType>;
+  topEnd?: SingleOrResponsive<BorderRadiiTokenType>;
+  bottomEnd?: SingleOrResponsive<BorderRadiiTokenType>;
+  bottomStart?: SingleOrResponsive<BorderRadiiTokenType>;
+};
+
 export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProps, StyleProps {
   /** The background color of the box. */
   backgroundColor?: BoxBackgroundColorsType;
@@ -33,8 +43,8 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProp
   backgroundGradient?: SingleOrResponsive<BackgroundGradientsDictionaryType>;
   /** The border color of the box. */
   borderColor?: BorderAccentColorsType | BorderEmotionColorsType | BorderColorsDictionaryType;
-  /** The border radius of the box. */
-  borderRadius?: SingleOrResponsive<BorderRadiiTokenType>;
+  /** The border radius of the box. Use an object with corner keys to set the radius per corner. */
+  borderRadius?: SingleOrResponsive<BorderRadiiTokenType> | BoxBorderRadiusCornersType;
   /** The border style of the box. */
   borderStyle?: BorderStylesDictionaryType;
   /** The border width of the box. */
