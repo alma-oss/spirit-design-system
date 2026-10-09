@@ -12,7 +12,6 @@ env:
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
   NX_MAX_CACHE_SIZE: 1GB
-  CACHE_KEY: repository-cache-key-${{ github.run_id }}
 
 jobs:
   lint:
@@ -23,18 +22,11 @@ jobs:
       HUSKY: 0
 
     steps:
-      # `es:lint`'s `import/resolver` needs the workspace packages' `dist` output to resolve
-      # their `exports`-only entry points (e.g. `@alma-oss/spirit-web-react`, `@alma-oss/spirit-icons`).
-      # Reuse the Node 22 build from build.yaml instead of building the packages again here.
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
 
       - name: Restore Nx cache
         id: nx_cache
@@ -59,15 +51,11 @@ jobs:
       HUSKY: 0
 
     steps:
-      - name: Restore Repository from Cache
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
-        id: restore-repository-cache
-        with:
-          path: ./
-          key: ${{ env.CACHE_KEY }}
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
-      - name: Setup Node
-        uses: ./.github/actions/setup-node
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
 
       - name: Restore Nx cache
         id: nx_cache
@@ -100,24 +88,3 @@ jobs:
 
       - name: Check Code-Style Format
         run: yarn format:check
-
-  cleanup:
-    name: 🧹 Cleanup
-    needs: [lint, types]
-    # Deletes the cache saved by build.yaml (see continuous-integration.yaml's `needs: [build-checks]`).
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    # Ensure this job runs regardless of previous job outcomes
-    if: always()
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-
-      # @see: https://github.com/actions/cache/blob/main/tips-and-workarounds.md#force-deletion-of-caches-overriding-default-cache-eviction-policy
-      - name: Cleanup cache
-        run: |
-          gh extension install actions/gh-actions-cache
-          gh actions-cache delete "${{ env.CACHE_KEY }}" --confirm
-        env:
-          GH_TOKEN: ${{ github.token}}
