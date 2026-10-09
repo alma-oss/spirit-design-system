@@ -1,0 +1,14 @@
+@use '@tokens' as tokens;
+
+// The search fills the whole tile.
+// The open dropdown takes no space in the tile, so the search reserves the height of the whole composition
+// (label, field and the dropdown, 444 px) and is centered in the tile.
+.SearchHistory {
+    align-self: center;
+    width: 100%;
+    height: 27.75rem;
+}
+
+.Title {
+    padding: tokens.$space-500;
+}

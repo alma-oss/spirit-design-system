@@ -1,0 +1,13 @@
+@use '@tokens' as tokens;
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+
+.Eyebrow {
+    @include typography.generate(tokens.$eyebrow);
+
+    margin: 0;
+    color: var(--spirit-color-accent-01-content-basic);
+}
+
+.Eyebrow--centered {
+    text-align: center;
+}
