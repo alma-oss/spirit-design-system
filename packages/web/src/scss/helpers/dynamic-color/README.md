@@ -7,6 +7,8 @@ curated tokens where available and compute only what's missing.
 
 To use dynamic color helpers, set up two things.
 
+👉 New to color schemes? See the [Color Schemes][color-schemes-guide] guide first.
+
 First, apply a color scheme to the **parent element** using a `color-scheme-on-*` class. You can use any available
 color scheme, for example the basic informative scheme:
 
@@ -117,3 +119,5 @@ color scheme token to read, every dynamic color is computed from the background 
 ℹ️ We still recommend color schemes as the more robust option. A color scheme delivers a complete, ready-to-use set of
 colors — content, background, and border — whereas a background utility provides only the background color, leaving
 everything else to be computed.
+
+[color-schemes-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md

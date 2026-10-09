@@ -6,6 +6,9 @@ Status: accepted
 
 Amends: [012](012-color-schemes.md)
 
+👉 This is the decision record. For a practical guide to using color schemes, see
+[Color Schemes](https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md).
+
 ## Context
 
 [Color Schemes](012-color-schemes.md) established that a `color-scheme-on-<category>-<intensity>` class pairs one
@@ -26,7 +29,7 @@ out on a basic background.
 
 1. **Both intensities are always exposed.** In addition to the paired properties from
    [Color Schemes](012-color-schemes.md), every `color-scheme-on-*` class sets both intensities of the background
-   and content colors as local custom properties, regardless of which intensity the class name picks:
+   and content colors as local CSS custom properties, regardless of which intensity the class name picks:
    - `--spirit-local-background-color-basic` and `--spirit-local-background-color-subtle`
    - `--spirit-local-color-basic` and `--spirit-local-color-subtle`
 
@@ -34,10 +37,10 @@ out on a basic background.
    `--spirit-local-color` and `--spirit-local-background-color` continue to resolve to the pair implied by the
    `<intensity>` in the class name. The new properties are additive; nothing about the existing contract changes.
 
-2. **Sass accessors mirror the custom properties.** The `tools/color-scheme` module exposes `color-basic()`,
+2. **Sass accessors mirror the CSS custom properties.** The `tools/color-scheme` module exposes `color-basic()`,
    `color-subtle()`, `background-color-basic()`, and `background-color-subtle()` alongside the existing `color()` and
    `background-color()`, each taking an optional fallback. Component CSS reads the intensities through these rather
-   than writing the custom property names by hand.
+   than writing the CSS custom property names by hand.
 
 3. **Categories without a pair reuse what they have.** The `disabled` category has no background pair of its own, so
    the disabled foreground stands in for the basic background: it is the color of a filled element sitting on a

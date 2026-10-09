@@ -54,10 +54,12 @@ Spirit **color schemes** are **semantic surfaces** built from design tokens. The
 or OS light/dark mode (`prefers-color-scheme`); they are Spirit’s own pattern for pairing foreground, background, and border colors on a subtree.
 In practice, this means you choose one surface class and Spirit keeps text, background, and border colors in sync for that part of the UI.
 
+👉 See the [Color Schemes][color-schemes-guide] guide for the full picture — pairing logic, all available schemes, the CSS custom properties they set, and how they relate to themes and dynamic colors.
+
 #### How It Works
 
 1. **Surface class** — Put `color-scheme-on-<suffix>` on a container (for example `color-scheme-on-neutral-basic`, `color-scheme-on-emotion-success-basic`,
-   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets **local** custom properties for content, border, and background (with the
+   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets **local** CSS custom properties for content, border, and background (with the
    Spirit CSS variable prefix), for example `--spirit-local-color` and `--spirit-local-background-color`.
 
    ℹ️ Every surface class also exposes both intensities of the background and content colors regardless of which variant you picked
@@ -296,6 +298,7 @@ Check your browser console to see if you are using any of the deprecated functio
 See the [LICENSE][license] file for information.
 
 [all-deprecations]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/DEPRECATIONS.md
+[color-schemes-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md
 [deprecations]: https://github.com/alma-oss/spirit-design-system/blob/main/static/deprecations-browser-console.png?raw=true
 [design-tokens-usage]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#basic-usage
 [design-tokens-load-path]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/design-tokens#in-sass
