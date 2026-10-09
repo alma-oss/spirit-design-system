@@ -3,7 +3,9 @@
   "compilerOptions": {
     "module": "ES2020",
     "target": "es2015",
-    "noEmit": false
+    "noEmit": false,
+    "paths": {},
+    "customConditions": []
   },
   "exclude": [
     "../docs/**/*",

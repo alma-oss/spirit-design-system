@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@local/*": ["./src/*"],
+      "@alma-oss/spirit-web-react/*": ["../../packages/web-react/src/*"],
+      "@alma-oss/spirit-web/*": ["../../packages/web/src/*"]
+    },
+    "customConditions": []
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+}
