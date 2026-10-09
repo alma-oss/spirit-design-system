@@ -1,9 +1,13 @@
-name: 'purge yarn caches'
-description: 'Purge Yarn Caches'
+name: 'purge caches'
+description: 'Purge GitHub Actions caches by key prefix'
 inputs:
   runner_os:
     description: 'Operating system of the runner'
     required: true
+  key_prefix:
+    description: 'Cache key prefix to purge. Defaults to the Yarn dependency cache prefix.'
+    required: false
+    default: ''
   exclude_key:
     description: 'Cache key to exclude from deletion (optional)'
     required: false
@@ -11,21 +15,27 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Purge Yarn Caches
+    - name: Purge Caches
       shell: bash
       env:
+        KEY_PREFIX: ${{ inputs.key_prefix }}
         EXCLUDE_KEY: ${{ inputs.exclude_key }}
       run: |
-        echo "🗑️ Purging Yarn caches..."
+        PREFIX="${KEY_PREFIX}"
+        if [ -z "$PREFIX" ]; then
+          PREFIX="${{ inputs.runner_os }}-Yarn-"
+        fi
+
+        echo "🗑️ Purging caches with prefix ${PREFIX}..."
 
         # Build jq filter based on exclusion
         if [ -n "$EXCLUDE_KEY" ]; then
-          FILTER='.[] | select(.key | startswith("${{ inputs.runner_os }}-Yarn-")) | select(.key != "'"$EXCLUDE_KEY"'") | .id'
+          FILTER='.[] | select(.key | startswith("'"$PREFIX"'")) | select(.key != "'"$EXCLUDE_KEY"'") | .id'
         else
-          FILTER='.[] | select(.key | startswith("${{ inputs.runner_os }}-Yarn-")) | .id'
+          FILTER='.[] | select(.key | startswith("'"$PREFIX"'")) | .id'
         fi
 
-        CACHES=$(gh cache list --json id,key --jq "$FILTER")
+        CACHES=$(gh cache list --limit 100 --json id,key --jq "$FILTER")
 
         if [ -n "$CACHES" ]; then
           echo "Found caches to delete:"

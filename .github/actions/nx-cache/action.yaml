@@ -1,0 +1,85 @@
+name: 'nx cache'
+description: 'Restore the shared Nx task cache produced by the warm job on main. Must run after dependencies
+  are installed.'
+
+inputs:
+  scope:
+    description: 'Name of the job this cache belongs to (e.g. build, lint, types). Jobs run in parallel and
+      each saves its own cache, so every job needs its own key line.'
+    required: false
+    default: 'build'
+  node-major:
+    description: 'Node major version this job runs on. Scopes the cache key, because Nx does not hash the Node
+      version itself.'
+    required: false
+    default: '22'
+
+outputs:
+  cache-key:
+    description: 'Primary key the Nx cache should be saved under'
+    value:
+      nx-${{ runner.os }}-node${{ inputs.node-major }}-${{ inputs.scope }}-${{ github.run_id }}-${{ github.run_attempt
+      }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Use workspace-local Nx directories
+      shell: bash
+      run: |
+        # Nx 23 keeps the cache and database under ~/.nx/<workspace-id>/ unless a directory is set
+        # explicitly. Pin both to the paths this action saves and restores.
+        echo 'NX_CACHE_DIRECTORY=.nx/cache' >> "$GITHUB_ENV"
+        echo 'NX_WORKSPACE_DATA_DIRECTORY=.nx/workspace-data' >> "$GITHUB_ENV"
+
+    - name: Clear locally created cache
+      shell: bash
+      run: |
+        # Restoring overlays files instead of replacing the directories. Task artifacts that came in
+        # with a whole-repository archive (e.g. the build job's) are not indexed by the scoped
+        # database restored below, so they would only be saved along with it.
+        rm -rf .nx/cache
+        rm -f .nx/workspace-data/*-v*.db .nx/workspace-data/*.lock
+
+    - name: Restore Nx cache
+      uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      with:
+        path: |
+          .nx/cache
+          .nx/workspace-data
+        key: nx-${{ runner.os }}-node${{ inputs.node-major }}-${{ inputs.scope }}-${{ github.run_id }}-${{
+          github.run_attempt }}
+        restore-keys: |
+          nx-${{ runner.os }}-node${{ inputs.node-major }}-${{ inputs.scope }}-
+
+    - name: Adopt restored cache database
+      shell: bash
+      run: |
+        restored=$(ls -1t .nx/workspace-data/*-v*.db 2>/dev/null | head -1 || true)
+        if [ -z "$restored" ]; then
+          echo "No Nx cache database was restored."
+          exit 0
+        fi
+
+        rm -f .nx/workspace-data/*.lock
+
+        # Keep the database version Nx wrote, e.g. "-v3.db".
+        suffix="-${restored##*-}"
+
+        ids=''
+        for source in /var/lib/dbus/machine-id /etc/machine-id; do
+          if [ -s "$source" ]; then
+            ids="${ids} $(tr -cd 'A-Za-z0-9._-' < "$source")"
+          fi
+        done
+        ids="${ids} $(hostname | tr -cd 'A-Za-z0-9._-') machine"
+
+        for id in $ids; do
+          target=".nx/workspace-data/${id}${suffix}"
+          if [ "$target" != "$restored" ]; then
+            cp -f "$restored" "$target"
+          fi
+        done
+
+        echo 'Nx cache database available as:'
+        ls -1 .nx/workspace-data/*-v*.db

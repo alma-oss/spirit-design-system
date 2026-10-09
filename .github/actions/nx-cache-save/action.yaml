@@ -1,0 +1,47 @@
+name: 'nx cache save'
+description: 'Save the Nx task cache and purge superseded entries. Runs only on pushes to main, so pull
+  requests never write the cache. Needs `actions: write` permission.'
+
+inputs:
+  cache-key:
+    description: 'Primary key to save under, the `cache-key` output of the nx-cache action'
+    required: true
+  key-prefix:
+    description: 'Prefix shared by all runs of this cache line, used to purge superseded entries'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Drop unused cache databases
+      if: ${{ !cancelled() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      shell: bash
+      run: |
+        # The restore step publishes the cache index under every name this runner could pick.
+        # Keep only the one Nx actually wrote to, so the saved cache does not accumulate copies.
+        keep=$(ls -1t .nx/workspace-data/*-v*.db 2>/dev/null | head -1 || true)
+        for database in .nx/workspace-data/*-v*.db; do
+          if [ -f "$database" ] && [ "$database" != "$keep" ]; then
+            rm -f "$database"
+          fi
+        done
+        echo "Saving Nx cache database: ${keep:-none}"
+
+    - name: Save Nx cache
+      if: ${{ !cancelled() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      with:
+        path: |
+          .nx/cache
+          .nx/workspace-data
+        key: ${{ inputs.cache-key }}
+
+    - name: Purge superseded Nx caches
+      if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      uses: ./.github/actions/purge-cache
+      with:
+        runner_os: ${{ runner.os }}
+        key_prefix: ${{ inputs.key-prefix }}
+        exclude_key: ${{ inputs.cache-key }}
+      env:
+        GH_TOKEN: ${{ github.token }}
