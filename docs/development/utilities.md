@@ -89,6 +89,18 @@ Controls border radius of an element using the [border-radius](https://developer
 | radius-500    | rounded-500     | rounded-tablet-500  | rounded-desktop-500  |
 | radius-full   | rounded-full    | rounded-tablet-full | rounded-desktop-full |
 
+To set the radius per corner, use `rounded-top-start-<radius>`, `rounded-top-end-<radius>`,
+`rounded-bottom-end-<radius>` and `rounded-bottom-start-<radius>`. Corners use logical directions, so they flip in RTL.
+The breakpoint comes after the corner name, e.g. `rounded-top-start-tablet-<radius>`
+(not `rounded-tablet-top-start-<radius>`).
+
+| Corner       | All breakpoints                 | Tablet and larger                      | Desktop and larger                      |
+| ------------ | ------------------------------- | -------------------------------------- | --------------------------------------- |
+| Top start    | `rounded-top-start-<radius>`    | `rounded-top-start-tablet-<radius>`    | `rounded-top-start-desktop-<radius>`    |
+| Top end      | `rounded-top-end-<radius>`      | `rounded-top-end-tablet-<radius>`      | `rounded-top-end-desktop-<radius>`      |
+| Bottom end   | `rounded-bottom-end-<radius>`   | `rounded-bottom-end-tablet-<radius>`   | `rounded-bottom-end-desktop-<radius>`   |
+| Bottom start | `rounded-bottom-start-<radius>` | `rounded-bottom-start-tablet-<radius>` | `rounded-bottom-start-desktop-<radius>` |
+
 ## Border Color
 
 Controls border color of an element using the [border-color](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color) CSS property.

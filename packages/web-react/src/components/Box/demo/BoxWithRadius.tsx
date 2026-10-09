@@ -20,6 +20,20 @@ const BoxWithRadius = () => (
     >
       With responsive radius
     </Box>
+    <Box
+      padding="space-800"
+      backgroundColor="secondary"
+      borderRadius={{ topStart: '0', topEnd: '0', bottomEnd: '300', bottomStart: '300' }}
+    >
+      With radius per corner
+    </Box>
+    <Box
+      padding="space-800"
+      backgroundColor="secondary"
+      borderRadius={{ topStart: '0', topEnd: '300', bottomEnd: { mobile: '100', tablet: '500' }, bottomStart: '300' }}
+    >
+      With responsive radius per corner
+    </Box>
   </>
 );
 
