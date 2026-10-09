@@ -22,6 +22,7 @@ Use when you need to:
 4. Drafts a description that leads with the _problem_, then the approach and any trade-offs
 5. Shows the draft side-by-side for review before touching anything
 6. Creates (`gh pr create`) or updates (`gh pr edit`) the PR
+7. After a new PR is created, offers to move the Jira issue to QA (asks first, never transitions on its own)
 
 ## Description Format
 
