@@ -11,6 +11,7 @@ env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
+  NX_MAX_CACHE_SIZE: 1GB
   CACHE_KEY: repository-cache-key-${{ github.run_id }}
 
 jobs:
@@ -35,8 +36,20 @@ jobs:
       - name: Setup Node
         uses: ./.github/actions/setup-node
 
+      - name: Restore Nx cache
+        id: nx_cache
+        uses: ./.github/actions/nx-cache
+        with:
+          scope: lint
+
       - name: Lint
         run: yarn lint
+
+      - name: Save Nx cache
+        uses: ./.github/actions/nx-cache-save
+        with:
+          cache-key: ${{ steps.nx_cache.outputs.cache-key }}
+          key-prefix: nx-${{ runner.os }}-node22-lint-
 
   types:
     name: 📘 Type Checking
@@ -56,8 +69,20 @@ jobs:
       - name: Setup Node
         uses: ./.github/actions/setup-node
 
+      - name: Restore Nx cache
+        id: nx_cache
+        uses: ./.github/actions/nx-cache
+        with:
+          scope: types
+
       - name: Types Check
         run: yarn types
+
+      - name: Save Nx cache
+        uses: ./.github/actions/nx-cache-save
+        with:
+          cache-key: ${{ steps.nx_cache.outputs.cache-key }}
+          key-prefix: nx-${{ runner.os }}-node22-types-
 
   format:
     name: 💅 Code Formatting

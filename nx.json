@@ -13,7 +13,7 @@
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": ["{projectRoot}/**/*", "!{projectRoot}/CHANGELOG.md", "sharedGlobals"],
     "sharedGlobals": [],
     "production": ["default"]
   },

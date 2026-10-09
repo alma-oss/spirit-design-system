@@ -11,6 +11,7 @@ env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
+  NX_MAX_CACHE_SIZE: 1GB
   CACHE_KEY: repository-cache-key-${{ github.run_id }}
 
 jobs:
@@ -32,6 +33,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Restore Nx cache
+        id: nx_cache
+        uses: ./.github/actions/nx-cache
+        with:
+          scope: build
+          node-major: ${{ matrix.node-version }}
+
       - name: Build packages
         run: yarn build
 
@@ -42,6 +50,12 @@ jobs:
             git status
             exit 1
           fi
+
+      - name: Save Nx cache
+        uses: ./.github/actions/nx-cache-save
+        with:
+          cache-key: ${{ steps.nx_cache.outputs.cache-key }}
+          key-prefix: nx-${{ runner.os }}-node${{ matrix.node-version }}-build-
 
       # Node 22 is the minimum supported version; lint.yaml restores this cache to reuse
       # the already-built workspace packages instead of building them again.
