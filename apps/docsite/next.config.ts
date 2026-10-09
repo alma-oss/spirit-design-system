@@ -24,6 +24,11 @@ const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: Str
 };
 
 const nextConfig: NextConfig = {
+  // `tsconfig.json` maps workspace packages to their sources so type checking and linting do not need a build.
+  // The production build type-checks against the built packages instead, see `tsconfig.prod.json`.
+  typescript: {
+    tsconfigPath: 'tsconfig.prod.json',
+  },
   outputFileTracingRoot: join(__dirname, '../../'),
   // The sprite route and the Web Preview tab read packages/web files via runtime `fs` calls,
   // which output file tracing can't detect statically — include them explicitly so they ship

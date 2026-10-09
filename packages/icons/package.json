@@ -28,6 +28,7 @@
       "import": "./dist/index.js"
     },
     "./icons": {
+      "stubs": "./types/icons.d.ts",
       "types": "./dist/icons.d.ts",
       "import": "./dist/icons.js"
     },
