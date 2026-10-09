@@ -2,7 +2,11 @@
   "extends": "../../configs/typescript-config-spirit/dom",
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@alma-oss/spirit-design-tokens": ["../design-tokens/src/js"]
+    }
   },
   "include": ["./src/**/*", "../common/src/**/*"],
   "exclude": ["./node_modules", "./dist/**/*", "../common/src/**/__tests__/**", "../common/src/**/*.test.ts"]
