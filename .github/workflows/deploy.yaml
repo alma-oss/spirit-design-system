@@ -1,0 +1,115 @@
+name: 🚀 Deploy
+
+on:
+  workflow_call:
+    outputs:
+      url:
+        description: 'URL of the Netlify deploy of the demo app'
+        value: ${{ jobs.deploy.outputs.url }}
+
+jobs:
+  deploy:
+    name: 🚀 Deploying
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    # Netlify credentials (NETLIFY_TOKEN, NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM) live in this environment
+    environment: netlify
+    permissions:
+      contents: read
+    outputs:
+      url: ${{ steps.netlify-deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      # Reuse the demo app built by the Build job instead of building it again
+      - name: Download demo app build
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: demo-build
+          path: apps/demo/build/
+
+      # `--filter` is required in a monorepo, otherwise the CLI stops asking which project to use.
+      # The CLI is synchronous, returns the exact deploy URL (no SHA lookup race) and exits non-zero
+      # on a deploy failure, so infra problems fail here and not in the test job.
+      - name: Deploy to Netlify
+        id: netlify-deploy
+        run: |
+          ALIAS_ARGS=()
+          if [ -n "$PR_NUMBER" ]; then
+            ALIAS_ARGS=(--alias "deploy-preview-${PR_NUMBER}")
+          fi
+          DEPLOY_JSON=$(yarn netlify deploy \
+            --filter @lmc-eu/spirit-demo-app \
+            --dir apps/demo/build \
+            "${ALIAS_ARGS[@]}" \
+            --message "E2E ${GITHUB_SHA}" \
+            --json)
+          echo "$DEPLOY_JSON"
+          DEPLOY_URL=$(echo "$DEPLOY_JSON" | jq -r '.deploy_url // empty')
+          if [ -z "$DEPLOY_URL" ]; then
+            echo "Netlify CLI did not return a deploy URL."
+            exit 1
+          fi
+          echo "url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
+        env:
+          # Same URL shape as the Netlify deploy preview of a PR; empty on main, where the deploy URL is used
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM }}
+
+      - name: Generate GitHub App token
+        id: app-token
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-pull-requests: write
+
+      # Same idea as the Netlify bot comment: one comment per PR, updated in place on every deploy.
+      # It also replaces the Slack alert, a failed deploy is visible right on the PR.
+      - name: Comment deploy result on PR
+        if: always() && github.event_name == 'pull_request' && steps.app-token.outcome == 'success'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            const marker = '<!-- spirit-e2e-deploy -->';
+            const succeeded = process.env.DEPLOY_OUTCOME === 'success';
+            const sha = context.payload.pull_request.head.sha;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = [
+              marker,
+              succeeded
+                ? '### ✅ Deploy Preview for E2E tests ready!'
+                : '### ⚠️ Deploy for E2E tests failed',
+              '',
+              '| Name | Link |',
+              '| :-- | :-- |',
+              `| 🔨 Latest commit | ${sha} |`,
+              `| 🔍 Latest deploy log | ${runUrl} |`,
+              succeeded
+                ? `| 😎 Deploy Preview | ${process.env.DEPLOY_URL} |`
+                : '| ℹ️ Details | E2E tests could not run: the deploy failed (infrastructure, not a test regression). |',
+            ].join('\n');
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+        env:
+          DEPLOY_OUTCOME: ${{ steps.netlify-deploy.outcome }}
+          DEPLOY_URL: ${{ steps.netlify-deploy.outputs.url }}
