@@ -679,7 +679,7 @@ export const inputSmall = {
   },
 };
 
-export const labelLargeBold = {
+export const labelLarge = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1.125rem',
@@ -689,17 +689,17 @@ export const labelLargeBold = {
   },
 };
 
-export const labelLargeRegular = {
+export const regular = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: '1.125rem',
+    fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 1.3333,
   },
 };
 
-export const labelMediumBold = {
+export const labelMedium = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1rem',
@@ -709,17 +709,7 @@ export const labelMediumBold = {
   },
 };
 
-export const labelMediumRegular = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1rem',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    lineHeight: 1.25,
-  },
-};
-
-export const labelSmallBold = {
+export const labelSmall = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '0.875rem',
@@ -729,17 +719,7 @@ export const labelSmallBold = {
   },
 };
 
-export const labelSmallRegular = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '0.875rem',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    lineHeight: 1.1429,
-  },
-};
-
-export const labelXlargeBold = {
+export const labelXlarge = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '1.25rem',
@@ -749,32 +729,12 @@ export const labelXlargeBold = {
   },
 };
 
-export const labelXlargeRegular = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '1.25rem',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    lineHeight: 1.4,
-  },
-};
-
-export const labelXsmallBold = {
+export const labelXsmall = {
   mobile: {
     fontFamily: "'Inter', sans-serif",
     fontSize: '0.75rem',
     fontStyle: 'normal',
     fontWeight: 600,
-    lineHeight: 1.3333,
-  },
-};
-
-export const labelXsmallRegular = {
-  mobile: {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: '0.75rem',
-    fontStyle: 'normal',
-    fontWeight: 400,
     lineHeight: 1.3333,
   },
 };
@@ -827,14 +787,10 @@ export const styles = {
   inputLarge,
   inputMedium,
   inputSmall,
-  labelLargeBold,
-  labelLargeRegular,
-  labelMediumBold,
-  labelMediumRegular,
-  labelSmallBold,
-  labelSmallRegular,
-  labelXlargeBold,
-  labelXlargeRegular,
-  labelXsmallBold,
-  labelXsmallRegular,
+  labelLarge,
+  regular,
+  labelMedium,
+  labelSmall,
+  labelXlarge,
+  labelXsmall,
 };
