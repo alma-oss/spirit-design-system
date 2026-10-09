@@ -60,6 +60,9 @@ export default [
         },
         typescript: {
           alwaysTryTypes: true,
+          // Omits the default `types` condition so workspace packages resolve to their sources
+          // (`development` condition) instead of the built `dist/*.d.ts`, which keeps linting independent of the build.
+          conditionNames: ['stubs', 'development', 'import', 'require', 'node', 'default'],
           project: [
             './tsconfig.json',
             './apps/*/tsconfig.json',

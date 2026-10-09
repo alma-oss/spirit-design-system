@@ -2,10 +2,15 @@
   "extends": "../../configs/typescript-config-spirit/dom",
   "compilerOptions": {
     "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "@alma-oss/spirit-design-tokens": ["../../packages/design-tokens/src/js"]
-    }
+      "@alma-oss/spirit-design-tokens": ["../../packages/design-tokens/src/js"],
+      "@alma-oss/spirit-web-react": ["../../packages/web-react/src/index.ts"],
+      "@alma-oss/spirit-web-react/*": ["../../packages/web-react/src/*"]
+    },
+    "customConditions": ["stubs"]
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./types/**/*.d.ts"],
   "exclude": ["./node_modules", "./dist"]

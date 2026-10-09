@@ -21,8 +21,14 @@
 
     "paths": {
       "@local/tests": ["./tests/index.ts"],
-      "@local/tests/*": ["./tests/*"]
-    }
+      "@local/tests/*": ["./tests/*"],
+      "@alma-oss/spirit-web-react": ["./src/index.ts"],
+      "@alma-oss/spirit-web-react/*": ["./src/*"],
+      "@alma-oss/spirit-design-tokens": ["../design-tokens/src/js"]
+    },
+
+    // Resolve the type stub of the generated icons entry point, see `@alma-oss/spirit-icons` exports.
+    "customConditions": ["stubs"]
   },
   "include": ["./src/**/*"],
   "exclude": ["./node_modules", "./dist/**/*"]
