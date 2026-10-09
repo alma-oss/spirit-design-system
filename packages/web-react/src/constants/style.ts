@@ -2,8 +2,14 @@ export const BackgroundStyleProps = {
   backgroundGradient: 'bg-gradient',
 } as const;
 
+export const BorderRadiusCorners = ['topStart', 'topEnd', 'bottomEnd', 'bottomStart'] as const;
+
 export const BorderRadiusStyleProps = {
   borderRadius: 'rounded',
+  borderRadiusTopStart: 'rounded-top-start',
+  borderRadiusTopEnd: 'rounded-top-end',
+  borderRadiusBottomEnd: 'rounded-bottom-end',
+  borderRadiusBottomStart: 'rounded-bottom-start',
 } as const;
 
 export const SpacingStyleProp = {

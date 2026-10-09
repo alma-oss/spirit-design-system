@@ -1,4 +1,5 @@
 import { type ElementType } from 'react';
+import { type BorderRadiusCorners } from '../constants';
 import {
   type BackgroundAccentColorsType,
   type BackgroundColorsDictionaryType,
@@ -11,10 +12,12 @@ import {
   type BorderRadiiTokenType,
   type BorderStylesDictionaryType,
   type BorderWidthsDictionaryType,
+  type BreakpointToken,
   type ChildrenProps,
   type ColorSchemeType,
   type PaddingProps,
   type PolymorphicComponentProps,
+  type Responsive,
   type SingleOrResponsive,
   type StyleProps,
   type TextColorProps,
@@ -26,6 +29,17 @@ export type BoxBackgroundColorsType =
   | BackgroundEmotionColorsType
   | BackgroundNeutralColorsType;
 
+type BoxBorderRadiusCornerKey = (typeof BorderRadiusCorners)[number];
+
+/** Per-corner border radius. Corners use logical directions (`start`/`end`), so they flip in RTL. */
+export type BoxBorderRadiusCornersType = {
+  [key in BoxBorderRadiusCornerKey]?: SingleOrResponsive<BorderRadiiTokenType>;
+} & { [key in BreakpointToken]?: never };
+
+/** Uniform border radius, a single value or a responsive object. It cannot be mixed with the corner keys. */
+export type BoxBorderRadiusUniformType =
+  BorderRadiiTokenType | (Responsive<BorderRadiiTokenType> & { [key in BoxBorderRadiusCornerKey]?: never });
+
 export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProps, StyleProps {
   /** The background color of the box. */
   backgroundColor?: BoxBackgroundColorsType;
@@ -33,8 +47,8 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProp
   backgroundGradient?: SingleOrResponsive<BackgroundGradientsDictionaryType>;
   /** The border color of the box. */
   borderColor?: BorderAccentColorsType | BorderEmotionColorsType | BorderColorsDictionaryType;
-  /** The border radius of the box. */
-  borderRadius?: SingleOrResponsive<BorderRadiiTokenType>;
+  /** The border radius of the box. Use an object with corner keys to set the radius per corner. */
+  borderRadius?: BoxBorderRadiusUniformType | BoxBorderRadiusCornersType;
   /** The border style of the box. */
   borderStyle?: BorderStylesDictionaryType;
   /** The border width of the box. */

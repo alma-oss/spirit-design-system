@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { type ElementType } from 'react';
-import { BorderColors } from '../../constants';
+import { BorderColors, BorderRadiusCorners, type BorderRadiusStyleProps } from '../../constants';
 import { useClassNamePrefix } from '../../hooks';
-import { type BoxProps } from '../../types';
+import { type BoxBorderRadiusCornersType, type BoxProps } from '../../types';
 
 export interface UseBoxStyleProps<E> {
   /** className props */
@@ -11,10 +11,31 @@ export interface UseBoxStyleProps<E> {
   props: E;
 }
 
+// Tells the per-corner object (`{ topStart, … }`) apart from the uniform one (`'100'` or `{ mobile, … }`).
+const isBorderRadiusPerCorners = (value: unknown): value is BoxBorderRadiusCornersType =>
+  typeof value === 'object' && value !== null && BorderRadiusCorners.some((corner) => corner in value);
+
+// Flatten the `borderRadius` prop into style props, a per-corner object becomes one style prop per corner.
+const getBorderRadiusProps = (borderRadius: BoxProps<ElementType>['borderRadius']) => {
+  if (!isBorderRadiusPerCorners(borderRadius)) {
+    return { borderRadius };
+  }
+
+  const { topStart, topEnd, bottomEnd, bottomStart } = borderRadius;
+
+  return {
+    borderRadiusTopStart: topStart,
+    borderRadiusTopEnd: topEnd,
+    borderRadiusBottomEnd: bottomEnd,
+    borderRadiusBottomStart: bottomStart,
+  } satisfies Record<Exclude<keyof typeof BorderRadiusStyleProps, 'borderRadius'>, unknown>;
+};
+
 export const useBoxStyleProps = (
   props: Partial<BoxProps<ElementType>>,
 ): UseBoxStyleProps<Partial<BoxProps<ElementType>>> => {
-  const { backgroundColor, borderColor, borderStyle, borderWidth, colorScheme, textColor, ...restProps } = props || {};
+  const { backgroundColor, borderColor, borderRadius, borderStyle, borderWidth, colorScheme, textColor, ...restProps } =
+    props || {};
 
   const schemeRootClass = useClassNamePrefix(colorScheme ? `color-scheme-on-${colorScheme}` : '');
   const bgColorSchemeClass = useClassNamePrefix('bg-color-scheme');
@@ -63,6 +84,6 @@ export const useBoxStyleProps = (
 
   return {
     classProps: boxClasses,
-    props: restProps,
+    props: { ...restProps, ...getBorderRadiusProps(borderRadius) },
   };
 };
