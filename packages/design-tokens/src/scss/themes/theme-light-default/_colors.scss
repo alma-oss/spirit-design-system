@@ -79,27 +79,27 @@ $border-interactive-state-selected: #7847ff !default;
 
 $component-button-plain-border: #fff0 !default;
 $component-button-plain-content: #6039cc !default;
-$component-button-plain-state-active: #e4daff !default;
-$component-button-plain-state-default: #fff0 !default;
-$component-button-plain-state-hover: #f1edff !default;
+$component-button-plain-state-active: #f3effc !default;
+$component-button-plain-state-default: #fdfdfc !default;
+$component-button-plain-state-hover: #f5f2fc !default;
 
 $component-button-primary-border: #4e2ea6 !default;
 $component-button-primary-content: #fdfdfc !default;
-$component-button-primary-state-active: #6039cc !default;
+$component-button-primary-state-active: #8355ff !default;
 $component-button-primary-state-default: #7847ff !default;
-$component-button-primary-state-hover: #6c40e5 !default;
+$component-button-primary-state-hover: #8052ff !default;
 
 $component-button-secondary-border: #7847ff !default;
 $component-button-secondary-content: #6039cc !default;
-$component-button-secondary-state-active: #e4daff !default;
-$component-button-secondary-state-default: #fdfdfc !default;
-$component-button-secondary-state-hover: #f1edff !default;
+$component-button-secondary-state-active: #eae2fc !default;
+$component-button-secondary-state-default: #f3effc !default;
+$component-button-secondary-state-hover: #ece5fc !default;
 
-$component-button-tertiary-border: #e5e5e5 !default;
+$component-button-tertiary-border: #929292 !default;
 $component-button-tertiary-content: #202020 !default;
-$component-button-tertiary-state-active: #d9d9d9 !default;
-$component-button-tertiary-state-default: #f4f4f4 !default;
-$component-button-tertiary-state-hover: #e5e5e5 !default;
+$component-button-tertiary-state-active: #e9e9e8 !default;
+$component-button-tertiary-state-default: #fdfdfc !default;
+$component-button-tertiary-state-hover: #eeeeed !default;
 
 $component-header-background: #fdfdfc !default;
 $component-header-border: #e5e5e5 !default;
@@ -141,10 +141,10 @@ $component-toggle-unselected-state-active: #f4f4f4 !default;
 $component-toggle-unselected-state-default: #fdfdfc !default;
 $component-toggle-unselected-state-hover: #f9f9f9 !default;
 
-$disabled-background: #f9f9f9 !default;
-$disabled-border: #e5e5e5 !default;
-$disabled-content: #a5a5a5 !default;
-$disabled-foreground: #d9d9d9 !default;
+$disabled-background: #e7e7e7 !default;
+$disabled-border: #929292 !default;
+$disabled-content: #727272 !default;
+$disabled-foreground: #afafaf !default;
 
 $emotion-danger-background-basic: #b60000 !default;
 $emotion-danger-background-subtle: #fae4e4 !default;
@@ -176,15 +176,15 @@ $emotion-success-state-active: #3e9b4f !default;
 $emotion-success-state-default: #327c3f !default;
 $emotion-success-state-hover: #388b47 !default;
 
-$emotion-warning-background-basic: #c26400 !default;
+$emotion-warning-background-basic: #b45309 !default;
 $emotion-warning-background-subtle: #faf1e4 !default;
 $emotion-warning-border-basic: #c26400 !default;
 $emotion-warning-border-subtle: #f9be80 !default;
 $emotion-warning-content-basic: #9d5100 !default;
 $emotion-warning-content-subtle: #fdfdfc !default;
-$emotion-warning-state-active: #f27d00 !default;
-$emotion-warning-state-default: #c26400 !default;
-$emotion-warning-state-hover: #da7100 !default;
+$emotion-warning-state-active: #ba601c !default;
+$emotion-warning-state-default: #b45309 !default;
+$emotion-warning-state-hover: #b85d17 !default;
 
 $focus-focus-ring-color-01: #d2c2ffb2 !default;
 

@@ -79,27 +79,27 @@ export const borderInteractiveStateSelected = '#7847ff';
 
 export const componentButtonPlainBorder = '#fff0';
 export const componentButtonPlainContent = '#6039cc';
-export const componentButtonPlainStateActive = '#e4daff';
-export const componentButtonPlainStateDefault = '#fff0';
-export const componentButtonPlainStateHover = '#f1edff';
+export const componentButtonPlainStateActive = '#f3effc';
+export const componentButtonPlainStateDefault = '#fdfdfc';
+export const componentButtonPlainStateHover = '#f5f2fc';
 
 export const componentButtonPrimaryBorder = '#4e2ea6';
 export const componentButtonPrimaryContent = '#fdfdfc';
-export const componentButtonPrimaryStateActive = '#6039cc';
+export const componentButtonPrimaryStateActive = '#8355ff';
 export const componentButtonPrimaryStateDefault = '#7847ff';
-export const componentButtonPrimaryStateHover = '#6c40e5';
+export const componentButtonPrimaryStateHover = '#8052ff';
 
 export const componentButtonSecondaryBorder = '#7847ff';
 export const componentButtonSecondaryContent = '#6039cc';
-export const componentButtonSecondaryStateActive = '#e4daff';
-export const componentButtonSecondaryStateDefault = '#fdfdfc';
-export const componentButtonSecondaryStateHover = '#f1edff';
+export const componentButtonSecondaryStateActive = '#eae2fc';
+export const componentButtonSecondaryStateDefault = '#f3effc';
+export const componentButtonSecondaryStateHover = '#ece5fc';
 
-export const componentButtonTertiaryBorder = '#e5e5e5';
+export const componentButtonTertiaryBorder = '#929292';
 export const componentButtonTertiaryContent = '#202020';
-export const componentButtonTertiaryStateActive = '#d9d9d9';
-export const componentButtonTertiaryStateDefault = '#f4f4f4';
-export const componentButtonTertiaryStateHover = '#e5e5e5';
+export const componentButtonTertiaryStateActive = '#e9e9e8';
+export const componentButtonTertiaryStateDefault = '#fdfdfc';
+export const componentButtonTertiaryStateHover = '#eeeeed';
 
 export const componentHeaderBackground = '#fdfdfc';
 export const componentHeaderBorder = '#e5e5e5';
@@ -141,10 +141,10 @@ export const componentToggleUnselectedStateActive = '#f4f4f4';
 export const componentToggleUnselectedStateDefault = '#fdfdfc';
 export const componentToggleUnselectedStateHover = '#f9f9f9';
 
-export const disabledBackground = '#f9f9f9';
-export const disabledBorder = '#e5e5e5';
-export const disabledContent = '#a5a5a5';
-export const disabledForeground = '#d9d9d9';
+export const disabledBackground = '#e7e7e7';
+export const disabledBorder = '#929292';
+export const disabledContent = '#727272';
+export const disabledForeground = '#afafaf';
 
 export const emotionDangerBackgroundBasic = '#b60000';
 export const emotionDangerBackgroundSubtle = '#fae4e4';
@@ -176,15 +176,15 @@ export const emotionSuccessStateActive = '#3e9b4f';
 export const emotionSuccessStateDefault = '#327c3f';
 export const emotionSuccessStateHover = '#388b47';
 
-export const emotionWarningBackgroundBasic = '#c26400';
+export const emotionWarningBackgroundBasic = '#b45309';
 export const emotionWarningBackgroundSubtle = '#faf1e4';
 export const emotionWarningBorderBasic = '#c26400';
 export const emotionWarningBorderSubtle = '#f9be80';
 export const emotionWarningContentBasic = '#9d5100';
 export const emotionWarningContentSubtle = '#fdfdfc';
-export const emotionWarningStateActive = '#f27d00';
-export const emotionWarningStateDefault = '#c26400';
-export const emotionWarningStateHover = '#da7100';
+export const emotionWarningStateActive = '#ba601c';
+export const emotionWarningStateDefault = '#b45309';
+export const emotionWarningStateHover = '#b85d17';
 
 export const focusFocusRingColor01 = '#d2c2ffb2';
 

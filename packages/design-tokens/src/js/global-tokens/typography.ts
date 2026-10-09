@@ -251,7 +251,7 @@ export const codeSmallRegular = {
 
 export const displayLarge = {
   mobile: {
-    fontFamily: "'General Sans', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: '4.75rem',
     fontStyle: 'normal',
     fontWeight: 700,
@@ -261,7 +261,7 @@ export const displayLarge = {
 
 export const displayMedium = {
   mobile: {
-    fontFamily: "'General Sans', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: '3.5rem',
     fontStyle: 'normal',
     fontWeight: 700,
@@ -271,7 +271,7 @@ export const displayMedium = {
 
 export const displaySmall = {
   mobile: {
-    fontFamily: "'General Sans', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: '3rem',
     fontStyle: 'normal',
     fontWeight: 700,
