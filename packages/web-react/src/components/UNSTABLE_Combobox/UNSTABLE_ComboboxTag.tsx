@@ -21,7 +21,7 @@ const UNSTABLE_ComboboxTag = ({
   const { t } = useI18n();
   const { tagDescriptionId } = useComboboxContext();
 
-  const removeButtonAriaLabel = resolveComponentString(removeLabel ?? { key: 'combobox.removeItemLabel' }, t, {
+  const removeButtonAriaLabel = resolveComponentString(removeLabel ?? { key: 'combobox.tag.removeAria' }, t, {
     itemLabel: getNodeText(label),
   });
 

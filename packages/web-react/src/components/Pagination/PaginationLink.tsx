@@ -25,7 +25,7 @@ const _PaginationLink = <E extends ElementType = 'a'>(props: SpiritPaginationLin
   const { pageLabel } = useStringsProp({
     pageLabel: { value: strings?.pageAria, deprecated: accessibilityLabel },
   });
-  const visuallyHiddenLabel = pageLabel || `${t('pagination.goToPage')} ${pageNumber}`;
+  const visuallyHiddenLabel = pageLabel || `${t('pagination.pageAria')} ${pageNumber}`;
 
   useDeprecationMessage({
     method: 'custom',

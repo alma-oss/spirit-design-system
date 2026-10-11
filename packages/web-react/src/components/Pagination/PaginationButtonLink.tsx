@@ -22,7 +22,7 @@ const _PaginationButtonLink = <E extends ElementType = 'a'>(
   const { t } = useI18n();
   const { direction, accessibilityLabel, ...restProps } = props as unknown as SpiritPaginationButtonLinkProps;
   const directionLabel =
-    accessibilityLabel ?? (direction === 'previous' ? t('pagination.previous') : t('pagination.next'));
+    accessibilityLabel ?? (direction === 'previous' ? t('pagination.previousAria') : t('pagination.nextAria'));
 
   const iconType = {
     previous: 'chevron-left',

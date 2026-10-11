@@ -43,8 +43,8 @@ const _TextFieldBase = (props: SpiritTextFieldBaseProps, ref: ForwardedRef<HTMLI
     ...restProps
   } = propsWithoutStrings;
   const { hide: ariaLabelHide, show: ariaLabelShow } = useStringsProp({
-    hide: { value: strings?.hideAria, key: 'textField.password.hide' },
-    show: { value: strings?.showAria, key: 'textField.password.show' },
+    hide: { value: strings?.hideAria, key: 'textField.hideAria' },
+    show: { value: strings?.showAria, key: 'textField.showAria' },
   });
   const { isPasswordShown, passwordToggle } = usePasswordToggle();
   const hasPasswordToggleAddon = Boolean(hasPasswordToggle && !isMultiline);

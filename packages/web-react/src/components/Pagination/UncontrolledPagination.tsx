@@ -23,7 +23,7 @@ const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.E
     ...rest
   } = props;
   const { page: resolvedAccessibilityLabel } = useStringsProp({
-    page: { value: strings?.pageAria, deprecated: accessibilityLabel, key: 'pagination.goToPage' },
+    page: { value: strings?.pageAria, deprecated: accessibilityLabel, key: 'pagination.pageAria' },
   });
   const { currentPage, pages, handlePageChange } = usePagination({
     defaultPage,

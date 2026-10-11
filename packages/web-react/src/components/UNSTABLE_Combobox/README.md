@@ -251,47 +251,276 @@ values Combobox does not set itself.
 | `focus()`                  | Focuses the combobox filter input                                                       |
 | `selectedKeys`             | Current selected keys (mirrors the `selectedKeys` prop)                                 |
 
-| Name                          | Type                                                        | Default                                     | Required | Description                                                                                                                          |
-| ----------------------------- | ----------------------------------------------------------- | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `addMoreDescriptionText`      | `string`                                                    | i18n `combobox.addMoreDescription`          | ✕        | _Deprecated, use `strings.addMore.descriptionAria`_                                                                                  |
-| `addMoreLabel`                | `string`                                                    | i18n `combobox.addMore`                     | ✕        | _Deprecated, use `strings.addMore.label`_                                                                                            |
-| `auxiliaryContent`            | `ReactNode`                                                 | —                                           | ✕        | Extra popover content sibling of the options widget                                                                                  |
-| `children`                    | `ReactNode`                                                 | —                                           | ✕        | Options inside the popover widget (optional for tip-only / `auxiliaryContent`)                                                       |
-| `contextualHelp`              | `ReactNode`                                                 | —                                           | ✕        | Content next to the visible field label, typically [ContextualHelp][contextual-help]; omitted when `isLabelHidden`. The field supplies the tooltip `id` |
-| `dropdownProps`               | `DropdownBaseProps`                                         | —                                           | ✕        | Alignment and dropdown behavior for the inner `Dropdown`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)          |
-| `emptySelectionLabel`         | `string`                                                    | —                                           | ✕        | _Deprecated, use `strings.selection.empty`_                                                                                          |
-| `emptyStateLabel`             | `ReactNode`                                                 | i18n `combobox.emptyState`                  | ✕        | Empty-state slot content                                                                                                             |
-| `hasClearButton`              | `bool`                                                      | `false`                                     | ✕        | Clear-all addon when selection is non-empty                                                                                          |
-| `hasEmptyState`               | `bool`                                                      | `false`                                     | ✕        | Enables empty-state slot; shown when there are no option children                                                                    |
-| `hasValidationIcon`           | `bool`                                                      | `false`                                     | ✕        | Whether to show the validation icon                                                                                                  |
-| `helperText`                  | `ReactNode`                                                 | —                                           | ✕        | Helper text below the field                                                                                                          |
-| `id`                          | `string`                                                    | —                                           | ✓        | Stable id for the combobox and related elements                                                                                      |
-| `inputValue`                  | `string`                                                    | —                                           | ✓        | Controlled filter/query string                                                                                                       |
-| `isDisabled`                  | `bool`                                                      | `false`                                     | ✕        | Disables input, tags, interaction, and contextual help                                                                               |
-| `isLabelHidden`               | `bool`                                                      | `false`                                     | ✕        | Visually hides the label (remains accessible) and omits contextual help                                                                                 |
-| `isLoading`                   | `bool`                                                      | `false`                                     | ✕        | Shows the loading slot                                                                                                               |
-| `isOpen`                      | `bool`                                                      | —                                           | ✓        | Popover open state                                                                                                                   |
-| `isRequired`                  | `bool`                                                      | `false`                                     | ✕        | Required indicator on the label and `aria-required` on the filter input                                                              |
-| `label`                       | `string`                                                    | —                                           | ✓        | Visible label and accessible name                                                                                                    |
-| `labelProps`                  | `StyleProps`                                                | —                                           | ✕        | [Style props][readme-style-props] for the inner `Label`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)           |
-| `loadingLabel`                | `ReactNode`                                                 | i18n `combobox.loading`                     | ✕        | Loading slot content (text and/or spinner)                                                                                           |
-| `onInputChange`               | `(value: string) => void`                                   | —                                           | ✓        | Called when the filter input changes                                                                                                 |
-| `onSelectionChange`           | `(keys: string[]) => void`                                  | —                                           | ✓        | Called when the selection changes                                                                                                    |
-| `onToggle`                    | `() => void`                                                | —                                           | ✓        | Toggle callback; parent updates `isOpen`                                                                                             |
-| `optionKeys`                  | `string[]`                                                  | from children                               | ✕        | Full option id set for all-selected / add-more; required when filtered options unmount                                               |
-| `optionsRole`                 | `'listbox'` \| `'grid'` \| `null`                           | `listbox`                                   | ✕        | Options widget pattern; see [Options Popup: Listbox or Grid](#options-popup-listbox-or-grid)                                         |
-| `popoverProps`                | `StyleProps`                                                | `{ theme: 'theme-light-default' }`          | ✕        | [Style props][readme-style-props] for the inner `DropdownPopover`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts) |
-| `removeAllLabel`              | `string`                                                    | i18n `combobox.removeAll`                   | ✕        | _Deprecated, use `strings.removeAllAria`_                                                                                            |
-| `removeItemLabel`             | `string`                                                    | i18n `combobox.removeItemLabel`             | ✕        | _Deprecated, use `strings.tag.removeAria`_                                                                                           |
-| `renderTags`                  | `(options: UnstableComboboxRenderTagsOptions) => ReactNode` | —                                           | ✕        | Custom selection UI; see [Custom Selection UI (renderTags)](#custom-selection-ui-rendertags)                                         |
-| `selectedKeys`                | `string[]`                                                  | —                                           | ✓        | Selected option ids (insertion order)                                                                                                |
-| `selectionAriaLabel`          | `string`                                                    | i18n `combobox.selectionAriaLabel`          | ✕        | _Deprecated, use `strings.selection.labelAria`_                                                                                      |
-| `selectionCountLabel`         | `string`                                                    | i18n `combobox.selectionCountLabel`         | ✕        | _Deprecated, use `strings.selection.countAria.plural`_                                                                               |
-| `selectionCountLabelSingular` | `string`                                                    | i18n `combobox.selectionCountLabelSingular` | ✕        | _Deprecated, use `strings.selection.countAria.singular`_                                                                             |
-| `size`                        | [Size dictionary][dictionary-size]                          | `medium`                                    | ✕        | Size of the field shell                                                                                                              |
-| `strings`                     | `UnstableComboboxStrings`                                   | —                                           | ✕        | Optional copy overrides; see [Translations](#translations)                                                                           |
-| `tagDescriptionText`          | `string`                                                    | i18n `combobox.tagDescriptionText`          | ✕        | _Deprecated, use `strings.tag.descriptionAria`_                                                                                      |
-| `tagProps`                    | `StyleProps`                                                | —                                           | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)  |
-| `validationState`             | [Validation dictionary][dictionary-validation]              | —                                           | ✕        | Validation state                                                                                                                     |
-| `validationText`              | `ReactNode` \| `ReactNode[]`                                | —                                           | ✕        | Validation message                                                                                                                   |
-| `variant`                     | [Fill Variants dictionary][dictionary-variant]              | `fill`                                      | ✕        | `InputContainer` variant                                                                                                             |
+| Name                          | Type                                                        | Default                                      | Required | Description                                                                                                                                             |
+| ----------------------------- | ----------------------------------------------------------- | -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `addMoreDescriptionText`      | `string`                                                    | i18n `combobox.addMore.descriptionAria`      | ✕        | _Deprecated, use `strings.addMore.descriptionAria`_                                                                                                     |
+| `addMoreLabel`                | `string`                                                    | i18n `combobox.addMore.label`                | ✕        | _Deprecated, use `strings.addMore.label`_                                                                                                               |
+| `auxiliaryContent`            | `ReactNode`                                                 | —                                            | ✕        | Extra popover content sibling of the options widget                                                                                                     |
+| `children`                    | `ReactNode`                                                 | —                                            | ✕        | Options inside the popover widget (optional for tip-only / `auxiliaryContent`)                                                                          |
+| `contextualHelp`              | `ReactNode`                                                 | —                                            | ✕        | Content next to the visible field label, typically [ContextualHelp][contextual-help]; omitted when `isLabelHidden`. The field supplies the tooltip `id` |
+| `dropdownProps`               | `DropdownBaseProps`                                         | —                                            | ✕        | Alignment and dropdown behavior for the inner `Dropdown`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)                             |
+| `emptySelectionLabel`         | `string`                                                    | —                                            | ✕        | _Deprecated, use `strings.selection.empty`_                                                                                                             |
+| `emptyStateLabel`             | `ReactNode`                                                 | i18n `combobox.emptyState`                   | ✕        | Empty-state slot content                                                                                                                                |
+| `hasClearButton`              | `bool`                                                      | `false`                                      | ✕        | Clear-all addon when selection is non-empty                                                                                                             |
+| `hasEmptyState`               | `bool`                                                      | `false`                                      | ✕        | Enables empty-state slot; shown when there are no option children                                                                                       |
+| `hasValidationIcon`           | `bool`                                                      | `false`                                      | ✕        | Whether to show the validation icon                                                                                                                     |
+| `helperText`                  | `ReactNode`                                                 | —                                            | ✕        | Helper text below the field                                                                                                                             |
+| `id`                          | `string`                                                    | —                                            | ✓        | Stable id for the combobox and related elements                                                                                                         |
+| `inputValue`                  | `string`                                                    | —                                            | ✓        | Controlled filter/query string                                                                                                                          |
+| `isDisabled`                  | `bool`                                                      | `false`                                      | ✕        | Disables input, tags, interaction, and contextual help                                                                                                  |
+| `isLabelHidden`               | `bool`                                                      | `false`                                      | ✕        | Visually hides the label (remains accessible) and omits contextual help                                                                                 |
+| `isLoading`                   | `bool`                                                      | `false`                                      | ✕        | Shows the loading slot                                                                                                                                  |
+| `isOpen`                      | `bool`                                                      | —                                            | ✓        | Popover open state                                                                                                                                      |
+| `isRequired`                  | `bool`                                                      | `false`                                      | ✕        | Required indicator on the label and `aria-required` on the filter input                                                                                 |
+| `label`                       | `string`                                                    | —                                            | ✓        | Visible label and accessible name                                                                                                                       |
+| `labelProps`                  | `StyleProps`                                                | —                                            | ✕        | [Style props][readme-style-props] for the inner `Label`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)                              |
+| `loadingLabel`                | `ReactNode`                                                 | i18n `combobox.loading`                      | ✕        | Loading slot content (text and/or spinner)                                                                                                              |
+| `onInputChange`               | `(value: string) => void`                                   | —                                            | ✓        | Called when the filter input changes                                                                                                                    |
+| `onSelectionChange`           | `(keys: string[]) => void`                                  | —                                            | ✓        | Called when the selection changes                                                                                                                       |
+| `onToggle`                    | `() => void`                                                | —                                            | ✓        | Toggle callback; parent updates `isOpen`                                                                                                                |
+| `optionKeys`                  | `string[]`                                                  | from children                                | ✕        | Full option id set for all-selected / add-more; required when filtered options unmount                                                                  |
+| `optionsRole`                 | `'listbox'` \| `'grid'` \| `null`                           | `listbox`                                    | ✕        | Options widget pattern; see [Options Popup: Listbox or Grid](#options-popup-listbox-or-grid)                                                            |
+| `popoverProps`                | `StyleProps`                                                | `{ theme: 'theme-light-default' }`           | ✕        | [Style props][readme-style-props] for the inner `DropdownPopover`; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)                    |
+| `removeAllLabel`              | `string`                                                    | i18n `combobox.removeAllAria`                | ✕        | _Deprecated, use `strings.removeAllAria`_                                                                                                               |
+| `removeItemLabel`             | `string`                                                    | i18n `combobox.tag.removeAria`               | ✕        | _Deprecated, use `strings.tag.removeAria`_                                                                                                              |
+| `renderTags`                  | `(options: UnstableComboboxRenderTagsOptions) => ReactNode` | —                                            | ✕        | Custom selection UI; see [Custom Selection UI (renderTags)](#custom-selection-ui-rendertags)                                                            |
+| `selectedKeys`                | `string[]`                                                  | —                                            | ✓        | Selected option ids (insertion order)                                                                                                                   |
+| `selectionAriaLabel`          | `string`                                                    | i18n `combobox.selection.labelAria`          | ✕        | _Deprecated, use `strings.selection.labelAria`_                                                                                                         |
+| `selectionCountLabel`         | `string`                                                    | i18n `combobox.selection.countAria.plural`   | ✕        | _Deprecated, use `strings.selection.countAria.plural`_                                                                                                  |
+| `selectionCountLabelSingular` | `string`                                                    | i18n `combobox.selection.countAria.singular` | ✕        | _Deprecated, use `strings.selection.countAria.singular`_                                                                                                |
+| `size`                        | [Size dictionary][dictionary-size]                          | `medium`                                     | ✕        | Size of the field shell                                                                                                                                 |
+| `strings`                     | `UnstableComboboxStrings`                                   | —                                            | ✕        | Optional copy overrides; see [Translations](#translations)                                                                                              |
+| `tagDescriptionText`          | `string`                                                    | i18n `combobox.tag.descriptionAria`          | ✕        | _Deprecated, use `strings.tag.descriptionAria`_                                                                                                         |
+| `tagProps`                    | `StyleProps`                                                | —                                            | ✕        | [Style props][readme-style-props] for the default `Tag` elements; see [Passing Props to Inner Parts](#passing-props-to-inner-parts)                     |
+| `validationState`             | [Validation dictionary][dictionary-validation]              | —                                            | ✕        | Validation state                                                                                                                                        |
+| `validationText`              | `ReactNode` \| `ReactNode[]`                                | —                                            | ✕        | Validation message                                                                                                                                      |
+| `variant`                     | [Fill Variants dictionary][dictionary-variant]              | `fill`                                       | ✕        | `InputContainer` variant                                                                                                                                |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
+### Translations
+
+Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default unless noted.
+`emptyStateLabel` and `loadingLabel` stay top-level `ReactNode` slots and win over `strings.emptyState` and `strings.loading`.
+
+| Key                            | Default key                             | English default                           | Description              |
+| ------------------------------ | --------------------------------------- | ----------------------------------------- | ------------------------ |
+| `addMore.label`                | `combobox.addMore.label`                | `+ Add more…`                             | Visible add-more prompt  |
+| `addMore.descriptionAria`      | `combobox.addMore.descriptionAria`      | `Add more {label}`                        | Add-more accessible name |
+| `selection.empty`              | —                                       | field `label`                             | Empty-field placeholder  |
+| `selection.labelAria`          | `combobox.selection.labelAria`          | `Selected {label}`                        | Selection summary        |
+| `selection.countAria.plural`   | `combobox.selection.countAria.plural`   | `{label}, {count} items selected`         | Count (plural)           |
+| `selection.countAria.singular` | `combobox.selection.countAria.singular` | `{label}, {count} item selected`          | Count (singular)         |
+| `tag.descriptionAria`          | `combobox.tag.descriptionAria`          | `Press Delete or Backspace to remove`     | Tag hint                 |
+| `tag.removeAria`               | `combobox.tag.removeAria`               | `Remove {itemLabel}`                      | Remove one tag           |
+| `removeAllAria`                | `combobox.removeAllAria`                | `Remove all`                              | Clear all                |
+| `emptyState`                   | `combobox.emptyState`                   | `Nothing found`                           | Empty-state text         |
+| `loading`                      | `combobox.loading`                      | `Loading…`                                | Loading text             |
+| `splitTag.listboxAria`         | `combobox.splitTag.listboxAria`         | `Options`                                 | Split-tag listbox name   |
+| `splitTag.selectAria`          | `combobox.splitTag.selectAria`          | `Select option, selected {selectedLabel}` | Split-tag trigger name   |
+
+### Deprecation Notice
+
+The flat translation props are deprecated and will be removed in v6. Use `strings` instead. `emptyStateLabel` and
+`loadingLabel` stay top-level `ReactNode` slots.
+
+### Migration Guide
+
+```diff
+- <UNSTABLE_Combobox addMoreLabel="+ Add more…" emptySelectionLabel="Search" />
++ <UNSTABLE_Combobox strings={{
+addMore: {
+  label: '+ Add more…',
+},
+selection: {
+  empty: 'Search',
+},
+}} />
+```
+
+## UNSTABLE_UncontrolledCombobox
+
+UNSTABLE_UncontrolledCombobox wraps **UNSTABLE_Combobox** with internal state for popover open state, selection, and
+the filter string. Filter starts as `''`. Use **`defaultIsOpen`** for the initial popover state (default `false`).
+
+```tsx
+import React from 'react';
+import { Label, UNSTABLE_ComboboxOption, UNSTABLE_UncontrolledCombobox } from '@alma-oss/spirit-web-react';
+
+export const Example = () => (
+  <UNSTABLE_UncontrolledCombobox id="languages-uncontrolled" label="Languages" defaultSelectedKeys={['cs']}>
+    <UNSTABLE_ComboboxOption value="cs">
+      <Label>Czech</Label>
+    </UNSTABLE_ComboboxOption>
+    <UNSTABLE_ComboboxOption value="en">
+      <Label>English</Label>
+    </UNSTABLE_ComboboxOption>
+  </UNSTABLE_UncontrolledCombobox>
+);
+```
+
+### API
+
+All props from **UNSTABLE_Combobox** apply except `isOpen`, `onToggle`, `selectedKeys`, and `inputValue`, which are
+managed internally.
+
+| Name                  | Type                       | Default | Required | Description                               |
+| --------------------- | -------------------------- | ------- | -------- | ----------------------------------------- |
+| `children`            | `ReactNode`                | —       | ✕        | Option rows (optional for tip-only)       |
+| `defaultIsOpen`       | `bool`                     | `false` | ✕        | Initial popover open state                |
+| `defaultSelectedKeys` | `string[]`                 | `[]`    | ✕        | Initial selection                         |
+| `id`                  | `string`                   | —       | ✓        | Stable id                                 |
+| `label`               | `string`                   | —       | ✓        | Label                                     |
+| `onInputChange`       | `(value: string) => void`  | —       | ✕        | Optional callback when the filter changes |
+| `onSelectionChange`   | `(keys: string[]) => void` | —       | ✕        | Optional callback when selection changes  |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
+## UNSTABLE_ComboboxOption
+
+UNSTABLE_ComboboxOption is one option in the popover options widget (combobox popover context is required). `value` must
+match entries in `selectedKeys`. Markup follows parent [`optionsRole`](#options-popup-listbox-or-grid): `role="option"` for listbox
+(default), or `role="row"` with a nested `role="gridcell"` for grid. For multi-action rows (one or more interactive
+elements), put extra cells in `endSlot` / `startSlot` (see the **Last Searches** demo).
+Pass optional **`label`** when `children` are rich and the selection tag should show a short title.
+
+Selection (`isSelected` / `aria-selected`), namespaced option `id`, and disabled state are controlled by the combobox.
+Pass `isDisabled` on the option for a permanently disabled item; combobox-level `isDisabled` is inherited.
+
+### API
+
+| Name         | Type        | Default | Required | Description                                                                        |
+| ------------ | ----------- | ------- | -------- | ---------------------------------------------------------------------------------- |
+| `children`   | `ReactNode` | —       | ✓        | Option label content (wrapped in `role="gridcell"` when `optionsRole="grid"`)      |
+| `isDisabled` | `bool`      | `false` | ✕        | Disables this option (also inherits Combobox `isDisabled`)                         |
+| `label`      | `string`    | —       | ✕        | Short label for selection tags when `children` are rich; defaults to children text |
+| `value`      | `string`    | —       | ✓        | Key used in `selectedKeys` (`data-spirit-value`; DOM `id` is namespaced)           |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
+## UNSTABLE_ComboboxTag
+
+Tag shell for custom `renderTags` output. Matches default selection tags for accessibility (`role="row"`, remove
+control). Pass `tagKeyboardProps` from `getKeyboardGridRowProps` so the row stays on the selection keyboard path.
+
+### API
+
+| Name               | Type                    | Default                        | Required | Description                                                    |
+| ------------------ | ----------------------- | ------------------------------ | -------- | -------------------------------------------------------------- |
+| `children`         | `ReactNode`             | —                              | ✕        | Tag content (defaults to `label`)                              |
+| `isDisabled`       | `bool`                  | `false`                        | ✕        | Disables the tag                                               |
+| `label`            | `ReactNode`             | —                              | ✓        | Accessible label for the tag                                   |
+| `onRemove`         | `() => void`            | —                              | ✓        | Remove button handler                                          |
+| `removeLabel`      | `string`                | i18n `combobox.tag.removeAria` | ✕        | Accessible name for the remove control; supports `{itemLabel}` |
+| `tagKeyboardProps` | `SelectionGridRowProps` | —                              | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags`       |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
+## UNSTABLE_ComboboxSplitTag
+
+Selection row for `renderTags` with three segments: label, nested select, and remove. Use it for
+Locations-style tags (city + distance). Wire `tagKeyboardProps` the same way as
+[`UNSTABLE_ComboboxTag`](#unstable_comboboxtag).
+
+The nested select is **controlled**: pass `select.isOpen` and `select.onToggle` (for example with
+[`useDisclosureState`][disclosure-hooks]). Because each selected item needs its own open state, keep that
+state in a small per-row component — do not call hooks inside `.map()`.
+
+```tsx
+const ComboboxLocationSplitTagRow = ({
+  distance,
+  item,
+  onDistanceChange,
+  onRemove,
+  tagKeyboardProps,
+}) => {
+  const { isExpanded: isSelectOpen, toggle: onSelectToggle } = useDisclosureState({
+    defaultExpanded: false,
+  });
+
+  return (
+    <UNSTABLE_ComboboxSplitTag
+      label={item.label}
+      onRemove={onRemove}
+      tagKeyboardProps={tagKeyboardProps}
+      select={{
+        value: distance,
+        options: ['+5 km', '+10 km', '+20 km', '+50 km'],
+        isOpen: isSelectOpen,
+        onToggle: onSelectToggle,
+        onChange: onDistanceChange,
+      }}
+    />
+  );
+};
+
+renderTags={({ getKeyboardGridRowProps, removeTagAtIndex, selectedItems }) =>
+  selectedItems.map((item, index) => (
+    <ComboboxLocationSplitTagRow
+      key={item.value}
+      item={item}
+      distance={distances[item.value]}
+      onDistanceChange={(next) =>
+        setDistances((current) => ({ ...current, [item.value]: next }))
+      }
+      onRemove={() => removeTagAtIndex(index)}
+      tagKeyboardProps={getKeyboardGridRowProps(index)}
+    />
+  ))
+}
+```
+
+See the **Locations (with SplitTag)** demo for a full example.
+
+### API
+
+| Name               | Type                                  | Default                        | Required | Description                                                                      |
+| ------------------ | ------------------------------------- | ------------------------------ | -------- | -------------------------------------------------------------------------------- |
+| `isDisabled`       | `bool`                                | Combobox `isDisabled`          | ✕        | Disables the row                                                                 |
+| `label`            | `ReactNode`                           | —                              | ✓        | Primary label segment                                                            |
+| `onRemove`         | `() => void`                          | —                              | ✓        | Remove button handler                                                            |
+| `removeLabel`      | `string`                              | i18n `combobox.tag.removeAria` | ✕        | Accessible name for remove; supports `{itemLabel}`                               |
+| `select`           | `UnstableComboboxSplitTagSelectProps` | —                              | ✓        | Controlled select segment (`value`, `options`, `onChange`, `isOpen`, `onToggle`) |
+| `tagKeyboardProps` | `SelectionGridRowProps`               | —                              | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags`                         |
+
+#### `select`
+
+| Name           | Type                             | Default                              | Required | Description                                                                     |
+| -------------- | -------------------------------- | ------------------------------------ | -------- | ------------------------------------------------------------------------------- |
+| `aria-label`   | `string`                         | i18n `combobox.splitTag.selectAria`  | ✕        | Accessible name for the select trigger. Overrides `strings.splitTag.selectAria` |
+| `id`           | `string`                         | auto                                 | ✕        | Id prefix for Dropdown / option ids                                             |
+| `isOpen`       | `bool`                           | —                                    | ✓        | Whether the nested select is open                                               |
+| `listboxLabel` | `TranslatableString`             | i18n `combobox.splitTag.listboxAria` | ✕        | Accessible name for the listbox. Overrides `strings.splitTag.listboxAria`       |
+| `onChange`     | `(value: string) => void`        | —                                    | ✓        | Selected option change                                                          |
+| `onToggle`     | `() => void`                     | —                                    | ✓        | Toggle nested select open state                                                 |
+| `options`      | `string[] \| { value, label }[]` | —                                    | ✓        | Select options                                                                  |
+| `value`        | `string`                         | —                                    | ✓        | Selected option value                                                           |
+
+On top of the API options, the components accept [additional attributes][readme-additional-attributes].
+If you need more control over the styling of a component, you can use [style props][readme-style-props]
+and [escape hatches][readme-escape-hatches].
+
+[combobox-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Combobox/demo/ComboboxThemes.tsx
+[combobox-web]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_Combobox/README.md
+[contextual-help]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ContextualHelp/README.md
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
+[dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
+[dictionary-variant]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#fill-variants
+[disclosure-hooks]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/disclosure/README.md
+[dropdown-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Dropdown/README.md
+[item-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
+[picker-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_Picker/README.md
+[readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
+[readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings
+[readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[splittag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/UNSTABLE_SplitTag/README.md
+[tag-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Tag/README.md

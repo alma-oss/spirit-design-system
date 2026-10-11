@@ -74,7 +74,7 @@ const getCharacterCounterScreenReaderMessage = (
 ): string => {
   if (counterThreshold === undefined) {
     return resolveComponentString(
-      strings?.characters?.enteredAria ?? { key: 'textArea.counter.charactersEntered' },
+      strings?.characters?.enteredAria ?? { key: 'textArea.counter.characters.enteredAria' },
       t,
       {
         count: currentLength,
@@ -83,7 +83,7 @@ const getCharacterCounterScreenReaderMessage = (
   }
 
   if (currentLength === 0) {
-    return resolveComponentString(strings?.canEnterUpToAria ?? { key: 'textArea.counter.canEnterUpTo' }, t, {
+    return resolveComponentString(strings?.canEnterUpToAria ?? { key: 'textArea.counter.canEnterUpToAria' }, t, {
       maxLength: counterThreshold,
     });
   }
@@ -92,8 +92,8 @@ const getCharacterCounterScreenReaderMessage = (
     const overCount = currentLength - counterThreshold;
     const value =
       overCount === 1
-        ? (strings?.character?.overLimitAria ?? { key: 'textArea.counter.characterOverLimit' })
-        : (strings?.characters?.overLimitAria ?? { key: 'textArea.counter.charactersOverLimit' });
+        ? (strings?.character?.overLimitAria ?? { key: 'textArea.counter.character.overLimitAria' })
+        : (strings?.characters?.overLimitAria ?? { key: 'textArea.counter.characters.overLimitAria' });
 
     return resolveComponentString(value, t, { count: overCount });
   }
@@ -101,8 +101,8 @@ const getCharacterCounterScreenReaderMessage = (
   const remaining = counterThreshold - currentLength;
   const value =
     remaining === 1
-      ? (strings?.character?.remainingAria ?? { key: 'textArea.counter.characterRemaining' })
-      : (strings?.characters?.remainingAria ?? { key: 'textArea.counter.charactersRemaining' });
+      ? (strings?.character?.remainingAria ?? { key: 'textArea.counter.character.remainingAria' })
+      : (strings?.characters?.remainingAria ?? { key: 'textArea.counter.characters.remainingAria' });
 
   return resolveComponentString(value, t, { count: remaining });
 };

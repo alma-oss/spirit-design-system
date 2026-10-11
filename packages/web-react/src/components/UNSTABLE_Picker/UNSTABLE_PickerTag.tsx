@@ -23,7 +23,7 @@ const UNSTABLE_PickerTag = ({
   const { t } = useI18n();
   const { size = Sizes.MEDIUM, tagDescriptionId } = usePickerContext();
 
-  const removeButtonLabel = resolveComponentString(removeLabel ?? { key: 'picker.removeItemLabel' }, t, {
+  const removeButtonLabel = resolveComponentString(removeLabel ?? { key: 'picker.tag.removeAria' }, t, {
     itemLabel: getNodeText(label),
   });
 

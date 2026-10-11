@@ -104,16 +104,16 @@ export const useComboboxSplitTag = (props: SpiritUnstableComboboxSplitTagProps):
 
   const labelText = getNodeText(label);
   const selectedLabelText = getNodeText(selectedOptionLabel);
-  const removeButtonAriaLabel = resolveComponentString(removeLabel ?? { key: 'combobox.removeItemLabel' }, t, {
+  const removeButtonAriaLabel = resolveComponentString(removeLabel ?? { key: 'combobox.tag.removeAria' }, t, {
     itemLabel: labelText,
   });
   const selectTriggerAriaLabel =
     select['aria-label'] ??
-    resolveComponentString(splitTag?.selectAria ?? { key: 'combobox.splitTagSelectLabel' }, t, {
+    resolveComponentString(splitTag?.selectAria ?? { key: 'combobox.splitTag.selectAria' }, t, {
       selectedLabel: selectedLabelText,
     });
   const listboxLabel = resolveComponentString(
-    select.listboxLabel ?? splitTag?.listboxAria ?? { key: 'combobox.splitTagListboxLabel' },
+    select.listboxLabel ?? splitTag?.listboxAria ?? { key: 'combobox.splitTag.listboxAria' },
     t,
   );
 

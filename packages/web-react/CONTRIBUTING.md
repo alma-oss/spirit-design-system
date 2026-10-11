@@ -314,13 +314,13 @@ export const useButtonAria = (props: UseButtonAriaProps): ButtonAria => {
 
 ## Translations
 
-Default component copy lives in **`src/translations/defaults.ts`** as nested **`defaultTranslations`** (keys use `camelCase` formatting with dot notation, e.g. `common.close`, `textField.password.show`).
+Default component copy lives in **`src/translations/defaults.ts`** as nested **`defaultTranslations`**. Component sections match the `strings` prop (`textField.showAria`, `picker.tag.removeAria`). Shared copy stays under `common` (`common.close`).
 
 Implementation uses **`useI18n`** in `src/hooks/useI18n.ts` and optional **`I18nProvider`** in `src/context/I18nContext.tsx` (supports nested overrides and locale catalogs, then defaults). **Consumer-facing documentation** (`I18nProvider`, locale config, `useI18n`, placeholders) is in the [package README][web-react-readme].
 
 ### Adding New Keys
 
-1. Add the key to `defaultTranslations` in `src/translations/defaults.ts` following the nested structure (e.g. `pagination.goToPage`, `textField.password.show`).
+1. Add the key to `defaultTranslations` in `src/translations/defaults.ts` using the same path as the `strings` prop (e.g. `pagination.pageAria`, `textField.showAria`).
 2. Expose required component copy as a top-level `TranslatableString` prop.
 3. Expose optional component copy with a meaningful default through a component-local `FooStrings` type and
    `StringsProps<FooStrings>`.
@@ -343,7 +343,7 @@ const { closeLabel } = useStringsProp({
 });
 
 const { addButtonLabel, closeButtonLabel } = useStringsProp({
-  addButtonLabel: { value: strings?.addAria, deprecated: addButtonLabel, key: 'picker.add' },
+  addButtonLabel: { value: strings?.addAria, deprecated: addButtonLabel, key: 'picker.addAria' },
   closeButtonLabel: { value: strings?.closeAria, deprecated: closeButtonLabel, key: 'common.close' },
 });
 ```

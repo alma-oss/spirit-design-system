@@ -181,7 +181,7 @@ export interface UnstableComboboxSplitTagSelectProps {
   onToggle: () => void;
   /** Accessible name for the select trigger. */
   'aria-label'?: string;
-  /** Accessible name for the options listbox. @default i18n `combobox.splitTagListboxLabel` */
+  /** Accessible name for the options listbox. @default i18n `combobox.splitTag.listboxAria` */
   listboxLabel?: TranslatableString;
   /** Stable id prefix for the nested Dropdown / option ids. */
   id?: string;

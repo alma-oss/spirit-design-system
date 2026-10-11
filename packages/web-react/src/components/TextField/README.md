@@ -169,10 +169,10 @@ such as a `button` or link.
 
 Override optional copy with [`strings`][readme-component-strings]. Used when `hasPasswordToggle` is set. Omitted keys use the built-in English default.
 
-| Key        | Default key               | English default | Description                    |
-| ---------- | ------------------------- | --------------- | ------------------------------ |
-| `showAria` | `textField.password.show` | `Show password` | Toggle when password is hidden |
-| `hideAria` | `textField.password.hide` | `Hide password` | Toggle when password is shown  |
+| Key        | Default key          | English default | Description                    |
+| ---------- | -------------------- | --------------- | ------------------------------ |
+| `showAria` | `textField.showAria` | `Show password` | Toggle when password is hidden |
+| `hideAria` | `textField.hideAria` | `Hide password` | Toggle when password is shown  |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

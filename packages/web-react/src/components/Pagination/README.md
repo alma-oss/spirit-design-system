@@ -255,11 +255,11 @@ Override optional copy with [`strings`][readme-component-strings]. Omitted keys 
 `PaginationLink` uses `pageAria`, previous/next links use `previousAria` / `nextAria`, and
 `UncontrolledPagination` accepts all three.
 
-| Key            | Default key           | English default | Description      |
-| -------------- | --------------------- | --------------- | ---------------- |
-| `pageAria`     | `pagination.goToPage` | `Go to page`    | Numbered page    |
-| `previousAria` | `pagination.previous` | `Previous`      | Previous control |
-| `nextAria`     | `pagination.next`     | `Next`          | Next control     |
+| Key            | Default key               | English default | Description      |
+| -------------- | ------------------------- | --------------- | ---------------- |
+| `pageAria`     | `pagination.pageAria`     | `Go to page`    | Numbered page    |
+| `previousAria` | `pagination.previousAria` | `Previous`      | Previous control |
+| `nextAria`     | `pagination.nextAria`     | `Next`          | Next control     |
 
 ### Deprecation Notice
 

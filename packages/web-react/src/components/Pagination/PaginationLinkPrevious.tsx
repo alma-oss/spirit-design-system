@@ -16,7 +16,7 @@ const _PaginationLinkPrevious = <E extends ElementType = 'a'>(
   ref: PolymorphicRef<E>,
 ) => {
   const { label } = useStringsProp({
-    label: { value: strings?.previousAria, deprecated: accessibilityLabel, key: 'pagination.previous' },
+    label: { value: strings?.previousAria, deprecated: accessibilityLabel, key: 'pagination.previousAria' },
   });
 
   useDeprecationMessage({

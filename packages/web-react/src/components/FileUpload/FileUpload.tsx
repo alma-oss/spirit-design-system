@@ -49,12 +49,12 @@ const FileUpload = (props: FileUploadProps) => {
     upload: resolvedInputUploadText,
     dragAndDrop: resolvedInputDragAndDropText,
   } = useStringsProp({
-    button: { value: strings?.button, deprecated: buttonText, key: 'fileUploader.browse' },
-    upload: { value: strings?.upload, deprecated: inputUploadText, key: 'fileUploader.inputUpload' },
+    button: { value: strings?.button, deprecated: buttonText, key: 'fileUploader.button' },
+    upload: { value: strings?.upload, deprecated: inputUploadText, key: 'fileUploader.upload' },
     dragAndDrop: {
       value: strings?.dragAndDrop,
       deprecated: inputDragAndDropText,
-      key: 'fileUploader.inputDragAndDrop',
+      key: 'fileUploader.dragAndDrop',
     },
   });
 

@@ -58,14 +58,14 @@ The component renders nothing if neither `hasCounter` nor `counterThreshold` is 
 Override screen reader messages with [`strings`][readme-component-strings]. The visible `5/200` text is not translated.
 Omitted keys use the built-in English default.
 
-| Key                        | Default key                            | English default                              | Description                  |
-| -------------------------- | -------------------------------------- | -------------------------------------------- | ---------------------------- |
-| `canEnterUpToAria`         | `textArea.counter.canEnterUpTo`        | `You can enter up to {maxLength} characters` | At the limit                 |
-| `character.overLimitAria`  | `textArea.counter.characterOverLimit`  | `{count} character over limit`               | One character over           |
-| `character.remainingAria`  | `textArea.counter.characterRemaining`  | `{count} character remaining`                | One character remaining      |
-| `characters.enteredAria`   | `textArea.counter.charactersEntered`   | `{count} characters entered`                 | Count only (no threshold)    |
-| `characters.overLimitAria` | `textArea.counter.charactersOverLimit` | `{count} characters over limit`              | Several characters over      |
-| `characters.remainingAria` | `textArea.counter.charactersRemaining` | `{count} characters remaining`               | Several characters remaining |
+| Key                        | Default key                                 | English default                              | Description                  |
+| -------------------------- | ------------------------------------------- | -------------------------------------------- | ---------------------------- |
+| `canEnterUpToAria`         | `textArea.counter.canEnterUpToAria`         | `You can enter up to {maxLength} characters` | At the limit                 |
+| `character.overLimitAria`  | `textArea.counter.character.overLimitAria`  | `{count} character over limit`               | One character over           |
+| `character.remainingAria`  | `textArea.counter.character.remainingAria`  | `{count} character remaining`                | One character remaining      |
+| `characters.enteredAria`   | `textArea.counter.characters.enteredAria`   | `{count} characters entered`                 | Count only (no threshold)    |
+| `characters.overLimitAria` | `textArea.counter.characters.overLimitAria` | `{count} characters over limit`              | Several characters over      |
+| `characters.remainingAria` | `textArea.counter.characters.remainingAria` | `{count} characters remaining`               | Several characters remaining |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
