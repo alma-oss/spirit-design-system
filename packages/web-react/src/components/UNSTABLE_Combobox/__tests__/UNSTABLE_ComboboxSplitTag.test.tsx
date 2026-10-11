@@ -98,6 +98,91 @@ const TestComboboxWithSplitTags = ({
 };
 
 describe('UNSTABLE_ComboboxSplitTag', () => {
+  it('should use strings.splitTag as the default accessible names', () => {
+    render(
+      <UNSTABLE_Combobox
+        id="test-combobox-split-tag-strings"
+        label="Locations"
+        isOpen={false}
+        onToggle={() => {}}
+        selectedKeys={['prague']}
+        onSelectionChange={() => {}}
+        inputValue=""
+        onInputChange={() => {}}
+        strings={{
+          splitTag: {
+            listboxAria: 'Distance options',
+            selectAria: 'Pick distance, selected {selectedLabel}',
+          },
+        }}
+        renderTags={() => (
+          <UNSTABLE_ComboboxSplitTag
+            label="Praha"
+            onRemove={() => {}}
+            select={{
+              value: '+5 km',
+              options: DISTANCES,
+              isOpen: true,
+              onToggle: () => {},
+              onChange: () => {},
+            }}
+          />
+        )}
+      >
+        <UNSTABLE_ComboboxOption value="prague" label="Praha">
+          Praha
+        </UNSTABLE_ComboboxOption>
+      </UNSTABLE_Combobox>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Pick distance, selected +5 km' })).toBeInTheDocument();
+    expect(screen.getByRole('listbox', { name: 'Distance options' })).toBeInTheDocument();
+  });
+
+  it('should prefer per-tag select labels over strings.splitTag', () => {
+    render(
+      <UNSTABLE_Combobox
+        id="test-combobox-split-tag-override"
+        label="Locations"
+        isOpen={false}
+        onToggle={() => {}}
+        selectedKeys={['prague']}
+        onSelectionChange={() => {}}
+        inputValue=""
+        onInputChange={() => {}}
+        strings={{
+          splitTag: {
+            listboxAria: 'Distance options',
+            selectAria: 'Pick distance, selected {selectedLabel}',
+          },
+        }}
+        renderTags={() => (
+          <UNSTABLE_ComboboxSplitTag
+            label="Praha"
+            onRemove={() => {}}
+            select={{
+              value: '+5 km',
+              options: DISTANCES,
+              isOpen: true,
+              onToggle: () => {},
+              onChange: () => {},
+              'aria-label': 'Custom trigger',
+              listboxLabel: 'Custom list',
+            }}
+          />
+        )}
+      >
+        <UNSTABLE_ComboboxOption value="prague" label="Praha">
+          Praha
+        </UNSTABLE_ComboboxOption>
+      </UNSTABLE_Combobox>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Custom trigger' })).toBeInTheDocument();
+    expect(screen.getByRole('listbox', { name: 'Custom list' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Pick distance, selected +5 km' })).not.toBeInTheDocument();
+  });
+
   it('should render label and select segments for a selected item', () => {
     render(<TestComboboxWithSplitTags />);
 
