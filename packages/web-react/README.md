@@ -254,7 +254,7 @@ t('unknown.key'); // 'unknown.key' (returns the key when not found)
 The `t` function accepts an optional second argument **`params`**: an object whose keys match `{key}` placeholders in the resolved string.
 
 ```tsx
-t('textArea.counter.charactersEntered', { count: 42 });
+t('textArea.counter.characters.enteredAria', { count: 42 });
 ```
 
 ### Component Strings
@@ -276,7 +276,8 @@ provider translation, and finally the built-in English default.
 
 The `Aria` suffix marks text that is not displayed and exists only as an accessible name, description, or instruction.
 Visible copy has no suffix. Related strings are grouped by purpose. Each component README lists the keys, dictionary
-defaults, and English copy in a **Translations** section.
+defaults, and English copy in a **Translations** section. Dictionary paths match the `strings` object
+(`picker.tag.removeAria`). Previous paths such as `picker.removeItemLabel` still resolve.
 
 ## Additional Attributes
 

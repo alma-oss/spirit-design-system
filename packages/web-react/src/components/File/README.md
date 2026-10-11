@@ -131,10 +131,10 @@ and [escape hatches][readme-escape-hatches].
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key          | Default key         | English default | Description    |
-| ------------ | ------------------- | --------------- | -------------- |
-| `editAria`   | `attachment.edit`   | `Edit`          | Edit action    |
-| `removeAria` | `attachment.remove` | `Remove`        | Dismiss action |
+| Key          | Default key             | English default | Description    |
+| ------------ | ----------------------- | --------------- | -------------- |
+| `editAria`   | `attachment.editAria`   | `Edit`          | Edit action    |
+| `removeAria` | `attachment.removeAria` | `Remove`        | Dismiss action |
 
 ### Deprecation Notice
 
@@ -144,7 +144,7 @@ Override optional copy with [`strings`][readme-component-strings]. Omitted keys 
 
 ```diff
 - <File label="report.pdf" editText="Edit" removeText="Remove" />
-+ <File label="report.pdf" strings={{ editAria: 'Edit', removeAria: { key: 'attachment.remove' } }} />
++ <File label="report.pdf" strings={{ editAria: 'Edit', removeAria: { key: 'attachment.removeAria' } }} />
 ```
 
 ## Icons

@@ -88,24 +88,24 @@ const _UNSTABLE_Picker = (props: SpiritUnstablePickerProps, ref: ForwardedRef<Sp
     selectionAriaLabel: resolvedSelectionAriaLabel,
     tagDescriptionText: resolvedTagDescriptionText,
   } = useStringsProp({
-    addButtonLabel: { value: strings?.addAria, deprecated: addButtonLabel, key: 'picker.add' },
+    addButtonLabel: { value: strings?.addAria, deprecated: addButtonLabel, key: 'picker.addAria' },
     closeButtonLabel: { value: strings?.closeAria, deprecated: closeButtonLabel, key: 'common.close' },
     emptySelectionLabel: {
       value: strings?.selection?.empty,
       deprecated: emptySelectionLabel,
       params: { label },
     },
-    removeAllLabel: { value: strings?.removeAllAria, deprecated: removeAllLabel, key: 'picker.removeAll' },
+    removeAllLabel: { value: strings?.removeAllAria, deprecated: removeAllLabel, key: 'picker.removeAllAria' },
     selectionAriaLabel: {
       value: strings?.selection?.labelAria,
       deprecated: selectionAriaLabel,
-      key: 'picker.selectionAriaLabel',
+      key: 'picker.selection.labelAria',
       params: { label },
     },
     tagDescriptionText: {
       value: strings?.tag?.descriptionAria,
       deprecated: tagDescriptionText,
-      key: 'picker.tagDescriptionText',
+      key: 'picker.tag.descriptionAria',
     },
   });
   const emptyLabel = resolvedEmptySelectionLabel || label;

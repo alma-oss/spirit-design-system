@@ -197,9 +197,9 @@ to be visible, use `isButtonLabelHidden` to visually hide the required accessibl
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 The dropdown trigger label is visible unless `isDropdownTriggerLabelHidden` is set.
 
-| Key                | Default key            | English default | Description            |
-| ------------------ | ---------------------- | --------------- | ---------------------- |
-| `dropdown.trigger` | `splitButton.dropdown` | `More`          | Dropdown trigger label |
+| Key                | Default key                    | English default | Description            |
+| ------------------ | ------------------------------ | --------------- | ---------------------- |
+| `dropdown.trigger` | `splitButton.dropdown.trigger` | `More`          | Dropdown trigger label |
 
 Required button copy stays on `labelButton` (not `strings`).
 

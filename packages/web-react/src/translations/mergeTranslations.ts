@@ -1,4 +1,4 @@
-type TranslationTree = { [key: string]: string | TranslationTree };
+import type { TranslationTree } from './translationTree';
 
 const isNestedTranslations = (value: unknown): value is TranslationTree =>
   typeof value === 'object' && value !== null && !Array.isArray(value);

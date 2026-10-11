@@ -2,6 +2,7 @@
 
 import React, { createContext, useMemo } from 'react';
 import { defaultTranslations } from '../translations/defaults';
+import { migrateDeprecatedTranslations } from '../translations/deprecatedTranslationKeys';
 import { mergeTranslations } from '../translations/mergeTranslations';
 import { type ChildrenProps } from '../types/shared';
 
@@ -62,7 +63,10 @@ const I18nProvider = ({ children, locale = 'en', translations }: I18nProviderPro
       return defaultTranslations;
     }
 
-    return mergeTranslations(defaultTranslations, localizedTranslations) as I18nTranslations;
+    return mergeTranslations(
+      defaultTranslations,
+      migrateDeprecatedTranslations(localizedTranslations),
+    ) as I18nTranslations;
   }, [locale, translations]);
 
   return React.createElement(I18nContext.Provider, { value }, children);

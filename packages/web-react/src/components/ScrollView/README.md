@@ -118,16 +118,16 @@ Or override only one label:
 
 ## ScrollView Props
 
-| Name                  | Type                                                              | Default    | Required | Description                                                      |
-| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------- |
-| `strings`             | `{ startAria?, endAria?, topAria?, bottomAria? }`                 | —          | ✕        | Control button labels; see [Translations](#translations)         |
+| Name                  | Type                                                              | Default    | Required | Description                                                                                           |
+| --------------------- | ----------------------------------------------------------------- | ---------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `strings`             | `{ startAria?, endAria?, topAria?, bottomAria? }`                 | —          | ✕        | Control button labels; see [Translations](#translations)                                              |
 | `ariaLabelControls`   | `{ top?: string, bottom?: string, start?: string; end?: string }` | —          | ✕        | _Deprecated, use `strings.startAria`, `strings.endAria`, `strings.topAria`, and `strings.bottomAria`_ |
-| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                |
-| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                      |
-| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                                         |
-| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                                  |
-| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled                               |
-| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                                   |
+| `controlsScrollStep`  | `number`                                                          | `300`      | ✕        | Scroll step for controls (pixels)                                                                     |
+| `children`            | `ReactNode`                                                       | —          | ✓        | ScrollView children's nodes                                                                           |
+| `direction`           | \[`horizontal` \| `vertical`]                                     | `vertical` | ✕        | Direction of the wrapper                                                                              |
+| `hasControls`         | `bool`                                                            | `false`    | ✕        | If true, controls are displayed                                                                       |
+| `isScrollbarDisabled` | `bool`                                                            | `false`    | ✕        | If true, the Scrollbar is disabled                                                                    |
+| `overflowDecorators`  | \[`borders` \| `shadows` \| `both`]                               | `shadows`  | ✕        | ScrollView overflow decorators                                                                        |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -139,10 +139,10 @@ Override optional copy with [`strings`][readme-component-strings]. Omitted keys 
 
 | Key          | Default key             | English default | Description              |
 | ------------ | ----------------------- | --------------- | ------------------------ |
-| `startAria`  | `scrollView.ariaStart`  | `Scroll left`   | Horizontal start control |
-| `endAria`    | `scrollView.ariaEnd`    | `Scroll right`  | Horizontal end control   |
-| `topAria`    | `scrollView.ariaTop`    | `Scroll up`     | Vertical start control   |
-| `bottomAria` | `scrollView.ariaBottom` | `Scroll down`   | Vertical end control     |
+| `startAria`  | `scrollView.startAria`  | `Scroll left`   | Horizontal start control |
+| `endAria`    | `scrollView.endAria`    | `Scroll right`  | Horizontal end control   |
+| `topAria`    | `scrollView.topAria`    | `Scroll up`     | Vertical start control   |
+| `bottomAria` | `scrollView.bottomAria` | `Scroll down`   | Vertical end control     |
 
 ### Deprecation Notice
 

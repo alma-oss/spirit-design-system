@@ -121,10 +121,10 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     addMoreDescriptionText: {
       value: strings?.addMore?.descriptionAria,
       deprecated: addMoreDescriptionText,
-      key: 'combobox.addMoreDescription',
+      key: 'combobox.addMore.descriptionAria',
       params: { label },
     },
-    addMoreLabel: { value: strings?.addMore?.label, deprecated: addMoreLabel, key: 'combobox.addMore' },
+    addMoreLabel: { value: strings?.addMore?.label, deprecated: addMoreLabel, key: 'combobox.addMore.label' },
     emptySelectionLabel: {
       value: strings?.selection?.empty,
       deprecated: emptySelectionLabel,
@@ -132,27 +132,27 @@ const ComboboxBase = (props: ComboboxBaseProps) => {
     },
     emptyState: { value: strings?.emptyState, key: 'combobox.emptyState' },
     loading: { value: strings?.loading, key: 'combobox.loading' },
-    removeAllLabel: { value: strings?.removeAllAria, deprecated: removeAllLabel, key: 'combobox.removeAll' },
+    removeAllLabel: { value: strings?.removeAllAria, deprecated: removeAllLabel, key: 'combobox.removeAllAria' },
     selectionAriaLabel: {
       value: strings?.selection?.labelAria,
       deprecated: selectionAriaLabel,
-      key: 'combobox.selectionAriaLabel',
+      key: 'combobox.selection.labelAria',
       params: { label },
     },
     selectionCountLabel: {
       value: strings?.selection?.countAria?.plural,
       deprecated: selectionCountLabel,
-      key: 'combobox.selectionCountLabel',
+      key: 'combobox.selection.countAria.plural',
     },
     selectionCountLabelSingular: {
       value: strings?.selection?.countAria?.singular,
       deprecated: selectionCountLabelSingular,
-      key: 'combobox.selectionCountLabelSingular',
+      key: 'combobox.selection.countAria.singular',
     },
     tagDescriptionText: {
       value: strings?.tag?.descriptionAria,
       deprecated: tagDescriptionText,
-      key: 'combobox.tagDescriptionText',
+      key: 'combobox.tag.descriptionAria',
     },
   });
   const resolvedEmptyStateLabel = emptyStateLabel ?? resolvedEmptyStateText;

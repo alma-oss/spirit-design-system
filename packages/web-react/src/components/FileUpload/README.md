@@ -119,11 +119,11 @@ The files list is built with the **Stack** component: use `<Stack aria-label="Up
 
 Override optional copy with [`strings`][readme-component-strings]. Omitted keys use the built-in English default.
 
-| Key           | Default key                     | English default         | Description                                         |
-| ------------- | ------------------------------- | ----------------------- | --------------------------------------------------- |
-| `button`      | `fileUploader.browse`           | `Browse`                | Visible browse button                               |
-| `upload`      | `fileUploader.inputUpload`      | `Upload your file`      | Drop-zone primary text                              |
-| `dragAndDrop` | `fileUploader.inputDragAndDrop` | `or drag and drop here` | Drop-zone suffix; omitted when drag-and-drop is off |
+| Key           | Default key                | English default         | Description                                         |
+| ------------- | -------------------------- | ----------------------- | --------------------------------------------------- |
+| `button`      | `fileUploader.button`      | `Browse`                | Visible browse button                               |
+| `upload`      | `fileUploader.upload`      | `Upload your file`      | Drop-zone primary text                              |
+| `dragAndDrop` | `fileUploader.dragAndDrop` | `or drag and drop here` | Drop-zone suffix; omitted when drag-and-drop is off |
 
 ### Deprecation Notice
 

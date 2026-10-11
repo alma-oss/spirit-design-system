@@ -37,7 +37,7 @@ const UncontrolledSplitButton = (props: UncontrolledSplitButtonProps) => {
     dropdownTriggerLabel: {
       value: strings?.dropdown?.trigger,
       deprecated: dropdownTriggerLabel,
-      key: 'splitButton.dropdown',
+      key: 'splitButton.dropdown.trigger',
     },
   });
   const resolvedButtonLabel = buttonLabelValue ?? '';

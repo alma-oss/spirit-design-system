@@ -2,7 +2,8 @@
 
 import { useCallback, useContext } from 'react';
 import I18nContext from '../context/I18nContext';
-import { defaultTranslations, replaceTranslationParams, resolveTranslationKey } from '../translations';
+import { defaultTranslations, replaceTranslationParams } from '../translations';
+import { resolveTranslation } from '../translations/deprecatedTranslationKeys';
 
 export type TranslateFunction = (key: string, params?: Record<string, unknown>) => string;
 
@@ -32,7 +33,7 @@ export const useI18n = (): UseI18nReturn => {
 
   const t: TranslateFunction = useCallback(
     (key, params) => {
-      const translation = resolveTranslationKey(translations, key);
+      const translation = resolveTranslation(translations, key);
 
       return !params ? translation : replaceTranslationParams(translation, params);
     },

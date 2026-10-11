@@ -44,8 +44,8 @@ const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Elem
   } = propsWithDefaults;
 
   const { edit: resolvedEditText, remove: resolvedRemoveText } = useStringsProp({
-    edit: { value: strings?.editAria, deprecated: editText, key: 'attachment.edit' },
-    remove: { value: strings?.removeAria, deprecated: removeText, key: 'attachment.remove' },
+    edit: { value: strings?.editAria, deprecated: editText, key: 'attachment.editAria' },
+    remove: { value: strings?.removeAria, deprecated: removeText, key: 'attachment.removeAria' },
   });
   const { classProps } = useFileStyleProps({ isDisabled, validationState });
   const { styleProps, props: transferProps } = useStyleProps(restProps);

@@ -33,10 +33,10 @@ export const useScrollViewControls = (
     top: topLabel,
     bottom: bottomLabel,
   } = useStringsProp({
-    start: { value: strings?.startAria, deprecated: ariaLabelControls?.start, key: 'scrollView.ariaStart' },
-    end: { value: strings?.endAria, deprecated: ariaLabelControls?.end, key: 'scrollView.ariaEnd' },
-    top: { value: strings?.topAria, deprecated: ariaLabelControls?.top, key: 'scrollView.ariaTop' },
-    bottom: { value: strings?.bottomAria, deprecated: ariaLabelControls?.bottom, key: 'scrollView.ariaBottom' },
+    start: { value: strings?.startAria, deprecated: ariaLabelControls?.start, key: 'scrollView.startAria' },
+    end: { value: strings?.endAria, deprecated: ariaLabelControls?.end, key: 'scrollView.endAria' },
+    top: { value: strings?.topAria, deprecated: ariaLabelControls?.top, key: 'scrollView.topAria' },
+    bottom: { value: strings?.bottomAria, deprecated: ariaLabelControls?.bottom, key: 'scrollView.bottomAria' },
   });
 
   const controls = [
