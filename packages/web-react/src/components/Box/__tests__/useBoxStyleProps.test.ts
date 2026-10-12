@@ -69,6 +69,16 @@ describe('useBoxStyleProps', () => {
     expect(result.current.classProps).toBe('bg-secondary');
   });
 
+  it('should return box shadow classProps', () => {
+    const props: BoxProps = {
+      boxShadow: '200',
+    };
+    const { result } = renderHook(() => useBoxStyleProps(props));
+
+    expect(result.current.classProps).toBe('shadow-200');
+    expect(result.current.props.boxShadow).toBeUndefined();
+  });
+
   it('should return border color classProps', () => {
     const props: BoxProps = {
       borderColor: 'basic',

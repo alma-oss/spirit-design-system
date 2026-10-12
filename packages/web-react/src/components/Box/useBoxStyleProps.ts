@@ -34,8 +34,17 @@ const getBorderRadiusProps = (borderRadius: BoxProps<ElementType>['borderRadius'
 export const useBoxStyleProps = (
   props: Partial<BoxProps<ElementType>>,
 ): UseBoxStyleProps<Partial<BoxProps<ElementType>>> => {
-  const { backgroundColor, borderColor, borderRadius, borderStyle, borderWidth, colorScheme, textColor, ...restProps } =
-    props || {};
+  const {
+    backgroundColor,
+    borderColor,
+    borderRadius,
+    borderStyle,
+    borderWidth,
+    boxShadow,
+    colorScheme,
+    textColor,
+    ...restProps
+  } = props || {};
 
   const schemeRootClass = useClassNamePrefix(colorScheme ? `color-scheme-on-${colorScheme}` : '');
   const bgColorSchemeClass = useClassNamePrefix('bg-color-scheme');
@@ -55,6 +64,8 @@ export const useBoxStyleProps = (
   let boxBorderColor = borderColor ? borderColor.replace('', boxBorderClassName) : '';
   let boxBorderStyle = '';
   const boxBorderWidth = borderWidth ? borderWidth.replace('', boxBorderClassName) : '';
+
+  const boxShadowClass = useClassNamePrefix(boxShadow ? `shadow-${boxShadow}` : '');
 
   const explicitTextClass = useClassNamePrefix(textColor ? `text-${textColor}` : '');
   let boxTextColorClass = '';
@@ -77,6 +88,7 @@ export const useBoxStyleProps = (
     boxBorderColor,
     boxBorderStyle,
     boxBorderWidth,
+    boxShadowClass,
     {
       [boxTextColorClass]: Boolean(boxTextColorClass),
     },
