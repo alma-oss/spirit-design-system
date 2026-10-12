@@ -22,9 +22,25 @@ jobs:
     outputs:
       url: ${{ steps.netlify-deploy.outputs.url }}
     steps:
+      # Only the files needed to run the pinned Netlify CLI and the comment action are checked out, and no
+      # dependencies are installed: `yarn dlx` fetches the CLI on its own, and the version comes from the
+      # `script` catalog in .yarnrc.yml.
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            /.nvmrc
+            /package.json
+            /.yarnrc.yml
+            /.github/actions/setup-node/
+            /.github/actions/deploy-comment/
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node
+        uses: ./.github/actions/setup-node
+
       # Reuse the demo app built by the Build job instead of building it again.
-      # The repository is deliberately not checked out and no dependencies are installed: no PR-controlled
-      # script or config runs while the Netlify credentials are available.
       - name: Download demo app build
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
@@ -33,7 +49,7 @@ jobs:
 
       # The CLI is synchronous, returns the exact deploy URL (no SHA lookup race) and exits non-zero
       # on a deploy failure, so infra problems fail here and not in the test job.
-      # The version is kept in sync with the `script` catalog in .yarnrc.yml.
+      # `catalog:script` pins the version (see .yarnrc.yml), there is a single place to bump it.
       - name: Deploy to Netlify
         id: netlify-deploy
         run: |
@@ -41,7 +57,7 @@ jobs:
           if [ -n "$PR_NUMBER" ]; then
             ALIAS_ARGS=(--alias "deploy-preview-${PR_NUMBER}")
           fi
-          OUTPUT=$(npx --yes netlify-cli@17.38.1 deploy \
+          OUTPUT=$(yarn dlx --quiet --package netlify-cli@catalog:script netlify deploy \
             --dir build \
             "${ALIAS_ARGS[@]}" \
             --message "E2E ${GITHUB_SHA}" \
@@ -58,3 +74,21 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_SPIRIT_DESIGN_SYSTEM }}
+
+      - name: Generate GitHub App token
+        id: app-token
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-pull-requests: write
+
+      # It also replaces the Slack alert, a failed deploy is visible right on the PR.
+      - name: Comment deploy result on PR
+        if: always() && github.event_name == 'pull_request' && steps.app-token.outcome == 'success'
+        uses: ./.github/actions/deploy-comment
+        with:
+          state: ${{ steps.netlify-deploy.outcome == 'success' && 'success' || 'failure' }}
+          url: ${{ steps.netlify-deploy.outputs.url }}
+          token: ${{ steps.app-token.outputs.token }}
