@@ -4,6 +4,7 @@ on:
   workflow_call:
 
 permissions:
+  actions: write
   contents: read
 
 env:
@@ -11,16 +12,52 @@ env:
   NX_VERBOSE_LOGGING: true
   NX_NO_CLOUD: true
   NX_MAX_CACHE_SIZE: 1GB
+  # Keep the Nx cache and its task index in the workspace so they can be saved and restored.
+  NX_CACHE_DIRECTORY: .nx/cache
+  NX_WORKSPACE_DATA_DIRECTORY: .nx/workspace-data
 
 jobs:
   build:
-    name: 👷 Building on Node.js ${{ matrix.node-version }})
+    name: 👷 Build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup and Install
+        uses: ./.github/actions/setup-install
+
+      - name: Restore Nx cache
+        id: nx_cache
+        uses: ./.github/actions/nx-cache
+        with:
+          scope: build
+
+      - name: Build packages
+        run: yarn build:packages
+
+      - name: Build apps
+        run: yarn build:apps
+
+      - name: Check for clean working directory
+        uses: ./.github/actions/check-clean-tree
+
+      - name: Save Nx cache
+        uses: ./.github/actions/nx-cache-save
+        with:
+          cache-key: ${{ steps.nx_cache.outputs.cache-key }}
+          key-prefix: nx-${{ runner.os }}-node22-build-
+
+  build-compat:
+    name: 🧬 Build packages on Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
       matrix:
-        # minimum required, current LTS, and next active release line
-        node-version: [22, 24, 26]
+        # current LTS and next active release line, the minimum required version is covered by `build`
+        node-version: [24, 26]
 
     steps:
       - name: Checkout
@@ -31,26 +68,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Restore Nx cache
-        id: nx_cache
-        uses: ./.github/actions/nx-cache
-        with:
-          scope: build
-          node-major: ${{ matrix.node-version }}
-
+      # The Nx cache is intentionally neither restored nor saved: Nx does not hash the Node.js version,
+      # so a cache hit would skip the very compatibility check this job exists for.
       - name: Build packages
         run: yarn build
 
       - name: Check for clean working directory
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            echo "Error: Git working directory is not clean"
-            git status
-            exit 1
-          fi
-
-      - name: Save Nx cache
-        uses: ./.github/actions/nx-cache-save
-        with:
-          cache-key: ${{ steps.nx_cache.outputs.cache-key }}
-          key-prefix: nx-${{ runner.os }}-node${{ matrix.node-version }}-build-
+        uses: ./.github/actions/check-clean-tree

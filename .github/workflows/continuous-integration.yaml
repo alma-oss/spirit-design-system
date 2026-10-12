@@ -30,8 +30,8 @@ jobs:
     if: github.event_name == 'pull_request'
     uses: ./.github/workflows/git.yaml
 
-  build-checks:
-    name: 🏗️ Build Checks
+  build:
+    name: 🏗️ Build
     uses: ./.github/workflows/build.yaml
     permissions:
       actions: write
@@ -63,7 +63,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build-checks, code-quality-gate]
+    needs: [git-checks, build, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:
