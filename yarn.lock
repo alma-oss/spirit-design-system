@@ -11179,9 +11179,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernovaio/sdk-exporters@npm:2.4.11":
-  version: 2.4.11
-  resolution: "@supernovaio/sdk-exporters@npm:2.4.11"
+"@supernovaio/sdk-exporters@npm:2.5.1":
+  version: 2.5.1
+  resolution: "@supernovaio/sdk-exporters@npm:2.5.1"
   dependencies:
     "@rollup/rollup-darwin-x64": "npm:4.59.0"
     "@supernova-studio/client": "npm:1.96.10"
@@ -11189,7 +11189,7 @@ __metadata:
   dependenciesMeta:
     "@rollup/rollup-darwin-x64":
       optional: true
-  checksum: 10/01006589b642934e01402027bea5cbbd5b7ea88b6596c5e140a945c6fc823d0957cd3c01573ea20fae90fabfb3e1748a41b1295c80a42817878012a72061bc36
+  checksum: 10/43237dc6d17f34dd558663b923352d420d5562c37973108fd542678ac13d6aa501941252615e10c0246069c2e49f9abdddb9b1c4ef550d84b796b170ab0e2ddb
   languageName: node
   linkType: hard
 
