@@ -54,6 +54,14 @@ A corner class overrides the uniform `rounded-<radius>` at the same breakpoint, 
 ⚠️ When you apply `border-<style>` without defining `border-<width>` or `border-<color>`, browsers automatically
 set `border-color: currentColor` and `border-width: medium`.
 
+## Shadow
+
+You can raise the Box using utility class `shadow-<shadow>`.
+
+```html
+<div class="shadow-100">With shadow</div>
+```
+
 ## Padding
 
 You can define padding using utility class `p-<padding>`.
