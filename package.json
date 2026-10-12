@@ -23,6 +23,8 @@
   "scripts": {
     "start": "yarn packages:start --ignore '@alma-oss/spirit-example*'",
     "build": "nx run-many --target=build --exclude=@alma-oss/spirit-docsite,@alma-oss/spirit-storybook,@lmc-eu/spirit-demo-app,@alma-oss/spirit-example-next-with-app-router,@alma-oss/spirit-example-next-with-pages-router",
+    "build:packages": "yarn build",
+    "build:apps": "nx run-many --target=build --projects=@alma-oss/spirit-docsite,@alma-oss/spirit-storybook,@lmc-eu/spirit-demo-app,@alma-oss/spirit-example-next-with-app-router,@alma-oss/spirit-example-next-with-pages-router",
     "es:lint": "eslint ./",
     "es:lint:fix": "yarn es:lint --fix",
     "format": "yarn format:check",
