@@ -48,6 +48,14 @@ If you need set responsive border radius, you can use an object:
 
 The borderColor, borderRadius, and borderStyle props are applied only if borderWidth is greater than `0`.
 
+## Shadow
+
+You can raise the Box using the `boxShadow` prop.
+
+```tsx
+<Box boxShadow="100">{/* Content goes here */}</Box>
+```
+
 ## Padding
 
 You can define padding using the `padding` prop.
@@ -119,6 +127,7 @@ You can define text color using the `textColor` prop. Use it to override the tex
 | `borderRadius`       | \[[BorderRadiiTokenType][readme-generated-types] \| `Responsive<BorderRadiiTokenType>`]                                                                                                                                                                                                                           | -       | ✕        | Border radius of the Box       |
 | `borderStyle`        | [Border Style dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | `solid` | ✕        | Border style of the Box        |
 | `borderWidth`        | [Border Width dictionary][dictionary-border]                                                                                                                                                                                                                                                                      | -       | ✕        | Border width of the Box        |
+| `boxShadow`          | [BoxShadowTokenType][readme-generated-types]                                                                                                                                                                                                                                                                      | -       | ✕        | Shadow of the Box              |
 | `colorScheme`        | `ColorSchemeType`                                                                                                                                                                                                                                                                                                 | -       | ✕        | Semantic color scheme surface  |
 | `elementType`        | `ElementType`                                                                                                                                                                                                                                                                                                     | `div`   | ✕        | Type of element                |
 | `padding`            | \[`SpaceToken` \| `Responsive<SpaceToken>`]                                                                                                                                                                                                                                                                       | -       | ✕        | Padding of the Box             |

@@ -11,6 +11,7 @@ import {
   type BorderRadiiTokenType,
   type BorderStylesDictionaryType,
   type BorderWidthsDictionaryType,
+  type BoxShadowTokenType,
   type ChildrenProps,
   type ColorSchemeType,
   type PaddingProps,
@@ -39,6 +40,8 @@ export interface BoxBaseProps extends ChildrenProps, TextColorProps, PaddingProp
   borderStyle?: BorderStylesDictionaryType;
   /** The border width of the box. */
   borderWidth?: BorderWidthsDictionaryType;
+  /** The shadow of the box. */
+  boxShadow?: BoxShadowTokenType;
   /** The color scheme of the box. */
   colorScheme?: ColorSchemeType;
 }
