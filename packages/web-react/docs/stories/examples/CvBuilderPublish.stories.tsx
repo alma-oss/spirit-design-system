@@ -121,14 +121,13 @@ export const CvBuilderPublish = () => {
         </Stack>
       </Section>
       <Section elementType="div" size="small" containerProps={{ size: 'large' }}>
-        {/* TODO [DS-2774]: The design applies `shadow-100` on this card. `Box` has no `boxShadow` prop
-                and there is no shadow utility class in `web`, so the shadow is intentionally omitted here. */}
         <Stack elementType="form" action="#" method="post" aria-labelledby="publish-cv-heading" spacing="space-1000">
           <Box
             backgroundColor="primary"
             borderColor="basic"
             borderRadius="400"
             borderWidth="100"
+            boxShadow="100"
             paddingX="space-800"
             paddingY="space-900"
           >

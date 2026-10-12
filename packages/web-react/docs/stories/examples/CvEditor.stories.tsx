@@ -55,8 +55,7 @@ const MENU_ITEMS = [
 
 /**
  * The white surface shared by all boxed sections of the page: background `primary`, 1px `basic` border,
- * `radius-300` and `space-800` padding. The design also carries a static `shadow-100`, which has no
- * Spirit prop (Card applies it on hover only), so it is left out.
+ * `radius-300`, `shadow-100` and `space-800` padding.
  *
  * `elementType`/`ariaLabelledby` pick the outer surface's semantics; the inner Flex only handles layout,
  * since Box can't carry both a custom tag and Flex's gap-based spacing at once.
@@ -85,6 +84,7 @@ const Surface = ({
     borderColor="basic"
     borderRadius="300"
     borderWidth="100"
+    boxShadow="100"
     padding="space-800"
   >
     <Flex direction="vertical" alignmentX="stretch" spacing={spacing}>
