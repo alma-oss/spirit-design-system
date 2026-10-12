@@ -1,0 +1,38 @@
+name: 📣 Announce Deploy
+
+on:
+  workflow_call:
+    inputs:
+      state:
+        description: 'pending to announce the deploy, skipped to close the announcement when it will not happen'
+        required: false
+        type: string
+        default: pending
+
+# Creates the deploy comment right away, so it sits near the top of the PR and is only updated later
+jobs:
+  announce:
+    name: 📣 Announcing
+    # Optional: it needs the GitHub App secrets, which are not available to PRs from forks
+    continue-on-error: true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-pull-requests: write
+
+      - name: Comment deploy state
+        uses: ./.github/actions/deploy-comment
+        with:
+          state: ${{ inputs.state }}
+          token: ${{ steps.app-token.outputs.token }}

@@ -44,9 +44,28 @@ jobs:
     permissions:
       pull-requests: read
 
+  announce-deploy:
+    name: 📣 Announce Deploy
+    needs: e2e-affected
+    # Only when the deploy can follow, otherwise the comment would stay in progress forever; there is no PR to comment on for main
+    if: ${{ github.event_name == 'pull_request' && needs.e2e-affected.outputs.run == 'true' }}
+    uses: ./.github/workflows/announce-deploy.yaml
+    secrets: inherit
+
+  announce-deploy-skipped:
+    name: 📣 Announce Deploy Skipped
+    needs: [build, announce-deploy]
+    # The deploy never starts after a failed or cancelled build, so close the announced comment here
+    if: ${{ always() && needs.announce-deploy.result == 'success' && needs.build.result != 'success' }}
+    uses: ./.github/workflows/announce-deploy.yaml
+    with:
+      state: skipped
+    secrets: inherit
+
   deploy:
     name: 🚀 Deploy
-    needs: [build, e2e-affected]
+    needs: [build, e2e-affected, announce-deploy]
+    # The announcement is optional: a skipped (main) or failed one must not block the deploy
     if: ${{ !cancelled() && needs.build.result == 'success' && needs.e2e-affected.outputs.run == 'true' }}
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
