@@ -131,6 +131,13 @@ $utilities: (
         generate-custom-properties: false,
         values: tokens.$radii,
     ),
+    'box-shadow': (
+        responsive: false,
+        property: box-shadow,
+        class: shadow,
+        generate-custom-properties: false,
+        values: tokens.$shadows,
+    ),
     'border-style': (
         responsive: false,
         property: border-style,
