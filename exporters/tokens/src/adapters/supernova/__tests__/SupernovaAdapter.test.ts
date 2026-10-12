@@ -25,9 +25,10 @@ describe('SupernovaAdapter', () => {
 
       const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
 
-      // Only the string token is mapped so far; dimension/figma tokens are filtered out.
-      expect(collection.tokens).toHaveLength(1);
-      expect(collection.tokens[0].id).toBe('stringRef');
+      // string and dimension tokens are mapped so far (see #DS-2335); the fixture set has no other types.
+      expect(collection.tokens.map((token) => token.id).sort()).toEqual(
+        ['dimensionRef', 'figmaTokenRef', 'stringRef'].sort(),
+      );
       expect(collection.groups).toHaveLength(exampleGroups.length);
       expect(collection.themes).toEqual([{ id: 'theme-1', name: 'Dark' }]);
       expect(collection.metadata.source).toBe('supernova');
