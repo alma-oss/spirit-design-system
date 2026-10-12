@@ -110,9 +110,14 @@ export const CvEditorDrivingLicense = () => {
           spacing="space-1000"
           noValidate
         >
-          {/* TODO [DS-2774]: The design applies `shadow-100` on this card. `Box` has no `boxShadow` prop
-                and there is no shadow utility class in `web`, so the shadow is intentionally omitted here. */}
-          <Box backgroundColor="primary" borderColor="basic" borderRadius="400" borderWidth="100" padding="space-900">
+          <Box
+            backgroundColor="primary"
+            borderColor="basic"
+            borderRadius="400"
+            borderWidth="100"
+            boxShadow="100"
+            padding="space-900"
+          >
             <FieldGroup
               id="cv-driving-license-groups"
               label="Skupiny řidičského průkazu"
