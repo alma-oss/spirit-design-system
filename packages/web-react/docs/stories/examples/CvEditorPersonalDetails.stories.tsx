@@ -43,13 +43,12 @@ export const CvEditorPersonalDetails = () => {
       <Section elementType="div" size="small" backgroundColor="secondary" containerProps={{ size: 'small' }}>
         <Stack spacing="space-1000">
           <form aria-labelledby="cv-personal-details-heading" method="post" action="#">
-            {/* TODO [DS-2774]: The design applies `shadow-100` on this card. `Box` has no `boxShadow` prop
-                and there is no shadow utility class in `web`, so the shadow is intentionally omitted here. */}
             <Box
               backgroundColor="primary"
               borderColor="basic"
               borderRadius="400"
               borderWidth="100"
+              boxShadow="100"
               padding="space-900"
               marginBottom={{ mobile: 'space-900', tablet: 'space-1000' }}
             >
