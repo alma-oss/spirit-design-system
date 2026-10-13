@@ -14575,10 +14575,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.13.0, axe-core@npm:~4.13.0":
-  version: 4.13.0
-  resolution: "axe-core@npm:4.13.0"
-  checksum: 10/b9319bedc705fde00e4abd981d8724202cc20102e4ae6d8edfde33cb5265e0fb8f67f32adcb4ad33fbd4a2c8d7ad7ef5af1d933d9ad859bed90e3eae0ee8c52f
+"axe-core@npm:4.14.0":
+  version: 4.14.0
+  resolution: "axe-core@npm:4.14.0"
+  checksum: 10/b41f9c5fb670b3e1812ba203b17570efa026071e6c722cd8384bacbe5f2be1578fc5d7544acf06df7758eb755c7d23629df922e86cc0655d656784157c0d8df5
   languageName: node
   linkType: hard
 
@@ -14593,6 +14593,13 @@ __metadata:
   version: 4.10.3
   resolution: "axe-core@npm:4.10.3"
   checksum: 10/9ff51ad0fd0fdec5c0247ea74e8ace5990b54c7f01f8fa3e5cd8ba98b0db24d8ebd7bab4a9bd4d75c28c4edcd1eac455b44c8c6c258c6a98f3d2f88bc60af4cc
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:~4.13.0":
+  version: 4.13.0
+  resolution: "axe-core@npm:4.13.0"
+  checksum: 10/b9319bedc705fde00e4abd981d8724202cc20102e4ae6d8edfde33cb5265e0fb8f67f32adcb4ad33fbd4a2c8d7ad7ef5af1d933d9ad859bed90e3eae0ee8c52f
   languageName: node
   linkType: hard
 
