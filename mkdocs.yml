@@ -44,9 +44,9 @@ nav:
       - 011 - Component Customization: decisions/011-component-customization.md
       - 012 - Color Schemes: decisions/012-color-schemes.md
       - 013 - Figma Assets Sync: decisions/013-figma-assets-sync.md
-      - 013 - Listbox vs Grid for Selectable Options: decisions/013-listbox-vs-grid-for-selectable-options.md
-      - 014 - Component Radius Overrides: decisions/014-component-radius-overrides.md
-      - 015 - Color Scheme Intensity Exposure: decisions/015-color-scheme-intensity-exposure.md
+      - 014 - Listbox vs Grid for Selectable Options: decisions/014-listbox-vs-grid-for-selectable-options.md
+      - 015 - Component Radius Overrides: decisions/015-component-radius-overrides.md
+      - 016 - Color Scheme Intensity Exposure: decisions/016-color-scheme-intensity-exposure.md
   - Migration Guides:
       - Overview: migrations/README.md
       - web-react:

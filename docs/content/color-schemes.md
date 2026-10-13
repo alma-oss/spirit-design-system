@@ -353,7 +353,7 @@ Current behavior that is expected to change. Do not build on it.
 ### Architecture Decisions
 
 - [ADR 012: Color Schemes][adr-color-schemes] — the decision record behind the concept
-- [ADR 015: Color Scheme Intensity Exposure][adr-intensity-exposure] — why both intensities are always exposed
+- [ADR 016: Color Scheme Intensity Exposure][adr-intensity-exposure] — why both intensities are always exposed
 - [ADR 008: Themes][adr-themes] — the layer above color schemes
 - [ADR 011: Component Customization][adr-component-customization] — prop versus component token
 
@@ -373,7 +373,7 @@ Current behavior that is expected to change. Do not build on it.
 
 [adr-color-schemes]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/012-color-schemes.md
 [adr-component-customization]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/011-component-customization.md
-[adr-intensity-exposure]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/015-color-scheme-intensity-exposure.md
+[adr-intensity-exposure]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/016-color-scheme-intensity-exposure.md
 [adr-themes]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/008-themes.md
 [box-preview]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Box/preview.html
 [box-react-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Box/README.md
