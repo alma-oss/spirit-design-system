@@ -3,7 +3,7 @@
 This project uses **dictionaries** to unify props across components.
 
 - A dictionary defines a **complete set of allowed values.** For example, the [Size](#size) dictionary contains `small`, `medium`, and `large`.
-- When a component uses a dictionary, it should support **all values from that dictionary**. For example, if a Button supports `medium` and `large` sizes, it should also support `small`.
+- When a component uses a dictionary, it must support **all values from that dictionary**. For example, if a Button supports `medium` and `large` sizes, it must also support `small`.
 - **A property value belongs to a dictionary,** not the other way around. For example, the `primary` color value is part of the [Action Color](#color) dictionary.
 - **Some dictionaries are generated from design tokens.** For example, the [Breakpoint](#breakpoint) dictionary is generated from the Breakpoint design token.
 - **Products can extend dictionaries** with additional values.
