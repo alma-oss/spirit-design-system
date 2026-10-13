@@ -2,8 +2,8 @@
 
 import { Box, Hidden } from '@alma-oss/spirit-web-react';
 import { type CSSProperties } from 'react';
+import Stamp, { type StampDirection } from '../../ui/Stamp';
 import styles from './PageShowcase.module.scss';
-import Stamp, { type StampDirection } from './Stamp';
 
 // All geometry below comes from the design, where the page screenshot (880 x 535) sits at 72, 45 in a 1024 x 580 frame.
 // The positions are kept as designed and converted to percentages of the screenshot.

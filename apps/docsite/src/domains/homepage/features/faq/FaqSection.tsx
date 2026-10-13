@@ -2,9 +2,9 @@
 
 import { Avatar, Divider, Flex, Grid, Heading, Stack, Text } from '@alma-oss/spirit-web-react';
 import { Fragment } from 'react';
+import PageSection from '../../ui/PageSection';
+import SectionHeader from '../../ui/SectionHeader';
 import styles from './FaqSection.module.scss';
-import PageSection from './PageSection';
-import SectionHeader from './SectionHeader';
 
 interface Question {
   question: string;
