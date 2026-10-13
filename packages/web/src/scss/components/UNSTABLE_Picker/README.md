@@ -44,7 +44,7 @@ When the label is visually hidden, omit the Flex and ContextualHelp. Place the l
 enough space below the Picker (or around it, depending on the popover placement) so the popover does not
 overflow its scrollable container or get clipped.
 
-Pick the presentation by what a single option contains; see [decision 013][decision-listbox-grid] for the
+Pick the presentation by what a single option contains; see [decision 014][decision-listbox-grid] for the
 reasoning.
 
 | Presentation                     | Markup                                          | Use when                                                                   |
@@ -676,7 +676,7 @@ The selection area (`UNSTABLE_PickerSelection`) uses a dynamic ARIA role:
 
 [`role="grid"`][mdn-grid-role] is used because each tag contains a remove button: `listbox` options cannot
 hold interactive elements and a plain `list` carries no keyboard navigation contract — see
-[decision 013][decision-listbox-grid]. Each tag is structured as a `row` containing a `cell` with the tag
+[decision 014][decision-listbox-grid]. Each tag is structured as a `row` containing a `cell` with the tag
 label and a remove button. A single-column grid is valid and follows the same pattern used by
 [React Aria][react-aria]'s TagGroup.
 
@@ -685,7 +685,7 @@ label and a remove button. A single-column grid is valid and follows the same pa
 The popover is a `role="dialog"` (the trigger uses `aria-haspopup="dialog"`), so it can hold any content. It
 needs an accessible name via `aria-label` or `aria-labelledby`. The role the **options inside it** carry
 follows from what a single option contains — see [Basic Usage](#basic-usage) for the three presentations and
-[decision 013][decision-listbox-grid] for the reasoning.
+[decision 014][decision-listbox-grid] for the reasoning.
 
 ### Dropdown Popover: Required JavaScript Features
 
@@ -762,7 +762,7 @@ Popover API is strongly recommended.
 | `aria-describedby`          | Tag               | Links to the hidden removal instruction                                                               |
 
 [contextual-help]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ContextualHelp/README.md
-[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
+[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/014-listbox-vs-grid-for-selectable-options.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
 [jira-listbox-react]: https://jira.almacareer.tech/browse/DS-2770
 [jira-selection-live-region]: https://jira.almacareer.tech/browse/DS-2759

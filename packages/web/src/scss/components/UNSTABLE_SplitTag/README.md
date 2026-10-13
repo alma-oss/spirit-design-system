@@ -167,7 +167,7 @@ and keep its nested `ControlButton` decorative with a `span` element and `aria-h
 
 The Dropdown trigger uses `aria-haspopup="dialog"` and controls a `role="dialog"` popover with an accessible
 name. Radius choices are plain labels without interactive descendants, so the inner option list uses
-`role="listbox"` and `role="option"` according to [decision 013][decision-listbox-grid]. Each option has a
+`role="listbox"` and `role="option"` according to [decision 014][decision-listbox-grid]. Each option has a
 unique `id`, `aria-selected`, and roving `tabindex`; its decorative check glyph is rendered at the end in
 `Item__slot`.
 
@@ -175,4 +175,4 @@ The demo uses real focus in the listbox. Up and Down Arrow move focus without wr
 the first and last option, printable characters use type-ahead with a 500 ms reset, and Space or Enter
 selects the focused option.
 
-[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
+[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/014-listbox-vs-grid-for-selectable-options.md

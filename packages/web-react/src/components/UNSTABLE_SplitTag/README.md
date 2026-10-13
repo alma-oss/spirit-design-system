@@ -100,7 +100,7 @@ const { getOptionProps } = useSplitTagListboxKeyboard({
 The listbox is for plain options only and must not contain buttons, links, checkboxes, or other interactive
 descendants. Keyboard: Up/Down move between options, Home/End jump to first/last, type-ahead focuses by label,
 and Space/Enter selects. See the [demo keyboard helper][split-tag-listbox-keyboard-demo] for the full
-implementation and [decision 013][decision-listbox-grid] for the role choice.
+implementation and [decision 014][decision-listbox-grid] for the role choice.
 
 ## With ControlButton
 
@@ -175,7 +175,7 @@ On top of the API options, the component accepts [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/013-listbox-vs-grid-for-selectable-options.md
+[decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/014-listbox-vs-grid-for-selectable-options.md
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size-extended
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
