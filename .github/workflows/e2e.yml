@@ -9,15 +9,22 @@ on:
 
 env:
   NODE_ENV: testing
+  # Number of shards the test suite is split into, keep in sync with the `shard` matrix of the `test` job
+  SHARD_TOTAL: 4
 
 jobs:
   test:
-    name: 🖥️ End-to-End Testing
+    name: 🖥️ End-to-End Testing (${{ matrix.shard }}/4)
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
-      pull-requests: write
       contents: read
+    strategy:
+      # Let the other shards finish, so a single run reports every failure
+      fail-fast: false
+      matrix:
+        # keep in sync with SHARD_TOTAL and the job name
+        shard: [1, 2, 3, 4]
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -42,10 +49,64 @@ jobs:
             -e PW_PAGE_RETRIES="${{ vars.PW_PAGE_RETRIES || '5' }}" \
             -e WEBSITE_URL="${{ inputs.url }}" \
             mcr.microsoft.com/playwright:v${{ steps.playwright-version.outputs.version }}-noble \
-            sh -c "corepack install && corepack enable && yarn test:e2e"
+            sh -c "corepack install && corepack enable && yarn test:e2e --shard=${{ matrix.shard }}/${{ env.SHARD_TOTAL }} --reporter=blob"
+
+      # Partial reports of the shards are merged into one HTML report by the `report` job
+      - name: Upload blob report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: blob-report-${{ matrix.shard }}
+          path: blob-report/
+          retention-days: 1
+          if-no-files-found: error
+
+  report:
+    name: 📋 End-to-End Report
+    needs: test
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      # Merging needs neither browsers nor the workspace dependencies, only the Playwright CLI of the same
+      # version the shards used. Only the Yarn configuration is checked out, so `yarn dlx` fetches it
+      # with the repository's supply-chain settings (disabled scripts, minimal package age).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: |
+            .yarnrc.yml
+            package.json
+            .yarn/plugins
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Get Playwright Version
+        id: playwright-version
+        run: |
+          PW_VERSION=$(yq '.catalogs.test["@playwright/test"]' .yarnrc.yml)
+          echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Download blob reports
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: blob-report-*
+          path: all-blob-reports/
+          merge-multiple: true
+
+      - name: Merge reports
+        run: yarn dlx -p playwright@${{ steps.playwright-version.outputs.version }} playwright merge-reports --reporter html ./all-blob-reports
+        env:
+          PLAYWRIGHT_HTML_OPEN: never
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: failure()
+        if: ${{ !cancelled() && needs.test.result == 'failure' }}
         id: artifact-upload-step
         with:
           name: playwright-report
@@ -53,7 +114,7 @@ jobs:
           retention-days: 30
 
       - name: Comment PR with artifact URL
-        if: failure()
+        if: ${{ !cancelled() && needs.test.result == 'failure' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
@@ -73,7 +134,7 @@ jobs:
       - name: Notify Slack when failure
         id: Slack
         uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v1.27.1
-        if: failure()
+        if: ${{ !cancelled() && needs.test.result == 'failure' }}
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }} # Slack channel-id of #spirit-design-system-notifications_en
           payload: |
@@ -101,7 +162,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*E2E tests result:* `${{ job.status }}`"
+                        "text": "*E2E tests result:* `${{ needs.test.result }}`"
                       }
                     },
                     {
