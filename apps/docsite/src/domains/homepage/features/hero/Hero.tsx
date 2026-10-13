@@ -15,11 +15,11 @@ import {
 } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { useState } from 'react';
-import { routes } from '../routing/routes';
-import Eyebrow from './Eyebrow';
+import { routes } from '../../../routing/routes';
+import Eyebrow from '../../ui/Eyebrow';
+import HoverLottie from '../../ui/HoverLottie';
+import PageSection from '../../ui/PageSection';
 import styles from './Hero.module.scss';
-import HoverLottie from './HoverLottie';
-import PageSection from './PageSection';
 
 const popularLinks = [
   { label: 'Button', href: routes.component('Button') },
@@ -95,7 +95,7 @@ const Hero = () => (
           <Flex direction="vertical" alignmentX="center" spacing="space-1000">
             <Stack spacing="space-500">
               <Eyebrow isCentered>MEET SPIRIT</Eyebrow>
-              <Heading elementType="h2" size="xlarge" textAlignment="center" marginBottom="space-0">
+              <Heading elementType="h1" size="xlarge" textAlignment="center" marginBottom="space-0">
                 Design consistently.
                 <br />
                 Ship faster. Include everyone.
