@@ -43,6 +43,10 @@ Available environment variables:
 | `PW_NAVIGATION_TIMEOUT` | Navigation timeout in milliseconds | `30000`            | `30000`      |
 | `PW_PAGE_RETRIES`       | Page navigation retries            | `3`                | `3`          |
 
+In CI the suite is split into [shards][playwright-docs-sharding] (`--shard=X/N`), each running on its own runner with a single Playwright worker.
+The shards upload blob reports that a final job merges into a single HTML report.
+To reproduce a single shard locally, run it through the Docker wrapper: `./bin/make/e2e.sh --testOptions "--shard=2/4"`.
+
 In case of any further configuration needs, please refer to the [Playwright configuration documentation][playwright-docs-config].
 
 ## Test Harness
@@ -210,6 +214,7 @@ For more information, please refer to the [Accessibility Testing Guidelines][acc
 [docs-axe-core-playwright]: https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright
 [playwright-docs]: https://playwright.dev/
 [playwright-docs-config]: https://playwright.dev/docs/test-configuration
+[playwright-docs-sharding]: https://playwright.dev/docs/test-sharding
 [testing-library-query-priority]: https://testing-library.com/docs/queries/about/#priority
 [visual-comparison-proposal]: https://github.com/microsoft/playwright/issues/24312
 [visual-comparison-proposal-feedback]: https://github.com/microsoft/playwright/issues/32057
