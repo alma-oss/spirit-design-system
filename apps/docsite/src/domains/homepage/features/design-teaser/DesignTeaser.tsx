@@ -1,12 +1,12 @@
 'use client';
 
 import { Box, Grid, GridItem, Stack, Text } from '@alma-oss/spirit-web-react';
-import { routes } from '../routing/routes';
+import { routes } from '../../../routing/routes';
+import PageSection from '../../ui/PageSection';
+import SectionHeader from '../../ui/SectionHeader';
+import Stats, { type Stat } from '../../ui/Stats';
 import { AssetGroups } from './CustomAssets';
 import styles from './DesignTeaser.module.scss';
-import PageSection from './PageSection';
-import SectionHeader from './SectionHeader';
-import Stats, { type Stat } from './Stats';
 
 const stats: Stat[] = [
   { value: 2, suffix: '+', label: 'Modes and themes' },

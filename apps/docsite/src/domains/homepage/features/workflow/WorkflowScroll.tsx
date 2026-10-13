@@ -3,9 +3,9 @@
 import { Box, Flex, Grid, GridItem, Heading, Link, Stack, Text } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { routes } from '../routing/routes';
-import Eyebrow from './Eyebrow';
-import PageSection from './PageSection';
+import { routes } from '../../../routing/routes';
+import Eyebrow from '../../ui/Eyebrow';
+import PageSection from '../../ui/PageSection';
 import styles from './WorkflowScroll.module.scss';
 
 const REPOSITORY_URL = 'https://github.com/alma-oss/spirit-design-system/tree/main';
@@ -72,9 +72,10 @@ const steps: WorkflowStep[] = [
     description: 'Catch detached components, hardcoded values and missing tokens before they reach production.',
     imageAlt: 'Preview of checking a design for detached components',
     imageColor: 'emotion-informative-subtle',
+    // Component status has no page yet, so it links to the components index.
     // The design check has no page of its own yet, so it links to the design section.
     links: [
-      { label: 'Component status', href: `${routes.components}/status` },
+      { label: 'Component status', href: routes.components },
       { label: 'Design Check', href: routes.design },
     ],
   },

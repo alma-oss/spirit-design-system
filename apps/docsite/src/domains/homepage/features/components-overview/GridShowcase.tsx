@@ -2,8 +2,8 @@
 
 import { Box, Container, Flex, Grid, GridItem, Heading, Hidden, Section, Text } from '@alma-oss/spirit-web-react';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import Stamp, { type StampDirection, type StampTone } from '../../ui/Stamp';
 import styles from './GridShowcase.module.scss';
-import Stamp, { type StampDirection, type StampTone } from './Stamp';
 
 // All geometry below comes from the design.
 // The window is 884 px wide and its visible part is 394 px tall, the browser content inside it is 880 px wide.

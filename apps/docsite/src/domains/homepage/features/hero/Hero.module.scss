@@ -1,6 +1,6 @@
 @use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
 @use '@tokens' as tokens;
-@use './variables';
+@use '../../ui/variables';
 
 .Hero {
     // The decorative line is as wide as the viewport, so it must not make the page scroll horizontally.

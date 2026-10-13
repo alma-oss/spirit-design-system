@@ -1,11 +1,11 @@
 'use client';
 
 import { Flex, Heading, IconBox, Stack, Text } from '@alma-oss/spirit-web-react';
-import { routes } from '../routing/routes';
+import { routes } from '../../../routing/routes';
+import FeatureGrid, { type Feature } from '../../ui/FeatureGrid';
+import PageSection from '../../ui/PageSection';
 import styles from './ComponentsOverview.module.scss';
-import FeatureGrid, { type Feature } from './FeatureGrid';
 import GridShowcase from './GridShowcase';
-import PageSection from './PageSection';
 
 // The subpages are not available yet, so every card links to the components page for now.
 const features: Feature[] = [

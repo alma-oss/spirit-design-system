@@ -2,17 +2,17 @@
 
 import { Box, Grid, GridItem, Stack, Text } from '@alma-oss/spirit-web-react';
 import { type ReactNode } from 'react';
-import { routes } from '../routing/routes';
+import { routes } from '../../../routing/routes';
+import PageSection from '../../ui/PageSection';
+import SectionHeader from '../../ui/SectionHeader';
+import Stats from '../../ui/Stats';
 import styles from './BuildingBlocks.module.scss';
 import EducationForm from './EducationForm';
 import FilesCard from './FilesCard';
 import NotificationsCard from './NotificationsCard';
-import PageSection from './PageSection';
 import PageShowcase from './PageShowcase';
 import ProfileProgress from './ProfileProgress';
 import SearchHistory from './SearchHistory';
-import SectionHeader from './SectionHeader';
-import Stats from './Stats';
 import TechStackCard from './TechStackCard';
 
 // The tile height from the design includes the border and the `space-1000` padding (in px).

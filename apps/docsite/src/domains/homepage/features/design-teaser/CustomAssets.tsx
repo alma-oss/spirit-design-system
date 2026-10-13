@@ -2,9 +2,9 @@
 
 import { Box, Flex, Heading, Text } from '@alma-oss/spirit-web-react';
 import { type CSSProperties, useState } from 'react';
+import HoverLottie from '../../ui/HoverLottie';
+import PageSection from '../../ui/PageSection';
 import styles from './CustomAssets.module.scss';
-import HoverLottie from './HoverLottie';
-import PageSection from './PageSection';
 
 const ASSETS_PATH = '/custom-assets';
 const CODE_TEXT_CLASS = 'typography-code-small-regular';

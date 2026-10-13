@@ -1,8 +1,8 @@
 'use client';
 
 import { Grid, GridItem, PartnerLogo, ProductLogo } from '@alma-oss/spirit-web-react';
+import PageSection from '../../ui/PageSection';
 import styles from './LogoStrip.module.scss';
-import PageSection from './PageSection';
 
 const LOGOS_PATH = '/logos';
 
