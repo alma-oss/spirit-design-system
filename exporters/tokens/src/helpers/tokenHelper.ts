@@ -333,9 +333,9 @@ const FONT_WEIGHT_MAP: Record<string, number> = {
 };
 
 const normalizeFontWeight = (fontWeightText: string): number | string => {
-  const normalizedText = fontWeightText.toLowerCase();
+  const normalizedText = fontWeightText.trim().toLowerCase();
   const normalizedWithoutItalic = normalizedText.replace(/\s*italic$/i, '');
-  const mappedValue = FONT_WEIGHT_MAP[normalizedWithoutItalic];
+  const mappedValue = FONT_WEIGHT_MAP[normalizedWithoutItalic.replace(/[\s_-]+/g, '')];
 
   if (mappedValue) {
     return mappedValue;
