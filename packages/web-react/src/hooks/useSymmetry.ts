@@ -1,4 +1,4 @@
-import { breakpoints } from '@alma-oss/spirit-design-tokens';
+import { breakpointTokens } from '../constants';
 import { BREAKPOINT_MOBILE, type BreakpointToken, type SingleOrResponsive } from '../types';
 
 const SYMMETRICAL_CLASS_SUFFIX = '--symmetrical';
@@ -48,10 +48,10 @@ export function useSymmetry(
     };
   }
 
-  const { classes } = (Object.keys(breakpoints) as BreakpointToken[]).reduce(
-    getSymmetryClassNamesReducer(componentClass, isSymmetrical),
-    { classes: [] as string[], wasSymmetrical: false },
-  );
+  const { classes } = breakpointTokens.reduce(getSymmetryClassNamesReducer(componentClass, isSymmetrical), {
+    classes: [] as string[],
+    wasSymmetrical: false,
+  });
 
   return {
     isSymmetricalActive: Object.values(isSymmetrical).includes(true),

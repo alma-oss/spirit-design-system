@@ -115,7 +115,7 @@ export const CvEditor = () => {
         size="small"
         backgroundColor="secondary"
         containerProps={{ size: 'large' }}
-        paddingBottom={{ mobile: 'space-0', tablet: 'space-0' }}
+        paddingBottom="space-0"
       >
         <Breadcrumbs marginBottom="space-1000" items={[{ title: 'Domů', url: '#' }, { title: 'Životopis' }]} />
         <Heading elementType="h1" size="large" fontWeight="semibold">
