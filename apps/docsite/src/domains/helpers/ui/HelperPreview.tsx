@@ -10,7 +10,9 @@ import React from 'react';
 // WebPreview's suppressHydrationWarning only covers its own container element, not mutations on
 // elements nested inside it, so it doesn't cover this case. Importing with ssr:false keeps the
 // preview out of the server-rendered HTML entirely so no mismatch is possible.
-const WebPreview = dynamic(() => import('@local/domains/components/ui/WebPreview'), { ssr: false });
+const WebPreview = dynamic(() => import('@local/domains/components/ui/WebPreview').then((mod) => mod.WebPreview), {
+  ssr: false,
+});
 
 interface HelperPreviewProps {
   html: string;
