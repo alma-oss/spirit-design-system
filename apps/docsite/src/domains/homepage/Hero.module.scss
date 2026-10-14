@@ -1,0 +1,94 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@tokens' as tokens;
+@use './variables';
+
+.Hero {
+    // The decorative line is as wide as the viewport, so it must not make the page scroll horizontally.
+    overflow-x: clip;
+}
+
+.Intro {
+    min-width: 0;
+}
+
+.Search {
+    // The vertical Flex is a grid, so its only column has to span the whole width for the field to stretch.
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+}
+
+.SearchForm {
+    width: 100%;
+}
+
+.Persona {
+    // The cards have their own background, so they cover the decorative line which runs behind them.
+    position: relative;
+    min-width: 0;
+}
+
+// The vertical Flex is a grid, so the animation takes the free height of the card.
+.PersonaContent {
+    grid-template-rows: auto auto auto;
+}
+
+.PersonaTitle {
+    color: var(--spirit-color-link-primary-state-default);
+}
+
+.PersonaAnimation {
+    height: 11.25rem;
+    min-height: 0;
+}
+
+// The animations are exported in blue and white, so the colors are mapped to the theme tokens here.
+.PersonaLottie {
+    width: 100%;
+    height: 100%;
+
+    [fill='rgb(12,60,246)'] {
+        fill: var(--spirit-color-text-primary);
+    }
+
+    [stroke='rgb(12,60,246)'] {
+        stroke: var(--spirit-color-text-primary);
+    }
+
+    [fill='rgb(255,255,255)'] {
+        fill: var(--spirit-color-background-primary);
+    }
+
+    [stroke='rgb(255,255,255)'] {
+        stroke: var(--spirit-color-background-primary);
+    }
+}
+
+// The decorative line runs through the whole page width behind the cards, about a fifth of their height from the top.
+// It is drawn only when the cards are in a single row.
+.Personas {
+    position: relative;
+    width: 100%;
+
+    @include breakpoint.up(tokens.$breakpoint-desktop) {
+        &::before {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 100vw;
+            height: tokens.$border-width-100;
+            content: '';
+            background-color: variables.$line-color;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+// The popular links have the small body size, like the label before them.
+.PopularLink {
+    font: inherit;
+}
+
+// The commas between the links have the color of the links, as in the design.
+.PopularSeparator {
+    color: var(--spirit-color-link-primary-state-default);
+}
