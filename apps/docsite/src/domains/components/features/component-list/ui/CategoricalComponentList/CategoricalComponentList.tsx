@@ -1,17 +1,16 @@
 import { Heading, Text } from '@alma-oss/spirit-web-react';
-import { COMPONENT_CATEGORY_DESCRIPTIONS } from '@local/domains/components/constants/componentCategories';
-import { groupComponentsByCategory } from '@local/domains/components/utils/groupComponentsByCategory';
 import React from 'react';
-import ComponentCard from './ComponentCard';
-import ComponentGrid from './ComponentGrid';
-import ComponentsBand from './ComponentsBand';
+import { COMPONENT_CATEGORY_DESCRIPTIONS } from '../../model/componentCategories';
+import { groupComponentsByCategory } from '../../utils/groupComponentsByCategory';
+import { ComponentCard } from '../ComponentCard';
+import { ComponentGrid } from '../ComponentGrid';
+import { ComponentsBand } from '../ComponentsBand';
 
 interface CategoricalComponentListProps {
   components: string[];
-  previews: Record<string, string>;
 }
 
-const CategoricalComponentList = ({ components, previews }: CategoricalComponentListProps) => {
+const CategoricalComponentList = ({ components }: CategoricalComponentListProps) => {
   const categories = groupComponentsByCategory(components);
 
   return categories.map(({ category, components: filtered }) => (
@@ -31,7 +30,7 @@ const CategoricalComponentList = ({ components, previews }: CategoricalComponent
       <ComponentsBand variant="grid">
         <ComponentGrid>
           {filtered.map((component) => (
-            <ComponentCard key={component} component={component} previewHtml={previews[component]} />
+            <ComponentCard key={component} component={component} />
           ))}
         </ComponentGrid>
       </ComponentsBand>
