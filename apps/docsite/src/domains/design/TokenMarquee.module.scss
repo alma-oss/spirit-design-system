@@ -60,7 +60,7 @@ $swatch-color-size: 1.375rem;
     // Only the background is half transparent, so the glow of the hero shines through.
     background-color: color-mix(in srgb, var(--spirit-color-background-primary) 50%, transparent);
     border: tokens.$border-width-100 solid var(--spirit-color-border-basic);
-    border-radius: tokens.$radius-100;
+    border-radius: tokens.$radius-300;
 }
 
 .Label {
@@ -140,6 +140,7 @@ $swatch-color-size: 1.375rem;
         var(--spirit-color-accent-01-background-subtle);
     border: solid var(--spirit-color-accent-01-border-basic);
     border-width: 0 tokens.$border-width-200;
+    height: 1.25rem;
     border-radius: 0;
 }
 
@@ -158,8 +159,11 @@ $swatch-color-size: 1.375rem;
 }
 
 .Swatch--container {
-    background-color: var(--spirit-color-accent-03-background-subtle);
-    border: solid var(--spirit-color-accent-03-border-basic);
+    // The inner area keeps a gap of 4px from the vertical lines.
+    padding: 0 tokens.$space-300;
+    background-color: var(--spirit-color-emotion-success-background-subtle);
+    background-clip: content-box;
+    border: solid var(--spirit-color-emotion-success-border-subtle);
     border-width: 0 tokens.$border-width-200;
     border-radius: 0;
 }
