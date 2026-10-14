@@ -1,25 +1,27 @@
 'use client';
 
 import { Link, Tag } from '@alma-oss/spirit-web-react';
-import { getComponentDescription } from '@local/domains/components/constants/componentDescriptions';
 import { routes } from '@local/domains/routing/routes';
 import useIsComponentUnstable from '@local/hooks/useIsComponentUnstable';
 import NextLink from 'next/link';
 import React from 'react';
+import { getComponentCatalogEntry } from '../../model/componentCatalog';
+import { PreviewFrame } from '../PreviewFrame';
 import styles from './ComponentCard.module.scss';
-import PreviewFrame from './PreviewFrame';
 
 interface ComponentCardProps {
   component: string;
-  previewHtml?: string;
 }
 
-const ComponentCard = ({ component, previewHtml = undefined }: ComponentCardProps) => {
+const ComponentCard = ({ component }: ComponentCardProps) => {
   const isUnstable = useIsComponentUnstable(component.toLowerCase());
+  const { description, guides, Preview } = getComponentCatalogEntry(component);
 
   return (
     <li className={styles.card}>
-      <PreviewFrame html={previewHtml} contentClassName={styles.preview} />
+      <PreviewFrame guides={guides} contentClassName={styles.preview}>
+        {Preview ? <Preview /> : undefined}
+      </PreviewFrame>
       <span className={styles.badge}>
         <Tag size="xsmall" color={isUnstable ? 'warning' : 'success'} isSubtle>
           {isUnstable ? 'Unstable' : 'Stable'}
@@ -36,9 +38,7 @@ const ComponentCard = ({ component, previewHtml = undefined }: ComponentCardProp
         >
           {component}
         </Link>
-        <p className={`typography-body-small-regular text-secondary ${styles.description}`}>
-          {getComponentDescription(component)}
-        </p>
+        <p className={`typography-body-small-regular text-secondary ${styles.description}`}>{description}</p>
       </div>
     </li>
   );
