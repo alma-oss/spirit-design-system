@@ -89,8 +89,9 @@ However, the `paddingY` prop will override the `size` prop.
 </Section>
 ```
 
-Note that `paddingY` replaces the size padding completely, so breakpoints not listed in it get no padding at all.
-In the example above, the Section has no vertical padding on mobile and tablet.
+Note that `paddingY` replaces the size padding completely. Its responsive values apply from their breakpoint upwards,
+so only breakpoints below the first value get no padding. In the example above, the Section has no vertical padding
+on mobile and tablet.
 
 When combined with `size`, the `paddingTop` and `paddingBottom` values apply from their breakpoint upwards,
 overriding the responsive size padding on all larger screens too. Breakpoints below the first one you specify

@@ -29,8 +29,9 @@ Responsive values can be defined using the `tablet` and `desktop` infixes:
 
 ## Background Color
 
-Use the `bg-*` utility classes to set the background color. Available values are `primary`,
-`secondary` and `tertiary`, see the [Background Color dictionary][dictionary-color].
+Use the `bg-*` utility classes to set the background color. The examples below use `primary`,
+`secondary` and `tertiary` from the [Background Color dictionary][dictionary-color]; see the
+[utility classes][utilities] for additional generated background values.
 
 ```html
 <section class="py-900 py-tablet-1000 bg-primary">…</section>
