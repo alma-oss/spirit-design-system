@@ -1,7 +1,7 @@
 import React from 'react';
-import ComponentCardSkeleton from './ComponentCardSkeleton';
-import ComponentGrid from './ComponentGrid';
-import ComponentsBand from './ComponentsBand';
+import { ComponentCardSkeleton } from '../ComponentCardSkeleton';
+import { ComponentGrid } from '../ComponentGrid';
+import { ComponentsBand } from '../ComponentsBand';
 
 const SKELETON_ITEMS_COUNT = 9;
 const SKELETON_ITEMS = Array.from({ length: SKELETON_ITEMS_COUNT }, (_, index) => `component-skeleton-${index}`);
