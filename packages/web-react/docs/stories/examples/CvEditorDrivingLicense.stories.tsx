@@ -84,7 +84,7 @@ export const CvEditorDrivingLicense = () => {
         size="small"
         backgroundColor="secondary"
         containerProps={{ size: 'small' }}
-        paddingBottom={{ mobile: 'space-0', tablet: 'space-0' }}
+        paddingBottom="space-0"
       >
         <Stack spacing="space-1000">
           <Breadcrumbs

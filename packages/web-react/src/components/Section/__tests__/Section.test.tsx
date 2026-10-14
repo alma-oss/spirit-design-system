@@ -130,7 +130,7 @@ describe('Section', () => {
       </Section>,
     );
 
-    expect(screen.getByTestId('section')).toHaveClass(sizePaddingClasses[size], 'pt-200');
+    expect(screen.getByTestId('section')).toHaveClass(sizePaddingClasses[size], 'pt-200', 'pt-tablet-200');
   });
 
   it('should render with overridden paddingY', () => {
