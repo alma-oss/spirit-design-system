@@ -1,8 +1,8 @@
 'use client';
 
 import { Icon, InputAddon, TextField, VisuallyHidden } from '@alma-oss/spirit-web-react';
-import { useComponentsSearchQueryState } from '@local/domains/components/hooks/useComponentsSearchQueryState';
 import React from 'react';
+import { useComponentsSearchQueryState } from '../../hooks/useComponentsSearchQueryState';
 import styles from './ComponentSearch.module.scss';
 
 const SEARCH_ID = 'components-search';
