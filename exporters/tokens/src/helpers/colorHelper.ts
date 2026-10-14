@@ -71,8 +71,7 @@ export const transformColorsToVariables = (
         return cssVar;
       });
     })
-    .join(',')
-    .replace(/0px/g, '0');
+    .join(',');
 
   return transformedValue;
 };
