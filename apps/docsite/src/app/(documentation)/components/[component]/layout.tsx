@@ -1,5 +1,5 @@
-import ComponentCover from '@local/domains/components/ui/ComponentCover';
-import ComponentTabNav from '@local/domains/components/ui/ComponentTabNav';
+import { ComponentCover } from '@local/domains/components/ui/ComponentCover';
+import { ComponentTabNav } from '@local/domains/components/ui/ComponentTabNav';
 import { getComponentTabAvailability } from '@local/domains/content/componentDocs';
 import { type ReactNode } from 'react';
 
