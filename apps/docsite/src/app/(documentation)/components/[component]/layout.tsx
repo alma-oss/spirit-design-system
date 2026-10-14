@@ -1,4 +1,4 @@
-import ComponentCover from '@local/domains/components/ui/ComponentCover';
+import { ComponentCover } from '@local/domains/components/ui/ComponentCover';
 import ComponentTabNavigation from '@local/domains/components/ui/ComponentTabNavigation';
 import { type ReactNode } from 'react';
 

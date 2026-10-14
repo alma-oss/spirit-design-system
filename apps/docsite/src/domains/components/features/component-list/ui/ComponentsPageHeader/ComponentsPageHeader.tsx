@@ -19,15 +19,25 @@ import {
   VisuallyHidden,
 } from '@alma-oss/spirit-web-react';
 import React, { useEffect, useId, useState } from 'react';
-import ComponentSearch from './ComponentSearch';
-import ComponentSortToggle from './ComponentSortToggle';
+import { ComponentSearch } from '../ComponentSearch';
+import { ComponentSortToggle } from '../ComponentSortToggle';
 import styles from './ComponentsPageHeader.module.scss';
 
 const TOAST_DURATION = 3000;
 
-const PAGE_ACTIONS = ['Copy page as Markdown', 'Open in Storybook', 'Open on GitHub', 'Open in Figma'];
+const PAGE_TITLE = 'Components';
+const PAGE_DESCRIPTION = 'Explore the Spirit components, see how they look, and find the one you need.';
 
-// The page actions are UI only for now; Copy page only shows the confirmation toast and does not copy anything yet.
+const PAGE_ACTIONS = [
+  { label: 'Copy page as Markdown', href: undefined },
+  { label: 'Open in Storybook', href: 'https://spirit-design-system-storybook.netlify.app/' },
+  { label: 'Open on GitHub', href: 'https://github.com/alma-oss/spirit-design-system/' },
+  {
+    label: 'Open in Figma',
+    href: 'https://www.figma.com/design/w9Ca4hvkuYLshsrHu1bYwT/Spirit-UI-KIT',
+  },
+] as const;
+
 // The same block lives in the component detail header and the two will be unified later.
 const ComponentsPageHeader = () => {
   const id = useId();
@@ -44,9 +54,22 @@ const ComponentsPageHeader = () => {
     return () => window.clearTimeout(timeout);
   }, [isToastOpen]);
 
-  const showToast = () => {
+  const copyPage = async () => {
+    const markdown = `# ${PAGE_TITLE}\n\n${PAGE_DESCRIPTION}\n\n${window.location.href}`;
+
+    try {
+      await navigator.clipboard.writeText(markdown);
+      setIsDropdownOpen(false);
+      setIsToastOpen(true);
+    } catch {
+      // A denied clipboard write must not report success.
+      setIsDropdownOpen(false);
+    }
+  };
+
+  const openAction = (href: string) => {
     setIsDropdownOpen(false);
-    setIsToastOpen(true);
+    window.open(href, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -64,16 +87,16 @@ const ComponentsPageHeader = () => {
 
           <div className={styles.title}>
             <Heading elementType="h1" size="large" fontWeight="semibold" marginBottom="space-0">
-              Components
+              {PAGE_TITLE}
             </Heading>
             <Text elementType="p" size="medium" marginBottom="space-0">
-              Explore the Spirit components, see how they look, and find the one you need.
+              {PAGE_DESCRIPTION}
             </Text>
           </div>
         </div>
 
         <SplitButton color="tertiary" size="small">
-          <Button onClick={showToast}>
+          <Button onClick={copyPage}>
             <Icon name="placeholder" />
             Copy page
           </Button>
@@ -88,14 +111,14 @@ const ComponentsPageHeader = () => {
               <Icon name="chevron-down" />
             </DropdownTrigger>
             <DropdownPopover aria-label="Page actions">
-              {PAGE_ACTIONS.map((action, index) => (
+              {PAGE_ACTIONS.map((action) => (
                 <Item
-                  key={action}
+                  key={action.label}
                   elementType="button"
                   startSlot={<Icon name="placeholder" />}
-                  onClick={index === 0 ? showToast : () => setIsDropdownOpen(false)}
+                  onClick={action.href === undefined ? copyPage : () => openAction(action.href)}
                 >
-                  <Label>{action}</Label>
+                  <Label>{action.label}</Label>
                 </Item>
               ))}
             </DropdownPopover>
