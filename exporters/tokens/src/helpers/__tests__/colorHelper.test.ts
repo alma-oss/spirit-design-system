@@ -31,7 +31,7 @@ const dataProviderItemsTransformColorsToVariables = [
     name: 'shadow-100',
     value: '0px 1px 0px #ffffff, 0px 1px 0px #00000001',
     expectedValue:
-      '0 1px 0 var(--spirit-color-shadows-shadow-100-color-01, #ffffff), 0 1px 0 var(--spirit-color-shadows-shadow-100-color-02, #00000001)',
+      '0px 1px 0px var(--spirit-color-shadows-shadow-100-color-01, #ffffff), 0px 1px 0px var(--spirit-color-shadows-shadow-100-color-02, #00000001)',
   },
   {
     hasTokenPrefix: true,
@@ -39,7 +39,7 @@ const dataProviderItemsTransformColorsToVariables = [
     name: 'shadow-200',
     value: '0px 1px 0px #ffffff, 0px 1px 0px #00000001, 0px 1px 0px #00000002',
     expectedValue:
-      '0 1px 0 var(--spirit-color-shadow-200-color-01, #ffffff), 0 1px 0 var(--spirit-color-shadow-200-color-02, #00000001), 0 1px 0 var(--spirit-color-shadow-200-color-03, #00000002)',
+      '0px 1px 0px var(--spirit-color-shadow-200-color-01, #ffffff), 0px 1px 0px var(--spirit-color-shadow-200-color-02, #00000001), 0px 1px 0px var(--spirit-color-shadow-200-color-03, #00000002)',
   },
   {
     hasTokenPrefix: false,
@@ -47,7 +47,14 @@ const dataProviderItemsTransformColorsToVariables = [
     name: 'shadow-200',
     value: '0px 1px 0px #ffffff, 0px 1px 0px #00000001, 0px 1px 0px #00000002',
     expectedValue:
-      '0 1px 0 var(--color-shadow-200-color-01, #ffffff), 0 1px 0 var(--color-shadow-200-color-02, #00000001), 0 1px 0 var(--color-shadow-200-color-03, #00000002)',
+      '0px 1px 0px var(--color-shadow-200-color-01, #ffffff), 0px 1px 0px var(--color-shadow-200-color-02, #00000001), 0px 1px 0px var(--color-shadow-200-color-03, #00000002)',
+  },
+  {
+    hasTokenPrefix: true,
+    group: '',
+    name: 'shadow-300',
+    value: '0px 100px 80px 0px #0000001a',
+    expectedValue: '0px 100px 80px 0px var(--spirit-color-shadow-300-color-01, #0000001a)',
   },
 ];
 
