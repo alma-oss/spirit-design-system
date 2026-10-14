@@ -302,6 +302,28 @@ describe('tokenHelper', () => {
 
       expect(tokenValue).toContain(`line-height: ${expectedLineHeight}`);
     });
+
+    it.each([
+      { fontWeight: 'SemiBold', expectedFontWeight: 600 },
+      { fontWeight: 'Semi Bold', expectedFontWeight: 600 },
+      { fontWeight: 'Semi-Bold', expectedFontWeight: 600 },
+      { fontWeight: 'Semi Bold Italic', expectedFontWeight: 600 },
+      { fontWeight: 'Extra Light', expectedFontWeight: 200 },
+      { fontWeight: '500', expectedFontWeight: 500 },
+    ])('should format font-weight "$fontWeight" as $expectedFontWeight', ({ fontWeight, expectedFontWeight }) => {
+      const tokenValue = typographyValue(
+        {
+          fontFamily: { text: 'Inter' },
+          fontSize: { unit: 'Pixels', measure: 16, referencedTokenId: null },
+          fontWeight: { text: fontWeight },
+          referencedTokenId: null,
+        } as unknown as TypographyToken['value'],
+        false,
+        false,
+      );
+
+      expect(tokenValue).toContain(`font-weight: ${expectedFontWeight}`);
+    });
   });
 
   describe('filterExcludedTokens', () => {
