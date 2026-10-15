@@ -1,4 +1,4 @@
-import { SizesExtended, breakpointOrder } from '../../constants';
+import { SizesExtended, breakpointTokens } from '../../constants';
 import {
   BREAKPOINT_MOBILE,
   type Responsive,
@@ -29,7 +29,7 @@ const fillBreakpoints = (
   const filled: Responsive<SpaceToken> = {};
   let lastValue: SpaceToken | undefined;
 
-  breakpointOrder.forEach((breakpoint) => {
+  breakpointTokens.forEach((breakpoint) => {
     lastValue = responsiveValue[breakpoint] ?? lastValue;
 
     if (lastValue !== undefined && (breakpoint in responsiveValue || breakpoint in sizePadding)) {
@@ -41,7 +41,7 @@ const fillBreakpoints = (
 };
 
 export const useSectionSizeProps = (props: SectionProps = {}) => {
-  const { size, paddingY, paddingTop, paddingBottom } = props;
+  const { paddingBottom, paddingTop, paddingY, size } = props;
   const sizePadding = size ? sizePaddingMapping[size as SizeExtendedDictionaryType<never>] : undefined;
 
   if (!sizePadding) {

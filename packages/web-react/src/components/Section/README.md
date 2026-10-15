@@ -89,13 +89,11 @@ However, the `paddingY` prop will override the `size` prop.
 </Section>
 ```
 
-Note that `paddingY` replaces the size padding completely. Its responsive values apply from their breakpoint upwards,
-so only breakpoints below the first value get no padding. In the example above, the Section has no vertical padding
+Note that `paddingY` replaces the size padding completely. In the example above, the Section has no vertical padding
 on mobile and tablet.
 
-When combined with `size`, the `paddingTop` and `paddingBottom` values apply from their breakpoint upwards,
-overriding the responsive size padding on all larger screens too. Breakpoints below the first one you specify
-keep the size padding.
+On the other hand, `paddingTop` and `paddingBottom` override the size padding only from their first breakpoint upwards.
+Smaller breakpoints keep the size padding.
 
 ```tsx
 <Section size="medium" paddingTop={{ tablet: 'space-200' }}>

@@ -2,6 +2,6 @@ import { breakpoints } from '@alma-oss/spirit-design-tokens';
 import type { BreakpointToken } from '../types';
 
 /**
- * Breakpoint tokens ordered from the smallest to the largest breakpoint.
+ * Breakpoint tokens in the order they are defined in the design tokens.
  */
-export const breakpointOrder = Object.keys(breakpoints) as readonly BreakpointToken[];
+export const breakpointTokens = Object.keys(breakpoints) as readonly BreakpointToken[];

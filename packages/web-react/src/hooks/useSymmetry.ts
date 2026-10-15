@@ -1,4 +1,4 @@
-import { breakpointOrder } from '../constants';
+import { breakpointTokens } from '../constants';
 import { BREAKPOINT_MOBILE, type BreakpointToken, type SingleOrResponsive } from '../types';
 
 const SYMMETRICAL_CLASS_SUFFIX = '--symmetrical';
@@ -48,7 +48,7 @@ export function useSymmetry(
     };
   }
 
-  const { classes } = breakpointOrder.reduce(getSymmetryClassNamesReducer(componentClass, isSymmetrical), {
+  const { classes } = breakpointTokens.reduce(getSymmetryClassNamesReducer(componentClass, isSymmetrical), {
     classes: [] as string[],
     wasSymmetrical: false,
   });
