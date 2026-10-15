@@ -1,3 +1,4 @@
+import { fetchAllComponents } from '../../repositories/componentsRepository';
 import { COMPONENT_CATEGORIES } from '../componentCategories';
 
 describe('componentCategories', () => {
@@ -27,5 +28,21 @@ describe('componentCategories', () => {
     const sorted = [...categories].sort();
 
     expect(categories).toEqual(sorted);
+  });
+
+  it('should categorize every component', () => {
+    const allCategorized = new Set(Object.values(COMPONENT_CATEGORIES).flat());
+    const uncategorized = fetchAllComponents().filter((component) => !allCategorized.has(component));
+
+    expect(uncategorized).toEqual([]);
+  });
+
+  it('should only categorize existing components', () => {
+    const allComponents = new Set(fetchAllComponents());
+    const nonExistent = Object.values(COMPONENT_CATEGORIES)
+      .flat()
+      .filter((component) => !allComponents.has(component));
+
+    expect(nonExistent).toEqual([]);
   });
 });
