@@ -1,10 +1,12 @@
-.header {
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+
+.ComponentsPageHeader {
     display: flex;
     flex-direction: column;
     gap: var(--spirit-space-1300);
 }
 
-.top {
+.ComponentsPageHeader__top {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spirit-space-800);
@@ -12,28 +14,28 @@
     justify-content: space-between;
 }
 
-.top > :last-child,
-.toolbar > :last-child {
+.ComponentsPageHeader__top > :last-child,
+.ComponentsPageHeader__toolbar > :last-child {
     // Keep the Copy page button and the search on the right edge even when they wrap onto their own line.
     margin-left: auto;
 }
 
-.text {
+.ComponentsPageHeader__text {
     display: flex;
-    flex: 1 1 24rem;
+    flex: 1 1 units.px-to-rem(384);
     flex-direction: column;
     gap: var(--spirit-space-1000);
     min-width: 0;
-    max-width: 37rem; // 592px
+    max-width: units.px-to-rem(592);
 }
 
-.title {
+.ComponentsPageHeader__title {
     display: flex;
     flex-direction: column;
     gap: var(--spirit-space-700);
 }
 
-.toolbar {
+.ComponentsPageHeader__toolbar {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spirit-space-800);

@@ -1,0 +1,6 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+
+.ComponentSearch {
+    flex: 0 1 units.px-to-rem(279);
+    min-width: 0;
+}
