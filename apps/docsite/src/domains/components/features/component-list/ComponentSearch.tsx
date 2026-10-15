@@ -2,8 +2,8 @@
 
 import { Icon, InputAddon, TextField, VisuallyHidden } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import { useComponentsSearchQueryState } from '../../hooks/useComponentsSearchQueryState';
-import styles from './ComponentSearch.module.scss';
+import { useComponentsSearchQueryState } from './hooks/useComponentsSearchQueryState';
+import './ComponentSearch.scss';
 
 const SEARCH_ID = 'components-search';
 
@@ -11,7 +11,7 @@ const ComponentSearch = () => {
   const [query, setQuery] = useComponentsSearchQueryState();
 
   return (
-    <div className={styles.search}>
+    <div className="ComponentSearch">
       <TextField
         id={SEARCH_ID}
         isLabelHidden
