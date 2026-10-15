@@ -1,3 +1,4 @@
+export * from './breakpoints';
 export * from './classes';
 export * from './colors';
 export * from './dictionaries';

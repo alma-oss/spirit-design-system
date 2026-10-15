@@ -89,6 +89,31 @@ However, the `paddingY` prop will override the `size` prop.
 </Section>
 ```
 
+Note that `paddingY` replaces the size padding completely. In the example above, the Section has no vertical padding
+on mobile and tablet.
+
+On the other hand, `paddingTop` and `paddingBottom` override the size padding only from their first breakpoint upwards.
+Smaller breakpoints keep the size padding.
+
+```tsx
+<Section size="medium" paddingTop={{ tablet: 'space-200' }}>
+  Padding top is `space-1100` on mobile and `space-200` on tablet and desktop.
+</Section>
+```
+
+### Removing Bottom Padding
+
+A common case is the last Section on the page, e.g. one placed right above the footer, that needs no bottom
+padding:
+
+```tsx
+<Section size="medium" paddingBottom="space-0">
+  Last section before the footer
+</Section>
+```
+
+The same works for `paddingTop`.
+
 ## Text Alignment
 
 You can set the text alignment of the Section using the `textAlignment` prop.

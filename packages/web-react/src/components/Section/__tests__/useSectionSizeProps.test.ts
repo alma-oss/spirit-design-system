@@ -70,10 +70,44 @@ describe('useSectionSizeProps', () => {
 
     expect(result.current.modifiedProps).toStrictEqual({
       paddingTop: { mobile: 'space-100', tablet: 'space-200' },
-      paddingBottom: 'space-300',
+      paddingBottom: { mobile: 'space-300', tablet: 'space-300' },
       paddingY: sectionSizeDataProvider.find((data) => data[0] === 'large')![1],
       size: 'large',
     });
+  });
+
+  it.each([
+    // [paddingBottom, expectedPaddingBottom]
+    ['space-0', { mobile: 'space-0', tablet: 'space-0' }],
+    [{ mobile: 'space-0' }, { mobile: 'space-0', tablet: 'space-0' }],
+    [{ tablet: 'space-0' }, { tablet: 'space-0' }],
+    [{ desktop: 'space-0' }, { desktop: 'space-0' }],
+    [
+      { mobile: 'space-0', desktop: 'space-200' },
+      { mobile: 'space-0', tablet: 'space-0', desktop: 'space-200' },
+    ],
+  ] as [SpiritSectionProps['paddingBottom'], SpiritSectionProps['paddingBottom']][])(
+    'should fill paddingBottom %o over size breakpoints',
+    (paddingBottom, expectedPaddingBottom) => {
+      const props: SpiritSectionProps = { size: 'medium', paddingBottom };
+      const { result } = renderHook(() => useSectionSizeProps(props));
+
+      expect(result.current.modifiedProps.paddingBottom).toStrictEqual(expectedPaddingBottom);
+    },
+  );
+
+  it('should fill paddingTop over size breakpoints', () => {
+    const props: SpiritSectionProps = { size: 'medium', paddingTop: 'space-0' };
+    const { result } = renderHook(() => useSectionSizeProps(props));
+
+    expect(result.current.modifiedProps.paddingTop).toStrictEqual({ mobile: 'space-0', tablet: 'space-0' });
+  });
+
+  it('should not fill paddingBottom when paddingY overrides size', () => {
+    const props: SpiritSectionProps = { size: 'medium', paddingY: 'space-200', paddingBottom: 'space-0' };
+    const { result } = renderHook(() => useSectionSizeProps(props));
+
+    expect(result.current.modifiedProps.paddingBottom).toBe('space-0');
   });
 
   it.each(sectionSizeDataProvider)('should return paddingY for size %s', (size, expectedPaddingY) => {
