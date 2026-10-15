@@ -1,0 +1,71 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+@use '../../ui/docsite-tokens' as docsite;
+
+$_glyph-bleed: 0;
+
+// The same inset as the section container, so the intro Container is not nested in another one.
+.CustomAssets__column {
+    max-width: tokens.$container-xlarge-max-width;
+    padding-inline: tokens.$container-padding-mobile;
+    margin-inline: auto;
+
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
+        padding-inline: tokens.$container-padding-tablet;
+    }
+}
+
+.CustomAssets {
+    background-color: docsite.$showcase-background;
+}
+
+.CustomAssets__glyph {
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+}
+
+.CustomAssets__inset,
+.CustomAssets__bleed {
+    position: absolute;
+    inset: $_glyph-bleed;
+}
+
+.CustomAssets__image {
+    display: block;
+    width: 100%;
+
+    // The image fills the glyph or the square frame above. Grid cannot size a replaced image.
+    height: 100%;
+}
+
+// The label stays content-sized and the dashed frame takes the free height beside the icon columns.
+// Grid has no fractional row tracks, so this template stays.
+.CustomAssets__illustrations {
+    grid-template-rows: auto 1fr;
+}
+
+.CustomAssets__tile {
+    background-color: tokens.$background-interactive-state-default;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: tokens.$background-interactive-state-hover;
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: background-color 0.25s ease-in-out;
+    }
+}
+
+.CustomAssets__illustration {
+    position: relative;
+
+    // The artwork is a square frame. Grid has no size prop, so the designed frame stays here.
+    width: units.px-to-rem(114px);
+    height: units.px-to-rem(114px);
+    overflow: hidden;
+    border-radius: tokens.$radius-400;
+}

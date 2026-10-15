@@ -1,0 +1,60 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+@use '../../ui/docsite-tokens' as docsite;
+
+.PageShowcase {
+    overflow: hidden;
+    background-color: docsite.$page-showcase-background;
+}
+
+.PageShowcase__stage {
+    position: relative;
+    max-width: units.px-to-rem(880px);
+    margin-inline: auto;
+}
+
+.PageShowcase__page {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-top-left-radius: tokens.$radius-500;
+    border-top-right-radius: tokens.$radius-500;
+}
+
+.PageShowcase__annotation {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.PageShowcase__highlight {
+    position: absolute;
+    border: tokens.$border-width-100 solid tokens.$accent-02-border-basic;
+    background-color: color-mix(in srgb, tokens.$accent-02-background-basic 20%, transparent);
+    pointer-events: auto;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: background-color 0.25s ease-in-out;
+    }
+}
+
+// Positioning and the hover emphasis live on the wrapper. Stamp owns its own look.
+.PageShowcase__stamp {
+    position: absolute;
+    pointer-events: auto;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: transform 0.25s ease-in-out;
+    }
+}
+
+// Hovering a highlight or its note emphasizes the whole annotation.
+@media (hover: hover) {
+    .PageShowcase__annotation:has(.PageShowcase__highlight:hover, .PageShowcase__stamp:hover) .PageShowcase__highlight {
+        background-color: color-mix(in srgb, tokens.$accent-02-background-basic 35%, transparent);
+    }
+
+    .PageShowcase__annotation:has(.PageShowcase__highlight:hover, .PageShowcase__stamp:hover) .PageShowcase__stamp {
+        transform: scale(1.06);
+    }
+}

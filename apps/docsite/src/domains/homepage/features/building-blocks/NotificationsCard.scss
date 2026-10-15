@@ -1,0 +1,33 @@
+@use '@tokens' as tokens;
+
+// The card stretches to the tile grid, which keeps the designed height.
+// Toast itself cannot sit in that tile: it is fixed to the viewport and has no placement prop.
+.NotificationsCard {
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+}
+
+// The panel fills the tile and its bottom corners are cut off by the edge of the tile.
+.NotificationsCard__panel {
+    position: relative;
+    min-width: 0;
+    padding: tokens.$space-1000;
+    border: tokens.$border-width-100 solid tokens.$border-basic;
+    border-bottom: 0;
+    border-radius: tokens.$radius-500 tokens.$radius-500 0 0;
+    background-color: tokens.$background-primary;
+}
+
+// ToastBar is not fixed. This stack pins those bars to the bottom of the panel, newest toward the edge.
+.NotificationsCard__toasts {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: tokens.$space-700;
+    align-items: center;
+    padding: tokens.$space-1000;
+}

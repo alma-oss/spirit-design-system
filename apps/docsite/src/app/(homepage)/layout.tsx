@@ -1,11 +1,25 @@
+import {
+  BuildingBlocks,
+  ComponentsOverview,
+  DesignTeaser,
+  FaqSection,
+  Hero,
+  LogoStrip,
+  WorkflowScroll,
+} from '@local/domains/homepage';
 import { type ChildrenProps } from '@local/types';
-import { Cover } from '@local/ui';
 
 interface HomepageLayoutProps extends ChildrenProps {}
 
 const HomepageLayout = async ({ children }: HomepageLayoutProps) => (
   <>
-    <Cover />
+    <Hero />
+    <LogoStrip />
+    <WorkflowScroll />
+    <BuildingBlocks />
+    <DesignTeaser />
+    <ComponentsOverview />
+    <FaqSection />
     {children}
   </>
 );

@@ -26,7 +26,7 @@ interface HeaderProps {
 
 const Header = ({ disableClientRouting = false }: HeaderProps) => (
   <SpiritHeader hasBottomDivider>
-    <Container isFluid>
+    <Container>
       <Flex alignmentX="left" spacingX="space-1000">
         <HeaderLogo
           elementType={disableClientRouting ? 'a' : NextLink}

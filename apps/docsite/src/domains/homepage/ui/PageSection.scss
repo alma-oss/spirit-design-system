@@ -1,0 +1,22 @@
+@use '@tokens' as tokens;
+@use './docsite-tokens' as docsite;
+
+// The rails sit on the shared container edges and run the full section height, padding included,
+// so they meet the top rule. The gray is the footer rule. Spirit border and divider colors are darker.
+.PageSection--rails {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: max(0px, calc((100% - #{tokens.$container-xlarge-max-width}) / 2));
+        inset-block: 0;
+        inline-size: min(100%, #{tokens.$container-xlarge-max-width});
+        border-inline: tokens.$border-width-100 solid #{docsite.$section-line};
+        pointer-events: none;
+    }
+}
+
+.PageSection--topLine {
+    border-block-start: tokens.$border-width-100 solid #{docsite.$section-line};
+}

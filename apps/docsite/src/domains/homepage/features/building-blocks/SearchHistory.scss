@@ -1,0 +1,7 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+
+// The open dropdown is taken out of flow, so it never stretches the grid row.
+// Grid has no row-track size to reserve that menu, so the composition height stays here (444 px).
+.SearchHistory {
+    height: units.px-to-rem(444px);
+}
