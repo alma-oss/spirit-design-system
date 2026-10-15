@@ -1,18 +1,18 @@
-.band {
+.ComponentsBand {
     background-color: var(--spirit-color-background-primary);
 }
 
-.container {
+.ComponentsBand__container {
     box-sizing: border-box;
     border-inline: 1px solid var(--spirit-color-border-basic);
 }
 
-.container--header {
+.ComponentsBand__container--header {
     padding-top: var(--spirit-space-1400);
     padding-bottom: var(--spirit-space-1100);
 }
 
-.container--heading {
+.ComponentsBand__container--heading {
     padding-top: var(--spirit-space-1400);
     padding-bottom: var(--spirit-space-1100);
 
@@ -21,15 +21,15 @@
 }
 
 // The page footer draws its own line over the whole width, so the last block lets it overlap its bottom line.
-.band:last-child {
+.ComponentsBand:last-child {
     margin-bottom: -1px;
 }
 
-.band--header {
+.ComponentsBand--header {
     border-bottom: 1px solid var(--spirit-color-border-basic);
 }
 
 // The grid fills the whole container, so its lines meet the vertical lines of the page. The cells have their own padding.
-.container.container--grid {
+.ComponentsBand__container.ComponentsBand__container--grid {
     padding-inline: 0;
 }
