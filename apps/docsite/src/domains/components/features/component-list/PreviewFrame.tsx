@@ -2,7 +2,7 @@
 
 import { useIsomorphicLayoutEffect } from '@alma-oss/spirit-web-react';
 import React, { CSSProperties, ReactNode, useRef, useState } from 'react';
-import styles from './PreviewFrame.module.scss';
+import './PreviewFrame.scss';
 
 type PreviewGuides = 'vertical' | 'horizontal';
 
@@ -83,31 +83,31 @@ const PreviewFrame = ({
   }, [children]);
 
   return (
-    <div ref={frameRef} className={styles.frame}>
+    <div ref={frameRef} className="PreviewFrame">
       {guides && (
         <>
           {hasVerticalGuides && (
             <>
-              <span className={`${styles.guide} ${styles.guideVertical}`} style={{ left: guides.left }} />
-              <span className={`${styles.guide} ${styles.guideVertical}`} style={{ left: guides.right }} />
+              <span className="PreviewFrame__guide PreviewFrame__guide--vertical" style={{ left: guides.left }} />
+              <span className="PreviewFrame__guide PreviewFrame__guide--vertical" style={{ left: guides.right }} />
             </>
           )}
           {hasHorizontalGuides && (
             <>
-              <span className={`${styles.guide} ${styles.guideHorizontal}`} style={{ top: guides.top }} />
-              <span className={`${styles.guide} ${styles.guideHorizontal}`} style={{ top: guides.bottom }} />
+              <span className="PreviewFrame__guide PreviewFrame__guide--horizontal" style={{ top: guides.top }} />
+              <span className="PreviewFrame__guide PreviewFrame__guide--horizontal" style={{ top: guides.bottom }} />
             </>
           )}
         </>
       )}
       <div
         ref={contentRef}
-        className={contentClassName ? `${styles.content} ${contentClassName}` : styles.content}
+        className={contentClassName ? `PreviewFrame__content ${contentClassName}` : 'PreviewFrame__content'}
         style={{ '--preview-scale': scale } as CSSProperties}
         // The preview is a picture only – `inert` removes it from hover, focus and the accessibility tree.
         inert
       >
-        {children ?? <div className={styles.placeholder} />}
+        {children ?? <div className="PreviewFrame__placeholder" />}
       </div>
     </div>
   );
