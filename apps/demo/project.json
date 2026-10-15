@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/demo",
   "projectType": "application",
+  "implicitDependencies": ["@alma-oss/spirit-web", "@alma-oss/spirit-web-react"],
   "targets": {
     "build": {
       "outputs": ["{projectRoot}/build"],
