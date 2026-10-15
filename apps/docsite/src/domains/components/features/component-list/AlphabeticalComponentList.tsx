@@ -1,7 +1,7 @@
 import React from 'react';
-import { ComponentCard } from '../ComponentCard';
-import { ComponentGrid } from '../ComponentGrid';
-import { ComponentsBand } from '../ComponentsBand';
+import ComponentCard from './ComponentCard';
+import ComponentGrid from './ComponentGrid';
+import ComponentsBand from './ComponentsBand';
 
 interface AlphabeticalComponentListProps {
   components: string[];
