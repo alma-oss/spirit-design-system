@@ -3,7 +3,7 @@
 import { Box, Hidden } from '@alma-oss/spirit-web-react';
 import { type CSSProperties } from 'react';
 import Stamp, { type StampDirection } from '../../ui/Stamp';
-import styles from './PageShowcase.module.scss';
+import './PageShowcase.scss';
 
 // All geometry below comes from the design, where the page screenshot (880 x 535) sits at 72, 45 in a 1024 x 580 frame.
 // The positions are kept as designed and converted to percentages of the screenshot.
@@ -74,20 +74,22 @@ const PageShowcase = () => (
     borderRadius="500"
     paddingTop="space-1100"
     paddingX={{ mobile: 'space-700', tablet: 'space-1200' }}
-    UNSAFE_className={styles.PageShowcase}
+    UNSAFE_className="PageShowcase"
   >
-    <div className={styles.Stage}>
+    <div className="PageShowcase__stage">
       <img
-        className={styles.Page}
+        className="PageShowcase__page"
         src="/components-overview/jobs-page.webp"
         alt="A Jobs.cz page built from Spirit Design System components: navigation, search with filters and a list of job offers."
       />
 
       <Hidden on={['mobile', 'tablet']}>
         {annotations.map(({ label, target, stamp }) => (
-          <div key={label} className={styles.Annotation}>
-            <div className={styles.Highlight} style={toStyle(target)} />
-            <Stamp label={label} direction={stamp.direction} style={toStyle(stamp)} className={styles.Stamp} />
+          <div key={label} className="PageShowcase__annotation">
+            <div className="PageShowcase__highlight" style={toStyle(target)} />
+            <div className="PageShowcase__stamp" style={toStyle(stamp)}>
+              <Stamp label={label} direction={stamp.direction} style={{ inset: 0 }} />
+            </div>
           </div>
         ))}
       </Hidden>

@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Box,
   CloseButton,
   Dropdown,
   DropdownPopover,
@@ -13,7 +14,7 @@ import {
   TextField,
 } from '@alma-oss/spirit-web-react';
 import { useState } from 'react';
-import styles from './SearchHistory.module.scss';
+import './SearchHistory.scss';
 
 interface RecentSearch {
   label: string;
@@ -41,7 +42,7 @@ const SearchHistory = () => {
   };
 
   return (
-    <div className={styles.SearchHistory}>
+    <div className="SearchHistory">
       <Dropdown id="building-blocks-search-dropdown" isOpen onToggle={noop} enableAutoClose={false} fullWidthMode="all">
         <TextField
           id="building-blocks-search"
@@ -53,9 +54,11 @@ const SearchHistory = () => {
         />
         <DropdownPopover aria-label="Recent searches" enableAutoFocus={false}>
           <Stack spacing="space-300">
-            <Text size="small" textColor="secondary" UNSAFE_className={styles.Title}>
-              Recent searches:
-            </Text>
+            <Box padding="space-500">
+              <Text size="small" textColor="secondary">
+                Recent searches:
+              </Text>
+            </Box>
             {searches.map(({ label, helperText, newOffers }) => (
               <Item
                 key={label}

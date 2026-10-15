@@ -1,0 +1,54 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+
+$_glyph-bleed: 0;
+
+.AssetGroups__glyph {
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+}
+
+.AssetGroups__inset,
+.AssetGroups__bleed {
+    position: absolute;
+    inset: $_glyph-bleed;
+}
+
+.AssetGroups__image {
+    display: block;
+    width: 100%;
+
+    // The image fills the glyph or the square frame above. Grid cannot size a replaced image.
+    height: 100%;
+}
+
+// The label stays content-sized and the dashed frame takes the free height beside the icon columns.
+// Grid has no fractional row tracks, so this template stays.
+.AssetGroups__illustrations {
+    grid-template-rows: auto 1fr;
+}
+
+.AssetGroups__tile {
+    background-color: tokens.$background-interactive-state-default;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: tokens.$background-interactive-state-hover;
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: background-color 0.25s ease-in-out;
+    }
+}
+
+.AssetGroups__illustration {
+    position: relative;
+
+    // The artwork is a square frame. Grid has no size prop, so the designed frame stays here.
+    width: units.px-to-rem(114px);
+    height: units.px-to-rem(114px);
+    overflow: hidden;
+    border-radius: tokens.$radius-400;
+}

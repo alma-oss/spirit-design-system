@@ -2,7 +2,6 @@
 
 import { Box, Checkbox, Divider, FieldGroup, ProgressBar, Radio, Stack } from '@alma-oss/spirit-web-react';
 import { useState } from 'react';
-import styles from './ProfileProgress.module.scss';
 
 const TOTAL_STEPS = 4;
 
@@ -29,45 +28,40 @@ const ProfileProgress = () => {
       borderWidth="100"
       borderRadius="500"
       padding={{ mobile: 'space-700', tablet: 'space-1000' }}
-      UNSAFE_className={styles.Card}
     >
       <Stack spacing="space-800">
         <Stack spacing="space-700">
-          <FieldGroup id="building-blocks-contact" label="Who can contact you?" isRequired>
-            <Stack spacing="space-500" UNSAFE_className={styles.Options}>
-              {contactOptions.map(({ id, label }) => (
-                <Checkbox
-                  key={id}
-                  id={`building-blocks-contact-${id}`}
-                  name="buildingBlocksContact"
-                  label={label}
-                  isChecked={contacts.includes(id)}
-                  onChange={() => toggleContact(id)}
-                />
-              ))}
-            </Stack>
+          <FieldGroup id="building-blocks-contact" label="Who can contact you?">
+            {contactOptions.map(({ id, label }) => (
+              <Checkbox
+                key={id}
+                id={`building-blocks-contact-${id}`}
+                name="buildingBlocksContact"
+                label={label}
+                isChecked={contacts.includes(id)}
+                onChange={() => toggleContact(id)}
+              />
+            ))}
           </FieldGroup>
 
           <Divider />
 
-          <FieldGroup id="building-blocks-visibility" label="CV visibility" isRequired>
-            <Stack spacing="space-500" UNSAFE_className={styles.Options}>
-              <Radio
-                id="building-blocks-visibility-public"
-                name="buildingBlocksVisibility"
-                label="Public"
-                isChecked={visibility === 'public'}
-                onChange={() => setVisibility('public')}
-              />
-              <Radio
-                id="building-blocks-visibility-hidden"
-                name="buildingBlocksVisibility"
-                label="Hidden"
-                helperText="Companies won’t contact you directly"
-                isChecked={visibility === 'hidden'}
-                onChange={() => setVisibility('hidden')}
-              />
-            </Stack>
+          <FieldGroup id="building-blocks-visibility" label="CV visibility">
+            <Radio
+              id="building-blocks-visibility-public"
+              name="buildingBlocksVisibility"
+              label="Public"
+              isChecked={visibility === 'public'}
+              onChange={() => setVisibility('public')}
+            />
+            <Radio
+              id="building-blocks-visibility-hidden"
+              name="buildingBlocksVisibility"
+              label="Hidden"
+              helperText="Companies won’t contact you directly"
+              isChecked={visibility === 'hidden'}
+              onChange={() => setVisibility('hidden')}
+            />
           </FieldGroup>
         </Stack>
 

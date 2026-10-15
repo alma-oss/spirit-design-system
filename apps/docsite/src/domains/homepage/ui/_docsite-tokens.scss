@@ -1,0 +1,29 @@
+// Temporary homepage colors. These are not Spirit design tokens.
+// Do not add them to @alma-oss/spirit-design-tokens.
+
+// Decorative section rails, the hero rule, and the footer top border.
+$section-line: #e9e9e9;
+
+// Stamp note and point borders. Box borderColor has no white.
+$stamp-border: #fff;
+
+// Cool wash behind the grid showcase.
+$showcase-background: #eef2f8;
+
+// Warm panel behind the design-teaser asset tiles.
+$design-assets-background: #f5f3f2;
+
+// Page preview behind the building-blocks screenshot.
+$page-showcase-background: #d7d8f5;
+
+// Grid diagram: column overlay, container edge, section band, and placeholder blocks.
+$grid-column-gradient-start: #7e9cff;
+$grid-column-gradient-end: #f4f4f4;
+$grid-column-active-gradient-start: #7c6cb8;
+$grid-column-active-gradient-end: #c77ad3;
+$grid-column-border: #8061ac;
+$grid-column-active-border: #6e2fc5;
+$grid-container-edge: #e887e1;
+$grid-section-band-border: #1c8598;
+$grid-block-border: #dadada;
+$grid-block-background: #eaeaea;

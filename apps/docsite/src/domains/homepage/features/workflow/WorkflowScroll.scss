@@ -1,41 +1,39 @@
 @use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@alma-oss/spirit-web/src/scss/tools/units';
 @use '@tokens' as tokens;
 
 // The height of the image is the same as the height of a step in the design (420 px).
-$_image-height: 26.25rem;
+$_image-height: units.px-to-rem(420px);
 
 // The steps are inactive until the scroll reaches them, the active one is the only one fully visible.
-.Step {
-    padding-block: tokens.$space-1300;
-    padding-inline-end: tokens.$space-1000;
-
+.WorkflowScroll__step {
     // Each step has its own stretch of the scroll, so only the active step is in the viewport at the trigger line.
-    // The steps are never lower than in the design (420 px).
+    // Grid has no track size and cannot reserve a viewport-relative runway, so this minimum stays (at least 420 px, otherwise 58vh).
     min-height: max(#{$_image-height}, 58vh);
+    padding-inline-end: tokens.$space-1000;
+    padding-block: tokens.$space-1300;
     opacity: 0.2;
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-    transform: translateY(1.25rem);
 
     &:last-child {
         // Extra space under the last step, so it can reach the trigger line of the scroll.
         padding-bottom: tokens.$space-1300 + tokens.$space-1700;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-        transition: none;
-        transform: none;
+    @media (prefers-reduced-motion: no-preference) {
+        transform: translateY(units.px-to-rem(20px));
+        transition:
+            opacity 0.4s ease,
+            transform 0.4s ease;
     }
 }
 
-.Step--active {
+.WorkflowScroll__step--active {
     opacity: 1;
     transform: translateY(0);
 }
 
 // On small screens, the steps are closer to each other and the image belongs to the step.
-.StepImage {
+.WorkflowScroll__stepImage {
     margin-top: tokens.$space-1000;
 
     @include breakpoint.up(tokens.$breakpoint-tablet) {
@@ -43,56 +41,51 @@ $_image-height: 26.25rem;
     }
 }
 
-.Image {
+.WorkflowScroll__image {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+
+    // The placeholder has no intrinsic height. Grid has no track size, so the designed image height stays here.
     min-height: $_image-height;
 }
 
 @include breakpoint.down(tokens.$breakpoint-tablet) {
-    .Step {
+    .WorkflowScroll__step {
         min-height: 0;
-        padding-block: tokens.$space-1100;
         padding-inline-end: 0;
+        padding-block: tokens.$space-1100;
 
         &:last-child {
             padding-bottom: tokens.$space-1100;
         }
     }
-
-    .Gallery {
-        display: none;
-    }
 }
 
-.Panel {
+// The panel fills the grid item, so the sticky image has the whole column of steps to travel along.
+.WorkflowScroll__panel {
     height: 100%;
 }
 
 // The image sticks to the top of the viewport while the steps scroll next to it.
-.Sticky {
+// Its height comes from the overlapping grid items, not from a fixed box.
+.WorkflowScroll__sticky {
     position: sticky;
-    top: tokens.$space-1700;
-    height: $_image-height;
+    inset-block-start: tokens.$space-1700;
 }
 
-// All the images lie over each other, only the active one is visible.
-.Slide {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+// All the images lie in one grid cell, only the active one is visible.
+.WorkflowScroll__slide {
     opacity: 0;
-    transition: opacity 0.4s ease;
+    pointer-events: none;
 
-    @media (prefers-reduced-motion: reduce) {
-        transition: none;
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.4s ease;
     }
 }
 
-.Slide--active {
-    pointer-events: auto;
+.WorkflowScroll__slide--active {
     opacity: 1;
+    pointer-events: auto;
 }

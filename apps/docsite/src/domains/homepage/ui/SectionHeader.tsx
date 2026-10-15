@@ -11,7 +11,6 @@ import {
   UNSTABLE_EyebrowText,
 } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
-import styles from './SectionHeader.module.scss';
 
 interface SectionHeaderProps {
   /** The short label above the title. */
@@ -38,7 +37,7 @@ const SectionHeader = ({
   actionColor = 'secondary',
 }: SectionHeaderProps) => (
   <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-800" spacingY="space-900">
-    <GridItem columnStart={{ tablet: 1 }} columnEnd={{ tablet: 6 }} UNSAFE_className={styles.Item}>
+    <GridItem columnStart={{ tablet: 1 }} columnEnd={{ tablet: 6 }}>
       <Stack spacing={eyebrow ? 'space-800' : 'space-900'}>
         <Stack spacing="space-500">
           {eyebrow && <UNSTABLE_EyebrowText textColor="accent-01-basic">{eyebrow}</UNSTABLE_EyebrowText>}
@@ -52,7 +51,7 @@ const SectionHeader = ({
       </Stack>
     </GridItem>
     {actionLabel && actionHref && (
-      <GridItem columnStart={{ tablet: 6 }} columnEnd={{ tablet: 13 }} UNSAFE_className={styles.Item}>
+      <GridItem columnStart={{ tablet: 6 }} columnEnd={{ tablet: 13 }}>
         <Flex alignmentX={{ mobile: 'left', tablet: 'right' }}>
           <ButtonLink elementType={NextLink} href={actionHref} color={actionColor}>
             {actionLabel}

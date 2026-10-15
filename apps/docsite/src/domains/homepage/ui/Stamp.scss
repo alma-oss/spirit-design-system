@@ -1,0 +1,72 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+@use './docsite-tokens' as docsite;
+
+$_point-size: units.px-to-rem(11px);
+
+.Stamp {
+    --stamp-color: #{tokens.$accent-02-background-basic};
+    --stamp-line-color: #{tokens.$accent-02-border-basic};
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    filter: drop-shadow(tokens.$shadow-200);
+    pointer-events: auto;
+}
+
+.Stamp--success {
+    --stamp-color: #{tokens.$emotion-success-background-basic};
+    --stamp-line-color: #{tokens.$emotion-success-border-basic};
+}
+
+.Stamp__label {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    // The note border is white. Box borderColor has no white token.
+    border: tokens.$border-width-100 solid docsite.$stamp-border;
+}
+
+.Stamp__line {
+    flex: 1;
+    border: 0 dashed var(--stamp-line-color);
+}
+
+.Stamp__point {
+    flex-shrink: 0;
+    width: $_point-size;
+    height: $_point-size;
+    border: tokens.$border-width-100 solid docsite.$stamp-border;
+    border-radius: 50%;
+    background-color: var(--stamp-color);
+}
+
+// The sticky note and its point are placed along the line, in the direction the note points to.
+.Stamp--right {
+    flex-direction: row;
+}
+
+.Stamp--left {
+    flex-direction: row-reverse;
+}
+
+.Stamp--right .Stamp__line,
+.Stamp--left .Stamp__line {
+    border-top-width: tokens.$border-width-100;
+}
+
+.Stamp--down {
+    flex-direction: column-reverse;
+}
+
+.Stamp--up {
+    flex-direction: column;
+}
+
+.Stamp--down .Stamp__line,
+.Stamp--up .Stamp__line {
+    border-left-width: tokens.$border-width-100;
+}
