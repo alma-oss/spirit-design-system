@@ -65,12 +65,12 @@ $background-interactive-state-active: #ffffff1a !default;
 $background-interactive-state-default: #fff0 !default;
 $background-interactive-state-hover: #ffffff0d !default;
 
-$background-primary: #6039cc !default;
+$background-primary: #4e2ea6 !default;
 $background-secondary: #3c2480 !default;
-$background-tertiary: #1e1240 !default;
+$background-tertiary: #202020 !default;
 
 $border-basic: #a07eff !default;
-$border-focus: #1e1240 !default;
+$border-focus: #fdfdfc !default;
 
 $border-interactive-state-active: #bba3ff !default;
 $border-interactive-state-default: #a07eff !default;
@@ -147,7 +147,7 @@ $disabled-content: #ffffff80 !default;
 $disabled-foreground: #fff3 !default;
 
 $emotion-danger-background-basic: #e40000 !default;
-$emotion-danger-background-subtle: #fce5e5 !default;
+$emotion-danger-background-subtle: #fae4e4 !default;
 $emotion-danger-border-basic: #e93333 !default;
 $emotion-danger-border-subtle: #ef6666 !default;
 $emotion-danger-content-basic: #720000 !default;
@@ -157,7 +157,7 @@ $emotion-danger-state-default: #e40000 !default;
 $emotion-danger-state-hover: #e93333 !default;
 
 $emotion-informative-background-basic: #0066d8 !default;
-$emotion-informative-background-subtle: #e5f0fb !default;
+$emotion-informative-background-subtle: #e4effa !default;
 $emotion-informative-border-basic: #3385e0 !default;
 $emotion-informative-border-subtle: #66a3e8 !default;
 $emotion-informative-content-basic: #00336c !default;
@@ -167,7 +167,7 @@ $emotion-informative-state-default: #0066d8 !default;
 $emotion-informative-state-hover: #3385e0 !default;
 
 $emotion-success-background-basic: #3e9b4f !default;
-$emotion-success-background-subtle: #ecf5ed !default;
+$emotion-success-background-subtle: #dbf2de !default;
 $emotion-success-border-basic: #65af72 !default;
 $emotion-success-border-subtle: #8bc395 !default;
 $emotion-success-content-basic: #1f4e28 !default;
@@ -177,7 +177,7 @@ $emotion-success-state-default: #3e9b4f !default;
 $emotion-success-state-hover: #65af72 !default;
 
 $emotion-warning-background-basic: #f27d00 !default;
-$emotion-warning-background-subtle: #fef2e5 !default;
+$emotion-warning-background-subtle: #faf1e4 !default;
 $emotion-warning-border-basic: #f59733 !default;
 $emotion-warning-border-subtle: #f7b166 !default;
 $emotion-warning-content-basic: #793f00 !default;
@@ -186,30 +186,30 @@ $emotion-warning-state-active: #f6a44d !default;
 $emotion-warning-state-default: #f27d00 !default;
 $emotion-warning-state-hover: #f59733 !default;
 
-$focus-focus-ring-color-01: #d2c2ffb2 !default;
+$focus-focus-ring-color-01: #ffffff4d !default;
 
 $form-field-danger: #ec4d4d !default;
 
-$form-field-fill-background-state-active: #fff !default;
-$form-field-fill-background-state-default: #f9f9f9 !default;
-$form-field-fill-background-state-hover: #f1edff !default;
-$form-field-fill-border-state-active: #936cff !default;
-$form-field-fill-border-state-default: #ae91ff !default;
-$form-field-fill-border-state-hover: #a07eff !default;
+$form-field-fill-background-state-active: #3c2480 !default;
+$form-field-fill-background-state-default: #6039cc !default;
+$form-field-fill-background-state-hover: #4e2ea6 !default;
+$form-field-fill-border-state-active: #e5e5e5 !default;
+$form-field-fill-border-state-default: #f9f9f9 !default;
+$form-field-fill-border-state-hover: #f4f4f4 !default;
 $form-field-fill-border-state-selected: #ffbe00 !default;
-$form-field-fill-content: #202020 !default;
-$form-field-fill-placeholder: #666 !default;
+$form-field-fill-content: #f9f9f9 !default;
+$form-field-fill-placeholder: #e5e5e5 !default;
 
 $form-field-helper-text: #c9b5ff !default;
 $form-field-label: #fff !default;
 
-$form-field-outline-background-state-active: #fff0 !default;
+$form-field-outline-background-state-active: #1a1b1b4d !default;
 $form-field-outline-background-state-default: #fff0 !default;
-$form-field-outline-background-state-hover: #1a1b1b0d !default;
-$form-field-outline-border-state-active: #7847ff !default;
-$form-field-outline-border-state-default: #ae91ff !default;
-$form-field-outline-border-state-hover: #1a1b1b99 !default;
-$form-field-outline-border-state-selected: #7847ff !default;
+$form-field-outline-background-state-hover: #1a1b1b33 !default;
+$form-field-outline-border-state-active: #fdfdfc !default;
+$form-field-outline-border-state-default: #fff9 !default;
+$form-field-outline-border-state-hover: #ffffffb2 !default;
+$form-field-outline-border-state-selected: #fff !default;
 $form-field-outline-content: #f9f9f9 !default;
 $form-field-outline-placeholder: #f9f9f9 !default;
 

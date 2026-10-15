@@ -186,7 +186,7 @@ export const emotionWarningStateActive = '#ba601c';
 export const emotionWarningStateDefault = '#b45309';
 export const emotionWarningStateHover = '#b85d17';
 
-export const focusFocusRingColor01 = '#d2c2ffb2';
+export const focusFocusRingColor01 = '#000';
 
 export const formFieldDanger = '#b60000';
 

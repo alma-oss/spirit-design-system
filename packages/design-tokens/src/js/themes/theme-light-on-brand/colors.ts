@@ -65,12 +65,12 @@ export const backgroundInteractiveStateActive = '#ffffff1a';
 export const backgroundInteractiveStateDefault = '#fff0';
 export const backgroundInteractiveStateHover = '#ffffff0d';
 
-export const backgroundPrimary = '#6039cc';
+export const backgroundPrimary = '#4e2ea6';
 export const backgroundSecondary = '#3c2480';
-export const backgroundTertiary = '#1e1240';
+export const backgroundTertiary = '#202020';
 
 export const borderBasic = '#a07eff';
-export const borderFocus = '#1e1240';
+export const borderFocus = '#fdfdfc';
 
 export const borderInteractiveStateActive = '#bba3ff';
 export const borderInteractiveStateDefault = '#a07eff';
@@ -147,7 +147,7 @@ export const disabledContent = '#ffffff80';
 export const disabledForeground = '#fff3';
 
 export const emotionDangerBackgroundBasic = '#e40000';
-export const emotionDangerBackgroundSubtle = '#fce5e5';
+export const emotionDangerBackgroundSubtle = '#fae4e4';
 export const emotionDangerBorderBasic = '#e93333';
 export const emotionDangerBorderSubtle = '#ef6666';
 export const emotionDangerContentBasic = '#720000';
@@ -157,7 +157,7 @@ export const emotionDangerStateDefault = '#e40000';
 export const emotionDangerStateHover = '#e93333';
 
 export const emotionInformativeBackgroundBasic = '#0066d8';
-export const emotionInformativeBackgroundSubtle = '#e5f0fb';
+export const emotionInformativeBackgroundSubtle = '#e4effa';
 export const emotionInformativeBorderBasic = '#3385e0';
 export const emotionInformativeBorderSubtle = '#66a3e8';
 export const emotionInformativeContentBasic = '#00336c';
@@ -167,7 +167,7 @@ export const emotionInformativeStateDefault = '#0066d8';
 export const emotionInformativeStateHover = '#3385e0';
 
 export const emotionSuccessBackgroundBasic = '#3e9b4f';
-export const emotionSuccessBackgroundSubtle = '#ecf5ed';
+export const emotionSuccessBackgroundSubtle = '#dbf2de';
 export const emotionSuccessBorderBasic = '#65af72';
 export const emotionSuccessBorderSubtle = '#8bc395';
 export const emotionSuccessContentBasic = '#1f4e28';
@@ -177,7 +177,7 @@ export const emotionSuccessStateDefault = '#3e9b4f';
 export const emotionSuccessStateHover = '#65af72';
 
 export const emotionWarningBackgroundBasic = '#f27d00';
-export const emotionWarningBackgroundSubtle = '#fef2e5';
+export const emotionWarningBackgroundSubtle = '#faf1e4';
 export const emotionWarningBorderBasic = '#f59733';
 export const emotionWarningBorderSubtle = '#f7b166';
 export const emotionWarningContentBasic = '#793f00';
@@ -186,30 +186,30 @@ export const emotionWarningStateActive = '#f6a44d';
 export const emotionWarningStateDefault = '#f27d00';
 export const emotionWarningStateHover = '#f59733';
 
-export const focusFocusRingColor01 = '#d2c2ffb2';
+export const focusFocusRingColor01 = '#ffffff4d';
 
 export const formFieldDanger = '#ec4d4d';
 
-export const formFieldFillBackgroundStateActive = '#fff';
-export const formFieldFillBackgroundStateDefault = '#f9f9f9';
-export const formFieldFillBackgroundStateHover = '#f1edff';
-export const formFieldFillBorderStateActive = '#936cff';
-export const formFieldFillBorderStateDefault = '#ae91ff';
-export const formFieldFillBorderStateHover = '#a07eff';
+export const formFieldFillBackgroundStateActive = '#3c2480';
+export const formFieldFillBackgroundStateDefault = '#6039cc';
+export const formFieldFillBackgroundStateHover = '#4e2ea6';
+export const formFieldFillBorderStateActive = '#e5e5e5';
+export const formFieldFillBorderStateDefault = '#f9f9f9';
+export const formFieldFillBorderStateHover = '#f4f4f4';
 export const formFieldFillBorderStateSelected = '#ffbe00';
-export const formFieldFillContent = '#202020';
-export const formFieldFillPlaceholder = '#666';
+export const formFieldFillContent = '#f9f9f9';
+export const formFieldFillPlaceholder = '#e5e5e5';
 
 export const formFieldHelperText = '#c9b5ff';
 export const formFieldLabel = '#fff';
 
-export const formFieldOutlineBackgroundStateActive = '#fff0';
+export const formFieldOutlineBackgroundStateActive = '#1a1b1b4d';
 export const formFieldOutlineBackgroundStateDefault = '#fff0';
-export const formFieldOutlineBackgroundStateHover = '#1a1b1b0d';
-export const formFieldOutlineBorderStateActive = '#7847ff';
-export const formFieldOutlineBorderStateDefault = '#ae91ff';
-export const formFieldOutlineBorderStateHover = '#1a1b1b99';
-export const formFieldOutlineBorderStateSelected = '#7847ff';
+export const formFieldOutlineBackgroundStateHover = '#1a1b1b33';
+export const formFieldOutlineBorderStateActive = '#fdfdfc';
+export const formFieldOutlineBorderStateDefault = '#fff9';
+export const formFieldOutlineBorderStateHover = '#ffffffb2';
+export const formFieldOutlineBorderStateSelected = '#fff';
 export const formFieldOutlineContent = '#f9f9f9';
 export const formFieldOutlinePlaceholder = '#f9f9f9';
 
