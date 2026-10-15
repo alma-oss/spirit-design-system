@@ -187,9 +187,14 @@ export const CvEditorWorkExperience = () => {
           spacing="space-1000"
           noValidate
         >
-          {/* TODO [DS-2774]: The design applies `shadow-100` on this card. `Box` has no `boxShadow` prop
-                and there is no shadow utility class in `web`, so the shadow is intentionally omitted here. */}
-          <Box backgroundColor="primary" borderColor="basic" borderRadius="400" borderWidth="100" padding="space-900">
+          <Box
+            backgroundColor="primary"
+            borderColor="basic"
+            borderRadius="400"
+            borderWidth="100"
+            boxShadow="100"
+            padding="space-900"
+          >
             {/* TODO [DS-2775]: Form fields render an internal `Stack` (`display: grid`). As a direct `Grid`
                   child they get vertically stretched to match the tallest sibling. Each field must be wrapped
                   in `GridItem` to contain the stretch. */}

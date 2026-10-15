@@ -15,6 +15,12 @@ import Box from '../Box';
 
 const dataProvider = [
   {
+    prop: 'boxShadow',
+    value: '100',
+    className: 'shadow-100',
+    description: 'box shadow',
+  },
+  {
     prop: 'backgroundColor',
     value: 'primary',
     className: 'bg-primary',

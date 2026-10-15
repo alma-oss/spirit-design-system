@@ -18,6 +18,7 @@ export * from './radii';
 export * from './refs';
 export * from './responsive';
 export * from './router';
+export * from './shadows';
 export * from './sizes';
 export * from './slots';
 export * from './style';

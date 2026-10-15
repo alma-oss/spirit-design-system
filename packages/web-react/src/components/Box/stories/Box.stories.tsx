@@ -1,4 +1,4 @@
-import { accentColors, emotionColors } from '@alma-oss/spirit-design-tokens';
+import { accentColors, emotionColors, shadows } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -130,6 +130,15 @@ const meta: Meta<typeof Box> = {
     borderRadius: {
       control: 'object',
     },
+    boxShadow: {
+      control: 'select',
+      options: [...Object.keys(shadows), undefined],
+      table: {
+        type: {
+          summary: 'BoxShadowTokenType',
+        },
+      },
+    },
     borderStyle: {
       control: 'select',
       options: Object.values(BorderStyles),
@@ -209,6 +218,7 @@ const meta: Meta<typeof Box> = {
       desktop: '400',
     },
     borderColor: undefined,
+    boxShadow: undefined,
     backgroundColor: undefined,
     backgroundGradient: undefined,
     textColor: undefined,

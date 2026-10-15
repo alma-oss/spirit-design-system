@@ -10,6 +10,7 @@ import BoxWithBorder from './BoxWithBorder';
 import BoxWithColorScheme from './BoxWithColorScheme';
 import BoxWithCustomPadding from './BoxWithCustomPadding';
 import BoxWithRadius from './BoxWithRadius';
+import BoxWithShadow from './BoxWithShadow';
 import BoxWithTextColor from './BoxWithTextColor';
 
 export const Preview = () => (
@@ -34,6 +35,9 @@ export const Preview = () => (
     </DocsSection>
     <DocsSection title="With Radius">
       <BoxWithRadius />
+    </DocsSection>
+    <DocsSection title="With Shadow">
+      <BoxWithShadow />
     </DocsSection>
     <DocsSection title="With Text Color">
       <BoxWithTextColor />
