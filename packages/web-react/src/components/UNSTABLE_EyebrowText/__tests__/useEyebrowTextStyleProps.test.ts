@@ -1,0 +1,31 @@
+import { renderHook } from '@testing-library/react';
+import { TextColors } from '../../../constants';
+import { type SpiritEyebrowTextProps } from '../types';
+import { useEyebrowTextStyleProps } from '../useEyebrowTextStyleProps';
+
+describe('useEyebrowTextStyleProps', () => {
+  it('should return the eyebrow typography class without a color utility', () => {
+    const { result } = renderHook(() => useEyebrowTextStyleProps({}));
+
+    expect(result.current.classProps).toBe('typography-eyebrow');
+  });
+
+  it.each(Object.values(TextColors))('should return %s color class', (textColor) => {
+    const props = { textColor } as SpiritEyebrowTextProps;
+    const { result } = renderHook(() => useEyebrowTextStyleProps(props));
+
+    expect(result.current.classProps).toBe(`typography-eyebrow text-${textColor}`);
+  });
+
+  it('should pass text alignment through and strip text color', () => {
+    const props = {
+      textAlignment: 'center',
+      textColor: TextColors.PRIMARY,
+    } as SpiritEyebrowTextProps;
+    const { result } = renderHook(() => useEyebrowTextStyleProps(props));
+
+    expect(result.current.classProps).toBe('typography-eyebrow text-primary');
+    expect(result.current.props).toHaveProperty('textAlignment', 'center');
+    expect(result.current.props).not.toHaveProperty('textColor');
+  });
+});
