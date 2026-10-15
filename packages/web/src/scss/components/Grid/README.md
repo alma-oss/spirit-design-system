@@ -158,22 +158,25 @@ Responsive Horizontal and Vertical alignment:
 </div>
 ```
 
-## Grid Item
+## GridItem
 
 Grid Item is a wrapper for Grid items. It allows you to configure your Grid structure
-as you wish. Use CSS variables to set a column where the Grid Item should start or end.
+as you wish. Use CSS variables to set a column and row where the Grid Item should start or end.
 If you want to set how to item should span, set the value as `span X` where X is the
-number of columns the item should span, like this `--grid-item-column-start: span 2`.
+number of columns or rows the item should span, like this `--grid-item-column-start: span 2`.
 
 These variables are available:
 
 - `--grid-item-column-start`
 - `--grid-item-column-end`
+- `--grid-item-row-start`
+- `--grid-item-row-end`
 
 Add suffixes to these variables to set them for specific breakpoints:
 
 - `--grid-item-column-start-tablet`
 - `--grid-item-column-end-desktop`
+- `--grid-item-row-start-desktop`
 - etc.
 
 Mobile suffix is not needed as it is the default. If no breakpoint value is set for
@@ -341,7 +344,74 @@ variables.
 </div>
 ```
 
+### Sidebar First in Source Order
+
+Placement variables let you show the items in a different order than they appear in the DOM. In the following
+example, the sidebar comes first in the source, so it stacks above the content on mobile and tablet,
+while on desktop it is placed on the right side of the content. Setting `--grid-item-row-start-desktop`
+on both items keeps them on the same row on desktop.
+
+```html
+<div class="Grid Grid--alignmentXStretch Grid--alignmentYStretch">
+  <div
+    class="GridItem"
+    style="
+      --grid-item-column-start: 1;
+      --grid-item-column-end: span 12;
+      --grid-item-column-start-desktop: 9;
+      --grid-item-column-end-desktop: span 4;
+      --grid-item-row-start-desktop: 1;
+    "
+  >
+    <div class="docs-Box docs-Box--small">Sidebar</div>
+  </div>
+  <div
+    class="GridItem"
+    style="
+      --grid-item-column-start: 1;
+      --grid-item-column-end: span 12;
+      --grid-item-column-end-desktop: 9;
+      --grid-item-row-start-desktop: 1;
+    "
+  >
+    <div class="docs-Box docs-Box--small">Content</div>
+  </div>
+</div>
+```
+
+👉 Reordering items visually does not change the reading or focus order. Please read the
+[Accessibility](#accessibility) section before using this pattern.
+
+## Accessibility
+
+Grid and Grid Item are layout components and do not add any semantics. Use meaningful elements
+(e.g. `ul` and `li` for lists, `aside` for a sidebar) where it fits the content.
+
+### Source Order and Visual Order
+
+The `--grid-item-column-*` and `--grid-item-row-*` variables only change where an item is displayed. They do not
+change its position in the DOM, which is what determines:
+
+- the reading order for screen readers,
+- the keyboard focus (<kbd>Tab</kbd>) order,
+- the stacking order on breakpoints where the items span the full width.
+
+When the visual order differs from the source order, keyboard and screen reader users experience the page in a different
+sequence than sighted mouse users. For example, in the [sidebar first](#sidebar-first-in-source-order) layout, keyboard
+focus moves through the sidebar first, even though it is displayed on the right side of the content on desktop.
+
+To keep the layout accessible (see WCAG [1.3.2 Meaningful Sequence][wcag-meaningful-sequence] and
+[2.4.3 Focus Order][wcag-focus-order]):
+
+- Prefer a DOM order that matches the logical reading order and use placement variables to adjust the layout only.
+- Reorder items visually only when both orders make sense, e.g. a sidebar with a summary that is relevant before the
+  main content.
+- Do not use positive `tabindex` values to fix the focus order.
+- Test the layout with the keyboard on all breakpoints.
+
 [alignment-dictionary]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [css-tricks-grid]: https://css-tricks.com/snippets/css/complete-guide-grid/
 [grid-mdn]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
+[wcag-focus-order]: https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html
+[wcag-meaningful-sequence]: https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html

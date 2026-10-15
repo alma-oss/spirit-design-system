@@ -16,6 +16,8 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 - Grid lays items out visually, but reading order follows the source order. Always ensure logical DOM order matches expected reading flow.
 
+- Placing GridItems with column and row props (e.g. a sidebar that comes first in the DOM but is displayed on the right on desktop) does not change the keyboard focus order or the stacking order on smaller screens. Reorder items visually only when both orders make sense.
+
 ### **Responsive Behavior**
 
 - On smaller screens, Grid will collapse to fewer columns – ensure content remains legible and navigable.
