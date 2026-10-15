@@ -93,3 +93,4 @@ const ComponentTabNav = ({ views, component, tabs }: ComponentTabNavProps) => {
 };
 
 export default ComponentTabNav;
+export { ComponentTabNav };
