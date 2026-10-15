@@ -1,6 +1,9 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@tokens' as tokens;
+
 // Cells are separated by 1px lines. The outer vertical lines belong to the page container, so the last cell of a row
 // has no right line.
-.grid {
+.ComponentGrid {
     display: grid;
     grid-template-columns: 1fr;
     padding: 0;
@@ -29,7 +32,7 @@
         }
     }
 
-    @media (min-width: 48rem) {
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
         grid-template-columns: repeat(2, 1fr);
 
         > li:not(:nth-child(2n)) {
@@ -37,7 +40,7 @@
         }
     }
 
-    @media (min-width: 80rem) {
+    @include breakpoint.up(tokens.$breakpoint-desktop) {
         grid-template-columns: repeat(3, 1fr);
 
         > li:nth-child(2n):not(:nth-child(3n)) {
