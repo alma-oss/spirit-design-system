@@ -40,6 +40,6 @@ export const COMPONENT_CATEGORIES: Record<string, string[]> = {
   Navigation: ['Breadcrumbs', 'Dropdown', 'Navigation', 'Pagination', 'SegmentedControl', 'Tabs'],
   Overlays: ['Dialog', 'Drawer', 'Modal'],
   Structure: ['Footer', 'Header'],
-  Typography: ['Heading', 'Text', 'UNSTABLE_DisplayHeading'],
+  Typography: ['Heading', 'Text', 'UNSTABLE_DisplayHeading', 'UNSTABLE_EyebrowText'],
   Utilities: ['Hidden', 'NoSsr', 'Truncate', 'VisuallyHidden'],
 };
