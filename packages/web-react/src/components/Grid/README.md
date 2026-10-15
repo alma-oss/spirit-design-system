@@ -194,6 +194,97 @@ previous breakpoint will be used.
 </Grid>
 ```
 
+### Content and Sidebar Layout
+
+The most common use of `GridItem` placement is a main content column with a sidebar next to it.
+
+Basic content and sidebar:
+
+```tsx
+<Grid>
+  <GridItem columnStart={1} columnEnd={10}>
+    Content
+  </GridItem>
+  <GridItem columnStart={11} columnEnd="span 2">
+    Sidebar
+  </GridItem>
+</Grid>
+```
+
+Content and sidebar with responsive columns:
+
+```tsx
+<Grid>
+  <GridItem columnStart={1} columnEnd={{ mobile: 5, tablet: 9 }}>
+    Content
+  </GridItem>
+  <GridItem columnStart={{ mobile: 10, tablet: 11 }} columnEnd={{ mobile: 'span 3', tablet: 'span 2' }}>
+    Sidebar
+  </GridItem>
+</Grid>
+```
+
+Nested Grids with GridItems:
+
+```tsx
+<Grid>
+  <GridItem columnStart={1} columnEnd={10}>
+    <Grid>
+      <GridItem columnStart={1} columnEnd="span 4">
+        First Nested Content
+      </GridItem>
+      <GridItem columnStart={5} columnEnd="span 4">
+        Second Nested Content
+      </GridItem>
+    </Grid>
+  </GridItem>
+  <GridItem columnStart={11} columnEnd="span 2">
+    Sidebar
+  </GridItem>
+</Grid>
+```
+
+Every nested `Grid` has 12 columns if not specified otherwise, and the placement props of nested
+`GridItem`s are independent of their parents.
+
+Sidebar moved to the second row on desktop:
+
+```tsx
+<Grid>
+  <GridItem columnStart={1} columnEnd={8}>
+    Content
+  </GridItem>
+  <GridItem columnStart={9} columnEnd="span 4" rowStart={{ desktop: 2 }}>
+    Sidebar
+  </GridItem>
+</Grid>
+```
+
+#### Sidebar First in Source Order
+
+Placement props let you show the items in a different order than they appear in the DOM. In the following
+example, the sidebar comes first in the source, so it stacks above the content on mobile and tablet,
+while on desktop it is placed on the right side of the content. Setting `rowStart` on both items keeps
+them on the same row on desktop.
+
+```tsx
+<Grid>
+  <GridItem
+    columnStart={{ mobile: 1, desktop: 9 }}
+    columnEnd={{ mobile: 'span 12', desktop: 'span 4' }}
+    rowStart={{ desktop: 1 }}
+  >
+    Sidebar
+  </GridItem>
+  <GridItem columnStart={1} columnEnd={{ mobile: 'span 12', desktop: 9 }} rowStart={{ desktop: 1 }}>
+    Content
+  </GridItem>
+</Grid>
+```
+
+👉 Reordering items visually does not change the reading or focus order. Please read the
+[Accessibility](#accessibility) section before using this pattern.
+
 ### API
 
 | Name          | Type                                  | Default | Required | Description                        |
@@ -208,6 +299,33 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+## Accessibility
+
+`Grid` and `GridItem` are layout components and do not add any semantics. Use the `elementType` prop to render
+meaningful elements (e.g. `ul` and `li` for lists, `aside` for a sidebar) where it fits the content.
+
+### Source Order and Visual Order
+
+The `columnStart`, `columnEnd`, `rowStart`, and `rowEnd` props only change where an item is displayed. They do not
+change its position in the DOM, which is what determines:
+
+- the reading order for screen readers,
+- the keyboard focus (<kbd>Tab</kbd>) order,
+- the stacking order on breakpoints where the items span the full width.
+
+When the visual order differs from the source order, keyboard and screen reader users experience the page in a different
+sequence than sighted mouse users. For example, in the [sidebar first](#sidebar-first-in-source-order) layout, keyboard
+focus moves through the sidebar first, even though it is displayed on the right side of the content on desktop.
+
+To keep the layout accessible (see WCAG [1.3.2 Meaningful Sequence][wcag-meaningful-sequence] and
+[2.4.3 Focus Order][wcag-focus-order]):
+
+- Prefer a DOM order that matches the logical reading order and use placement props to adjust the layout only.
+- Reorder items visually only when both orders make sense, e.g. a sidebar with a summary that is relevant before the
+  main content.
+- Do not use positive `tabindex` values to fix the focus order.
+- Test the layout with the keyboard on all breakpoints.
+
 [alignment-dictionary]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [css-tricks-grid]: https://css-tricks.com/snippets/css/complete-guide-grid/
@@ -217,3 +335,5 @@ and [escape hatches][readme-escape-hatches].
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[wcag-focus-order]: https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html
+[wcag-meaningful-sequence]: https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html
