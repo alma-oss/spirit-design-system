@@ -64,6 +64,9 @@ makefile
 *.svg
 *.jpg
 
+# Lottie animations are exported minified
+apps/docsite/public/lottie/
+
 # Ignore File
 .*ignore
 
