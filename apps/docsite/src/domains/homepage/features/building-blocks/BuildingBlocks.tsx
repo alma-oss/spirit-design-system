@@ -1,12 +1,21 @@
 'use client';
 
-import { Box, Grid, GridItem, Stack, Text } from '@alma-oss/spirit-web-react';
-import { type ReactNode } from 'react';
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  type SpiritGridItemProps,
+  type SpiritTileProps,
+  Stack,
+  Text,
+  UNSTABLE_Tile,
+} from '@alma-oss/spirit-web-react';
 import { routes } from '../../../routing/routes';
 import PageSection from '../../ui/PageSection';
 import SectionHeader from '../../ui/SectionHeader';
 import Stats from '../../ui/Stats';
-import styles from './BuildingBlocks.module.scss';
+import './BuildingBlocks.scss';
 import EducationForm from './EducationForm';
 import FilesCard from './FilesCard';
 import NotificationsCard from './NotificationsCard';
@@ -15,17 +24,12 @@ import ProfileProgress from './ProfileProgress';
 import SearchHistory from './SearchHistory';
 import TechStackCard from './TechStackCard';
 
-// The tile height from the design includes the border and the `space-1000` padding (in px).
-const TILE_PADDING = 33;
-
-interface Tile {
+interface BuildingBlock extends Pick<SpiritGridItemProps, 'columnStart' | 'columnEnd'> {
   caption: string;
   /** Height of the tile as designed, in px. */
   height: number;
-  columnStart: number;
-  columnEnd: number;
   /** The tile content, a placeholder is rendered when omitted. */
-  content?: ReactNode;
+  content?: SpiritTileProps['children'];
   /** Whether the content brings its own frame instead of the standard tile. */
   hasOwnFrame?: boolean;
   /** Whether the content fills the whole tile, otherwise it is centered in it. */
@@ -33,13 +37,13 @@ interface Tile {
 }
 
 // The bento is a 12-column grid: every row is either one full-width tile or two tiles.
-const rows: Tile[][] = [
+const rows: BuildingBlock[][] = [
   [
     {
       caption: 'From individual components we build a whole page',
       height: 577,
-      columnStart: 1,
-      columnEnd: 13,
+      columnStart: { tablet: 1 },
+      columnEnd: { tablet: 13 },
       content: <PageShowcase />,
       hasOwnFrame: true,
     },
@@ -48,34 +52,34 @@ const rows: Tile[][] = [
     {
       caption: 'A composition of form elements for picking education',
       height: 530,
-      columnStart: 1,
-      columnEnd: 8,
+      columnStart: { tablet: 1 },
+      columnEnd: { tablet: 8 },
       content: <EducationForm />,
       isFilled: true,
     },
     {
       caption: 'Tracking progress while creating an account',
       height: 530,
-      columnStart: 8,
-      columnEnd: 13,
+      columnStart: { tablet: 8 },
+      columnEnd: { tablet: 13 },
       content: <ProfileProgress />,
       isFilled: true,
     },
   ],
   [
     {
-      caption: 'Tracking progress while creating an account',
+      caption: 'Managing and uploading files',
       height: 532,
-      columnStart: 1,
-      columnEnd: 6,
+      columnStart: { tablet: 1 },
+      columnEnd: { tablet: 6 },
       content: <FilesCard />,
       isFilled: true,
     },
     {
       caption: 'Search history built from many subcomponents',
       height: 532,
-      columnStart: 6,
-      columnEnd: 13,
+      columnStart: { tablet: 6 },
+      columnEnd: { tablet: 13 },
       content: <SearchHistory />,
     },
   ],
@@ -83,15 +87,15 @@ const rows: Tile[][] = [
     {
       caption: 'Interactive tags in context',
       height: 532,
-      columnStart: 1,
-      columnEnd: 8,
+      columnStart: { tablet: 1 },
+      columnEnd: { tablet: 8 },
       content: <TechStackCard />,
     },
     {
       caption: 'Toast message',
       height: 532,
-      columnStart: 8,
-      columnEnd: 13,
+      columnStart: { tablet: 8 },
+      columnEnd: { tablet: 13 },
       content: <NotificationsCard />,
       hasOwnFrame: true,
     },
@@ -121,43 +125,37 @@ const BuildingBlocks = () => (
             spacingY={{ mobile: 'space-1100', tablet: 'space-1000' }}
           >
             {row.map(({ caption, height, columnStart, columnEnd, content, hasOwnFrame, isFilled }) => (
-              <GridItem
-                key={caption}
-                columnStart={{ tablet: columnStart }}
-                columnEnd={{ tablet: columnEnd }}
-                UNSAFE_className={styles.Item}
-              >
-                <Stack spacing="space-700">
+              <GridItem key={caption} columnStart={columnStart} columnEnd={columnEnd}>
+                <Flex direction="vertical" spacing="space-700" UNSAFE_className="BuildingBlocks__item">
+                  {/* Grid has no row-track size. The designed tile is taller than its content, so this minimum stays and the other tile in the row stretches to it. */}
                   {hasOwnFrame ? (
-                    content
-                  ) : (
-                    <Box
-                      backgroundColor="secondary"
-                      borderColor="basic"
-                      borderWidth="100"
-                      borderRadius="500"
-                      padding={{ mobile: 'space-700', tablet: 'space-1000' }}
-                      UNSAFE_className={styles.Shell}
-                    >
-                      <div
-                        className={isFilled ? `${styles.Tile} ${styles['Tile--filled']}` : styles.Tile}
-                        style={{ minHeight: height - TILE_PADDING * 2 }}
-                      >
-                        {content ?? (
-                          <div className="docs-Placeholder">
-                            <div className="docs-Placeholder__text">
-                              <Text emphasis="semibold">Placeholder</Text>
-                              <Text textColor="secondary">{caption}</Text>
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                    <Box elementType={Grid} cols={1} UNSAFE_className="BuildingBlocks__frame">
+                      {content}
                     </Box>
+                  ) : (
+                    <UNSTABLE_Tile
+                      elementType={Grid}
+                      cols={1}
+                      alignmentY={isFilled ? 'stretch' : 'center'}
+                      backgroundColor="secondary"
+                      padding={{ mobile: 'space-700', tablet: 'space-1000' }}
+                      UNSAFE_className="BuildingBlocks__frame"
+                      UNSAFE_style={{ minHeight: height }}
+                    >
+                      {content ?? (
+                        <div className="docs-Placeholder">
+                          <div className="docs-Placeholder__text">
+                            <Text emphasis="semibold">Placeholder</Text>
+                            <Text textColor="secondary">{caption}</Text>
+                          </div>
+                        </div>
+                      )}
+                    </UNSTABLE_Tile>
                   )}
-                  <Text size="small" textColor="secondary">
+                  <Text size="small" textColor="secondary" UNSAFE_className="BuildingBlocks__caption">
                     {caption}
                   </Text>
-                </Stack>
+                </Flex>
               </GridItem>
             ))}
           </Grid>

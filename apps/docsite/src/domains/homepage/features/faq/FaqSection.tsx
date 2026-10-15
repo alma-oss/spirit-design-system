@@ -1,10 +1,7 @@
-'use client';
-
-import { Avatar, Divider, Flex, Grid, Heading, Stack, Text } from '@alma-oss/spirit-web-react';
+import { Avatar, Divider, Flex, Grid, GridItem, Heading, Stack, Text } from '@alma-oss/spirit-web-react';
 import { Fragment } from 'react';
 import PageSection from '../../ui/PageSection';
 import SectionHeader from '../../ui/SectionHeader';
-import styles from './FaqSection.module.scss';
 
 interface Question {
   question: string;
@@ -60,7 +57,7 @@ const rows: Question[][] = [
 ];
 
 const QuestionBlock = ({ question, answer, author, avatar }: Question) => (
-  <Stack spacing="space-700" UNSAFE_className={styles.Question}>
+  <Stack spacing="space-700">
     <Heading elementType="h3" size="xsmall" marginBottom="space-0">
       {question}
     </Heading>
@@ -88,7 +85,7 @@ const FaqSection = () => (
         title="You are asking the right questions."
         description="Real questions we hear every week, answered by the people who build Spirit."
         descriptionSize="large"
-        // The link to the community channel is not known yet.
+        // TODO: Link to the community channel once its URL is known.
         actionLabel="Join #spirit-design-system"
         actionHref="#"
         actionColor="tertiary"
@@ -98,9 +95,15 @@ const FaqSection = () => (
         {rows.map((row, rowIndex) => (
           <Fragment key={row[0].question}>
             {rowIndex > 0 && <Divider />}
-            <Grid cols={{ mobile: 1, tablet: 2 }} spacing="space-1000">
-              {row.map((item) => (
-                <QuestionBlock key={item.question} {...item} />
+            <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-1000" spacingY="space-1000">
+              {row.map((item, index) => (
+                <GridItem
+                  key={item.question}
+                  columnStart={{ tablet: index === 0 ? 1 : 8 }}
+                  columnEnd={{ tablet: index === 0 ? 6 : 13 }}
+                >
+                  <QuestionBlock {...item} />
+                </GridItem>
               ))}
             </Grid>
           </Fragment>

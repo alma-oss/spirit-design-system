@@ -2,7 +2,7 @@
 
 import { Grid, Heading, Stack, Text, VisuallyHidden } from '@alma-oss/spirit-web-react';
 import { type CSSProperties } from 'react';
-import styles from './Stats.module.scss';
+import './Stats.scss';
 
 export interface Stat {
   /** The number that is counted up to. A stat without a number shows the text only. */
@@ -37,7 +37,7 @@ const Stats = ({ stats = defaultStats, size = 'medium' }: StatsProps) => (
             <>
               <VisuallyHidden>{`${value}${suffix}`}</VisuallyHidden>
               <span aria-hidden="true">
-                <span className={styles.StatValue} style={{ '--stat-target': value } as CSSProperties} />
+                <span className="Stats__value" style={{ '--stats-target': value } as CSSProperties} />
                 {suffix}
               </span>
             </>

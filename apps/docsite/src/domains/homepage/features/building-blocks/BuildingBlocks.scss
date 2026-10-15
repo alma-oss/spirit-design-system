@@ -1,0 +1,12 @@
+// Vertical Flex is a grid and has no track-size prop. A zero minimum keeps an input
+// from widening the page column.
+.BuildingBlocks__item {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+}
+
+// Tile, Box, and Text have no minWidth prop.
+.BuildingBlocks__frame,
+.BuildingBlocks__caption {
+    min-width: 0;
+}

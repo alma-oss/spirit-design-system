@@ -6,10 +6,10 @@ import {
   FileImagePreview,
   FileUpload,
   Flex,
-  Icon,
   Label,
   SegmentedControl,
   SegmentedControlItem,
+  Spinner,
   Stack,
   Truncate,
 } from '@alma-oss/spirit-web-react';
@@ -147,8 +147,7 @@ const FilesCard = () => {
                   label="File name"
                   helperText={
                     <span>
-                      <Icon name="spinner" boxSize={16} UNSAFE_className="animation-spin-clockwise" />{' '}
-                      <span>Uploading your file…</span>
+                      <Spinner boxSize={16} /> <span>Uploading your file…</span>
                     </span>
                   }
                   removeText="Remove file"

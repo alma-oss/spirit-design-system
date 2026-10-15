@@ -1,0 +1,23 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '../../ui/docsite-tokens' as docsite;
+
+.DesignTeaser__cell {
+    min-width: 0;
+}
+
+// The tile fills its grid item, so a taller neighbour stretches the row.
+// Grid has no row-track size. The copy is shorter than the designed tile (340 px), so this minimum stays.
+.DesignTeaser__tile {
+    height: 100%;
+    min-height: units.px-to-rem(340px);
+}
+
+.DesignTeaser__assets {
+    height: 100%;
+    background-color: docsite.$design-assets-background;
+}
+
+// Grid has no row-track size. An empty placeholder is shorter than the design, so the titles would not line up.
+.DesignTeaser__placeholder {
+    min-height: units.px-to-rem(176px);
+}
