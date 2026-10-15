@@ -1,9 +1,4 @@
-import {
-  ComponentList,
-  ComponentListSkeleton,
-  ComponentsBand,
-  ComponentsPageHeader,
-} from '@local/domains/components/features/component-list';
+import { ComponentList, ComponentListSkeleton, ComponentsBand, ComponentsPageHeader } from '@local/domains/components';
 import { fetchAllComponents } from '@local/domains/components/repositories/componentsRepository';
 import React, { Suspense } from 'react';
 

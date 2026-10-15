@@ -19,9 +19,9 @@ import {
   VisuallyHidden,
 } from '@alma-oss/spirit-web-react';
 import React, { useEffect, useId, useState } from 'react';
-import { ComponentSearch } from '../ComponentSearch';
-import { ComponentSortToggle } from '../ComponentSortToggle';
-import styles from './ComponentsPageHeader.module.scss';
+import ComponentSearch from './ComponentSearch';
+import ComponentSortToggle from './ComponentSortToggle';
+import './ComponentsPageHeader.scss';
 
 const TOAST_DURATION = 3000;
 
@@ -73,9 +73,9 @@ const ComponentsPageHeader = () => {
   };
 
   return (
-    <div className={styles.header}>
-      <div className={styles.top}>
-        <div className={styles.text}>
+    <div className="ComponentsPageHeader">
+      <div className="ComponentsPageHeader__top">
+        <div className="ComponentsPageHeader__text">
           <Breadcrumbs>
             <BreadcrumbsItem key="homepage" href="/">
               Spirit
@@ -85,7 +85,7 @@ const ComponentsPageHeader = () => {
             </BreadcrumbsItem>
           </Breadcrumbs>
 
-          <div className={styles.title}>
+          <div className="ComponentsPageHeader__title">
             <Heading elementType="h1" size="large" fontWeight="semibold" marginBottom="space-0">
               {PAGE_TITLE}
             </Heading>
@@ -126,7 +126,7 @@ const ComponentsPageHeader = () => {
         </SplitButton>
       </div>
 
-      <div className={styles.toolbar}>
+      <div className="ComponentsPageHeader__toolbar">
         <ComponentSortToggle />
         <ComponentSearch />
       </div>
