@@ -4,13 +4,16 @@ import React from 'react';
 import {
   Emphasis,
   FontWeight,
+  Intensity,
   SizesExtended,
   TextAlignments,
   TextColors,
   TextHyphens,
   TextWordBreaks,
 } from '../../../constants';
+import { type BoxBackgroundColorsType, type TextColorsType } from '../../../types';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
+import { Box } from '../../Box';
 import ReadMe from '../README.md?raw';
 import { Heading } from '..';
 
@@ -21,6 +24,8 @@ const textColorValues = [
   ...Object.values(accentColorsObject),
   ...Object.values(emotionColorsObject),
 ];
+
+const intensityPattern = new RegExp(`${Intensity.BASIC}|${Intensity.SUBTLE}`);
 
 const meta: Meta<typeof Heading> = {
   title: 'Components/Heading',
@@ -122,15 +127,17 @@ export const Playground: Story = {
   name: 'Heading',
   render: (args) => {
     const { children, textColor, ...restProps } = args;
-    const bgColor = textColor?.replace(/basic|subtle/, (match) => (match === 'basic' ? 'subtle' : 'basic'));
-    const boxClass = textColor?.match(/basic|subtle/) ? `bg-${bgColor}` : '';
+    const bgColor = (textColor as TextColorsType)?.replace(intensityPattern, (match) =>
+      match === Intensity.BASIC ? Intensity.SUBTLE : Intensity.BASIC,
+    );
+    const backgroundColor = (textColor as TextColorsType)?.match(intensityPattern) ? bgColor : undefined;
 
     return (
-      <div className={`${boxClass} p-800`}>
+      <Box backgroundColor={backgroundColor as BoxBackgroundColorsType | undefined} padding="space-800">
         <Heading textColor={textColor} {...restProps}>
           {children}
         </Heading>
-      </div>
+      </Box>
     );
   },
 };

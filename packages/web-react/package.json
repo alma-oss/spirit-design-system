@@ -775,6 +775,14 @@
       "require": "./dist/components/UNSTABLE_DisplayHeading/index.cjs",
       "default": "./dist/components/UNSTABLE_DisplayHeading/index.js"
     },
+    "./components/UNSTABLE_EyebrowText": {
+      "types": "./dist/components/UNSTABLE_EyebrowText/index.d.ts",
+      "development": "./src/components/UNSTABLE_EyebrowText/index.ts",
+      "production": "./dist/components/UNSTABLE_EyebrowText/index.js",
+      "import": "./dist/components/UNSTABLE_EyebrowText/index.js",
+      "require": "./dist/components/UNSTABLE_EyebrowText/index.cjs",
+      "default": "./dist/components/UNSTABLE_EyebrowText/index.js"
+    },
     "./components/UNSTABLE_Picker": {
       "types": "./dist/components/UNSTABLE_Picker/index.d.ts",
       "development": "./src/components/UNSTABLE_Picker/index.ts",

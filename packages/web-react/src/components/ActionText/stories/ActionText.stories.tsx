@@ -1,8 +1,8 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Sizes, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
-import { type TextColorsType } from '../../../types';
+import { Intensity, Sizes, TextAlignments, TextColors, TextHyphens, TextWordBreaks } from '../../../constants';
+import { type BoxBackgroundColorsType, type TextColorsType } from '../../../types';
 import { getAccentTextColors, getEmotionTextColors } from '../../../utils';
 import { Box } from '../../Box';
 import ReadMe from '../README.md?raw';
@@ -13,6 +13,8 @@ const textColorValues = [
   ...Object.values(getAccentTextColors()),
   ...Object.values(getEmotionTextColors()),
 ];
+
+const intensityPattern = new RegExp(`${Intensity.BASIC}|${Intensity.SUBTLE}`);
 
 const meta: Meta<typeof ActionText> = {
   title: 'Components/ActionText',
@@ -93,13 +95,13 @@ export const Playground: Story = {
   name: 'ActionText',
   render: (args) => {
     const { children, textColor, size = Sizes.MEDIUM, ...restProps } = args;
-    const bgColor = (textColor as TextColorsType)?.replace(/basic|subtle/, (match) =>
-      match === 'basic' ? 'subtle' : 'basic',
+    const bgColor = (textColor as TextColorsType)?.replace(intensityPattern, (match) =>
+      match === Intensity.BASIC ? Intensity.SUBTLE : Intensity.BASIC,
     );
-    const boxClass = (textColor as TextColorsType)?.match(/basic|subtle/) ? `bg-${bgColor}` : '';
+    const backgroundColor = (textColor as TextColorsType)?.match(intensityPattern) ? bgColor : undefined;
 
     return (
-      <Box UNSAFE_className={boxClass || undefined} padding="space-800">
+      <Box backgroundColor={backgroundColor as BoxBackgroundColorsType | undefined} padding="space-800">
         <ActionText textColor={textColor} size={size} {...restProps}>
           {children}
         </ActionText>
