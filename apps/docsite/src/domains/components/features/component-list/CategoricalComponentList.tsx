@@ -1,10 +1,10 @@
 import { Heading, Text } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import { COMPONENT_CATEGORY_DESCRIPTIONS } from '../../model/componentCategories';
-import { groupComponentsByCategory } from '../../utils/groupComponentsByCategory';
-import { ComponentCard } from '../ComponentCard';
-import { ComponentGrid } from '../ComponentGrid';
-import { ComponentsBand } from '../ComponentsBand';
+import ComponentCard from './ComponentCard';
+import ComponentGrid from './ComponentGrid';
+import ComponentsBand from './ComponentsBand';
+import { COMPONENT_CATEGORY_DESCRIPTIONS } from './model/componentCategories';
+import { groupComponentsByCategory } from './utils/groupComponentsByCategory';
 
 interface CategoricalComponentListProps {
   components: string[];

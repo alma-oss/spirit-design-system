@@ -1,9 +1,9 @@
 import { type ChildrenProps } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import styles from './ComponentGrid.module.scss';
+import './ComponentGrid.scss';
 
 interface ComponentGridProps extends ChildrenProps {}
 
-const ComponentGrid = ({ children }: ComponentGridProps) => <ul className={styles.grid}>{children}</ul>;
+const ComponentGrid = ({ children }: ComponentGridProps) => <ul className="ComponentGrid">{children}</ul>;
 
 export default ComponentGrid;
