@@ -74,3 +74,4 @@ const ComponentTabNavigation = async ({ views, component }: ComponentTabNavigati
 };
 
 export default ComponentTabNavigation;
+export { ComponentTabNavigation };
