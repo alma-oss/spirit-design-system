@@ -19,6 +19,14 @@ To distribute fields inside the FieldGroup, use the [Flex][readme-flex] componen
 </fieldset>
 ```
 
+## Sizes
+
+Set the group label size with `Label--small`, `Label--medium`, or `Label--large`. Grouped controls keep their own size. Medium is the default.
+
+```html
+<div class="Label Label--small" aria-hidden="true">Small</div>
+```
+
 ## HTML Semantics
 
 The FieldGroup component is a wrapper for form fields. Therefore, it uses the HTML `<fieldset>` element to group the

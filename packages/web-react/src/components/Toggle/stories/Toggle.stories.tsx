@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { InputPositions, ValidationStates } from '../../../constants';
+import { InputPositions, Sizes, ValidationStates } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import Toggle from '../Toggle';
 
@@ -15,6 +15,13 @@ const meta: Meta<typeof Toggle> = {
     controls: { exclude: ['validationStateIcon'] },
   },
   argTypes: {
+    size: {
+      control: 'select',
+      options: [...Object.values(Sizes), undefined],
+      table: {
+        defaultValue: { summary: Sizes.MEDIUM },
+      },
+    },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -47,6 +54,7 @@ const meta: Meta<typeof Toggle> = {
     isChecked: false,
     inputPosition: InputPositions.END,
     label: 'Toggle Label',
+    size: undefined,
     validationState: undefined,
     validationText: '',
   },

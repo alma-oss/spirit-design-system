@@ -11,6 +11,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import Slider from '../Slider';
 
 describe('Slider', () => {
@@ -87,5 +88,12 @@ describe('Slider', () => {
     const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
 
     expect(validationRoot.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(<Slider {...defaultProps} size={size} />);
+
+    expect(screen.getByText('Slider')).toHaveClass(`Label--${size}`);
+    expect(screen.getByRole('slider')).not.toHaveAttribute('size');
   });
 });

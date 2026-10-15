@@ -2,6 +2,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
+import { Sizes } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritFieldGroupProps } from '../../types';
@@ -24,6 +25,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     isLabelHidden,
     isRequired,
     label,
+    size = Sizes.MEDIUM,
     validationState,
     validationText,
     ...rest
@@ -43,7 +45,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
         isDisabled,
         isRequired,
         validationState,
-        label: { isLabelHidden },
+        label: { isLabelHidden, size },
       }}
     >
       <fieldset

@@ -30,6 +30,14 @@ For a single Radio button example:
 </div>
 ```
 
+## Sizes
+
+Set the label size with `Label--small`, `Label--medium`, or `Label--large`. The radio control stays the same. Medium is the default.
+
+```html
+<label class="Label Label--small cursor-pointer" for="radio-size-small">Small</label>
+```
+
 ## Selected State
 
 ```html

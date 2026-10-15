@@ -1,10 +1,11 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { ContextPropsProvider } from '../../context';
+import { Sizes } from '../../constants';
+import { ContextPropsProvider, useContextProps } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { mergeProps, mergeStyleProps } from '../../utils';
 import { Flex } from '../Flex';
 import { HelperText } from '../HelperText';
 import { InputDetails } from '../InputDetails';
@@ -14,8 +15,19 @@ import { Stack } from '../Stack';
 import { ValidationText, useValidationTextRole } from '../ValidationText';
 import { useCheckboxStyleProps } from './useCheckboxStyleProps';
 
+const defaultProps: Partial<SpiritCheckboxProps> = {
+  size: Sizes.MEDIUM,
+};
+
 const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
-  const { classProps, direction, props: modifiedProps } = useCheckboxStyleProps(props);
+  const { isItem: isItemProp } = props;
+  const { size: itemSize } = useContextProps<Partial<SpiritCheckboxProps>>({}, isItemProp ? 'item' : undefined);
+  const propsWithDefaults = mergeProps(
+    defaultProps,
+    { size: itemSize },
+    props as Partial<SpiritCheckboxProps>,
+  ) as SpiritCheckboxProps;
+  const { classProps, direction, props: modifiedProps } = useCheckboxStyleProps(propsWithDefaults);
   const {
     'aria-describedby': ariaDescribedBy = '',
     'aria-details': ariaDetailsAttr,
@@ -29,6 +41,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
     isLabelHidden,
     isRequired,
     label,
+    size,
     validationState,
     validationText,
     value,
@@ -87,12 +100,14 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
         isDisabled,
         isRequired,
         validationState,
-        label: { isStretched: isItem, isLabelHidden },
+        label: { isStretched: isItem, isLabelHidden, size },
       }}
     >
       {isItem ? (
         <Item isDisabled={isDisabled} startSlot={checkboxInput} {...mergeStyleProps(Item, { styleProps })}>
-          <Stack spacing="space-400">{checkboxText}</Stack>
+          <ContextPropsProvider value={{ label: { size } }}>
+            <Stack spacing="space-400">{checkboxText}</Stack>
+          </ContextPropsProvider>
         </Item>
       ) : (
         <Flex

@@ -87,26 +87,38 @@ Validation states can be presented either by adding the `validationState` attrib
 />
 ```
 
+## Sizes
+
+`size` changes the group label through context props. Grouped controls keep their own size. Medium is the default.
+
+```tsx
+<FieldGroup id="field-group-size-small" label="Small" size="small">
+  <Checkbox id="checkbox-size-small" label="Checkbox" name="checkboxSizeSmall" />
+</FieldGroup>
+```
+
 ## API
 
-| Name                | Type                                           | Default | Required | Description                              |
-| ------------------- | ---------------------------------------------- | ------- | -------- | ---------------------------------------- |
-| `form`              | `string`                                       | `null`  | ✕        | Parent form ID                           |
-| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon          |
-| `helperText`        | `ReactNode`                                    | `null`  | ✕        | Custom helper text                       |
-| `id`                | `string`                                       | —       | ✓        | Group and label identification           |
-| `isDisabled`        | `bool`                                         | `false` | ✕        | If true, the group is disabled           |
-| `isLabelHidden`     | `bool`                                         | `false` | ✕        | If true, label is hidden                 |
-| `isRequired`        | `bool`                                         | `false` | ✕        | If true, the group is marked as required |
-| `label`             | `ReactNode`                                    | —       | ✓        | Label text                               |
-| `name`              | `string`                                       | `null`  | ✕        | Group name                               |
-| `validationState`   | [Validation dictionary][dictionary-validation] | `null`  | ✕        | Type of validation state                 |
-| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | `null`  | ✕        | Validation text                          |
+| Name                | Type                                           | Default  | Required | Description                              |
+| ------------------- | ---------------------------------------------- | -------- | -------- | ---------------------------------------- |
+| `form`              | `string`                                       | `null`   | ✕        | Parent form ID                           |
+| `hasValidationIcon` | `bool`                                         | `false`  | ✕        | Whether to show validation icon          |
+| `helperText`        | `ReactNode`                                    | `null`   | ✕        | Custom helper text                       |
+| `id`                | `string`                                       | —        | ✓        | Group and label identification           |
+| `isDisabled`        | `bool`                                         | `false`  | ✕        | If true, the group is disabled           |
+| `isLabelHidden`     | `bool`                                         | `false`  | ✕        | If true, label is hidden                 |
+| `isRequired`        | `bool`                                         | `false`  | ✕        | If true, the group is marked as required |
+| `label`             | `ReactNode`                                    | —        | ✓        | Label text                               |
+| `name`              | `string`                                       | `null`   | ✕        | Group name                               |
+| `size`              | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                             |
+| `validationState`   | [Validation dictionary][dictionary-validation] | `null`   | ✕        | Type of validation state                 |
+| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | `null`   | ✕        | Validation text                          |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [gh-web-field-group-disabled]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/FieldGroup#disabled-state
 [gh-web-field-group-html]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/FieldGroup#html-semantics

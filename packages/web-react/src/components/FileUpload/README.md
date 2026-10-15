@@ -76,6 +76,22 @@ The consumer is responsible for setting the validation state based on their own 
 </Stack>
 ```
 
+## Sizes
+
+`size` changes the field label through context props. The drop zone keeps its current dimensions. Medium is the default.
+
+```tsx
+<FileUpload
+  id="file-uploader-size-small"
+  name="fileUploaderSizeSmall"
+  label="Small"
+  size="small"
+  inputUploadText="Upload your file"
+  inputDragAndDropText="or drag and drop here"
+  helperText="Max file size is 10 MB"
+/>
+```
+
 ## FileUpload Props
 
 | Name                     | Type                                 | Default  | Required | Description                                                                                                                                                                                                                                                        |
@@ -101,6 +117,7 @@ The consumer is responsible for setting the validation state based on their own 
 | `label`                  | `ReactNode`                          | —        | ✕        | Field label (required when `name` is provided to show the input)                                                                                                                                                                                                   |
 | `name`                   | `string`                             | —        | ✕        | When provided, the file input and drop zone are rendered. Field name used for the file input.                                                                                                                                                                      |
 | `rootId`                 | `string`                             | —        | ✕        | Optional `id` on the root `.FileUpload` wrapper (matches static doc anchors such as `example-standard`).                                                                                                                                                           |
+| `size`                   | [Size dictionary][dictionary-size]   | `medium` | ✕        | Size variant                                                                                                                                                                                                                                                       |
 | `validationState`        | `ValidationState`                    | —        | ✕        | Validation state (visual only)                                                                                                                                                                                                                                     |
 | `validationText`         | \[`ReactNode` \| `ReactNode[]`]      | —        | ✕        | Validation status text (visual only)                                                                                                                                                                                                                               |
 
@@ -145,6 +162,7 @@ dragAndDrop: 'or drop here',
 This component uses the `Icon` component internally. To ensure correct rendering,
 please refer to the [Icon component documentation][web-react-icon-documentation] for setup instructions.
 
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [div-element-docs]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-component-strings]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#component-strings

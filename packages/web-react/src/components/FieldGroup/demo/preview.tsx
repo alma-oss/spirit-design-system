@@ -11,6 +11,7 @@ import FieldGroupGroupedRadios from './FieldGroupGroupedRadios';
 import FieldGroupHelperText from './FieldGroupHelperText';
 import FieldGroupHiddenLabel from './FieldGroupHiddenLabel';
 import FieldGroupRequired from './FieldGroupRequired';
+import FieldGroupSizes from './FieldGroupSizes';
 import FieldGroupValidationState from './FieldGroupValidationState';
 import FieldGroupValidationWithIcon from './FieldGroupValidationWithIcon';
 
@@ -19,6 +20,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <FieldGroupDefault />
+      </DocsSection>
+      <DocsSection title="Sizes">
+        <FieldGroupSizes />
       </DocsSection>
       <DocsSection title="Required">
         <FieldGroupRequired />

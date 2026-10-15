@@ -2,7 +2,7 @@ import { accentColors } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { EmotionColors, ValidationStates } from '../../../constants';
+import { EmotionColors, Sizes, ValidationStates } from '../../../constants';
 import { type AccentColorNamesType } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { ProgressBar, ProgressBarColorsExtended } from '..';
@@ -52,6 +52,13 @@ const meta: Meta<typeof ProgressBar> = {
         defaultValue: { summary: '100' },
       },
     },
+    size: {
+      control: 'select',
+      options: [...Object.values(Sizes), undefined],
+      table: {
+        defaultValue: { summary: Sizes.MEDIUM },
+      },
+    },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -78,6 +85,7 @@ const meta: Meta<typeof ProgressBar> = {
     color: 'informative',
     isDisabled: false,
     max: 100,
+    size: undefined,
     value: 60,
     valuePlacement: 'right',
   },
