@@ -2,8 +2,8 @@
 
 import { SegmentedControl, SegmentedControlItem } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import { useComponentsSortQueryState } from '../../hooks/useComponentsSortQueryState';
-import { SORT_OPTIONS, type SortOption } from '../../model/componentCategories';
+import { useComponentsSortQueryState } from './hooks/useComponentsSortQueryState';
+import { SORT_OPTIONS, type SortOption } from './model/componentCategories';
 
 const ComponentSortToggle = () => {
   const [sort, setSort] = useComponentsSortQueryState();
