@@ -12,7 +12,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { EmotionColors } from '../../../constants';
+import { EmotionColors, Sizes } from '../../../constants';
 import { ContextPropsProvider } from '../../../context';
 import { getColorSchemeClassName } from '../../../utils';
 import { PROGRESS_BAR_VALUE_THROTTLE_MS, ProgressBarColorsExtended } from '../constants';
@@ -221,5 +221,12 @@ describe('ProgressBar', () => {
     );
 
     expect(screen.getByText('Add your work experience to continue')).toBeInTheDocument();
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(<ProgressBar id="progress-bar-size" label="Profile completeness" size={size} value={60} />);
+
+    expect(screen.getByText('Profile completeness')).toHaveClass(`Label--${size}`);
+    expect(screen.getByRole('progressbar')).not.toHaveClass(`ProgressBar--${size}`);
   });
 });

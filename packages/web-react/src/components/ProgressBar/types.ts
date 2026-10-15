@@ -5,6 +5,7 @@ import type {
   EmotionColorNamesType,
   HelperTextProps,
   InputBaseProps,
+  SizesDictionaryType,
   SpiritProgressElementPropsWithRef,
   StyleProps,
   Validation,
@@ -25,13 +26,15 @@ export type ProgressBarProps<C = void> = StyleProps &
   HelperTextProps &
   InputBaseProps &
   Validation &
-  Omit<SpiritProgressElementPropsWithRef, 'color' | 'label' | 'max' | 'value'> & {
+  Omit<SpiritProgressElementPropsWithRef, 'color' | 'label' | 'max' | 'size' | 'value'> & {
     /** The color of the progress bar. */
     color?: ProgressBarColor<C>;
     /** Accessible name rendered with the Label component. */
     label?: ReactNode;
     /** The maximum value of the progress bar. */
     max?: number;
+    /** Size variant. */
+    size?: SizesDictionaryType;
     /** The validation text to display. */
     validationText?: ValidationTextType;
     /** The current value of the progress bar. */

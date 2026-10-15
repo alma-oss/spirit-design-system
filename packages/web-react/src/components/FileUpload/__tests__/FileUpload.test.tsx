@@ -15,6 +15,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import { renderWithIcons as render } from '@local/tests/testUtils/testIcons';
+import { Sizes } from '../../../constants';
 import FileUpload from '../FileUpload';
 
 const defaultProps = { id: 'file-uploader' };
@@ -229,5 +230,12 @@ describe('FileUpload', () => {
 
       expect(dropEvent.defaultPrevented).toBe(true);
     });
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(<FileUpload {...defaultPropsWithInput} label="Upload label" size={size} />);
+
+    expect(screen.getByText('Upload label')).toHaveClass(`Label--${size}`);
+    expect(document.querySelector('.FileUploadInput__dropZone')).not.toHaveClass(`FileUploadInput__dropZone--${size}`);
   });
 });

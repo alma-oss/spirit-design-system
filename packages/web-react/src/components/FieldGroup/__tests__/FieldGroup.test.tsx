@@ -11,6 +11,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import FieldGroup from '../FieldGroup';
 
 jest.mock('../../../hooks/useIcon');
@@ -177,5 +178,15 @@ describe('FieldGroup', () => {
     const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
 
     expect(validationRoot.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(
+      <FieldGroup id="field-group-size" label="Group label" size={size}>
+        {itemList}
+      </FieldGroup>,
+    );
+
+    expect(screen.getByText('Group label', { selector: '.Label' })).toHaveClass(`Label--${size}`);
   });
 });

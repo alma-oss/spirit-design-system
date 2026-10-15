@@ -2,7 +2,7 @@ import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import DocsBox from '../../../../docs/DocsBox';
-import { ValidationStates } from '../../../constants';
+import { Sizes, ValidationStates } from '../../../constants';
 import { Checkbox } from '../../Checkbox';
 import { Radio } from '../../Radio';
 import ReadMe from '../README.md?raw';
@@ -80,6 +80,13 @@ const meta: Meta<typeof FieldGroup> = {
     name: {
       control: 'text',
     },
+    size: {
+      control: 'select',
+      options: [...Object.values(Sizes), undefined],
+      table: {
+        defaultValue: { summary: Sizes.MEDIUM },
+      },
+    },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -109,6 +116,7 @@ const meta: Meta<typeof FieldGroup> = {
     isRequired: false,
     label: 'Label',
     name: 'FieldGroup',
+    size: undefined,
     validationState: undefined,
     validationText: 'Validation text',
   },

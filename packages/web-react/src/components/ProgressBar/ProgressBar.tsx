@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef, useId, useMemo } from 'react';
+import { Sizes } from '../../constants';
 import { ContextPropsProvider, useContextProps } from '../../context';
 import { useAriaDescribedBy, useStyleProps, useThrottledValue } from '../../hooks';
 import { type ForwardRefComponent } from '../../types';
@@ -61,6 +62,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
     isRequired,
     label,
     max,
+    size = Sizes.MEDIUM,
     validationState,
     validationText,
     value,
@@ -119,7 +121,7 @@ const _ProgressBar = (props: SpiritProgressBarProps, ref: ForwardedRef<HTMLProgr
         isDisabled,
         isRequired,
         validationState,
-        label: { isLabelHidden },
+        label: { isLabelHidden, size },
       }}
     >
       {shouldRenderField ? (

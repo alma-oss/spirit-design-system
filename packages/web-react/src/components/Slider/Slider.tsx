@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type CSSProperties, type ChangeEvent, type FormEvent, type ForwardedRef, forwardRef } from 'react';
+import { Sizes } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritSliderProps } from '../../types';
@@ -26,6 +27,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
     isLabelHidden,
     label,
     max,
+    size = Sizes.MEDIUM,
     min,
     step,
     validationState,
@@ -61,7 +63,7 @@ const _Slider = (props: SpiritSliderProps, ref: ForwardedRef<HTMLInputElement>) 
       value={{
         isDisabled,
         validationState,
-        label: { isLabelHidden },
+        label: { isLabelHidden, size },
       }}
     >
       <div {...styleProps} {...otherProps}>

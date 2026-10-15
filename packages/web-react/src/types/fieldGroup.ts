@@ -3,6 +3,7 @@ import { type LabelProps } from './label';
 import {
   type HelperTextProps,
   type RequiredProps,
+  type SizesDictionaryType,
   type SpiritFieldGroupElementPropsWithRef,
   type Validation,
   type ValidationTextType,
@@ -13,6 +14,8 @@ export interface FieldGroupProps
   isDisabled?: boolean;
   isLabelHidden?: boolean;
   label: ReactNode;
+  /** Size variant. */
+  size?: SizesDictionaryType;
   validationText?: ValidationTextType;
 }
 

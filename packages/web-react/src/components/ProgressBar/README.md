@@ -170,6 +170,16 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 
 👉 See [Describing a particular region][mdn-progress-region] for more information.
 
+## Sizes
+
+`size` changes the visible label through context props. The bar keeps its current dimensions. Medium is the default. Omit `label` when the bar has no visible label.
+
+```tsx
+<ProgressBar id="progress-bar-size-small" label="Small" size="small" value={60} />
+<ProgressBar id="progress-bar-size-medium" label="Medium (default)" value={60} />
+<ProgressBar id="progress-bar-size-large" label="Large" size="large" value={60} />
+```
+
 ## API
 
 | Name                | Type                                                                                                               | Default       | Required | Description                                                             |
@@ -182,6 +192,7 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 | `isLabelHidden`     | `bool`                                                                                                             | `false`       | ✕        | Whether the label is visually hidden                                    |
 | `label`             | `ReactNode`                                                                                                        | —             | ✕        | Visible label; omit and use `aria-label` when there is no visible label |
 | `max`               | `number`                                                                                                           | `100`         | ✕        | Maximum value of the ProgressBar                                        |
+| `size`              | [Size dictionary][dictionary-size]                                                                                 | `medium`      | ✕        | Size variant                                                            |
 | `validationState`   | [Validation dictionary][dictionary-validation]                                                                     | —             | ✕        | Validation state                                                        |
 | `validationText`    | `ReactNode` or `ReactNode[]`                                                                                       | —             | ✕        | Validation text displayed below the bar                                 |
 | `value`             | `number`                                                                                                           | —             | ✓        | Current value of the ProgressBar                                        |
@@ -195,6 +206,7 @@ and [escape hatches][readme-escape-hatches].
 
 For detailed information see [ProgressBar][progress-bar] component.
 
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-progress]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [mdn-progress-region]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress#describing_a_particular_region

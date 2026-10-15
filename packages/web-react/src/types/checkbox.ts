@@ -9,12 +9,13 @@ import {
   type ItemProps,
   type RequiredProps,
   type SingleOrResponsive,
+  type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
   type Validation,
   type ValidationTextProp,
 } from './shared';
 
-export type CheckboxElementBaseProps = SpiritInputElementPropsWithRef;
+export type CheckboxElementBaseProps = Omit<SpiritInputElementPropsWithRef, 'size'>;
 
 export interface CheckboxProps
   extends
@@ -36,6 +37,8 @@ export interface CheckboxProps
   inputPosition?: SingleOrResponsive<InputPositionType>;
   /** Text of control label */
   label: ReactNode;
+  /** Size variant. */
+  size?: SizesDictionaryType;
 }
 
 export interface SpiritCheckboxProps extends CheckboxProps {}

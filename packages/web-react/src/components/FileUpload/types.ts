@@ -1,5 +1,6 @@
 import { type MutableRefObject, type ReactNode } from 'react';
 import {
+  type SizesDictionaryType,
   type SpiritInputElementProps,
   type StringsProps,
   type TranslatableString,
@@ -31,7 +32,7 @@ export type FileUploadAttachmentsItem = FileItem;
 
 export type FilesSelectedType = (files: File[]) => void;
 
-export type FileUploadInputProps = Omit<SpiritInputElementProps, 'onError' | 'label' | 'strings'> &
+export type FileUploadInputProps = Omit<SpiritInputElementProps, 'onError' | 'label' | 'size' | 'strings'> &
   FileUploadTextProps &
   Validation & {
     accept?: string;
@@ -50,6 +51,8 @@ export type FileUploadInputProps = Omit<SpiritInputElementProps, 'onError' | 'la
     isUploadDisabled?: boolean;
     label?: ReactNode;
     name: string;
+    /** Size variant. */
+    size?: SizesDictionaryType;
     onFilesSelected?: FilesSelectedType;
     validationText?: ValidationTextType;
   };

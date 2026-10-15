@@ -11,7 +11,8 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { ValidationStates } from '../../../constants';
+import { Sizes, ValidationStates } from '../../../constants';
+import { ContextPropsProvider } from '../../../context';
 import Radio from '../Radio';
 
 describe('Radio', () => {
@@ -116,5 +117,50 @@ describe('Radio', () => {
     );
 
     expect(screen.getByRole('radio', { name: 'Radio Label' })).toBeInTheDocument();
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(<Radio id="radio-size" label="Label" size={size} />);
+
+    expect(screen.getByText('Label')).toHaveClass(`Label--${size}`);
+    expect(screen.getByRole('radio')).not.toHaveClass(`Radio--${size}`);
+    expect(screen.getByRole('radio')).not.toHaveAttribute('size');
+  });
+
+  it('should keep the label size when the radio is an item', () => {
+    render(<Radio id="radio-item-size" label="Label" size="large" isItem />);
+
+    expect(screen.getByText('Label')).toHaveClass('Label--large');
+    expect(screen.getByRole('radio')).not.toHaveClass('Radio--large');
+  });
+
+  it('should take the label size from the item context when the radio is an item', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'small' } }}>
+        <Radio id="radio-item-context-size" label="Label" isItem />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Label')).toHaveClass('Label--small');
+  });
+
+  it('should prefer the size prop over the item context', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'small' } }}>
+        <Radio id="radio-item-prop-size" label="Label" size="large" isItem />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Label')).toHaveClass('Label--large');
+  });
+
+  it('should ignore the item context when the radio is not an item', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'small' } }}>
+        <Radio id="radio-no-item-size" label="Label" />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Label')).toHaveClass('Label--medium');
   });
 });

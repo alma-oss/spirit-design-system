@@ -58,6 +58,14 @@ slider.
 position = 100 * (value - min) / (max - min)
 ```
 
+## Sizes
+
+Set the label size with `Label--small`, `Label--medium`, or `Label--large`. The slider control stays the same. Medium is the default.
+
+```html
+<label for="slider-size-small" class="Label Label--small">Small</label>
+```
+
 ## Required
 
 ℹ️ As per the [HTML specification][html-spec-range], the Slider component does not have a `required` attribute.

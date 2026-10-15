@@ -8,11 +8,12 @@ import {
   type ItemProps,
   type RequiredProps,
   type SingleOrResponsive,
+  type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
   type Validation,
 } from './shared';
 
-export type RadioElementBaseProps = SpiritInputElementPropsWithRef;
+export type RadioElementBaseProps = Omit<SpiritInputElementPropsWithRef, 'size'>;
 
 export interface RadioProps
   extends
@@ -30,6 +31,8 @@ export interface RadioProps
   isChecked?: boolean;
   /** Text of control label */
   label: ReactNode;
+  /** Size variant. */
+  size?: SizesDictionaryType;
 }
 
 export interface SpiritRadioProps extends RadioProps {}

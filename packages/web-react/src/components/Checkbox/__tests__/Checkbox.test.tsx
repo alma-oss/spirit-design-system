@@ -12,7 +12,8 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
-import { ValidationStates } from '../../../constants';
+import { Sizes, ValidationStates } from '../../../constants';
+import { ContextPropsProvider } from '../../../context';
 import Checkbox from '../Checkbox';
 
 jest.mock('../../../hooks/useIcon');
@@ -174,5 +175,50 @@ describe('Checkbox', () => {
     const input = screen.getByRole('checkbox');
 
     expect(input).not.toHaveAttribute('aria-details');
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(<Checkbox id="checkbox-size" label="Label" size={size} />);
+
+    expect(screen.getByText('Label')).toHaveClass(`Label--${size}`);
+    expect(screen.getByRole('checkbox')).not.toHaveClass(`Checkbox--${size}`);
+    expect(screen.getByRole('checkbox')).not.toHaveAttribute('size');
+  });
+
+  it('should keep the label size when the checkbox is an item', () => {
+    render(<Checkbox id="checkbox-item-size" label="Label" size="small" isItem />);
+
+    expect(screen.getByText('Label')).toHaveClass('Label--small');
+    expect(screen.getByRole('checkbox')).not.toHaveClass('Checkbox--small');
+  });
+
+  it('should take the label size from the item context when the checkbox is an item', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'large' } }}>
+        <Checkbox id="checkbox-item-context-size" label="Label" isItem />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Label')).toHaveClass('Label--large');
+  });
+
+  it('should prefer the size prop over the item context', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'large' } }}>
+        <Checkbox id="checkbox-item-prop-size" label="Label" size="small" isItem />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Label')).toHaveClass('Label--small');
+  });
+
+  it('should ignore the item context when the checkbox is not an item', () => {
+    render(
+      <ContextPropsProvider value={{ item: { size: 'large' } }}>
+        <Checkbox id="checkbox-no-item-size" label="Label" />
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Label')).toHaveClass('Label--medium');
   });
 });

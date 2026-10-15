@@ -3,13 +3,14 @@ import {
   type HelperTextProps,
   type InputBaseProps,
   type RequiredProps,
+  type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
   type StyleProps,
   type Validation,
   type ValidationTextType,
 } from './shared';
 
-export type SliderBaseProps = SpiritInputElementPropsWithRef;
+export type SliderBaseProps = Omit<SpiritInputElementPropsWithRef, 'size'>;
 
 export interface SliderProps
   extends SliderBaseProps, HelperTextProps, InputBaseProps, RequiredProps, Validation, StyleProps {
@@ -18,6 +19,8 @@ export interface SliderProps
   max?: number;
   min?: number;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  /** Size variant. */
+  size?: SizesDictionaryType;
   step?: number;
   validationText?: ValidationTextType;
   value: number;

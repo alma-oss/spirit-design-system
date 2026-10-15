@@ -12,6 +12,7 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
 import Toggle from '../Toggle';
 
 describe('Toggle', () => {
@@ -155,5 +156,13 @@ describe('Toggle', () => {
     const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
 
     expect(validationRoot.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(<Toggle id="toggle-size" label="Toggle Label" size={size} />);
+
+    expect(screen.getByText('Toggle Label')).toHaveClass(`Label--${size}`);
+    expect(screen.getByRole('checkbox')).not.toHaveClass(`Toggle--${size}`);
+    expect(screen.getByRole('checkbox')).not.toHaveAttribute('size');
   });
 });
