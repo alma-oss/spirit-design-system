@@ -1,6 +1,8 @@
 @use '@alma-oss/spirit-web/src/scss/settings/transitions';
 
 // The number counts up in pure CSS: the registered integer property is animated and printed via a counter.
+// `Stats--pending` holds it at 0 until the row is on screen. `Stats--counting` plays the count once.
+// Reduced motion never gets those classes, so the final number stays put.
 @property --stats-value {
     syntax: '<integer>';
     inherits: false;
@@ -27,6 +29,12 @@
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        animation: stats-count-up transitions.$duration-600 transitions.$timing-eased-out;
+        .Stats--pending & {
+            --stats-value: 0;
+        }
+
+        .Stats--counting & {
+            animation: stats-count-up transitions.$duration-600 transitions.$timing-eased-out;
+        }
     }
 }
