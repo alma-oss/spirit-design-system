@@ -158,6 +158,12 @@ any other form field:
 Use the `accessibility-hidden` helper class on the Label, or the `aria-label` attribute, when the label
 should not be visible.
 
+Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **The bar stays the same.** Medium is the default.
+
+```html
+<label for="progress-bar-size-small" class="Label Label--small">Small</label>
+```
+
 ## Layout
 
 ProgressBar is fluid by default. Use parent layout components like [Flex][readme-flex],

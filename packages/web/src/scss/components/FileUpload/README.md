@@ -98,6 +98,14 @@ Add `Label--required` to the label for a required indicator. Validation is up to
 <label for="file-uploader" class="Label Label--medium Label--required">Label</label>
 ```
 
+### Sizes
+
+Set the field label size with `Label--small`, `Label--medium`, or `Label--large`. **The drop zone stays the same.** Medium is the default.
+
+```html
+<label for="file-uploader-size-small" class="Label Label--small">Small</label>
+```
+
 ### Validation States
 
 Follow the [Validation state dictionary][dictionary-validation]. Use modifier classes on the root `FileUploadInput`: `FileUploadInput--success`, `FileUploadInput--warning`, `FileUploadInput--danger`.

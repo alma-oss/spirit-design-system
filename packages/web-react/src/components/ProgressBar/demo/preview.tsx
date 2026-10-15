@@ -10,6 +10,7 @@ import ProgressBarCompletion from './ProgressBarCompletion';
 import ProgressBarDefault from './ProgressBarDefault';
 import ProgressBarDisabled from './ProgressBarDisabled';
 import ProgressBarFieldComposition from './ProgressBarFieldComposition';
+import ProgressBarSizes from './ProgressBarSizes';
 import ProgressBarValuePlacement from './ProgressBarValuePlacement';
 import ProgressBarWithFile from './ProgressBarWithFile';
 
@@ -18,6 +19,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default" stackAlignment="stretch">
         <ProgressBarDefault />
+      </DocsSection>
+      <DocsSection title="Sizes" stackAlignment="stretch">
+        <ProgressBarSizes />
       </DocsSection>
       <DocsSection title="Completion" stackAlignment="stretch">
         <ProgressBarCompletion />

@@ -9,12 +9,14 @@ import {
   type ItemProps,
   type RequiredProps,
   type SingleOrResponsive,
+  type SizeProps,
+  type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
   type Validation,
   type ValidationTextProp,
 } from './shared';
 
-export type CheckboxElementBaseProps = SpiritInputElementPropsWithRef;
+export type CheckboxElementBaseProps = Omit<SpiritInputElementPropsWithRef, 'size'>;
 
 export interface CheckboxProps
   extends
@@ -27,7 +29,8 @@ export interface CheckboxProps
     ValidationTextProp,
     RequiredProps,
     HelperTextProps,
-    DetailsProps {
+    DetailsProps,
+    SizeProps<SizesDictionaryType> {
   /** Whether the checkbox is indeterminate */
   indeterminate?: boolean;
   /** Whether the checkbox is checked */

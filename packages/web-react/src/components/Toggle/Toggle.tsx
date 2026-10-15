@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ChangeEvent, type ForwardedRef, forwardRef, useState } from 'react';
+import { Sizes } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritToggleProps } from '../../types';
@@ -27,6 +28,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
     isRequired,
     label,
     helperText,
+    size = Sizes.MEDIUM,
     onChange = () => {},
     validationState,
     validationText,
@@ -52,7 +54,7 @@ const _Toggle = (props: SpiritToggleProps, ref: ForwardedRef<HTMLInputElement>) 
         isDisabled,
         isRequired,
         validationState,
-        label: { isLabelHidden },
+        label: { isLabelHidden, size },
       }}
     >
       <Flex

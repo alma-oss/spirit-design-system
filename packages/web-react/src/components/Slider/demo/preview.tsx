@@ -8,6 +8,7 @@ import SliderDefault from './SliderDefault';
 import SliderDisabled from './SliderDisabled';
 import SliderHelperText from './SliderHelperText';
 import SliderHiddenLabel from './SliderHiddenLabel';
+import SliderSizes from './SliderSizes';
 import SliderValidation from './SliderValidation';
 import SliderValidationWithIcon from './SliderValidationWithIcon';
 
@@ -16,6 +17,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default" stackAlignment="stretch">
         <SliderDefault />
+      </DocsSection>
+      <DocsSection title="Sizes" stackAlignment="stretch">
+        <SliderSizes />
       </DocsSection>
       <DocsSection title="Hidden Label" stackAlignment="stretch">
         <SliderHiddenLabel />

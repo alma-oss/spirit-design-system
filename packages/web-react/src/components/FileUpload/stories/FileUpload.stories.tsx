@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { ValidationStates } from '../../../constants';
+import { Sizes, ValidationStates } from '../../../constants';
 import { File, FileImagePreview } from '../../File';
 import { Stack } from '../../Stack';
 import { useFileUploaderDemo } from '../demo/useFileUploaderDemo';
@@ -105,6 +105,13 @@ const meta: Meta<typeof FileUpload> = {
       description: 'Optional `id` on the root `.FileUpload` wrapper (doc anchors / page structure).',
       table: { defaultValue: { summary: '—' } },
     },
+    size: {
+      control: 'select',
+      options: [...Object.values(Sizes), undefined],
+      table: {
+        defaultValue: { summary: Sizes.MEDIUM },
+      },
+    },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -137,6 +144,7 @@ const meta: Meta<typeof FileUpload> = {
     label: 'Label',
     name: 'attachments',
     rootId: '',
+    size: undefined,
     validationState: undefined,
     validationText: 'Validation message',
   },

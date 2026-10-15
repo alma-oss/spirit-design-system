@@ -13,6 +13,7 @@ import ToggleHiddenLabel from './ToggleHiddenLabel';
 import ToggleIndicators from './ToggleIndicators';
 import ToggleInputPosition from './ToggleInputPosition';
 import ToggleRequired from './ToggleRequired';
+import ToggleSizes from './ToggleSizes';
 import ToggleValidation from './ToggleValidation';
 import ToggleValidationWithIcon from './ToggleValidationWithIcon';
 
@@ -21,6 +22,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default" stackAlignment="stretch">
         <ToggleDefault />
+      </DocsSection>
+      <DocsSection title="Sizes" stackAlignment="stretch">
+        <ToggleSizes />
       </DocsSection>
       <DocsSection title="Indicators" stackAlignment="stretch">
         <ToggleIndicators />

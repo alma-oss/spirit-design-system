@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { InputPositions, ValidationStates } from '../../../constants';
+import { InputPositions, Sizes, ValidationStates } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { Checkbox } from '..';
 
@@ -68,6 +68,13 @@ const meta: Meta<typeof Checkbox> = {
     name: {
       control: 'text',
     },
+    size: {
+      control: 'select',
+      options: [...Object.values(Sizes), undefined],
+      table: {
+        defaultValue: { summary: Sizes.MEDIUM },
+      },
+    },
     validationState: {
       control: 'select',
       options: [...Object.values(ValidationStates), undefined],
@@ -104,6 +111,7 @@ const meta: Meta<typeof Checkbox> = {
     label: 'Label',
     name: 'checkbox',
     onChange: () => {},
+    size: undefined,
     validationState: undefined,
     validationText: 'Validation text',
     value: 'checkbox',

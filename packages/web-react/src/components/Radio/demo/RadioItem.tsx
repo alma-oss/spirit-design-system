@@ -46,6 +46,10 @@ const RadioItem = () => {
         name="itemDisabled"
         isChecked
       />
+
+      <Radio id="radio-item-size-small" isItem label="Small" name="itemSize" size="small" />
+      <Radio id="radio-item-size-medium" isItem label="Medium (default)" name="itemSize" />
+      <Radio id="radio-item-size-large" isItem label="Large" name="itemSize" size="large" />
     </Stack>
   );
 };

@@ -11,6 +11,19 @@
 </div>
 ```
 
+## Sizes
+
+`size` is the label size. **The checkbox control stays the same.** Medium is the default.
+
+```html
+<div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
+  <input type="checkbox" id="checkbox-size-small" class="Checkbox" name="checkboxSizeSmall" />
+  <div>
+    <label class="Label Label--small cursor-pointer" for="checkbox-size-small">Small</label>
+  </div>
+</div>
+```
+
 ## Required Input
 
 ```html
