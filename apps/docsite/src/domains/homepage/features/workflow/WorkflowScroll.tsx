@@ -1,10 +1,19 @@
 'use client';
 
-import { Box, Flex, Grid, GridItem, Heading, Link, Stack, Text } from '@alma-oss/spirit-web-react';
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  UNSTABLE_EyebrowText,
+} from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { routes } from '../../../routing/routes';
-import Eyebrow from '../../ui/Eyebrow';
 import PageSection from '../../ui/PageSection';
 import styles from './WorkflowScroll.module.scss';
 
@@ -168,7 +177,7 @@ const WorkflowScroll = () => {
           <GridItem columnStart={{ tablet: 1 }} columnEnd={{ tablet: 6 }}>
             <Stack spacing="space-800">
               <Stack spacing="space-500">
-                <Eyebrow>WORKFLOW</Eyebrow>
+                <UNSTABLE_EyebrowText textColor="accent-01-basic">WORKFLOW</UNSTABLE_EyebrowText>
                 <Heading elementType="h2" size="large" marginBottom="space-0">
                   From first frame
                   <br />
@@ -194,7 +203,7 @@ const WorkflowScroll = () => {
               >
                 <Stack spacing="space-1100">
                   <Stack spacing="space-700">
-                    <Eyebrow>{eyebrow}</Eyebrow>
+                    <UNSTABLE_EyebrowText textColor="accent-01-basic">{eyebrow}</UNSTABLE_EyebrowText>
                     <Heading elementType="h3" size="small" marginBottom="space-0">
                       {title}
                     </Heading>

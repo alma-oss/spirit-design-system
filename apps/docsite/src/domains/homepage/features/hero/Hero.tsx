@@ -12,11 +12,11 @@ import {
   Stack,
   Text,
   TextField,
+  UNSTABLE_EyebrowText,
 } from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
 import { useState } from 'react';
 import { routes } from '../../../routing/routes';
-import Eyebrow from '../../ui/Eyebrow';
 import HoverLottie from '../../ui/HoverLottie';
 import PageSection from '../../ui/PageSection';
 import styles from './Hero.module.scss';
@@ -94,7 +94,9 @@ const Hero = () => (
         <GridItem columnStart={{ tablet: 3 }} columnEnd={{ tablet: 11 }} UNSAFE_className={styles.Intro}>
           <Flex direction="vertical" alignmentX="center" spacing="space-1000">
             <Stack spacing="space-500">
-              <Eyebrow isCentered>MEET SPIRIT</Eyebrow>
+              <UNSTABLE_EyebrowText textAlignment="center" textColor="accent-01-basic">
+                MEET SPIRIT
+              </UNSTABLE_EyebrowText>
               <Heading elementType="h1" size="xlarge" textAlignment="center" marginBottom="space-0">
                 Design consistently.
                 <br />
