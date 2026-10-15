@@ -219,6 +219,8 @@ __metadata:
     remark-gfm: "catalog:content"
     sass-embedded: "catalog:build"
     shiki: "catalog:content"
+    stylelint: "catalog:lint"
+    stylelint-config-spirit: "workspace:^"
     ts-node: "catalog:script"
     typescript: "catalog:types"
     yaml: "catalog:script"
