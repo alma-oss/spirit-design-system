@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- we want to log when test fails */
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 import { formatPackageName, getServerUrl, hideFromVisualTests, waitForPageLoad, takeScreenshot, retryPageGoto } from '../../helpers';
-import { test, Page } from '../../helpers/fixtures';
+import { expect, test, Page } from '../../helpers/fixtures';
 
 type TestConfig = {
   componentsDir: string;
@@ -12,6 +12,7 @@ type TestConfig = {
 type ModalTestConfig = {
   openSelector: string;
   testName: string;
+  scrollerSelector?: string;
 };
 
 const modalTestConfigs: ModalTestConfig[] = [
@@ -26,10 +27,12 @@ const modalTestConfigs: ModalTestConfig[] = [
   {
     openSelector: 'modal-with-scrolling-inside',
     testName: 'with-scrolling-inside',
+    scrollerSelector: 'dialog[open] .ModalBody',
   },
   {
     openSelector: 'modal-with-scrollview',
     testName: 'with-scrollview',
+    scrollerSelector: 'dialog[open] .ScrollView__viewport',
   },
   {
     openSelector: 'modal-with-custom-height',
@@ -40,6 +43,21 @@ const modalTestConfigs: ModalTestConfig[] = [
     testName: 'disabled-backdrop-click',
   },
 ];
+
+// Scroll with the mouse wheel over the element to make sure nothing in between swallows the event
+const expectWheelScrolling = async (page: Page, selector: string): Promise<void> => {
+  const scroller = page.locator(selector);
+  const box = await scroller.boundingBox();
+
+  if (!box) {
+    throw new Error(`Scroller ${selector} is not visible.`);
+  }
+
+  await page.mouse.move(box.x + (box.width / 2), box.y + (box.height / 2));
+  await page.mouse.wheel(0, 200);
+
+  await expect.poll(() => scroller.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+};
 
 const runModalTests = async (page: Page, componentName: string): Promise<void> => {
   // open basic modal, close with backdrop click
@@ -71,6 +89,11 @@ const runModalTests = async (page: Page, componentName: string): Promise<void> =
   for (const config of modalTestConfigs) {
     await page.click(`[data-test-id="${config.openSelector}"]`);
     await takeScreenshot(page, `${componentName}-${config.testName}`);
+
+    if (config.scrollerSelector) {
+      await expectWheelScrolling(page, config.scrollerSelector);
+    }
+
     await page.click('dialog[open] header button');
   }
 
