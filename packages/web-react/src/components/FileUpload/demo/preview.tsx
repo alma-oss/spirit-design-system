@@ -10,6 +10,7 @@ import FileUploadInputValidationStates from './FileUploadInputValidationStates';
 import FileUploadInputValidationWithIcon from './FileUploadInputValidationWithIcon';
 import FileUploadInputWithAttachment from './FileUploadInputWithAttachment';
 import FileUploadSimple from './FileUploadSimple';
+import FileUploadSizes from './FileUploadSizes';
 import FileUploadUploadDisabled from './FileUploadUploadDisabled';
 
 export const Preview = () => (
@@ -17,6 +18,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="FileUpload" tag="Visual demo only" stackAlignment="start">
         <FileUploadSimple />
+      </DocsSection>
+      <DocsSection title="Sizes" tag="Visual demo only" stackAlignment="stretch">
+        <FileUploadSizes />
       </DocsSection>
       <DocsSection title="Validation State with Validation Text" tag="Visual demo only" stackAlignment="start">
         <FileUploadInputValidationStates />

@@ -49,6 +49,10 @@ const CheckboxItem = () => {
         isRequired
         isChecked
       />
+
+      <Checkbox id="checkbox-item-size-small" name="checkboxItemSizeSmall" label="Small" isItem size="small" />
+      <Checkbox id="checkbox-item-size-medium" name="checkboxItemSizeMedium" label="Medium (default)" isItem />
+      <Checkbox id="checkbox-item-size-large" name="checkboxItemSizeLarge" label="Large" isItem size="large" />
     </Stack>
   );
 };

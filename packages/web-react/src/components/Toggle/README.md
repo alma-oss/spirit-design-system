@@ -180,6 +180,16 @@ const Example = () => {
 };
 ```
 
+## Sizes
+
+`size` changes the label through context props. **The toggle control keeps its current dimensions.** Medium is the default.
+
+```tsx
+<Toggle id="toggle-size-small" label="Small" name="toggleSizeSmall" size="small" />
+<Toggle id="toggle-size-medium" label="Medium (default)" name="toggleSizeMedium" />
+<Toggle id="toggle-size-large" label="Large" name="toggleSizeLarge" size="large" />
+```
+
 ## Accessibility
 
 - The `details` content is linked to the toggle via the `aria-details` attribute
@@ -193,24 +203,25 @@ const Example = () => {
 
 ## API
 
-| Name                | Type                                           | Default | Required | Description                                                                               |
-| ------------------- | ---------------------------------------------- | ------- | -------- | ----------------------------------------------------------------------------------------- |
-| `autoComplete`      | `string`                                       | -       | ✕        | [Automated assistance in filling][autocomplete-attr]                                      |
-| `details`           | `ReactNode`                                    | —       | ✕        | Details content                                                                           |
-| `hasIndicators`     | `bool`                                         | `false` | ✕        | Whether has visual indicators                                                             |
-| `hasValidationIcon` | `bool`                                         | `false` | ✕        | Whether to show validation icon                                                           |
-| `helperText`        | `string`                                       | -       | ✕        | Helper text                                                                               |
-| `id`                | `string`                                       | -       | ✓        | Input and label identification                                                            |
-| `inputPosition`     | \[`string` \| `object`]                        | `end`   | ✕        | Position of the input (`start` or `end`), supports [responsive][readme-responsive] values |
-| `isChecked`         | `bool`                                         | `false` | ✕        | Whether is toggle checked                                                                 |
-| `isDisabled`        | `bool`                                         | `false` | ✕        | Whether is toggle disabled                                                                |
-| `isLabelHidden`     | `bool`                                         | `false` | ✕        | Whether is label hidden                                                                   |
-| `label`             | `ReactNode`                                    | -       | ✓        | Label text                                                                                |
-| `name`              | `string`                                       | -       | ✕        | Input name                                                                                |
-| `onChange`          | (event: ChangeEvent<HTMLInputElement>) => void | -       | ✕        | Change event handler                                                                      |
-| `ref`               | `ForwardedRef<HTMLInputElement>`               | -       | ✕        | Input element reference                                                                   |
-| `validationState`   | [Validation dictionary][dictionary-validation] | -       | ✕        | Type of validation state                                                                  |
-| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | -       | ✕        | Validation text                                                                           |
+| Name                | Type                                           | Default  | Required | Description                                                                               |
+| ------------------- | ---------------------------------------------- | -------- | -------- | ----------------------------------------------------------------------------------------- |
+| `autoComplete`      | `string`                                       | -        | ✕        | [Automated assistance in filling][autocomplete-attr]                                      |
+| `details`           | `ReactNode`                                    | —        | ✕        | Details content                                                                           |
+| `hasIndicators`     | `bool`                                         | `false`  | ✕        | Whether has visual indicators                                                             |
+| `hasValidationIcon` | `bool`                                         | `false`  | ✕        | Whether to show validation icon                                                           |
+| `helperText`        | `string`                                       | -        | ✕        | Helper text                                                                               |
+| `id`                | `string`                                       | -        | ✓        | Input and label identification                                                            |
+| `inputPosition`     | \[`string` \| `object`]                        | `end`    | ✕        | Position of the input (`start` or `end`), supports [responsive][readme-responsive] values |
+| `isChecked`         | `bool`                                         | `false`  | ✕        | Whether is toggle checked                                                                 |
+| `isDisabled`        | `bool`                                         | `false`  | ✕        | Whether is toggle disabled                                                                |
+| `isLabelHidden`     | `bool`                                         | `false`  | ✕        | Whether is label hidden                                                                   |
+| `label`             | `ReactNode`                                    | -        | ✓        | Label text                                                                                |
+| `name`              | `string`                                       | -        | ✕        | Input name                                                                                |
+| `onChange`          | (event: ChangeEvent<HTMLInputElement>) => void | -        | ✕        | Change event handler                                                                      |
+| `ref`               | `ForwardedRef<HTMLInputElement>`               | -        | ✕        | Input element reference                                                                   |
+| `size`              | [Size dictionary][dictionary-size]             | `medium` | ✕        | Size variant                                                                              |
+| `validationState`   | [Validation dictionary][dictionary-validation] | -        | ✕        | Type of validation state                                                                  |
+| `validationText`    | \[`ReactNode` \| `ReactNode[]`]                | -        | ✕        | Validation text                                                                           |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -236,6 +247,7 @@ const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
     isRequired,
     label,
     onChange,
+    size,
     validationState,
     validationText,
     ...restProps
@@ -290,6 +302,7 @@ const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
         isDisabled,
         isLabelHidden,
         isRequired,
+        label: { size },
         validationState,
       }}
     >
@@ -312,6 +325,7 @@ For detailed information see the [Toggle][readme-toggle] component.
 
 [autocomplete-attr]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
+[dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-checkbox]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes

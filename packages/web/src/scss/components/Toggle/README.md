@@ -19,6 +19,14 @@ the native input element and styles it to look like a toggle switch.
 </div>
 ```
 
+## Sizes
+
+Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **The toggle control stays the same.** Medium is the default.
+
+```html
+<label class="Label Label--large cursor-pointer" for="toggle-size-large">Large</label>
+```
+
 ## Indicators
 
 If you need to indicate the state of the toggle, you can add the `Toggle--indicators`

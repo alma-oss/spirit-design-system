@@ -2,6 +2,7 @@
 
 import classNames from 'classnames';
 import React, { type DragEvent, type DragEventHandler, useEffect, useState } from 'react';
+import { Sizes } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useDeprecationMessage, useStringsProp, useStyleProps } from '../../hooks';
 import { Button } from '../Button';
@@ -37,6 +38,7 @@ const FileUpload = (props: FileUploadProps) => {
     isUploadDisabled,
     label,
     name,
+    size = Sizes.MEDIUM,
     onFilesSelected,
     rootId,
     strings,
@@ -130,7 +132,7 @@ const FileUpload = (props: FileUploadProps) => {
         isDisabled,
         isRequired,
         validationState,
-        label: { isLabelHidden },
+        label: { isLabelHidden, size },
       }}
     >
       <div

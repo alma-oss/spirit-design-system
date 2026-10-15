@@ -46,7 +46,7 @@ and [escape hatches][readme-escape-hatches]. For controlling inherited and share
 ## Sizes
 
 Label supports all [Size Extended dictionary][dictionary-size] values. The default size is `medium`.
-Size-aware form fields such as TextField, TextArea, and Select provide their size through context.
+Form fields provide their `size` through context props.
 Label inherits it unless a direct `size` prop overrides the context.
 
 ```tsx

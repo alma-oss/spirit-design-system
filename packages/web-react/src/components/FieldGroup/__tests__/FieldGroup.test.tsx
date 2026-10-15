@@ -11,6 +11,9 @@ import {
   stylePropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
+import { Sizes } from '../../../constants';
+import { Select } from '../../Select';
+import { TextField } from '../../TextField';
 import FieldGroup from '../FieldGroup';
 
 jest.mock('../../../hooks/useIcon');
@@ -177,5 +180,30 @@ describe('FieldGroup', () => {
     const validationRoot = screen.getByText('Invalid').parentElement as HTMLElement;
 
     expect(validationRoot.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
+    render(
+      <FieldGroup id="field-group-size" label="Group label" size={size}>
+        {itemList}
+      </FieldGroup>,
+    );
+
+    expect(screen.getByText('Group label', { selector: '.Label' })).toHaveClass(`Label--${size}`);
+  });
+
+  it('should not override nested form field label sizes', () => {
+    render(
+      <FieldGroup id="field-group-nested-sizes" label="Group label" size="large">
+        <TextField id="nested-text-field-small" label="Small text field" size="small" />
+        <Select id="nested-select-small" label="Small select" size="small">
+          <option value="1">Option 1</option>
+        </Select>
+      </FieldGroup>,
+    );
+
+    expect(screen.getByText('Group label', { selector: '.Label' })).toHaveClass('Label--large');
+    expect(screen.getByText('Small text field', { selector: '.Label' })).toHaveClass('Label--small');
+    expect(screen.getByText('Small select', { selector: '.Label' })).toHaveClass('Label--small');
   });
 });

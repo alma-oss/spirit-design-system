@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { type ChangeEvent, useState } from 'react';
-import { ValidationStates } from '../../../constants';
+import { Sizes, ValidationStates } from '../../../constants';
 import { type SpiritSliderProps } from '../../../types';
 import { DEMO_SLIDER_DEFAULT_VALUE, SLIDER_DEFAULT_PROPS } from '../constants';
 import ReadMe from '../README.md?raw';
@@ -74,6 +74,13 @@ const meta: Meta<typeof Slider> = {
         defaultValue: { summary: `${SLIDER_DEFAULT_PROPS.step}` },
       },
     },
+    size: {
+      control: 'select',
+      options: [...Object.values(Sizes), undefined],
+      table: {
+        defaultValue: { summary: Sizes.MEDIUM },
+      },
+    },
     validationState: {
       control: 'select',
       description: 'The validation state of the slider',
@@ -112,6 +119,7 @@ const meta: Meta<typeof Slider> = {
     label: 'Label',
     max: SLIDER_DEFAULT_PROPS.max,
     min: SLIDER_DEFAULT_PROPS.min,
+    size: undefined,
     step: SLIDER_DEFAULT_PROPS.step,
     validationState: undefined,
     validationText: '',

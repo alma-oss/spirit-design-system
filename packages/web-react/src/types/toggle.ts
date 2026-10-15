@@ -8,13 +8,15 @@ import {
   type InputPositionType,
   type RequiredProps,
   type SingleOrResponsive,
+  type SizeProps,
+  type SizesDictionaryType,
   type SpiritInputElementPropsWithRef,
   type StyleProps,
   type Validation,
   type ValidationTextType,
 } from './shared';
 
-export type ToggleElementBaseProps = SpiritInputElementPropsWithRef;
+export type ToggleElementBaseProps = Omit<SpiritInputElementPropsWithRef, 'size'>;
 
 export interface ToggleProps
   extends
@@ -26,7 +28,8 @@ export interface ToggleProps
     HelperTextProps,
     DetailsProps,
     StyleProps,
-    Validation {
+    Validation,
+    SizeProps<SizesDictionaryType> {
   hasIndicators?: boolean;
   /** Position of the input element relative to the label */
   inputPosition?: SingleOrResponsive<InputPositionType>;

@@ -2,6 +2,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
+import { Sizes } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type SpiritFieldGroupProps } from '../../types';
@@ -24,6 +25,7 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
     isLabelHidden,
     isRequired,
     label,
+    size = Sizes.MEDIUM,
     validationState,
     validationText,
     ...rest
@@ -56,9 +58,11 @@ const FieldGroup = (props: SpiritFieldGroupProps) => {
         <VisuallyHidden elementType="legend">{label}</VisuallyHidden>
         <Stack spacing="space-400">
           {!isLabelHidden && (
-            <Label elementType="div" aria-hidden="true">
-              {label}
-            </Label>
+            <ContextPropsProvider value={{ label: { size } }}>
+              <Label elementType="div" aria-hidden="true">
+                {label}
+              </Label>
+            </ContextPropsProvider>
           )}
           <Flex direction="vertical" spacingY="space-500">
             {children}

@@ -14,6 +14,7 @@ import CheckboxIndeterminate from './CheckboxIndeterminate';
 import CheckboxInputPosition from './CheckboxInputPosition';
 import CheckboxItem from './CheckboxItem';
 import CheckboxRequired from './CheckboxRequired';
+import CheckboxSizes from './CheckboxSizes';
 import CheckboxValidation from './CheckboxValidation';
 import CheckboxValidationWithIcon from './CheckboxValidationWithIcon';
 
@@ -22,6 +23,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <CheckboxDefault />
+      </DocsSection>
+      <DocsSection title="Sizes">
+        <CheckboxSizes />
       </DocsSection>
       <DocsSection title="Indeterminate">
         <CheckboxIndeterminate />

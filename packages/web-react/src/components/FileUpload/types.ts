@@ -1,5 +1,7 @@
 import { type MutableRefObject, type ReactNode } from 'react';
 import {
+  type SizeProps,
+  type SizesDictionaryType,
   type SpiritInputElementProps,
   type StringsProps,
   type TranslatableString,
@@ -31,9 +33,10 @@ export type FileUploadAttachmentsItem = FileItem;
 
 export type FilesSelectedType = (files: File[]) => void;
 
-export type FileUploadInputProps = Omit<SpiritInputElementProps, 'onError' | 'label' | 'strings'> &
+export type FileUploadInputProps = Omit<SpiritInputElementProps, 'onError' | 'label' | 'size' | 'strings'> &
   FileUploadTextProps &
-  Validation & {
+  Validation &
+  SizeProps<SizesDictionaryType> & {
     accept?: string;
     dropZoneRef?: MutableRefObject<HTMLDivElement>;
     hasValidationIcon?: boolean;

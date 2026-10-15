@@ -132,6 +132,7 @@ export type SizesExtendedDictionaryKeys = keyof typeof SizesExtended;
 export type SizeExtendedDictionaryType<T = undefined> = (typeof SizesExtended)[SizesExtendedDictionaryKeys] | T;
 
 export interface SizeProps<P> {
+  /** Size variant. */
   size?: P;
 }
 

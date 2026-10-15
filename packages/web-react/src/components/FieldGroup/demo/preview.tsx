@@ -8,9 +8,11 @@ import FieldGroupDefault from './FieldGroupDefault';
 import FieldGroupDisabled from './FieldGroupDisabled';
 import FieldGroupGroupedCheckboxes from './FieldGroupGroupedCheckboxes';
 import FieldGroupGroupedRadios from './FieldGroupGroupedRadios';
+import FieldGroupGroupedTextFields from './FieldGroupGroupedTextFields';
 import FieldGroupHelperText from './FieldGroupHelperText';
 import FieldGroupHiddenLabel from './FieldGroupHiddenLabel';
 import FieldGroupRequired from './FieldGroupRequired';
+import FieldGroupSizes from './FieldGroupSizes';
 import FieldGroupValidationState from './FieldGroupValidationState';
 import FieldGroupValidationWithIcon from './FieldGroupValidationWithIcon';
 
@@ -19,6 +21,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <FieldGroupDefault />
+      </DocsSection>
+      <DocsSection title="Sizes">
+        <FieldGroupSizes />
       </DocsSection>
       <DocsSection title="Required">
         <FieldGroupRequired />
@@ -43,6 +48,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Grouped Radios">
         <FieldGroupGroupedRadios />
+      </DocsSection>
+      <DocsSection title="Grouped TextFields">
+        <FieldGroupGroupedTextFields />
       </DocsSection>
     </IconsProvider>
   </StrictMode>

@@ -11,6 +11,7 @@ import RadioHiddenLabel from './RadioHiddenLabel';
 import RadioInputPosition from './RadioInputPosition';
 import RadioItem from './RadioItem';
 import RadioLongLabelText from './RadioLongLabelText';
+import RadioSizes from './RadioSizes';
 import RadioValidation from './RadioValidation';
 
 export const Preview = () => (
@@ -18,6 +19,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <RadioDefault />
+      </DocsSection>
+      <DocsSection title="Sizes">
+        <RadioSizes />
       </DocsSection>
       <DocsSection title="With Long Label Text">
         <RadioLongLabelText />
