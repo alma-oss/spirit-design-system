@@ -12,7 +12,6 @@
     padding-block: theme.$body-padding-y;
     overflow-x: var(--modal-body-overflow-x, visible);
     overflow-y: var(--modal-body-overflow-y, visible);
-    overscroll-behavior: contain;
 
     @include breakpoint.up(map.get(theme.$breakpoints, tablet)) {
         padding-inline: theme.$common-padding-x-tablet;
