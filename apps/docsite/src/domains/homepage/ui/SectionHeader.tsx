@@ -1,8 +1,16 @@
 'use client';
 
-import { ButtonLink, Flex, Grid, GridItem, Heading, Stack, Text } from '@alma-oss/spirit-web-react';
+import {
+  ButtonLink,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Stack,
+  Text,
+  UNSTABLE_EyebrowText,
+} from '@alma-oss/spirit-web-react';
 import NextLink from 'next/link';
-import Eyebrow from './Eyebrow';
 import styles from './SectionHeader.module.scss';
 
 interface SectionHeaderProps {
@@ -33,7 +41,7 @@ const SectionHeader = ({
     <GridItem columnStart={{ tablet: 1 }} columnEnd={{ tablet: 6 }} UNSAFE_className={styles.Item}>
       <Stack spacing={eyebrow ? 'space-800' : 'space-900'}>
         <Stack spacing="space-500">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          {eyebrow && <UNSTABLE_EyebrowText textColor="accent-01-basic">{eyebrow}</UNSTABLE_EyebrowText>}
           <Heading elementType="h2" size="large" marginBottom="space-0">
             {title}
           </Heading>
