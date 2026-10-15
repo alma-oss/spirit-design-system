@@ -1,4 +1,7 @@
-.frame {
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+
+.PreviewFrame {
+    // Parsed in PreviewFrame.tsx with parseFloat, which reads the px number. Keep these two in px.
     --preview-frame-padding: 32px;
     --preview-frame-guide-gap: 12px; // distance between the guides and the component edges
     --preview-frame-guide-color: rgb(0 0 0 / 16%);
@@ -13,7 +16,7 @@
     user-select: none;
 }
 
-.content {
+.PreviewFrame__content {
     --preview-scale: 1;
 
     position: absolute;
@@ -32,19 +35,19 @@
     }
 }
 
-.placeholder {
-    width: 112px;
-    height: 28px;
+.PreviewFrame__placeholder {
+    width: units.px-to-rem(112);
+    height: units.px-to-rem(28);
     background-color: rgb(0 0 0 / 10%);
 }
 
 // Guides run along the edges of the content box across the whole frame and fade out towards the frame edges.
-.guide {
+.PreviewFrame__guide {
     position: absolute;
     background-repeat: no-repeat;
 }
 
-.guideVertical {
+.PreviewFrame__guide--vertical {
     top: 0;
     bottom: 0;
     width: 1px;
@@ -56,7 +59,7 @@
     );
 }
 
-.guideHorizontal {
+.PreviewFrame__guide--horizontal {
     right: 0;
     left: 0;
     height: 1px;
