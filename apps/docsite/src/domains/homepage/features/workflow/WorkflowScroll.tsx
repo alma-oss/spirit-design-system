@@ -15,7 +15,7 @@ import NextLink from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { routes } from '../../../routing/routes';
 import PageSection from '../../ui/PageSection';
-import styles from './WorkflowScroll.module.scss';
+import './WorkflowScroll.scss';
 
 const REPOSITORY_URL = 'https://github.com/alma-oss/spirit-design-system/tree/main';
 
@@ -116,7 +116,7 @@ const StepImage = ({ alt, color, label }: { alt: string; color: WorkflowStep['im
     borderColor="basic"
     borderWidth="100"
     borderRadius="500"
-    UNSAFE_className={styles.Image}
+    UNSAFE_className="WorkflowScroll__image"
   >
     <Text textColor="primary" emphasis="semibold" size="large" marginBottom="space-0">
       {label}
@@ -199,7 +199,7 @@ const WorkflowScroll = () => {
                 ref={(element) => {
                   stepRefs.current[index] = element;
                 }}
-                className={`${styles.Step} ${index === activeIndex ? styles['Step--active'] : ''}`}
+                className={`WorkflowScroll__step${index === activeIndex ? ' WorkflowScroll__step--active' : ''}`}
               >
                 <Stack spacing="space-1100">
                   <Stack spacing="space-700">
@@ -226,25 +226,28 @@ const WorkflowScroll = () => {
                 </Stack>
 
                 {/* On small screens, every step shows its own image below the text. */}
-                <div className={styles.StepImage}>
+                <div className="WorkflowScroll__stepImage">
                   <StepImage alt={imageAlt} color={imageColor} label={eyebrow} />
                 </div>
               </div>
             ))}
           </GridItem>
 
-          <GridItem columnStart={{ tablet: 6 }} columnEnd={{ tablet: 13 }} UNSAFE_className={styles.Gallery}>
-            <Box backgroundColor="secondary" borderRadius="500" UNSAFE_className={styles.Panel}>
-              <div ref={stickyRef} className={styles.Sticky}>
-                {steps.map(({ title, eyebrow, imageAlt, imageColor }, index) => (
-                  <div
-                    key={title}
-                    aria-hidden={index !== activeIndex}
-                    className={`${styles.Slide} ${index === activeIndex ? styles['Slide--active'] : ''}`}
-                  >
-                    <StepImage alt={imageAlt} color={imageColor} label={eyebrow} />
-                  </div>
-                ))}
+          <GridItem columnStart={{ tablet: 6 }} columnEnd={{ tablet: 13 }} hideOn="mobile">
+            <Box backgroundColor="secondary" borderRadius="500" UNSAFE_className="WorkflowScroll__panel">
+              <div ref={stickyRef} className="WorkflowScroll__sticky">
+                <Grid cols={1}>
+                  {steps.map(({ title, eyebrow, imageAlt, imageColor }, index) => (
+                    <GridItem key={title} columnStart={1} rowStart={1}>
+                      <div
+                        aria-hidden={index !== activeIndex}
+                        className={`WorkflowScroll__slide${index === activeIndex ? ' WorkflowScroll__slide--active' : ''}`}
+                      >
+                        <StepImage alt={imageAlt} color={imageColor} label={eyebrow} />
+                      </div>
+                    </GridItem>
+                  ))}
+                </Grid>
               </div>
             </Box>
           </GridItem>

@@ -1,10 +1,10 @@
 'use client';
 
-import { Box, Flex, Heading, Text } from '@alma-oss/spirit-web-react';
+import { Box, Container, Flex, Grid, Heading, Text } from '@alma-oss/spirit-web-react';
 import { type CSSProperties, useState } from 'react';
 import HoverLottie from '../../ui/HoverLottie';
 import PageSection from '../../ui/PageSection';
-import styles from './CustomAssets.module.scss';
+import './CustomAssets.scss';
 
 const ASSETS_PATH = '/custom-assets';
 const CODE_TEXT_CLASS = 'typography-code-small-regular';
@@ -73,12 +73,18 @@ const IconGroup = ({ name, glyphs }: { name: string; glyphs: Glyph[] }) => (
     >
       <Flex direction="vertical" spacing="space-500">
         {glyphs.map(({ src, size, inset, bleed }, index) => (
-          <Box key={src} borderRadius="400" paddingX="space-600" paddingY="space-500" UNSAFE_className={styles.Tile}>
+          <Box
+            key={src}
+            borderRadius="400"
+            paddingX="space-600"
+            paddingY="space-500"
+            UNSAFE_className="CustomAssets__tile"
+          >
             <Flex alignmentY="center" spacing="space-600">
-              <span className={styles.Glyph} style={{ width: size, height: size }}>
-                <span className={styles.GlyphInset} style={asStyle(inset)}>
-                  <span className={styles.GlyphBleed} style={asStyle(bleed)}>
-                    <img src={`${ASSETS_PATH}/icons/${src}`} alt="" />
+              <span className="CustomAssets__glyph" style={{ width: size, height: size }}>
+                <span className="CustomAssets__inset" style={asStyle(inset)}>
+                  <span className="CustomAssets__bleed" style={asStyle(bleed)}>
+                    <img className="CustomAssets__image" src={`${ASSETS_PATH}/icons/${src}`} alt="" />
                   </span>
                 </span>
               </span>
@@ -98,16 +104,16 @@ const IllustrationTile = ({ caption, src = undefined, animation = undefined }: I
     <Box
       borderRadius="400"
       padding="space-600"
-      UNSAFE_className={styles.Tile}
+      UNSAFE_className="CustomAssets__tile"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Flex direction="vertical" alignmentX="center" spacing="space-700">
-        <div className={styles.Illustration}>
+        <div className="CustomAssets__illustration">
           {animation ? (
-            <HoverLottie path={animation} isHovered={isHovered} className={styles.IllustrationImage} />
+            <HoverLottie path={animation} isHovered={isHovered} className="CustomAssets__image" />
           ) : (
-            <img className={styles.IllustrationImage} src={`${ASSETS_PATH}/illustrations/${src}`} alt="" />
+            <img className="CustomAssets__image" src={`${ASSETS_PATH}/illustrations/${src}`} alt="" />
           )}
         </div>
         <AssetCaption>{caption}</AssetCaption>
@@ -121,16 +127,19 @@ export const AssetGroups = () => (
   <Flex isWrapping alignmentX="space-between" alignmentY="stretch" spacing="space-1000">
     <IconGroup name="icon-home" glyphs={homeIcons} />
 
-    <Flex direction="vertical" alignmentX="left" spacing="space-700" UNSAFE_className={styles.IllustrationsGroup}>
+    <Flex direction="vertical" alignmentX="left" spacing="space-700" UNSAFE_className="CustomAssets__illustrations">
       <AssetLabel>illustration-password</AssetLabel>
       <Box
+        elementType={Grid}
+        cols={1}
+        alignmentX="center"
+        alignmentY="center"
         backgroundColor="primary"
         borderStyle="dashed"
         borderWidth="200"
         borderColor="accent-02-basic"
         borderRadius="300"
         paddingX="space-800"
-        UNSAFE_className={styles.IllustrationsBox}
       >
         <Flex isWrapping alignmentX="center" alignmentY="center" spacing="space-700">
           {illustrations.map((illustration, index) => (
@@ -149,22 +158,27 @@ export const AssetGroups = () => (
 );
 
 const CustomAssets = () => (
-  <PageSection size="xlarge" hasTopLine backgroundColor="primary">
-    <Box borderRadius="400" paddingX="space-800" paddingY="space-1200" UNSAFE_className={styles.CustomAssets}>
-      <Flex direction="vertical" alignmentX="center" spacing="space-1200">
-        <Flex direction="vertical" spacing="space-600" UNSAFE_className={styles.Intro}>
-          <Heading elementType="h2" size="medium" textAlignment="center">
-            Your own icons and illustrations
-          </Heading>
-          <Text textColor="secondary" textAlignment="center">
-            Got your own set of icons or illustrations? Use it. We keep one consistent naming structure for
-            illustrations and icons across all products, and ship everything as one bundle.
-          </Text>
-        </Flex>
+  <PageSection size="xlarge" hasContainer={false} hasTopLine backgroundColor="primary">
+    {/* The column matches the section container so the intro Container is not nested inside another one. */}
+    <div className="CustomAssets__column">
+      <Box borderRadius="400" paddingX="space-800" paddingY="space-1200" UNSAFE_className="CustomAssets">
+        <Flex direction="vertical" alignmentX="center" spacing="space-1200">
+          <Container size="small">
+            <Flex direction="vertical" spacing="space-600">
+              <Heading elementType="h2" size="medium" textAlignment="center">
+                Your own icons and illustrations
+              </Heading>
+              <Text textColor="secondary" textAlignment="center">
+                Got your own set of icons or illustrations? Use it. We keep one consistent naming structure for
+                illustrations and icons across all products, and ship everything as one bundle.
+              </Text>
+            </Flex>
+          </Container>
 
-        <AssetGroups />
-      </Flex>
-    </Box>
+          <AssetGroups />
+        </Flex>
+      </Box>
+    </div>
   </PageSection>
 );
 

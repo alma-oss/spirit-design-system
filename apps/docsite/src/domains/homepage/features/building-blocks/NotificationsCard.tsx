@@ -6,13 +6,15 @@ import {
   Heading,
   Stack,
   Text,
+  ToastBar,
+  ToastBarLink,
+  ToastBarMessage,
   ToastProvider,
   Toggle,
-  UncontrolledToast,
   useToast,
 } from '@alma-oss/spirit-web-react';
 import { useRef } from 'react';
-import styles from './NotificationsCard.module.scss';
+import './NotificationsCard.scss';
 
 const settings = [
   {
@@ -70,7 +72,41 @@ const Settings = () => {
   );
 };
 
-// A tile with the card sticking to its bottom edge. The toasts are shown inside of the card, not at the screen edge.
+// Toast is fixed to the viewport and cannot be placed in the card. ToastBar is the bar itself, so the queue renders here.
+const NotificationToasts = () => {
+  const { hide, queue } = useToast();
+  const visible = queue.filter((item) => item.isOpen && item.content);
+
+  if (visible.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="NotificationsCard__toasts">
+      {visible.map((item) => {
+        const { color, iconName, id, content, hasIcon, isDismissible, linkProps } = item;
+
+        return (
+          <ToastBar
+            key={id}
+            id={id}
+            color={color}
+            hasIcon={hasIcon}
+            iconName={iconName}
+            isDismissible={isDismissible}
+            onClose={() => hide(id)}
+            isOpen
+          >
+            <ToastBarMessage>{content.message}</ToastBarMessage>
+            {content.link && <ToastBarLink {...linkProps}>{content.link}</ToastBarLink>}
+          </ToastBar>
+        );
+      })}
+    </div>
+  );
+};
+
+// A tile with the panel sticking to its bottom edge. The toasts are shown inside of the panel, not at the screen edge.
 const NotificationsCard = () => (
   <Box
     backgroundColor="secondary"
@@ -80,14 +116,12 @@ const NotificationsCard = () => (
     paddingTop="space-1000"
     paddingX={{ mobile: 'space-700', tablet: 'space-1000' }}
     paddingBottom="space-0"
-    UNSAFE_className={styles.Tile}
+    UNSAFE_className="NotificationsCard"
   >
     <ToastProvider>
-      <div className={styles.Card}>
+      <div className="NotificationsCard__panel">
         <Settings />
-        <div className={styles.Toasts}>
-          <UncontrolledToast alignmentX="center" alignmentY="bottom" isCollapsible />
-        </div>
+        <NotificationToasts />
       </div>
     </ToastProvider>
   </Box>

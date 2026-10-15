@@ -1,0 +1,196 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+@use '../../ui/docsite-tokens' as docsite;
+
+// Gradient fills composed from the temporary homepage colors.
+$_column-gradient: linear-gradient(to bottom, docsite.$grid-column-gradient-start, docsite.$grid-column-gradient-end);
+$_column-active-gradient: linear-gradient(
+    to bottom,
+    docsite.$grid-column-active-gradient-start,
+    docsite.$grid-column-active-gradient-end
+);
+
+// Translucent section band. Not a solid hex, so it stays here.
+$_section-band: rgb(35 204 223 / 14%);
+
+.GridShowcase {
+    overflow: hidden;
+    background-color: docsite.$showcase-background;
+}
+
+// The same inset as the section container. The intro is centered inside it, not nested in another Container.
+.GridShowcase__band {
+    // Width is required. Auto margins would otherwise shrink this grid item to the intro.
+    width: 100%;
+    max-width: tokens.$container-xlarge-max-width;
+    padding-inline: tokens.$container-padding-mobile;
+    margin-inline: auto;
+
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
+        padding-inline: tokens.$container-padding-tablet;
+    }
+}
+
+// Narrow centered intro. No container padding, or the paragraph wraps an extra line.
+.GridShowcase__intro {
+    max-width: tokens.$container-small-max-width;
+    margin-inline: auto;
+}
+
+.GridShowcase__window {
+    position: relative;
+    width: calc(884 / 1024 * 100%);
+    margin-inline: auto;
+}
+
+.GridShowcase__clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-top-left-radius: tokens.$radius-400;
+    border-top-right-radius: tokens.$radius-400;
+    background-color: tokens.$background-primary;
+}
+
+.GridShowcase__frame {
+    transform-origin: top left;
+}
+
+.GridShowcase__toolbar {
+    display: flex;
+    gap: tokens.$space-900;
+    align-items: center;
+
+    // Diagram chrome. Grid has no track size for this scaled browser frame.
+    height: units.px-to-rem(40px);
+    padding-inline: units.px-to-rem(18px);
+}
+
+.GridShowcase__toolbarDot {
+    width: units.px-to-rem(12px);
+    height: units.px-to-rem(12px);
+    border-radius: 50%;
+    background-color: tokens.$border-basic;
+}
+
+.GridShowcase__browser {
+    width: units.px-to-rem(880px);
+
+    // The browser frame is a scaled drawing. Grid has no track size, so this height stays.
+    height: units.px-to-rem(358px);
+    margin-inline: units.px-to-rem(2px);
+    overflow: hidden;
+    background-color: tokens.$background-secondary;
+}
+
+.GridShowcase__page {
+    transform-origin: top left;
+}
+
+.GridShowcase__section {
+    position: relative;
+
+    // The real vertical padding of the section is the highlighted band.
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: tokens.$space-1400;
+        border-bottom: tokens.$border-width-100 solid docsite.$grid-section-band-border;
+        background-color: $_section-band;
+    }
+}
+
+.GridShowcase__sectionHotspot {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+    height: tokens.$space-1400;
+}
+
+.GridShowcase__container {
+    position: relative;
+}
+
+.GridShowcase__containerEdge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: tokens.$space-700;
+    border: 0 solid docsite.$grid-container-edge;
+}
+
+.GridShowcase__containerEdge--start {
+    left: 0;
+    border-left-width: tokens.$border-width-100;
+}
+
+.GridShowcase__containerEdge--end {
+    right: 0;
+    border-right-width: tokens.$border-width-100;
+}
+
+.GridShowcase__layers {
+    position: relative;
+}
+
+.GridShowcase__blocks {
+    position: absolute;
+    inset: 0;
+    grid-template-rows: units.px-to-rem(127px) units.px-to-rem(52px) units.px-to-rem(66px) units.px-to-rem(193px);
+}
+
+.GridShowcase__block {
+    border: tokens.$border-width-100 solid docsite.$grid-block-border;
+    border-radius: tokens.$radius-300;
+    background-color: docsite.$grid-block-background;
+}
+
+.GridShowcase__column {
+    position: relative;
+
+    // The columns are painted over the page and have to reach the bottom of the browser frame.
+    // Grid stretch cannot see that frame, so this height stays.
+    height: units.px-to-rem(536px);
+    border: 0 dashed docsite.$grid-column-border;
+    border-inline-width: tokens.$border-width-100;
+    background-image: $_column-gradient;
+    opacity: 0.8;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.25s ease-in-out;
+    }
+}
+
+.GridShowcase__column--active {
+    border-color: docsite.$grid-column-active-border;
+    background-image: $_column-active-gradient;
+}
+
+// Positioning and the hover emphasis live on the wrapper. Stamp owns its own look.
+.GridShowcase__stamp {
+    position: absolute;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: transform 0.25s ease-in-out;
+    }
+}
+
+// Hovering an element of the grid emphasizes it and its note.
+@media (hover: hover) {
+    .GridShowcase__window:has(.GridShowcase__column--active:hover) .GridShowcase__stamp--column,
+    .GridShowcase__window:has(.GridShowcase__sectionHotspot:hover) .GridShowcase__stamp--section,
+    .GridShowcase__window:has(.GridShowcase__containerEdge:hover) .GridShowcase__stamp--container {
+        transform: scale(1.06);
+    }
+
+    .GridShowcase__column:hover {
+        opacity: 1;
+    }
+
+    .GridShowcase__section:has(.GridShowcase__sectionHotspot:hover)::before {
+        background-color: rgb(35 204 223 / 28%);
+    }
+}

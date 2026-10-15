@@ -1,12 +1,13 @@
 'use client';
 
-import { Box, Grid, GridItem, Stack, Text } from '@alma-oss/spirit-web-react';
+import { Box, Grid, GridItem, Link, Stack, Text } from '@alma-oss/spirit-web-react';
+import NextLink from 'next/link';
 import { routes } from '../../../routing/routes';
 import PageSection from '../../ui/PageSection';
 import SectionHeader from '../../ui/SectionHeader';
 import Stats, { type Stat } from '../../ui/Stats';
 import { AssetGroups } from './CustomAssets';
-import styles from './DesignTeaser.module.scss';
+import './DesignTeaser.scss';
 
 const stats: Stat[] = [
   { value: 2, suffix: '+', label: 'Modes and themes' },
@@ -78,7 +79,7 @@ const DesignTeaser = () => (
             key={title}
             columnStart={{ tablet: columnStart }}
             columnEnd={{ tablet: columnEnd }}
-            UNSAFE_className={styles.Topic}
+            UNSAFE_className="DesignTeaser__cell"
           >
             <Box
               backgroundColor={hasAssets ? undefined : 'primary'}
@@ -86,20 +87,22 @@ const DesignTeaser = () => (
               borderWidth="100"
               borderRadius="500"
               padding={hasAssets ? 'space-1000' : 'space-800'}
-              UNSAFE_className={hasAssets ? styles.AssetsTile : styles.Tile}
+              UNSAFE_className={hasAssets ? 'DesignTeaser__assets' : 'DesignTeaser__tile'}
             >
-              <Stack spacing={hasAssets ? 'space-1200' : 'space-800'} UNSAFE_className={styles.TileContent}>
-                {!hasAssets && <div className="docs-Placeholder" />}
+              <Grid cols={1} spacingY={hasAssets ? 'space-1200' : 'space-800'}>
+                {!hasAssets && <div className="docs-Placeholder DesignTeaser__placeholder" />}
                 <Stack spacing="space-500">
-                  <Text emphasis="semibold" marginBottom="space-0" UNSAFE_className={styles.TopicTitle}>
-                    {title}
+                  <Text fontWeight="semibold" marginBottom="space-0">
+                    <Link elementType={NextLink} href={routes.design} underlined="never">
+                      {title}
+                    </Link>
                   </Text>
                   <Text textColor="secondary" marginBottom="space-0">
                     {description}
                   </Text>
                 </Stack>
                 {hasAssets && <AssetGroups />}
-              </Stack>
+              </Grid>
             </Box>
           </GridItem>
         ))}

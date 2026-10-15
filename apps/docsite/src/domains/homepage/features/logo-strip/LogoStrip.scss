@@ -1,0 +1,30 @@
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+
+.LogoStrip__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: units.px-to-rem(44px);
+}
+
+.LogoStrip__grey,
+.LogoStrip__color {
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.25s ease-in-out;
+    }
+}
+
+.LogoStrip__color {
+    opacity: 0;
+}
+
+@media (hover: hover) {
+    .LogoStrip__cell:hover .LogoStrip__color {
+        opacity: 1;
+    }
+
+    .LogoStrip__cell:hover .LogoStrip__grey {
+        opacity: 0;
+    }
+}

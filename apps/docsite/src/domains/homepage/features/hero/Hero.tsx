@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { routes } from '../../../routing/routes';
 import HoverLottie from '../../ui/HoverLottie';
 import PageSection from '../../ui/PageSection';
-import styles from './Hero.module.scss';
+import './Hero.scss';
 
 const popularLinks = [
   { label: 'Button', href: routes.component('Button') },
@@ -68,31 +68,33 @@ const PersonaCard = ({ title, description, animation }: PersonaCardProps) => {
       borderWidth="100"
       borderRadius="500"
       padding="space-800"
-      UNSAFE_className={styles.Persona}
+      UNSAFE_className="Hero__persona"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Flex direction="vertical" spacing="space-500" UNSAFE_className={styles.PersonaContent}>
-        <div className={styles.PersonaAnimation}>
-          <HoverLottie path={animation} isHovered={isHovered} className={styles.PersonaLottie} />
+      <Stack spacing="space-500">
+        <div className="Hero__personaAnimation">
+          <HoverLottie path={animation} isHovered={isHovered} className="Hero__personaLottie" />
         </div>
-        <Text size="large" emphasis="semibold" marginBottom="space-0" UNSAFE_className={styles.PersonaTitle}>
-          {title}
+        <Text size="large" fontWeight="semibold" marginBottom="space-0">
+          <Link elementType="span" underlined="never">
+            {title}
+          </Link>
         </Text>
         <Text size="small" textColor="secondary" marginBottom="space-0">
           {description}
         </Text>
-      </Flex>
+      </Stack>
     </Box>
   );
 };
 
 const Hero = () => (
-  <PageSection size="large" paddingBottom="small" hasRails={false} className={styles.Hero} backgroundColor="primary">
+  <PageSection size="large" paddingBottom="small" hasRails={false} className="Hero" backgroundColor="primary">
     <Flex direction="vertical" alignmentX="center" spacing="space-1300">
       <Grid cols={{ mobile: 1, tablet: 12 }} spacingX="space-800">
-        <GridItem columnStart={{ tablet: 3 }} columnEnd={{ tablet: 11 }} UNSAFE_className={styles.Intro}>
-          <Flex direction="vertical" alignmentX="center" spacing="space-1000">
+        <GridItem columnStart={{ tablet: 3 }} columnEnd={{ tablet: 11 }} UNSAFE_className="Hero__intro">
+          <Stack spacing="space-1000">
             <Stack spacing="space-500">
               <UNSTABLE_EyebrowText textAlignment="center" textColor="accent-01-basic">
                 MEET SPIRIT
@@ -109,8 +111,8 @@ const Hero = () => (
               or React, and adapt to any brand.
             </Text>
 
-            <Flex direction="vertical" alignmentX="left" spacing="space-700" UNSAFE_className={styles.Search}>
-              <form role="search" className={styles.SearchForm} onSubmit={(event) => event.preventDefault()}>
+            <Stack spacing="space-700">
+              <form role="search" onSubmit={(event) => event.preventDefault()}>
                 <TextField
                   id="docs-search"
                   name="q"
@@ -138,38 +140,21 @@ const Hero = () => (
                 </Text>
                 <Flex isWrapping alignmentX="left" alignmentY="center" spacing="space-300">
                   {popularLinks.map(({ label, href }, index) => (
-                    <Flex key={label} alignmentY="center" spacing="space-0">
-                      <Text elementType="span" size="small" marginBottom="space-0">
-                        <Link
-                          elementType={NextLink}
-                          href={href}
-                          underlined="hover"
-                          UNSAFE_className={styles.PopularLink}
-                        >
-                          {label}
-                        </Link>
-                      </Text>
-                      {index < popularLinks.length - 1 && (
-                        <Text
-                          elementType="span"
-                          size="small"
-                          marginBottom="space-0"
-                          UNSAFE_className={styles.PopularSeparator}
-                          aria-hidden="true"
-                        >
-                          ,
-                        </Text>
-                      )}
-                    </Flex>
+                    <Text key={label} elementType="span" size="small" marginBottom="space-0">
+                      <Link elementType={NextLink} href={href} underlined="never">
+                        {label}
+                        {index < popularLinks.length - 1 ? <span aria-hidden="true">,</span> : null}
+                      </Link>
+                    </Text>
                   ))}
                 </Flex>
               </Flex>
-            </Flex>
-          </Flex>
+            </Stack>
+          </Stack>
         </GridItem>
       </Grid>
 
-      <div className={styles.Personas}>
+      <div className="Hero__personas">
         <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
           {personas.map((persona) => (
             <PersonaCard key={persona.title} {...persona} />

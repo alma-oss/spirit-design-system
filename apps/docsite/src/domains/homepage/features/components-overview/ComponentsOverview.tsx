@@ -1,10 +1,9 @@
 'use client';
 
-import { Flex, Heading, IconBox, Stack, Text } from '@alma-oss/spirit-web-react';
+import { Container, Flex, Heading, IconBox, Stack, Text } from '@alma-oss/spirit-web-react';
 import { routes } from '../../../routing/routes';
 import FeatureGrid, { type Feature } from '../../ui/FeatureGrid';
 import PageSection from '../../ui/PageSection';
-import styles from './ComponentsOverview.module.scss';
 import GridShowcase from './GridShowcase';
 
 // The subpages are not available yet, so every card links to the components page for now.
@@ -36,23 +35,27 @@ const features: Feature[] = [
 ];
 
 const ComponentsOverview = () => (
-  <PageSection size="xlarge" hasTopLine backgroundColor="primary">
+  <PageSection size="xlarge" hasContainer={false} hasTopLine backgroundColor="primary">
     <Stack spacing="space-1200">
-      <Flex direction="vertical" alignmentX="center" spacing="space-700" UNSAFE_className={styles.Intro}>
-        <IconBox iconName="placeholder" color="success" shape="circle" size="large" />
-        <Heading elementType="h2" size="large" textAlignment="center">
-          From a single component to a whole page
-        </Heading>
-        <Text textColor="secondary" textAlignment="center">
-          You build from parts that have already survived design, development and testing. No wondering whether it will
-          work, just what you will make with it.
-        </Text>
-      </Flex>
+      <Container size="small">
+        <Flex direction="vertical" alignmentX="center" spacing="space-700">
+          <IconBox iconName="placeholder" color="success" shape="circle" size="large" />
+          <Heading elementType="h2" size="large" textAlignment="center">
+            From a single component to a whole page
+          </Heading>
+          <Text textColor="secondary" textAlignment="center">
+            You build from parts that have already survived design, development and testing. No wondering whether it
+            will work, just what you will make with it.
+          </Text>
+        </Flex>
+      </Container>
 
       <Stack spacing="space-1300">
         <GridShowcase />
 
-        <FeatureGrid features={features} />
+        <Container>
+          <FeatureGrid features={features} />
+        </Container>
       </Stack>
     </Stack>
   </PageSection>
