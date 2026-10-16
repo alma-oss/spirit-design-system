@@ -1,5 +1,7 @@
 import conventionalConfig from '@alma-oss/commitlint-config';
 
+const ERROR = 2;
+
 export default {
   extends: ['@alma-oss/commitlint-config'],
   ignores: [
@@ -22,9 +24,9 @@ export default {
     },
   ],
   rules: {
-    'issue-reference-format': [2, 'always'],
+    'issue-reference-format': [ERROR, 'always'],
     'scope-enum': [
-      1,
+      ERROR,
       'always',
       [
         // Use when committing changes/additions/removals to exact package
