@@ -22,7 +22,9 @@ runs:
 
         # Changes outside any Nx project that still alter what the projects build or how they are checked.
         # Nx maps none of them to a project, so they would otherwise mark nothing affected.
-        GLOBAL_PATTERN='^(package\.json|\.nvmrc|\.yarnrc\.yml|lerna\.json|jest\.config\.|eslint\.config\.|\.prettierrc|\.prettierignore|\.remarkrc|\.remarkignore|\.editorconfig|\.github/actions/|\.github/workflows/(affected|build|lint|test|continuous-integration)\.ya?ml$)'
+        # Pipeline files (.github/) are deliberately not listed: they hold no package source, so changing
+        # them must not re-run package tests.
+        GLOBAL_PATTERN='^(package\.json|\.nvmrc|\.yarnrc\.yml|lerna\.json|jest\.config\.|eslint\.config\.|\.prettierrc|\.prettierignore|\.remarkrc|\.remarkignore|\.editorconfig)'
 
         # git's empty tree: diffing against it lists every file, so Nx marks every project affected
         EMPTY_TREE=$(git hash-object -t tree /dev/null)

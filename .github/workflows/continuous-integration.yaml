@@ -27,8 +27,8 @@ concurrency:
 
 jobs:
   # Computes which apps are affected by the change, for the jobs that cannot ask Nx themselves (deploy and
-  # e2e). Build, lint, types, format and unit tests resolve what is affected inside their own jobs, so they
-  # do not wait for this one.
+  # e2e). Unit tests resolve what is affected inside their own job. Build, lint, types and format run in full:
+  # the Nx cache already skips their unchanged work, so affected would add little for its clone overhead.
   affected:
     name: 🎯 Affected
     uses: ./.github/workflows/affected.yaml
@@ -44,9 +44,6 @@ jobs:
   build:
     name: 🏗️ Build
     uses: ./.github/workflows/build.yaml
-    with:
-      # The Deploy workflow ships the demo app built here, affected or not
-      build-demo: ${{ github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository)) }}
     permissions:
       actions: write
       contents: read
