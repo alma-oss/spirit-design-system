@@ -56,8 +56,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          # The Playwright setup and its deploy target are not part of any project.
-          E2E_PATTERN='^(tests/|playwright\.config\.|\.github/workflows/(e2e|deploy)\.ya?ml$)'
+          # The Playwright setup, its deploy target and the root demo inputs (homepage, static assets) are not
+          # part of any project.
+          E2E_PATTERN='^(index\.html$|static/|tests/|playwright\.config\.|\.github/workflows/(e2e|deploy)\.ya?ml$)'
 
           demo_note=''
           AFFECTED=$(yarn nx show projects --affected --base="$NX_BASE" --head="$NX_HEAD" -t build --json)
@@ -85,7 +86,7 @@ jobs:
             demo_note=' (everything affected)'
           elif [ "$demo" = false ] && grep -E "$E2E_PATTERN" "$CHANGED_FILES" >/dev/null; then
             demo=true
-            demo_note=' (e2e-infra override)'
+            demo_note=' (root demo/e2e-infra override)'
           fi
 
           {
