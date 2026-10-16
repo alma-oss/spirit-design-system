@@ -13,15 +13,17 @@ $grid-spacing-mobile: 1rem !default;
 $grid-spacing-desktop: 2rem !default;
 $grid-spacing-tablet: 2rem !default;
 
-$grid-columns: 12 !default;
-
 $css-variable-prefix: spirit- !default;
+
+$grid-columns: 12 !default;
 
 $container-padding-desktop: 2rem !default;
 $container-padding-mobile: 1rem !default;
 $container-padding-tablet: 2rem !default;
 
 $container-max-width: 80rem !default;
+
+$container-xxlarge-max-width: 100rem !default;
 
 $containers: (
     xsmall: (
@@ -45,6 +47,9 @@ $containers: (
         tablet: $container-padding-tablet,
     ),
     max-width: $container-max-width,
+    xxlarge: (
+        max-width: $container-xxlarge-max-width,
+    ),
 ) !default;
 
 $grids: (

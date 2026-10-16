@@ -221,9 +221,11 @@ $gradient-basic-overlay-color-02: var(--spirit-color-gradient-basic-overlay-colo
 
 $gradient-primary-color-01: var(--spirit-color-gradient-primary-color-01);
 $gradient-primary-color-02: var(--spirit-color-gradient-primary-color-02);
+$gradient-primary-color-03: var(--spirit-color-gradient-primary-color-03);
 
 $gradient-secondary-color-01: var(--spirit-color-gradient-secondary-color-01);
 $gradient-secondary-color-02: var(--spirit-color-gradient-secondary-color-02);
+$gradient-secondary-color-03: var(--spirit-color-gradient-secondary-color-03);
 
 $gradient-skeleton-color-01: var(--spirit-color-gradient-skeleton-color-01);
 $gradient-skeleton-color-02: var(--spirit-color-gradient-skeleton-color-02);
@@ -543,10 +545,12 @@ $gradient-colors: (
     primary: (
         color-01: $gradient-primary-color-01,
         color-02: $gradient-primary-color-02,
+        color-03: $gradient-primary-color-03,
     ),
     secondary: (
         color-01: $gradient-secondary-color-01,
         color-02: $gradient-secondary-color-02,
+        color-03: $gradient-secondary-color-03,
     ),
     skeleton: (
         color-01: $gradient-skeleton-color-01,
