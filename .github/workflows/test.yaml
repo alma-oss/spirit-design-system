@@ -42,7 +42,7 @@ jobs:
         run: yarn workspace @alma-oss/spirit-design-tokens build
 
       - name: Unit Tests
-        run: yarn packages:test:unit:coverage:affected
+        run: yarn test:unit:coverage
 
       - name: Upload Coverage Artifacts
         if: always()
