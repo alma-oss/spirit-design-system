@@ -26,8 +26,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Computes which apps are affected by the change. Nothing gates on it yet — the outputs
-  # (demo / docsite / storybook) are consumed by the build → deploy → e2e chain in a later change.
+  # Computes which apps are affected by the change. It runs next to the build, so it adds no time to
+  # the critical path. Only deploy and e2e gate on it; the build still builds every app, because
+  # waiting for the result there would delay it by the install time of this job.
   affected:
     name: 🎯 Affected
     uses: ./.github/workflows/affected.yaml
@@ -49,9 +50,10 @@ jobs:
 
   deploy:
     name: 🚀 Deploy
-    needs: build
-    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
+    needs: [affected, build]
+    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets.
+    # Skipped (counts as passed in the gates) when the demo app is not affected.
+    if: github.event_name != 'schedule' && needs.affected.outputs.demo == 'true' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
