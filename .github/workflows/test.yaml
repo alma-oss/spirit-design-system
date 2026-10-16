@@ -9,6 +9,8 @@ concurrency:
 
 permissions:
   contents: read
+  # nx-set-shas reads the last successful run of the calling workflow to derive the base SHA
+  actions: read
 
 env:
   NX_BRANCH: ${{ github.event.number || github.ref_name }}
@@ -26,15 +28,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # `nx affected` needs the full history to resolve the base
+          fetch-depth: 0
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
+
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
 
       - name: Build
         run: yarn workspace @alma-oss/spirit-design-tokens build
 
       - name: Unit Tests
-        run: yarn test:unit:coverage
+        run: yarn packages:test:unit:coverage:affected
 
       - name: Upload Coverage Artifacts
         if: always()

@@ -1,0 +1,52 @@
+name: 'nx affected'
+description:
+  'Resolve what changed for `nx affected` and the file-based checks. Exports NX_BASE and NX_HEAD, NX_AFFECTED_ALL
+  (`true` when everything must be treated as affected) and CHANGED_FILES (path of a file listing the changed files).
+  The repository must be checked out with full history (`fetch-depth: 0`). Needs `actions: read` permission.'
+
+runs:
+  using: 'composite'
+  steps:
+    # On a PR the base is the merge-base with the target branch; on a push to `main` it is the last successful run
+    # of the calling workflow (HEAD~1 when there is none). The scheduled run has no meaningful base.
+    - name: Derive base and head SHAs
+      if: ${{ github.event_name != 'schedule' }}
+      uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+    - name: Resolve changes
+      shell: bash
+      env:
+        EVENT_NAME: ${{ github.event_name }}
+      run: |
+        set -euo pipefail
+
+        # Changes outside any Nx project that still alter what the projects build or how they are checked.
+        # Nx maps none of them to a project, so they would otherwise mark nothing affected.
+        GLOBAL_PATTERN='^(package\.json|\.nvmrc|\.yarnrc\.yml|lerna\.json|jest\.config\.|eslint\.config\.|\.prettierrc|\.prettierignore|\.remarkrc|\.remarkignore|\.editorconfig|\.github/actions/|\.github/workflows/(affected|build|lint|test|continuous-integration)\.ya?ml$)'
+
+        # git's empty tree: diffing against it lists every file, so Nx marks every project affected
+        EMPTY_TREE=$(git hash-object -t tree /dev/null)
+
+        all=false
+        changed="$RUNNER_TEMP/changed-files.txt"
+        if [ "$EVENT_NAME" = schedule ]; then
+          all=true
+          NX_BASE=$EMPTY_TREE
+          NX_HEAD=HEAD
+          git ls-files > "$changed"
+        else
+          # Written to a file before matching: `grep -q` closing the pipe early would fail the pipeline.
+          git diff --name-only --diff-filter=d "$NX_BASE" "$NX_HEAD" > "$changed"
+          if grep -E "$GLOBAL_PATTERN" "$changed" > /dev/null; then
+            all=true
+            NX_BASE=$EMPTY_TREE
+          fi
+        fi
+
+        {
+          echo "NX_BASE=$NX_BASE"
+          echo "NX_HEAD=$NX_HEAD"
+          echo "NX_AFFECTED_ALL=$all"
+          echo "CHANGED_FILES=$changed"
+        } >> "$GITHUB_ENV"
+        echo "base: $NX_BASE, head: $NX_HEAD, everything affected: $all, changed files: $(wc -l < "$changed")"

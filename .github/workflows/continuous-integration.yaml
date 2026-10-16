@@ -26,9 +26,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Computes which apps are affected by the change. It runs next to the build, so it adds no time to
-  # the critical path. Only deploy and e2e gate on it; the build still builds every app, because
-  # waiting for the result there would delay it by the install time of this job.
+  # Computes which apps are affected by the change, for the jobs that cannot ask Nx themselves (deploy and
+  # e2e). Build, lint, types, format and unit tests resolve what is affected inside their own jobs, so they
+  # do not wait for this one.
   affected:
     name: 🎯 Affected
     uses: ./.github/workflows/affected.yaml
@@ -44,6 +44,9 @@ jobs:
   build:
     name: 🏗️ Build
     uses: ./.github/workflows/build.yaml
+    with:
+      # The Deploy workflow ships the demo app built here, affected or not
+      build-demo: ${{ github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository)) }}
     permissions:
       actions: write
       contents: read
@@ -81,6 +84,9 @@ jobs:
   tests:
     name: 🧪 Tests
     uses: ./.github/workflows/test.yaml
+    permissions:
+      contents: read
+      actions: read
 
   code-quality-gate:
     name: 📊 Code Quality Gate

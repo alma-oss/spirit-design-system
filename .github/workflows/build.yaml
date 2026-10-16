@@ -2,6 +2,12 @@ name: 🏗️ Build
 
 on:
   workflow_call:
+    inputs:
+      build-demo:
+        description: 'Build the demo app and upload it as an artifact, even when it is not affected (for the Deploy workflow)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   actions: write
@@ -25,9 +31,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # `nx affected` needs the full history to resolve the base
+          fetch-depth: 0
 
       - name: Setup and Install
         uses: ./.github/actions/setup-install
+
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
 
       - name: Restore Nx cache
         id: nx_cache
@@ -36,16 +48,23 @@ jobs:
           scope: build
 
       - name: Build packages
-        run: yarn build:packages
+        run: yarn build:packages:affected
 
       - name: Build apps
-        run: yarn build:apps
+        run: yarn build:apps:affected
+
+      # The Deploy workflow ships this build whether or not the app is affected, so make sure it exists.
+      # It is replayed from the Nx cache when the step above has built it already.
+      - name: Build demo app
+        if: ${{ inputs.build-demo }}
+        run: yarn nx run @lmc-eu/spirit-demo-app:build
 
       - name: Check for clean working directory
         uses: ./.github/actions/check-clean-tree
 
       # The demo build is shared with the Deploy workflow, so it is not built again
       - name: Cache App Build (demo)
+        if: ${{ inputs.build-demo }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: demo-build
@@ -72,16 +91,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # `nx affected` needs the full history to resolve the base
+          fetch-depth: 0
 
       - name: Setup and Install
         uses: ./.github/actions/setup-install
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
+
       # The Nx cache is intentionally neither restored nor saved: Nx does not hash the Node.js version,
       # so a cache hit would skip the very compatibility check this job exists for.
       - name: Build packages
-        run: yarn build
+        run: yarn build:packages:affected --skip-nx-cache
 
       - name: Check for clean working directory
         uses: ./.github/actions/check-clean-tree

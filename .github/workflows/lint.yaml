@@ -24,9 +24,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          # `nx affected` needs the full history to resolve the base
+          fetch-depth: 0
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
+
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
 
       - name: Restore Nx cache
         id: nx_cache
@@ -34,8 +40,26 @@ jobs:
         with:
           scope: lint
 
-      - name: Lint
-        run: yarn lint
+      - name: Lint packages
+        run: yarn packages:lint:affected
+
+      # The root ESLint and remark runs are not Nx projects, so they check the changed files only.
+      # Everything is checked when the shared configuration changed.
+      - name: Lint root
+        run: |
+          if [ "$NX_AFFECTED_ALL" = true ]; then
+            yarn es:lint
+            yarn lint:markdown
+            exit 0
+          fi
+          mapfile -t scripts < <(grep -E '\.(js|jsx|mjs|cjs|ts|tsx)$' "$CHANGED_FILES" || true)
+          mapfile -t docs < <(grep -E '\.md$' "$CHANGED_FILES" || true)
+          if [ "${#scripts[@]}" -gt 0 ]; then
+            yarn eslint --no-warn-ignored "${scripts[@]}"
+          fi
+          if [ "${#docs[@]}" -gt 0 ]; then
+            yarn remark --quiet --frail "${docs[@]}"
+          fi
 
       - name: Save Nx cache
         uses: ./.github/actions/nx-cache-save
@@ -53,9 +77,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          # `nx affected` needs the full history to resolve the base
+          fetch-depth: 0
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
+
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
 
       - name: Restore Nx cache
         id: nx_cache
@@ -64,7 +94,7 @@ jobs:
           scope: types
 
       - name: Types Check
-        run: yarn types
+        run: yarn packages:types:affected
 
       - name: Save Nx cache
         uses: ./.github/actions/nx-cache-save
@@ -82,9 +112,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          # `nx affected` needs the full history to resolve the base
+          fetch-depth: 0
 
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
 
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
+
       - name: Check Code-Style Format
-        run: yarn format:check
+        run: |
+          if [ "$NX_AFFECTED_ALL" = true ]; then
+            yarn format:check
+            exit 0
+          fi
+          mapfile -t files < "$CHANGED_FILES"
+          if [ "${#files[@]}" -gt 0 ]; then
+            yarn prettier --check --ignore-unknown "${files[@]}"
+          fi

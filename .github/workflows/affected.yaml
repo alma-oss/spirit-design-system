@@ -48,49 +48,24 @@ jobs:
       - name: Setup Node and Install Dependencies
         uses: ./.github/actions/setup-install
 
-      # Sets NX_BASE / NX_HEAD. On a PR it is the merge-base with the target branch; on a push
-      # to `main` it is the last successful run of the calling CI workflow (HEAD~1 when there is none).
-      # The scheduled run has no meaningful base, it treats everything as affected.
-      - name: Derive base and head SHAs
-        if: github.event_name != 'schedule'
-        uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
 
       - name: Compute affected projects
         id: calc
-        env:
-          EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
 
-          # Changes outside any Nx project that still alter what the apps build or how they are checked.
-          # Nx maps none of them to a project, so they would otherwise mark nothing affected.
-          GLOBAL_PATTERN='^(package\.json|\.nvmrc|\.yarnrc\.yml|\.github/actions/|\.github/workflows/(affected|build|continuous-integration)\.ya?ml$)'
-          # The Playwright setup and its deploy target are not part of any project either.
+          # The Playwright setup and its deploy target are not part of any project.
           E2E_PATTERN='^(tests/|playwright\.config\.|\.github/workflows/(e2e|deploy)\.ya?ml$)'
 
-          all=false
           demo_note=''
-          changed=''
-          if [ "$EVENT_NAME" = schedule ]; then
-            all=true
-          else
-            # Collected before matching: `grep -q` closing the pipe early would fail the pipeline.
-            changed=$(git diff --name-only "$NX_BASE" "$NX_HEAD")
-            if grep -E "$GLOBAL_PATTERN" <<<"$changed" >/dev/null; then
-              all=true
-            fi
-          fi
-
-          # Fail closed: an unparsable result must stop the run, not report every app as unaffected.
-          AFFECTED='[]'
-          if [ "$all" = false ]; then
-            AFFECTED=$(yarn nx show projects --affected --base="$NX_BASE" --head="$NX_HEAD" -t build --json)
-            jq -e 'type == "array"' <<<"$AFFECTED" >/dev/null
-            echo "Affected projects (build target): $AFFECTED"
-          fi
+          AFFECTED=$(yarn nx show projects --affected --base="$NX_BASE" --head="$NX_HEAD" -t build --json)
+          jq -e 'type == "array"' <<<"$AFFECTED" >/dev/null
+          echo "Affected projects (build target): $AFFECTED"
 
           has() {
-            if [ "$all" = true ] || jq -e --arg p "$1" 'any(.[]; . == $p)' <<<"$AFFECTED" >/dev/null; then
+            if jq -e --arg p "$1" 'any(.[]; . == $p)' <<<"$AFFECTED" >/dev/null; then
               echo true
             else
               echo false
@@ -106,9 +81,9 @@ jobs:
             examples=true
           fi
 
-          if [ "$all" = true ]; then
+          if [ "$NX_AFFECTED_ALL" = true ]; then
             demo_note=' (everything affected)'
-          elif [ "$demo" = false ] && grep -E "$E2E_PATTERN" <<<"$changed" >/dev/null; then
+          elif [ "$demo" = false ] && grep -E "$E2E_PATTERN" "$CHANGED_FILES" >/dev/null; then
             demo=true
             demo_note=' (e2e-infra override)'
           fi
