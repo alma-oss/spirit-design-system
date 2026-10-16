@@ -38,11 +38,29 @@ jobs:
       actions: write
       contents: read
 
+  announce-deploy:
+    name: 📣 Announce Deploy
+    # Only when the deploy can follow, otherwise the comment would stay in progress forever
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository
+    uses: ./.github/workflows/announce-deploy.yaml
+    secrets: inherit
+
+  announce-deploy-skipped:
+    name: 📣 Announce Deploy Skipped
+    needs: [build, announce-deploy]
+    # The deploy never starts after a failed or cancelled build, so close the announced comment here
+    if: ${{ always() && needs.announce-deploy.result == 'success' && needs.build.result != 'success' }}
+    uses: ./.github/workflows/announce-deploy.yaml
+    with:
+      state: skipped
+    secrets: inherit
+
   deploy:
     name: 🚀 Deploy
-    needs: build
-    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
+    needs: [build, announce-deploy]
+    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets.
+    # The announcement is optional: a skipped (main) or failed one must not block the deploy
+    if: ${{ !cancelled() && needs.build.result == 'success' && github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository)) }}
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
