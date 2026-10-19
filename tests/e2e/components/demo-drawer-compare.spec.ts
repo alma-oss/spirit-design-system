@@ -38,6 +38,21 @@ const waitForDrawerAlignment = async (page: Page, alignment: 'left' | 'right'): 
   }, alignment);
 };
 
+// Scroll with the mouse wheel over the element to make sure nothing in between swallows the event
+const expectWheelScrolling = async (page: Page, selector: string): Promise<void> => {
+  const scroller = page.locator(selector);
+  const box = await scroller.boundingBox();
+
+  if (!box) {
+    throw new Error(`Scroller ${selector} is not visible.`);
+  }
+
+  await page.mouse.move(box.x + (box.width / 2), box.y + (box.height / 2));
+  await page.mouse.wheel(0, 200);
+
+  await expect.poll(() => scroller.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+};
+
 const runDrawerTests = async (page: Page, componentName: string): Promise<void> => {
   // open drawer on the right side, close with backdrop click
   await page.click('[data-testid="drawer-open-button"]');
@@ -98,6 +113,31 @@ const runDrawerTests = async (page: Page, componentName: string): Promise<void> 
   await page.keyboard.press('Escape');
 
   await expect(page.getByTestId('drawer-panel')).not.toBeVisible();
+
+  // open drawer with ScrollView, scroll it with the mouse wheel, close with escape key
+  // make the page taller than the viewport, so a scroll leaking to it would show in `window.scrollY`
+  await page.addStyleTag({ content: 'body { min-height: 200vh; }' });
+  await page.click('[data-testid="drawer-scrollview-open-button"]');
+
+  // wait for the panel to slide in completely, otherwise the wheel event lands outside the page
+  await expect(page.locator('dialog[open] .ScrollView__viewport')).toBeInViewport({ ratio: 1 });
+
+  await expectWheelScrolling(page, 'dialog[open] .ScrollView__viewport');
+
+  // scroll past the end of the content and make sure the scroll does not leak to the page under the drawer
+  await page.mouse.wheel(0, 5000);
+
+  const viewport = page.locator('dialog[open] .ScrollView__viewport');
+  const getDistanceToEnd = (element: Element) => element.scrollHeight - element.clientHeight - element.scrollTop;
+
+  // wait until the wheel reaches the end of the content, only then the page could start to scroll
+  await expect.poll(() => viewport.evaluate(getDistanceToEnd)).toBeLessThanOrEqual(1);
+
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+
+  await page.keyboard.press('Escape');
+
+  await expect(page.locator('dialog[open]')).toHaveCount(0);
 };
 
 const runComponentCompareTests = ({ componentsDir, packageName, componentName }: TestConfig): void => {
