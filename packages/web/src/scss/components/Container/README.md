@@ -25,6 +25,7 @@ inside the Container or prevent margin collapsing issues.
 - `Container--medium`
 - `Container--large`
 - `Container--xlarge` (default)
+- `Container--xxlarge`
 
 ```html
 <div class="Container Container--xsmall">Content</div>
@@ -32,6 +33,7 @@ inside the Container or prevent margin collapsing issues.
 <div class="Container Container--medium">Content</div>
 <div class="Container Container--large">Content</div>
 <div class="Container Container--xlarge">Content</div>
+<div class="Container Container--xxlarge">Content</div>
 ```
 
 ⚠️ Make sure that you have properly set up `container-{{size}}-max-width` tokens in your project. Without it, the old default size will be used, and sizes will not be available.
@@ -43,6 +45,7 @@ The following design tokens are required for Container to work:
 - `container-medium-max-width`
 - `container-large-max-width`
 - `container-xlarge-max-width`
+- `container-xxlarge-max-width`
 
 ## Text Alignment
 
