@@ -1,7 +1,7 @@
 # Post Release Notes
 
 Creates a Slack Canvas from a `docs/release-notes/<date>.md` file, shares it in a channel and announces it there.
-Used by the `Release Notes` job in the [Publish workflow](../../.github/workflows/publish.yaml).
+Used by the `Release Notes` stage of the [Release workflow](../../.github/workflows/release-notes.yaml).
 
 ## Usage
 
@@ -9,7 +9,7 @@ Used by the `Release Notes` job in the [Publish workflow](../../.github/workflow
 yarn workspace @alma-oss/spirit-post-release-notes post-release-notes docs/release-notes/2026-10-02.md --dry
 ```
 
-`--dry` prints the Canvas title and body without calling Slack.
+`--dry` prints the Canvas title and body without calling Slack. Relative paths are resolved from the repository root.
 
 ## Environment
 

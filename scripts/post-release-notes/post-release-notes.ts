@@ -46,6 +46,8 @@ async function main() {
     throw new Error('Usage: post-release-notes <release-notes.md> [--dry]');
   }
 
+  // `yarn workspace` runs this script from its own folder (and resets INIT_CWD), relative paths are meant from the repository root
+  process.chdir(process.env.PROJECT_CWD ?? process.cwd());
   const { title, body } = buildCanvas(readFileSync(filePath, 'utf8'), basename(filePath, '.md'));
 
   if (isDryRun) {
