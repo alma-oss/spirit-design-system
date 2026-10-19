@@ -234,6 +234,18 @@ Thank you for staying with us!
 
 ---
 
+## CI Mode
+
+When the prompt says to run in **CI mode** (non-interactive, e.g. the `Release Notes` stage in `release-notes.yaml`, called from `release.yaml`):
+
+- Never ask questions or wait for confirmation.
+- Step 1: use the release tag/date given in the prompt instead of guessing the latest tag.
+- Step 3b: also write the warnings to `docs/release-notes/.warnings.md` so the workflow can put them in the PR body. Do not commit this file. The workflow pastes the file into the PR body as Markdown, so write it as a Markdown list (one `- ` bullet per warning, keep the `[package]` prefix, no leading spaces, no `⚠️` header line) instead of the terminal format. If there are no warnings, write `No warnings.`
+- Step 6: skip Jira entirely and use the fallback line `* More improvements are in the works — stay tuned!`.
+- Step 8: only write the file. Do not commit, push or open a PR — the workflow does it.
+
+---
+
 ## Output Example (Abbreviated)
 
 ```markdown
