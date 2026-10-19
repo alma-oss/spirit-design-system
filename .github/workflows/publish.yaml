@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       ref:
-        description: 'Release commit to publish; empty checks out the triggering commit (no tag, publish is skipped)'
+        description: 'Release commit to publish; empty checks out the triggering commit'
         required: false
         default: ''
         type: string
@@ -34,7 +34,7 @@ jobs:
         id: check-tag-exists
         uses: ./.github/actions/has-tags
 
-  # TODO: npm validates the *calling* workflow file for Trusted Publishing, which is now `release.yaml`.
+  # TODO(DS-1102): npm validates the *calling* workflow file for Trusted Publishing, which is now `release.yaml`.
   #  Before the first release, change the Trusted Publisher workflow filename from `publish.yaml`
   #  to `release.yaml` on npmjs.com for every published package (package → Settings → Publishing access),
   #  otherwise `lerna publish` fails with a 404/ENEEDAUTH error.
