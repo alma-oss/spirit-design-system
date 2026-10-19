@@ -1,0 +1,184 @@
+@use '@tokens' as tokens;
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+
+$chip-gap: tokens.$space-800;
+$swatch-size: 1.875rem;
+$swatch-color-size: 1.375rem;
+
+.Marquee {
+    display: flex;
+    flex-direction: column;
+    gap: $chip-gap;
+    width: 100vw;
+    // The marquee runs through the whole viewport, even though it is placed in the container.
+    margin-inline: calc(50% - 50vw);
+    // The rows fade out to the sides.
+    mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+}
+
+.Row {
+    --marquee-duration: 60s;
+
+    display: flex;
+    overflow: hidden;
+}
+
+.Track {
+    display: flex;
+    flex-shrink: 0;
+    gap: $chip-gap;
+    padding: 0 $chip-gap 0 0;
+    margin: 0;
+    list-style: none;
+    animation: marquee var(--marquee-duration) linear infinite;
+}
+
+.Row--reverse .Track {
+    animation-direction: reverse;
+}
+
+@keyframes marquee {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Track {
+        animation: none;
+    }
+}
+
+.Chip {
+    display: flex;
+    flex-shrink: 0;
+    gap: tokens.$space-600;
+    align-items: center;
+    height: 3.5rem;
+    padding: tokens.$space-600 tokens.$space-700;
+    overflow: clip;
+    // Only the background is half transparent, so the glow of the hero shines through.
+    background-color: color-mix(in srgb, var(--spirit-color-background-primary) 50%, transparent);
+    border: tokens.$border-width-100 solid var(--spirit-color-border-basic);
+    border-radius: tokens.$radius-300;
+}
+
+.Label {
+    @include typography.generate(tokens.$code-small-regular);
+
+    display: flex;
+    gap: tokens.$space-300;
+    color: var(--spirit-color-text-secondary);
+    white-space: nowrap;
+}
+
+.Value {
+    color: var(--spirit-color-text-tertiary);
+}
+
+.Swatch {
+    display: block;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: $swatch-size;
+    height: $swatch-size;
+    border-radius: 0.375rem;
+}
+
+.Swatch--color {
+    position: relative;
+    border: tokens.$border-width-100 solid var(--spirit-color-border-basic);
+    border-radius: 50%;
+
+    // The color itself is a smaller circle inside the ring.
+    &::after {
+        position: absolute;
+        inset: 0;
+        width: $swatch-color-size;
+        height: $swatch-color-size;
+        margin: auto;
+        content: '';
+        background-color: var(--swatch-color);
+        border-radius: 50%;
+    }
+}
+
+.Swatch--radius {
+    position: relative;
+    background: transparent;
+    border: tokens.$border-width-200 solid var(--spirit-color-border-basic);
+    border-radius: tokens.$radius-300;
+
+    // The top right corner is highlighted, so the radius of the token is easy to see.
+    &::after {
+        position: absolute;
+        top: -(tokens.$border-width-200);
+        right: -(tokens.$border-width-200);
+        box-sizing: border-box;
+        width: calc(50% + #{tokens.$border-width-200});
+        height: calc(50% + #{tokens.$border-width-200});
+        content: '';
+        border: solid var(--spirit-color-accent-02-border-basic);
+        border-width: tokens.$border-width-200 tokens.$border-width-200 0 0;
+        border-top-right-radius: tokens.$radius-300;
+    }
+}
+
+.Swatch--border {
+    background: transparent;
+    border: solid var(--spirit-color-accent-02-border-basic);
+    border-radius: tokens.$radius-300;
+}
+
+.Swatch--spacing {
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0 0.1875rem,
+            var(--spirit-color-accent-01-border-subtle) 0.1875rem 0.25rem
+        ),
+        var(--spirit-color-accent-01-background-subtle);
+    border: solid var(--spirit-color-accent-01-border-basic);
+    border-width: 0 tokens.$border-width-200;
+    height: 1.25rem;
+    border-radius: 0;
+}
+
+.Swatch--shadow {
+    // The square is smaller than the other swatches, so the offset shadow stays inside the chip.
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--spirit-color-background-primary);
+    border: tokens.$border-width-100 solid var(--spirit-color-border-basic);
+    border-radius: tokens.$radius-100;
+    box-shadow: 0.1875rem 0.1875rem 0 0 var(--spirit-color-text-tertiary);
+}
+
+.Swatch--gradient {
+    border-radius: tokens.$radius-300;
+}
+
+.Swatch--container {
+    // The inner area keeps a gap of 4px from the vertical lines.
+    padding: 0 tokens.$space-300;
+    background-color: var(--spirit-color-emotion-success-background-subtle);
+    background-clip: content-box;
+    border: solid var(--spirit-color-emotion-success-border-subtle);
+    border-width: 0 tokens.$border-width-200;
+    border-radius: 0;
+}
+
+// The illustration is drawn in a box of the swatch size, the empty box is shown until the image is provided.
+.Swatch--illustration {
+    background-color: var(--spirit-color-background-secondary);
+    border: tokens.$border-width-100 dashed var(--spirit-color-border-basic);
+    border-radius: tokens.$radius-100;
+}
+
+.Illustration {
+    display: block;
+    flex-shrink: 0;
+    width: $swatch-size;
+    height: $swatch-size;
+    object-fit: contain;
+}

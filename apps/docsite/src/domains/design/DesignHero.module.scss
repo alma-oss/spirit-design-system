@@ -1,0 +1,18 @@
+// The hero has a soft radial glow in the middle, it fades to the primary background at the edges.
+// The tint is not tokenized in Spirit, so it uses a raw value.
+$glow-color: #f0f2fe;
+
+.Hero {
+    background-image: radial-gradient(
+        ellipse 66.8% 66.8% at 50% 33.2%,
+        var(--spirit-color-background-primary) 0%,
+        $glow-color 56.1%,
+        var(--spirit-color-background-primary) 100%
+    );
+}
+
+// The vertical Flex is a grid, so its only column must not grow with the full-width marquee, otherwise the intro text
+// would not stay in the middle columns of the container.
+.Content {
+    grid-template-columns: minmax(0, 1fr);
+}
