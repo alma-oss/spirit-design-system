@@ -1,0 +1,29 @@
+{
+  "name": "@alma-oss/spirit-post-release-notes",
+  "version": "1.0.0",
+  "description": "Post release notes as a Slack Canvas of the Spirit Design System",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alma-oss/spirit-design-system.git",
+    "directory": "scripts/post-release-notes"
+  },
+  "license": "MIT",
+  "keywords": [
+    "release notes",
+    "slack",
+    "canvas"
+  ],
+  "scripts": {
+    "post-release-notes": "tsx ./post-release-notes.ts",
+    "types": "tsc"
+  },
+  "dependencies": {
+    "tsx": "catalog:script"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:types",
+    "typescript": "catalog:types"
+  }
+}
