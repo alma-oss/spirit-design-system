@@ -14,6 +14,9 @@ node_modules
 # Log files
 *.log
 
+# TypeScript incremental build info
+*.tsbuildinfo
+
 # Makefile
 local.mk
 
