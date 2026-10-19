@@ -71,3 +71,11 @@ jobs:
         run: yarn post-changelog
         env:
           SLACK_CHANGELOG_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATIONS_WEBHOOK_URL }}
+
+  release-notes:
+    name: 📝 Release Notes
+    needs: publish
+    uses: ./.github/workflows/release-notes.yaml
+    secrets: inherit
+    permissions:
+      contents: read
