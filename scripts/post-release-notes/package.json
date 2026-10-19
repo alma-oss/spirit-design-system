@@ -1,0 +1,38 @@
+{
+  "name": "@alma-oss/spirit-post-release-notes",
+  "version": "1.0.0",
+  "description": "Post release notes as a Slack Canvas of the Spirit Design System",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alma-oss/spirit-design-system.git",
+    "directory": "scripts/post-release-notes"
+  },
+  "license": "MIT",
+  "keywords": [
+    "release notes",
+    "slack",
+    "canvas"
+  ],
+  "scripts": {
+    "post-release-notes": "tsx ./post-release-notes.ts",
+    "test": "npm-run-all --serial test:unit types",
+    "test:unit": "jest --config ./jest.config.ts",
+    "test:unit:watch": "yarn test:unit --watchAll",
+    "test:unit:coverage": "yarn test:unit --coverage",
+    "types": "tsc"
+  },
+  "dependencies": {
+    "tsx": "catalog:script"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:build",
+    "@swc/jest": "catalog:test",
+    "@types/node": "catalog:types",
+    "jest": "catalog:test",
+    "jest-config-spirit": "workspace:^",
+    "npm-run-all2": "catalog:script",
+    "typescript": "catalog:types"
+  }
+}
