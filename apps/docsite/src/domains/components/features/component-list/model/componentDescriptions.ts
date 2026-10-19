@@ -1,5 +1,5 @@
-// Placeholder descriptions, shown under the name of a component on its card. A component without its own description
-// gets one of the lorem ipsum texts until the team writes the final copy.
+// Descriptions shown under the name of a component on its card. A component without its own description
+// gets a neutral fallback built from its name until the team writes the final copy.
 export const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Accordion: 'Expandable sections for revealing content',
   ActionGroup: 'Layout utility for grouping related buttons',
@@ -20,12 +20,10 @@ export const COMPONENT_DESCRIPTIONS: Record<string, string> = {
   Timeline: 'Series of events in chronological order',
 };
 
-export const LOREM_IPSUM_DESCRIPTIONS = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-];
+const UNSTABLE_PREFIX = 'UNSTABLE_';
 
-const hashName = (name: string) => [...name].reduce((hash, character) => hash + character.charCodeAt(0), 0);
+const getFallbackDescription = (component: string): string =>
+  `Spirit ${component.startsWith(UNSTABLE_PREFIX) ? component.slice(UNSTABLE_PREFIX.length) : component} component`;
 
 export const getComponentDescription = (component: string): string =>
-  COMPONENT_DESCRIPTIONS[component] ?? LOREM_IPSUM_DESCRIPTIONS[hashName(component) % LOREM_IPSUM_DESCRIPTIONS.length];
+  COMPONENT_DESCRIPTIONS[component] ?? getFallbackDescription(component);
