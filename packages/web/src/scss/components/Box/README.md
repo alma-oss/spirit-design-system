@@ -6,6 +6,9 @@ The Box component is a simple container around content or other components.
 <div>Content</div>
 ```
 
+For a composition about one topic — artwork or media, a body, a footer, or one link over the whole block — use
+[Card][card]. Box is the surface: padding, border, background, shadow, or a color scheme.
+
 ## Color Scheme
 
 Prefer color schemes for semantic surfaces and use direct utility classes as an override when needed.
@@ -123,4 +126,5 @@ Responsive values can be set for each prop using utility classes. For example, `
 </div>
 ```
 
+[card]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Card/README.md
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
