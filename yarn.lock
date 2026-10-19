@@ -335,6 +335,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@alma-oss/spirit-post-release-notes@workspace:scripts/post-release-notes":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/spirit-post-release-notes@workspace:scripts/post-release-notes"
+  dependencies:
+    "@types/node": "catalog:types"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+  languageName: unknown
+  linkType: soft
+
 "@alma-oss/spirit-storybook@workspace:apps/storybook":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-storybook@workspace:apps/storybook"
