@@ -1,5 +1,3 @@
-'use client';
-
 import { ControlButton, Icon, InputAddon, InputContainer } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

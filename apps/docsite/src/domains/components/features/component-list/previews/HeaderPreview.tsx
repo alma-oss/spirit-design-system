@@ -1,5 +1,3 @@
-'use client';
-
 import { Container, Flex, Header, HeaderLogo } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

@@ -1,5 +1,3 @@
-'use client';
-
 import { Heading, Timeline, TimelineHeading, TimelineMarker, TimelineStep } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

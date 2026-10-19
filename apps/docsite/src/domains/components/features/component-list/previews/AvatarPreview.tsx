@@ -1,5 +1,3 @@
-'use client';
-
 import { Avatar, Flex, Icon } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

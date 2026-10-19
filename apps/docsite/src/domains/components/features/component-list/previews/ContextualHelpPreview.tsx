@@ -1,5 +1,3 @@
-'use client';
-
 import { ContextualHelp } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

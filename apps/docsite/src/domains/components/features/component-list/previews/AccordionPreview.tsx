@@ -1,5 +1,3 @@
-'use client';
-
 import { AccordionContent, AccordionHeader, AccordionItem, UncontrolledAccordion } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

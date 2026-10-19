@@ -1,5 +1,3 @@
-'use client';
-
 import { Truncate } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

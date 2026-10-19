@@ -1,5 +1,3 @@
-'use client';
-
 import { COMPONENT_PREVIEWS } from '../previews';
 import { COMPONENT_CATEGORIES } from './componentCategories';
 import { getComponentDescription } from './componentDescriptions';
