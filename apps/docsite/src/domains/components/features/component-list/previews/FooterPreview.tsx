@@ -1,5 +1,3 @@
-'use client';
-
 import { Footer, Grid, Heading, Link, Stack } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

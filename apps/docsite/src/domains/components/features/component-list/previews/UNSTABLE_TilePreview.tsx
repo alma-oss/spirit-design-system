@@ -1,5 +1,3 @@
-'use client';
-
 import { UNSTABLE_Tile } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

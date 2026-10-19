@@ -1,5 +1,3 @@
-'use client';
-
 import { Flex, Pill } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

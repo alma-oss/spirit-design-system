@@ -1,5 +1,3 @@
-'use client';
-
 import { Button, Icon, SplitButton } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

@@ -1,5 +1,3 @@
-'use client';
-
 import { Alert, Link } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

@@ -1,5 +1,3 @@
-'use client';
-
 import { UNSTABLE_ComboboxOption, UNSTABLE_UncontrolledCombobox } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

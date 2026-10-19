@@ -1,5 +1,3 @@
-'use client';
-
 import { Button, Matrix, PricingPlan, PricingPlanHeader } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

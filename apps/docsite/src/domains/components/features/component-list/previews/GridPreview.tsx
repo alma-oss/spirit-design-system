@@ -1,5 +1,3 @@
-'use client';
-
 import { Grid } from '@alma-oss/spirit-web-react';
 import React from 'react';
 

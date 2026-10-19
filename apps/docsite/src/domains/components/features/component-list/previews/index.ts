@@ -1,5 +1,3 @@
-'use client';
-
 import { COMPONENT_PREVIEW_MANIFEST } from '../model/componentPreviewManifest';
 import type { ComponentPreviewRegistration } from '../model/types';
 import AccordionPreview from './AccordionPreview';
