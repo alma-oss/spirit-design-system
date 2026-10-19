@@ -1,0 +1,59 @@
+name: 🚢 Release
+run-name: Release, dry-run:${{ inputs.dryrun }}, confirm:${{ inputs.confirm }}
+
+concurrency:
+  group: npm-registry
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+    inputs:
+      dryrun:
+        description: 'Dry run'
+        required: false
+        default: false
+        type: boolean
+      confirm:
+        description: 'Confirm version push (yes/no)'
+        required: false
+        default: 'no'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    name: 🚀 Version
+    uses: ./.github/workflows/version.yaml
+    secrets: inherit
+    permissions:
+      contents: read
+    with:
+      dryrun: ${{ inputs.dryrun }}
+      confirm: ${{ inputs.confirm }}
+
+  publish:
+    name: 🚢 Publish
+    needs: version
+    uses: ./.github/workflows/publish.yaml
+    secrets: inherit
+    permissions:
+      # create commits and releases
+      contents: write
+      # Required for OIDC
+      id-token: write
+    with:
+      ref: ${{ needs.version.outputs.sha }}
+
+  release-notes:
+    name: 📝 Release Notes
+    needs: [version, publish]
+    # A called workflow whose jobs were all skipped (no tag on the release commit) still reports success
+    if: ${{ needs.version.outputs.sha != '' }}
+    uses: ./.github/workflows/release-notes.yaml
+    secrets: inherit
+    permissions:
+      contents: read
+    with:
+      ref: ${{ needs.version.outputs.sha }}

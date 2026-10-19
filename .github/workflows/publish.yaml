@@ -1,13 +1,13 @@
 name: 🚢 Publish
 
-concurrency:
-  group: npm-registry
-  cancel-in-progress: true
-
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      ref:
+        description: 'Release commit to publish; empty checks out the triggering commit (no tag, publish is skipped)'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -24,6 +24,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: ${{ inputs.ref }}
           # Even though this is set, shallow clones do not always retrieve all tags correctly
           fetch-tags: true
           # So we need to fetch full history, including all tags
@@ -33,6 +34,10 @@ jobs:
         id: check-tag-exists
         uses: ./.github/actions/has-tags
 
+  # TODO: npm validates the *calling* workflow file for Trusted Publishing, which is now `release.yaml`.
+  #  Before the first release, change the Trusted Publisher workflow filename from `publish.yaml`
+  #  to `release.yaml` on npmjs.com for every published package (package → Settings → Publishing access),
+  #  otherwise `lerna publish` fails with a 404/ENEEDAUTH error.
   publish:
     name: 📦 Publish Packages
     needs: has-tags
@@ -51,6 +56,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: ${{ inputs.ref }}
           # Even though this is set, shallow clones do not always retrieve all tags correctly
           fetch-tags: true
           # So we need to fetch full history, including all tags
@@ -71,11 +77,3 @@ jobs:
         run: yarn post-changelog
         env:
           SLACK_CHANGELOG_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATIONS_WEBHOOK_URL }}
-
-  release-notes:
-    name: 📝 Release Notes
-    needs: publish
-    uses: ./.github/workflows/release-notes.yaml
-    secrets: inherit
-    permissions:
-      contents: read
