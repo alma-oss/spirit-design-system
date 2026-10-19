@@ -18,6 +18,7 @@ import {
   ToastBarMessage,
   VisuallyHidden,
 } from '@alma-oss/spirit-web-react';
+import { routes } from '@local/domains/routing/routes';
 import React, { useEffect, useId, useState } from 'react';
 import ComponentSearch from './ComponentSearch';
 import ComponentSortToggle from './ComponentSortToggle';
@@ -77,10 +78,10 @@ const ComponentsPageHeader = () => {
       <div className="ComponentsPageHeader__top">
         <div className="ComponentsPageHeader__text">
           <Breadcrumbs>
-            <BreadcrumbsItem key="homepage" href="/">
+            <BreadcrumbsItem key="homepage" href={routes.homepage}>
               Spirit
             </BreadcrumbsItem>
-            <BreadcrumbsItem key="components" href="/components" isCurrent>
+            <BreadcrumbsItem key="components" href={routes.components} isCurrent>
               Components
             </BreadcrumbsItem>
           </Breadcrumbs>
