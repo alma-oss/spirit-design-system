@@ -15,15 +15,28 @@ Card is a versatile composition of a few subcomponents:
 
 Additionally, Card can be used with [CardLink](#making-the-whole-card-clickable) to create a clickable card.
 
+See [Accessibility](#accessibility) for the article, footer, and heading rules.
+
+## Card or Box
+
+Use Card for a block about one topic that is composed of Card subcomponents — a body, plus any of artwork, media,
+logo, or footer — or for a block the user activates as a whole through a
+[CardLink](#making-the-whole-card-clickable).
+
+Use [Box][box] for a surface that only needs padding, border, background, shadow, or a color scheme. A settings panel
+with none of that composition and no card-wide link is a Box, including when a design file labels the panel a card.
+
+A [boxed Card](#boxed-cards) looks like a panel, but it is still a Card, with the card grid and an `<article>`.
+
 ## Card
 
 Card is the main container of the composition.
 
 ```html
 <article class="Card Card--vertical">
-  <!-- CardArtwork or CardMedia -->
-  <!-- CardBody -->
-  <!-- CardFooter -->
+  <!-- CardArtwork or CardMedia (optional) -->
+  <!-- CardBody (required) -->
+  <!-- CardFooter (optional) -->
 </article>
 ```
 
@@ -31,7 +44,7 @@ Regardless of the [layout](#card-layout), the Card subcomponents must be arrange
 
 1. [CardArtwork](#cardartwork) (optional) or CardMedia (optional) — first
 2. [CardLogo](#cardlogo) (optional)
-3. [CardBody](#cardbody)
+3. [CardBody](#cardbody) (required)
 4. [CardFooter](#cardfooter) (optional) – last
 
 ℹ️ Every `<div>` counts, especially on large pages. During the development of the Card component, we did our best to
@@ -82,7 +95,8 @@ infixes, e.g. `Card--tablet--horizontal` or `Card--desktop--vertical`.
 
 ### Boxed Cards
 
-Card can be displayed with a border and a box shadow on hover.
+Card can be displayed with a border and a background. When the card contains a
+[CardLink](#making-the-whole-card-clickable), it also gets a box shadow on hover.
 
 ```html
 <article class="Card Card--vertical Card--boxed">
@@ -142,7 +156,7 @@ To align the artwork, use one of the following CSS modifiers:
 - `CardArtwork--alignmentXCenter`
 - `CardArtwork--alignmentXRight`
 
-ℹ️ These options are only available in the vertical card layout.
+ℹ️ In a horizontal layout the media column is only as wide as the artwork, so the alignment has no visible effect.
 
 ## CardMedia
 
@@ -282,7 +296,21 @@ subcomponent.
 
 ## CardBody
 
-CardBody is the main content area of the Card.
+CardBody is required for any card that has text or other main content. It is the main content area of the Card, and
+the only subcomponent placed in the `body` area of the card grid.
+
+The grid areas are fixed: `media`, `body`, `footer`, and `logo` in horizontal layouts. Spacing between them comes
+from `margin-bottom` on these subcomponents. CardBody fills the flexible `body` track and inserts the gap before
+whatever follows it.
+
+Content placed directly in Card has no grid area, so the grid puts it in the first free cell. With no artwork or
+media, that cell is `media`: a full-width row in a vertical card, and a column sized to the content in a horizontal
+card, which leaves the rest of the card empty. When artwork or media already fills `media`, a horizontal card places
+that content in the `logo` row. In a vertical card it lands in the `body` row, but without the CardBody margin, so
+the gap before the footer is missing.
+
+The one composition that skips CardBody is a card made of only [CardArtwork](#cardartwork) or only
+[CardMedia](#cardmedia).
 
 ```html
 <div class="CardBody">
@@ -442,6 +470,10 @@ Depending on your situation, you may want to use the list semantics. And it will
 </ul>
 ```
 
+ℹ️ A card rendered as `li` is a list item. A [CardFooter](#cardfooter) inside it belongs to the nearest sectioning
+ancestor outside that item. When the card has a footer, put the `<article>` card inside the `<li>`. See
+[Accessibility](#accessibility).
+
 ## Card Article
 
 Card Article is not a standalone component, but a suggested composition of Card subcomponents designed
@@ -541,16 +573,78 @@ This way, the Card will only have a single accessible link which will be announc
 
 ℹ️ A big shout-out to [Ondřej Pohl][ondrej-pohl] for sharing many of these best practices!
 
-## Full Example
+## Accessibility
 
-When you put it all together:
+### Element Type
+
+Write the card as an [`<article>`][mdn-article], as the examples do. An article is a self-contained composition
+about one topic, which matches a Card. Prefer it to `div` or `li` for two reasons:
+
+- It has the `article` role, so assistive technologies expose the card as one self-contained unit. A `div` has no
+  role, and an `li` only says the card is an item in a list.
+- It is a sectioning element, so a `<footer class="CardFooter">` inside it is the footer of the card. Neither `div`
+  nor `li` is a sectioning element. See [Footer](#footer).
+
+Use a different element when the card plays a different role in the page:
+
+- `<section class="Card">` — the card is a thematic part of a larger page and has its own heading.
+- `<li class="Card">` — the card is one item in a list and it has no footer. See [Card Grid](#card-grid). `li` is
+  not a sectioning element, so a footer inside it belongs to an ancestor outside the card.
+- `<div class="Card">` — the card must stay out of the document outline. For a plain surface, use [Box][box].
+
+To combine a list with a footer, leave the card as an `<article>` and wrap it in the list item:
 
 ```html
-<article class="Card Card--vertical Card--boxed">
-  <div class="CardMedia CardMedia--auto">
-    <div class="CardMedia__canvas">
-      <img src="…" alt="" />
-    </div>
+<ul class="Grid Grid--cols-1 Grid--tablet--cols-2 Grid--desktop--cols-3">
+  <li class="d-grid">
+    <article class="Card Card--vertical">
+      <!-- CardBody, CardFooter, … -->
+    </article>
+  </li>
+</ul>
+```
+
+The `d-grid` class makes the list item a grid container, so the card fills the height of the list item and the
+footers of cards in the same row line up.
+
+### Footer
+
+`CardFooter` is a `<footer>`. In HTML, a footer belongs to its nearest ancestor sectioning element (`article`,
+`section`, `aside`, or `nav`). With no such ancestor, it belongs to the page `body`.
+
+The `<article>` is that ancestor, so the footer is the footer of the card. A card rendered as `div` or `li` is not
+a sectioning element, and the footer scopes to the next sectioning ancestor outside the card. When that ancestor is
+`body` and the footer sits outside `main`, assistive technologies expose it as the `contentinfo` landmark, the page
+footer.
+
+Keep `article`, or another sectioning element, on any card that has a footer.
+
+### Headings
+
+CardTitle is an `<h4>` in the examples. Choose the heading level that continues the outline of the page. Under a
+section heading `h2`, the card title is an `h3`. An `h4` skips a level when no `h3` sits between the section
+heading and the card.
+
+`article` and `section` are sectioning content and should contain a heading. Give every such card a heading at that
+level.
+
+The `CardTitle--heading` modifier changes the title typography only. The outline follows the element you write.
+A title that should stay out of the outline needs a non-heading element, and the card itself should be a `div`.
+
+For one link stretched over the card, a text-only “Read more”, and a media link hidden from assistive technologies,
+see [Best Practices](#best-practices).
+
+## Full Example
+
+Artwork, body, and footer together. The horizontal layout gives [CardLogo](#cardlogo) its own grid area, next to
+the artwork:
+
+```html
+<article class="Card Card--horizontal Card--boxed">
+  <div class="CardArtwork CardArtwork--alignmentXLeft">
+    <svg class="Icon" width="24" height="24" aria-hidden="true">
+      <use href="/assets/icons/svg/sprite.svg#file" />
+    </svg>
   </div>
   <div class="CardLogo">
     <div class="PartnerLogo PartnerLogo--medium PartnerLogo--safeArea">
@@ -564,13 +658,18 @@ When you put it all together:
     </h4>
     <p>Card content</p>
   </div>
-  <footer class="CardFooter CardFooter--alignmentXLeft">
-    <a href="#" class="Button Button--medium Button--primary">Primary</a>
-    <a href="#" class="Button Button--medium Button--secondary">Secondary</a>
+  <div class="CardFooterDivider" aria-hidden="true"></div>
+  <footer class="CardFooter CardFooter--hasDivider CardFooter--alignmentXLeft">
+    <a href="#" class="Button Button--small Button--primary">Primary</a>
+    <a href="#" class="Button Button--small Button--secondary">Secondary</a>
   </footer>
 </article>
 ```
 
+ℹ️ [CardMedia](#cardmedia) uses the same grid area as CardArtwork. Swap it in when the card leads with a larger image
+or a video.
+
+[box]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Box/README.md
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
@@ -578,5 +677,6 @@ When you put it all together:
 [grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [heydon-pickering-card]: https://inclusive-components.design/cards/
 [hugo-giraudel-card]: https://kittygiraudel.com/2022/04/02/accessible-cards/
+[mdn-article]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article
 [mdn-object-fit]: https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
 [ondrej-pohl]: https://youtu.be/SdlgZFKxs40?feature=shared&t=1010

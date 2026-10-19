@@ -15,15 +15,29 @@ Card is a versatile composition of a few subcomponents:
 
 Additionally, Card can be used with [CardLink](#making-the-whole-card-clickable) to create a clickable card.
 
+See [Accessibility](#accessibility) for the article, footer, and heading rules.
+
+## Card or Box
+
+Use Card for a block about one topic that is composed of Card subcomponents — a body, plus any of artwork, media,
+logo, or footer — or for a block the user activates as a whole through a
+[CardLink](#making-the-whole-card-clickable).
+
+Use [Box][box] for a surface that only needs padding, border, background, shadow, or a color scheme. A settings panel
+with none of that composition and no card-wide link is a Box, including when a design file labels the panel a card.
+
+A [boxed Card](#boxed-cards) looks like a panel, but it is still a Card, with the card grid and, by default, an
+`<article>`.
+
 ## Card
 
 Card is the main container of the composition.
 
 ```tsx
 <Card>
-  {/* CardArtwork or CardMedia */}
-  {/* CardBody */}
-  {/* CardFooter */}
+  {/* CardArtwork or CardMedia (optional) */}
+  {/* CardBody (required) */}
+  {/* CardFooter (optional) */}
 </Card>
 ```
 
@@ -31,7 +45,7 @@ Regardless of the [layout](#card-layout), the Card subcomponents must be arrange
 
 1. [CardArtwork](#cardartwork) (optional) or CardMedia (optional) — first
 2. [CardLogo](#cardlogo) (optional)
-3. [CardBody](#cardbody)
+3. [CardBody](#cardbody) (required)
 4. [CardFooter](#cardfooter) (optional) – last
 
 ℹ️ Every `<div>` counts, especially on large pages. During the development of the Card component, we did our best to
@@ -81,7 +95,8 @@ previous breakpoint will be used.
 
 ### Boxed Cards
 
-Card can be displayed with a border and a box shadow on hover.
+Card can be displayed with a border and a background. When the card contains a
+[CardLink](#making-the-whole-card-clickable), it also gets a box shadow on hover.
 
 ```tsx
 <Card isBoxed>{/* … */}</Card>
@@ -123,7 +138,7 @@ Pass an object to `alignmentY` to set different values for different [breakpoint
 | ------------- | ------------------------------------------------------------------------------------------ | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `alignmentY`  | \[[AlignmentY dictionary][dictionary-alignment] \| `Responsive<AlignmentYDictionaryType>`] | —          | ✕        | Vertical alignment of the content, use object to set responsive values, e.g. `{ mobile: 'top', tablet: 'center' }`                                                       |
 | `direction`   | \[[DirectionExtended dictionary][dictionary-direction] \| `object`]                        | `vertical` | ✕        | Direction of the content inside Card component, use object to set responsive values, e.g. `{ mobile: 'horizontal', tablet: 'vertical', desktop: 'horizontal-reversed' }` |
-| `elementType` | `ElementType`                                                                              | `article`  | ✕        | Type of element                                                                                                                                                          |
+| `elementType` | `ElementType`                                                                              | `article`  | ✕        | Type of element, see [Accessibility](#accessibility)                                                                                                                     |
 | `isBoxed`     | `bool`                                                                                     | `false`    | ✕        | Whether the Card have border                                                                                                                                             |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
@@ -142,7 +157,7 @@ CardArtwork is an optional subcomponent that displays a small image or icon.
 </CardArtwork>
 ```
 
-### Artwork Alignment (Horizontal Layouts Only)
+### Artwork Alignment (Vertical Layout Only)
 
 In the vertical Card layout, the artwork can be horizontally aligned to the start, center, or end of the Card.
 Available alignment options are derived from the [AlignmentX][dictionary-alignment] dictionary.
@@ -159,6 +174,8 @@ To align the artwork, use `alignmentX` prop:
   </svg>
 </CardArtwork>
 ```
+
+ℹ️ In a horizontal layout the media column is only as wide as the artwork, so the alignment has no visible effect.
 
 ### API
 
@@ -304,7 +321,14 @@ subcomponent.
 
 ## CardBody
 
-CardBody is the main content area of the Card.
+CardBody is required for any card that has text or other main content. It is the main content area of the Card.
+
+Card lays out its subcomponents on a CSS grid with fixed areas, and CardBody is the only one placed in the body area.
+Its bottom margin also creates the gap before the footer. Content placed directly in Card, without CardBody, ends
+up in the wrong part of the card, often leaving the rest of the card empty, and loses the spacing before the footer.
+
+The one composition that skips CardBody is a card made of only [CardArtwork](#cardartwork) or only
+[CardMedia](#cardmedia).
 
 ```tsx
 <CardBody>{/* … */}</CardBody>
@@ -468,6 +492,10 @@ Depending on your situation, you may want to use the list semantics. And it will
 </Grid>
 ```
 
+ℹ️ A card rendered as `li` is a list item. A [CardFooter](#cardfooter) inside it belongs to the nearest sectioning
+ancestor outside that item. When the card has a footer, put the `<article>` card inside the `<li>`. See
+[Accessibility](#accessibility).
+
 ## Card Article
 
 Card Article is not a standalone component, but a suggested composition of Card subcomponents designed
@@ -573,15 +601,76 @@ link. For optimum accessibility, you should only provide this in the form of a t
 
 This way, the Card will only have a single accessible link which will be announced by screen readers.
 
-## Full Example
+## Accessibility
 
-When you put it all together:
+### Element Type
+
+Card renders an [`<article>`][mdn-article] by default (`elementType`). An article is a self-contained composition
+about one topic, which matches a Card. It is the default instead of `div` or `li` for two reasons:
+
+- It has the `article` role, so assistive technologies expose the card as one self-contained unit. A `div` has no
+  role, and an `li` only says the card is an item in a list.
+- It is a sectioning element, so a [CardFooter](#cardfooter) inside it is the footer of the card. Neither `div` nor
+  `li` is a sectioning element. See [Footer](#footer).
+
+Use a different element when the card plays a different role in the page:
+
+- `section` — the card is a thematic part of a larger page and has its own heading.
+- `li` — the card is one item in a list and it has no CardFooter. See [Card Grid](#card-grid). `li` is not a
+  sectioning element, so a footer inside it belongs to an ancestor outside the card.
+- `div` — the card must stay out of the document outline. For a plain surface, use [Box][box].
+
+To combine a list with a footer, leave the card as an `<article>` and wrap it in the list item:
 
 ```tsx
-<Card isBoxed>
-  <CardMedia>
-    <img src="…" alt="" />
-  </CardMedia>
+<Grid elementType="ul" cols={{ mobile: 1, tablet: 2, desktop: 3 }}>
+  <li className="d-grid">
+    <Card>{/* CardBody, CardFooter, … */}</Card>
+  </li>
+</Grid>
+```
+
+The `d-grid` class makes the list item a grid container, so the card fills the height of the list item and the
+footers of cards in the same row line up.
+
+### Footer
+
+CardFooter renders a `<footer>`. In HTML, a footer belongs to its nearest ancestor sectioning element (`article`,
+`section`, `aside`, or `nav`). With no such ancestor, it belongs to the page `body`.
+
+The default `<article>` is that ancestor, so the footer is the footer of the card. A card rendered as `div` or `li`
+is not a sectioning element, and the footer scopes to the next sectioning ancestor outside the card. When that
+ancestor is `body` and the footer sits outside `main`, assistive technologies expose it as the `contentinfo`
+landmark, the page footer.
+
+Keep `article`, or another sectioning element, on any card that renders a CardFooter.
+
+### Headings
+
+CardTitle renders an `<h4>` by default. Set `elementType` so the level continues the outline of the page. Under a
+section heading `h2`, the card title is an `h3`. The default `h4` skips a level when no `h3` sits between the
+section heading and the card.
+
+`article` and `section` are sectioning content and should contain a heading. Give every such card a CardTitle, or a
+[Heading][heading], at that level.
+
+`isHeading` changes the title typography only. The outline follows the element, which stays `h4` until you set
+`elementType`. A title that should stay out of the outline needs a non-heading element, and the card itself should
+be a `div`.
+
+For one link stretched over the card, a text-only “Read more”, and a media link hidden from assistive technologies,
+see [Best Practices](#best-practices).
+
+## Full Example
+
+Artwork, body, and footer together. The horizontal layout gives [CardLogo](#cardlogo) its own grid area, next to
+the artwork:
+
+```tsx
+<Card direction="horizontal" isBoxed>
+  <CardArtwork>
+    <Icon name="file" />
+  </CardArtwork>
   <CardLogo>
     <PartnerLogo>
       <img src="…" alt="Logo" />
@@ -594,15 +683,19 @@ When you put it all together:
     </CardTitle>
     <p>Card content</p>
   </CardBody>
-  <CardFooter>
+  <CardFooter hasDivider>
     <ButtonLink size="small">Primary</ButtonLink>
     <ButtonLink size="small">Secondary</ButtonLink>
   </CardFooter>
 </Card>
 ```
 
+ℹ️ [CardMedia](#cardmedia) uses the same grid area as CardArtwork. Swap it in when the card leads with a larger image
+or a video.
+
 ℹ️ A big shout-out to [Ondřej Pohl][ondrej-pohl] for sharing many of these best practices!
 
+[box]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Box/README.md
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
@@ -613,6 +706,7 @@ When you put it all together:
 [heading]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Heading/README.md
 [heydon-pickering-card]: https://inclusive-components.design/cards/
 [hugo-giraudel-card]: https://kittygiraudel.com/2022/04/02/accessible-cards/
+[mdn-article]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article
 [mdn-object-fit]: https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
 [ondrej-pohl]: https://linkedin.com/in/ondrejpohl
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
