@@ -16,8 +16,8 @@ Use when you need to:
 
 ## What it covers
 
-1. A `'use client'` preview in `features/component-list/previews/<Name>Preview.tsx`, built with
-   `@alma-oss/spirit-web-react`
+1. A preview in `features/component-list/previews/<Name>Preview.tsx`, built with
+   `@alma-oss/spirit-web-react`, with `'use client'` only when it uses hooks or event handlers
 2. The same component name in `COMPONENT_PREVIEW_MANIFEST` and `COMPONENT_PREVIEWS`
 3. `COMPONENTS_WITHOUT_PREVIEW` for a card that stays a placeholder
 4. Keeping `doc-preview-card.html` out of the component packages, and leaving `preview.html` and
@@ -35,5 +35,5 @@ stay as they are unless the task asks to change them.
 
 ## Check
 
-Open `/components` and find the card. Run docsite lint, types, and unit tests. `componentCatalog.test.ts`
+Open `/components` and find the card. Run `yarn workspace @alma-oss/spirit-docsite test`. `componentCatalog.test.ts`
 checks that the manifest and the registry list the same components.
