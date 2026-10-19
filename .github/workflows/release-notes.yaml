@@ -2,6 +2,12 @@ name: 📝 Release Notes
 
 on:
   workflow_call:
+    inputs:
+      ref:
+        description: 'Release commit the notes are generated for'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -24,6 +30,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: ${{ inputs.ref }}
           fetch-tags: true
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
