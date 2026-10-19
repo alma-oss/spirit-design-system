@@ -1,13 +1,12 @@
-import { Container } from '@alma-oss/spirit-web-react';
+import { type ChildrenProps, Container } from '@alma-oss/spirit-web-react';
 import classNames from 'classnames';
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import './ComponentsBand.scss';
 
 type ComponentsBandVariant = 'header' | 'heading' | 'grid';
 
-interface ComponentsBandProps {
+interface ComponentsBandProps extends ChildrenProps {
   variant?: ComponentsBandVariant;
-  children: ReactNode;
 }
 
 // A full-width block of the components page. The container inside carries the vertical lines on the whole height of
