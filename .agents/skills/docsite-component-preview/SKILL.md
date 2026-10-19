@@ -10,7 +10,7 @@ category: spirit
 displayName: Spirit Docsite Component Preview
 ---
 
-# Docsite component preview
+# Docsite Component Preview
 
 Use this skill when someone adds a component to the docsite or changes the picture shown on its card at
 `/components`. The preview is documentation UI. It is not a new component in `packages/web` or
@@ -19,7 +19,7 @@ Use this skill when someone adds a component to the docsite or changes the pictu
 Page layout and SCSS conventions are `/spirit:docsite-composition` and `/spirit:docsite-styles` on the
 homepage branch. Do not copy those skills into this branch. This skill does not restyle the listing.
 
-## Where the preview lives
+## Where the Preview Lives
 
 Create `apps/docsite/src/domains/components/features/component-list/previews/<Name>Preview.tsx`.
 
@@ -43,7 +43,7 @@ const ButtonPreview = () => (
 export default ButtonPreview;
 ```
 
-## Register it in both places
+## Register It in Both Places
 
 The catalog test requires the manifest keys and `COMPONENT_PREVIEWS` keys to be the same set.
 
@@ -59,20 +59,20 @@ Button: { Preview: ButtonPreview, guides: COMPONENT_PREVIEW_MANIFEST.Button },
 Guides are `'vertical'`, `'horizontal'`, or `undefined`. `undefined` draws both axes. Copy the value into
 both files; the test checks they match.
 
-## A component with no preview
+## A Component with No Preview
 
 Add the name only to `COMPONENTS_WITHOUT_PREVIEW` in `componentPreviewManifest.ts`. The card shows the
 placeholder. Do not invent a preview, and do not put that name in the manifest or in `COMPONENT_PREVIEWS`.
 A name belongs to one list.
 
-## Leave the packages and the detail preview alone
+## Leave the Packages and the Detail Preview Alone
 
 Do not add `doc-preview-card.html`, or a loader for it, under `packages/web` or `packages/web-react`.
 
 Do not edit `preview.html` or `apps/docsite/src/domains/components/utils/compilePreview.ts`. Those belong
 to the component-detail Web Preview.
 
-## Match the source
+## Match the Source
 
 When converting an existing preview, keep the variant, size, text, icons, and number of instances.
 
@@ -82,7 +82,7 @@ asset. Do not replace it with a stock photo.
 Do not change `componentCategories.ts` or `componentDescriptions.ts` unless someone asks for new categories
 or public copy.
 
-## The frame is a picture
+## The Frame Is a Picture
 
 `PreviewFrame` marks the preview `inert`. Leave that in place. Do not make the card preview interactive.
 

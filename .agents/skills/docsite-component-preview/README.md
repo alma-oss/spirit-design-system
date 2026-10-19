@@ -1,4 +1,4 @@
-# Docsite component preview
+# Docsite Component Preview
 
 Workflow for adding or changing the picture on a component card in the Spirit docsite.
 
@@ -14,7 +14,7 @@ Use when you need to:
 - Convert an existing preview into a React composition
 - Leave a component on the placeholder because it has no preview
 
-## What it covers
+## What It Covers
 
 1. A preview in `features/component-list/previews/<Name>Preview.tsx`, built with
    `@alma-oss/spirit-web-react`, with `'use client'` only when it uses hooks or event handlers
