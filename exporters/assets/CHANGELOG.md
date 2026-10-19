@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-assets-exporter%402.1.0...%40alma-oss%2Fspirit-assets-exporter%402.2.0) (2026-10-19)
+
+### Features
+
+- **exporter-assets:** add flag-icons asset type #DS-2835 ([59e0049](https://github.com/alma-oss/spirit-design-system/commit/59e00492982caf844b31d9157dadfaba8f684d9e)), references [#DS-2835](https://github.com/alma-oss/spirit-design-system/issues/DS-2835)
+
+### Chores
+
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+
 ## 2.1.0 (2026-10-02)
 
 ### Features

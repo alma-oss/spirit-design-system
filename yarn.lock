@@ -158,7 +158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alma-oss/spirit-design-tokens@npm:^5.2.0, @alma-oss/spirit-design-tokens@workspace:^, @alma-oss/spirit-design-tokens@workspace:packages/design-tokens":
+"@alma-oss/spirit-design-tokens@npm:^5.2.1, @alma-oss/spirit-design-tokens@workspace:^, @alma-oss/spirit-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-design-tokens@workspace:packages/design-tokens"
   dependencies:
@@ -281,7 +281,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@alma-oss/spirit-icons@npm:^4.1.0, @alma-oss/spirit-icons@workspace:^, @alma-oss/spirit-icons@workspace:packages/icons":
+"@alma-oss/spirit-icons@npm:^4.1.1, @alma-oss/spirit-icons@workspace:^, @alma-oss/spirit-icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-icons@workspace:packages/icons"
   dependencies:
@@ -496,8 +496,8 @@ __metadata:
   dependencies:
     "@alma-oss/browserslist-config": "catalog:build"
     "@alma-oss/spirit-common": "workspace:^"
-    "@alma-oss/spirit-design-tokens": "npm:^5.2.0"
-    "@alma-oss/spirit-icons": "npm:^4.1.0"
+    "@alma-oss/spirit-design-tokens": "npm:^5.2.1"
+    "@alma-oss/spirit-icons": "npm:^4.1.1"
     "@babel/core": "catalog:build"
     "@csstools/normalize.css": "catalog:frontend"
     "@eslint/compat": "catalog:lint"

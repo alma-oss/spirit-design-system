@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.6.1...%40alma-oss%2Fspirit-storybook%400.6.2) (2026-10-19)
+
+### Styles
+
+- **storybook:** apply lint fixes ([40654b4](https://github.com/alma-oss/spirit-design-system/commit/40654b4f224cf8cea525c5956875f7f96867611a))
+
 ## [0.6.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.6.0...%40alma-oss%2Fspirit-storybook%400.6.1) (2026-10-02)
 
 ### Code Refactoring

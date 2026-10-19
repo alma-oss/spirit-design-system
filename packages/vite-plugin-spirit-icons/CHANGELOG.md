@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fvite-plugin-spirit-icons%402.1.0...%40alma-oss%2Fvite-plugin-spirit-icons%402.1.1) (2026-10-19)
+
+### Chores
+
+- **vite-plugin-spirit-icons:** add own eslint configuration ([b442552](https://github.com/alma-oss/spirit-design-system/commit/b442552af296e723ed478cf7797abcace2891e5e))
+
+### Styles
+
+- **vite-plugin-spirit-icons:** apply eslint fixes ([451e50b](https://github.com/alma-oss/spirit-design-system/commit/451e50b748d1aa4249502a7ada416307b4c55e17))
+- **vite-plugin-spirit-icons:** apply lint fixes ([b977157](https://github.com/alma-oss/spirit-design-system/commit/b977157c70cda90e0b959e4625bba07174b6d0a6))
+
 ## [2.1.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/vite-plugin-spirit-icons@2.0.0...@alma-oss/vite-plugin-spirit-icons@2.1.0) (2026-08-07)
 
 ### Features

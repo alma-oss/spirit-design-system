@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-analytics%403.0.0...%40alma-oss%2Fspirit-analytics%403.0.1) (2026-10-19)
+
+### Chores
+
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [3.0.0](https://github.com/alma-oss/spirit-design-system/compare/@alma-oss/spirit-analytics@2.0.8...@alma-oss/spirit-analytics@3.0.0) (2026-07-08)
 
 ### ⚠ BREAKING CHANGES

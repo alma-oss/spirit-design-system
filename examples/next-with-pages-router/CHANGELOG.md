@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.12](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.11...%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.12) (2026-10-19)
+
+### Bug Fixes
+
+- **examples:** suppress import validation errors for next-env.d.ts ([7095d95](https://github.com/alma-oss/spirit-design-system/commit/7095d958a840119b28a5f0b619a4e725ee5db15d))
+
+### Chores
+
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [0.4.11](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.10...%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.11) (2026-10-02)
 
 **Note:** Version bump only for package @alma-oss/spirit-example-next-with-pages-router

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.2.0...%40alma-oss%2Fspirit-design-tokens%405.2.1) (2026-10-19)
+
+### Documentation
+
+- **repo:** introduce color schemes guide #DS-2795 ([5c92114](https://github.com/alma-oss/spirit-design-system/commit/5c921148f238a004bcccd211dc32cf2cac98c666)), references [#DS-2795](https://github.com/alma-oss/spirit-design-system/issues/DS-2795)
+
+### Chores
+
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [5.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.1.0...%40alma-oss%2Fspirit-design-tokens%405.2.0) (2026-10-02)
 
 ### Features

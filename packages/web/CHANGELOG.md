@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.2.0...%40alma-oss%2Fspirit-web%405.3.0) (2026-10-19)
+
+### Features
+
+- **web-react:** add per-corner border radius to `Box` #DS-2831 ([225760e](https://github.com/alma-oss/spirit-design-system/commit/225760e2d97ab9f9faebaba42ca00a8d83b2edf8)), references [#DS-2831](https://github.com/alma-oss/spirit-design-system/issues/DS-2831)
+- **web:** add `shadow-<token>` box shadow utilities #DS-2774 ([d85375f](https://github.com/alma-oss/spirit-design-system/commit/d85375f2060cfa91e4e24882b764507a513efab7)), references [#DS-2774](https://github.com/alma-oss/spirit-design-system/issues/DS-2774)
+
+### Bug Fixes
+
+- **web-react:** omit `ContextualHelp` when the label is hidden #DS-2845 ([91740c1](https://github.com/alma-oss/spirit-design-system/commit/91740c1e41f272e8b540019e82066d88b58d716c)), references [#DS-2845](https://github.com/alma-oss/spirit-design-system/issues/DS-2845)
+- **web:** allow scrolling to reach ScrollView in ModalBody #DS-2884 ([fa858ba](https://github.com/alma-oss/spirit-design-system/commit/fa858ba6d88f5945eea4edb1c6f3c575b5c3bdc3)), references [#DS-2884](https://github.com/alma-oss/spirit-design-system/issues/DS-2884)
+- **web:** keep nested radius from shrinking below the child default ([cebbf51](https://github.com/alma-oss/spirit-design-system/commit/cebbf517b3d8d066b05eb0b5421cf377cf0935c4))
+
+### Documentation
+
+- **repo:** introduce color schemes guide #DS-2795 ([5c92114](https://github.com/alma-oss/spirit-design-system/commit/5c921148f238a004bcccd211dc32cf2cac98c666)), references [#DS-2795](https://github.com/alma-oss/spirit-design-system/issues/DS-2795)
+- **repo:** renumber adrs so each number is unique #DS-2795 ([aa7a34e](https://github.com/alma-oss/spirit-design-system/commit/aa7a34eac134b5258cb1b780a17e3eab3d1f17eb)), references [#DS-2795](https://github.com/alma-oss/spirit-design-system/issues/DS-2795)
+- **web,web-react:** document Icon size inheritance in Button, ControlButton and InputAddon #DS-2556 ([1217288](https://github.com/alma-oss/spirit-design-system/commit/121728822b8884d578a811772c1313c2fe5662f4)), references [#DS-2556](https://github.com/alma-oss/spirit-design-system/issues/DS-2556)
+
+### Chores
+
+- **deps:** switch browserslist, remark, and stylelint configs to `@alma-oss` scope ([ee32eff](https://github.com/alma-oss/spirit-design-system/commit/ee32effbd08fec5fcedf8a38c3aadb8aa89246ef))
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [5.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.1.0...%40alma-oss%2Fspirit-web%405.2.0) (2026-10-02)
 
 ### Features

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-supernova-extract%401.1.0...%40alma-oss%2Fspirit-supernova-extract%401.1.1) (2026-10-19)
+
+**Note:** Version bump only for package @alma-oss/spirit-supernova-extract
+
 ## 1.1.0 (2026-10-02)
 
 ### Features

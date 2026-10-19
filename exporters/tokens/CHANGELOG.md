@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-tokens-exporter%404.4.0...%40alma-oss%2Fspirit-tokens-exporter%404.4.1) (2026-10-19)
+
+### Bug Fixes
+
+- **exporter-tokens:** map spaced font weight names to numeric values ([5a0bfa0](https://github.com/alma-oss/spirit-design-system/commit/5a0bfa089e56568f3dbe94d2a596d15364be2061))
+- **exporter-tokens:** stop collapsing trailing zeros in shadow px values ([4a18b1e](https://github.com/alma-oss/spirit-design-system/commit/4a18b1e7bd44ba97ae59bd4895874d1e1f29d78d))
+
+### Chores
+
+- **deps:** update dependency @supernovaio/sdk-exporters to v2.5.1 ([484f5a9](https://github.com/alma-oss/spirit-design-system/commit/484f5a9d21380282fc850467d2532b231147595d))
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [4.4.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-tokens-exporter%404.3.0...%40alma-oss%2Fspirit-tokens-exporter%404.4.0) (2026-09-02)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.13](https://github.com/alma-oss/spirit-design-system/compare/stylelint-config-spirit%400.1.12...stylelint-config-spirit%400.1.13) (2026-10-19)
+
+### Chores
+
+- **deps:** switch browserslist, remark, and stylelint configs to `@alma-oss` scope ([ee32eff](https://github.com/alma-oss/spirit-design-system/commit/ee32effbd08fec5fcedf8a38c3aadb8aa89246ef))
+
 ## [0.1.12](https://github.com/alma-oss/spirit-design-system/compare/stylelint-config-spirit@0.1.11...stylelint-config-spirit@0.1.12) (2026-03-04)
 
 ### Chores

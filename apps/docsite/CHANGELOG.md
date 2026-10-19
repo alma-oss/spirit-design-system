@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-docsite%400.7.0...%40alma-oss%2Fspirit-docsite%400.8.0) (2026-10-19)
+
+### Features
+
+- **docsite:** hide component tabs without a source #DS-2534 ([6b470a7](https://github.com/alma-oss/spirit-design-system/commit/6b470a7f822777d02b0270b7d329902ef6a76d48)), references [#DS-2534](https://github.com/alma-oss/spirit-design-system/issues/DS-2534)
+- **docsite:** style markdown headings through `Heading` #DS-2224 ([6b6e8d0](https://github.com/alma-oss/spirit-design-system/commit/6b6e8d0df9dce5350c35180ebea0e94bbe1544f2)), references [#DS-2224](https://github.com/alma-oss/spirit-design-system/issues/DS-2224)
+
+### Chores
+
+- **docsite:** track Next.js generated agent rule files ([644e3e4](https://github.com/alma-oss/spirit-design-system/commit/644e3e4314ff2e5c5f8229d21c9c85d8b7d117f7))
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [0.7.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-docsite%400.6.0...%40alma-oss%2Fspirit-docsite%400.7.0) (2026-10-02)
 
 ### Features

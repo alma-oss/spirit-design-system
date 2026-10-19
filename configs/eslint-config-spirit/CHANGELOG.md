@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit%400.4.0...eslint-config-spirit%400.5.0) (2026-10-19)
+
+### ⚠ BREAKING CHANGES
+
+- **eslint-config:** consumers requiring eslint-config-spirit via
+  commonjs require() will break - the package is now esm-only and
+  must be imported.
+- **eslint-config:** convert eslint-config-spirit's remaining configs to native esm
+
+### Bug Fixes
+
+- **eslint-config:** add explicit import resolver settings for monorepo workspace packages ([b24c1c3](https://github.com/alma-oss/spirit-design-system/commit/b24c1c35333df27c1d82d70db430ec9a7e18fb6b))
+- **eslint-config:** avoid jest-formatting plugin collision in consumers ([13ad58c](https://github.com/alma-oss/spirit-design-system/commit/13ad58c00fcf524965cda7bd1a0ecd8f644359e4))
+
+### Styles
+
+- **repo:** apply lint fixes to agent skill scripts ([c89e50d](https://github.com/alma-oss/spirit-design-system/commit/c89e50d59a82cdc658a2b424c4053665fae51369))
+
+### Code Refactoring
+
+- **eslint-config:** convert eslint-config-spirit to native flat esm ([442fc35](https://github.com/alma-oss/spirit-design-system/commit/442fc35bf113c446e203dd652e3265466c29687f))
+- **eslint-config:** convert eslint-config-spirit's remaining configs to native esm ([09e9977](https://github.com/alma-oss/spirit-design-system/commit/09e9977c58bb69e7e58eed26f88368818dadcd1f))
+- **eslint-config:** handle jest and typescript configs natively instead of via FlatCompat ([8a4f778](https://github.com/alma-oss/spirit-design-system/commit/8a4f7785cf9dd4b2dec3eee5e1e569e6531bc97f))
+
 ## [0.4.0](https://github.com/alma-oss/spirit-design-system/compare/eslint-config-spirit@0.3.0...eslint-config-spirit@0.4.0) (2026-07-08)
 
 ### Features

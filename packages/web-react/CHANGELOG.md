@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.5.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.4.0...%40alma-oss%2Fspirit-web-react%405.5.0) (2026-10-19)
+
+### Features
+
+- **web-react:** add `boxShadow` prop to `Box` #DS-2774 ([7fac525](https://github.com/alma-oss/spirit-design-system/commit/7fac525535467318c17dc3df7a98e555dd80414b)), references [#DS-2774](https://github.com/alma-oss/spirit-design-system/issues/DS-2774)
+- **web-react:** add `TranslatableString` and component string resolver #DS-2209 ([9d72fcc](https://github.com/alma-oss/spirit-design-system/commit/9d72fcc10b8f8677b857ae49bd08cbef3e366ee5)), references [#DS-2209](https://github.com/alma-oss/spirit-design-system/issues/DS-2209)
+- **web-react:** add per-corner border radius to `Box` #DS-2831 ([225760e](https://github.com/alma-oss/spirit-design-system/commit/225760e2d97ab9f9faebaba42ca00a8d83b2edf8)), references [#DS-2831](https://github.com/alma-oss/spirit-design-system/issues/DS-2831)
+- **web-react:** add translatable `strings` and required string props #DS-2209 ([8634eca](https://github.com/alma-oss/spirit-design-system/commit/8634eca5c9af91920d878b0ad094e98a4a2147e3)), references [#DS-2209](https://github.com/alma-oss/spirit-design-system/issues/DS-2209)
+- **web-react:** deprecate old component string props #DS-2209 ([2f6c0cf](https://github.com/alma-oss/spirit-design-system/commit/2f6c0cf9412ea75d805f5d940affc46c0e0eb2ab)), references [#DS-2209](https://github.com/alma-oss/spirit-design-system/issues/DS-2209)
+- **web-react:** match translation defaults to `strings` #DS-2209 ([6a43915](https://github.com/alma-oss/spirit-design-system/commit/6a43915d852f0e6adc9e455fc60eaadea15ab88a)), references [#DS-2209](https://github.com/alma-oss/spirit-design-system/issues/DS-2209)
+
+### Bug Fixes
+
+- **web-react:** fix Code Connect issues found in review #DS-2701 ([e81e349](https://github.com/alma-oss/spirit-design-system/commit/e81e349bdaca0c6f26e78953fad96123d8f667fd)), closes [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701), references [#2970](https://github.com/alma-oss/spirit-design-system/issues/2970)
+- **web-react:** omit `ContextualHelp` when the label is hidden #DS-2845 ([91740c1](https://github.com/alma-oss/spirit-design-system/commit/91740c1e41f272e8b540019e82066d88b58d716c)), references [#DS-2845](https://github.com/alma-oss/spirit-design-system/issues/DS-2845)
+
+### Documentation
+
+- **repo:** introduce color schemes guide #DS-2795 ([5c92114](https://github.com/alma-oss/spirit-design-system/commit/5c921148f238a004bcccd211dc32cf2cac98c666)), references [#DS-2795](https://github.com/alma-oss/spirit-design-system/issues/DS-2795)
+- **repo:** renumber adrs so each number is unique #DS-2795 ([aa7a34e](https://github.com/alma-oss/spirit-design-system/commit/aa7a34eac134b5258cb1b780a17e3eab3d1f17eb)), references [#DS-2795](https://github.com/alma-oss/spirit-design-system/issues/DS-2795)
+- **web-react:** use `boxShadow` on `Box` in CV builder examples #DS-2774 ([fbf3030](https://github.com/alma-oss/spirit-design-system/commit/fbf3030f64ba2806c563894e4524f56675e29126)), references [#DS-2774](https://github.com/alma-oss/spirit-design-system/issues/DS-2774)
+- **web,web-react:** document Icon size inheritance in Button, ControlButton and InputAddon #DS-2556 ([1217288](https://github.com/alma-oss/spirit-design-system/commit/121728822b8884d578a811772c1313c2fe5662f4)), references [#DS-2556](https://github.com/alma-oss/spirit-design-system/issues/DS-2556)
+
+### Chores
+
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
+### Styles
+
+- **web-react:** rename disabled jest rule to namespaced plugin ([f19bb7f](https://github.com/alma-oss/spirit-design-system/commit/f19bb7f68d3ef6b276b79fdb420447af8affbe5d))
+
+### Code Refactoring
+
+- **web-react:** migrate Spinner–ToastBar Code Connect files to Template API #DS-2701 ([0694b16](https://github.com/alma-oss/spirit-design-system/commit/0694b16a8f126bb48f4c8775495044bf19e2cdc3)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+- **web-react:** migrate Toggle–ValidationText Code Connect files to Template API #DS-2701 ([b5518ad](https://github.com/alma-oss/spirit-design-system/commit/b5518ad877fc112ed8ed19ee1435b34c77fe5d5a)), references [#DS-2701](https://github.com/alma-oss/spirit-design-system/issues/DS-2701)
+
+### Tests
+
+- **web-react:** cover `strings.splitTag` overrides #DS-2209 ([debc201](https://github.com/alma-oss/spirit-design-system/commit/debc201372d7865ab3e9d0ffec697deb91d35641)), references [#DS-2209](https://github.com/alma-oss/spirit-design-system/issues/DS-2209)
+
 ## [5.4.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.3.0...%40alma-oss%2Fspirit-web-react%405.4.0) (2026-10-02)
 
 ### Features

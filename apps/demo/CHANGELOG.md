@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.2.0...%40lmc-eu%2Fspirit-demo-app%403.2.1) (2026-10-19)
+
+### Styles
+
+- **demo:** apply lint fixes to vite config ([8f0aa84](https://github.com/alma-oss/spirit-design-system/commit/8f0aa84c66c6a66b7ad5d4869531c9da39f066a7))
+
 ## [3.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.1.0...%40lmc-eu%2Fspirit-demo-app%403.2.0) (2026-10-02)
 
 ### Features

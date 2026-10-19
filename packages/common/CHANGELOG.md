@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-common%400.7.0...%40alma-oss%2Fspirit-common%400.7.1) (2026-10-19)
+
+### Chores
+
+- **repo:** stop wrapping eslint-config-spirit in compat.extends ([18905b0](https://github.com/alma-oss/spirit-design-system/commit/18905b059f348f0cbac5c597908e543afdb8f4e6))
+- **repo:** stop wrapping spirit style/prettier in compat.extends ([58b1a0d](https://github.com/alma-oss/spirit-design-system/commit/58b1a0d7cc729a6fc5f8a823b1def7e1ebce9e65))
+
 ## [0.7.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-common%400.6.3...%40alma-oss%2Fspirit-common%400.7.0) (2026-10-02)
 
 ### Features

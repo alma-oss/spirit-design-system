@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/alma-oss/spirit-design-system/compare/jest-config-spirit%400.2.4...jest-config-spirit%400.2.5) (2026-10-19)
+
+### Styles
+
+- **jest-config:** apply lint fixes ([336f431](https://github.com/alma-oss/spirit-design-system/commit/336f4319735fe54f0ca459f571be526a99ba5717))
+
 ## [0.2.4](https://github.com/alma-oss/spirit-design-system/compare/jest-config-spirit@0.2.3...jest-config-spirit@0.2.4) (2026-07-08)
 
 ### Tests

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-icons%404.1.0...%40alma-oss%2Fspirit-icons%404.1.1) (2026-10-19)
+
+### Chores
+
+- **icons:** add own eslint configuration ([e67e6b6](https://github.com/alma-oss/spirit-design-system/commit/e67e6b62a8d054007dc882d00c5c511b44371360))
+
+### Styles
+
+- **icons:** apply lint fixes to build scripts ([b1e03bc](https://github.com/alma-oss/spirit-design-system/commit/b1e03bc7c93108c1d488605518190b14bf5142d3))
+
 ## [4.1.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-icons%404.0.1...%40alma-oss%2Fspirit-icons%404.1.0) (2026-10-02)
 
 ### Features
