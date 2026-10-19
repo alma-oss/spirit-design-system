@@ -23,15 +23,14 @@ homepage branch. Do not copy those skills into this branch. This skill does not 
 
 Create `apps/docsite/src/domains/components/features/component-list/previews/<Name>Preview.tsx`.
 
-- Start the file with `'use client'`.
+- Add `'use client'` only when the preview uses hooks or event handlers. Previews render inside the client
+  `ComponentCard`, so a static composition does not need it.
 - Compose it from `@alma-oss/spirit-web-react`.
 - Export the component as the default export.
 - Show the default or primary variant, medium size, and a single instance, unless the source markup shows
   something else.
 
 ```tsx
-'use client';
-
 import { Button } from '@alma-oss/spirit-web-react';
 import React from 'react';
 
@@ -92,6 +91,7 @@ or public copy.
 
 ## Done
 
-Open `/components` and find the card. Then run docsite lint, types, and unit tests. The catalog test in
+Open `/components` and find the card. Then run `yarn workspace @alma-oss/spirit-docsite test`, which runs lint,
+unit tests, and types. The catalog test in
 `model/__tests__/componentCatalog.test.ts` fails when the manifest and the registry disagree, or when a
 placeholder component is registered.
