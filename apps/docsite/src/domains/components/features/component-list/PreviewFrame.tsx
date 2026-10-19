@@ -2,9 +2,8 @@
 
 import { useIsomorphicLayoutEffect } from '@alma-oss/spirit-web-react';
 import React, { CSSProperties, ReactNode, useRef, useState } from 'react';
+import type { PreviewGuides } from './model/types';
 import './PreviewFrame.scss';
-
-type PreviewGuides = 'vertical' | 'horizontal';
 
 interface PreviewFrameProps {
   children?: ReactNode;
