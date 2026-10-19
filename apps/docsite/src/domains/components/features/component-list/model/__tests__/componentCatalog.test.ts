@@ -1,8 +1,18 @@
 import { COMPONENT_PREVIEWS } from '../../previews';
 import { getComponentCatalogEntry } from '../componentCatalog';
 import { COMPONENT_CATEGORIES } from '../componentCategories';
-import { COMPONENT_DESCRIPTIONS, getComponentDescription, LOREM_IPSUM_DESCRIPTIONS } from '../componentDescriptions';
+import { COMPONENT_DESCRIPTIONS, getComponentDescription } from '../componentDescriptions';
 import { COMPONENTS_WITHOUT_PREVIEW, COMPONENT_PREVIEW_MANIFEST } from '../componentPreviewManifest';
+
+// The unit test job does not build `@alma-oss/spirit-web-react`, so its `dist` entry point is missing there.
+jest.mock(
+  '@alma-oss/spirit-web-react',
+  () =>
+    new Proxy({ __esModule: true } as Record<string | symbol, unknown>, {
+      get: (target, name) => (name in target ? target[name] : () => null),
+    }),
+  { virtual: true },
+);
 
 describe('componentCatalog', () => {
   it('should keep the authored card descriptions', () => {
@@ -10,9 +20,9 @@ describe('componentCatalog', () => {
     expect(getComponentDescription('Item')).toBe(COMPONENT_DESCRIPTIONS.Item);
   });
 
-  it('should keep the existing fallback description for a component without authored copy', () => {
-    expect(LOREM_IPSUM_DESCRIPTIONS).toContain(getComponentDescription('Box'));
-    expect(getComponentDescription('Box').length).toBeGreaterThan(0);
+  it('should name the component in the fallback description for a component without authored copy', () => {
+    expect(getComponentDescription('Box')).toBe('Spirit Box component');
+    expect(getComponentDescription('UNSTABLE_Tile')).toBe('Spirit Tile component');
   });
 
   it('should keep the current category membership', () => {
