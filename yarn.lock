@@ -186,12 +186,14 @@ __metadata:
     "@alma-oss/spirit-icons": "workspace:^"
     "@alma-oss/spirit-web": "workspace:^"
     "@alma-oss/spirit-web-react": "workspace:^"
+    "@almacareer/cookie-consent-manager": "catalog:docsite"
     "@eslint/compat": "catalog:lint"
     "@eslint/eslintrc": "catalog:lint"
     "@mdx-js/loader": "catalog:content"
     "@mdx-js/react": "catalog:content"
     "@next/eslint-plugin-next": "catalog:lint"
     "@next/mdx": "catalog:content"
+    "@next/third-parties": "catalog:docsite"
     "@types/mdx": "catalog:types"
     "@types/node": "catalog:types"
     "@types/react": "catalog:types"
@@ -209,7 +211,7 @@ __metadata:
     next: "catalog:frontend"
     next-mdx-remote: "catalog:content"
     npm-run-all2: "catalog:script"
-    nuqs: "catalog:frontend"
+    nuqs: "catalog:docsite"
     postcss: "catalog:build"
     postcss-preset-env: "catalog:build"
     react: "catalog:frontend"
@@ -579,6 +581,18 @@ __metadata:
     vite: ">=5"
   languageName: unknown
   linkType: soft
+
+"@almacareer/cookie-consent-manager@npm:3.1.0":
+  version: 3.1.0
+  resolution: "@almacareer/cookie-consent-manager@npm:3.1.0"
+  dependencies:
+    "@lmc-eu/spirit-design-tokens": "npm:^3.0.2"
+    mergician: "npm:^2.0.2"
+    nanoid: "npm:^5.0.9"
+    vanilla-cookieconsent: "npm:3.1.0"
+  checksum: 10/a23ec92f49f6a3b6df3a826ecc7045be60a62fada3d7b8aac43ac2798cdeaf12850717113d87f0b0b454fc7e31d8fc756d496e592b0d6416be8d59cd589678b1
+  languageName: node
+  linkType: hard
 
 "@ampproject/remapping@npm:^2.2.0":
   version: 2.3.0
@@ -7065,6 +7079,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@lmc-eu/spirit-design-tokens@npm:^3.0.2":
+  version: 3.7.4
+  resolution: "@lmc-eu/spirit-design-tokens@npm:3.7.4"
+  checksum: 10/510985ea3dd3a19554c48894e94646f981c3c4bfad02db9be52564deedeab16e537b2b3bd157da6011bd42e6afa016c3348ca9594d4835d6212f7ce7f445c8c0
+  languageName: node
+  linkType: hard
+
 "@lukeed/ms@npm:^2.0.1":
   version: 2.0.2
   resolution: "@lukeed/ms@npm:2.0.2"
@@ -8002,6 +8023,18 @@ __metadata:
   version: 16.3.8
   resolution: "@next/swc-win32-x64-msvc@npm:16.3.8"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/third-parties@npm:16.3.8":
+  version: 16.3.8
+  resolution: "@next/third-parties@npm:16.3.8"
+  dependencies:
+    third-party-capital: "npm:1.0.20"
+  peerDependencies:
+    next: ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0-beta.0
+    react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+  checksum: 10/4d1bba5ca16f7721e6b091dcb6ba4ec26632df514349d546c9d088dea107f7aca9f084ee39170b5b207eb9048ca5bb6dc81bd6d1f157199fa9637a0d94eee1bf
   languageName: node
   linkType: hard
 
@@ -27757,6 +27790,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mergician@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "mergician@npm:2.0.2"
+  checksum: 10/9718de75d75e1b3296be222324a15d4cba08fe52ae52efacd61936355a037e1688d7f018e2d201ec34354ddd22692907d6de8a99a3d54425d5ddf84359ff82d3
+  languageName: node
+  linkType: hard
+
 "methods@npm:~1.1.2":
   version: 1.1.2
   resolution: "methods@npm:1.1.2"
@@ -28836,6 +28876,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 10/b19641487fc25325189175226a4b9fcc8da39989c6a39fd35921802158d6b1725d59d8454a4e30643d2bb4837382cac11ee129417282678a67f8394b31c228d9
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^5.0.9":
+  version: 5.1.16
+  resolution: "nanoid@npm:5.1.16"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 10/b1e702e2b7072e74ac2ae880907d0a291853a36617ec5c3d27d81ab04965ebc0d4d0f707cf9220928cf93d5370b1f561c930efee853dc9c1a3facaefdf1a42ee
   languageName: node
   linkType: hard
 
@@ -38008,6 +38057,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"third-party-capital@npm:1.0.20":
+  version: 1.0.20
+  resolution: "third-party-capital@npm:1.0.20"
+  checksum: 10/40e2531b428a21f05531fc62ef82859c0071211eff09588baf75d4b525096bbdb4f93e17e2d538849db8d4fc3cceb074933d7be59fddc26f86718fbbe852a97f
+  languageName: node
+  linkType: hard
+
 "thread-stream@npm:^3.0.0":
   version: 3.1.0
   resolution: "thread-stream@npm:3.1.0"
@@ -40043,6 +40099,13 @@ __metadata:
   version: 13.15.26
   resolution: "validator@npm:13.15.26"
   checksum: 10/22488ae718ca724eda81b7c8bf505005d4d70cb6ff9a319f48fd897a31d40fd9a2971af4a3288667a04c56b4f95912555495519d54a5d8d63c2572bf4970081a
+  languageName: node
+  linkType: hard
+
+"vanilla-cookieconsent@npm:3.1.0":
+  version: 3.1.0
+  resolution: "vanilla-cookieconsent@npm:3.1.0"
+  checksum: 10/053e887cde87cb1e583288d2c3d8b56acf9c97293e5c9ff5c35d0f43b68c8e20441a321469126e92ac78fbb8410fe245cd2f879d4c376b7b2a66ffca00dee41c
   languageName: node
   linkType: hard
 
