@@ -33,6 +33,11 @@ export const getTokenGroup = (token: Token): string | undefined => {
   return token.origin?.name?.split('/')[0].toLowerCase();
 };
 
+export const getOriginName = (token: Token): string | undefined => token.origin?.name?.toLowerCase();
+
+export const getParentOriginName = (token: Token): string | undefined =>
+  getOriginName(token)?.split('/').slice(0, -1).join('/');
+
 export const tokenVariableName = (token: Token, tokenGroups: Array<TokenGroup>, hasParentPrefix: boolean): string => {
   let parent;
   if (hasParentPrefix) {
@@ -80,6 +85,12 @@ export const formatTokenStyleByOutput = (
 
   return `$${name}: ${normalizedValue} !default;`;
 };
+
+export const cssVariableReference = (tokenPrefix: string, cssVariablePrefix: string, name: string): string =>
+  `var(--${tokenPrefix}${cssVariablePrefix}${name})`;
+
+export const formatCssVariableReference = (name: string, reference: string, hasJsOutput: boolean): string =>
+  hasJsOutput ? formatTokenStyleByOutput(name, reference, true) : `$${name}: ${reference};`;
 
 export const sortTokens = (
   tokens: Token[],

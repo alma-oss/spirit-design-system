@@ -10,3 +10,5 @@ export const toPlural = (name: string): string => {
 };
 
 export const toCamelCase = (name: string): string => NamingHelper.codeSafeVariableName(name, StringCase.camelCase);
+
+export const formatLayerSuffix = (layer: number): string => `-${layer.toString().padStart(2, '0')}`;

@@ -16,7 +16,11 @@ import { exampleShadowTokens } from '../../../tests/fixtures/exampleShadowTokens
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { findTokenPrefix } from '../../helpers/findTokenPrefix';
 import { filterExcludedTokens } from '../../filters/excludedTokens';
-import { generateStylesFromTokens, tokenToStyleByType } from '../stylesGenerator';
+import {
+  generateCssVariableReferencesFromTokens,
+  generateStylesFromTokens,
+  tokenToStyleByType,
+} from '../stylesGenerator';
 import { type FontSizeBaseMap } from '../../helpers/unitHelper';
 
 const mappedTokens: Map<string, Token> = new Map([]);
@@ -116,7 +120,9 @@ describe('stylesGenerator', () => {
         hasJsOutput: false,
         hasTokenPrefix: true,
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--spirit-shadow-100-offset-x-01, 0) var(--spirit-shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--spirit-shadow-100-blur-radius-01, 0.5714rem) var(--spirit-shadow-100-spread-radius-01, 0) ' +
+          'var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         token: exampleShadowTokens.get('shadowRef') as ShadowToken,
@@ -125,7 +131,9 @@ describe('stylesGenerator', () => {
         hasJsOutput: false,
         hasTokenPrefix: false,
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--shadow-100-offset-x-01, 0) var(--shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--shadow-100-blur-radius-01, 0.5714rem) var(--shadow-100-spread-radius-01, 0) ' +
+          'var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         token: exampleGradientTokens.get('gradientRef') as GradientToken,
@@ -157,7 +165,6 @@ describe('stylesGenerator', () => {
           mappedTokens,
           tokenGroups,
           tokenPrefix,
-          false,
           hasParentPrefix,
           hasJsOutput,
           fontSizeBaseMap,
@@ -173,7 +180,6 @@ describe('stylesGenerator', () => {
       {
         tokens: exampleDimensionAndStringTokens,
         hasJsOutput: false,
-        hasMixin: false,
         hasParentPrefix: true,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens',
@@ -182,7 +188,6 @@ describe('stylesGenerator', () => {
       {
         tokens: exampleDimensionAndStringTokens,
         hasJsOutput: true,
-        hasMixin: false,
         hasParentPrefix: true,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with js output',
@@ -191,25 +196,14 @@ describe('stylesGenerator', () => {
       {
         tokens: exampleColorsTokens,
         hasJsOutput: false,
-        hasMixin: true,
         hasParentPrefix: false,
         hasTokenPrefix: false,
-        description: 'should generate styles from tokens with colors and mixin',
+        description: 'should generate styles from tokens with colors',
         expectedStyles: '$active: #ca2026 !default;\n\n$primary: #fff !default;',
       },
       {
         tokens: exampleColorsTokens,
-        hasJsOutput: false,
-        hasMixin: false,
-        hasParentPrefix: false,
-        hasTokenPrefix: true,
-        description: 'should generate styles from tokens with colors and without mixin',
-        expectedStyles: '$active: var(--spirit-color-active);\n\n$primary: var(--spirit-color-primary);',
-      },
-      {
-        tokens: exampleColorsTokens,
         hasJsOutput: true,
-        hasMixin: true,
         hasParentPrefix: false,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with colors with js output',
@@ -218,27 +212,28 @@ describe('stylesGenerator', () => {
       {
         tokens: exampleShadowTokens,
         hasJsOutput: false,
-        hasMixin: false,
         hasParentPrefix: false,
         hasTokenPrefix: true,
         description: 'should generate styles from tokens with shadows',
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--spirit-shadow-100-offset-x-01, 0) var(--spirit-shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--spirit-shadow-100-blur-radius-01, 0.5714rem) var(--spirit-shadow-100-spread-radius-01, 0) ' +
+          'var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         tokens: exampleShadowTokens,
         hasJsOutput: false,
-        hasMixin: false,
         hasParentPrefix: false,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with shadows',
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--shadow-100-offset-x-01, 0) var(--shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--shadow-100-blur-radius-01, 0.5714rem) var(--shadow-100-spread-radius-01, 0) ' +
+          'var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         tokens: exampleGradientTokens,
         hasJsOutput: false,
-        hasMixin: false,
         hasParentPrefix: false,
         hasTokenPrefix: true,
         description: 'should generate styles from tokens with gradients',
@@ -248,7 +243,6 @@ describe('stylesGenerator', () => {
       {
         tokens: exampleGradientTokens,
         hasJsOutput: false,
-        hasMixin: false,
         hasParentPrefix: false,
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with gradients',
@@ -259,7 +253,7 @@ describe('stylesGenerator', () => {
 
     it.each(dataProvider)(
       '$description',
-      ({ tokens, hasJsOutput, hasMixin, hasParentPrefix, hasTokenPrefix, expectedStyles }) => {
+      ({ tokens, hasJsOutput, hasParentPrefix, hasTokenPrefix, expectedStyles }) => {
         const prefixTokens = Array.from(examplePrefixToken.values());
         const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
         const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
@@ -268,7 +262,6 @@ describe('stylesGenerator', () => {
           mappedTokens,
           tokenGroups,
           tokenPrefix,
-          hasMixin,
           hasParentPrefix,
           false,
           hasJsOutput,
@@ -278,5 +271,40 @@ describe('stylesGenerator', () => {
         expect(styles).toBe(expectedStyles);
       },
     );
+  });
+
+  describe('generateCssVariableReferencesFromTokens', () => {
+    const dataProvider = [
+      {
+        hasJsOutput: false,
+        hasTokenPrefix: true,
+        description: 'should generate references to css variables',
+        expectedStyles: '$active: var(--spirit-color-active);\n\n$primary: var(--spirit-color-primary);',
+      },
+      {
+        hasJsOutput: true,
+        hasTokenPrefix: false,
+        description: 'should generate references to css variables with js output',
+        expectedStyles:
+          "export const active = 'var(--color-active)';\n\nexport const primary = 'var(--color-primary)';",
+      },
+    ];
+
+    it.each(dataProvider)('$description', ({ hasJsOutput, hasTokenPrefix, expectedStyles }) => {
+      const prefixTokens = Array.from(examplePrefixToken.values());
+      const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
+      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()));
+      const styles = generateCssVariableReferencesFromTokens(
+        filteredTokens,
+        tokenGroups,
+        tokenPrefix,
+        'color-',
+        false,
+        false,
+        hasJsOutput,
+      );
+
+      expect(styles).toBe(expectedStyles);
+    });
   });
 });

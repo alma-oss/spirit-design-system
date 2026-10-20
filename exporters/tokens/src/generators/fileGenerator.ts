@@ -330,9 +330,7 @@ export const generateOutputFilesByThemes = async (
   // Generate root themes file
   const rootThemesFileContent = generateThemesRootFile(filteredThemes);
   const rootTsThemesFileContent = generateThemesRootFile(filteredThemes, true);
-  const rootScssThemesFile = "@forward 'color-tokens';\n";
-  const rootJsThemesFile = "export * from './colorTokens';\n";
-  const colorTokensFile = generateFiles(
+  const commonThemedScssFiles = generateFiles(
     filteredColorCollections,
     mappedTokens,
     tokenGroups,
@@ -341,7 +339,7 @@ export const generateOutputFilesByThemes = async (
     false,
     fontSizeBaseMap,
   );
-  const colorTsTokensFile = generateFiles(
+  const commonThemedTsFiles = generateFiles(
     filteredColorCollections,
     mappedTokens,
     tokenGroups,
@@ -350,6 +348,8 @@ export const generateOutputFilesByThemes = async (
     true,
     fontSizeBaseMap,
   );
+  const rootScssThemesFile = generateBarrelFile(commonThemedScssFiles);
+  const rootJsThemesFile = generateBarrelFile(commonThemedTsFiles, true);
 
   outputFiles.push({ path: `./${SCSS_DIRECTORY}/`, fileName: '@themes.scss', content: rootThemesFileContent });
   outputFiles.push({
@@ -363,14 +363,14 @@ export const generateOutputFilesByThemes = async (
     content: rootScssThemesFile,
   });
   outputFiles.push(
-    ...colorTokensFile.map((file) => ({
+    ...commonThemedScssFiles.map((file) => ({
       path: `./${SCSS_DIRECTORY}/${THEMES_DIRECTORY}`,
       fileName: `_${file.fileName}.scss`,
       content: file.content,
     })),
   );
   outputFiles.push(
-    ...colorTsTokensFile.map((file) => ({
+    ...commonThemedTsFiles.map((file) => ({
       path: `./${JS_DIRECTORY}/${THEMES_DIRECTORY}`,
       fileName: `${file.fileName}.ts`,
       content: file.content,

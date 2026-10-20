@@ -42,6 +42,8 @@ describe('mixinGenerator', () => {
         tokenPrefix,
         hasParentPrefix,
         false,
+        'color-css-variables',
+        'color-',
       );
 
       expect(styles).toBe(`@mixin color-css-variables {\n${expectedStyles}\n}\n`);
