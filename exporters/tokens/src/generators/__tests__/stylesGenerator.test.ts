@@ -116,7 +116,9 @@ describe('stylesGenerator', () => {
         hasJsOutput: false,
         hasTokenPrefix: true,
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--spirit-shadow-100-offset-x-01, 0) var(--spirit-shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--spirit-shadow-100-blur-radius-01, 0.5714rem) var(--spirit-shadow-100-spread-radius-01, 0) ' +
+          'var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         token: exampleShadowTokens.get('shadowRef') as ShadowToken,
@@ -125,7 +127,9 @@ describe('stylesGenerator', () => {
         hasJsOutput: false,
         hasTokenPrefix: false,
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--shadow-100-offset-x-01, 0) var(--shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--shadow-100-blur-radius-01, 0.5714rem) var(--shadow-100-spread-radius-01, 0) ' +
+          'var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         token: exampleGradientTokens.get('gradientRef') as GradientToken,
@@ -223,7 +227,9 @@ describe('stylesGenerator', () => {
         hasTokenPrefix: true,
         description: 'should generate styles from tokens with shadows',
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--spirit-shadow-100-offset-x-01, 0) var(--spirit-shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--spirit-shadow-100-blur-radius-01, 0.5714rem) var(--spirit-shadow-100-spread-radius-01, 0) ' +
+          'var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         tokens: exampleShadowTokens,
@@ -233,7 +239,9 @@ describe('stylesGenerator', () => {
         hasTokenPrefix: false,
         description: 'should generate styles from tokens with shadows',
         expectedStyles:
-          '$shadow-100: 0 0.1429rem 0.5714rem 0 var(--color-shadows-shadow-100-color-01, #00000026) !default;',
+          '$shadow-100: var(--shadow-100-offset-x-01, 0) var(--shadow-100-offset-y-01, 0.1429rem) ' +
+          'var(--shadow-100-blur-radius-01, 0.5714rem) var(--shadow-100-spread-radius-01, 0) ' +
+          'var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
         tokens: exampleGradientTokens,

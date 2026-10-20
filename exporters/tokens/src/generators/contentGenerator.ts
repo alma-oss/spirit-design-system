@@ -2,13 +2,14 @@ import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
 import { FileData } from '../config/fileConfig';
 import { indentAndFormat } from '../formatters/stylesFormatter';
 import { convertToJs, convertToScss, deepMergeObjects } from '../helpers/objectHelper';
-import { generateStylesFromTokens } from './stylesGenerator';
+import { generateCssVariableReferencesFromTokens, generateStylesFromTokens } from './stylesGenerator';
 import { DeviceDimensionMap, type StylesObjectType, generateStylesObjectFromTokens } from './stylesObjectGenerator';
 import { findTokenPrefix } from '../helpers/findTokenPrefix';
 import { filterExcludedTokens } from '../filters/excludedTokens';
 import { generateMixinFromTokens } from './mixinGenerator';
 import { getFontSizeBaseMap, type FontSizeBaseMap } from '../helpers/unitHelper';
 import { getTokenGroup } from '../helpers/tokenHelper';
+import { filterCollections } from '../helpers/collectionsHelper';
 
 // Add disclaimer to the top of the content
 export const addDisclaimer = (content: string): string => {
@@ -60,8 +61,11 @@ const addEmptyLineBetweenTokenGroups = (index: number, length: number): string =
 
 type ProcessTokensResult = {
   styles: string;
-  mixin: string;
   stylesObject: StylesObjectType;
+};
+
+export const omitTopLevelGroupFromPaths = (tokenGroups: Array<TokenGroup>): Array<TokenGroup> => {
+  return tokenGroups.map((group) => ({ ...group, path: group.path.slice(1) }) as TokenGroup);
 };
 
 const processTokensForType = (
@@ -76,32 +80,38 @@ const processTokensForType = (
   hasJsOutput: boolean,
   fontSizeBaseMap: FontSizeBaseMap,
   deviceDimensions?: DeviceDimensionMap,
+  cssVariableReferencePrefix?: string,
 ): ProcessTokensResult => {
   let styles = '';
-  let mixin = '';
 
   // Generate css tokens
   if (tokenType !== TokenType.typography) {
-    const generatedStyles = generateStylesFromTokens(
-      filteredTokens,
-      mappedTokens,
-      tokenGroups,
-      tokenPrefix,
-      hasMixin,
-      hasParentPrefix,
-      sortByNumValue,
-      hasJsOutput,
-      fontSizeBaseMap,
-    );
+    const generatedStyles =
+      cssVariableReferencePrefix === undefined
+        ? generateStylesFromTokens(
+            filteredTokens,
+            mappedTokens,
+            tokenGroups,
+            tokenPrefix,
+            hasMixin,
+            hasParentPrefix,
+            sortByNumValue,
+            hasJsOutput,
+            fontSizeBaseMap,
+          )
+        : generateCssVariableReferencesFromTokens(
+            filteredTokens,
+            tokenGroups,
+            tokenPrefix,
+            cssVariableReferencePrefix,
+            hasParentPrefix,
+            sortByNumValue,
+            hasJsOutput,
+          );
     if (generatedStyles) {
       styles += generatedStyles;
       styles += '\n\n';
     }
-  }
-
-  // Generate mixin
-  if (!hasJsOutput && hasMixin) {
-    mixin += generateMixinFromTokens(filteredTokens, tokenGroups, tokenPrefix, hasParentPrefix, sortByNumValue);
   }
 
   // Generate css object
@@ -118,7 +128,6 @@ const processTokensForType = (
 
   return {
     styles,
-    mixin,
     stylesObject: groupStylesObject,
   };
 };
@@ -206,17 +215,25 @@ export const generateFileContent = ({
 }: GenerateFileContent) => {
   let styledTokens = '';
   let stylesObject: StylesObjectType = {};
-  let styledMixin = '';
+  const mixinTokens: Token[] = [];
   const fontSizeBaseMap = fontSizeBaseMapOverride ?? getFontSizeBaseMap(tokens);
   const {
+    collectionName,
+    prepareTokens,
     excludeGroupNames = null,
     groupNames,
     hasMixin = false,
+    mixinName,
+    cssVariablePrefix,
+    hasCssVariableReferences = false,
     hasParentPrefix = true,
     hasStylesObject = true,
+    hasTopLevelGroupPrefix = true,
     sortByNumValue = false,
     tokenTypes,
   } = fileData;
+  const cssVariableReferencePrefix = hasCssVariableReferences ? (cssVariablePrefix ?? '') : undefined;
+  const namingTokenGroups = hasTopLevelGroupPrefix ? tokenGroups : omitTopLevelGroupFromPaths(tokenGroups);
 
   // Check if group filtering should be applied
   // Apply group filtering if:
@@ -228,6 +245,8 @@ export const generateFileContent = ({
 
   // Calculate token prefix once since it doesn't depend on tokenType
   const tokenPrefix = findTokenPrefix(tokens);
+  const preparedTokens = prepareTokens ? prepareTokens(tokens) : tokens;
+  const fileTokens = collectionName ? filterCollections(preparedTokens, collectionName) : preparedTokens;
 
   // Iterate over token types and groups to filter tokens
   tokenTypes.forEach((tokenType) => {
@@ -237,19 +256,19 @@ export const generateFileContent = ({
       // to avoid including groups from other token types
       const tokensToConsider =
         groupNames && groupNames.length > 0 && groupNames[0] !== ''
-          ? tokens
-          : filterTokensByType(tokens, tokenType, excludeGroupNames);
+          ? fileTokens
+          : filterTokensByType(fileTokens, tokenType, excludeGroupNames);
 
       const groups = getGroups(tokensToConsider, excludeGroupNames, groupNames);
 
       groups.forEach((group) => {
-        const filteredTokens = filterTokensByTypeAndGroup(tokens, tokenType, group, excludeGroupNames);
+        const filteredTokens = filterTokensByTypeAndGroup(fileTokens, tokenType, group, excludeGroupNames);
 
         const result = processTokensForType(
           filteredTokens,
           tokenType,
           mappedTokens,
-          tokenGroups,
+          namingTokenGroups,
           tokenPrefix,
           hasMixin,
           hasParentPrefix,
@@ -257,21 +276,22 @@ export const generateFileContent = ({
           hasJsOutput,
           fontSizeBaseMap,
           deviceDimensions,
+          cssVariableReferencePrefix,
         );
 
         styledTokens += result.styles;
-        styledMixin += result.mixin;
+        mixinTokens.push(...filteredTokens);
         stylesObject = deepMergeObjects(stylesObject, result.stylesObject);
       });
     } else {
       // Filter by type only (no group filtering)
-      const filteredTokens = filterTokensByType(tokens, tokenType, excludeGroupNames);
+      const filteredTokens = filterTokensByType(fileTokens, tokenType, excludeGroupNames);
 
       const result = processTokensForType(
         filteredTokens,
         tokenType,
         mappedTokens,
-        tokenGroups,
+        namingTokenGroups,
         tokenPrefix,
         hasMixin,
         hasParentPrefix,
@@ -279,10 +299,11 @@ export const generateFileContent = ({
         hasJsOutput,
         fontSizeBaseMap,
         deviceDimensions,
+        cssVariableReferencePrefix,
       );
 
       styledTokens += result.styles;
-      styledMixin += result.mixin;
+      mixinTokens.push(...filteredTokens);
       stylesObject = deepMergeObjects(stylesObject, result.stylesObject);
     }
   });
@@ -306,7 +327,15 @@ export const generateFileContent = ({
     if (content) {
       content += '\n\n';
     }
-    content += styledMixin;
+    content += generateMixinFromTokens(
+      mixinTokens,
+      namingTokenGroups,
+      tokenPrefix,
+      hasParentPrefix,
+      sortByNumValue,
+      mixinName,
+      cssVariablePrefix,
+    );
   }
 
   return {
