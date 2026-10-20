@@ -41,6 +41,32 @@ export const groupFunctions = {
   },
 };
 
+export const createGroup = (
+  id: string,
+  name: string,
+  path: string[],
+  tokenType: TokenType = TokenType.dimension,
+): TokenGroup =>
+  ({
+    ...groupFunctions,
+    id,
+    idInVersion: id,
+    brandId: 'brandIdValue',
+    designSystemVersionId: 'designSystemVersionIdValue',
+    name,
+    description: '',
+    isRoot: false,
+    tokenType,
+    childrenIds: [],
+    path,
+    tokenIds: [],
+    subgroupIds: [],
+    parentGroupId: null,
+    sortOrder: -1,
+    createdAt: null,
+    updatedAt: null,
+  }) as unknown as TokenGroup;
+
 export const exampleGroups: TokenGroup[] = [
   {
     ...groupFunctions,

@@ -16,7 +16,13 @@ import {
   TokenGroup,
   TokenType,
 } from '@supernovaio/sdk-exporters';
-import { addEmptyLineBetweenTokenGroups, sortTokens } from '../helpers/tokenHelper';
+import {
+  addEmptyLineBetweenTokenGroups,
+  cssVariableReference,
+  formatCssVariableReference,
+  sortTokens,
+  tokenVariableName,
+} from '../helpers/tokenHelper';
 import { type FontSizeBaseMap, createDefaultFontSizeBaseMap } from '../helpers/unitHelper';
 import {
   processNumericToken,
@@ -32,7 +38,6 @@ export const tokenToStyleByType = (
   mappedTokens: Map<string, unknown>,
   tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
-  hasMixin: boolean,
   hasParentPrefix: boolean,
   hasJsOutput: boolean,
   fontSizeBaseMap: FontSizeBaseMap,
@@ -43,7 +48,6 @@ export const tokenToStyleByType = (
     hasJsOutput,
     fontSizeBaseMap,
     tokenPrefix,
-    hasMixin,
     mappedTokens,
   };
 
@@ -79,12 +83,34 @@ export const tokenToStyleByType = (
   }
 };
 
+export const generateCssVariableReferencesFromTokens = (
+  tokens: Token[],
+  tokenGroups: Array<TokenGroup>,
+  tokenPrefix: string,
+  cssVariablePrefix: string,
+  hasParentPrefix: boolean,
+  sortByNumValue: boolean,
+  hasJsOutput: boolean,
+): string => {
+  const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+
+  const cssTokens = sortedTokens.map((token) => {
+    const name = tokenVariableName(token, tokenGroups, hasParentPrefix);
+
+    return {
+      css: formatCssVariableReference(name, cssVariableReference(tokenPrefix, cssVariablePrefix, name), hasJsOutput),
+      parentGroupId: token.parentGroupId,
+    };
+  });
+
+  return addEmptyLineBetweenTokenGroups(cssTokens);
+};
+
 export const generateStylesFromTokens = (
   tokens: Token[],
   mappedTokens: Map<string, Token>,
   tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
-  hasMixin: boolean,
   hasParentPrefix: boolean,
   sortByNumValue: boolean,
   hasJsOutput: boolean,
@@ -98,7 +124,6 @@ export const generateStylesFromTokens = (
       mappedTokens,
       tokenGroups,
       tokenPrefix,
-      hasMixin,
       hasParentPrefix,
       hasJsOutput,
       fontSizeBaseMap,

@@ -2,7 +2,7 @@ import { ShadowToken, TokenGroup } from '@supernovaio/sdk-exporters';
 import { exampleShadowTokens } from '../../../tests/fixtures/exampleShadowTokens';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
-import { processShadowToken } from '../shadowTokenProcessor';
+import { processShadowToken, transformShadowLengthsToVariables } from '../shadowTokenProcessor';
 import { type FontSizeBaseMap } from '../../helpers/unitHelper';
 
 jest.mock('../../../config', () => ({
@@ -18,6 +18,29 @@ const fontSizeBaseMap: FontSizeBaseMap = new Map([
 ]);
 
 describe('shadowTokenProcessor', () => {
+  describe('transformShadowLengthsToVariables', () => {
+    it.each([
+      {
+        description: 'single layer',
+        shadow: '0px 2px 8px 0px #0000001a',
+        expected:
+          'var(--spirit-shadow-100-offset-x-01, 0px) var(--spirit-shadow-100-offset-y-01, 2px) ' +
+          'var(--spirit-shadow-100-blur-radius-01, 8px) var(--spirit-shadow-100-spread-radius-01, 0px) #0000001a',
+      },
+      {
+        description: 'multiple layers',
+        shadow: '0px 2px 8px 0px #0000001a, inset 1px 1px 0px 0px #000000ff',
+        expected:
+          'var(--spirit-shadow-100-offset-x-01, 0px) var(--spirit-shadow-100-offset-y-01, 2px) ' +
+          'var(--spirit-shadow-100-blur-radius-01, 8px) var(--spirit-shadow-100-spread-radius-01, 0px) #0000001a, ' +
+          'inset var(--spirit-shadow-100-offset-x-02, 1px) var(--spirit-shadow-100-offset-y-02, 1px) ' +
+          'var(--spirit-shadow-100-blur-radius-02, 0px) var(--spirit-shadow-100-spread-radius-02, 0px) #000000ff',
+      },
+    ])('should wrap lengths into variables for $description', ({ shadow, expected }) => {
+      expect(transformShadowLengthsToVariables('shadow-100', shadow, 'spirit-')).toBe(expected);
+    });
+  });
+
   describe('processShadowToken', () => {
     it('should process shadow token and convert px to rem', () => {
       const token = exampleShadowTokens.get('shadowRef') as ShadowToken;

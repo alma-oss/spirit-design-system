@@ -1,5 +1,7 @@
 import { Token, TokenType } from '@supernovaio/sdk-exporters';
-import { TOKEN_COLLECTION_THEMES_NAME, TOKEN_COLLECTION_PROPERTY_NAME } from '../constants';
+import { COLOR_CSS_VARIABLE_PREFIX, TOKEN_COLLECTION_THEMES_NAME } from '../constants';
+import { filterCollections } from './collectionsHelper';
+import { formatLayerSuffix } from './stringHelper';
 
 const HEX_COLOR_REGEX = /#([A-Fa-f0-9]{6,8})\b/g;
 const LONG_HEX_WITH_ALPHA_LENGTH = 8;
@@ -65,7 +67,7 @@ export const transformColorsToVariables = (
     .split(',')
     .map((part) => {
       return part.replace(HEX_COLOR_REGEX, (match) => {
-        const cssVar = `var(--${tokenPrefix}color-${renderGroupName}${name}-color-${counter.toString().padStart(2, '0')}, ${match})`;
+        const cssVar = `var(--${tokenPrefix}${COLOR_CSS_VARIABLE_PREFIX}${renderGroupName}${name}-color${formatLayerSuffix(counter)}, ${match})`;
         counter += 1;
 
         return cssVar;
@@ -76,25 +78,14 @@ export const transformColorsToVariables = (
   return transformedValue;
 };
 
+/**
+ * Keeps all non-color tokens and only those color tokens that belong to the themes collection.
+ *
+ * @param {Token[]} tokens - Array of tokens to filter.
+ * @returns {Token[]} - Array of filtered tokens.
+ */
 export const filterColorCollections = (tokens: Token[]) => {
-  return tokens.filter((item) => {
-    // Include all tokens that are not of tokenType "Color"
-    if (item.tokenType !== TokenType.color) {
-      return true;
-    }
+  const themeTokens = new Set(filterCollections(tokens, TOKEN_COLLECTION_THEMES_NAME));
 
-    // Proceed with filtering for "Color" tokenType
-    const collectionProperties = Array.isArray(item.properties) ? item.properties : [];
-    const collectionProperty = collectionProperties.find((prop) => prop.name === TOKEN_COLLECTION_PROPERTY_NAME);
-    if (!collectionProperty) {
-      return false;
-    }
-
-    const themeTokenOption = collectionProperty.options?.find((option) => option.name === TOKEN_COLLECTION_THEMES_NAME);
-    if (!themeTokenOption) {
-      return false;
-    }
-
-    return item.propertyValues?.collection === themeTokenOption.id;
-  });
+  return tokens.filter((item) => item.tokenType !== TokenType.color || themeTokens.has(item));
 };
