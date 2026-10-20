@@ -13,11 +13,14 @@ describe('fetchCorporateFooter', () => {
     fetchSpy.mockRestore();
   });
 
-  it('should return the footer HTML unchanged', async () => {
-    const html = '<footer class="almc-footer"><p>content</p></footer>';
+  it('should replace footer tags so the markup can sit inside the page footer', async () => {
+    const html =
+      '<footer class="almc-footer"><p>content</p><FOOTER><span>nested</span></FOOTER><footer-widget>keep</footer-widget></footer>';
     fetchSpy.mockResolvedValueOnce(new Response(html, { status: 200 }));
 
-    await expect(fetchCorporateFooter()).resolves.toBe(html);
+    await expect(fetchCorporateFooter()).resolves.toBe(
+      '<div class="almc-footer"><p>content</p><div><span>nested</span></div><footer-widget>keep</footer-widget></div>',
+    );
     expect(fetchSpy).toHaveBeenCalledWith(
       FOOTER_API_URL,
       expect.objectContaining({
