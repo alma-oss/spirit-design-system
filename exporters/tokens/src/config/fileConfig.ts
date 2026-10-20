@@ -1,13 +1,20 @@
-import { TokenType } from '@supernovaio/sdk-exporters';
+import { Token, TokenType } from '@supernovaio/sdk-exporters';
+import { COLOR_CSS_VARIABLE_PREFIX, TOKEN_COLLECTION_THEMES_NAME } from '../constants';
+import { getShadowLengthTokens } from '../filters/shadowLengthTokens';
 
 export type FileData = {
   fileName: string;
   tokenTypes: TokenType[];
+  collectionName?: string;
+  prepareTokens?: (tokens: Token[]) => Token[];
   groupNames?: string[];
   excludeGroupNames?: string[] | null;
-  hasMixin?: boolean;
+  mixinName?: string | null;
+  cssVariablePrefix?: string;
+  hasCssVariableReferences?: boolean;
   hasStylesObject?: boolean;
   hasParentPrefix?: boolean;
+  hasTopLevelGroupPrefix?: boolean;
   sortByNumValue?: boolean;
 };
 
@@ -63,13 +70,23 @@ export const nonThemedFilesData: FileData[] = [
   },
 ];
 
+const shadowLengthFileData = {
+  tokenTypes: [TokenType.dimension],
+  collectionName: TOKEN_COLLECTION_THEMES_NAME,
+  prepareTokens: getShadowLengthTokens,
+  hasStylesObject: false,
+  hasTopLevelGroupPrefix: false,
+} satisfies Partial<FileData>;
+
 export const themedFilesData: FileData[] = [
   {
     fileName: 'colors',
     tokenTypes: [TokenType.color],
-    hasMixin: true,
+    mixinName: 'color-css-variables',
+    cssVariablePrefix: COLOR_CSS_VARIABLE_PREFIX,
     hasStylesObject: false,
   },
+  { fileName: 'shadows', ...shadowLengthFileData, mixinName: 'shadow-css-variables' },
 ];
 
 export const devicesFilesData: FileData[] = [
@@ -88,4 +105,12 @@ export const devicesFilesData: FileData[] = [
   },
 ];
 
-export const commonThemedFilesData: FileData[] = [{ fileName: 'color-tokens', tokenTypes: [TokenType.color] }];
+export const commonThemedFilesData: FileData[] = [
+  {
+    fileName: 'color-tokens',
+    tokenTypes: [TokenType.color],
+    hasCssVariableReferences: true,
+    cssVariablePrefix: COLOR_CSS_VARIABLE_PREFIX,
+  },
+  { fileName: 'shadow-tokens', ...shadowLengthFileData, hasCssVariableReferences: true },
+];

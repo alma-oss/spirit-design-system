@@ -1,3 +1,4 @@
+export const COLOR_CSS_VARIABLE_PREFIX = 'color-';
 export const COLOR_JS_SUFFIX = 'Colors';
 export const COLOR_KEY = 'colors';
 export const COLOR_SCSS_SUFFIX = '-colors';
