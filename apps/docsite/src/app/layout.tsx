@@ -1,4 +1,6 @@
 import { Stack } from '@alma-oss/spirit-web-react';
+import { GoogleTagManager } from '@local/domains/analytics/ui/GoogleTagManager';
+import { CookieConsent } from '@local/domains/consent/ui/CookieConsent';
 import Footer from '@local/domains/footer/ui/Footer';
 import { type ChildrenProps } from '@local/types';
 import { AppProvider } from '@local/ui/AppProvider';
@@ -25,6 +27,8 @@ const RootLayout = ({ children }: RootLayoutProps) => (
       <link rel="stylesheet" href={generalSansStylesheet} />
     </head>
     <body>
+      <GoogleTagManager />
+      <CookieConsent />
       <AppProvider>
         <Header />
         <main>
