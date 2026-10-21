@@ -21,7 +21,7 @@ homepage branch. Do not copy those skills into this branch. This skill does not 
 
 ## Where the Preview Lives
 
-Create `apps/docsite/src/domains/components/features/component-list/previews/<Name>Preview.tsx`.
+Create `apps/docsite/src/domains/components/features/component-card/previews/<Name>Preview.tsx`.
 
 - Add `'use client'` only when the preview uses hooks or event handlers. Previews render inside the client
   `ComponentCard`, so a static composition does not need it.
@@ -48,9 +48,9 @@ export default ButtonPreview;
 The catalog test requires the manifest keys and `COMPONENT_PREVIEWS` keys to be the same set.
 
 1. Add the component name to `COMPONENT_PREVIEW_MANIFEST` in
-   `apps/docsite/src/domains/components/features/component-list/model/componentPreviewManifest.ts`.
+   `apps/docsite/src/domains/components/features/component-catalog/constants/componentPreviewManifest.ts`.
 2. Import the preview and add the same name to `COMPONENT_PREVIEWS` in
-   `apps/docsite/src/domains/components/features/component-list/previews/index.ts`:
+   `apps/docsite/src/domains/components/features/component-card/previews/index.ts`:
 
 ```ts
 Button: { Preview: ButtonPreview, guides: COMPONENT_PREVIEW_MANIFEST.Button },
@@ -79,7 +79,7 @@ When converting an existing preview, keep the variant, size, text, icons, and nu
 If the markup references a partial under `apps/docsite/src/domains/components/ui/partials`, render that
 asset. Do not replace it with a stock photo.
 
-Do not change `componentCategories.ts` or `componentDescriptions.ts` unless someone asks for new categories
+Do not change `component-catalog/constants/componentCategories.ts` or `componentDescriptions.ts` unless someone asks for new categories
 or public copy.
 
 ## The Frame Is a Picture
@@ -93,5 +93,5 @@ or public copy.
 
 Open `/components` and find the card. Then run `yarn workspace @alma-oss/spirit-docsite test`, which runs lint,
 unit tests, and types. The catalog test in
-`model/__tests__/componentCatalog.test.ts` fails when the manifest and the registry disagree, or when a
+`component-catalog/repositories/__tests__/componentsCatalogRepository.test.ts` fails when the manifest and the registry disagree, or when a
 placeholder component is registered.
