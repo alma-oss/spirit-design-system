@@ -5,17 +5,17 @@ import { routes } from '@local/domains/routing/routes';
 import useIsComponentUnstable from '@local/hooks/useIsComponentUnstable';
 import NextLink from 'next/link';
 import React from 'react';
-import { getComponentCatalogEntry } from './model/componentCatalog';
-import PreviewFrame from './PreviewFrame';
+import type { ComponentCatalogEntry } from '../../../component-catalog';
+import { PreviewFrame } from '../PreviewFrame';
 import './ComponentCard.scss';
 
 interface ComponentCardProps {
-  component: string;
+  entry: ComponentCatalogEntry;
 }
 
-const ComponentCard = ({ component }: ComponentCardProps) => {
+const ComponentCard = ({ entry }: ComponentCardProps) => {
+  const { name: component, description, guides, Preview } = entry;
   const isUnstable = useIsComponentUnstable(component.toLowerCase());
-  const { description, guides, Preview } = getComponentCatalogEntry(component);
 
   return (
     <li className="ComponentCard">
