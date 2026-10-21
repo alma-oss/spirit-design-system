@@ -1,0 +1,39 @@
+# Docsite Component Preview
+
+Workflow for adding or changing the picture on a component card in the Spirit docsite.
+
+## Usage
+
+```text
+/spirit:docsite-component-preview
+```
+
+Use when you need to:
+
+- Add a card preview for a component on `/components`
+- Convert an existing preview into a React composition
+- Leave a component on the placeholder because it has no preview
+
+## What It Covers
+
+1. A preview in `features/component-card/previews/<Name>Preview.tsx`, built with
+   `@alma-oss/spirit-web-react`, with `'use client'` only when it uses hooks or event handlers
+2. One `export * as <Name>` line in `previews/index.ts`, and optional `guides` set on the preview component
+3. No preview file and no line for a card that stays a placeholder
+4. Keeping `doc-preview-card.html` out of the component packages, and leaving `preview.html` and
+   `compilePreview.ts` for the detail Web Preview
+5. Reusing an asset from `ui/partials` when the source markup points at one
+6. Leaving the preview `inert`, and leaving the frame's parsed lengths in `px`
+
+Page composition and SCSS stay in `/spirit:docsite-composition` and `/spirit:docsite-styles` on the homepage
+branch. This skill does not copy them.
+
+## Output
+
+A preview file plus one line in `previews/index.ts`, or nothing for a placeholder. Categories and public descriptions
+stay as they are unless the task asks to change them.
+
+## Check
+
+Open `/components` and find the card. Run `yarn workspace @alma-oss/spirit-docsite test`. `componentsCatalogRepository.test.ts`
+checks that every registered preview exports a component, valid guides, and an existing component name.
