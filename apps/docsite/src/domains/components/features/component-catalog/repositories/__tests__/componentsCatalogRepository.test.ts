@@ -1,8 +1,8 @@
-import { COMPONENT_PREVIEWS } from '../../previews';
-import { getComponentCatalogEntry } from '../componentCatalog';
-import { COMPONENT_CATEGORIES } from '../componentCategories';
-import { COMPONENT_DESCRIPTIONS, getComponentDescription } from '../componentDescriptions';
-import { COMPONENTS_WITHOUT_PREVIEW, COMPONENT_PREVIEW_MANIFEST } from '../componentPreviewManifest';
+import { COMPONENT_PREVIEWS } from '../../../component-card/previews';
+import { COMPONENT_CATEGORIES } from '../../constants/componentCategories';
+import { COMPONENT_DESCRIPTIONS, getComponentDescription } from '../../constants/componentDescriptions';
+import { COMPONENTS_WITHOUT_PREVIEW, COMPONENT_PREVIEW_MANIFEST } from '../../constants/componentPreviewManifest';
+import { fetchComponentsCatalog } from '../componentsCatalogRepository';
 
 // The unit test job does not build `@alma-oss/spirit-web-react`, so its `dist` entry point is missing there.
 jest.mock(
@@ -14,7 +14,7 @@ jest.mock(
   { virtual: true },
 );
 
-describe('componentCatalog', () => {
+describe('componentsCatalogRepository', () => {
   it('should keep the authored card descriptions', () => {
     expect(getComponentDescription('Button')).toBe(COMPONENT_DESCRIPTIONS.Button);
     expect(getComponentDescription('Item')).toBe(COMPONENT_DESCRIPTIONS.Item);
@@ -32,12 +32,22 @@ describe('componentCatalog', () => {
   });
 
   it('should describe every catalog entry and place an uncategorized component in Uncategorized', () => {
-    expect(getComponentCatalogEntry('Button')).toMatchObject({
+    const [button, actionText] = fetchComponentsCatalog(['Button', 'ActionText']);
+
+    expect(button).toMatchObject({
       name: 'Button',
       category: 'Actions',
       description: COMPONENT_DESCRIPTIONS.Button,
     });
-    expect(getComponentCatalogEntry('ActionText').category).toBe('Uncategorized');
+    expect(actionText.category).toBe('Uncategorized');
+  });
+
+  it('should keep the order of the requested components', () => {
+    expect(fetchComponentsCatalog(['Tag', 'Alert', 'Button']).map(({ name }) => name)).toEqual([
+      'Tag',
+      'Alert',
+      'Button',
+    ]);
   });
 
   it('should register a React preview for every manifest entry and no others', () => {
@@ -52,7 +62,9 @@ describe('componentCatalog', () => {
   it('should leave the components without a card preview unregistered', () => {
     COMPONENTS_WITHOUT_PREVIEW.forEach((component) => {
       expect(COMPONENT_PREVIEWS[component]).toBeUndefined();
-      expect(getComponentCatalogEntry(component).Preview).toBeUndefined();
+    });
+    fetchComponentsCatalog([...COMPONENTS_WITHOUT_PREVIEW]).forEach((entry) => {
+      expect(entry.Preview).toBeUndefined();
     });
   });
 });
