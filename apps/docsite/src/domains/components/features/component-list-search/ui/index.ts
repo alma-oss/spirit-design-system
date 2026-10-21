@@ -1,0 +1,1 @@
+export { ComponentSearch } from './ComponentSearch';
