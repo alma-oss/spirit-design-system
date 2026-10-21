@@ -2,13 +2,11 @@
 
 import { Text } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import AlphabeticalComponentList from './AlphabeticalComponentList';
-import CategoricalComponentList from './CategoricalComponentList';
-import ComponentsBand from './ComponentsBand';
-import { useComponentsSearchQueryState } from './hooks/useComponentsSearchQueryState';
-import { useComponentsSortQueryState } from './hooks/useComponentsSortQueryState';
-import { SORT_OPTIONS } from './model/componentCategories';
-import { filterComponents } from './utils/filterComponents';
+import { filterComponents, useComponentsSearchQueryState } from '../../../component-list-search';
+import { SORT_OPTIONS, useComponentsSortQueryState } from '../../../component-list-sort';
+import { AlphabeticalComponentList } from '../AlphabeticalComponentList';
+import { CategoricalComponentList } from '../CategoricalComponentList';
+import { ComponentsBand } from '../ComponentsBand';
 
 interface ComponentListProps {
   components: string[];

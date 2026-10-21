@@ -2,7 +2,7 @@
 
 import { Icon, InputAddon, TextField, VisuallyHidden } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import { useComponentsSearchQueryState } from './hooks/useComponentsSearchQueryState';
+import { useComponentsSearchQueryState } from '../../hooks/useComponentsSearchQueryState';
 import './ComponentSearch.scss';
 
 const SEARCH_ID = 'components-search';
