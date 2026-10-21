@@ -1,4 +1,4 @@
-import type { PreviewGuides } from './types';
+import type { PreviewGuides } from '../types';
 
 // Components that have a React card preview. Guides limit which measurement lines the frame draws.
 export const COMPONENT_PREVIEW_MANIFEST: Record<string, PreviewGuides | undefined> = {

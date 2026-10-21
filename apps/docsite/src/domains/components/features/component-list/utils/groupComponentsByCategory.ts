@@ -1,4 +1,4 @@
-import { COMPONENT_CATEGORIES } from '../model/componentCategories';
+import { COMPONENT_CATEGORIES } from '../../component-catalog/constants/componentCategories';
 
 export interface ComponentCategory {
   category: string;

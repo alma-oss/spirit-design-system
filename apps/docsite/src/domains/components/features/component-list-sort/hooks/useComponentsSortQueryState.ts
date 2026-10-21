@@ -1,7 +1,7 @@
 'use client';
 
 import { useQueryState, parseAsStringEnum } from 'nuqs';
-import { SORT_OPTIONS, type SortOption } from '../model/componentCategories';
+import { SORT_OPTIONS, type SortOption } from '../constants';
 
 const componentsSortParser = parseAsStringEnum<SortOption>([
   SORT_OPTIONS.ALPHABETICAL,
