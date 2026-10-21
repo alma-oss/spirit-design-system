@@ -1,5 +1,5 @@
-import { COMPONENT_PREVIEW_MANIFEST } from '../model/componentPreviewManifest';
-import type { ComponentPreviewRegistration } from '../model/types';
+import { COMPONENT_PREVIEW_MANIFEST } from '../../component-catalog/constants/componentPreviewManifest';
+import type { ComponentPreviewRegistration } from '../../component-catalog/types';
 import AccordionPreview from './AccordionPreview';
 import ActionGroupPreview from './ActionGroupPreview';
 import ActionTextPreview from './ActionTextPreview';
