@@ -20,8 +20,8 @@ import {
 } from '@alma-oss/spirit-web-react';
 import { routes } from '@local/domains/routing/routes';
 import React, { useEffect, useId, useState } from 'react';
-import ComponentSearch from './ComponentSearch';
-import ComponentSortToggle from './ComponentSortToggle';
+import { ComponentSearch } from '../../../component-list-search';
+import { ComponentSortToggle } from '../../../component-list-sort';
 import './ComponentsPageHeader.scss';
 
 const TOAST_DURATION = 3000;
