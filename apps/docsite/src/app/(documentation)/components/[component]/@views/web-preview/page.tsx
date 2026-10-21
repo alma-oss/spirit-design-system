@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import WebPreview from '@local/domains/components/ui/WebPreview';
+import { WebPreview } from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import { notFound } from 'next/navigation';
