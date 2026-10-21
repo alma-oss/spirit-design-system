@@ -52,3 +52,4 @@ const WebPreview = ({ html }: WebPreviewProps) => {
 };
 
 export default WebPreview;
+export { WebPreview };

@@ -37,3 +37,4 @@ const ComponentCover = () => {
 };
 
 export default ComponentCover;
+export { ComponentCover };
