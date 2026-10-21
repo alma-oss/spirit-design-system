@@ -27,6 +27,7 @@ Pitfalls:
 - Every call failing with a generic error (and listing projects returning an empty list) means no VPN.
 - Some MCP clients pick up a changed token only after restarting the session.
 - The `comment` field embedded in the issue response is paginated on its own and can hold fewer comments than exist — fetch the dedicated `/comment?maxResults=50` endpoint when reading the ticket.
+- The Jira MCP `get_issue` returns no comments by default. Passing both `comment_limit: 50` and `fields: "*all"` (or `fields: "comment,status"`) returned them on DS-2848 — try that before falling back to REST.
 - The Jira MCP `get_issue` can return no comments at all, whatever `comment_limit` says — read them with the REST `/comment` endpoint instead. To check whether a comment already exists without a token, `jira_search` with JQL `key = DS-1234 AND comment ~ "Acceptance review"` works.
 - The MCP `add_comment` can fail with a generic "Error calling tool" on every attempt (even after an MCP restart) while reads work. Do not loop on it: post via REST (`POST /rest/api/2/issue/<KEY>/comment`, expect HTTP 201) with the token injected by the user's secret manager, e.g. a CLI that runs a command with the secret in the environment. Build the JSON body with `python3 -c 'import json…'` (not hand-escaped), never echo the token, and read the stored comment back afterwards.
 - The comment returned by the write call is not the stored body — re-fetch.
@@ -110,6 +111,9 @@ Pitfalls:
 - A real-input scroll check (bugs like "cannot scroll with wheel/touch") — drive the page with Playwright's `page.mouse.move` + `page.mouse.wheel(0, 200)` over the scroller, and for touch use a mobile context (`hasTouch`, `isMobile`, 375px) with CDP `Input.synthesizeScrollGesture` (`gestureSourceType: 'touch'`, negative `yDistance`). Read `scrollTop` after a ~600ms wait. Run the same script against production and the PR preview and print both.
 - Demo modals: after closing one dialog, wait for `dialog[open]` to detach (plus ~500ms for the animation) before clicking the next trigger, otherwise the old dialog "intercepts pointer events".
 - Run ad-hoc Playwright scripts from inside the repo (copy to a throwaway file, delete after) so `@playwright/test` resolves; from the scratchpad it does not. Pass URL and label as separate arguments.
+- A browser MCP that fails with "The browser is already running for <profile dir>" has a stale Chrome holding its dedicated profile. Kill only that profile's Chrome (e.g. `pkill -f "<profile-dir-name>"`), never the user's personal browser, then retry.
+- Browser MCP screenshot tools may refuse to write outside their configured workspace roots ("not within any of the configured workspace roots"). Do not fight it: either save somewhere the tool allows, or use `verify.mjs --screenshot`. If no screenshot can be saved, drop the "Screenshots attached" line from the Jira comment and write "No screenshots attached" under Not verified.
+- A one-shot `evaluate_script` that returns headings, links, and element counts (`h1`, `h2`, `a[href="#"]`, `document.querySelectorAll(...).length`) is enough evidence for text and link claims; no screenshot needed.
 - Prefer text output (computed values, accessibility tree) over screenshots; take screenshots only for the 1–2 most visual criteria.
 
 ### Link Checks (Product Tickets)

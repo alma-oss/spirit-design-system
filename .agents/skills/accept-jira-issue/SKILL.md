@@ -46,6 +46,7 @@ Get the issue with all fields and up to 50 comments. Then:
 3. For each (sub-)criterion write the **expected observation** — what you will see on the deployment if it is met. Example: "AC2 — a Box with `topStart: '0'` renders `border-start-start-radius: 0px` while other corners keep the uniform radius."
 4. Note status, labels, and components. Labels `spirit-web` / `spirit-web-react` mean both packages must be checked.
 5. Collect any deployment URLs already in the description or comments (e.g. "released on beta.jobs.cz").
+6. Check comments for blockers ("waiting on PR #3029") and look up their current state. Report a blocker that has since merged as resolved, not as open. A status of Done before acceptance is normal here — the `Accept` transition can still be available (DS-2848: Done → Accepted worked); list the transitions instead of assuming it will be rejected.
 
 ### Step 2: Find the Implementation
 
@@ -99,6 +100,9 @@ For each criterion:
 
 - Compare the observation to the expected observation from Step 1.
 - **Bugs: reproduce first, then verify the fix.** Run the reproduction steps on the baseline (production demo / `main`) and confirm the bug appears; a fix cannot be accepted if the bug never reproduced on the baseline. Then run the identical steps on the PR preview. Record both observations side by side, e.g. "main: `scrollTop` 0 after wheel 200; PR: 200". Use the same browser, viewport, and input method for both. For scroll/input bugs use real input events (mouse wheel, CDP touch gesture) rather than setting `scrollTop` in script — see recipes.
+- **Always open the deployment when a deploy URL exists — also for review, process, and docs tickets.** "The criteria are about process" is not a reason to skip the browser. Turn the PR's claimed fixes into observable checks and verify them on the preview. Example: DS-2848 ("Review: homepage redesign") — thread replies said "Fixed", so the checks were: the title is an `h1` (`document.querySelectorAll('h1')`), the removed section is gone (0 matching elements), "Component status" has `href="/components"`, and the still-open placeholder is a dead `href="#"` link. Reading only PR threads would have left every "Fixed" as the implementer's claim, not evidence.
+- **Review tickets ("all findings addressed or tracked"):** list every review thread with its resolution. For each thread left as-is, look for tracking at the PR head (a Jira link, a follow-up issue, or a `TODO` comment in the code — fetch the file with `gh api repos/<owner>/<repo>/contents/<path>?ref=<head-sha>` and grep). In this team a `TODO` comment on a work-in-progress PR counts as tracked. A left-as-is thread with none of these is Partially met; name it in the report. DS-2848: two of three open items had a `TODO` (`FaqSection.tsx`, `Hero.tsx`), the third (a `global.scss` question) had none.
+- **Guardrail criteria:** agent rules, skills, and docs (e.g. `AGENTS.md`, `.agents/skills/*`) count as guardrails here. Still list in "Not verified" that they are not enforced by lint or CI, so the reader knows.
 - Check every breakpoint and both packages (web, web-react) when the criterion or the ticket labels call for it.
 - For an `X OR Y` criterion, record which branch was implemented and verify that branch fully; do not mark the other branch as missing.
 - Capture screenshots only for the 1–2 most visual criteria, into a temporary `<KEY>-acceptance/` folder **outside the repository**.
