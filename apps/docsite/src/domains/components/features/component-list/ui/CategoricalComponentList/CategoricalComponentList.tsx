@@ -1,10 +1,10 @@
 import { Heading, Text } from '@alma-oss/spirit-web-react';
 import React from 'react';
-import ComponentCard from './ComponentCard';
-import ComponentGrid from './ComponentGrid';
-import ComponentsBand from './ComponentsBand';
-import { COMPONENT_CATEGORY_DESCRIPTIONS } from './model/componentCategories';
-import { groupComponentsByCategory } from './utils/groupComponentsByCategory';
+import { ComponentCard } from '../../../component-card';
+import { COMPONENT_CATEGORY_DESCRIPTIONS, fetchComponentsCatalog } from '../../../component-catalog';
+import { groupComponentsByCategory } from '../../utils/groupComponentsByCategory';
+import { ComponentGrid } from '../ComponentGrid';
+import { ComponentsBand } from '../ComponentsBand';
 
 interface CategoricalComponentListProps {
   components: string[];
@@ -29,8 +29,8 @@ const CategoricalComponentList = ({ components }: CategoricalComponentListProps)
       </ComponentsBand>
       <ComponentsBand variant="grid">
         <ComponentGrid>
-          {filtered.map((component) => (
-            <ComponentCard key={component} component={component} />
+          {fetchComponentsCatalog(filtered).map((entry) => (
+            <ComponentCard key={entry.name} entry={entry} />
           ))}
         </ComponentGrid>
       </ComponentsBand>
