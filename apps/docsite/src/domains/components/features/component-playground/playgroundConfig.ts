@@ -1,3 +1,5 @@
+import { isRecord } from '../../utils/isRecord';
+
 export const PLAYGROUND_COMPONENTS = ['Button'] as const;
 
 export type PlaygroundComponentName = (typeof PLAYGROUND_COMPONENTS)[number];
@@ -41,9 +43,6 @@ export interface PlaygroundFile extends PlaygroundConfig {
   /** Tab route segments (e.g. `web-preview`) that are not offered for this component. */
   hiddenTabs?: string[];
 }
-
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
 
 const isOptionalBoolean = (value: unknown) => value === undefined || typeof value === 'boolean';
 

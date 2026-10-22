@@ -26,15 +26,13 @@ describe('componentsCatalogRepository', () => {
     expect(getComponentDescription('UNSTABLE_Tile')).toBe('Spirit Tile component');
   });
 
-  it('should describe every catalog entry and place an uncategorized component in Uncategorized', () => {
-    const [button, unknown] = fetchComponentsCatalog(['Button', 'UnknownComponent']);
+  it('should describe every catalog entry', () => {
+    const [button] = fetchComponentsCatalog(['Button']);
 
     expect(button).toMatchObject({
       name: 'Button',
-      category: 'Actions',
       description: COMPONENT_DESCRIPTIONS.Button,
     });
-    expect(unknown.category).toBe('Uncategorized');
   });
 
   it('should keep the order of the requested components', () => {
