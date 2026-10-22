@@ -104,7 +104,7 @@ Analyze all changed code across these areas:
 4. **Tests** — Missing coverage for critical paths, edge cases, error branches; high regression risk without tests
 5. **Types** — `any` abuse, stringly-typed APIs, exposed mutable internals, god objects (10+ fields), types that allow invalid states
 6. **Simplification** — Deep nesting (>3 levels), duplicate logic, poor naming, unnecessary abstractions, over-engineering
-7. **Guidelines** — Deviations from project conventions in [CLAUDE.md](../CLAUDE.md) or project config (imports, naming, error handling, file structure)
+7. **Guidelines** — Deviations from project conventions in [AGENTS.md](../AGENTS.md) or project config (imports, naming, error handling, file structure)
 
 ### AI-Generated Code
 
