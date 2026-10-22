@@ -141,3 +141,15 @@ Cross-origin links return an opaque response — open them and check the page ti
 
 - macOS `sed` needs an explicit empty backup suffix: `sed -i '' 's/a/b/' file`.
 - zsh fails on unmatched globs — quote them: `grep -r --include='*.ts' …`.
+
+### Widgets that hide from automation (cookie banners)
+
+Some consent libraries skip rendering for headless or webdriver browsers, so a missing banner in Playwright or a browser MCP is not evidence. Re-check with automation signals masked:
+
+```js
+const browser = await chromium.launch({ channel: 'chrome', args: ['--disable-blink-features=AutomationControlled'] });
+const context = await browser.newContext({ userAgent: '<a normal desktop Chrome UA string>' });
+await context.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }));
+```
+
+Also use `waitUntil: 'load'` plus a fixed wait, not `networkidle`, on pages with analytics or Netlify drawer traffic that never settles. Use a fresh browser context so no stored consent cookie hides the banner.

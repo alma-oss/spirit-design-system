@@ -22,6 +22,8 @@ Draft a DS-project Jira Story, preview it for approval, file it via the `jira` M
 - **Don't prescribe an API that hasn't been designed yet.** If the concrete shape (function signatures, type interfaces) is part of the ticket's own work, describe capabilities and cite external prior art instead of inventing code blocks that look decided. Only write out concrete signatures if the user has actually agreed on them in conversation first — never default to inventing one.
 - **Implementation notes carry the depth — gate the structure on actual complexity, not habit.** If the work is simple enough to explain in a flat list, use one `h2. Implementation notes` with up to ~5 plain bullets — don't manufacture sub-headings to fill a template. If the work genuinely spans multiple files/layers, draws on external prior art, or needs to separate current-state from approach from scope, split into `h3.` sub-headings: "What exists today" (evidence, file references), "Model to draw from" (the reasoning/prior art being drawn from), and "Scope of the work" (explicit bullets). Judge which shape fits from what you actually know about the work — don't default to the heavier one just because it's more thorough-looking.
 - **References are opt-in, not a template fixture.** Only add a References list of external links when prior art genuinely changes how someone would implement this — verify every link actually resolves (fetch/open it) before including it, never paste an unverified URL. Skip it entirely for internal-only or straightforward work.
+- **Check what already exists before drafting.** Read the code or the parent ticket for what is already done, and write acceptance criteria only for the remaining work. For "add the GTM id" the integration already read `NEXT_PUBLIC_GTM_ID`, so the ticket needed 2 criteria and 2 notes; the first draft had 5 and was cut on request.
+- **The preview must match what you claim.** If you say you removed or changed something, re-read the draft before sending it (the first DS-2890 preview said the DS-2458 mention was removed but still contained it).
 - **Always preview before writing.** Show the full drafted text to the user before calling `jira_create_issue` or `jira_update_issue`. Iterate until approved.
 
 ---
@@ -78,7 +80,7 @@ jira_link_to_epic(issue_key="<new key>", epic_key="<epic from Step 2>")
 jira_update_issue(issue_key="<new key>", fields={"customfield_12151": "<epic key>"})
 ```
 
-Related tickets are linked with `jira_create_issue_link(link_type="Relation", ...)` — "Relates to" is not a valid type name here. `jira_update_issue` replaces `labels` wholesale, so read the current labels first when the ticket may already have some.
+For `Blocks`, `inward_issue_key` is the blocker: inward `GA-2242`, outward `DS-2890` stores "DS-2890 is blocked by GA-2242". A generic tool error does not prove a link was not created; re-read `issuelinks` before retrying. Related tickets are linked with `jira_create_issue_link(link_type="Relation", ...)` — "Relates to" is not a valid type name here. `jira_update_issue` replaces `labels` wholesale, so read the current labels first when the ticket may already have some.
 
 ### Step 6: Apply the Jira Wiki-Markup Gotchas
 
