@@ -2,10 +2,10 @@
 @use '@tokens' as tokens;
 
 .MarkdownContent pre {
-    padding: var(--spirit-space-800) var(--spirit-space-900);
-    margin-block: var(--spirit-space-1000);
+    padding: tokens.$space-800 tokens.$space-900;
+    margin-block: tokens.$space-1000;
     white-space: pre-wrap;
-    border-radius: var(--spirit-radius-300);
+    border-radius: tokens.$radius-300;
 }
 
 .MarkdownContent p {
@@ -15,8 +15,8 @@
 .MarkdownContent ul,
 .MarkdownContent ol {
     max-width: 70ch;
-    padding-inline-start: var(--spirit-space-1000);
-    margin-block: var(--spirit-space-900);
+    padding-inline-start: tokens.$space-1000;
+    margin-block: tokens.$space-900;
 }
 
 .MarkdownContent ul {
@@ -28,12 +28,12 @@
 }
 
 .MarkdownContent li {
-    margin-block: var(--spirit-space-600);
+    margin-block: tokens.$space-600;
 }
 
 .MarkdownContent li::marker {
     font-size: 1em;
-    color: var(--spirit-color-neutral-content-basic);
+    color: tokens.$neutral-content-basic;
 }
 
 .MarkdownContent ul ul,
@@ -41,16 +41,16 @@
 .MarkdownContent ol ul,
 .MarkdownContent ol ol {
     max-width: unset;
-    margin-block: var(--spirit-space-400);
+    margin-block: tokens.$space-400;
 }
 
 .MarkdownContent code:not(pre code) {
     @include typography.generate(tokens.$code-small-regular);
 
-    padding: var(--spirit-space-100) var(--spirit-space-400);
+    padding: tokens.$space-100 tokens.$space-400;
     white-space: pre-wrap;
     word-break: break-word;
     vertical-align: baseline;
-    border-radius: var(--spirit-radius-200);
-    background: var(--spirit-color-background-secondary);
+    border-radius: tokens.$radius-200;
+    background-color: tokens.$background-secondary;
 }
