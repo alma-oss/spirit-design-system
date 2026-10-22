@@ -34,11 +34,11 @@ The detail layout is `ComponentHeader`, then `ComponentTabNavigation`, then the 
 
 Detail blocks use `ComponentsBand` from `features/component-list`. Do not add a second band component.
 
-| Variant | Use |
-| --- | --- |
-| `detailHeader` | Header. No full-width bottom line, so the header flows into the tabs. |
-| `tabs` | Tab strip. Full-width bottom line. |
-| `content` | A documentation block. The divider is inside the container, and the last block has none. |
+| Variant        | Use                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| `detailHeader` | Header. No full-width bottom line, so the header flows into the tabs.                    |
+| `tabs`         | Tab strip. Full-width bottom line.                                                       |
+| `content`      | A documentation block. The divider is inside the container, and the last block has none. |
 
 Do not change the listing variants `header`, `heading`, and `grid`.
 
@@ -96,7 +96,7 @@ heading component then sets `fontWeight="semibold"` and `marginTop="space-0"`. D
 - `splitMarkdownSections` only splits blocks, drops thematic breaks, and strips bold-only headings. Do not
   shift a heading level that `rehypeNormalizeHeadings` will shift again.
 
-## design.md
+## Design.md
 
 `design.md` is Supernova output. `yarn supernova:extract` overwrites hand edits. The Button color images
 are intentionally absent on this branch. Do not put them back.
