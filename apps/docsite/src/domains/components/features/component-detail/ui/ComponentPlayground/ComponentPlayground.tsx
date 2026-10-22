@@ -21,6 +21,7 @@ import {
   type PlaygroundConfig,
   type PlaygroundControl,
 } from './playgroundConfig';
+import { buildCode, type SnippetAttribute } from './playgroundSnippet';
 import './ComponentPlayground.scss';
 
 type PlaygroundValue = string | boolean;
@@ -81,11 +82,6 @@ const registry: Record<PlaygroundComponentName, ComponentType<PlaygroundComponen
 const getInitialValues = (controls: PlaygroundControl[]) =>
   Object.fromEntries(controls.map((control) => [control.name, control.defaultValue ?? false]));
 
-interface SnippetAttribute {
-  name: string;
-  value?: string;
-}
-
 const getAttributes = (controls: PlaygroundControl[], values: Record<string, PlaygroundValue>): SnippetAttribute[] =>
   controls
     .filter((control) => control.name !== 'children' && values[control.name] !== (control.defaultValue ?? false))
@@ -94,39 +90,6 @@ const getAttributes = (controls: PlaygroundControl[], values: Record<string, Pla
 
       return typeof value === 'boolean' ? { name: control.name } : { name: control.name, value: String(value) };
     });
-
-const formatAttribute = ({ name, value }: SnippetAttribute) => (value === undefined ? name : `${name}="${value}"`);
-
-const importLine = (what: string, from: string) => (what ? `import ${what} from '${from}';` : `import '${from}';`);
-
-const IMPORT_LINES = ['themes', 'foundation', 'components', 'helpers', 'utilities'].map((name) =>
-  importLine('', `@alma-oss/spirit-web/css/${name}.css`),
-);
-
-const buildCode = (component: string, attributes: SnippetAttribute[], children: string) => {
-  const isMultiline = attributes.length > 2;
-  const jsx = isMultiline
-    ? [
-        `<${component}`,
-        ...attributes.map((attribute) => `  ${formatAttribute(attribute)}`),
-        '>',
-        `  ${children}`,
-        `</${component}>`,
-      ]
-    : [`${[`<${component}`, ...attributes.map(formatAttribute)].join(' ')}>${children}</${component}>`];
-
-  return [
-    importLine('React', 'react'),
-    importLine(`{ ${component} }`, '@alma-oss/spirit-web-react'),
-    ...IMPORT_LINES,
-    '',
-    'export default function Example() {',
-    '  return (',
-    ...jsx.map((line) => `    ${line}`),
-    '  );',
-    '}',
-  ];
-};
 
 const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl = '' }: PlaygroundConfig) => {
   const id = useId();

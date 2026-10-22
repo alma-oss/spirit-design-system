@@ -102,15 +102,19 @@ describe('isComponentTabHidden', () => {
 });
 
 describe('getComponentDescription', () => {
-  it('returns the first sentence under the readme title', async () => {
+  const writeReadme = async (markdown: string) => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'component-description-'));
     const componentDir = path.join(root, 'packages/web-react/src/components/Button');
 
     await fs.mkdir(componentDir, { recursive: true });
-    await fs.writeFile(
-      path.join(componentDir, 'README.md'),
+    await fs.writeFile(path.join(componentDir, 'README.md'), markdown, 'utf8');
+
+    return root;
+  };
+
+  it('returns the first sentence under the readme title', async () => {
+    const root = await writeReadme(
       '# Button\n\nButton allows users to [take actions](/docs). More text.\n\n## Usage\n',
-      'utf8',
     );
 
     await expect(getComponentDescription('button', root)).resolves.toBe('Button allows users to take actions.');
@@ -120,6 +124,34 @@ describe('getComponentDescription', () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'component-description-'));
 
     await expect(getComponentDescription('button', root)).resolves.toBe('');
+  });
+
+  it('ignores a fenced example once the readme has already opened a section', async () => {
+    const root = await writeReadme(
+      '# Accordion\n\n## Usage\n\n```tsx\nexport const Example = () => {\n\n  return null;\n};\n```\n',
+    );
+
+    await expect(getComponentDescription('button', root)).resolves.toBe('');
+  });
+
+  it('removes a reference link from the intro', async () => {
+    const root = await writeReadme(
+      '# Stack\n\n[Stack][stack] is a component that allows you to compose elements vertically.\n\n[stack]: https://example.com\n',
+    );
+
+    await expect(getComponentDescription('button', root)).resolves.toBe(
+      'Stack is a component that allows you to compose elements vertically.',
+    );
+  });
+
+  it('skips an unstable warning and uses the next paragraph', async () => {
+    const root = await writeReadme(
+      '# Combobox\n\n⚠️ This component is **UNSTABLE**. Its API may change.\n\nCombobox is a form control built on [Dropdown][dropdown].\n',
+    );
+
+    await expect(getComponentDescription('button', root)).resolves.toBe(
+      'Combobox is a form control built on Dropdown.',
+    );
   });
 });
 

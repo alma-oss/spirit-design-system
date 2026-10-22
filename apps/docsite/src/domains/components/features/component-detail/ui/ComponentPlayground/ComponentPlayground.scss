@@ -41,6 +41,7 @@
     }
 }
 
+// TODO: Next to the panel the preview is already narrower than 768px, so Tablet looks the same as Desktop.
 .ComponentPlayground__stage--tablet {
     max-width: units.px-to-rem(768);
 }
