@@ -1,3 +1,4 @@
+import { ScrollView } from '@alma-oss/spirit-web-react';
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/features/component-list';
 import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import ComponentTabNavigationItems, { type TabItem } from '@local/domains/components/ui/ComponentTabNavigationItems';
@@ -61,7 +62,11 @@ const ComponentTabNavigation = async ({ component, hiddenTabs = [] }: ComponentT
 
   return (
     <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.TABS}>
-      <ComponentTabNavigationItems items={items.filter((item) => !hiddenTabs.includes(item.segment))} />
+      <div className="d-grid">
+        <ScrollView direction="horizontal" isScrollbarDisabled>
+          <ComponentTabNavigationItems items={items.filter((item) => !hiddenTabs.includes(item.segment))} />
+        </ScrollView>
+      </div>
     </ComponentsBand>
   );
 };
