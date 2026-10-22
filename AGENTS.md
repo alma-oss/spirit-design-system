@@ -26,6 +26,7 @@ Spirit Design System is an open-source design system developed by Alma Career (f
   [Getting Started section of the Development Guide][development-guide-getting-started] for base tooling
   and repository management.
   Always use these tools for working with packages and gaining insights into the project structure and dependencies.
+- Dependencies may have changed since your training data. Read the version-matched docs shipped with the package or its changelog before changing its APIs, config, or conventions, for example the [Next.js guide][nextjs-docs].
 - When verifying your changes, refer to the [Common Tasks section of the Development Guide][development-guide-common-tasks]
   for running tests and linters. Always run the appropriate tests and linters before finishing your work.
 
@@ -41,4 +42,5 @@ For comprehensive guidelines, see:
 [contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
 [development-guide-getting-started]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#getting-started
 [development-guide-common-tasks]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#common-tasks
+[nextjs-docs]: node_modules/next/dist/docs/index.md
 [readme]: https://github.com/alma-oss/spirit-design-system/blob/main/README.md
