@@ -1,11 +1,39 @@
+import type { PlaygroundControl } from './playgroundConfig';
+
 export interface SnippetAttribute {
   name: string;
   value?: string;
 }
 
-const needsJsxString = (value: string) => /["\\\n\r]/.test(value);
+type PlaygroundValue = string | boolean;
 
-const needsJsxChildren = (children: string) => /[{}<>]/.test(children);
+const needsJsxString = (value: string) => /["\\\n\r&]/.test(value);
+
+const needsJsxChildren = (children: string) => /[{}<>&]/.test(children);
+
+// String props stay even at the playground default, so the copy matches the preview.
+// A boolean is omitted only while it is false. Children are rendered as the element body.
+export const getSnippetAttributes = (
+  controls: PlaygroundControl[],
+  values: Record<string, PlaygroundValue>,
+): SnippetAttribute[] =>
+  controls.flatMap((control) => {
+    if (control.name === 'children') {
+      return [];
+    }
+
+    const value = values[control.name];
+
+    if (typeof value === 'boolean') {
+      return value ? [{ name: control.name }] : [];
+    }
+
+    if (value === undefined || value === '') {
+      return [];
+    }
+
+    return [{ name: control.name, value }];
+  });
 
 export const formatAttribute = ({ name, value }: SnippetAttribute) => {
   if (value === undefined) {

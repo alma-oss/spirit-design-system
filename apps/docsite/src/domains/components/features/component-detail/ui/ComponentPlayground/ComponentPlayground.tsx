@@ -21,7 +21,7 @@ import {
   type PlaygroundConfig,
   type PlaygroundControl,
 } from './playgroundConfig';
-import { buildCode, type SnippetAttribute } from './playgroundSnippet';
+import { buildCode, getSnippetAttributes } from './playgroundSnippet';
 import './ComponentPlayground.scss';
 
 type PlaygroundValue = string | boolean;
@@ -82,15 +82,6 @@ const registry: Record<PlaygroundComponentName, ComponentType<PlaygroundComponen
 const getInitialValues = (controls: PlaygroundControl[]) =>
   Object.fromEntries(controls.map((control) => [control.name, control.defaultValue ?? false]));
 
-const getAttributes = (controls: PlaygroundControl[], values: Record<string, PlaygroundValue>): SnippetAttribute[] =>
-  controls
-    .filter((control) => control.name !== 'children' && values[control.name] !== (control.defaultValue ?? false))
-    .map((control) => {
-      const value = values[control.name];
-
-      return typeof value === 'boolean' ? { name: control.name } : { name: control.name, value: String(value) };
-    });
-
 const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl = '' }: PlaygroundConfig) => {
   const id = useId();
   const [values, setValues] = useState<Record<string, PlaygroundValue>>(() => getInitialValues(controls));
@@ -101,7 +92,7 @@ const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl 
 
   const PlaygroundComponent = isPlaygroundComponentName(component) ? registry[component] : undefined;
   const { children: childrenValue, ...componentProps } = values;
-  const codeLines = buildCode(component, getAttributes(controls, values), String(childrenValue ?? ''));
+  const codeLines = buildCode(component, getSnippetAttributes(controls, values), String(childrenValue ?? ''));
 
   const setValue = (name: string, value: PlaygroundValue) => setValues((previous) => ({ ...previous, [name]: value }));
 
