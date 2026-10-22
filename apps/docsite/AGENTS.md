@@ -24,6 +24,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - `/spirit:docsite-composition`: building or refactoring any docsite page, section, or component in TSX, assets, and content.
 - `/spirit:docsite-styles`: writing or reviewing any docsite SCSS.
+- `/spirit:docsite-component-detail`: the component page header, playground, tabs, and documentation blocks.
 
 [agents-git-workflow]: ../../.agents/instructions/git-workflow.md
 [docsite-limits]: ../../.agents/skills/docsite-composition/SKILL.md#known-spirit-limits
