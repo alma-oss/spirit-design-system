@@ -10,45 +10,49 @@
     margin: 0;
     overflow: clip; // cuts off the extended lines of the cells
     list-style: none;
+}
 
-    > li {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: var(--spirit-space-700);
-        padding: var(--spirit-space-1000);
-        border-bottom: 1px solid var(--spirit-color-border-basic);
+.ComponentGrid > li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-700);
+    padding: var(--spirit-space-1000);
+    border-bottom: 1px solid var(--spirit-color-border-basic);
+}
 
-        // Continues the bottom line to the right, so an incomplete last row has the line across the whole grid. The part
-        // outside the grid is clipped. Where the neighbor cell has the same line, the two overlap.
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 100%;
-            width: 100vw;
-            pointer-events: none;
-            border-bottom: 1px solid var(--spirit-color-border-basic);
-        }
-    }
+// Continues the bottom line to the right, so an incomplete last row has the line across the whole grid. The part
+// outside the grid is clipped. Where the neighbor cell has the same line, the two overlap.
+.ComponentGrid > li::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 100%;
+    width: 100vw;
+    border-bottom: 1px solid var(--spirit-color-border-basic);
+    pointer-events: none;
+}
 
-    @include breakpoint.up(tokens.$breakpoint-tablet) {
+@include breakpoint.up(tokens.$breakpoint-tablet) {
+    .ComponentGrid {
         grid-template-columns: repeat(2, 1fr);
-
-        > li:not(:nth-child(2n)) {
-            border-right: 1px solid var(--spirit-color-border-basic);
-        }
     }
 
-    @include breakpoint.up(tokens.$breakpoint-desktop) {
+    .ComponentGrid > li:not(:nth-child(2n)) {
+        border-right: 1px solid var(--spirit-color-border-basic);
+    }
+}
+
+@include breakpoint.up(tokens.$breakpoint-desktop) {
+    .ComponentGrid {
         grid-template-columns: repeat(3, 1fr);
+    }
 
-        > li:nth-child(2n):not(:nth-child(3n)) {
-            border-right: 1px solid var(--spirit-color-border-basic);
-        }
+    .ComponentGrid > li:nth-child(3n) {
+        border-right: 0;
+    }
 
-        > li:nth-child(3n) {
-            border-right: 0;
-        }
+    .ComponentGrid > li:nth-child(2n):not(:nth-child(3n)) {
+        border-right: 1px solid var(--spirit-color-border-basic);
     }
 }

@@ -12,8 +12,8 @@
     place-items: center;
     aspect-ratio: 2 / 1;
     overflow: hidden;
-    pointer-events: none;
     user-select: none;
+    pointer-events: none;
 }
 
 .PreviewFrame__content {
@@ -23,17 +23,20 @@
     top: 50%;
     left: 50%;
     z-index: 1;
+
     // Natural size of the content, even if it is wider than the frame – it gets scaled down afterwards.
     width: max-content;
     transform: translate(-50%, -50%) scale(var(--preview-scale));
     transform-origin: center;
-
-    // Some components re-enable pointer events on their own; the preview must never react to the mouse.
-    &,
-    & * {
-        pointer-events: none !important;
-    }
 }
+
+// Some components re-enable pointer events on their own; the preview must never react to the mouse.
+// stylelint-disable selector-max-universal, declaration-no-important -- Previews must ignore pointer events on every nested control.
+.PreviewFrame__content,
+.PreviewFrame__content * {
+    pointer-events: none !important;
+}
+// stylelint-enable selector-max-universal, declaration-no-important
 
 .PreviewFrame__placeholder {
     width: units.px-to-rem(112);

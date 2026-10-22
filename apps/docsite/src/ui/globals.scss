@@ -1,4 +1,5 @@
 @forward '@alma-oss/spirit-web/src/scss';
+
 @use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
 @use '@almacareer/cookie-consent-manager/CookieConsentManager';
 @use '@tokens' as tokens;
@@ -13,9 +14,9 @@ html {
 
 // 2.
 body {
-    min-height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    min-height: 100%;
 }
 
 :root,
@@ -27,14 +28,16 @@ body {
     --docs-color-logo-foreground: #fff;
 }
 
+// Shared with Storybook, the demo app, and packages/web previews, so these names stay as they are.
+// stylelint-disable selector-class-pattern
 .docs-Heading {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spirit-space-500) var(--spirit-space-600);
     align-items: baseline;
     margin-bottom: var(--spirit-space-900);
-    font-size: var(--spirit-typography-heading-small-bold-mobile-font-size);
     font-weight: var(--spirit-typography-heading-small-bold-mobile-font-weight);
+    font-size: var(--spirit-typography-heading-small-bold-mobile-font-size);
     line-height: var(--spirit-typography-heading-small-bold-mobile-line-height);
 
     @include breakpoint.up(tokens.$breakpoint-tablet) {
@@ -63,8 +66,8 @@ body {
     min-height: var(--spirit-space-1000);
     padding: var(--spirit-space-700);
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
     color: var(--spirit-color-neutral-content-subtle);
     background: var(--spirit-color-neutral-background-basic);
 }
@@ -83,12 +86,12 @@ body {
 .docs-Placeholder {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: var(--spirit-space-1000);
     align-items: center;
+    justify-content: center;
     width: 100%;
     padding: var(--spirit-space-1200) var(--spirit-space-900);
     text-align: center;
-    gap: var(--spirit-space-1000);
     border: var(--spirit-border-width-200) dashed var(--spirit-color-border-basic);
     border-radius: var(--spirit-radius-200);
     background: var(--spirit-color-background-primary);
@@ -99,6 +102,7 @@ body {
     flex-direction: column;
     gap: var(--spirit-space-500);
 }
+// stylelint-enable selector-class-pattern
 
 .docs-border-bottom-basic {
     border-bottom: 1px solid var(--spirit-color-border-basic);
