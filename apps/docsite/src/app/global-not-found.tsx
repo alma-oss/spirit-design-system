@@ -1,4 +1,6 @@
 import { ButtonLink, EmptyState, EmptyStateSection, Flex, Heading, Section, Text } from '@alma-oss/spirit-web-react';
+import { GoogleTagManager } from '@local/domains/analytics/ui/GoogleTagManager';
+import { CookieConsent } from '@local/domains/consent/ui/CookieConsent';
 import Footer from '@local/domains/footer/ui/Footer';
 import { routes } from '@local/domains/routing/routes';
 import { Header } from '@local/ui';
@@ -19,6 +21,8 @@ const GlobalNotFound = () => (
       <link rel="stylesheet" href={generalSansStylesheet} />
     </head>
     <body>
+      <GoogleTagManager />
+      <CookieConsent />
       <AppProvider>
         <Header disableClientRouting />
         <Flex elementType="main" alignmentX="center" alignmentY="center">

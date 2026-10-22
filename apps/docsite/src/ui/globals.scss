@@ -1,5 +1,6 @@
 @forward '@alma-oss/spirit-web/src/scss';
 @use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@almacareer/cookie-consent-manager/CookieConsentManager';
 @use '@tokens' as tokens;
 
 // 1. Expand the page to fill the viewport height to be ready for various themes.
