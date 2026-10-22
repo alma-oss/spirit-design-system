@@ -94,8 +94,9 @@ When converting an existing preview, keep the variant, size, text, icons, and nu
 If the markup references a partial under `apps/docsite/src/domains/components/ui/partials`, render that
 asset. Do not replace it with a stock photo.
 
-Do not change `component-catalog/constants/componentCategories.ts` or `componentDescriptions.ts` unless someone asks for new categories
-or public copy.
+Add a new component to its category in `component-catalog/constants/componentCategories.ts` by the placement rule
+at the top of the file. Do not move existing components or change category descriptions or
+`componentDescriptions.ts` unless someone asks for new categories or public copy.
 
 ## The Frame Is a Picture
 
