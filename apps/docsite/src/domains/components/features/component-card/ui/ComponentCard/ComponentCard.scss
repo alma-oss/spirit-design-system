@@ -25,8 +25,8 @@
     right: var(--spirit-space-800);
     z-index: 2;
     display: block;
-    pointer-events: none;
     opacity: 0;
+    pointer-events: none;
 
     @media (prefers-reduced-motion: no-preference) {
         transition: opacity 0.15s ease-in-out;

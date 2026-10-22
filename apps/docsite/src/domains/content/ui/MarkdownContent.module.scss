@@ -1,58 +1,56 @@
 @use '@alma-oss/spirit-web/src/scss/tools/typography';
 @use '@tokens' as tokens;
 
-.MarkdownContent {
-    pre {
-        margin-block: var(--spirit-space-1000);
-        padding: var(--spirit-space-800) var(--spirit-space-900);
-        white-space: pre-wrap;
-        border-radius: var(--spirit-radius-300);
-    }
+.MarkdownContent pre {
+    padding: var(--spirit-space-800) var(--spirit-space-900);
+    margin-block: var(--spirit-space-1000);
+    white-space: pre-wrap;
+    border-radius: var(--spirit-radius-300);
+}
 
-    p {
-        max-width: 70ch;
-    }
+.MarkdownContent p {
+    max-width: 70ch;
+}
 
-    ul,
-    ol {
-        margin-block: var(--spirit-space-900);
-        padding-inline-start: var(--spirit-space-1000);
-        max-width: 70ch;
-    }
+.MarkdownContent ul,
+.MarkdownContent ol {
+    max-width: 70ch;
+    padding-inline-start: var(--spirit-space-1000);
+    margin-block: var(--spirit-space-900);
+}
 
-    ul {
-        list-style: disc;
-    }
+.MarkdownContent ul {
+    list-style: disc;
+}
 
-    ol {
-        list-style: decimal;
-    }
+.MarkdownContent ol {
+    list-style: decimal;
+}
 
-    li {
-        margin-block: var(--spirit-space-600);
-    }
+.MarkdownContent li {
+    margin-block: var(--spirit-space-600);
+}
 
-    li::marker {
-        color: var(--spirit-color-neutral-content-basic);
-        font-size: 1em;
-    }
+.MarkdownContent li::marker {
+    font-size: 1em;
+    color: var(--spirit-color-neutral-content-basic);
+}
 
-    ul ul,
-    ul ol,
-    ol ul,
-    ol ol {
-        margin-block: var(--spirit-space-400);
-        max-width: unset;
-    }
+.MarkdownContent ul ul,
+.MarkdownContent ul ol,
+.MarkdownContent ol ul,
+.MarkdownContent ol ol {
+    max-width: unset;
+    margin-block: var(--spirit-space-400);
+}
 
-    code:not(pre code) {
-        @include typography.generate(tokens.$code-small-regular);
+.MarkdownContent code:not(pre code) {
+    @include typography.generate(tokens.$code-small-regular);
 
-        background: var(--spirit-color-background-secondary);
-        padding: var(--spirit-space-100) var(--spirit-space-400);
-        border-radius: var(--spirit-radius-200);
-        word-break: break-word;
-        white-space: pre-wrap;
-        vertical-align: baseline;
-    }
+    padding: var(--spirit-space-100) var(--spirit-space-400);
+    white-space: pre-wrap;
+    word-break: break-word;
+    vertical-align: baseline;
+    border-radius: var(--spirit-radius-200);
+    background: var(--spirit-color-background-secondary);
 }
