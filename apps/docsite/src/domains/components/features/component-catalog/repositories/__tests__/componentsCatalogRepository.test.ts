@@ -1,6 +1,5 @@
 import { fetchAllComponents } from '../../../../repositories/componentsRepository';
 import * as previewModules from '../../../component-card/previews';
-import { COMPONENT_CATEGORIES } from '../../constants/componentCategories';
 import { COMPONENT_DESCRIPTIONS, getComponentDescription } from '../../constants/componentDescriptions';
 import { PREVIEW_GUIDES } from '../../constants/previewGuides';
 import type { PreviewComponent } from '../../types';
@@ -27,21 +26,15 @@ describe('componentsCatalogRepository', () => {
     expect(getComponentDescription('UNSTABLE_Tile')).toBe('Spirit Tile component');
   });
 
-  it('should keep the current category membership', () => {
-    expect(COMPONENT_CATEGORIES.Forms).toContain('Field');
-    expect(COMPONENT_CATEGORIES.Forms).toContain('TextField');
-    expect(Object.values(COMPONENT_CATEGORIES).flat()).not.toContain('ActionText');
-  });
-
   it('should describe every catalog entry and place an uncategorized component in Uncategorized', () => {
-    const [button, actionText] = fetchComponentsCatalog(['Button', 'ActionText']);
+    const [button, unknown] = fetchComponentsCatalog(['Button', 'UnknownComponent']);
 
     expect(button).toMatchObject({
       name: 'Button',
       category: 'Actions',
       description: COMPONENT_DESCRIPTIONS.Button,
     });
-    expect(actionText.category).toBe('Uncategorized');
+    expect(unknown.category).toBe('Uncategorized');
   });
 
   it('should keep the order of the requested components', () => {

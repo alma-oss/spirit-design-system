@@ -87,9 +87,10 @@ Promote `packages/web-react/src/components/UNSTABLE_X/` → `packages/web-react/
    entry with `./components/X`, matching the shape of neighbouring entries
    (`types`/`development`/`production`/`import`/`require`/`default`). Keep changes scoped to the stabilized
    component; do not regenerate every export unless that is the explicit intent.
-5. **Docsite category + slug** in `apps/docsite/src/domains/components/constants/componentCategories.ts`:
-   move the component into its stable category group and remove the `['UNSTABLE_X', 'unstable-x']` slug
-   mapping. Update `componentSlug` tests (`componentNameToSlug` / slug→name) accordingly.
+5. **Docsite category + slug**: in
+   `apps/docsite/src/domains/components/features/component-catalog/constants/componentCategories.ts`, move the
+   component into its stable category, following the category's placement rule. Slugs are derived from the
+   component name; update `componentSlug` tests (`componentNameToSlug` / slug→name) that mention the component.
 6. **Stories** under `docs/stories/examples/` and the component `stories/`: rename files, drop the
    `UNSTABLE_` prefix in titles/`category`, and remove unstable tags/flags. In Storybook `meta.title`,
    move the component from the **Experimental** sidebar group to **Components**: change

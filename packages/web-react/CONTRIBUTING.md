@@ -6,10 +6,15 @@
 
 ### Writing a Component
 
-Do not forget to export and register new component in all necessary places.
+Do not forget to export and register new component in all necessary places:
 
 - `scripts/entryPoints.js`
 - `src/components/index.ts`
+
+In the repository root:
+
+- `apps/docsite/src/domains/components/features/component-catalog/constants/componentCategories.ts`: place the
+  component in a category by the placement rule at the top of the file
 
 ### File Hierarchy
 
