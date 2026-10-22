@@ -17,6 +17,18 @@ Generate a Slack-ready release notes document from the latest lerna publish, inc
 
 ---
 
+## CI Mode
+
+When the prompt says to run in **CI mode** (non-interactive, e.g. the `Release Notes` job in `publish.yaml`):
+
+- Never ask questions or wait for confirmation.
+- Step 1: use the release tag/date given in the prompt instead of guessing the latest tag.
+- Step 3b: also write the warnings (same format) to `docs/release-notes/.warnings.md` so the workflow can put them in the PR body. Do not commit this file.
+- Step 6: skip Jira entirely and use the fallback line `* More improvements are in the works — stay tuned!`.
+- Step 8: only write the file. Do not commit, push or open a PR — the workflow does it.
+
+---
+
 ## Workflow
 
 ### Step 1 — Identify the Latest Release
