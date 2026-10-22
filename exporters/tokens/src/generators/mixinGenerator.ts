@@ -8,15 +8,17 @@ export const generateMixinFromTokens = (
   tokenPrefix: string,
   hasParentPrefix: boolean,
   sortByNumValue: boolean,
+  mixinName: string = 'color-css-variables',
+  variablePrefix: string = 'color-',
 ): string => {
   const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
   const variables = sortedTokens
     .map((token) => {
       const name = tokenVariableName(token, tokenGroups, hasParentPrefix);
 
-      return `${SCSS_INDENTATION}--${tokenPrefix}color-${name}: #{$${name}};`;
+      return `${SCSS_INDENTATION}--${tokenPrefix}${variablePrefix}${name}: #{$${name}};`;
     })
     .join('\n');
 
-  return `@mixin color-css-variables {\n${variables}\n}\n`;
+  return `@mixin ${mixinName} {\n${variables}\n}\n`;
 };

@@ -38,17 +38,19 @@ The index file contains SCSS forwards of all other outputs.
 
 ### Theme Tokens
 
-Theme tokens include all theme-specific tokens (currently limited to color tokens), with the exception of device collections from Supernova.
+Theme tokens include all theme-specific tokens (color tokens and shadow length dimension tokens), with the exception of device collections from Supernova.
 The exporter creates a dedicated directory for each theme, containing SCSS maps and CSS variables grouped by color categories.
 
 #### Outputs
 
 - \_color-tokens.scss - Contains color CSS variables for each color and mapping to color groups
+- \_shadow-tokens.scss - Contains shadow length CSS variables for each shadow length
 - index.scss
 
 For each theme, the exporter generates the following files:
 
 - \\{theme_name}\\\_colors.scss - Contains color values and mapping to CSS variables
+- \\{theme_name}\\\_shadows.scss - Contains shadow lengths of the theme collection and mapping to CSS variables
 - \\{theme_name}\\index.scss
 
 The index files contains SCSS forwards of all other outputs.
@@ -92,6 +94,9 @@ The exporter handles specific exceptions to the general logic of token processin
 
 ### Special Cases
 
+- Shadow tokens: each length is wrapped in a CSS variable `--{tokenPrefix}{name}-{offset-x|offset-y|blur-radius|spread-radius}-XX`, where `XX` is the shadow layer number. The original shadow values serve as fallbacks.
+  The variables are set per theme from dimension tokens of the theme collection nested under the shadow token path, e.g. `Shadow/shadow-100/offset-x` for the `Shadow/shadow-100` shadow.
+  Token names without a layer number belong to the first layer and get the `-01` suffix; lengths of further layers are named with their layer number, e.g. `Shadow/shadow-100/offset-x-02`.
 - Gradient tokens: CSS variables are added for gradients, allowing for theme-based color customization and gradient angle adjustments. The original gradient values serve as fallbacks for these CSS variables.
 - Color tokens with multiple references – When processing color tokens containing multiple color references (e.g., gradients with multiple stops), the exporter automatically generates numbered CSS variables for each color.
   These variables follow the pattern `--{tokenPrefix}color-{groupName}-{name}-color-XX`, where `XX` is an incremented counter for each color reference in the token. This ensures that all color components of a token remain

@@ -16,7 +16,12 @@ import {
   TokenGroup,
   TokenType,
 } from '@supernovaio/sdk-exporters';
-import { addEmptyLineBetweenTokenGroups, sortTokens } from '../helpers/tokenHelper';
+import {
+  addEmptyLineBetweenTokenGroups,
+  formatTokenStyleByOutput,
+  sortTokens,
+  tokenVariableName,
+} from '../helpers/tokenHelper';
 import { type FontSizeBaseMap, createDefaultFontSizeBaseMap } from '../helpers/unitHelper';
 import {
   processNumericToken,
@@ -77,6 +82,30 @@ export const tokenToStyleByType = (
     default:
       return null;
   }
+};
+
+export const generateCssVariableReferencesFromTokens = (
+  tokens: Token[],
+  tokenGroups: Array<TokenGroup>,
+  tokenPrefix: string,
+  cssVariablePrefix: string,
+  hasParentPrefix: boolean,
+  sortByNumValue: boolean,
+  hasJsOutput: boolean,
+): string => {
+  const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+
+  const cssTokens = sortedTokens.map((token) => {
+    const name = tokenVariableName(token, tokenGroups, hasParentPrefix);
+    const cssVariableName = `var(--${tokenPrefix}${cssVariablePrefix}${name})`;
+
+    return {
+      css: hasJsOutput ? formatTokenStyleByOutput(name, cssVariableName, true) : `$${name}: ${cssVariableName};`,
+      parentGroupId: token.parentGroupId,
+    };
+  });
+
+  return addEmptyLineBetweenTokenGroups(cssTokens);
 };
 
 export const generateStylesFromTokens = (
