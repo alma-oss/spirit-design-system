@@ -1,10 +1,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {
+  parsePlaygroundFile,
+  type PlaygroundFile,
+} from '../components/features/component-detail/ui/ComponentPlayground/playgroundConfig';
 import { isValidComponentSlug, slugToComponentName } from '../components/utils/componentSlug';
 import { componentDocsDirectory, componentDocTabs, type ComponentDocTab } from '../routing/routes';
 import { fileExists } from './contentRepository';
 import { getRepoRoot } from './paths';
-import { type PlaygroundConfig } from './ui/ComponentPlayground';
 
 export interface ComponentTabAvailability {
   overview: boolean;
@@ -30,19 +33,15 @@ const componentDirectory = (slug: string, repoRoot: string) =>
 
 /**
  * Interactive playground definition (`docs/playground.json`), present only for components that have one.
+ * An unknown component or a control that does not match the schema is treated as no playground.
  *
  * @param slug
  * @param repoRoot
  */
-export interface ComponentPlaygroundFile extends PlaygroundConfig {
-  /** Tab route segments (e.g. `web-preview`) that are not offered for this component. */
-  hiddenTabs?: string[];
-}
-
 export const getComponentPlayground = async (
   slug: string,
   repoRoot = getRepoRoot(),
-): Promise<ComponentPlaygroundFile | null> => {
+): Promise<PlaygroundFile | null> => {
   if (!isValidComponentSlug(slug)) {
     return null;
   }
@@ -50,7 +49,7 @@ export const getComponentPlayground = async (
   try {
     const raw = await fs.readFile(path.join(componentDirectory(slug, repoRoot), 'docs', 'playground.json'), 'utf8');
 
-    return JSON.parse(raw) as ComponentPlaygroundFile;
+    return parsePlaygroundFile(JSON.parse(raw));
   } catch {
     return null;
   }

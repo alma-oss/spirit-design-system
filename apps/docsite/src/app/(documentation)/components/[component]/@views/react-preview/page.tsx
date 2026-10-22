@@ -1,4 +1,4 @@
-import ComponentBand from '@local/domains/components/ui/ComponentBand';
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import { isComponentTabHidden } from '@local/domains/content/componentDocs';
 import { componentSegments } from '@local/domains/routing/routes';
@@ -24,9 +24,9 @@ const ReactPreviewTabPage = async ({ params }: ReactPreviewTabProps) => {
     const { default: Preview } = await import(`@alma-oss/spirit-web-react/components/${componentName}/preview`);
 
     return (
-      <ComponentBand>
+      <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.CONTENT}>
         <Preview />
-      </ComponentBand>
+      </ComponentsBand>
     );
   } catch (error) {
     logError(`[ComponentView] Failed to load React Preview for "${component}":`, error);

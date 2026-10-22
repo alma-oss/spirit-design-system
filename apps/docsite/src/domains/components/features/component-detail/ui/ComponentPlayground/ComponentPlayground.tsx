@@ -3,54 +3,37 @@
 import {
   Button,
   Divider,
+  Flex,
   Link,
-  Select,
   SegmentedControl,
   SegmentedControlItem,
+  Select,
+  Stack,
+  Text,
   TextField,
   Toggle,
 } from '@alma-oss/spirit-web-react';
+import classNames from 'classnames';
 import { type ComponentType, type ReactNode, useId, useState } from 'react';
-import styles from './ComponentPlayground.module.scss';
+import {
+  isPlaygroundComponentName,
+  type PlaygroundComponentName,
+  type PlaygroundConfig,
+  type PlaygroundControl,
+} from './playgroundConfig';
+import './ComponentPlayground.scss';
 
 type PlaygroundValue = string | boolean;
 
-interface SelectControl {
-  name: string;
-  type: 'select';
-  options: string[];
-  defaultValue: string;
-  isRequired?: boolean;
-}
-
-interface TextControl {
-  name: string;
-  type: 'text';
-  defaultValue: string;
-  isRequired?: boolean;
-}
-
-interface BooleanControl {
-  name: string;
-  type: 'boolean';
-  defaultValue?: boolean;
-}
-
-export type PlaygroundControl = SelectControl | TextControl | BooleanControl;
-
-export interface PlaygroundConfig {
-  component: string;
-  controls: PlaygroundControl[];
-  /** Link to the component's Storybook, shown below the controls. */
-  storybookUrl?: string;
-  /** Link to the component in Figma, shown below the controls. */
-  figmaUrl?: string;
+interface PlaygroundComponentProps {
+  children?: ReactNode;
+  [key: string]: unknown;
 }
 
 const DEVICES = {
-  desktop: { label: 'Desktop', width: '100%' },
-  tablet: { label: 'Tablet', width: '48rem' },
-  mobile: { label: 'Mobile', width: '23.4375rem' },
+  desktop: 'Desktop',
+  tablet: 'Tablet',
+  mobile: 'Mobile',
 } as const;
 
 type Device = keyof typeof DEVICES;
@@ -90,9 +73,10 @@ const DEVICE_ICONS: Record<Device, ReactNode> = {
   ),
 };
 
-// Components are looked up by name because MDX props crossing the server/client boundary must be serializable.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const registry: Record<string, ComponentType<any>> = { Button };
+// Components are looked up by name because props crossing the server/client boundary must be serializable.
+const registry: Record<PlaygroundComponentName, ComponentType<PlaygroundComponentProps>> = {
+  Button: Button as ComponentType<PlaygroundComponentProps>,
+};
 
 const getInitialValues = (controls: PlaygroundControl[]) =>
   Object.fromEntries(controls.map((control) => [control.name, control.defaultValue ?? false]));
@@ -152,7 +136,7 @@ const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl 
   // Spirit Toggle keeps its own checked state, so it has to be remounted for the reset to show.
   const [resetCount, setResetCount] = useState(0);
 
-  const Component = registry[component];
+  const PlaygroundComponent = isPlaygroundComponentName(component) ? registry[component] : undefined;
   const { children: childrenValue, ...componentProps } = values;
   const codeLines = buildCode(component, getAttributes(controls, values), String(childrenValue ?? ''));
 
@@ -173,10 +157,14 @@ const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl 
     }
   };
 
+  if (!PlaygroundComponent) {
+    return null;
+  }
+
   return (
-    <div className={styles.ComponentPlayground}>
-      <div className={styles.ComponentPlayground__main}>
-        <div className={styles.ComponentPlayground__devices}>
+    <div className="ComponentPlayground">
+      <div className="ComponentPlayground__main">
+        <Flex alignmentX="center">
           <SegmentedControl
             label="Preview size"
             name={`${id}-device`}
@@ -187,116 +175,109 @@ const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl 
             variant="fill"
           >
             {(Object.keys(DEVICES) as Device[]).map((key) => (
-              <SegmentedControlItem key={key} id={`${id}-device-${key}`} value={key} aria-label={DEVICES[key].label}>
+              <SegmentedControlItem key={key} id={`${id}-device-${key}`} value={key} aria-label={DEVICES[key]}>
                 {DEVICE_ICONS[key]}
               </SegmentedControlItem>
             ))}
           </SegmentedControl>
-        </div>
+        </Flex>
 
-        <div className={styles.ComponentPlayground__preview}>
-          <div className={styles.ComponentPlayground__stage} style={{ maxWidth: DEVICES[device].width }}>
-            <Component {...componentProps}>{String(childrenValue ?? '')}</Component>
+        <div className="ComponentPlayground__preview">
+          <div
+            className={classNames('ComponentPlayground__stage', {
+              'ComponentPlayground__stage--tablet': device === 'tablet',
+              'ComponentPlayground__stage--mobile': device === 'mobile',
+            })}
+          >
+            <PlaygroundComponent {...componentProps}>{String(childrenValue ?? '')}</PlaygroundComponent>
           </div>
         </div>
 
-        <div className={styles.ComponentPlayground__code}>
-          <pre className={styles.ComponentPlayground__snippet}>
+        <div className="ComponentPlayground__code">
+          <pre className="ComponentPlayground__snippet typography-code-small-regular">
             <code>{codeLines.join('\n')}</code>
           </pre>
-          <Button color="secondary" size="small" onClick={copyCode}>
-            {isCopied ? 'Copied' : 'Copy code'}
-          </Button>
+          <div className="ComponentPlayground__copy">
+            <Button color="secondary" size="small" onClick={copyCode}>
+              {isCopied ? 'Copied' : 'Copy code'}
+            </Button>
+          </div>
         </div>
       </div>
 
-      <aside className={styles.ComponentPlayground__panel} aria-label="Properties">
-        <div className={styles.ComponentPlayground__group}>
-          <div className={styles.ComponentPlayground__panelHeader}>
-            <h3 className={styles.ComponentPlayground__panelTitle}>Appearance</h3>
-            {/* Spirit Link renders a real <button> here, the a11y rule only sees the component name. */}
+      <aside className="ComponentPlayground__panel" aria-label="Properties">
+        <Stack spacing="space-900">
+          <Flex alignmentX="space-between" alignmentY="center">
+            <Text elementType="p" size="small" textColor="secondary" marginBottom="space-0">
+              Appearance
+            </Text>
+            {/* Spirit Link renders a real button here; the a11y rule only sees the component name. */}
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <Link
-              elementType="button"
-              type="button"
-              onClick={resetValues}
-              UNSAFE_className={styles.ComponentPlayground__reset}
-            >
+            <Link elementType="button" type="button" onClick={resetValues}>
               Reset
             </Link>
-          </div>
+          </Flex>
 
-          <div className={styles.ComponentPlayground__controls}>
+          <Stack spacing="space-700">
             {controls.map((control) => {
               const controlId = `${id}-${control.name}`;
               const value = values[control.name];
-              const isRequired = control.type !== 'boolean' && control.isRequired;
+
+              if (control.type === 'boolean') {
+                return (
+                  <Toggle
+                    key={`${control.name}-${resetCount}`}
+                    id={controlId}
+                    label={control.name}
+                    isChecked={Boolean(value)}
+                    onChange={(event) => setValue(control.name, event.target.checked)}
+                  />
+                );
+              }
+
+              if (control.type === 'select') {
+                return (
+                  <Select
+                    key={control.name}
+                    id={controlId}
+                    name={controlId}
+                    size="small"
+                    label={control.name}
+                    isRequired={control.isRequired}
+                    value={String(value)}
+                    onChange={(event) => setValue(control.name, (event.target as HTMLSelectElement).value)}
+                  >
+                    {control.options.map((option) => (
+                      <option key={option} value={option}>
+                        {capitalize(option)}
+                      </option>
+                    ))}
+                  </Select>
+                );
+              }
 
               return (
-                <div key={control.name} className={styles.ComponentPlayground__row}>
-                  {control.type === 'boolean' ? (
-                    <>
-                      <label className={styles.ComponentPlayground__label} htmlFor={controlId}>
-                        {control.name}
-                      </label>
-                      <Toggle
-                        key={resetCount}
-                        id={controlId}
-                        label={control.name}
-                        isLabelHidden
-                        isChecked={Boolean(value)}
-                        onChange={(event) => setValue(control.name, event.target.checked)}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <label className={styles.ComponentPlayground__label} htmlFor={controlId}>
-                        {control.name}
-                        {isRequired && '*'}
-                      </label>
-                      <div className={styles.ComponentPlayground__field}>
-                        {control.type === 'select' ? (
-                          <Select
-                            id={controlId}
-                            name={controlId}
-                            isLabelHidden
-                            size="small"
-                            label={control.name}
-                            value={String(value)}
-                            onChange={(event) => setValue(control.name, (event.target as HTMLSelectElement).value)}
-                          >
-                            {control.options.map((option) => (
-                              <option key={option} value={option}>
-                                {capitalize(option)}
-                              </option>
-                            ))}
-                          </Select>
-                        ) : (
-                          <TextField
-                            id={controlId}
-                            name={controlId}
-                            isLabelHidden
-                            size="small"
-                            label={control.name}
-                            value={String(value)}
-                            onChange={(event) => setValue(control.name, (event.target as HTMLInputElement).value)}
-                          />
-                        )}
-                      </div>
-                    </>
-                  )}
-                </div>
+                <TextField
+                  key={control.name}
+                  id={controlId}
+                  name={controlId}
+                  size="small"
+                  label={control.name}
+                  isRequired={control.isRequired}
+                  value={String(value)}
+                  onChange={(event) => setValue(control.name, (event.target as HTMLInputElement).value)}
+                />
               );
             })}
-          </div>
-        </div>
+          </Stack>
+        </Stack>
 
         {(storybookUrl || figmaUrl) && (
           <>
-            <Divider UNSAFE_className={styles.ComponentPlayground__divider} />
-            <div className={styles.ComponentPlayground__links}>
+            <Divider />
+            <Stack spacing="space-700">
               {figmaUrl && (
-                <div className={styles.ComponentPlayground__action}>
+                <div className="ComponentPlayground__action">
                   <Button
                     elementType="a"
                     href={figmaUrl}
@@ -310,11 +291,13 @@ const ComponentPlayground = ({ component, controls, storybookUrl = '', figmaUrl 
                 </div>
               )}
               {storybookUrl && (
-                <Link href={storybookUrl} target="_blank" rel="noreferrer" underlined="always">
-                  Open in Storybook
-                </Link>
+                <Flex alignmentX="center">
+                  <Link href={storybookUrl} target="_blank" rel="noreferrer" underlined="always">
+                    Open in Storybook
+                  </Link>
+                </Flex>
               )}
-            </div>
+            </Stack>
           </>
         )}
       </aside>

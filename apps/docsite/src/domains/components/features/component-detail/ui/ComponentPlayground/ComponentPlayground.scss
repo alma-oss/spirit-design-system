@@ -1,0 +1,93 @@
+@use '@alma-oss/spirit-web/src/scss/tools/breakpoint';
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+
+.ComponentPlayground {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    border: tokens.$border-width-100 solid tokens.$border-basic;
+    border-radius: tokens.$radius-500;
+    background-color: tokens.$background-primary;
+
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
+        grid-template-columns: minmax(0, 1fr) units.px-to-rem(414);
+    }
+}
+
+.ComponentPlayground__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-800);
+    min-width: 0;
+    padding: var(--spirit-space-1000);
+}
+
+.ComponentPlayground__preview {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: units.px-to-rem(256);
+}
+
+.ComponentPlayground__stage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: max-width 0.2s ease;
+    }
+}
+
+.ComponentPlayground__stage--tablet {
+    max-width: units.px-to-rem(768);
+}
+
+.ComponentPlayground__stage--mobile {
+    max-width: units.px-to-rem(375);
+}
+
+.ComponentPlayground__code {
+    position: relative;
+    padding: var(--spirit-space-800);
+    border-radius: tokens.$radius-500;
+    background-color: tokens.$background-secondary;
+}
+
+.ComponentPlayground__snippet {
+    padding: 0;
+    padding-inline-end: units.px-to-rem(112); // keeps the code clear of the Copy code button
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre;
+    color: tokens.$text-primary;
+    background: none;
+}
+
+.ComponentPlayground__copy {
+    position: absolute;
+    top: var(--spirit-space-700);
+    right: var(--spirit-space-700);
+}
+
+.ComponentPlayground__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spirit-space-1000);
+    min-width: 0;
+    padding: var(--spirit-space-1000);
+    border-top: tokens.$border-width-100 solid tokens.$border-basic;
+
+    @include breakpoint.up(tokens.$breakpoint-tablet) {
+        border-top: 0;
+        border-left: tokens.$border-width-100 solid tokens.$border-basic;
+    }
+}
+
+// Full width is a layout decision, so the button stretches through its grid wrapper.
+.ComponentPlayground__action {
+    display: grid;
+    width: 100%;
+}

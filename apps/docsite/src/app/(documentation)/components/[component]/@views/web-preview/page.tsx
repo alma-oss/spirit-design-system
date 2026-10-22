@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import ComponentBand from '@local/domains/components/ui/ComponentBand';
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { WebPreview } from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
@@ -33,9 +33,9 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
     const html = compilePreview(source);
 
     return (
-      <ComponentBand>
+      <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.CONTENT}>
         <WebPreview html={html} />
-      </ComponentBand>
+      </ComponentsBand>
     );
   } catch (error) {
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);

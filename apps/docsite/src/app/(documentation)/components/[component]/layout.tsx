@@ -1,7 +1,7 @@
-import ComponentHeader from '@local/domains/components/ui/ComponentHeader';
+import { ComponentHeader, ComponentPlayground } from '@local/domains/components/features/component-detail';
 import { ComponentTabNavigation } from '@local/domains/components/ui/ComponentTabNavigation';
+import { getComponentPageLinks } from '@local/domains/components/ui/PageActions';
 import { getComponentDescription, getComponentPlayground } from '@local/domains/content/componentDocs';
-import ComponentPlayground, { type PlaygroundConfig } from '@local/domains/content/ui/ComponentPlayground';
 import { type ReactNode } from 'react';
 
 interface ComponentViewsLayoutProps {
@@ -16,14 +16,19 @@ const ComponentViewsLayout = async ({ views, params }: ComponentViewsLayoutProps
     getComponentPlayground(component),
   ]);
 
-  const { hiddenTabs = [], ...playground } = playgroundFile ?? {};
-
   return (
     <>
-      <ComponentHeader description={description}>
-        {playgroundFile && <ComponentPlayground {...(playground as PlaygroundConfig)} />}
+      <ComponentHeader description={description} links={getComponentPageLinks(component, playgroundFile)}>
+        {playgroundFile && (
+          <ComponentPlayground
+            component={playgroundFile.component}
+            controls={playgroundFile.controls}
+            storybookUrl={playgroundFile.storybookUrl}
+            figmaUrl={playgroundFile.figmaUrl}
+          />
+        )}
       </ComponentHeader>
-      <ComponentTabNavigation component={component} hiddenTabs={hiddenTabs} />
+      <ComponentTabNavigation component={component} hiddenTabs={playgroundFile?.hiddenTabs} />
       {views}
     </>
   );

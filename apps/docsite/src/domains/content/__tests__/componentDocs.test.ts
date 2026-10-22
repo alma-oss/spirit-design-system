@@ -1,7 +1,18 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { getComponentTabAvailability, isComponentTabHidden, resolveComponentTabFile } from '../componentDocs';
+import {
+  DOCSITE_FIGMA_URL,
+  DOCSITE_STORYBOOK_URL,
+  getComponentPageLinks,
+} from '@local/domains/components/ui/PageActions/pageLinks';
+import {
+  getComponentDescription,
+  getComponentPlayground,
+  getComponentTabAvailability,
+  isComponentTabHidden,
+  resolveComponentTabFile,
+} from '../componentDocs';
 
 describe('getComponentTabAvailability', () => {
   it('hides Component Tab Pages that are not on disk', async () => {
@@ -87,5 +98,105 @@ describe('isComponentTabHidden', () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), 'component-tabs-'));
 
     await expect(isComponentTabHidden('accordion', 'web-preview', root)).resolves.toBe(false);
+  });
+});
+
+describe('getComponentDescription', () => {
+  it('returns the first sentence under the readme title', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'component-description-'));
+    const componentDir = path.join(root, 'packages/web-react/src/components/Button');
+
+    await fs.mkdir(componentDir, { recursive: true });
+    await fs.writeFile(
+      path.join(componentDir, 'README.md'),
+      '# Button\n\nButton allows users to [take actions](/docs). More text.\n\n## Usage\n',
+      'utf8',
+    );
+
+    await expect(getComponentDescription('button', root)).resolves.toBe('Button allows users to take actions.');
+  });
+
+  it('returns an empty string when the readme is missing', async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'component-description-'));
+
+    await expect(getComponentDescription('button', root)).resolves.toBe('');
+  });
+});
+
+describe('getComponentPlayground', () => {
+  const writePlayground = async (raw: string) => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), 'component-playground-'));
+    const docsDir = path.join(root, 'packages/web-react/src/components/Button/docs');
+
+    await fs.mkdir(docsDir, { recursive: true });
+    await fs.writeFile(path.join(docsDir, 'playground.json'), raw, 'utf8');
+
+    return root;
+  };
+
+  it('returns null for an unknown component or a broken control', async () => {
+    const unknown = await writePlayground(JSON.stringify({ component: 'Missing', controls: [] }));
+    const broken = await writePlayground(JSON.stringify({ component: 'Button', controls: [{ name: 'color' }] }));
+
+    await expect(getComponentPlayground('button', unknown)).resolves.toBeNull();
+    await expect(getComponentPlayground('button', broken)).resolves.toBeNull();
+  });
+
+  it('returns null for invalid JSON', async () => {
+    const root = await writePlayground('{');
+
+    await expect(getComponentPlayground('button', root)).resolves.toBeNull();
+  });
+
+  it('returns a valid playground', async () => {
+    const root = await writePlayground(
+      JSON.stringify({
+        component: 'Button',
+        controls: [{ name: 'isDisabled', type: 'boolean' }],
+        storybookUrl: 'https://example.com/storybook',
+      }),
+    );
+
+    await expect(getComponentPlayground('button', root)).resolves.toEqual({
+      component: 'Button',
+      controls: [{ name: 'isDisabled', type: 'boolean' }],
+      storybookUrl: 'https://example.com/storybook',
+    });
+  });
+
+  it('reads the Button playground from the repository', async () => {
+    const playground = await getComponentPlayground('button');
+
+    expect(playground?.component).toBe('Button');
+    expect(playground?.controls.length).toBeGreaterThan(0);
+  });
+});
+
+describe('getComponentPageLinks', () => {
+  it('uses the playground urls and the component folder on GitHub', () => {
+    expect(
+      getComponentPageLinks('button', {
+        storybookUrl: 'https://example.com/storybook',
+        figmaUrl: 'https://example.com/figma',
+      }),
+    ).toEqual([
+      { label: 'Open in Storybook', href: 'https://example.com/storybook' },
+      {
+        label: 'Open on GitHub',
+        href: 'https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/src/components/Button',
+      },
+      { label: 'Open in Figma', href: 'https://example.com/figma' },
+    ]);
+  });
+
+  it('falls back to the listing urls', () => {
+    expect(getComponentPageLinks('button')).toEqual([
+      { label: 'Open in Storybook', href: DOCSITE_STORYBOOK_URL },
+      {
+        label: 'Open on GitHub',
+        href: 'https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/src/components/Button',
+      },
+      { label: 'Open in Figma', href: DOCSITE_FIGMA_URL },
+    ]);
   });
 });
