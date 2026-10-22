@@ -5,12 +5,14 @@ import React, { StrictMode } from 'react';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
 import DrawerDefault from './DrawerDefault';
+import DrawerWithScrollView from './DrawerWithScrollView';
 
 export const Preview = () => (
   <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Drawer">
         <DrawerDefault />
+        <DrawerWithScrollView />
       </DocsSection>
     </IconsProvider>
   </StrictMode>

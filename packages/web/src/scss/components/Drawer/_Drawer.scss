@@ -1,6 +1,10 @@
 // 1. To keep the Drawer in top-layer until the animation is complete we animate the `display` and `overlay` properties too and set
 //    the @starting-style. Unfortunatelly, this works only in Chromium-based browsers.
 //    See https://developer.mozilla.org/en-US/docs/Web/CSS/overlay and https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style
+//
+// 2. `overscroll-behavior` takes effect only on scroll containers, so `overflow: hidden` is needed to keep scroll from
+//    chaining to the page behind. It lives here rather than on `DrawerPanelBody` so it does not swallow scroll events
+//    meant for a nested ScrollView.
 
 @use '../../tools/typography';
 @use '@tokens' as tokens;
@@ -20,9 +24,11 @@
     max-width: none;
     height: 100%;
     max-height: none;
+    overflow: hidden; // 2.
     border: none;
     background-color: theme.$backdrop-background-color;
     visibility: hidden;
+    overscroll-behavior: contain; // 2.
 
     &::backdrop {
         background-color: transparent;
