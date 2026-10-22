@@ -49,6 +49,6 @@ describe('groupComponentsByCategory', () => {
     const result = groupComponentsByCategory(['Modal', 'Button', 'Heading']);
     const categories = result.map(({ category }) => category);
 
-    expect(categories).toEqual(['Actions', 'Overlays', 'Typography']);
+    expect(categories).toEqual(['Actions', 'Overlays', 'Text']);
   });
 });
