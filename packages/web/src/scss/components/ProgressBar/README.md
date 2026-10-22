@@ -301,10 +301,6 @@ When the ProgressBar tracks the loading of a region of the page, set `aria-busy=
 point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` once loading has finished:
 
 ```html
-<div id="offers" aria-busy="true" aria-describedby="offers-progress">
-  <!-- … the content of this region is loading … -->
-</div>
-
 <progress
   class="ProgressBar color-scheme-on-emotion-informative-subtle"
   id="offers-progress"
@@ -313,7 +309,21 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
   style="--progress-bar-value: 60%"
   aria-label="Loading offers"
 ></progress>
+
+<section aria-busy="true" aria-describedby="offers-progress" aria-labelledby="offers-heading">
+  <h2 id="offers-heading">Offers</h2>
+  <!-- … the content of this region is loading … -->
+</section>
 ```
+
+⚠️ Place the ProgressBar next to the busy region and the live region, not inside them. Assistive technologies
+may ignore changes inside a busy region until loading finishes ([`aria-busy`][wai-aria-busy]). Live regions
+announce changes of their content, not of the ProgressBar value ([`aria-relevant`][wai-aria-relevant]), and
+`role="status"` would re-read the ProgressBar on every text update ([`status`][wai-aria-status] is atomic).
+
+ℹ️ If the region is a significant section of the page, name it, for example with `aria-labelledby` pointing at its
+heading as in the example above. A named `section` becomes a [region landmark][mdn-region-role] that users can find
+and navigate to. Use landmarks sparingly, though: for smaller areas, leave the region unnamed.
 
 👉 See [Describing a particular region][mdn-progress-region] for more information.
 
@@ -321,6 +331,7 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [mdn-progress]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [mdn-progress-region]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress#describing_a_particular_region
+[mdn-region-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [readme-file-upload-progress]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/File/README.md#upload-progress
 [readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
@@ -329,3 +340,6 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 [readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Label/README.md
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md
+[wai-aria-busy]: https://www.w3.org/TR/wai-aria-1.2/#aria-busy
+[wai-aria-relevant]: https://www.w3.org/TR/wai-aria-1.2/#aria-relevant
+[wai-aria-status]: https://www.w3.org/TR/wai-aria-1.2/#status
