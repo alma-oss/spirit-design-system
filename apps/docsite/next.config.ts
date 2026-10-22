@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
       '../../packages/web/src/scss/components/**/preview.html',
       '../../packages/web-react/src/components/**/README.md',
       '../../packages/web-react/src/components/**/preview/index.ts',
+      '../../docs/components.schema.yaml',
     ],
     '/components/[component]/web-preview': [
       '../../packages/web/src/scss/components/**/preview.html',

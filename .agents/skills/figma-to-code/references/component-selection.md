@@ -4,7 +4,7 @@ Do not memorize full APIs here. Confirm exports, props, and defaults from curren
 
 - Barrel: `packages/web-react/src/components/index.ts`
 - Component folder: `packages/web-react/src/components/<Name>/` (implementation, types, README, `figma/`)
-- Categories (docsite, not an export list): `apps/docsite/src/domains/components/constants/componentCategories.ts`
+- Categories (docsite, not an export list): `docs/components.schema.yaml`
 - Deprecations: `packages/web-react/DEPRECATIONS.md`
 
 Prefer a Spirit component when it owns the needed semantics, behavior, or styling. Decide in this
