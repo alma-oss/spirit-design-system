@@ -7,6 +7,7 @@
 //    b) Layout settings are applied to the grid via custom properties.
 //    c) If there is an expanded CardMedia in a boxed card, replace card padding with empty grid columns/rows.
 //    d) Padding is adjusted for different breakpoints.
+// 6. Declare the background context so nested components and dynamic colors resolve against the card.
 
 @use 'sass:map';
 @use '@tokens' as tokens;
@@ -39,6 +40,7 @@
 .Card--boxed {
     --#{tokens.$css-variable-prefix}card-padding: #{theme.$padding}; // 5.d
     --#{tokens.$css-variable-prefix}card-padding-condensed: #{theme.$padding-condensed}; // 5.d
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color}; // 6.
 
     border: theme.$border-width theme.$border-style theme.$border-color;
     border-radius: theme.$border-radius;
