@@ -16,7 +16,7 @@ Use this skill when promoting an **experimental** component from its `UNSTABLE_`
 when a stabilization also **removes** a now-superseded component.
 
 Do **not** rely on hard-coded links to specific source files in this skill: components move and get renamed
-over time. Instead, search current code and git history by pattern (`UNSTABLE_`, `componentCategories`,
+over time. Instead, search current code and git history by pattern (`UNSTABLE_`, `components.schema`,
 `componentNameToSlug`, `useDeprecationMessage`, `migration-`).
 
 **Do not copy-paste example commit hashes** as if they were the canonical migration. Always discover fresh
@@ -87,10 +87,10 @@ Promote `packages/web-react/src/components/UNSTABLE_X/` → `packages/web-react/
    entry with `./components/X`, matching the shape of neighbouring entries
    (`types`/`development`/`production`/`import`/`require`/`default`). Keep changes scoped to the stabilized
    component; do not regenerate every export unless that is the explicit intent.
-5. **Docsite category + slug**: in
-   `apps/docsite/src/domains/components/features/component-catalog/constants/componentCategories.ts`, move the
-   component into its stable category, following the category's placement rule. Slugs are derived from the
-   component name; update `componentSlug` tests (`componentNameToSlug` / slug→name) that mention the component.
+5. **Docsite category + slug**: in `docs/components.schema.yaml`, rename the component's anchored entry in
+   `components` and its alias, and move it into its stable category, following the category's placement
+   rule. Slugs are derived from the component name; update `componentSlug` tests (`componentNameToSlug` /
+   slug→name) that mention the component.
 6. **Stories** under `docs/stories/examples/` and the component `stories/`: rename files, drop the
    `UNSTABLE_` prefix in titles/`category`, and remove unstable tags/flags. In Storybook `meta.title`,
    move the component from the **Experimental** sidebar group to **Components**: change

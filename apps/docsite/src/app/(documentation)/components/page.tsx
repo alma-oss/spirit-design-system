@@ -5,11 +5,13 @@ import {
   ComponentsBand,
   ComponentsPageHeader,
 } from '@local/domains/components';
+import { fetchComponentCategories } from '@local/domains/components/repositories/componentCategoriesRepository';
 import { fetchAllComponents } from '@local/domains/components/repositories/componentsRepository';
 import React, { Suspense } from 'react';
 
 const ComponentsPage = () => {
   const components: string[] = fetchAllComponents();
+  const categories = fetchComponentCategories();
 
   return (
     <>
@@ -17,7 +19,7 @@ const ComponentsPage = () => {
         <ComponentsPageHeader />
       </ComponentsBand>
       <Suspense fallback={<ComponentListSkeleton />}>
-        <ComponentList components={components} />
+        <ComponentList components={components} categories={categories} />
       </Suspense>
     </>
   );

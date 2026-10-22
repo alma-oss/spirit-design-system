@@ -1,3 +1,9 @@
-export { COMPONENT_CATEGORIES, COMPONENT_CATEGORY_DESCRIPTIONS } from './constants/componentCategories';
 export { fetchComponentsCatalog } from './repositories/componentsCatalogRepository';
-export type { ComponentCatalogEntry, PreviewComponent, PreviewGuides, PreviewModule } from './types';
+export type {
+  ComponentCatalogEntry,
+  ComponentCategories,
+  ComponentCategoryDefinition,
+  PreviewComponent,
+  PreviewGuides,
+  PreviewModule,
+} from './types';
