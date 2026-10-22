@@ -161,12 +161,22 @@ When the ProgressBar tracks the loading of a region of the page, set `aria-busy=
 point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` once loading has finished:
 
 ```tsx
-<div id="offers" aria-busy="true" aria-describedby="offers-progress">
-  {/* … the content of this region is loading … */}
-</div>
-
 <ProgressBar id="offers-progress" aria-label="Loading offers" value={60} />
+
+<section aria-busy="true" aria-describedby="offers-progress" aria-labelledby="offers-heading">
+  <h2 id="offers-heading">Offers</h2>
+  {/* … the content of this region is loading … */}
+</section>
 ```
+
+⚠️ Place the ProgressBar next to the busy region and the live region, not inside them. Assistive technologies
+may ignore changes inside a busy region until loading finishes ([`aria-busy`][wai-aria-busy]). Live regions
+announce changes of their content, not of the ProgressBar value ([`aria-relevant`][wai-aria-relevant]), and
+`role="status"` would re-read the ProgressBar on every text update ([`status`][wai-aria-status] is atomic).
+
+ℹ️ If the region is a significant section of the page, name it, for example with `aria-labelledby` pointing at its
+heading as in the example above. A named `section` becomes a [region landmark][mdn-region-role] that users can find
+and navigate to. Use landmarks sparingly, though: for smaller areas, leave the region unnamed.
 
 👉 See [Describing a particular region][mdn-progress-region] for more information.
 
@@ -198,6 +208,7 @@ For detailed information see [ProgressBar][progress-bar] component.
 [dictionary-validation]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#validation
 [mdn-progress]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [mdn-progress-region]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress#describing_a_particular_region
+[mdn-region-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role
 [progress-bar]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ProgressBar/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Container/README.md
@@ -207,3 +218,6 @@ For detailed information see [ProgressBar][progress-bar] component.
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[wai-aria-busy]: https://www.w3.org/TR/wai-aria-1.2/#aria-busy
+[wai-aria-relevant]: https://www.w3.org/TR/wai-aria-1.2/#aria-relevant
+[wai-aria-status]: https://www.w3.org/TR/wai-aria-1.2/#status
