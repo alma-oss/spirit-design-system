@@ -44,14 +44,14 @@ that is published from `main` as the current Active version.
 ### Maintenance
 
 For a release in the Maintenance phase, patch releases are published containing
-security patches and critical bug fixes. When a version moves from Active to
+security patches and critical bugfixes. When a version moves from Active to
 Maintenance, consuming projects should begin migrating to the new Active major
-version. During Maintenance we also consider adding non-critical bug fixes on an
+version. During Maintenance we also consider adding non-critical bugfixes on an
 ad hoc basis, by request only. To request a fix be back-ported to a Maintenance
 release, please
 [open an issue][spirit-jira-board] or let us know in [support Slack channel][spirit-support-slack-channel].
 
-Changes required for critical security and bug fixes may lead to semver-major
+Changes required for critical security and bugfixes may lead to semver-major
 changes landing within a release stream, such situations will be rare and will
 land as semver-minor. Although, those changes should have a revert option
 included.

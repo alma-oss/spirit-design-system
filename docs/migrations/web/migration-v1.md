@@ -131,7 +131,7 @@ The most notable change is that the mobile and desktop navigation are now separa
 - `HeaderDialog`
 
 Formerly, the desktop dialog (holding the site navigation) was a responsive CSS modification of a shared HTML code.
-With the new `Header` and `HeaderDialog`, each component has its own instance of the navigation, i.e. the navigation code is duplicated.
+With the new `Header` and `HeaderDialog`, each component has its own instance of the navigation, that is the navigation code is duplicated.
 This is because `HeaderDialog` will become an independent component in the future.
 
 You may need to take additional measures so your SEO is not affected by the duplicate HTML code of the navigation.

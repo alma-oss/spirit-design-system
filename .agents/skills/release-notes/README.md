@@ -17,7 +17,7 @@ The skill writes to `docs/release-notes/YYYY-MM-DD.md` (version-controlled; see 
 - `#` / `##` / `###` headers for document structure
 - `**bold**` for package names, What's Next headings, and prop names
 - `` `backticks` `` for component names, hook names, and npm package names
-- `[text](url)` links for commit hashes, Full changelog, Slack channel, and GitHub repo
+- `[text](url)` links for commit hashes, Full changelog, Slack channel, and GitHub repository
 
 ---
 

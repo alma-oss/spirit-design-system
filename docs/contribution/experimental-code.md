@@ -70,7 +70,7 @@ Some Spirit packages ship with available feature flags. These feature flags
 enable new behavior and styling, allowing you to opt-in to new breaking changes
 while remaining on the current major version. When a new feature flag is
 introduced it is marked `false` or "off" by default to ensure backward
-compatibility. A feature flag may be configured in JavaScript, SASS, or both.
+compatibility. A feature flag may be configured in JavaScript, Sass, or both.
 
 All the currently available feature flags, as well as how to enable them, is
 documented in each package's main README file in the section `Feature Flags`.
@@ -98,7 +98,7 @@ As the usage of an existing flag increases or we determine a feature to be of hi
 importance, we'll "commit" it to a future major release and rename it to use the
 `enable-v#-*` prefix. At this point, the API or functionality behind this flag is
 now fixed and won't change. We intend to ship this flag as "on by default" in
-the major version indicated in the name. e.g. `enable-v3-some-feature`
+the major version indicated in the name. For example, `enable-v3-some-feature`
 
 All breaking changes will be shipped as `enable-v#-*` flags within the current
 releases. This enables projects to opt-in to breaking changes earlier
@@ -171,7 +171,7 @@ be met to move a component from experimental to stable:
     - [ ] Stories cover at least common component states
     - [ ] Stories generate a `Playground` for controls
       - [ ] Controls with no meaningful change to the component visuals should
-            be hidden from the controls panel, eg. `className`
+            be hidden from the controls panel, for example `className`
       - [ ] Props of type `node` with no proper controls available for
             configuration should be hidden from the controls panel, eg.
             `children`
