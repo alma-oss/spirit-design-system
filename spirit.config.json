@@ -8,5 +8,19 @@
         "assets": ["icons"]
       }
     ]
+  },
+  "tokens": {
+    "sources": [
+      {
+        "fileKey": "BXRF3VABXQm2TGkL0nwS4i",
+        "brand": "Spirit",
+        "out": "packages/design-tokens/src",
+        "fontStacks": {
+          "Inter": "'Inter', sans-serif",
+          "Roboto Mono": "'Roboto Mono', monospace",
+          "General Sans": "'General Sans', sans-serif"
+        }
+      }
+    ]
   }
 }
