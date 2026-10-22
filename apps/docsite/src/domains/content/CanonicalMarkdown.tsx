@@ -1,8 +1,9 @@
-import ComponentBand from '@local/domains/components/ui/ComponentBand';
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { compileCanonicalSource } from '@local/domains/content/compileCanonicalMdx';
 import { readAllowedMarkdown, readCanonicalFile } from '@local/domains/content/contentRepository';
 import { splitMarkdownSections } from '@local/domains/content/splitMarkdownSections';
 import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
+import { componentBlockHeadingComponents } from '@local/mdx-components';
 import { notFound } from 'next/navigation';
 
 interface CanonicalMarkdownProps {
@@ -45,16 +46,18 @@ const CanonicalMarkdown = async ({
 
   if (asBlocks) {
     const compiled = await Promise.all(
-      splitMarkdownSections(raw).map((block) => compileCanonicalSource(block, isCanonical || !filePath)),
+      splitMarkdownSections(raw).map((block) =>
+        compileCanonicalSource(block, isCanonical || !filePath, componentBlockHeadingComponents),
+      ),
     );
 
     return (
       <>
         {compiled.map(({ content }, index) => (
           // eslint-disable-next-line react/no-array-index-key -- blocks are static and never reordered
-          <ComponentBand key={index}>
+          <ComponentsBand key={index} variant={COMPONENTS_BAND_VARIANTS.CONTENT}>
             <MarkdownContent>{content}</MarkdownContent>
-          </ComponentBand>
+          </ComponentsBand>
         ))}
       </>
     );

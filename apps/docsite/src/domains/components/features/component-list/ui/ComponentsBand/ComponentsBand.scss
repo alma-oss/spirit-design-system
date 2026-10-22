@@ -1,3 +1,5 @@
+@use '@tokens' as tokens;
+
 .ComponentsBand {
     background-color: var(--spirit-color-background-primary);
 }
@@ -20,9 +22,33 @@
     border-bottom: 1px solid var(--spirit-color-border-basic);
 }
 
-// The page footer draws its own line over the whole width, so the last block lets it overlap its bottom line.
-.ComponentsBand:last-child {
+// The page footer draws its own line over the whole width, so the last listing block lets it overlap its bottom line.
+// Detail blocks size their own dividers and stay out of this overlap.
+.ComponentsBand:last-child:not(.ComponentsBand--tabs, .ComponentsBand--content) {
     margin-bottom: -1px;
+}
+
+.ComponentsBand__container--detailHeader {
+    padding-top: var(--spirit-space-1400);
+}
+
+.ComponentsBand--tabs {
+    border-bottom: tokens.$border-width-100 solid tokens.$border-basic;
+}
+
+.ComponentsBand__container--tabs {
+    padding-block: var(--spirit-space-1000);
+}
+
+.ComponentsBand__container--content {
+    padding-top: var(--spirit-space-1400);
+    padding-bottom: var(--spirit-space-1100);
+}
+
+// Dividers between content blocks stay inside the container. The last block has no divider of its own: the page
+// footer draws the full-width line.
+.ComponentsBand--content:not(:last-child) .ComponentsBand__container--content {
+    border-bottom: tokens.$border-width-100 solid tokens.$border-basic;
 }
 
 .ComponentsBand--header {

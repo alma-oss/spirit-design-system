@@ -1,5 +1,5 @@
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/features/component-list';
 import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
-import ComponentBand from '@local/domains/components/ui/ComponentBand';
 import ComponentTabNavigationItems, { type TabItem } from '@local/domains/components/ui/ComponentTabNavigationItems';
 import { getComponentTabAvailability } from '@local/domains/content/componentDocs';
 import { routes, componentSegments } from '@local/domains/routing/routes';
@@ -60,9 +60,9 @@ const ComponentTabNavigation = async ({ component, hiddenTabs = [] }: ComponentT
   ];
 
   return (
-    <ComponentBand variant="tabs">
+    <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.TABS}>
       <ComponentTabNavigationItems items={items.filter((item) => !hiddenTabs.includes(item.segment))} />
-    </ComponentBand>
+    </ComponentsBand>
   );
 };
 

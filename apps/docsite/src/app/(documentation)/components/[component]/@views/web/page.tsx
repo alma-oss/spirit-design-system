@@ -1,8 +1,11 @@
-import ComponentBand from '@local/domains/components/ui/ComponentBand';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { compileCanonicalSource } from '@local/domains/content/compileCanonicalMdx';
 import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
+import { componentBlockHeadingComponents } from '@local/mdx-components';
 import { notFound } from 'next/navigation';
-import React from 'react';
 
 interface WebTabPageProps {
   params: Promise<{ component: string }>;
@@ -18,21 +21,25 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
   }
 
   try {
-    const { default: ReadMe } = await import(
-      `@alma-oss/spirit-web/scss/components/${slugToComponentName(component)}/README.md`
+    const source = await readFile(
+      join(process.cwd(), '../../packages/web/src/scss/components', slugToComponentName(component), 'README.md'),
+      'utf8',
     );
+    const { content } = await compileCanonicalSource(source, false, componentBlockHeadingComponents);
 
     return (
-      <ComponentBand>
-        <MarkdownContent>
-          <ReadMe />
-        </MarkdownContent>
-      </ComponentBand>
+      <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.CONTENT}>
+        <MarkdownContent>{content}</MarkdownContent>
+      </ComponentsBand>
     );
   } catch (error) {
-    logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
+    if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') {
+      logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
 
-    return null;
+      return null;
+    }
+
+    throw error;
   }
 };
 
