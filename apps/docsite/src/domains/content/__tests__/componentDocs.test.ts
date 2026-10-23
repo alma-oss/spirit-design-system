@@ -1,11 +1,8 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {
-  DOCSITE_FIGMA_URL,
-  DOCSITE_STORYBOOK_URL,
-  getComponentPageLinks,
-} from '@local/domains/components/ui/PageActions/pageLinks';
+import { FIGMA_URL, STORYBOOK_URL } from '@local/config/externalLinks';
+import { getComponentPageLinks } from '@local/domains/components/ui/PageActions/pageLinks';
 import {
   getComponentDescription,
   getComponentPlayground,
@@ -223,12 +220,12 @@ describe('getComponentPageLinks', () => {
 
   it('falls back to the listing urls', () => {
     expect(getComponentPageLinks('button')).toEqual([
-      { label: 'Open in Storybook', href: DOCSITE_STORYBOOK_URL },
+      { label: 'Open in Storybook', href: STORYBOOK_URL },
       {
         label: 'Open on GitHub',
         href: 'https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/src/components/Button',
       },
-      { label: 'Open in Figma', href: DOCSITE_FIGMA_URL },
+      { label: 'Open in Figma', href: FIGMA_URL },
     ]);
   });
 });
