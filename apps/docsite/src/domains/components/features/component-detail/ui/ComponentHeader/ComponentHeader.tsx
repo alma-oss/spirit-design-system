@@ -1,7 +1,7 @@
 'use client';
 
 import { Breadcrumbs, BreadcrumbsItem, Flex, Heading, Tag, Text } from '@alma-oss/spirit-web-react';
-import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/features/component-list';
+import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/ui/ComponentsBand';
 import { PageActions, type PageLink } from '@local/domains/components/ui/PageActions';
 import { routes } from '@local/domains/routing/routes';
 import useBreadcrumbs from '@local/hooks/useBreadcrumbs';
