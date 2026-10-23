@@ -20,7 +20,8 @@ Card pictures on `/components` stay in `/spirit:docsite-component-preview`.
 
 1. The detail layout: header, optional playground, `Navigation` tabs, then the view. No `ComponentCover`.
 2. `ComponentsBand` variants `detailHeader`, `tabs`, and `content`, without changing the listing variants.
-3. Header and playground UI in `features/component-detail/ui/<Name>/`, with plain SCSS and a barrel.
+3. Header UI in `features/component-detail/ui/<Name>/`, and the playground in `features/component-playground`,
+   with plain SCSS and a barrel.
 4. Shared `PageActions`: copy writes the title, description, and URL; Storybook and Figma fall back to the
    listing URLs; GitHub opens the component folder.
 5. `PLAYGROUND_COMPONENTS` plus `parsePlaygroundFile`. An unknown or broken playground is not rendered.
