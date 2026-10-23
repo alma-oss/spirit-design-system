@@ -7,4 +7,4 @@ export {
   type PlaygroundConfig,
   type PlaygroundControl,
   type PlaygroundFile,
-} from './playgroundConfig';
+} from '../../playgroundConfig';

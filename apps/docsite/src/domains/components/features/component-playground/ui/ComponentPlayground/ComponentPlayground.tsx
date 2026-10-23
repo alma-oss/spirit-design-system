@@ -20,8 +20,8 @@ import {
   type PlaygroundComponentName,
   type PlaygroundConfig,
   type PlaygroundControl,
-} from './playgroundConfig';
-import { buildCode, getSnippetAttributes } from './playgroundSnippet';
+} from '../../playgroundConfig';
+import { buildCode, getSnippetAttributes } from '../../playgroundSnippet';
 import './ComponentPlayground.scss';
 
 type PlaygroundValue = string | boolean;

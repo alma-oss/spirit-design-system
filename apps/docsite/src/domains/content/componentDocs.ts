@@ -3,7 +3,7 @@ import path from 'node:path';
 import {
   parsePlaygroundFile,
   type PlaygroundFile,
-} from '../components/features/component-detail/ui/ComponentPlayground/playgroundConfig';
+} from '@local/domains/components/features/component-playground/playgroundConfig';
 import { isValidComponentSlug, slugToComponentName } from '../components/utils/componentSlug';
 import { componentDocsDirectory, componentDocTabs, type ComponentDocTab } from '../routing/routes';
 import { fileExists } from './contentRepository';

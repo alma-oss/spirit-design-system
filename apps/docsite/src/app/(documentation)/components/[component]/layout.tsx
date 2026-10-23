@@ -1,4 +1,5 @@
-import { ComponentHeader, ComponentPlayground } from '@local/domains/components/features/component-detail';
+import { ComponentHeader } from '@local/domains/components/features/component-detail';
+import { ComponentPlayground } from '@local/domains/components/features/component-playground';
 import { ComponentTabNavigation } from '@local/domains/components/ui/ComponentTabNavigation';
 import { getComponentPageLinks } from '@local/domains/components/ui/PageActions';
 import { getComponentDescription, getComponentPlayground } from '@local/domains/content/componentDocs';
