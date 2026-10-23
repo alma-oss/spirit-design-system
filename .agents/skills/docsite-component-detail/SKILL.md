@@ -32,7 +32,7 @@ The detail layout is `ComponentHeader`, then `ComponentTabNavigation`, then the 
 
 ## Bands
 
-Detail blocks use `ComponentsBand` from `features/component-list`. Do not add a second band component.
+Detail blocks use `ComponentsBand` from `domains/components/ui/ComponentsBand`. Do not add a second band component.
 
 | Variant        | Use                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------- |
@@ -44,11 +44,16 @@ Do not change the listing variants `header`, `heading`, and `grid`.
 
 ## Where New UI Lives
 
-Put header and playground pieces in
+Put header pieces in
 `apps/docsite/src/domains/components/features/component-detail/ui/<Name>/`.
 
 - Plain SCSS (`import './Name.scss'`) and string BEM classes. No CSS modules.
 - A folder `index.ts`, and a barrel from `features/component-detail/index.ts`.
+
+The playground is its own feature, `features/component-playground`. Its UI is
+`features/component-playground/ui/ComponentPlayground/`. `playgroundConfig.ts` and `playgroundSnippet.ts`
+sit at the feature root and are exported from `features/component-playground/index.ts`. Do not put the
+playground back under `component-detail`.
 
 ## Page Actions
 
