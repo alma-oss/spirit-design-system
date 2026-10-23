@@ -1,8 +1,1 @@
-export {
-  COMPONENTS_BAND_VARIANTS,
-  ComponentList,
-  ComponentListSkeleton,
-  ComponentsBand,
-  ComponentsPageHeader,
-  type ComponentsBandVariant,
-} from './ui';
+export { ComponentList, ComponentListSkeleton, ComponentsPageHeader } from './ui';

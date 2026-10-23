@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Flex, Heading, Section } from '@alma-oss/spirit-web-react';
+import { GITHUB_URL } from '@local/config/externalLinks';
 import NextLink from 'next/link';
 import React from 'react';
 
@@ -17,12 +18,7 @@ const Cover = () => (
       <Button elementType={NextLink} size="large" href="https://spirit.supernova-docs.io/spirit/">
         Docs
       </Button>
-      <Button
-        elementType={NextLink}
-        color="secondary"
-        size="large"
-        href="https://github.com/alma-oss/spirit-design-system/"
-      >
+      <Button elementType={NextLink} color="secondary" size="large" href={GITHUB_URL}>
         GitHub
       </Button>
     </Flex>

@@ -20,7 +20,7 @@ const DesignTabPage = async ({ params }: DesignTabPageProps) => {
     notFound();
   }
 
-  return <CanonicalMarkdown isCanonical filePath={filePath} missing="not-found" />;
+  return <CanonicalMarkdown asBlocks isCanonical filePath={filePath} missing="not-found" />;
 };
 
 export default DesignTabPage;

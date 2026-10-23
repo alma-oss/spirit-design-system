@@ -1,6 +1,6 @@
 import { isValidComponentSlug } from '@local/domains/components/utils/componentSlug';
 import CanonicalMarkdown from '@local/domains/content/CanonicalMarkdown';
-import { resolveComponentTabFile } from '@local/domains/content/componentDocs';
+import { getComponentTabAvailability, resolveComponentTabFile } from '@local/domains/content/componentDocs';
 import { notFound } from 'next/navigation';
 
 interface FigmaTabPageProps {
@@ -15,12 +15,13 @@ const FigmaTabPage = async ({ params }: FigmaTabPageProps) => {
   }
 
   const filePath = resolveComponentTabFile(component, 'figma');
+  const { figma: isFigmaTabAvailable } = await getComponentTabAvailability(component);
 
-  if (!filePath) {
+  if (!filePath || !isFigmaTabAvailable) {
     notFound();
   }
 
-  return <CanonicalMarkdown isCanonical filePath={filePath} missing="not-found" />;
+  return <CanonicalMarkdown asBlocks isCanonical filePath={filePath} missing="not-found" />;
 };
 
 export default FigmaTabPage;
