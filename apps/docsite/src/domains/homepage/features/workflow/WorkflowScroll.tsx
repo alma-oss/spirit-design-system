@@ -11,13 +11,14 @@ import {
   Text,
   UNSTABLE_EyebrowText,
 } from '@alma-oss/spirit-web-react';
+import { REPOSITORY_URL } from '@local/config/externalLinks';
 import NextLink from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { routes } from '../../../routing/routes';
 import PageSection from '../../ui/PageSection';
 import './WorkflowScroll.scss';
 
-const REPOSITORY_URL = 'https://github.com/alma-oss/spirit-design-system/tree/main';
+const REPOSITORY_TREE_URL = `${REPOSITORY_URL}/tree/main`;
 
 interface WorkflowStep {
   eyebrow: string;
@@ -70,8 +71,8 @@ const steps: WorkflowStep[] = [
     imageColor: 'emotion-success-subtle',
     // The packages have no pages in the docsite yet, so they link to their READMEs on GitHub.
     links: [
-      { label: 'Web package', href: `${REPOSITORY_URL}/packages/web` },
-      { label: 'React package', href: `${REPOSITORY_URL}/packages/web-react` },
+      { label: 'Web package', href: `${REPOSITORY_TREE_URL}/packages/web` },
+      { label: 'React package', href: `${REPOSITORY_TREE_URL}/packages/web-react` },
       { label: 'Component docs', href: routes.components },
     ],
   },
