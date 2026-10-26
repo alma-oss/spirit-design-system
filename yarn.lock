@@ -174,6 +174,7 @@ __metadata:
     "@mdx-js/react": "catalog:content"
     "@next/eslint-plugin-next": "catalog:lint"
     "@next/mdx": "catalog:content"
+    "@types/matter-js": "catalog:types"
     "@types/mdx": "catalog:types"
     "@types/node": "catalog:types"
     "@types/react": "catalog:types"
@@ -188,6 +189,7 @@ __metadata:
     jest: "catalog:test"
     jest-config-spirit: "workspace:^"
     lottie-react: "catalog:frontend"
+    matter-js: "catalog:frontend"
     next: "catalog:frontend"
     next-mdx-remote: "catalog:content"
     npm-run-all2: "catalog:script"
@@ -11401,6 +11403,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
+  languageName: node
+  linkType: hard
+
+"@types/matter-js@npm:0.19.8":
+  version: 0.19.8
+  resolution: "@types/matter-js@npm:0.19.8"
+  checksum: 10/a853868e97ff70fc771174528d3d545431b204708e30af7f89d302f357d9237aa8891d9b58ef951f3aca246ff72661cd0318b02f3a7cc939aeb8e1538a025e12
   languageName: node
   linkType: hard
 
@@ -26597,6 +26606,13 @@ __metadata:
   version: 2.1.3
   resolution: "mathml-tag-names@npm:2.1.3"
   checksum: 10/1201a25a137d6b9e328facd67912058b8b45b19a6c4cc62641c9476195da28a275ca6e0eca070af5378b905c2b11abc1114676ba703411db0b9ce007de921ad0
+  languageName: node
+  linkType: hard
+
+"matter-js@npm:0.19.0":
+  version: 0.19.0
+  resolution: "matter-js@npm:0.19.0"
+  checksum: 10/7945824d9ec059437562d626479562d615b65bc2b519f08efdd5183fade213458388a35d54552c81c7edeea33cfe6e9ba9354983c1e7019b40dbb933e4c5a0ef
   languageName: node
   linkType: hard
 
