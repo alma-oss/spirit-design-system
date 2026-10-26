@@ -743,6 +743,14 @@
       "require": "./dist/components/Toggle/index.cjs",
       "default": "./dist/components/Toggle/index.js"
     },
+    "./components/Toolbar": {
+      "types": "./dist/components/Toolbar/index.d.ts",
+      "development": "./src/components/Toolbar/index.ts",
+      "production": "./dist/components/Toolbar/index.js",
+      "import": "./dist/components/Toolbar/index.js",
+      "require": "./dist/components/Toolbar/index.cjs",
+      "default": "./dist/components/Toolbar/index.js"
+    },
     "./components/Tooltip": {
       "types": "./dist/components/Tooltip/index.d.ts",
       "development": "./src/components/Tooltip/index.ts",
