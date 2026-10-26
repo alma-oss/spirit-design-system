@@ -1,5 +1,10 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import { Checkbox } from '../../Checkbox';
 import FieldGroup from '../FieldGroup';
 
@@ -34,6 +39,15 @@ describe('FieldGroup accessibility', () => {
   accessibilityValidationStateTest(
     (props) => (
       <FieldGroup {...props} id="field-group-validation" label="Label" validationText="Validation text">
+        {fieldGroupContent}
+      </FieldGroup>
+    ),
+    'fieldset',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => (
+      <FieldGroup {...props} id="field-group-aria-describedby" label="Label">
         {fieldGroupContent}
       </FieldGroup>
     ),

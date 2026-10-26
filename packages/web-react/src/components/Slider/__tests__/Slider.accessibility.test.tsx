@@ -1,5 +1,10 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import Slider from '../Slider';
 
 describe('Slider accessibility', () => {
@@ -24,6 +29,11 @@ describe('Slider accessibility', () => {
         validationText="Validation text"
       />
     ),
+    'input[type="range"]',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => <Slider {...props} id="slider-aria-describedby" label="Label" value={50} onChange={() => {}} />,
     'input[type="range"]',
   );
 });

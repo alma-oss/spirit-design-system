@@ -1,5 +1,10 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import TextField from '../TextField';
 
 jest.mock('../../../hooks/useIcon');
@@ -22,6 +27,11 @@ describe('TextField accessibility', () => {
         hasPasswordToggle
       />
     ),
+    'input',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => <TextField {...props} id="textfield-aria-describedby" label="Label" />,
     'input',
   );
 });

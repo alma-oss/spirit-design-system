@@ -1,5 +1,11 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityAriaDetailsTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import Toggle from '../Toggle';
 
 describe('Toggle accessibility', () => {
@@ -15,6 +21,16 @@ describe('Toggle accessibility', () => {
 
   accessibilityValidationStateTest(
     (props) => <Toggle {...props} id="toggle" label="Toggle me" validationText="Validation text" />,
+    'input[type="checkbox"]',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => <Toggle {...props} id="toggle-aria-describedby" label="Toggle me" />,
+    'input[type="checkbox"]',
+  );
+
+  accessibilityAriaDetailsTest(
+    (props) => <Toggle {...props} id="toggle-aria-details" label="Toggle me" />,
     'input[type="checkbox"]',
   );
 });

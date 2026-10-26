@@ -1,5 +1,10 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import Select from '../Select';
 
 jest.mock('../../../hooks/useIcon');
@@ -33,6 +38,15 @@ describe('Select accessibility', () => {
   accessibilityValidationStateTest(
     (props) => (
       <Select {...props} id="select-validation" label="Label" validationText="Validation text">
+        {selectOptions}
+      </Select>
+    ),
+    'select',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => (
+      <Select {...props} id="select-aria-describedby" label="Label">
         {selectOptions}
       </Select>
     ),
