@@ -330,22 +330,22 @@ the rulesets under the repository's **Settings → Rules → Rulesets**.
 Rulesets let us define required reviews, required status checks, linear history, etc. for
 everyone, while also naming specific **bypass actors** that are exempt from some or all of those
 rules. This is what allows `almaoss-spirit-design-system[bot]` (the GitHub App used by the
-`Version` workflow described below) to push version bump commits and tags directly to these branches,
+`Version` stage described below) to push version bump commits and tags directly to these branches,
 without opening a pull request, while regular contributors still go through PR review as usual.
 
 ### Authentication
 
-The release process involves two independent authentication mechanisms, one per workflow.
+The release process involves two independent authentication mechanisms, one per stage of the `Release` workflow.
 
 #### GitHub (`Version` Workflow)
 
-The [`Version`][version-action] workflow authenticates as a GitHub App rather than a personal access token.
+The `Version` stage of the [`Release`][release-action] workflow authenticates as a GitHub App rather than a personal access token.
 A short-lived installation token is minted per run via `actions/create-github-app-token`, using the
 `GH_APP_CLIENT_ID` and `GH_APP_PRIVATE_KEY` secrets. Commits, tags, and releases it creates are attributed to
 `almaoss-spirit-design-system[bot]`. Unlike the PAT (tied to a personal account and requiring manual
 renewal), this token is org-owned, scoped to this repo, and expires automatically.
 
-**If the `Version` workflow fails with an authentication or permission error**, check the GitHub App's
+**If the `Version` stage fails with an authentication or permission error**, check the GitHub App's
 installation in the org's [GitHub App settings][github-app-settings] (find the app tied to
 `almaoss-spirit-design-system[bot]`):
 
@@ -363,13 +363,13 @@ token scoped to that single run — there is no `NPM_TOKEN`/`NODE_AUTH_TOKEN` se
 
 This only works because the workflow runs under the `npm-registry` GitHub Actions environment,
 and each published package (`@alma-oss/spirit-web`, `@alma-oss/spirit-web-react`,
-`@alma-oss/spirit-design-tokens`, etc.) has this exact repo, workflow file, and environment
-registered as its Trusted Publisher on npmjs.com.
+`@alma-oss/spirit-design-tokens`, etc.) has this exact repo, workflow file (`release.yaml`, the
+calling workflow — npm does not look at the reusable `publish.yaml`), and environment registered as its Trusted Publisher on npmjs.com.
 
-**If `Publish` fails with an npm authentication or 403 error**:
+**If the `Publish` stage fails with an npm authentication or 403 error**:
 
 - Confirm the `npm-registry` environment still exists and is referenced correctly in
-  [`publish.yaml`][publish-action].
+  [`publish.yaml`][publish-action] (called from [`release.yaml`][release-action]).
 - Check the affected package's Trusted Publisher configuration on npmjs.com (package →
   Settings → Publishing access) — the trust link is matched by exact repo/workflow
   file/environment name, so renaming any of them silently breaks it.
@@ -383,8 +383,8 @@ Merge all appropriate PRs you want to publish into the appropriate branch
 
 #### Automatically
 
-1. Go to repository **Actions** tab and select the `Version` workflow
-   i. or go to the [workflow page directly][version-action]
+1. Go to repository **Actions** tab and select the `Release` workflow
+   i. or go to the [workflow page directly][release-action]
 2. On the right top corner, click on the `Run workflow` button
    i. Select the branch you want to publish from (e.g. `main`)
    ii. You can check the `Dry run` checkbox to run the workflow without publishing the packages
@@ -392,7 +392,9 @@ Merge all appropriate PRs you want to publish into the appropriate branch
    iv. Click on the `Run workflow` button
    ![Run version workflow](./static/version-workflow-run.jpg)
 3. Check that the version number is correct and everything looks good during the workflow run or try the dry run first
-4. Publishing is done automatically (event driven) by [`Publish` Action][publish-action] (uses `build` script and `make publish` command)
+4. Publishing and release notes follow in the same run: the `Publish` stage ([`publish.yaml`][publish-action], uses `build` script and
+   `make publish` command) runs only when the version step pushed a release commit with tags, then the `Release Notes` stage opens a PR
+   with the generated notes and posts them to Slack
 
 #### Manually (Fallback Option)
 
@@ -471,4 +473,4 @@ After the release notes are ready, you can publish them (copy&paste from canvas)
 [storybook-mcp-overview]: https://storybook.js.org/docs/ai/mcp/overview
 [storybook-mcp-sharing]: https://storybook.js.org/docs/ai/mcp/sharing
 [typescript]: https://www.typescriptlang.org/
-[version-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/version.yaml
+[release-action]: https://github.com/alma-oss/spirit-design-system/actions/workflows/release.yaml
