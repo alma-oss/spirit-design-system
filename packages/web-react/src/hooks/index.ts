@@ -3,6 +3,7 @@ export * from './disclosure';
 export * from './gridKeyboardNavigation';
 export * from './selection';
 export * from './styleProps';
+export * from './toolbar';
 export * from './useAlignmentClass';
 export * from './useAriaIdRefs';
 export * from './useAriaIds';

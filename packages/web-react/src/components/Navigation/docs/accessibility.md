@@ -26,6 +26,18 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 - For dropdown navigation, support **Arrow keys** to move through sub-menus and **Esc** to close.
 
+### **Toolbar**
+
+- Use a [`Toolbar`][toolbar] for three or more actions that stay visible, for example the actions for the document being edited. Do not use it for one or two controls, or for site navigation. Inside a toolbar, `Navigation` renders as a `div`.
+
+- Name the `Toolbar` with `aria-label` or `aria-labelledby`. A name is required when the page has more than one toolbar. The `Navigation` layout follows the Toolbar `orientation`.
+
+- Inside a `Toolbar`, the `ul` and `li` use `role="presentation"`, so the toolbar is not also announced as a list.
+
+- The toolbar is one **Tab** stop and remembers the last focused action.
+
+- **Arrow keys** for the orientation move between actions and wrap around. **Home** and **End** move to the first and last action. Text fields, text areas, and selects keep their own arrow keys and stay separate Tab stops.
+
 ### **Focus Management**
 
 - Maintain visible focus indicators for all items.
@@ -43,3 +55,5 @@ The majority of accessibility issues are already guaranteed by implementation. I
 ### **Mobile Menus**
 
 - When using collapsible menus or drawers, manage focus correctly – trap focus inside the menu when open and return focus to the trigger on close.
+
+[toolbar]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Toolbar/README.md
