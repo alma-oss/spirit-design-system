@@ -22,6 +22,18 @@ const FULL_SIZE_WIDTH = 640;
 // The cards can be moved only by a mouse on a screen that is not a phone. On a phone they just fall and stay.
 const DRAG_QUERY = '(pointer: fine) and (min-width: 48rem)';
 
+// A copy of the array in a random order (Fisher–Yates), so the cards fall in a different order each time.
+const shuffle = <T,>(items: T[]) => {
+  const result = [...items];
+
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [result[index], result[other]] = [result[other], result[index]];
+  }
+
+  return result;
+};
+
 const joinClassNames = (...classNames: (string | false)[]) => classNames.filter(Boolean).join(' ');
 
 /**
@@ -119,7 +131,7 @@ const FallingTokens = () => {
       const scale = getScale();
       const rows: { el: HTMLElement; width: number; height: number; fullWidth: number; fullHeight: number }[][] = [[]];
       let rowWidth = 0;
-      getCards().forEach((el) => {
+      shuffle(getCards()).forEach((el) => {
         const { offsetWidth: fullWidth, offsetHeight: fullHeight } = el;
         const width = fullWidth * scale;
         const height = fullHeight * scale;
@@ -142,9 +154,12 @@ const FallingTokens = () => {
         y -= rowHeight;
 
         const rowItems = row.map(({ el, width, height, fullWidth, fullHeight }) => {
+          // A random shift, so the cards do not land in the same places each time. It is smaller than the free space.
+          const shiftX = (Math.random() - 0.5) * Math.min(spacing, 40);
+          const shiftY = (Math.random() - 0.5) * 30;
           const body = Bodies.rectangle(
-            x + width / 2,
-            y + (rowHeight - height) / 2,
+            x + width / 2 + shiftX,
+            y + (rowHeight - height) / 2 + shiftY,
             width + 2 * CARD_MARGIN,
             height + 2 * CARD_MARGIN,
             {
