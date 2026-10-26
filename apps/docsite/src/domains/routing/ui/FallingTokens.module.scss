@@ -1,0 +1,272 @@
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+@use '@tokens' as tokens;
+
+// Cards with design tokens (Figma file 0rP28fqkiNA0lcy4cPM7nd, nodes 1143:6875 and 1152:2697).
+// The card chrome uses Spirit tokens. The demos inside the cards show colors and values of the tokens they are named
+// after, so those are raw values on purpose.
+
+// The scene for the physics, Matter.js sets the transform of the cards.
+.stage {
+    position: relative;
+    width: 100%;
+    height: 25rem;
+    // Clips the cards at the sides and at the bottom, but lets the pile reach into the gap above the scene (`space-1300`).
+    // The cards waiting above the scene are still hidden.
+    clip-path: inset(calc(-1 * #{tokens.$space-1300}) 0 0 0);
+}
+
+.card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    gap: var(--spirit-space-500);
+    align-items: center;
+    justify-content: center;
+    padding: var(--spirit-space-700);
+    border: var(--spirit-border-width-100) solid var(--spirit-color-border-basic);
+    border-radius: var(--spirit-radius-400);
+    overflow: hidden;
+    color: var(--spirit-color-text-secondary);
+    background-color: var(--spirit-color-background-primary);
+    // Hidden above the scene until the physics starts.
+    transform: translateY(-100vh);
+    cursor: grab;
+    user-select: none;
+
+    // Do not promote the cards to their own layer (`will-change`), rotated cards would be blurred.
+
+    img {
+        pointer-events: none;
+    }
+}
+
+.isDragging,
+.isDragging .card {
+    cursor: grabbing;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.label {
+    @include typography.generate(tokens.$code-small-regular);
+
+    white-space: nowrap;
+}
+
+.hex {
+    @include typography.generate(tokens.$body-xsmall-regular);
+
+    color: var(--spirit-color-text-tertiary);
+}
+
+.icon {
+    display: block;
+    flex-shrink: 0;
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+// ----- Demos of the tokens -----
+
+.radiusDemo {
+    box-sizing: border-box;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    background: linear-gradient(225deg, #f0c8fe 0.83%, #fff 99.17%);
+}
+
+.radius300 {
+    border-top-right-radius: var(--spirit-radius-300);
+}
+
+.radiusFull {
+    border: 2px solid #000;
+    border-radius: 999px;
+}
+
+.swatch {
+    flex-shrink: 0;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: var(--spirit-radius-300);
+}
+
+.gradient {
+    background: linear-gradient(#eae3ff, #cebcff);
+}
+
+.warning {
+    background-color: #b45309;
+}
+
+.colorCard {
+    flex-direction: column;
+    gap: var(--spirit-space-400);
+    padding: var(--spirit-space-600) var(--spirit-space-500);
+}
+
+.swatchBar {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: var(--spirit-radius-300);
+}
+
+.green {
+    background-color: #3e9b4f;
+}
+
+.yellow {
+    background-color: #ffbe00;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.textCentered {
+    align-self: center;
+    align-items: center;
+}
+
+.space {
+    box-sizing: border-box;
+    height: 3.5rem;
+}
+
+.spaceDemo {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-right: 2px solid #d80090;
+    border-left: 2px solid #d80090;
+    // A solid fill instead of hatching, thin diagonal lines flickered when the card moved.
+    background-color: rgb(216 0 144 / 12%);
+}
+
+.containerDemo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    box-sizing: border-box;
+    width: 1.875rem;
+    height: 1.875rem;
+    padding: 0 var(--spirit-space-300);
+    border-right: 2px solid #5888ff;
+    border-left: 2px solid #5888ff;
+
+    &::before {
+        content: '';
+        flex: 1;
+        height: 1rem;
+        background-color: #dccfff;
+    }
+}
+
+.gridDemo {
+    display: flex;
+    gap: var(--spirit-space-200);
+    box-sizing: border-box;
+    width: 5.375rem;
+    height: 3rem;
+    padding: var(--spirit-space-300) 0;
+
+    span {
+        flex: 1;
+        background-color: #cfd6ff;
+    }
+}
+
+// ----- Cards with a picture -----
+
+.image {
+    padding: var(--spirit-space-400);
+
+    img {
+        display: block;
+        width: 6.875rem;
+        height: 6.875rem;
+        border-radius: var(--spirit-radius-300);
+        object-fit: cover;
+    }
+}
+
+.hero {
+    flex-direction: column;
+    gap: var(--spirit-space-600);
+    padding: var(--spirit-space-900) var(--spirit-space-800);
+    border: 0;
+
+    img {
+        display: block;
+        width: 5.8125rem;
+    }
+}
+
+// The hero cards in the dark colors use the on-brand theme, so the label is white.
+.font {
+    background-color: #202020;
+
+    .label {
+        color: var(--spirit-color-text-primary);
+    }
+}
+
+.display {
+    background-color: #4e2ea6;
+
+    .label {
+        color: var(--spirit-color-text-primary);
+    }
+}
+
+.accessibility,
+.bodyXlarge {
+    .label {
+        color: #202020;
+    }
+}
+
+.accessibility {
+    background-color: #e9f8e8;
+
+    img {
+        width: 2.75rem;
+    }
+}
+
+.bodyXlarge {
+    background-color: #e8f0f8;
+
+    img {
+        width: 2.8125rem;
+    }
+}
+
+.motion {
+    padding: var(--spirit-space-500) var(--spirit-space-500) var(--spirit-space-700);
+}
+
+// The animation (500 × 500 px) has an empty margin, so it is drawn 1.4 times larger than its box, which crops the
+// margin. A larger box is used instead of `scale`, rotated cards would be blurred by it.
+.lottieBox {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+    overflow: hidden;
+}
+
+.lottie {
+    position: absolute;
+    top: -1.2rem;
+    left: -1.2rem;
+    width: 8.4rem;
+    height: 8.4rem;
+}

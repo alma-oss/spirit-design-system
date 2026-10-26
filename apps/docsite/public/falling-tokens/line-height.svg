@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Color">
+<mask id="path-1-inside-1_0_9" fill="white">
+<path d="M0 0H30V30H0V0Z"/>
+</mask>
+<path d="M0 0V2H30V0V-2H0V0ZM30 30V28H0V30V32H30V30Z" fill="#E851FF" mask="url(#path-1-inside-1_0_9)"/>
+<path id="A" d="M13.8564 10H15.401L12.1931 20H10.5L13.8564 10ZM16.0693 10L19.5 20H17.8069L14.5099 10H16.0693ZM12.1188 16.3143H17.7178V17.6857H12.1188V16.3143Z" fill="#202020"/>
+</g>
+</svg>

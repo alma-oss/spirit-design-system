@@ -1,0 +1,15 @@
+@use '@tokens' as tokens;
+
+.notFound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: tokens.$space-1300;
+    align-items: center;
+    width: 100%;
+}
