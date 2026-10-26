@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { WebPreview } from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
@@ -15,7 +16,7 @@ const { error: logError } = console;
 const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
   const { component } = await params;
 
-  if (!isValidComponentSlug(component)) {
+  if (!isValidComponentSlug(component) || !getComponentViewsAvailability(component).webPreview) {
     notFound();
   }
 
@@ -33,7 +34,7 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);
 
-    return null;
+    notFound();
   }
 };
 

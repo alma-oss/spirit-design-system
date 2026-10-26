@@ -1,5 +1,11 @@
 import { type Dirent, existsSync, readdirSync } from 'fs';
-import { fetchAllComponents, getComponentViewsAvailability } from '../componentsRepository';
+import {
+  buildComponentSectionIndex,
+  fetchAllComponents,
+  getComponentViewsAvailability,
+  hasComponentSection,
+  listComponentSlugsForSection,
+} from '../componentsRepository';
 
 jest.mock('fs', () => ({
   existsSync: jest.fn(),
@@ -98,5 +104,72 @@ describe('getComponentViewsAvailability', () => {
       reactPreview: false,
     });
     expect(existsSyncMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('hasComponentSection', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should report view and doc sections from the files on disk', () => {
+    existsSyncMock.mockImplementation(
+      (filePath: string) =>
+        filePath.endsWith('packages/web-react/src/components/ActionGroup/README.md') ||
+        filePath.endsWith('packages/web-react/src/components/ActionGroup/preview/index.ts'),
+    );
+
+    expect(hasComponentSection('action-group', 'web')).toBe(false);
+    expect(hasComponentSection('action-group', 'webPreview')).toBe(false);
+    expect(hasComponentSection('action-group', 'design')).toBe(false);
+    expect(hasComponentSection('action-group', 'react')).toBe(true);
+    expect(hasComponentSection('action-group', 'reactPreview')).toBe(true);
+  });
+
+  it('should report no section for an invalid component slug', () => {
+    expect(hasComponentSection('../button', 'web')).toBe(false);
+    expect(hasComponentSection('../button', 'overview')).toBe(false);
+    expect(existsSyncMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('listComponentSlugsForSection', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should list only components that have the section', () => {
+    readdirSyncMock.mockReturnValue([makeDirent('ActionGroup', true), makeDirent('Button', true)]);
+    existsSyncMock.mockImplementation(
+      (filePath: string) =>
+        filePath.endsWith('packages/web-react/src/components/ActionGroup/README.md') ||
+        filePath.endsWith('packages/web-react/src/components/ActionGroup/preview/index.ts') ||
+        filePath.endsWith('packages/web/src/scss/components/Button/README.md'),
+    );
+
+    expect(listComponentSlugsForSection('react')).toEqual(['action-group']);
+    expect(listComponentSlugsForSection('web')).toEqual(['button']);
+    expect(listComponentSlugsForSection('design')).toEqual([]);
+  });
+});
+
+describe('buildComponentSectionIndex', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should build a sorted index of the sections each component has', () => {
+    readdirSyncMock.mockReturnValue([makeDirent('Button', true), makeDirent('ActionGroup', true)]);
+    existsSyncMock.mockImplementation(
+      (filePath: string) =>
+        filePath.endsWith('packages/web-react/src/components/ActionGroup/README.md') ||
+        filePath.endsWith('packages/web-react/src/components/Button/docs/overview.md') ||
+        filePath.endsWith('packages/web/src/scss/components/Button/README.md'),
+    );
+
+    expect(buildComponentSectionIndex()).toEqual({
+      'action-group': ['react'],
+      button: ['overview', 'web'],
+    });
   });
 });

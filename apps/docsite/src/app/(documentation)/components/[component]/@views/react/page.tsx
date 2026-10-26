@@ -1,3 +1,4 @@
+import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
 import { notFound } from 'next/navigation';
@@ -12,7 +13,7 @@ const { error: logError } = console;
 const ReactTabPage = async ({ params }: ReactTabProps) => {
   const { component } = await params;
 
-  if (!isValidComponentSlug(component)) {
+  if (!isValidComponentSlug(component) || !getComponentViewsAvailability(component).react) {
     notFound();
   }
 
@@ -29,7 +30,7 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load React README for "${component}":`, error);
 
-    return null;
+    notFound();
   }
 };
 

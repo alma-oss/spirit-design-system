@@ -1,3 +1,4 @@
+import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -11,7 +12,7 @@ const { error: logError } = console;
 const ReactPreviewTabPage = async ({ params }: ReactPreviewTabProps) => {
   const { component } = await params;
 
-  if (!isValidComponentSlug(component)) {
+  if (!isValidComponentSlug(component) || !getComponentViewsAvailability(component).reactPreview) {
     notFound();
   }
 
@@ -24,7 +25,7 @@ const ReactPreviewTabPage = async ({ params }: ReactPreviewTabProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load React Preview for "${component}":`, error);
 
-    return null;
+    notFound();
   }
 };
 

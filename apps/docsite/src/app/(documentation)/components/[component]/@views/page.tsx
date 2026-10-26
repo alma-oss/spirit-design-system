@@ -20,7 +20,7 @@ const GuidelinesPage = async ({ params }: GuidelinesPageProps) => {
     notFound();
   }
 
-  return <CanonicalMarkdown isCanonical filePath={filePath} />;
+  return <CanonicalMarkdown isCanonical filePath={filePath} missing="not-found" />;
 };
 
 export default GuidelinesPage;
