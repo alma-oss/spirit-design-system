@@ -51,6 +51,8 @@ export default {
         'scripts',
         // Use when affecting CI process
         'ci',
+        // Use for dependency updates (e.g. Renovate/Dependabot bumps) that are not tied to a single package
+        'deps',
         // Use for anything that does not directly affect packages, ie. updating repo-wide
         'repo',
         // Use for changes in support applications like `demo`
