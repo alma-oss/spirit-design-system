@@ -18,7 +18,11 @@
         "{workspaceRoot}/packages/codemods/README.md",
         "{workspaceRoot}/packages/web/CHANGELOG.md",
         "{workspaceRoot}/packages/web-react/CHANGELOG.md",
-        "{workspaceRoot}/packages/web-react/src/components/**/docs/*.md"
+        "{workspaceRoot}/packages/web/src/scss/components/**/README.md",
+        "{workspaceRoot}/packages/web/src/scss/components/**/preview.html",
+        "{workspaceRoot}/packages/web-react/src/components/**/README.md",
+        "{workspaceRoot}/packages/web-react/src/components/**/docs/*.md",
+        "{workspaceRoot}/packages/web-react/src/components/**/preview/index.ts"
       ],
       "cache": true
     },
