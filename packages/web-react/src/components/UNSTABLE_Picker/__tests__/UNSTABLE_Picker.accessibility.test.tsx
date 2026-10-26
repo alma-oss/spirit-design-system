@@ -1,7 +1,12 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import React, { type ComponentProps } from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import { useToggle } from '../../../hooks';
 import { UNSTABLE_Picker, UNSTABLE_PickerGroup, UNSTABLE_PickerItem } from '..';
 
@@ -42,6 +47,8 @@ describe('UNSTABLE_Picker accessibility', () => {
   accessibilityDisabledTest(PickerTest, '[data-testid="picker-test"]');
 
   accessibilityValidationStateTest(PickerTest, '[data-testid="picker-test"]');
+
+  accessibilityAriaDescribedByTest(PickerTest, `#${selectionDomId}`);
 
   describe('ARIA attributes', () => {
     it('sets outer input container group label to field label', () => {

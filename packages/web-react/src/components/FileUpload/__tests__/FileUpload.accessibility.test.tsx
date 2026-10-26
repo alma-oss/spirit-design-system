@@ -1,5 +1,10 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import { FileUpload } from '..';
 
 jest.mock('../../../hooks/useIcon');
@@ -30,6 +35,11 @@ describe('FileUpload accessibility', () => {
         {...props}
       />
     ),
+    'input[type="file"]',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => <FileUpload {...defaultInputProps} id="file-uploader-input-aria-describedby" {...props} />,
     'input[type="file"]',
   );
 });

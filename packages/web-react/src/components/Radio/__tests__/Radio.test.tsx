@@ -96,14 +96,6 @@ describe('Radio', () => {
     expect(screen.getByText('text')).toBeInTheDocument();
   });
 
-  it('should register helper text id in aria-describedby', () => {
-    render(<Radio id="radio-aria-describedby" label="Label" helperText="Helper" />);
-
-    const input = screen.getByRole('radio', { name: 'Label' });
-
-    expect(input.getAttribute('aria-describedby')).toContain('radio-aria-describedby-helper-text');
-  });
-
   it('should render label with html tags', () => {
     render(
       <Radio
