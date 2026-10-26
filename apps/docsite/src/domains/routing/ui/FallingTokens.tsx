@@ -17,6 +17,10 @@ const CARD_GAP = 24;
 const CARD_MARGIN = 2;
 // How far above the scene the cards may pile up. It matches the gap above the scene (`space-1300`, 56 px).
 const CEILING_OFFSET = 56;
+// Below this width of the scene the cards are scaled down proportionally, so there are enough of them on a phone.
+const FULL_SIZE_WIDTH = 640;
+// The cards can be moved only by a mouse on a screen that is not a phone. On a phone they just fall and stay.
+const DRAG_QUERY = '(pointer: fine) and (min-width: 48rem)';
 
 const joinClassNames = (...classNames: (string | false)[]) => classNames.filter(Boolean).join(' ');
 
@@ -40,29 +44,34 @@ const FallingTokens = () => {
 
     const getCards = () => [...stage.querySelectorAll<HTMLElement>('[data-token-card]')];
 
+    const getScale = () => Math.min(1, stage.clientWidth / FULL_SIZE_WIDTH);
+
     // Cards lying in rows at the bottom of the section, without any physics.
     const layoutStatically = () => {
+      const scale = getScale();
       let x = CARD_GAP;
       let rowHeight = 0;
-      const rows: { el: HTMLElement; x: number; width: number; height: number }[][] = [[]];
+      const rows: { el: HTMLElement; x: number; fullWidth: number; fullHeight: number }[][] = [[]];
 
       getCards().forEach((el) => {
-        const { offsetWidth: width, offsetHeight: height } = el;
+        const { offsetWidth: fullWidth, offsetHeight: fullHeight } = el;
+        const width = fullWidth * scale;
 
         if (x + width > stage.clientWidth - CARD_GAP && rows[rows.length - 1].length > 0) {
           rows.push([]);
           x = CARD_GAP;
         }
 
-        rows[rows.length - 1].push({ el, x, width, height });
+        rows[rows.length - 1].push({ el, x, fullWidth, fullHeight });
         x += width + CARD_GAP;
-        rowHeight = Math.max(rowHeight, height);
+        rowHeight = Math.max(rowHeight, fullHeight * scale);
       });
 
       rows.forEach((row, rowIndex) => {
         const y = stage.clientHeight - (rows.length - rowIndex) * (rowHeight + CARD_GAP / 2);
-        row.forEach(({ el, x: left }) => {
-          el.style.transform = `translate(${left}px, ${y}px)`;
+        row.forEach(({ el, x: left, fullWidth, fullHeight }) => {
+          // The scaling is done around the center of the card, so the box is moved by half of the difference.
+          el.style.transform = `translate(${left - (fullWidth * (1 - scale)) / 2}px, ${y - (fullHeight * (1 - scale)) / 2}px) scale(${scale})`;
         });
       });
     };
@@ -107,17 +116,20 @@ const FallingTokens = () => {
 
       // The cards start in rows above the section, so they do not overlap. The cards of each row are spread over the
       // whole width, so they land next to each other and do not pile up on one side.
-      const rows: { el: HTMLElement; width: number; height: number }[][] = [[]];
+      const scale = getScale();
+      const rows: { el: HTMLElement; width: number; height: number; fullWidth: number; fullHeight: number }[][] = [[]];
       let rowWidth = 0;
       getCards().forEach((el) => {
-        const { offsetWidth: width, offsetHeight: height } = el;
+        const { offsetWidth: fullWidth, offsetHeight: fullHeight } = el;
+        const width = fullWidth * scale;
+        const height = fullHeight * scale;
 
         if (rowWidth + width > stage.clientWidth - 2 * CARD_GAP && rows[rows.length - 1].length > 0) {
           rows.push([]);
           rowWidth = 0;
         }
 
-        rows[rows.length - 1].push({ el, width, height });
+        rows[rows.length - 1].push({ el, width, height, fullWidth, fullHeight });
         rowWidth += width + CARD_GAP;
       });
 
@@ -129,7 +141,7 @@ const FallingTokens = () => {
         let x = row.length > 1 ? CARD_GAP : (stage.clientWidth - row[0].width) / 2;
         y -= rowHeight;
 
-        const rowItems = row.map(({ el, width, height }) => {
+        const rowItems = row.map(({ el, width, height, fullWidth, fullHeight }) => {
           const body = Bodies.rectangle(
             x + width / 2,
             y + (rowHeight - height) / 2,
@@ -144,7 +156,7 @@ const FallingTokens = () => {
           );
           x += width + spacing;
 
-          return { el, body, width, height };
+          return { el, body, fullWidth, fullHeight };
         });
         y -= 40;
 
@@ -156,7 +168,8 @@ const FallingTokens = () => {
       );
 
       // Dragging the cards is for the mouse only, on touch devices it would block the scrolling.
-      if (window.matchMedia('(pointer: fine)').matches) {
+      const canDrag = window.matchMedia(DRAG_QUERY).matches;
+      if (canDrag) {
         const mouse = Mouse.create(stage);
         // The mouse wheel stays with the page. The handler is not typed, but Matter registers it on the element.
         const { mousewheel } = mouse as unknown as { mousewheel: EventListener };
@@ -172,20 +185,30 @@ const FallingTokens = () => {
         Events.on(drag, 'enddrag', () => stage.classList.remove(styles.isDragging));
       }
 
+      let calmFrames = 0;
       Events.on(engine, 'afterUpdate', () => {
-        items.forEach(({ el, body, width, height }) => {
+        items.forEach(({ el, body, fullWidth, fullHeight }) => {
           if (Math.abs(body.angle) > MAX_ANGLE) {
             Body.setAngle(body, Math.sign(body.angle) * MAX_ANGLE);
             Body.setAngularVelocity(body, 0);
           }
 
-          el.style.transform = `translate(${body.position.x - width / 2}px, ${body.position.y - height / 2}px) rotate(${body.angle}rad)`;
+          el.style.transform = `translate(${body.position.x - fullWidth / 2}px, ${body.position.y - fullHeight / 2}px) rotate(${body.angle}rad) scale(${scale})`;
         });
 
         // All the cards are in the scene (or in the free space above it), so the ceiling can be added.
         if (!hasCeiling && items.every(({ body }) => body.bounds.min.y >= -CEILING_OFFSET)) {
           hasCeiling = true;
           buildWalls();
+        }
+
+        // The cards that cannot be moved are frozen once they have settled, so they stop using the processor.
+        if (!canDrag && hasCeiling) {
+          calmFrames = items.every(({ body }) => body.speed < 0.1 && body.angularSpeed < 0.01) ? calmFrames + 1 : 0;
+
+          if (calmFrames > 60) {
+            Runner.stop(runner);
+          }
         }
       });
 
