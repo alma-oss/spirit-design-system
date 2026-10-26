@@ -58,6 +58,7 @@ export default {
         // Use for changes in support applications like `demo`
         'demo',
         'docsite',
+        'storybook',
       ],
     ],
   },
