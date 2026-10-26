@@ -27,12 +27,43 @@ it will apply a gap between them.
 
 ℹ️ Don't forget to add the `aria-label` attribute to the `Navigation` component for correct accessible title.
 
+### Toolbar
+
+For three or more actions that stay visible, such as the actions for the document being edited, wrap the `Navigation`
+in a [`Toolbar`][toolbar]. Do not use a toolbar for one or two controls, or for site navigation. Inside a toolbar,
+`Navigation` renders as a `div`, because a toolbar is not a navigation landmark.
+
+```tsx
+<Toolbar orientation="vertical" aria-label="CV actions">
+  <Navigation>
+    <NavigationItem>
+      <NavigationAction href="#">Preview</NavigationAction>
+    </NavigationItem>
+    <NavigationItem>
+      <Button color="secondary">Download</Button>
+    </NavigationItem>
+    <NavigationItem>
+      <NavigationAction elementType="button" type="button">
+        Share
+      </NavigationAction>
+    </NavigationItem>
+  </Navigation>
+</Toolbar>
+```
+
+Inside a `Toolbar`, the `ul` and `li` keep the layout and use `role="presentation"`. Assistive technologies then do not
+announce them as a list as well as a toolbar.
+
+The `Navigation` layout follows the Toolbar `orientation`, so do not set `direction`. Each `NavigationItem` joins the
+toolbar through its first link or button, such as a `NavigationAction`, `NavigationAvatar`, `Button`, `ButtonLink`, or
+`DropdownTrigger`. The `Toolbar` owns the [keyboard interaction][apg-toolbar].
+
 ### API
 
-| Name        | Type                                                                                       | Default      | Required | Description                   |
-| ----------- | ------------------------------------------------------------------------------------------ | ------------ | -------- | ----------------------------- |
-| `children`  | \[`ReactElement<HTMLLIElement>` \| `ReactElement<NavigationItem>` \| Array of these types] | `null`       | ✓        | Content of the Navigation     |
-| `direction` | [Direction dictionary][dictionary-direction]                                               | `horizontal` | ✕        | Orientation of the Navigation |
+| Name        | Type                                                                                       | Default      | Required | Description                                                      |
+| ----------- | ------------------------------------------------------------------------------------------ | ------------ | -------- | ---------------------------------------------------------------- |
+| `children`  | \[`ReactElement<HTMLLIElement>` \| `ReactElement<NavigationItem>` \| Array of these types] | `null`       | ✓        | Content of the Navigation                                        |
+| `direction` | [Direction dictionary][dictionary-direction]                                               | `horizontal` | ✕        | Layout direction. Inside a `Toolbar`, this follows `orientation` |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -282,6 +313,7 @@ With Buttons:
 </Navigation>
 ```
 
+[apg-toolbar]: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 [dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
@@ -289,4 +321,5 @@ With Buttons:
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[toolbar]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Toolbar/README.md
 [web-react-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md

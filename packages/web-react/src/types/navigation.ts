@@ -7,6 +7,7 @@ import {
   type ChildrenProps,
   type DirectionDictionaryType,
   type EndSlotProps,
+  type PolymorphicComponentProps,
   type ShapeVariantDictionaryType,
   type SizeExtendedDictionaryType,
   type SpiritPolymorphicElementPropsWithRef,
@@ -73,10 +74,12 @@ export type SpiritNavigationActionProps<E extends ElementType = 'a'> = Navigatio
 export type SpiritNavigationAvatarProps<E extends ElementType = 'a'> = NavigationAvatarProps<E> &
   SpiritPolymorphicElementPropsWithRef<E, NavigationAvatarProps<E>>;
 
-export interface SpiritNavigationProps extends StyleProps {
+export interface NavigationProps extends StyleProps {
   children:
     | ReactElement<HTMLLIElement>
     | ReactElement<typeof NavigationItem>
     | Array<ReactElement<HTMLLIElement> | ReactElement<typeof NavigationItem>>;
   direction?: DirectionDictionaryType;
 }
+
+export type SpiritNavigationProps<E extends ElementType = 'nav'> = PolymorphicComponentProps<E, NavigationProps>;
