@@ -1,3 +1,10 @@
+<!-- Navigation toolbar JavaScript interaction DEMO -->
+<script type="module">
+  import { initNavigationToolbars } from './navigation-toolbar-demo.mjs';
+
+  initNavigationToolbars();
+</script>
+
 <section class="py-900 py-tablet-1000">
 
   <div class="Container">
@@ -404,6 +411,78 @@
           </li>
         </ul>
       </nav>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Horizontal Toolbar</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="Navigation Navigation--horizontal"
+        role="toolbar"
+        aria-label="Horizontal toolbar"
+        aria-orientation="horizontal"
+      >
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--pill">Preview</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <button type="button" class="NavigationAction NavigationAction--pill">Download</button>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--pill NavigationAction--disabled">Disabled</span>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <button type="button" class="Button Button--medium Button--secondary">Share</button>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Vertical Toolbar</h2>
+
+    <div class="docs-Stack docs-Stack--stretch">
+
+      <div
+        class="Navigation Navigation--vertical"
+        role="toolbar"
+        aria-label="Vertical toolbar"
+        aria-orientation="vertical"
+      >
+        <ul>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <a href="#" class="NavigationAction NavigationAction--pill">Preview</a>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <button type="button" class="NavigationAction NavigationAction--pill">Download</button>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <span class="NavigationAction NavigationAction--pill NavigationAction--disabled">Disabled</span>
+          </li>
+          <li class="NavigationItem NavigationItem--alignmentYCenter">
+            <button type="button" class="NavigationAction NavigationAction--pill">Delete</button>
+          </li>
+        </ul>
+      </div>
 
     </div>
 
