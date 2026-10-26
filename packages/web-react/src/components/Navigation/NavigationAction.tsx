@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { ShapeVariants } from '../../constants';
-import { useStyleProps } from '../../hooks';
+import { useStyleProps, useToolbarItem } from '../../hooks';
 import {
   type NavigationActionProps,
   type PolymorphicComponent,
@@ -28,17 +28,25 @@ const _NavigationAction = <E extends ElementType = 'a'>(
     children,
     startSlot,
     endSlot,
+    onFocus,
+    onKeyDown,
     ...restProps
   } = propsWithDefaults;
   const ElementTag = propsWithDefaults.isDisabled ? 'span' : elementType;
 
   const { navigationActionProps } = useNavigationActionProps(propsWithDefaults);
+  const toolbarItemProps = useToolbarItem({
+    isDisabled: propsWithDefaults.isDisabled,
+    onFocus,
+    onKeyDown,
+    ref,
+  });
   const { classProps, props: modifiedProps } = useNavigationStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.action, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...navigationActionProps} {...mergedStyleProps} ref={ref}>
+    <ElementTag {...otherProps} {...navigationActionProps} {...mergedStyleProps} {...toolbarItemProps}>
       {startSlot != null && <span className={classProps.slot}>{startSlot}</span>}
       <span className="text-word-break-long-words">{children}</span>
       {endSlot != null && <span className={classProps.slot}>{endSlot}</span>}

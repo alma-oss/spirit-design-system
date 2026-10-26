@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React, { useRef } from 'react';
-import { useAutoFocus, useStyleProps } from '../../hooks';
+import { ToolbarBoundary, useAutoFocus, useStyleProps } from '../../hooks';
 import { type SpiritDivElementProps } from '../../types';
 import { useDropdownContext } from './DropdownContext';
 import { useDropdownAriaProps } from './useDropdownAriaProps';
@@ -37,7 +37,7 @@ const DropdownPopover = (props: DropdownPopoverProps) => {
       {...contentProps}
       {...otherProps}
     >
-      {children}
+      <ToolbarBoundary>{children}</ToolbarBoundary>
     </div>
   );
 };

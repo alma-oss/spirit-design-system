@@ -9,7 +9,7 @@ import React, {
   forwardRef,
   useRef,
 } from 'react';
-import { useCancelEvent, useClickOutside } from '../../hooks';
+import { ToolbarBoundary, useCancelEvent, useClickOutside } from '../../hooks';
 import { type DialogProps, type ForwardRefComponent } from '../../types';
 import { useDialog } from './useDialog';
 
@@ -62,11 +62,13 @@ const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>
       onTransitionEnd={onTransitionEnd}
       {...restProps}
     >
-      {cloneElement(child, {
-        ref: (clonedElementRef: HTMLElement) => {
-          contentElementRef.current = clonedElementRef;
-        },
-      })}
+      <ToolbarBoundary>
+        {cloneElement(child, {
+          ref: (clonedElementRef: HTMLElement) => {
+            contentElementRef.current = clonedElementRef;
+          },
+        })}
+      </ToolbarBoundary>
     </dialog>
   );
 };
