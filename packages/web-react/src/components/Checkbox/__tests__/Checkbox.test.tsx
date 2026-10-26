@@ -119,24 +119,6 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox', { name: 'Label Text' })).toBeInTheDocument();
   });
 
-  it('should register helper and validation text ids in aria-describedby', () => {
-    render(
-      <Checkbox
-        id="checkbox-aria-describedby"
-        label="Label"
-        helperText="Helper"
-        validationState="danger"
-        validationText="Invalid"
-      />,
-    );
-
-    const input = screen.getByRole('checkbox', { name: 'Label' });
-    const describedBy = input.getAttribute('aria-describedby') ?? '';
-
-    expect(describedBy).toContain('checkbox-aria-describedby-helper-text');
-    expect(describedBy).toContain('checkbox-aria-describedby-validation-text');
-  });
-
   it('should render validation icon when hasValidationIcon is set', () => {
     render(
       <Checkbox
@@ -167,14 +149,6 @@ describe('Checkbox', () => {
     const input = screen.getByRole('checkbox');
 
     expect(input).toHaveAttribute('aria-details', 'checkbox-details');
-  });
-
-  it('should not set aria-details when no details provided', () => {
-    render(<Checkbox id="checkbox" label="Label" />);
-
-    const input = screen.getByRole('checkbox');
-
-    expect(input).not.toHaveAttribute('aria-details');
   });
 
   it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {

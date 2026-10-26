@@ -1,5 +1,10 @@
 import React from 'react';
-import { accessibilityDisabledTest, accessibilityTest, accessibilityValidationStateTest } from '@local/tests';
+import {
+  accessibilityAriaDescribedByTest,
+  accessibilityDisabledTest,
+  accessibilityTest,
+  accessibilityValidationStateTest,
+} from '@local/tests';
 import TextArea from '../TextArea';
 
 describe('TextArea accessibility', () => {
@@ -9,6 +14,11 @@ describe('TextArea accessibility', () => {
 
   accessibilityValidationStateTest(
     (props) => <TextArea {...props} id="textarea-validation" label="Label" validationText="Validation text" />,
+    'textarea',
+  );
+
+  accessibilityAriaDescribedByTest(
+    (props) => <TextArea {...props} id="textarea-aria-describedby" label="Label" />,
     'textarea',
   );
 });
