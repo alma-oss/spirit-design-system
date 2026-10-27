@@ -20,6 +20,18 @@ export const componentSegments = {
   reactPreview: 'react-preview',
 };
 
+// URL segment to the section name used in `component-sections.json`. Guidelines is the `overview` section
+// served without a segment, so it is not listed.
+export const componentSectionBySegment: Record<string, string> = {
+  [componentSegments.design]: 'design',
+  [componentSegments.accessibility]: 'accessibility',
+  [componentSegments.figma]: 'figma',
+  [componentSegments.web]: 'web',
+  [componentSegments.react]: 'react',
+  [componentSegments.webPreview]: 'webPreview',
+  [componentSegments.reactPreview]: 'reactPreview',
+};
+
 const componentsRoute = `${ROUTE_DELIMITER}components`;
 
 const componentRoute = (componentName: string) => `${componentsRoute}/${componentNameToSlug(componentName)}`;

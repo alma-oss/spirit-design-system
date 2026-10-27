@@ -1,8 +1,9 @@
-import path from 'node:path';
-import { isValidComponentSlug, slugToComponentName } from '../components/utils/componentSlug';
-import { componentDocsDirectory, componentDocTabs, type ComponentDocTab } from '../routing/routes';
+import { componentDocTabs } from '../routing/routes';
+import { resolveComponentTabFile, type ComponentTab } from './componentDocPaths';
 import { fileExists } from './contentRepository';
 import { getRepoRoot } from './paths';
+
+export { resolveComponentTabFile };
 
 export interface ComponentTabAvailability {
   overview: boolean;
@@ -11,17 +12,7 @@ export interface ComponentTabAvailability {
   figma: boolean;
 }
 
-export type ComponentTab = ComponentDocTab;
-
-const isComponentDocTab = (tab: string): tab is ComponentTab => (componentDocTabs as readonly string[]).includes(tab);
-
-export const resolveComponentTabFile = (slug: string, tab: ComponentTab, repoRoot = getRepoRoot()): string | null => {
-  if (!isValidComponentSlug(slug) || !isComponentDocTab(tab)) {
-    return null;
-  }
-
-  return path.join(repoRoot, componentDocsDirectory, slugToComponentName(slug), 'docs', `${tab}.md`);
-};
+export type { ComponentTab };
 
 export const getComponentTabAvailability = async (
   slug: string,
