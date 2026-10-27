@@ -1,5 +1,6 @@
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { isMissingModuleError } from '@local/domains/components/utils/isMissingModuleError';
 import { isComponentTabHidden } from '@local/domains/content/componentDocsRepository';
 import { componentSegments } from '@local/domains/routing/routes';
 import { notFound } from 'next/navigation';
@@ -29,9 +30,13 @@ const ReactPreviewTabPage = async ({ params }: ReactPreviewTabProps) => {
       </ComponentsBand>
     );
   } catch (error) {
+    if (isMissingModuleError(error)) {
+      notFound();
+    }
+
     logError(`[ComponentView] Failed to load React Preview for "${component}":`, error);
 
-    return null;
+    throw error;
   }
 };
 

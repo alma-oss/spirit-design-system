@@ -4,6 +4,7 @@ import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/compone
 import { WebPreview } from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { isMissingModuleError } from '@local/domains/components/utils/isMissingModuleError';
 import { isComponentTabHidden } from '@local/domains/content/componentDocsRepository';
 import { componentSegments } from '@local/domains/routing/routes';
 import { notFound } from 'next/navigation';
@@ -38,9 +39,13 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
       </ComponentsBand>
     );
   } catch (error) {
+    if (isMissingModuleError(error)) {
+      notFound();
+    }
+
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);
 
-    return null;
+    throw error;
   }
 };
 

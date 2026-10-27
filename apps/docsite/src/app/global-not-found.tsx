@@ -1,11 +1,10 @@
-import { ButtonLink, EmptyState, EmptyStateSection, Flex, Heading, Section, Text } from '@alma-oss/spirit-web-react';
 import { GoogleTagManager } from '@local/domains/analytics/ui/GoogleTagManager';
 import { CookieConsent } from '@local/domains/consent/ui/CookieConsent';
 import Footer from '@local/domains/footer/ui/Footer';
-import { routes } from '@local/domains/routing/routes';
 import { Header } from '@local/ui';
 import { AppProvider } from '@local/ui/AppProvider';
 import { fontshareApiUrl, generalSansStylesheet } from '@local/ui/fonts';
+import { NotFoundContent } from '@local/ui/NotFoundContent';
 import { Metadata } from 'next';
 import '../ui/globals.scss';
 
@@ -25,26 +24,7 @@ const GlobalNotFound = () => (
       <CookieConsent />
       <AppProvider>
         <Header disableClientRouting />
-        <Flex elementType="main" alignmentX="center" alignmentY="center">
-          <Section size="medium">
-            <EmptyState spacing="space-900">
-              <EmptyStateSection>
-                <Heading elementType="h1" size="xlarge">
-                  404
-                </Heading>
-              </EmptyStateSection>
-              <EmptyStateSection spacing="space-600">
-                <Heading elementType="h2" size="xsmall">
-                  Page Not Found
-                </Heading>
-                <Text>The page you are looking for might have been moved, deleted, or never existed.</Text>
-              </EmptyStateSection>
-              <EmptyStateSection>
-                <ButtonLink href={routes.homepage}>Back to Homepage</ButtonLink>
-              </EmptyStateSection>
-            </EmptyState>
-          </Section>
-        </Flex>
+        <NotFoundContent elementType="main" />
         <Footer />
       </AppProvider>
     </body>
