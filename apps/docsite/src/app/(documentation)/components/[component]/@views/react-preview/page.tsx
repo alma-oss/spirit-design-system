@@ -25,7 +25,7 @@ const ReactPreviewTabPage = async ({ params }: ReactPreviewTabProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load React Preview for "${component}":`, error);
 
-    notFound();
+    return null;
   }
 };
 

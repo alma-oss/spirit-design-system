@@ -34,7 +34,7 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);
 
-    notFound();
+    return null;
   }
 };
 

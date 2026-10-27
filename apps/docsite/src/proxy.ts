@@ -12,11 +12,23 @@ const rewriteNotFound = (request: NextRequest) => {
   return NextResponse.rewrite(url, { status: 404 });
 };
 
+const redirectTo = (request: NextRequest, pathname: string) => {
+  const url = request.nextUrl.clone();
+
+  url.pathname = pathname;
+
+  return NextResponse.redirect(url, 307);
+};
+
 export const proxy = (request: NextRequest) => {
   const resolution = resolveComponentSectionRequest(request.nextUrl.pathname, componentSectionIndex);
 
   if (resolution === 'missing') {
     return rewriteNotFound(request);
+  }
+
+  if (typeof resolution === 'object') {
+    return redirectTo(request, resolution.redirectTo);
   }
 
   return NextResponse.next();

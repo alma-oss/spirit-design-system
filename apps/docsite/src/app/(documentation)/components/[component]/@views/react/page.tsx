@@ -30,7 +30,7 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load React README for "${component}":`, error);
 
-    notFound();
+    return null;
   }
 };
 

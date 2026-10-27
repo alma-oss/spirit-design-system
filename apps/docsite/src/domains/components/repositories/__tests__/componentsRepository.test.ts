@@ -4,7 +4,6 @@ import {
   fetchAllComponents,
   getComponentViewsAvailability,
   hasComponentSection,
-  listComponentSlugsForSection,
 } from '../componentsRepository';
 
 jest.mock('fs', () => ({
@@ -130,26 +129,6 @@ describe('hasComponentSection', () => {
     expect(hasComponentSection('../button', 'web')).toBe(false);
     expect(hasComponentSection('../button', 'overview')).toBe(false);
     expect(existsSyncMock).not.toHaveBeenCalled();
-  });
-});
-
-describe('listComponentSlugsForSection', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should list only components that have the section', () => {
-    readdirSyncMock.mockReturnValue([makeDirent('ActionGroup', true), makeDirent('Button', true)]);
-    existsSyncMock.mockImplementation(
-      (filePath: string) =>
-        filePath.endsWith('packages/web-react/src/components/ActionGroup/README.md') ||
-        filePath.endsWith('packages/web-react/src/components/ActionGroup/preview/index.ts') ||
-        filePath.endsWith('packages/web/src/scss/components/Button/README.md'),
-    );
-
-    expect(listComponentSlugsForSection('react')).toEqual(['action-group']);
-    expect(listComponentSlugsForSection('web')).toEqual(['button']);
-    expect(listComponentSlugsForSection('design')).toEqual([]);
   });
 });
 

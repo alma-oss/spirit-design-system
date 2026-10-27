@@ -30,7 +30,7 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
   } catch (error) {
     logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
 
-    notFound();
+    return null;
   }
 };
 
