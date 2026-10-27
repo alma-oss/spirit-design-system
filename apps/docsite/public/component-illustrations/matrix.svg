@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<rect x="16" y="18" width="88" height="60" rx="4" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<line x1="17" y1="38" x2="103" y2="38" stroke="#BDBDC6" stroke-width="2"/>
+<line x1="17" y1="58" x2="103" y2="58" stroke="#BDBDC6" stroke-width="2"/>
+<line x1="46" y1="19" x2="46" y2="77" stroke="#BDBDC6" stroke-width="2" stroke-linecap="round"/>
+<line x1="76" y1="19" x2="76" y2="77" stroke="#BDBDC6" stroke-width="2" stroke-linecap="round"/>
+<path d="M22.0 28.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#6B6B80" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M52.0 28.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82.0 28.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.0 48.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M52.0 48.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82.0 48.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.0 68.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M52.0 68.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82.0 68.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

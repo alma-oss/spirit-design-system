@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<rect x="26" y="12" width="68" height="72" rx="5" fill="#F0F0F4"/>
+<g transform="translate(0 -8)">
+<path d="M34.5 31 L38 28.5 V40" fill="none" stroke="#6B6B80" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="46" cy="34.2" rx="3.2" ry="5.8" fill="none" stroke="#6B6B80" stroke-width="2.4"/>
+<ellipse cx="56" cy="34.2" rx="3.2" ry="5.8" fill="none" stroke="#6B6B80" stroke-width="2.4"/>
+<path d="M75 30.5 Q67 27.5 67 34.2 Q67 41 75 38 M64.5 32.6 H72.5 M64.5 35.8 H72.5" fill="none" stroke="#6B6B80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M34 43 L37 46 L42 40" fill="none" stroke="#6B6B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M48.0 43.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M34 53 L37 56 L42 50" fill="none" stroke="#6B6B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M48.0 53.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="34" y="66" width="52" height="12" rx="4" fill="#6B6B80"/>
+<rect x="34" y="62" width="52" height="12" rx="4" fill="#BDBDC6"/>
+<path d="M48.0 68.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#6B6B80" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

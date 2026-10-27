@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<clipPath id="c1"><rect x="14" y="34" width="92" height="28" rx="4"/></clipPath>
+<rect x="14" y="34" width="92" height="28" rx="4" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<g clip-path="url(#c1)"><rect x="14" y="34" width="26" height="28" fill="#F0F0F4"/><rect x="80" y="34" width="26" height="28" fill="#F0F0F4"/></g>
+<rect x="14" y="34" width="92" height="28" rx="4" fill="none" stroke="#BDBDC6" stroke-width="2"/>
+<rect x="22.5" y="48.5" width="9" height="7.5" rx="1.6" fill="#6B6B80"/>
+<path d="M24.5 48.5 V46 Q24.5 42.5 27 42.5 Q29.5 42.5 29.5 46 V48.5" fill="none" stroke="#6B6B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="93" cy="48" r="6" fill="none" stroke="#6B6B80" stroke-width="2.2"/>
+<path d="M90.2 48.4 L92.3 50.5 L96 45.8" fill="none" stroke="#6B6B80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M54.5 53.5 L60.0 42.5 L65.5 53.5 M57.0 49.5 H63.0" fill="none" stroke="#BDBDC6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

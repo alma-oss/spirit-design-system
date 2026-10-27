@@ -25,20 +25,11 @@
     right: var(--spirit-space-800);
     z-index: 2;
     display: block;
-    pointer-events: none;
     opacity: 0;
+    pointer-events: none;
 
     @media (prefers-reduced-motion: no-preference) {
         transition: opacity 0.15s ease-in-out;
-    }
-}
-
-// Preview is grayscale until the card is hovered or focused.
-.ComponentCard__preview {
-    filter: grayscale(1);
-
-    @media (prefers-reduced-motion: no-preference) {
-        transition: filter 0.2s ease-in-out;
     }
 }
 
@@ -46,27 +37,15 @@
     opacity: 1;
 }
 
-.ComponentCard:focus-within .ComponentCard__preview {
-    filter: none;
-}
-
 @media (hover: hover) {
     .ComponentCard:hover .ComponentCard__badge {
         opacity: 1;
     }
-
-    .ComponentCard:hover .ComponentCard__preview {
-        filter: none;
-    }
 }
 
-// Touch devices can't hover, so show the status badge and the colors of the preview all the time.
+// Touch devices can't hover, so show the status badge all the time.
 @media (hover: none) {
     .ComponentCard__badge {
         opacity: 1;
-    }
-
-    .ComponentCard__preview {
-        filter: none;
     }
 }
