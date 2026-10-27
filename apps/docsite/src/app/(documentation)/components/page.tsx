@@ -5,12 +5,14 @@ import {
   ComponentsBand,
   ComponentsPageHeader,
 } from '@local/domains/components';
+import { fetchComponentsCatalog } from '@local/domains/components/features/component-catalog/repositories/componentsCatalogRepository';
 import { fetchComponentCategories } from '@local/domains/components/repositories/componentCategoriesRepository';
 import { fetchAllComponents } from '@local/domains/components/repositories/componentsRepository';
 import React, { Suspense } from 'react';
 
 const ComponentsPage = () => {
   const components: string[] = fetchAllComponents();
+  const catalog = fetchComponentsCatalog(components);
   const categories = fetchComponentCategories(components);
 
   // The query-state hooks (nuqs) read search params, so this page needs its own Suspense boundary.
@@ -21,7 +23,7 @@ const ComponentsPage = () => {
         <ComponentsPageHeader />
       </ComponentsBand>
       <Suspense fallback={<ComponentListSkeleton />}>
-        <ComponentList components={components} categories={categories} />
+        <ComponentList catalog={catalog} categories={categories} />
       </Suspense>
     </Suspense>
   );

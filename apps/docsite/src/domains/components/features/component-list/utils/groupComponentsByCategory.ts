@@ -1,18 +1,25 @@
-import type { ComponentCategories, ComponentCategoryDefinition } from '../../component-catalog';
+import type { ComponentCategories } from '../../component-catalog';
 
-export type ComponentCategory = { category: string } & ComponentCategoryDefinition;
+interface NamedComponent {
+  name: string;
+}
 
-export const groupComponentsByCategory = (
-  components: string[],
+export interface ComponentCategory<T extends NamedComponent> {
+  category: string;
+  description: string;
+  components: T[];
+}
+
+const byName = (a: NamedComponent, b: NamedComponent) => a.name.localeCompare(b.name);
+
+export const groupComponentsByCategory = <T extends NamedComponent>(
+  components: T[],
   componentCategories: ComponentCategories,
-): ComponentCategory[] => {
-  const componentsSet = new Set(components);
-
-  return Object.entries(componentCategories)
+): ComponentCategory<T>[] =>
+  Object.entries(componentCategories)
     .map(([category, { description, components: categoryComponents }]) => ({
       category,
       description,
-      components: categoryComponents.filter((component) => componentsSet.has(component)).sort(),
+      components: components.filter(({ name }) => categoryComponents.includes(name)).sort(byName),
     }))
     .filter(({ components: filtered }) => filtered.length > 0);
-};

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<rect x="14" y="12" width="92" height="26" rx="4" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<rect x="18" y="18" width="34" height="14" rx="4" fill="#6B6B80"/>
+<path d="M23.0 25.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#F0F0F4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M43 23 L47 27 M47 23 L43 27" fill="none" stroke="#F0F0F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="55" y="18" width="34" height="14" rx="4" fill="#6B6B80"/>
+<path d="M60.0 25.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#F0F0F4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M80 23 L84 27 M84 23 L80 27" fill="none" stroke="#F0F0F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M95 27 L98 23.5 L101 27" fill="none" stroke="#BDBDC6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="14" y="42" width="92" height="42" rx="4" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<rect x="17" y="45" width="86" height="16" rx="3" fill="#F0F0F4"/>
+<path d="M24.0 53.0 q2.50 -5.00 5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0" fill="none" stroke="#6B6B80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M24.0 71.0 q2.50 -5.00 5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

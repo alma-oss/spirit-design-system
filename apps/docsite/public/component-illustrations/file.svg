@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<g transform="translate(6 0)">
+<rect x="14" y="32" width="80" height="32" rx="5" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<path transform="translate(24 38) rotate(25 4.5 9.5)" d="M3.5 5 V13.5 a1.5 1.5 0 0 0 3 0 V3.5 a3.5 3.5 0 0 0 -7 0 V14 a5 5 0 0 0 10 0 V4" fill="none" stroke="#6B6B80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M44.0 42.0 q2.50 -5.00 5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0 t5.00 0" fill="none" stroke="#6B6B80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M50 51.5 H46 L45.6 55.1 Q50 53.9 50 57.3 Q50 59.5 47.6 59.5 Q45.8 59.5 45 58.5" fill="none" stroke="#BDBDC6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="55.5" cy="53.5" rx="2.1" ry="2" fill="none" stroke="#BDBDC6" stroke-width="1.8"/>
+<ellipse cx="55.5" cy="57.6" rx="2.4" ry="2.2" fill="none" stroke="#BDBDC6" stroke-width="1.8"/>
+<path d="M61.5 51.0 V59.5 M65.7 54.5 L61.5 57.0 M63 55.8 L66 59.5" fill="none" stroke="#BDBDC6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M70.5 51.0 V59.5" fill="none" stroke="#BDBDC6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="73" cy="57.0" r="2.4" fill="none" stroke="#BDBDC6" stroke-width="1.8"/>
+</g>
+</svg>

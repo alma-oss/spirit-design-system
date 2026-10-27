@@ -1,19 +1,15 @@
-import * as previewModules from '../../component-card/previews';
 import { getComponentDescription } from '../constants/componentDescriptions';
-import type { ComponentCatalogEntry, PreviewModule } from '../types';
+import type { ComponentCatalogEntry } from '../types';
+import { getComponentIllustration, readIllustrationSlugs } from './componentIllustrationsRepository';
 
-const previews: Record<string, PreviewModule | undefined> = previewModules;
+const fetchComponentCatalogEntry = (component: string, illustrationSlugs: Set<string>): ComponentCatalogEntry => ({
+  name: component,
+  description: getComponentDescription(component),
+  illustration: getComponentIllustration(component, illustrationSlugs),
+});
 
-const fetchComponentCatalogEntry = (component: string): ComponentCatalogEntry => {
-  const Preview = previews[component]?.default;
+export const fetchComponentsCatalog = (components: string[]): ComponentCatalogEntry[] => {
+  const illustrationSlugs = readIllustrationSlugs();
 
-  return {
-    name: component,
-    description: getComponentDescription(component),
-    guides: Preview?.guides,
-    Preview,
-  };
+  return components.map((component) => fetchComponentCatalogEntry(component, illustrationSlugs));
 };
-
-export const fetchComponentsCatalog = (components: string[]): ComponentCatalogEntry[] =>
-  components.map(fetchComponentCatalogEntry);
