@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { guardMissingModule } from '@local/domains/components/utils/guardMissingModule';
 import { compileCanonicalSource } from '@local/domains/content/compileCanonicalMdx';
 import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
 import { componentBlockHeadingComponents } from '@local/mdx-components';
@@ -33,11 +34,9 @@ const ReactTabPage = async ({ params }: ReactTabProps) => {
       </ComponentsBand>
     );
   } catch (error) {
-    if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') {
-      logError(`[ComponentView] Failed to load React README for "${component}":`, error);
+    guardMissingModule(error);
 
-      return null;
-    }
+    logError(`[ComponentView] Failed to load React README for "${component}":`, error);
 
     throw error;
   }
