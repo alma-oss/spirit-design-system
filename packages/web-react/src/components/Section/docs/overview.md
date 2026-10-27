@@ -64,4 +64,6 @@ There are general recommendations which doesn’t have to be tightly coupled to 
 
 - Pair Section with **Container** to align and pad content consistently across devices.
 
-- Use semantic &lt;section> element in markup to reinforce accessibility.
+- Render &lt;section> only for bands with their own heading; use &lt;div> for the rest.
+
+- Start a new Section only where the background changes or a new headed region begins.

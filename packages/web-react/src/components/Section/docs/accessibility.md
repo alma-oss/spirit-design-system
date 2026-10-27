@@ -8,9 +8,9 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 ### **Semantics**
 
-- Use the semantic &lt;section> element.
+- Use the &lt;section> element only when the band has its own **heading** (&lt;h2>, &lt;h3>, …) and content worth jumping to. Link the heading using `aria-labelledby`.
 
-- Each Section should have a **heading** (&lt;h2>, &lt;h3>, …) to describe its purpose. Without a heading, screen reader users may find Sections confusing.
+- Use &lt;div> for everything else, e.g. background stripes, breadcrumb strips, or the band with the page's &lt;h1>.
 
 ### **Reading Order**
 
@@ -18,7 +18,7 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 ### **Landmark Navigation**
 
-- Screen readers expose &lt;section> as landmarks if they have headings. This helps users jump between sections.
+- Screen readers expose a named &lt;section> as a landmark. Each unnecessary landmark is one more stop for users to skip.
 
 ### **Color and Contrast**
 
