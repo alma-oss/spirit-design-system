@@ -41,13 +41,13 @@
     }
 
     @include breakpoint.up(tokens.$breakpoint-desktop) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
 
-        > li:nth-child(2n):not(:nth-child(3n)) {
+        > li:not(:nth-child(4n)) {
             border-right: 1px solid var(--spirit-color-border-basic);
         }
 
-        > li:nth-child(3n) {
+        > li:nth-child(4n) {
             border-right: 0;
         }
     }
