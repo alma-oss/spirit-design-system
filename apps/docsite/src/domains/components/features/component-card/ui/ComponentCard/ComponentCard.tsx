@@ -3,6 +3,7 @@
 import { EmotionColors, Link, Tag } from '@alma-oss/spirit-web-react';
 import { routes } from '@local/domains/routing/routes';
 import useIsComponentUnstable from '@local/hooks/useIsComponentUnstable';
+import Image from 'next/image';
 import NextLink from 'next/link';
 import React from 'react';
 import type { ComponentCatalogEntry } from '../../../component-catalog';
@@ -14,14 +15,12 @@ interface ComponentCardProps {
 }
 
 const ComponentCard = ({ entry }: ComponentCardProps) => {
-  const { name: component, description, guides, Preview } = entry;
+  const { name: component, description, illustration } = entry;
   const isUnstable = useIsComponentUnstable(component.toLowerCase());
 
   return (
     <li className="ComponentCard">
-      <PreviewFrame guides={guides} contentClassName="ComponentCard__preview">
-        {Preview ? <Preview /> : undefined}
-      </PreviewFrame>
+      <PreviewFrame>{illustration && <Image src={illustration} width={156} height={125} alt="" />}</PreviewFrame>
       <span className="ComponentCard__badge">
         <Tag size="xsmall" color={isUnstable ? EmotionColors.WARNING : EmotionColors.SUCCESS} isSubtle>
           {isUnstable ? 'Unstable' : 'Stable'}

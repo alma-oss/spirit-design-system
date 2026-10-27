@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<rect x="20" y="12" width="80" height="72" rx="4" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<rect x="88" y="18" width="7" height="60" rx="3.5" fill="#F0F0F4"/>
+<rect x="88" y="22" width="7" height="28" rx="3.5" fill="#6B6B80"/>
+<path d="M28.0 26.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28.0 38.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28.0 50.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28.0 62.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28.0 74.0 q2.00 -3.80 4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0 t4.00 0" fill="none" stroke="#BDBDC6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

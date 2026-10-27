@@ -45,14 +45,10 @@
 
 @include breakpoint.up(tokens.$breakpoint-desktop) {
     .ComponentGrid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
-    .ComponentGrid > li:nth-child(3n) {
-        border-right: 0;
-    }
-
-    .ComponentGrid > li:nth-child(2n):not(:nth-child(3n)) {
+    .ComponentGrid > li:nth-child(2n):not(:nth-child(4n)) {
         border-right: 1px solid var(--spirit-color-border-basic);
     }
 }

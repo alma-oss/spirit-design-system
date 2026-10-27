@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 96" width="120" height="96">
+<line x1="30" y1="20" x2="30" y2="76" stroke="#BDBDC6" stroke-width="2" stroke-linecap="round"/>
+<circle cx="30" cy="20" r="9" fill="#6B6B80"/>
+<polygon points="30.0,15.8 31.1,18.9 34.4,19.0 31.8,21.0 32.7,24.1 30.0,22.3 27.3,24.1 28.2,21.0 25.6,19.0 28.9,18.9" fill="#F0F0F4"/>
+<path d="M50.0 20.0 q3.00 -6.80 6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0" fill="none" stroke="#6B6B80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="30" cy="48" r="9" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<polygon points="30.0,43.8 31.1,46.9 34.4,47.0 31.8,49.0 32.7,52.1 30.0,50.3 27.3,52.1 28.2,49.0 25.6,47.0 28.9,46.9" fill="#BDBDC6"/>
+<path d="M50.0 48.0 q3.00 -6.80 6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0" fill="none" stroke="#BDBDC6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="30" cy="76" r="9" fill="#FFFFFF" stroke="#BDBDC6" stroke-width="2"/>
+<polygon points="30.0,71.8 31.1,74.9 34.4,75.0 31.8,77.0 32.7,80.1 30.0,78.3 27.3,80.1 28.2,77.0 25.6,75.0 28.9,74.9" fill="#BDBDC6"/>
+<path d="M50.0 76.0 q3.00 -6.80 6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0 t6.00 0" fill="none" stroke="#BDBDC6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

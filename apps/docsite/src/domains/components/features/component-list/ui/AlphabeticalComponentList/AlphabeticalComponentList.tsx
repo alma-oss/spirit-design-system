@@ -1,20 +1,20 @@
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/ui/ComponentsBand';
 import React from 'react';
 import { ComponentCard } from '../../../component-card';
-import { fetchComponentsCatalog } from '../../../component-catalog';
+import type { ComponentCatalogEntry } from '../../../component-catalog';
 import { ComponentGrid } from '../ComponentGrid';
 
 interface AlphabeticalComponentListProps {
-  components: string[];
+  catalog: ComponentCatalogEntry[];
 }
 
-const AlphabeticalComponentList = ({ components }: AlphabeticalComponentListProps) => {
-  const catalog = fetchComponentsCatalog([...components].sort());
+const AlphabeticalComponentList = ({ catalog }: AlphabeticalComponentListProps) => {
+  const sorted = [...catalog].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.GRID}>
       <ComponentGrid>
-        {catalog.map((entry) => (
+        {sorted.map((entry) => (
           <ComponentCard key={entry.name} entry={entry} />
         ))}
       </ComponentGrid>
