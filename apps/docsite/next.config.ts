@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
 import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from 'next/constants';
-import { writeComponentSectionIndex } from './src/domains/components/repositories/componentsRepository';
+import { writeComponentSectionIndex } from './src/domains/components/repositories/writeComponentSectionIndex';
 
 const pathDir = dirname(fileURLToPath(import.meta.url));
 
@@ -119,10 +119,10 @@ const withMDX = createMDX({
   options: mdxPluginOptions as unknown as NonNullable<Parameters<typeof createMDX>[0]>['options'],
 });
 
-const config = (phase: string): NextConfig => {
+const config = async (phase: string): Promise<NextConfig> => {
   // `next start` has no component sources. The index is written while they are on disk.
   if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
-    writeComponentSectionIndex(join(pathDir, 'src/generated/component-sections.json'));
+    await writeComponentSectionIndex(join(pathDir, 'src/generated/component-sections.json'), join(pathDir, '../..'));
   }
 
   return withMDX(nextConfig);

@@ -1,19 +1,14 @@
-import { componentSegments } from '@local/domains/routing/routes';
+import { componentSectionBySegment } from '@local/domains/routing/routes';
 import sectionIndex from '@local/generated/component-sections.json';
 
 export type ComponentSectionIndex = Readonly<Record<string, readonly string[]>>;
 
-export type ComponentSectionRequest = 'ignore' | 'missing' | 'present';
+export type ComponentSectionRequest = 'ignore' | 'missing' | 'present' | { redirectTo: string };
 
-const sectionBySegment: Record<string, string> = {
-  [componentSegments.design]: 'design',
-  [componentSegments.accessibility]: 'accessibility',
-  [componentSegments.figma]: 'figma',
-  [componentSegments.web]: 'web',
-  [componentSegments.react]: 'react',
-  [componentSegments.webPreview]: 'webPreview',
-  [componentSegments.reactPreview]: 'reactPreview',
-};
+// Section name to URL segment, the reverse of `componentSectionBySegment`.
+const segmentBySection = Object.fromEntries(
+  Object.entries(componentSectionBySegment).map(([segment, section]) => [section, segment]),
+);
 
 const decodePathSegment = (value: string): string | null => {
   try {
@@ -21,6 +16,14 @@ const decodePathSegment = (value: string): string | null => {
   } catch {
     return null;
   }
+};
+
+const resolveSection = (segment: string | undefined): string | undefined => {
+  if (segment === undefined) {
+    return 'overview';
+  }
+
+  return Object.hasOwn(componentSectionBySegment, segment) ? componentSectionBySegment[segment] : undefined;
 };
 
 export const componentSectionIndex: ComponentSectionIndex = sectionIndex;
@@ -46,12 +49,21 @@ export const resolveComponentSectionRequest = (
     return 'missing';
   }
 
-  const section = decodedSegment === undefined ? 'overview' : sectionBySegment[decodedSegment];
-  const sections = index[decodedSlug];
+  // `Object.hasOwn` keeps names such as `constructor` or `__proto__` from resolving to the prototype.
+  const section = resolveSection(decodedSegment);
+  const sections = Object.hasOwn(index, decodedSlug) ? index[decodedSlug] : undefined;
 
-  if (!section || !sections?.includes(section)) {
+  if (!section || !sections) {
     return 'missing';
   }
 
-  return 'present';
+  if (sections.includes(section)) {
+    return 'present';
+  }
+
+  // A component without Guidelines still has other sections. Send the bare URL to the first one.
+  const [firstSection] = sections;
+  const firstSegment = decodedSegment === undefined && firstSection ? segmentBySection[firstSection] : undefined;
+
+  return firstSegment ? { redirectTo: `/components/${decodedSlug}/${firstSegment}` } : 'missing';
 };
