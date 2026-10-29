@@ -303,8 +303,15 @@ changes:
 <div role="status" aria-live="polite">Uploading…</div>
 ```
 
+⚠️ Keep the ProgressBar outside the `role="status"` element. That element announces changes of its text, not of
+the ProgressBar value ([`aria-relevant`][wai-aria-relevant]). It is also atomic ([`status`][wai-aria-status]), so
+every text update would re-read the ProgressBar as well.
+
 When the ProgressBar tracks the loading of a region of the page, set `aria-busy="true"` on that region and
-point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` once loading has finished:
+point the region at the ProgressBar with `aria-describedby`. The region is then described by the value of the
+ProgressBar, not by its label, so set `aria-valuetext` to say what is loading and how much, and update it together
+with the value. Once loading has finished, remove `aria-busy`, and remove the ProgressBar together with the
+`aria-describedby` reference to it:
 
 ```html
 <progress
@@ -314,6 +321,7 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
   max="100"
   style="--progress-bar-value: 60%"
   aria-label="Loading offers"
+  aria-valuetext="60 % of offers loaded"
 ></progress>
 
 <section aria-busy="true" aria-describedby="offers-progress" aria-labelledby="offers-heading">
@@ -322,14 +330,13 @@ point the region at the ProgressBar with `aria-describedby`. Remove `aria-busy` 
 </section>
 ```
 
-⚠️ Place the ProgressBar next to the busy region and the live region, not inside them. Assistive technologies
-may ignore changes inside a busy region until loading finishes ([`aria-busy`][wai-aria-busy]). Live regions
-announce changes of their content, not of the ProgressBar value ([`aria-relevant`][wai-aria-relevant]), and
-`role="status"` would re-read the ProgressBar on every text update ([`status`][wai-aria-status] is atomic).
+⚠️ Do not put the ProgressBar inside the `aria-busy` region either. Assistive technologies may ignore changes
+there until loading finishes ([`aria-busy`][wai-aria-busy]).
 
-ℹ️ If the region is a significant section of the page, name it, for example with `aria-labelledby` pointing at its
-heading as in the example above. A named `section` becomes a [region landmark][mdn-region-role] that users can find
-and navigate to. Use landmarks sparingly, though: for smaller areas, leave the region unnamed.
+ℹ️ Screen readers announce the description when users enter a named region, such as the `section` labelled by its
+heading in the example above. Whether the region should be a named `section` at all is explained in
+[Section semantics][readme-section-semantics]. In an unnamed region, screen readers may skip the description, but users
+still reach the ProgressBar placed right before it.
 
 👉 See [Describing a particular region][mdn-progress-region] for more information.
 
@@ -337,13 +344,13 @@ and navigate to. Use landmarks sparingly, though: for smaller areas, leave the r
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [mdn-progress]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress
 [mdn-progress-region]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress#describing_a_particular_region
-[mdn-region-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/region_role
 [readme-container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [readme-file-upload-progress]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/File/README.md#upload-progress
 [readme-flex]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Flex/README.md
 [readme-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
 [readme-helper-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/HelperText/README.md
 [readme-label]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Label/README.md
+[readme-section-semantics]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Section/README.md#semantics
 [readme-stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [readme-validation-text]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ValidationText/README.md
 [wai-aria-busy]: https://www.w3.org/TR/wai-aria-1.2/#aria-busy
