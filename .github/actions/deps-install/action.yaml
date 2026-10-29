@@ -1,8 +1,21 @@
 name: 'install dependencies'
 description: 'Install Dependencies'
+inputs:
+  focus:
+    description:
+      'Name of a workspace to install dependencies for (`yarn workspaces focus`). Installs only what that workspace
+      needs instead of the whole monorepo. Does not verify the lockfile, so leave empty for jobs that run package code.'
+    required: false
 runs:
   using: 'composite'
   steps:
     - name: Install dependencies
       shell: bash
-      run: yarn --immutable --inline-builds
+      env:
+        FOCUS: ${{ inputs.focus }}
+      run: |
+        if [ -n "$FOCUS" ]; then
+          yarn workspaces focus "$FOCUS"
+        else
+          yarn --immutable --inline-builds
+        fi
