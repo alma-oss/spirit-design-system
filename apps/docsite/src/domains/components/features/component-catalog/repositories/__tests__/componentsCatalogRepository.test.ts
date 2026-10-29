@@ -1,20 +1,9 @@
+import { existsSync } from 'fs';
+import { join } from 'path';
 import { fetchAllComponents } from '../../../../repositories/componentsRepository';
-import * as previewModules from '../../../component-card/previews';
 import { COMPONENT_CATEGORIES } from '../../constants/componentCategories';
 import { COMPONENT_DESCRIPTIONS, getComponentDescription } from '../../constants/componentDescriptions';
-import { PREVIEW_GUIDES } from '../../constants/previewGuides';
-import type { PreviewComponent } from '../../types';
 import { fetchComponentsCatalog } from '../componentsCatalogRepository';
-
-// The unit test job does not build `@alma-oss/spirit-web-react`, so its `dist` entry point is missing there.
-jest.mock(
-  '@alma-oss/spirit-web-react',
-  () =>
-    new Proxy({ __esModule: true } as Record<string | symbol, unknown>, {
-      get: (target, name) => (name in target ? target[name] : () => null),
-    }),
-  { virtual: true },
-);
 
 describe('componentsCatalogRepository', () => {
   it('should keep the authored card descriptions', () => {
@@ -52,30 +41,25 @@ describe('componentsCatalogRepository', () => {
     ]);
   });
 
-  it('should export a component and valid guides from every card preview', () => {
-    Object.values(previewModules).forEach(({ default: Preview }) => {
-      expect(typeof Preview).toBe('function');
-      expect([undefined, ...Object.values(PREVIEW_GUIDES)]).toContain((Preview as PreviewComponent).guides);
-    });
+  it('should ship an illustration file for every illustrated component', () => {
+    const illustrations = fetchComponentsCatalog(fetchAllComponents())
+      .map(({ illustration }) => illustration)
+      .filter((illustration): illustration is string => Boolean(illustration));
+
+    expect(illustrations.length).toBeGreaterThan(0);
+    expect(illustrations.filter((illustration) => !existsSync(join(process.cwd(), 'public', illustration)))).toEqual(
+      [],
+    );
   });
 
-  it('should name every card preview after an existing component', () => {
-    const components = fetchAllComponents();
+  it('should take the illustration from the component name', () => {
+    const [button, unstableCombobox] = fetchComponentsCatalog(['Button', 'UNSTABLE_Combobox']);
 
-    Object.keys(previewModules).forEach((component) => {
-      expect(components).toContain(component);
-    });
+    expect(button.illustration).toBe('/component-illustrations/button.svg');
+    expect(unstableCombobox.illustration).toBe('/component-illustrations/unstable-combobox.svg');
   });
 
-  it('should take the preview and its guides from the preview module', () => {
-    const [accordion, button] = fetchComponentsCatalog(['Accordion', 'Button']);
-
-    expect(accordion.Preview).toBe(previewModules.Accordion.default);
-    expect(accordion.guides).toBe(PREVIEW_GUIDES.VERTICAL);
-    expect(button.guides).toBeUndefined();
-  });
-
-  it('should leave a component without a preview module on the placeholder', () => {
-    expect(fetchComponentsCatalog(['Dialog'])[0].Preview).toBeUndefined();
+  it('should leave a component without an illustration on the placeholder', () => {
+    expect(fetchComponentsCatalog(['Dialog'])[0].illustration).toBeUndefined();
   });
 });

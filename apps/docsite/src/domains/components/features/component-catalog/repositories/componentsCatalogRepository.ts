@@ -1,9 +1,7 @@
-import * as previewModules from '../../component-card/previews';
 import { COMPONENT_CATEGORIES } from '../constants/componentCategories';
 import { getComponentDescription } from '../constants/componentDescriptions';
-import type { ComponentCatalogEntry, PreviewModule } from '../types';
-
-const previews: Record<string, PreviewModule | undefined> = previewModules;
+import { getComponentIllustration } from '../constants/componentIllustrations';
+import type { ComponentCatalogEntry } from '../types';
 
 const categoryByComponent = new Map(
   Object.entries(COMPONENT_CATEGORIES).flatMap(([category, components]) =>
@@ -11,17 +9,12 @@ const categoryByComponent = new Map(
   ),
 );
 
-const fetchComponentCatalogEntry = (component: string): ComponentCatalogEntry => {
-  const Preview = previews[component]?.default;
-
-  return {
-    name: component,
-    description: getComponentDescription(component),
-    category: categoryByComponent.get(component) ?? 'Uncategorized',
-    guides: Preview?.guides,
-    Preview,
-  };
-};
+const fetchComponentCatalogEntry = (component: string): ComponentCatalogEntry => ({
+  name: component,
+  description: getComponentDescription(component),
+  category: categoryByComponent.get(component) ?? 'Uncategorized',
+  illustration: getComponentIllustration(component),
+});
 
 export const fetchComponentsCatalog = (components: string[]): ComponentCatalogEntry[] =>
   components.map(fetchComponentCatalogEntry);

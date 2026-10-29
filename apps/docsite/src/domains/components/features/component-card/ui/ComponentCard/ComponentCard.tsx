@@ -14,13 +14,15 @@ interface ComponentCardProps {
 }
 
 const ComponentCard = ({ entry }: ComponentCardProps) => {
-  const { name: component, description, guides, Preview } = entry;
+  const { name: component, description, illustration } = entry;
   const isUnstable = useIsComponentUnstable(component.toLowerCase());
 
   return (
     <li className="ComponentCard">
-      <PreviewFrame guides={guides} contentClassName="ComponentCard__preview">
-        {Preview ? <Preview /> : undefined}
+      <PreviewFrame>
+        {/* Static decorative SVG – next/image adds no optimization for it. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {illustration ? <img src={illustration} width={156} height={125} alt="" /> : undefined}
       </PreviewFrame>
       <span className="ComponentCard__badge">
         <Tag size="xsmall" color={isUnstable ? EmotionColors.WARNING : EmotionColors.SUCCESS} isSubtle>
