@@ -1,4 +1,5 @@
 // 1. Prevent options with long text from overflowing the popover.
+// 2. Declare the background context so nested components and dynamic colors resolve against the popover.
 
 @use 'sass:map';
 @use '@tokens' as tokens;
@@ -9,6 +10,7 @@
 
 .DropdownPopover {
     --#{tokens.$css-variable-prefix}placement-offset: #{theme.$offset};
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background}; // 2.
 
     @include placement.child();
 

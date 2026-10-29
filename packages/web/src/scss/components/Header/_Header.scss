@@ -1,5 +1,6 @@
 // 1. In order to have the border be outside of the height of the header, we need to use `content-box`
 //    for the box-sizing. The box-sizing is inherited by the children, so we need to reset it to `border-box`.
+// 2. Declare the background context so nested components and dynamic colors resolve against the header.
 
 @use '@tokens' as tokens;
 @use 'theme';
@@ -7,6 +8,7 @@
 .Header {
     --#{tokens.$css-variable-prefix}header-height: #{theme.$height};
     --#{tokens.$css-variable-prefix}navigation-height: var(--#{tokens.$css-variable-prefix}header-height);
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color}; // 2.
 
     flex: none;
     box-sizing: content-box; // 1.

@@ -1,6 +1,8 @@
 // 1. Make whole drop zone clickable. Cursor is hard-coded because links always use pointer.
 // 2. We need to target inner elements in a specific component state.
+// 3. Declare the background context so nested components and dynamic colors resolve against the drop zone.
 
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/accessibility';
@@ -23,6 +25,8 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput__dropZone {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background}; // 3.
+
     position: relative; // 1.
     display: grid;
     grid-template-columns: auto;
@@ -73,11 +77,15 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput__dropZone:hover {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background-state-hover}; // 3.
+
     border-color: theme.$input-drop-zone-border-color-state-hover;
     background-color: theme.$input-drop-zone-background-state-hover;
 }
 
 .FileUploadInput__input:where(:active) ~ .FileUploadInput__dropZone {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background-state-active}; // 3.
+
     border-color: theme.$input-drop-zone-border-color-state-active;
     background-color: theme.$input-drop-zone-background-state-active;
 }
@@ -105,6 +113,8 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput > .FileUploadInput__dropZone--disabled {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background-state-disabled}; // 3.
+
     border-style: dashed;
     border-color: theme.$input-drop-zone-border-color-state-disabled;
     background-color: theme.$input-drop-zone-background-state-disabled;

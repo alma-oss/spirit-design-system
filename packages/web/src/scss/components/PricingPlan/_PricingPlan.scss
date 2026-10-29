@@ -11,6 +11,9 @@
 //    easier. An additional element is needed to do so because `grid-template-rows` of the root element can be
 //    overridden to `subgrid` by the component's parent (typically the Matrix component), making the line names
 //    unavailable.
+//
+// 3. Declare the background context so nested components and dynamic colors resolve against the plan, including its
+//    highlighted variant.
 
 @use '@tokens' as tokens;
 @use '../../tools/component-radius-overrides';
@@ -19,6 +22,11 @@
 @use 'theme';
 
 .PricingPlan {
+    --#{tokens.$css-variable-prefix}local-background-color: var(
+        --#{tokens.$css-variable-prefix}pricing-plan-background-color,
+        #{theme.$background-color}
+    ); // 3.
+
     @include typography.generate(theme.$typography);
 
     display: grid;
