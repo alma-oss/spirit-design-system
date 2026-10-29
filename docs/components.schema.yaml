@@ -171,17 +171,12 @@ categories:
       - *Tag
       - *UNSTABLE_SplitTag
   Layout:
-    description: Elements that set where content sits on a page, from page regions and width to columns, gaps, and padding. They define spacing, alignment, and the responsive grid of an interface.
+    description: Elements that only set where content sits, such as width, columns, gaps, and alignment, without a surface of their own. They define the spacing and the responsive grid of an interface.
     components:
-      - *Box
       - *Container
       - *Flex
-      - *Footer
       - *Grid
-      - *Header
       - *Matrix
-      - *ScrollView
-      - *Section
       - *Stack
   Media and Icons:
     description: Imagery that stands for a person, a brand, or an idea. They carry avatars, icons, and brand marks.
@@ -209,10 +204,15 @@ categories:
       - *Modal
       - *Tooltip
   Structure:
-    description: Surfaces and separators that group, separate, or collapse any content without dictating what goes inside. They break a page into digestible parts.
+    description: Surfaces and separators that frame, group, separate, or collapse any content without dictating what goes inside. They break a page into regions and digestible parts.
     components:
       - *Accordion
+      - *Box
       - *Divider
+      - *Footer
+      - *Header
+      - *ScrollView
+      - *Section
       - *UNSTABLE_Tile
   Text:
     description: Components that only render text in a predefined style, without belonging to another component. They establish hierarchy and readability across headings, body copy, and supporting text.
