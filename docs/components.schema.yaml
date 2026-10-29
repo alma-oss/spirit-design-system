@@ -193,7 +193,6 @@ categories:
       - *Navigation
       - *Pagination
       - *SkipLink
-      - *Tabs
   Overlays:
     description: Surfaces that appear above the page, tied to a trigger, until they are dismissed. They keep extra content or a focused task in context.
     components:
@@ -204,7 +203,7 @@ categories:
       - *Modal
       - *Tooltip
   Structure:
-    description: Surfaces and separators that frame, group, separate, or collapse any content without dictating what goes inside. They break a page into regions and digestible parts.
+    description: Surfaces and separators that frame, group, separate, or reveal any content without dictating what goes inside. They break a page into regions and digestible parts.
     components:
       - *Accordion
       - *Box
@@ -213,6 +212,7 @@ categories:
       - *Header
       - *ScrollView
       - *Section
+      - *Tabs
       - *UNSTABLE_Tile
   Text:
     description: Components that only render text in a predefined style, without belonging to another component. They establish hierarchy and readability across headings, body copy, and supporting text.
