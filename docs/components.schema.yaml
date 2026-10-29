@@ -1,0 +1,233 @@
+# Component categories
+#
+# Groups components by what they are for. The docsite shows these categories and their
+# descriptions publicly in the categorical component listing (/components?sort=categorical).
+#
+# PLACEMENT RULE: The first sentence of each description is the rule for placing a component
+# in the category. The second sentence is copy for docsite readers.
+#
+# To place a component:
+#   1. Read the first sentence of every description and pick the category whose rule fits.
+#   2. If more than one fits, decide by what the component is, not by what it usually
+#      contains or where it is used.
+#   3. If none fits, consider rewording a rule or adding a category rather than stretching
+#      a rule to fit. Before adding a category, consider shifting the borders between
+#      categories so it also takes in existing components that would fit it better than
+#      their current category. Try to avoid single-component categories created only for
+#      lack of a better fit.
+#
+# When you edit a description, keep its first sentence a rule that decides placement.
+#
+# List every component once in `components` with an anchor (`- &Button Button`), then
+# reference it from its category with an alias (`- *Button`). A misspelled alias fails
+# the docsite build. Anchors must come before `categories`.
+#
+# Keep components, categories, and their components sorted alphabetically. Docsite tests
+# fail when a component is missing, listed twice, misspelled, or out of order.
+
+components:
+  - &Accordion Accordion
+  - &ActionGroup ActionGroup
+  - &ActionText ActionText
+  - &Alert Alert
+  - &Avatar Avatar
+  - &Box Box
+  - &Breadcrumbs Breadcrumbs
+  - &Button Button
+  - &ButtonLink ButtonLink
+  - &CaptionText CaptionText
+  - &Card Card
+  - &CharacterCounter CharacterCounter
+  - &Checkbox Checkbox
+  - &CloseButton CloseButton
+  - &Collapse Collapse
+  - &Container Container
+  - &ContextualHelp ContextualHelp
+  - &ControlButton ControlButton
+  - &Dialog Dialog
+  - &Divider Divider
+  - &Drawer Drawer
+  - &Dropdown Dropdown
+  - &EmptyState EmptyState
+  - &FieldGroup FieldGroup
+  - &File File
+  - &FileUpload FileUpload
+  - &Flex Flex
+  - &Footer Footer
+  - &Grid Grid
+  - &Header Header
+  - &Heading Heading
+  - &HelperText HelperText
+  - &Hidden Hidden
+  - &Icon Icon
+  - &IconBox IconBox
+  - &InputAddon InputAddon
+  - &InputContainer InputContainer
+  - &InputDetails InputDetails
+  - &Item Item
+  - &Label Label
+  - &Link Link
+  - &Matrix Matrix
+  - &Modal Modal
+  - &Navigation Navigation
+  - &NoSsr NoSsr
+  - &Pagination Pagination
+  - &PartnerLogo PartnerLogo
+  - &Pill Pill
+  - &PricingPlan PricingPlan
+  - &ProductLogo ProductLogo
+  - &ProgressBar ProgressBar
+  - &Radio Radio
+  - &ScrollView ScrollView
+  - &Section Section
+  - &SegmentedControl SegmentedControl
+  - &Select Select
+  - &Skeleton Skeleton
+  - &SkipLink SkipLink
+  - &Slider Slider
+  - &Spinner Spinner
+  - &SplitButton SplitButton
+  - &Stack Stack
+  - &Tabs Tabs
+  - &Tag Tag
+  - &Text Text
+  - &TextArea TextArea
+  - &TextField TextField
+  - &TextFieldBase TextFieldBase
+  - &Timeline Timeline
+  - &Toast Toast
+  - &Toggle Toggle
+  - &Tooltip Tooltip
+  - &Truncate Truncate
+  - &UNSTABLE_Combobox UNSTABLE_Combobox
+  - &UNSTABLE_DisplayHeading UNSTABLE_DisplayHeading
+  - &UNSTABLE_EyebrowText UNSTABLE_EyebrowText
+  - &UNSTABLE_Picker UNSTABLE_Picker
+  - &UNSTABLE_SplitTag UNSTABLE_SplitTag
+  - &UNSTABLE_Table UNSTABLE_Table
+  - &UNSTABLE_Tile UNSTABLE_Tile
+  - &ValidationText ValidationText
+  - &VisuallyHidden VisuallyHidden
+
+categories:
+  Actions:
+    description: Controls that let people do or reach one thing chosen by the author, and the groups that arrange them. They make clear what can be done and how important it is.
+    components:
+      - *ActionGroup
+      - *Button
+      - *ButtonLink
+      - *CloseButton
+      - *ControlButton
+      - *Link
+      - *SplitButton
+  Data Display:
+    description: Components that present one thing or a set of things through a fixed set of slots, such as a title, media, metadata, or rows. They turn records into clear, scannable units.
+    components:
+      - *Card
+      - *File
+      - *Item
+      - *PricingPlan
+      - *Timeline
+      - *UNSTABLE_Table
+  Feedback:
+    description: Elements that tell people the state of the system or the result of their action, from confirmations and errors to loading and empty states. They keep users informed without getting in their way.
+    components:
+      - *Alert
+      - *EmptyState
+      - *ProgressBar
+      - *Skeleton
+      - *Spinner
+      - *Toast
+  Form Parts:
+    description: Pieces that build, label, or explain a single form field and are not meant to be used as a complete field on their own. They compose into consistent, accessible fields.
+    components:
+      - *CharacterCounter
+      - *HelperText
+      - *InputAddon
+      - *InputContainer
+      - *InputDetails
+      - *Label
+      - *TextFieldBase
+      - *ValidationText
+  Forms:
+    description: Controls that let people enter, choose, or upload a value, and the groups that wrap them. They cover everything from short text to picking options and attaching files.
+    components:
+      - *Checkbox
+      - *FieldGroup
+      - *FileUpload
+      - *Radio
+      - *SegmentedControl
+      - *Select
+      - *Slider
+      - *TextArea
+      - *TextField
+      - *Toggle
+      - *UNSTABLE_Combobox
+      - *UNSTABLE_Picker
+  Indicators:
+    description: Compact labels attached to something else to show its status, count, or category. They let people scan and compare items at a glance.
+    components:
+      - *Pill
+      - *Tag
+      - *UNSTABLE_SplitTag
+  Layout:
+    description: Elements that only set where content sits, such as width, columns, gaps, and alignment, without a surface of their own. They define the spacing and the responsive grid of an interface.
+    components:
+      - *Container
+      - *Flex
+      - *Grid
+      - *Matrix
+      - *Stack
+  Media and Icons:
+    description: Imagery that stands for a person, a brand, or an idea. They carry avatars, icons, and brand marks.
+    components:
+      - *Avatar
+      - *Icon
+      - *IconBox
+      - *PartnerLogo
+      - *ProductLogo
+  Navigation:
+    description: Elements that move people through the product or the page, with destinations given by its structure rather than by its content. They show where the user is and what can be reached from there.
+    components:
+      - *Breadcrumbs
+      - *Navigation
+      - *Pagination
+      - *SkipLink
+  Overlays:
+    description: Surfaces that appear above the page, tied to a trigger, until they are dismissed. They keep extra content or a focused task in context.
+    components:
+      - *ContextualHelp
+      - *Dialog
+      - *Drawer
+      - *Dropdown
+      - *Modal
+      - *Tooltip
+  Structure:
+    description: Surfaces and separators that frame, group, separate, or reveal any content without dictating what goes inside. They break a page into regions and digestible parts.
+    components:
+      - *Accordion
+      - *Box
+      - *Divider
+      - *Footer
+      - *Header
+      - *ScrollView
+      - *Section
+      - *Tabs
+      - *UNSTABLE_Tile
+  Text:
+    description: Components that only render text in a predefined style, without belonging to another component. They establish hierarchy and readability across headings, body copy, and supporting text.
+    components:
+      - *ActionText
+      - *CaptionText
+      - *Heading
+      - *Text
+      - *UNSTABLE_DisplayHeading
+      - *UNSTABLE_EyebrowText
+  Utilities:
+    description: Helpers that adjust behavior or visibility without adding visual design of their own. They support accessibility, responsiveness, and rendering.
+    components:
+      - *Collapse
+      - *Hidden
+      - *NoSsr
+      - *Truncate
+      - *VisuallyHidden

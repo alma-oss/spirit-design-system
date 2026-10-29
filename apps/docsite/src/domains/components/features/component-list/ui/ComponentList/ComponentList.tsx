@@ -2,6 +2,7 @@
 
 import { Text } from '@alma-oss/spirit-web-react';
 import React from 'react';
+import type { ComponentCategories } from '../../../component-catalog';
 import { filterComponents, useComponentsSearchQueryState } from '../../../component-list-search';
 import { SORT_OPTIONS, useComponentsSortQueryState } from '../../../component-list-sort';
 import { AlphabeticalComponentList } from '../AlphabeticalComponentList';
@@ -10,9 +11,10 @@ import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '../ComponentsBand';
 
 interface ComponentListProps {
   components: string[];
+  categories: ComponentCategories;
 }
 
-const ComponentList = ({ components }: ComponentListProps) => {
+const ComponentList = ({ components, categories }: ComponentListProps) => {
   const [sort] = useComponentsSortQueryState();
   const [query] = useComponentsSearchQueryState();
   const filtered = filterComponents(components, query);
@@ -29,7 +31,7 @@ const ComponentList = ({ components }: ComponentListProps) => {
   }
 
   return sort === SORT_OPTIONS.CATEGORICAL ? (
-    <CategoricalComponentList components={filtered} />
+    <CategoricalComponentList components={filtered} categories={categories} />
   ) : (
     <AlphabeticalComponentList components={filtered} />
   );
