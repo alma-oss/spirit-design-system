@@ -26,6 +26,18 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 - For dropdown navigation, support **Arrow keys** to move through sub-menus and **Esc** to close.
 
+### **Toolbar**
+
+- Use `role="toolbar"` for a persistent group of 3 or more actions that is not site navigation, e.g. actions for the edited document. Do not use it for one or two controls. The toolbar renders a `div`, because the role is not allowed on `nav`. An explicit `elementType="nav"` is rendered as a `div` as well.
+
+- Provide an `aria-label` or `aria-labelledby`. `aria-orientation` follows the `direction` of the Navigation.
+
+- The `ul` and `li` use `role="presentation"`, so the toolbar is not also announced as a list.
+
+- The toolbar is a single **Tab** stop and remembers the last focused action.
+
+- **Arrow keys** matching the orientation move between actions and wrap around; **Home/End** move to the first/last action. Text fields, text areas and selects keep their own arrow keys and stay separate Tab stops.
+
 ### **Focus Management**
 
 - Maintain visible focus indicators for all items.

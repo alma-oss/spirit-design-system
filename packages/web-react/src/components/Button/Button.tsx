@@ -2,7 +2,7 @@
 
 import React, { type ElementType, forwardRef } from 'react';
 import { useContextProps } from '../../context';
-import { useStyleProps } from '../../hooks';
+import { useStyleProps, useToolbarItem } from '../../hooks';
 import { type ButtonProps, type PolymorphicComponent, type PolymorphicRef, type SpiritButtonProps } from '../../types';
 import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { Spinner } from '../Spinner';
@@ -28,9 +28,15 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
 
   const { buttonProps } = useButtonProps(propsWithDefaults);
 
-  const { children, elementType, ...restProps } = propsWithDefaults;
+  const { children, elementType, onFocus, onKeyDown, ...restProps } = propsWithDefaults;
 
   const Component = elementType as ElementType;
+  const toolbarItemProps = useToolbarItem({
+    isDisabled: restProps.isDisabled || restProps.isLoading,
+    onFocus,
+    onKeyDown,
+    ref,
+  });
   const { classProps, props: modifiedProps, styleProps: buttonStyleProps } = useButtonStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, {
@@ -40,7 +46,7 @@ const _Button = <E extends ElementType = 'button', C = void, S = void>(
   });
 
   return (
-    <Component {...filterDOMProps(otherProps)} {...buttonProps} ref={ref} {...mergedStyleProps}>
+    <Component {...filterDOMProps(otherProps)} {...buttonProps} {...toolbarItemProps} {...mergedStyleProps}>
       {children}
       {restProps.isLoading && <Spinner />}
     </Component>

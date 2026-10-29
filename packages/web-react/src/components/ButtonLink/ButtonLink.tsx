@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { useLinkClick, useStyleProps } from '../../hooks';
+import { useLinkClick, useStyleProps, useToolbarItem } from '../../hooks';
 import {
   type ButtonProps,
   type ButtonSizesType,
@@ -29,9 +29,22 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
   ref: PolymorphicRef<E>,
 ) => {
   const propsWithDefaults = { ...defaultProps, ...props };
-  const { elementType = defaultProps.elementType, children, routerOptions, ...restProps } = propsWithDefaults;
+  const {
+    elementType = defaultProps.elementType,
+    children,
+    onFocus,
+    onKeyDown,
+    routerOptions,
+    ...restProps
+  } = propsWithDefaults;
 
   const Component = elementType as ElementType;
+  const toolbarItemProps = useToolbarItem({
+    isDisabled: restProps.isDisabled || restProps.isLoading,
+    onFocus,
+    onKeyDown,
+    ref,
+  });
 
   const { buttonLinkProps } = useButtonLinkProps(propsWithDefaults);
   const { classProps, props: modifiedProps, styleProps: buttonLinkStyleProps } = useButtonLinkStyleProps(restProps);
@@ -49,7 +62,7 @@ const _ButtonLink = <E extends ElementType = 'a', C = void, S = void>(
   });
 
   return (
-    <Component {...otherProps} {...buttonLinkProps} {...mergedStyleProps} onClick={handleClick} ref={ref}>
+    <Component {...otherProps} {...buttonLinkProps} {...mergedStyleProps} onClick={handleClick} {...toolbarItemProps}>
       {children}
       {restProps.isLoading && <Spinner />}
     </Component>

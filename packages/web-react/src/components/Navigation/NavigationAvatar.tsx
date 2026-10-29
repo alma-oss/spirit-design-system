@@ -1,9 +1,9 @@
 'use client';
 
-import React, { type ElementType, forwardRef } from 'react';
+import React, { type ElementType, type HTMLAttributes, forwardRef } from 'react';
 import { Sizes } from '../../constants';
 import { useContextProps } from '../../context';
-import { useStyleProps } from '../../hooks';
+import { useStyleProps, useToolbarItem } from '../../hooks';
 import {
   type NavigationAvatarBaseProps,
   type PolymorphicComponent,
@@ -32,16 +32,19 @@ const _NavigationAvatar = <E extends ElementType = 'a'>(
     avatarSize,
     isSquare,
     children,
+    onFocus,
+    onKeyDown,
     ...restProps
-  } = propsWithDefaults;
+  } = propsWithDefaults as typeof propsWithDefaults & Pick<HTMLAttributes<HTMLElement>, 'onFocus' | 'onKeyDown'>;
   const ElementTag = elementType as ElementType;
 
+  const toolbarItemProps = useToolbarItem({ onFocus, onKeyDown, ref });
   const { classProps, props: modifiedProps } = useNavigationStyleProps({ isSquare, ...restProps });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(ElementTag, { classProps: classProps.avatar, styleProps, otherProps });
 
   return (
-    <ElementTag {...otherProps} {...mergedStyleProps} ref={ref}>
+    <ElementTag {...otherProps} {...mergedStyleProps} {...toolbarItemProps}>
       <Avatar size={avatarSize} isSquare={isSquare} aria-hidden="true">
         {avatarContent}
       </Avatar>

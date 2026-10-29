@@ -4,6 +4,7 @@ import React from 'react';
 import {
   ariaAttributesTest,
   classNamePrefixProviderTest,
+  elementTypePropsTest,
   restPropsTest,
   stylePropsTest,
   validHtmlAttributesTest,
@@ -36,6 +37,8 @@ describe('Navigation', () => {
   validHtmlAttributesTest(Navigation);
 
   ariaAttributesTest(Navigation);
+
+  elementTypePropsTest(Navigation, 'div');
 
   describe.each(dataProvider)('when direction is $direction', ({ direction, directionClassName }) => {
     beforeEach(() => {

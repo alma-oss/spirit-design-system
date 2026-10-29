@@ -2,7 +2,7 @@
 
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import { useStyleProps } from '../../hooks';
+import { ToolbarBoundary, useStyleProps } from '../../hooks';
 import { type TooltipPopoverProps } from '../../types';
 import { CloseButton } from '../CloseButton';
 import { useTooltipContext } from './TooltipContext';
@@ -107,8 +107,10 @@ const TooltipPopover = (props: TooltipPopoverProps) => {
       }}
       data-spirit-element="tooltip" // This is used to select CSS variables for maxWidth and tooltip offset
     >
-      {children}
-      {renderCloseButton}
+      <ToolbarBoundary>
+        {children}
+        {renderCloseButton}
+      </ToolbarBoundary>
       <span
         ref={arrowRef}
         className={classProps.arrowClassName}

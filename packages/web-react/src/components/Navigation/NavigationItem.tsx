@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { type ReactElement } from 'react';
 import { AlignmentYExtended } from '../../constants';
-import { useStyleProps } from '../../hooks';
+import { useStyleProps, useToolbarContext } from '../../hooks';
 import { type SpiritNavigationItemProps } from '../../types';
 import { useNavigationStyleProps } from './useNavigationStyleProps';
 
@@ -17,9 +17,15 @@ const NavigationItem = (props: SpiritNavigationItemProps): ReactElement => {
 
   const { classProps, props: modifiedProps } = useNavigationStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
+  const { isEnabled: isToolbar } = useToolbarContext();
 
   return (
-    <li {...otherProps} className={classNames(classProps.item, styleProps.className)} style={styleProps.style}>
+    <li
+      {...otherProps}
+      className={classNames(classProps.item, styleProps.className)}
+      style={styleProps.style}
+      {...(isToolbar ? { role: 'presentation' } : undefined)}
+    >
       {children}
     </li>
   );

@@ -40,6 +40,44 @@ it will insert a gap between them.
 
 ℹ️ Don't forget to add the `aria-label` attribute to the `Navigation` component for correct accessible title.
 
+### Toolbar
+
+Use `role="toolbar"` for a persistent, always-visible group of 3 or more actions that is not site navigation, e.g. actions
+for the document being edited. Do not use the toolbar role for one or two controls. Use a `div` instead of `nav`,
+because the `toolbar` role is not allowed on `nav`, and set `aria-orientation` to match the direction. The `ul` and
+`li` use `role="presentation"` so assistive technologies do not announce them as a list on top of the toolbar.
+
+```html
+<div class="Navigation Navigation--vertical" role="toolbar" aria-label="CV actions" aria-orientation="vertical">
+  <ul role="presentation">
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <a href="#" class="NavigationAction NavigationAction--pill" tabindex="0">Preview</a>
+    </li>
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <button type="button" class="NavigationAction NavigationAction--pill" tabindex="-1">Download</button>
+    </li>
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <button type="button" class="NavigationAction NavigationAction--pill" tabindex="-1">Share</button>
+    </li>
+  </ul>
+</div>
+```
+
+> **JS interaction is not part of Spirit.** There is a demo-only example showing one possible implementation
+> of the toolbar [keyboard interaction][apg-toolbar]. In your project, implement it to match your own
+> requirements and framework:
+
+- **Tab** moves focus into and out of the toolbar. The toolbar is a single Tab stop and remembers the last focused
+  action.
+- **Arrow Left/Right** (horizontal) or **Arrow Up/Down** (vertical) move focus between actions and wrap around.
+  Left and Right are swapped in right-to-left layouts.
+- **Home/End** move focus to the first/last action.
+- **Enter** activates the focused action natively, **Space** activates buttons.
+
+ℹ️ The toolbar uses a roving tabindex: the active item has `tabindex="0"`, the other items `tabindex="-1"`.
+Interactive `NavigationAction`, `NavigationAvatar` and `Button` elements are the items, disabled actions (`span`) are
+skipped. Other focusable content, e.g. a form field, stays a separate Tab stop and keeps its own arrow keys.
+
 ## Navigation Item
 
 The `NavigationItem` is a container for a navigation action or any other action.
@@ -257,5 +295,6 @@ With Buttons and NavigationAvatar:
 </nav>
 ```
 
+[apg-toolbar]: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 [web-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md
 [web-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md

@@ -2,7 +2,7 @@
 
 import React, { type ElementType, type MutableRefObject, useRef } from 'react';
 import { Transition, type TransitionStatus } from 'react-transition-group';
-import { useStyleProps } from '../../hooks';
+import { ToolbarBoundary, useStyleProps } from '../../hooks';
 import { type SpiritCollapseProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 import { useCollapseStyleProps } from './useCollapseStyleProps';
@@ -57,7 +57,7 @@ const Collapse = (props: SpiritCollapseProps) => {
   // For inline elements, when open, render content outside the collapse element
   const isInlineElement = Component === 'span';
   if (isInlineElement && isOpen) {
-    return children;
+    return <ToolbarBoundary>{children}</ToolbarBoundary>;
   }
 
   return (
@@ -75,7 +75,7 @@ const Collapse = (props: SpiritCollapseProps) => {
           ref={rootElementRef}
         >
           <Component ref={collapseElementRef} className={classProps.content}>
-            {children}
+            <ToolbarBoundary>{children}</ToolbarBoundary>
           </Component>
         </Component>
       )}

@@ -20,4 +20,22 @@ describe('Navigation accessibility', () => {
     ),
     'nav',
   );
+
+  describe('as toolbar', () => {
+    accessibilityTest(
+      (props) => (
+        <Navigation {...props} role="toolbar" aria-label="CV actions" direction="vertical">
+          <NavigationItem>
+            <NavigationAction href="#">Edit</NavigationAction>
+          </NavigationItem>
+          <NavigationItem>
+            <NavigationAction elementType="button" type="button">
+              Share
+            </NavigationAction>
+          </NavigationItem>
+        </Navigation>
+      ),
+      '[role="toolbar"]',
+    );
+  });
 });

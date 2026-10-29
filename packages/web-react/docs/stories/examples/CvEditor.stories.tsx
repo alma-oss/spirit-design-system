@@ -173,31 +173,8 @@ export const CvEditor = () => {
                 hideOn={['mobile', 'tablet']}
                 paddingY="space-800"
               >
-                {/* Shipped as a plain Navigation, i.e. a named `nav` landmark. The prototype uses
-                    `role="toolbar"`: a persistent, always-visible set of CV actions is neither a menu
-                    (transient, dismissable) nor real site navigation. That role is parked in the TODO
-                    below, because Spirit cannot honour the keyboard contract it implies. */}
-                {/* TODO: DS-2750 — Allow the `toolbar` pattern for Navigation
-
-                    1. The `toolbar` role implies a keyboard accessibility contract Spirit does not
-                       implement (roving tabindex, arrow keys, Home/End), see:
-                       https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/toolbar_role#keyboard_interactions
-                       https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
-
-                    2. Allow `elementType` for Navigation and its subcomponents.
-                       Not critical since the `toolbar` role overrides the <nav> role of Navigation,
-                       and the <ul>/<li> markup inside should be harmless.
-
-                    Once both are in place, this becomes:
-
-                    <Navigation
-                      direction="vertical"
-                      aria-orientation="vertical"
-                      aria-label="Správa životopisu"
-                      {...({ role: 'toolbar' } as Record<string, string>)}
-                    >
-                 */}
-                <Navigation direction="vertical" aria-label="Správa životopisu">
+                {/* Persistent, always-visible CV actions: a toolbar, not site navigation. */}
+                <Navigation role="toolbar" direction="vertical" aria-label="Správa životopisu">
                   {MENU_ITEMS.map(({ iconName, label }) => (
                     <NavigationItem key={label}>
                       <NavigationAction href="#" variant="pill" startSlot={<Icon name={iconName} />}>

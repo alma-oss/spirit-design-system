@@ -27,12 +27,53 @@ it will apply a gap between them.
 
 ℹ️ Don't forget to add the `aria-label` attribute to the `Navigation` component for correct accessible title.
 
+### Toolbar
+
+Use `role="toolbar"` for a persistent, always-visible group of 3 or more actions that is not site navigation, e.g. actions
+for the document being edited. Do not use the toolbar role for one or two controls.
+
+```tsx
+<Navigation role="toolbar" direction="vertical" aria-label="CV actions">
+  <NavigationItem>
+    <NavigationAction href="#">Preview</NavigationAction>
+  </NavigationItem>
+  <NavigationItem>
+    <NavigationAction elementType="button" type="button">
+      Download
+    </NavigationAction>
+  </NavigationItem>
+  <NavigationItem>
+    <NavigationAction elementType="button" type="button">
+      Share
+    </NavigationAction>
+  </NavigationItem>
+</Navigation>
+```
+
+The `Navigation` then renders a `div` instead of `nav`, because the `toolbar` role is not allowed on `nav`.
+An explicit `elementType="nav"` is rendered as a `div` as well. The `ul` and `li` keep the layout, and inside a
+toolbar they use `role="presentation"` so assistive technologies do not announce them as a list on top of the toolbar.
+It sets `aria-orientation` from the `direction` prop and implements the [toolbar keyboard interaction][apg-toolbar]:
+
+- **Tab** moves focus into and out of the toolbar. The toolbar is a single Tab stop and remembers the last focused
+  action.
+- **Arrow Left/Right** (horizontal) or **Arrow Up/Down** (vertical) move focus between actions and wrap around.
+  Left and Right are swapped in right-to-left layouts.
+- **Home/End** move focus to the first/last action.
+- **Enter** activates the focused action natively, **Space** activates buttons.
+
+ℹ️ `NavigationAction`, `NavigationAvatar`, `Button` and `ButtonLink` take part in the keyboard navigation, disabled ones
+are skipped. Other focusable content, e.g. a form field, stays a separate Tab stop and keeps its own arrow keys.
+[`useToolbarItem`][toolbar-hooks] is for button-like controls (`a` and `button`). Text fields, text areas and selects
+are left out, so they keep the caret and value keys. To add your own button-like component, use that hook.
+
 ### API
 
-| Name        | Type                                                                                       | Default      | Required | Description                   |
-| ----------- | ------------------------------------------------------------------------------------------ | ------------ | -------- | ----------------------------- |
-| `children`  | \[`ReactElement<HTMLLIElement>` \| `ReactElement<NavigationItem>` \| Array of these types] | `null`       | ✓        | Content of the Navigation     |
-| `direction` | [Direction dictionary][dictionary-direction]                                               | `horizontal` | ✕        | Orientation of the Navigation |
+| Name          | Type                                                                                       | Default      | Required | Description                                                |
+| ------------- | ------------------------------------------------------------------------------------------ | ------------ | -------- | ---------------------------------------------------------- |
+| `children`    | \[`ReactElement<HTMLLIElement>` \| `ReactElement<NavigationItem>` \| Array of these types] | `null`       | ✓        | Content of the Navigation                                  |
+| `direction`   | [Direction dictionary][dictionary-direction]                                               | `horizontal` | ✕        | Orientation of the Navigation                              |
+| `elementType` | `ElementType`                                                                              | `nav`        | ✕        | Type of element used as wrapper; `div` if `role="toolbar"` |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -282,6 +323,7 @@ With Buttons:
 </Navigation>
 ```
 
+[apg-toolbar]: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 [dictionary-direction]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#direction
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#size
 [dictionary-variant]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#variant
@@ -289,4 +331,5 @@ With Buttons:
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-generated-types]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#types-generated-from-design-tokens
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[toolbar-hooks]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/toolbar/README.md
 [web-react-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md
