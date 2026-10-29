@@ -5,8 +5,8 @@ import {
   ComponentsBand,
   ComponentsPageHeader,
 } from '@local/domains/components';
-import { fetchComponentCategories } from '@local/domains/components/repositories/componentCategoriesRepository';
 import { fetchAllComponents } from '@local/domains/components/repositories/componentsRepository';
+import { fetchComponentCategories } from '@local/domains/components/repositories/componentsSchemaRepository';
 import React, { Suspense } from 'react';
 
 const ComponentsPage = () => {

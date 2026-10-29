@@ -1,5 +1,5 @@
-import { fetchComponentsSchema, parseComponentsSchema } from '../componentCategoriesRepository';
 import { fetchAllComponents } from '../componentsRepository';
+import { fetchComponentsSchema, parseComponentsSchema } from '../componentsSchemaRepository';
 
 describe('fetchComponentsSchema', () => {
   const { components, categories } = fetchComponentsSchema();
