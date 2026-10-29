@@ -10,7 +10,7 @@ First, run the development server:
 yarn dev
 ```
 
-In case of error `npm error ERR! code ENOWORKSPACES`, please use `npx another telemetry disable`. For more information see [NPM error code ENOWORKSPACES with NextJS][npm-error-enoworkspaces].
+In case of error `npm error ERR! code ENOWORKSPACES`, please use `npx another telemetry disable`. For more information see [npm error code ENOWORKSPACES with NextJS][npm-error-enoworkspaces].
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

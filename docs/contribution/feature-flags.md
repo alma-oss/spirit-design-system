@@ -3,12 +3,12 @@
 ## Table of Contents
 
 - [Current feature flags](#current-feature-flags)
-- [Turning on feature flags in SASS](#turning-on-feature-flags-in-sass)
+- [Turning on feature flags in Sass](#turning-on-feature-flags-in-sass)
 
 The Spirit Design System codebase ships with a number of feature flags. These feature
 flags enable new behavior and styling, allowing you to opt-in to new (and
 sometimes breaking) changes while using the current version. A feature flag may
-be configured in React, SASS, or both.
+be configured in React, Sass, or both.
 
 This section documents each feature flag that is available and how to configure it.
 Folders and stories within this section in Storybook show components with all feature flags turned on.
@@ -27,9 +27,9 @@ For more details on this approach, see the
 [feature flag documentation][feature-flag-documentation]
 in the Spirit Design System monorepo.
 
-## Turning on Feature Flags in SASS
+## Turning on Feature Flags in Sass
 
-In SASS, you can enable feature flags in any of your stylesheets. Most often
+In Sass, you can enable feature flags in any of your stylesheets. Most often
 this is done at the root/entrypoint stylesheet.
 You can enable or disable them by loading
 the `feature-flags` module with a configuration.
@@ -46,7 +46,7 @@ Example with fictional feature flag to enable fullscreen modal:
 ```
 
 Every feature flag should also provide a class selector that can be used to enable or disable the feature.
-You can use this class if you want to limit the usage of the feature to a specific part of your application.
+You can use this class to limit the usage of the feature to a specific part of your application.
 Place the class on any parent element of the component you want to enable the feature for.
 
 Example:

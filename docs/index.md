@@ -17,7 +17,7 @@ It provides a comprehensive set of packages for building consistent UIs across A
 
 ## Links
 
-- [Spirit Design System website][spirit-website]
+- [Spirit Design System site][spirit-website]
 - [GitHub repository][github-repository]
 - [Support Slack channel][support-slack-channel]
 
