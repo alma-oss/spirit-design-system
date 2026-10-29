@@ -1,10 +1,12 @@
 // 1. Use ScrollView's backdoor to fix its height inside ModalDialog in Safari.
-// 2. We need to set the box-sizing again because the parent element unsets styles using `all: unset`.
-// 3. Intentionally transition also the worse performing properties to smooth out the changes of viewport size around
+// 2. Declare the background context so nested components and dynamic colors resolve against the dialog.
+// 3. We need to set the box-sizing again because the parent element unsets styles using `all: unset`.
+// 4. Intentionally transition also the worse performing properties to smooth out the changes of viewport size around
 //    the tablet breakpoint. However, `top` and `bottom` are not transitioned when switching from and to `auto`.
-// 4. Override bottom padding of parent `.Modal` in the docked variant.
+// 5. Override bottom padding of parent `.Modal` in the docked variant.
 
 @use 'sass:map';
+@use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/typography';
@@ -12,12 +14,13 @@
 
 .ModalDialog {
     --scroll-view-vertical-height: auto; // 1.
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$dialog-background-color}; // 5.
 
     @include typography.generate(theme.$typography);
 
     display: flex;
     flex-direction: column;
-    box-sizing: border-box; // 2.
+    box-sizing: border-box; // 3.
     width: theme.$dialog-width;
     max-width: calc(100% - #{theme.$padding-x});
     height: theme.$dialog-height;
@@ -40,7 +43,7 @@
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        transition-property: width, height, max-height, border-radius, transform; // 3.
+        transition-property: width, height, max-height, border-radius, transform; // 4.
         transition-duration: inherit;
     }
 }
@@ -66,7 +69,7 @@
 .ModalDialog--dockOnMobile {
     @include breakpoint.down(map.get(theme.$breakpoints, tablet)) {
         --modal-top: auto;
-        --modal-bottom: #{-1 * theme.$padding-y}; // 4.
+        --modal-bottom: #{-1 * theme.$padding-y}; // 5.
         --modal-translate-y: #{theme.$transition-shift-distance};
         --modal-transform-origin: bottom center;
 
