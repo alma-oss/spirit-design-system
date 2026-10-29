@@ -1,0 +1,178 @@
+/**
+ * CSS border-shape Property
+ *
+ * MDN: (no reference page yet) — Spec: https://drafts.csswg.org/css-borders-4/#border-shape
+ * Reference: https://chromestatus.com/feature/5459864205393920
+ * Interop: https://github.com/web-platform-tests/interop/issues/1371
+ * WebStatus: border-shape
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 147+, Firefox —, Safari —
+ * Last verified: 2026-10-27
+ *
+ * Task: Draw non-rectangular borders — circles, speech bubbles, scooped cards,
+ *       arbitrary shape() paths — that box-shadow and overflow clipping follow
+ * Why: clip-path and masks cut the painted box but cannot decorate the cut edge,
+ *      so borders and shadows disappear. border-shape redefines the border itself,
+ *      so the stroke, shadow, and content clip all follow the same geometry.
+ *
+ * CRITICAL: When border-shape is not `none`, border-radius is ignored (treated
+ * as 0) and corner-shape has no effect. Use border-shape for custom shapes, or
+ * border-radius + corner-shape for styled rectangles — never both.
+ */
+
+/* ==========================================================================
+   VALUES REFERENCE
+
+   border-shape: none | [ <basic-shape> <geometry-box>? ]{1,2}
+
+   Form                         Mode    Default reference box(es)
+   ─────────────────────────────────────────────────────────────────────────
+   border-shape: circle(50%)    Stroke  half-border-box (stroke straddles the path)
+   border-shape: <outer> <inner> Fill   outer → border-box, inner → padding-box
+
+   STROKE MODE (one shape): the border is stroked along the path, using the
+     relevant side's border width and color.
+   FILL MODE (two shapes): the border is the area between the outer and inner
+     paths, filled with the relevant side's border color.
+
+   RELEVANT SIDE: the first side with a non-none style, checked in logical order
+     block-start → inline-start → block-end → inline-end. Its width and color
+     paint the whole shape, so set borders with the shorthand to stay predictable.
+
+   ACCEPTS: any <basic-shape> — circle(), ellipse(), inset(), polygon(), path(),
+     shape(), rect(), xywh(). Coordinates are physical (x y), not logical.
+
+   INTERACTIONS:
+     border-radius / corner-shape → ignored
+     box-shadow  → outer shadow follows the outer path, inset shadow the inner
+     overflow    → content is clipped by the inner path (like border-radius)
+     layout      → unchanged; size and flow still use border-width
+   ========================================================================== */
+
+/* ==========================================================================
+   1. STROKE MODE — one shape, stroked with the border width
+   border-radius doubles as the fallback: it is ignored when border-shape
+   applies, so non-supporting browsers still get a rounded control.
+   ========================================================================== */
+
+.round-button {
+  inline-size: 4rem;
+  aspect-ratio: 1;
+  border: 3px solid oklch(0.55 0.2 260);
+  border-radius: 50%; /* Fallback — ignored once border-shape applies */
+  border-shape: circle(50%);
+}
+
+/* Hexagon badge — polygon() traces the border, background, and focus clip */
+.hex-badge {
+  inline-size: 5rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 0.5rem; /* Fallback */
+  border-shape: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* ==========================================================================
+   2. FILL MODE — two shapes define an outer and inner edge
+   The border is everything between the two paths, so its thickness can vary.
+   ========================================================================== */
+
+/* Diamond frame with uniform thickness */
+.diamond-frame {
+  inline-size: 12rem;
+  aspect-ratio: 1;
+  border: 10px solid crimson;
+  border-shape: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) polygon(50% 10%, 90% 50%, 50% 90%, 10% 50%);
+}
+
+/* Crescent ring — offset inner circle makes the border thicker on one side */
+.crescent-avatar {
+  inline-size: 6rem;
+  aspect-ratio: 1;
+  border: 8px solid oklch(0.7 0.18 50);
+  border-shape: circle(50%) circle(44% at 56% 46%);
+  overflow: clip; /* Image is clipped to the inner circle */
+}
+
+/* ==========================================================================
+   3. SPEECH BUBBLE — tail drawn by the border itself
+   Layout ignores border-shape, so reserve space for the tail with padding.
+   ========================================================================== */
+
+.speech-bubble {
+  --tail: 1rem;
+  padding: 1rem 1.25rem calc(1rem + var(--tail));
+  border: 2px solid oklch(0.45 0.05 260);
+  border-radius: 0.75rem; /* Fallback: plain rounded box, no tail */
+  background: oklch(0.97 0.01 260);
+  box-shadow: 0 0.25rem 0.75rem oklch(0 0 0 / 0.15); /* Follows the tail */
+  border-shape: polygon(
+    0% 0%,
+    100% 0%,
+    100% calc(100% - var(--tail)),
+    calc(2rem + var(--tail)) calc(100% - var(--tail)),
+    1.5rem 100%,
+    1.5rem calc(100% - var(--tail)),
+    0% calc(100% - var(--tail))
+  );
+}
+
+/* ==========================================================================
+   4. SCOOPED CARD — shape() mixes straight lines and arcs
+   A concave bite in the top-right corner leaves room for a floating action.
+   ========================================================================== */
+
+.scoop-card {
+  --bite: 3rem;
+  position: relative;
+  padding: 1.5rem;
+  padding-inline-end: calc(var(--bite) + 1rem);
+  border: 2px solid oklch(0.6 0.15 160);
+  border-radius: 1rem; /* Fallback */
+  background: oklch(0.98 0.02 160);
+  border-shape: shape(
+    from 0% 0%,
+    hline to calc(100% - var(--bite)),
+    arc to 100% var(--bite) of var(--bite) ccw,
+    /* Concave bite */ vline to 100%,
+    hline to 0%,
+    close
+  );
+}
+
+/* ==========================================================================
+   5. ANIMATING THE SHAPE
+   Animation type is "by computed value": shapes interpolate when both ends use
+   the same function with the same number of points.
+   ========================================================================== */
+
+.tab-shape {
+  border: 2px solid currentColor;
+  border-shape: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%);
+  transition: border-shape 250ms ease;
+
+  &:is(:hover, :focus-visible, [aria-selected='true']) {
+    /* Same point count → smooth trapezoid morph */
+    border-shape: polygon(0% 100%, 0.75rem 0%, calc(100% - 0.75rem) 0%, 100% 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-shape {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   6. PROGRESSIVE ENHANCEMENT
+   Most fallbacks come free via border-radius (see above). Gate only the extras
+   that would look wrong without the shape, like the speech-bubble padding.
+   ========================================================================== */
+
+@supports not (border-shape: circle(50%)) {
+  .speech-bubble {
+    padding-block-end: 1rem; /* No tail → no reserved space */
+  }
+}

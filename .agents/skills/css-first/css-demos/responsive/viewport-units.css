@@ -1,0 +1,155 @@
+/**
+ * Modern Viewport Units — Small, Large, Dynamic
+ *
+ * Reference: https://web.dev/blog/viewport-units
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/length#relative_length_units_based_on_viewport
+ * WebStatus: viewport-unit-variants
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 108+, Firefox 101+, Safari 15.4+
+ *
+ * Task: Size elements relative to the viewport with mobile-safe units
+ * Why: Classic vh/vw ignore mobile browser chrome (address bar, toolbar);
+ *      sv*/
+lv*/dv* units account for dynamic UI and writing direction
+ * Last verified: 2026-08-11
+ */
+
+
+/* ==========================================================================
+   UNIT REFERENCE TABLE
+
+   Prefix   Meaning      When to use
+   ──────   ───────      ──────────────────────────────────────────────────
+   sv*      Small        Viewport with all browser UI expanded (smallest)
+   lv*      Large        Viewport with all browser UI retracted (largest)
+   dv*      Dynamic      Adapts live as browser UI expands/retracts
+
+   Each prefix has 6 variants:
+   ┌────────┬────────┬────────┬────────┬────────┬────────┐
+   │  *vw   │  *vh   │  *vi   │  *vb   │  *vmin │  *vmax │
+   │ width  │ height │ inline │ block  │  min   │  max   │
+   └────────┴────────┴────────┴────────┴────────┴────────┘
+
+   Logical variants (vi, vb) respect writing-mode direction.
+
+   ❌ NEVER use 100vh for full-height layouts — it overflows on mobile.
+   ✅ Use dvb/dvh for dynamic, svb/svh for safe minimum, lvb/lvh for maximum.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. HERO SECTION — full viewport height
+   dvb adapts as the mobile address bar shows/hides
+   ========================================================================== */
+.hero {
+  min-block-size: 100dvb;
+  display: grid;
+  place-items: center;
+  padding-inline: 5dvi;
+}
+
+/* ==========================================================================
+   2. SAFE MINIMUM HEIGHT — small viewport
+   svb guarantees content fits even with all browser UI visible
+   ========================================================================== */
+.modal-content {
+  max-block-size: 100svb;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   3. MAXIMUM HEIGHT — large viewport
+   lvb uses the full space when browser UI is retracted
+   ========================================================================== */
+.fullscreen-media {
+  block-size: 100lvb;
+  inline-size: 100lvi;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   4. COMBINING sv* AND lv* FOR RANGE
+   Minimum safe size, maximum expanded size
+   ========================================================================== */
+.sidebar {
+  min-block-size: 100svb;
+  max-block-size: 100lvb;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   5. VIEWPORT-RELATIVE TYPOGRAPHY
+   Use dvi (dynamic viewport inline) for fluid type sizing
+   ========================================================================== */
+.headline {
+  font-size: clamp(2rem, 5dvi, 4rem);
+  line-height: 1.2;
+}
+
+.subheadline {
+  font-size: clamp(1rem, 2.5dvi, 1.75rem);
+}
+
+/* ==========================================================================
+   6. VIEWPORT-RELATIVE SPACING
+   ========================================================================== */
+.section {
+  padding-block: 10dvb;
+  padding-inline: 5dvi;
+}
+
+/* ==========================================================================
+   7. FULL-PAGE SCROLL SNAP SECTIONS
+   Each section fills the dynamic viewport
+   ========================================================================== */
+.snap-container {
+  block-size: 100dvb;
+  overflow-y: auto;
+  scroll-snap-type: block mandatory;
+  overscroll-behavior-block: contain;
+}
+
+.snap-container > section {
+  block-size: 100dvb;
+  scroll-snap-align: start;
+  display: grid;
+  place-items: center;
+}
+
+/* ==========================================================================
+   8. STICKY HEADER WITH VIEWPORT CALC
+   Remaining space below a fixed header
+   ========================================================================== */
+.main-content {
+  block-size: calc(100dvb - var(--header-block-size, 4rem));
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   9. LOGICAL UNITS FOR WRITING MODE SUPPORT
+   svi/svb auto-flip for vertical writing modes
+   ========================================================================== */
+.writing-mode-aware {
+  inline-size: 80dvi;
+  block-size: 100dvb;
+}
+
+/* Vertical writing mode — dvi now maps to height, dvb to width */
+.vertical-text {
+  writing-mode: vertical-rl;
+  inline-size: 50dvi;
+  block-size: 100dvb;
+}
+
+/* ==========================================================================
+   10. MIGRATION CHEATSHEET
+   Replace legacy units with modern equivalents
+
+   ❌ Legacy         ✅ Modern
+   ───────────       ──────────────
+   100vh             100dvb
+   100vw             100dvi
+   50vh              50dvb
+   100vmin           100dvmin
+   100vmax           100dvmax
+   ========================================================================== */

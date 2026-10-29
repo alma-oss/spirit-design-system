@@ -1,0 +1,107 @@
+/**
+ * Modern Form with CSS-Only Validation
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:user-valid
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+ *
+ * WebStatus: user-pseudos
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 119+, Firefox 88+, Safari 16.5+
+ *
+ * Task: Style form with validation feedback
+ * Why: Uses :user-valid and :user-invalid pseudo-classes for validation feedback
+ *      without JavaScript. Includes proper focus states for accessibility.
+ * Last verified: 2026-08-11
+ */
+
+.input {
+  inline-size: 100%;
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+  border: 2px solid light-dark(#ddd, #444);
+  border-radius: 0.5rem;
+  background: light-dark(white, #1a1a1a);
+  color: light-dark(#333, #f0f0f0);
+  transition: border-color 0.2s;
+}
+
+/* Valid state - only after user interaction */
+.input:user-valid {
+  border-color: light-dark(#22c55e, #4ade80);
+}
+
+/* Invalid state - only after user interaction */
+.input:user-invalid {
+  border-color: light-dark(#ef4444, #f87171);
+}
+
+/* Focus state for keyboard navigation */
+.input:focus-visible {
+  outline: 2px solid light-dark(#0066cc, #4d94ff);
+  outline-offset: 2px;
+  border-color: light-dark(#0066cc, #4d94ff);
+}
+
+/* Remove default focus outline for mouse users */
+.input:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Required field indicator */
+.input:required + .label::after {
+  content: ' *';
+  color: light-dark(#ef4444, #f87171);
+}
+
+/* Disabled state */
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Validation messages */
+.input:user-invalid + .error-message {
+  display: block;
+  color: light-dark(#ef4444, #f87171);
+  font-size: 0.875rem;
+  margin-block-start: 0.25rem;
+}
+
+.input:user-valid + .error-message {
+  display: none;
+}
+
+/* Success indicator icon */
+.input:user-valid::after {
+  content: '✓';
+  position: absolute;
+  inset-inline-end: 1rem;
+  color: light-dark(#22c55e, #4ade80);
+}
+
+/* Form-level validation with :has() */
+form:has(:user-invalid) .submit-button {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+form:has(:user-valid:not([type='submit'])) .submit-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Different input types */
+input[type='email']:user-invalid {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23ef4444"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm1 12H7v-2h2v2zm0-3H7V4h2v5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-inline-end: 3rem;
+}
+
+/* Checkbox/Radio validation */
+input[type='checkbox']:user-invalid,
+input[type='radio']:user-invalid {
+  outline: 2px solid light-dark(#ef4444, #f87171);
+  outline-offset: 2px;
+}

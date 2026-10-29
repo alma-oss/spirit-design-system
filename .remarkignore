@@ -15,6 +15,12 @@ docs/release-notes
 # Next.js agent rules (rewritten by `next dev`)
 apps/docsite/AGENTS.md
 
+# Symlink to `.agents/skills`. Remark follows it and lints the same files again.
+.claude/skills
+
+# Vendored upstream skill. Its Markdown is not authored in this repo.
+.agents/skills/css-first
+
 # Heading capitalization problems
 migration-*
 

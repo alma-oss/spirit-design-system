@@ -1,0 +1,264 @@
+/**
+ * sibling-index() & sibling-count() Functions
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-index
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/sibling-count
+ * WebStatus: sibling-count
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 138+, Firefox —, Safari 26.2+
+ * Spec: CSS Values and Units Module Level 5
+ *
+ * Task: Dynamically style elements based on their position among siblings
+ * Why: Replaces repetitive :nth-child() rules and inline --i variables
+ *      with a single declaration — like SCSS @for loops but resolved at
+ *      render time, adapting automatically when items are added/removed
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   WHAT THEY RETURN
+
+   sibling-index() → <integer> starting at 1 (1st child = 1, 2nd = 2, ...)
+   sibling-count() → <integer> total siblings including self
+
+   Both return <integer> (usable in calc(), clamp(), and any math function).
+   This is different from counter() which returns <string> (for generated content).
+
+   SCSS analogy:
+     @for $i from 1 through $n { .item:nth-child(#{$i}) { ... } }
+   becomes:
+     .item { property: calc(sibling-index() * value); }
+
+   Key difference: SCSS loops are compile-time — you must know $n.
+   sibling-index()/sibling-count() are render-time — they adapt to any DOM.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. STAGGERED ANIMATION — the killer use case
+   One rule replaces N nth-child selectors.
+   ========================================================================== */
+
+/* ❌ OLD — repetitive nth-child rules */
+/*
+.item:nth-child(1) { animation-delay: 0.1s; }
+.item:nth-child(2) { animation-delay: 0.2s; }
+.item:nth-child(3) { animation-delay: 0.3s; }
+... repeat for every item ...
+*/
+
+/* ✅ NEW — single declaration */
+.stagger-in > * {
+  animation: fade-slide-in 0.4s ease both;
+  animation-delay: calc(sibling-index() * 60ms);
+}
+
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+}
+
+/* ==========================================================================
+   2. REVERSE STAGGER — last item animates first
+   ========================================================================== */
+
+.stagger-reverse > * {
+  animation: fade-slide-in 0.4s ease both;
+  animation-delay: calc((sibling-count() - sibling-index()) * 60ms);
+}
+
+/* ==========================================================================
+   3. DYNAMIC COLOR — rainbow across siblings
+   Distribute hue evenly regardless of how many items exist.
+   ========================================================================== */
+
+.rainbow > * {
+  background-color: oklch(0.7 0.15 calc(360deg / sibling-count() * sibling-index()));
+}
+
+/* ==========================================================================
+   4. PROGRESSIVE SIZING — items grow with position
+   ========================================================================== */
+
+.progressive-bars > * {
+  inline-size: calc(sibling-index() / sibling-count() * 100%);
+  block-size: 2rem;
+  background: oklch(0.6 0.15 250);
+  border-radius: 0.25rem;
+}
+
+/* ==========================================================================
+   5. GRID STAGGER — stagger both opacity and position
+   ========================================================================== */
+
+.grid-reveal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+  gap: 1rem;
+}
+
+.grid-reveal > * {
+  animation: grid-pop 0.3s ease both;
+  animation-delay: calc(sibling-index() * 40ms);
+}
+
+@keyframes grid-pop {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
+/* ==========================================================================
+   6. CIRCULAR LAYOUT — replace manual --i variable
+   Previously required nth-child or inline style for --i.
+   ========================================================================== */
+
+.circle-layout {
+  --radius: 8rem;
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--radius) * 2 + 4rem);
+  aspect-ratio: 1;
+}
+
+.circle-layout > * {
+  position: absolute;
+  --angle: calc(360deg / sibling-count() * sibling-index());
+  translate: calc(cos(var(--angle)) * var(--radius)) calc(sin(var(--angle)) * -1 * var(--radius));
+}
+
+/* ==========================================================================
+   7. STACKED CARDS — offset by position
+   ========================================================================== */
+
+.card-stack {
+  position: relative;
+}
+
+.card-stack > * {
+  position: absolute;
+  inset: 0;
+  translate: calc(sibling-index() * 4px) calc(sibling-index() * 4px);
+  z-index: calc(sibling-count() - sibling-index());
+}
+
+/* ==========================================================================
+   8. DYNAMIC OPACITY — fade items toward edges
+   ========================================================================== */
+
+.fade-edges > * {
+  --center: calc(sibling-count() / 2);
+  --distance: abs(calc(sibling-index() - var(--center)));
+  opacity: calc(1 - var(--distance) / var(--center));
+}
+
+/* ==========================================================================
+   9. EQUAL-WIDTH FLEX COLUMNS — adapts to any number of items
+   MDN reference example. No media queries, no fixed column count.
+   ========================================================================== */
+
+.equal-columns {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.equal-columns > * {
+  inline-size: calc(100% / sibling-count());
+  text-align: center;
+}
+
+/* 3 items → 33.3% each, 5 items → 20% each, 7 items → 14.3% each
+   Add/remove DOM children and the layout auto-rebalances. */
+
+/* ==========================================================================
+   10. COMBINED — progressive width + distributed color
+   Each item gets wider AND shifts hue based on position.
+   ========================================================================== */
+
+.progress-rainbow > * {
+  inline-size: calc(sibling-index() * 30px);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: hsl(calc(360deg / sibling-count() * sibling-index()) 50% 50%);
+}
+
+/* ==========================================================================
+   11. ZERO-BASED INDEX LOOP — numbered list with derived size & color
+   Shift sibling-index() to a 0-based --i, then drive every per-item value
+   (width, a color ramp) off that single custom property — like a CSS @for.
+   Combines sibling-index() + relative colors + contrast-color() + counters.
+   ========================================================================== */
+
+.index-loop {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: li-count;
+
+  > li {
+    /* 0-based index: 1st item → 0, 2nd → 1, ... */
+    --i: calc(sibling-index() - 1);
+
+    /* one --i drives both the size and the lightness ramp */
+    --inline-size: calc(2rem + (var(--i) * 2rem));
+    --bg-color: hsl(from red h s calc(10% + (var(--i) * 9%)));
+
+    inline-size: var(--inline-size);
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: var(--bg-color);
+
+    /* contrast-color() auto-picks readable text as the row lightens */
+    color: contrast-color(var(--bg-color));
+
+    /* counter() prints the position as generated content */
+    counter-increment: li-count;
+
+    &::before {
+      content: counter(li-count) '. ';
+    }
+  }
+}
+
+/*
+ * Why this pattern:
+ *  - A single --i feeds EVERY per-item value — no inline styles, no
+ *    :nth-child ladder, and it re-balances when items are added/removed.
+ *  - hsl(from red h s calc(...)) ramps lightness off a base color using
+ *    relative color syntax — see visual/relative-colors.css.
+ *  - contrast-color() keeps the label legible at every step instead of
+ *    hand-tuning a text color per row — see functions/contrast-color.css.
+ *  - sibling-index() returns an <integer> for math; counter()/counter-
+ *    increment supply the visible number as a <string>.
+ */
+
+/* ==========================================================================
+   12. COMPARISON: SCSS @for vs sibling-index()
+
+   ❌ SCSS — compile-time, must know item count:
+   @for $i from 1 through 6 {
+     .item:nth-child(#{$i}) { animation-delay: #{$i * 0.1}s; }
+   }
+   // Generates 6 rules. Add a 7th item? Recompile.
+
+   ❌ Inline styles — clutters HTML:
+   <li style="--i: 0">...</li>
+   <li style="--i: 1">...</li>
+   li { animation-delay: calc(var(--i) * 100ms); }
+
+   ✅ sibling-index() — render-time, adapts to any DOM:
+   <li>...</li>
+   <li>...</li>
+   li { animation-delay: calc(sibling-index() * 100ms); }
+
+   One rule. No inline styles. No compilation. Works with any number of items.
+   ========================================================================== */

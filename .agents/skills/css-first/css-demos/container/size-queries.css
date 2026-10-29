@@ -1,0 +1,107 @@
+/**
+ * Container Size Queries
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries
+ * WebStatus: container-queries
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 105+, Firefox 110+, Safari 16+
+ *
+ * Task: Make components responsive to their container, not the viewport
+ * Why: Container queries let components adapt to their own context;
+ *      container units (cqi, cqb, cqw, cqh) scale relative to the container
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC CONTAINER QUERY — respond to container inline size
+   ========================================================================== */
+
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+.card {
+  display: grid;
+  gap: 1rem;
+}
+
+@container card (inline-size > 30rem) {
+  .card {
+    grid-template-columns: 1fr 2fr;
+    gap: 2cqi;
+  }
+}
+
+@container card (inline-size > 50rem) {
+  .card {
+    grid-template-columns: 1fr 3fr;
+    gap: 3cqi;
+    padding-inline: 2cqi;
+  }
+}
+
+/* ==========================================================================
+   2. CONTAINER QUERY UNITS — logical and physical
+   Core: cqi/cqb preferred (logical), cqw/cqh available (physical)
+   ========================================================================== */
+
+/*
+ * Logical units (preferred for i18n):
+ *   cqi  — 1% of container inline size
+ *   cqb  — 1% of container block size
+ *   cqmin — smaller of cqi/cqb
+ *   cqmax — larger of cqi/cqb
+ *
+ * Physical units:
+ *   cqw  — 1% of container width
+ *   cqh  — 1% of container height
+ */
+
+.responsive-text {
+  font-size: clamp(1rem, 3cqi, 2rem);
+  padding-inline: 4cqi;
+  padding-block: 2cqb;
+}
+
+.responsive-gap {
+  gap: clamp(0.5rem, 2cqi, 2rem);
+}
+
+/* ==========================================================================
+   3. NAMED CONTAINERS — query specific ancestor
+   ========================================================================== */
+
+.page {
+  container-type: inline-size;
+  container-name: page;
+}
+
+.sidebar {
+  container-type: inline-size;
+  container-name: sidebar;
+}
+
+/* Query the sidebar container specifically */
+@container sidebar (inline-size > 15rem) {
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Query the page container */
+@container page (inline-size > 60rem) {
+  .layout {
+    grid-template-columns: 20rem 1fr;
+  }
+}
+
+/* ==========================================================================
+   4. SHORTHAND — container property combines type + name
+   ========================================================================== */
+
+.widget {
+  container: widget / inline-size; /* name / type */
+}

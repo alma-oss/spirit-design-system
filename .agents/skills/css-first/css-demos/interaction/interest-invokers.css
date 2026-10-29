@@ -1,0 +1,171 @@
+/**
+ * Interest Invokers — Hover/Focus-Triggered Popovers
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using_interest_invokers
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interest-delay
+ * WebStatus: interest-invokers
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Show popovers on hover/focus without JavaScript
+ * Why: Declarative hover intent — replaces JS mouseenter/mouseleave handlers,
+ *      with built-in delay control and accessibility (focus triggers too)
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   HTML STRUCTURE (for reference):
+
+   <button interestfor="tooltip">Hover me</button>
+   <div id="tooltip" popover="hint">Tooltip content</div>
+
+   interestfor — links invoker to target by id
+   popover="hint" — ephemeral popover that auto-dismisses other hints
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BASIC TOOLTIP — hover to show
+   ========================================================================== */
+
+/*
+   <a href="/profile" interestfor="profile-preview">User Name</a>
+   <div id="profile-preview" popover="hint">
+     <img src="avatar.jpg" alt="" />
+     <p>User bio...</p>
+   </div>
+*/
+
+[popover='hint'] {
+  margin: 0;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 16px oklch(0 0 0 / 0.15);
+}
+
+/* ==========================================================================
+   2. interest-delay — control show/hide timing
+   Prevents flicker when cursor moves across link-heavy content.
+   ========================================================================== */
+
+/* Single value — same delay for show and hide */
+[interestfor] {
+  interest-delay: 300ms;
+}
+
+/* Two values — show delay, hide delay */
+.slow-tooltip-trigger {
+  interest-delay: 500ms 1s; /* 500ms to show, 1s to hide */
+}
+
+/* Instant show, slow hide — good for content-rich previews */
+.preview-trigger {
+  interest-delay: 0s 600ms;
+}
+
+/* ==========================================================================
+   3. :interest-target — style the popover when interest is active
+   MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:interest-source
+   ========================================================================== */
+
+/* Style the target popover when shown via interest */
+:popover-open:interest-target {
+  animation: hint-enter 0.2s ease;
+}
+
+@keyframes hint-enter {
+  from {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+/* ==========================================================================
+   4. LINK PREVIEW — rich content on hover
+   Like Wikipedia/GitHub link previews.
+
+   <a href="/article" interestfor="article-preview">Article Title</a>
+   <article id="article-preview" popover="hint">
+     <h3>Article Title</h3>
+     <p>First paragraph...</p>
+     <img src="thumbnail.jpg" alt="" />
+   </article>
+   ========================================================================== */
+
+.link-preview[popover='hint'] {
+  max-inline-size: 20rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+
+  & h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  & p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: oklch(0.5 0 0);
+  }
+
+  & img {
+    inline-size: 100%;
+    border-radius: 0.375rem;
+    margin-block-start: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   5. NAV MEGA-MENU — hover to reveal submenu
+
+   <nav>
+     <a href="/products" interestfor="products-menu">Products</a>
+     <div id="products-menu" popover="hint">
+       <a href="/phones">Phones</a>
+       <a href="/tablets">Tablets</a>
+     </div>
+   </nav>
+   ========================================================================== */
+
+.mega-menu[popover='hint'] {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 32px oklch(0 0 0 / 0.12);
+}
+
+/* Longer hide delay so user can move cursor into the menu */
+nav [interestfor] {
+  interest-delay: 200ms 800ms;
+}
+
+/* ==========================================================================
+   6. ANCHOR POSITIONING — position tooltip near trigger
+
+   Combine with anchor positioning for precise placement.
+   ========================================================================== */
+
+[interestfor] {
+  anchor-name: --interest-trigger;
+}
+
+[popover='hint'] {
+  position: fixed;
+  position-anchor: --interest-trigger;
+  inset: unset;
+  inset-block-start: anchor(end);
+  inset-inline-start: anchor(center);
+  translate: -50% 0.5rem;
+  position-try-fallbacks: flip-block;
+}
+
+/* ==========================================================================
+   7. @supports FALLBACK
+   ========================================================================== */
+
+@supports not (interest-delay: 0s) {
+  /* Fall back to :hover for non-supporting browsers */
+  .tooltip-wrapper:hover [popover] {
+    display: block;
+  }
+}

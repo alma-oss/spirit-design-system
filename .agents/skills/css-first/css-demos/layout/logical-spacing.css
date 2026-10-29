@@ -1,0 +1,79 @@
+/**
+ * Advanced Logical Spacing
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block
+ *
+ * Baseline: 🟢 Widely Available
+ * Support: 95% (All modern browsers)
+ *
+ * Task: Create responsive spacing that works in any writing mode
+ * Why: Logical properties with container units create truly responsive,
+ *      internationalization-ready layouts. Works in LTR, RTL, and vertical writing modes.
+ * Last verified: 2026-02
+ */
+
+.section {
+  /* Responsive padding using container units */
+  padding-inline: clamp(1rem, 5cqi, 3rem); /* Horizontal padding */
+  padding-block: clamp(2rem, 8cqb, 6rem); /* Vertical padding */
+  margin-block-end: 3rem; /* Bottom margin (or left in vertical mode) */
+}
+
+.grid {
+  container-type: inline-size;
+  display: grid;
+  gap: 2cqi; /* Responsive gap using container inline */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+/* Adjust spacing at larger containers */
+@container (inline-size > 60ch) {
+  .grid {
+    gap: 3cqi;
+  }
+
+  .section {
+    padding-inline: 4cqi;
+  }
+}
+
+/* Card with logical spacing */
+.card {
+  padding-inline-start: 2rem; /* Start of reading direction */
+  padding-inline-end: 2rem; /* End of reading direction */
+  padding-block-start: 1.5rem; /* Top (or right in vertical mode) */
+  padding-block-end: 1.5rem; /* Bottom (or left in vertical mode) */
+
+  margin-block: 1rem; /* Top and bottom margins */
+}
+
+/* Border with logical properties */
+.card-highlight {
+  border-inline-start: 4px solid #0066cc; /* Left border in LTR, right in RTL */
+  padding-inline-start: 1.5rem;
+}
+
+/* Inset positioning (logical alternative to left/right/top/bottom) */
+.badge {
+  position: absolute;
+  inset-block-start: 1rem; /* top in horizontal mode */
+  inset-inline-end: 1rem; /* right in LTR, left in RTL */
+}
+
+/* All sides at once */
+.overlay {
+  position: absolute;
+  inset: 0; /* All sides */
+  /* Or specific: */
+  /* inset-inline: 0; */ /* left and right (or equivalents) */
+  /* inset-block: 0; */ /* top and bottom (or equivalents) */
+}
+
+/* Writing mode demonstration */
+.vertical-text {
+  writing-mode: vertical-rl; /* Right-to-left vertical */
+  padding-inline: 2rem; /* Now applies to top/bottom */
+  padding-block: 1rem; /* Now applies to left/right */
+}

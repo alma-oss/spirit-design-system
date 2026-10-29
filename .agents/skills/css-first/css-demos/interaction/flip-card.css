@@ -1,0 +1,253 @@
+/**
+ * Flip Card / 3D Tile — backface-visibility
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
+ * Baseline: 🟢 Widely Available (since March 2022)
+ * Support: 97%
+ *
+ * Task: Create flip cards, 3D tiles, and reveal-on-hover UI patterns
+ * Why: Pure CSS 3D card flip with no JavaScript — backface-visibility: hidden
+ *      prevents the back face from showing through during rotation
+ */
+
+/* ==========================================================================
+   1. BASIC FLIP CARD — hover to reveal back
+
+   HTML:
+     <div class="flip-card">
+       <div class="flip-card__inner">
+         <div class="flip-card__front">Front</div>
+         <div class="flip-card__back">Back</div>
+       </div>
+     </div>
+   ========================================================================== */
+
+.flip-card {
+  perspective: 800px; /* 3D depth for children */
+  inline-size: min(100%, 20rem);
+  aspect-ratio: 3 / 4;
+}
+
+.flip-card__inner {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-style: preserve-3d; /* children live in 3D space */
+  transition: rotate 0.6s ease;
+}
+
+.flip-card:hover .flip-card__inner,
+.flip-card:focus-within .flip-card__inner {
+  rotate: y 180deg;
+}
+
+.flip-card__front,
+.flip-card__back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden; /* hide when rotated away */
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.flip-card__front {
+  background: oklch(0.95 0 0);
+}
+
+.flip-card__back {
+  background: oklch(0.35 0.15 260);
+  color: white;
+  rotate: y 180deg; /* pre-rotated so it faces back */
+}
+
+/* ==========================================================================
+   2. CLICK/FOCUS FLIP — accessible with keyboard
+   Toggle via :focus-within or checkbox hack.
+   ========================================================================== */
+
+/*
+   HTML:
+     <div class="flip-card--toggle">
+       <button class="flip-card__trigger" aria-label="Flip card">
+         <div class="flip-card__inner">
+           <div class="flip-card__front">...</div>
+           <div class="flip-card__back">...</div>
+         </div>
+       </button>
+     </div>
+*/
+
+.flip-card--toggle {
+  perspective: 800px;
+}
+
+.flip-card__trigger {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.flip-card__trigger:focus-visible .flip-card__inner {
+  rotate: y 180deg;
+}
+
+/* ==========================================================================
+   3. VERTICAL FLIP — rotate on X axis
+   ========================================================================== */
+
+.flip-card--vertical:hover .flip-card__inner {
+  rotate: x 180deg;
+}
+
+.flip-card--vertical .flip-card__back {
+  rotate: x 180deg;
+}
+
+/* ==========================================================================
+   4. PRODUCT TILE — image front, details back
+   ========================================================================== */
+
+.product-tile {
+  perspective: 800px;
+  inline-size: min(100%, 18rem);
+  aspect-ratio: 1;
+}
+
+.product-tile__inner {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-style: preserve-3d;
+  transition: rotate 0.5s ease;
+}
+
+.product-tile:hover .product-tile__inner {
+  rotate: y 180deg;
+}
+
+.product-tile__image,
+.product-tile__details {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 0.75rem;
+  overflow: clip;
+}
+
+.product-tile__image {
+  display: grid;
+  place-items: center;
+  background: oklch(0.95 0.02 200);
+}
+
+.product-tile__image img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.product-tile__details {
+  rotate: y 180deg;
+  background: oklch(0.2 0 0);
+  color: white;
+  padding: 1.5rem;
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   5. TEAM MEMBER CARD — photo front, bio back
+   ========================================================================== */
+
+.team-card {
+  perspective: 600px;
+  inline-size: min(100%, 16rem);
+  aspect-ratio: 3 / 4;
+}
+
+.team-card__inner {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-style: preserve-3d;
+  transition: rotate 0.6s ease;
+}
+
+.team-card:hover .team-card__inner {
+  rotate: y 180deg;
+}
+
+.team-card__photo,
+.team-card__bio {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 0.75rem;
+}
+
+.team-card__photo {
+  overflow: clip;
+}
+
+.team-card__photo img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.team-card__bio {
+  rotate: y 180deg;
+  background: oklch(0.97 0 0);
+  padding: 1.5rem;
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   6. FLIP CARD GRID — responsive tile layout
+   ========================================================================== */
+
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
+}
+
+/* ==========================================================================
+   7. 3D PROPERTIES REFERENCE
+
+   Property                Value               Purpose
+   ──────────────────      ──────────────       ──────────────────────────
+   perspective             <length>             3D depth on parent
+   transform-style         preserve-3d          Children live in 3D space
+   backface-visibility     hidden               Hide back face
+   rotate                  y 180deg             Flip around Y axis
+   rotate                  x 180deg             Flip around X axis
+
+   ❌ WRONG — using transform shorthand
+   .inner { transform: rotateY(180deg); }
+
+   ✅ CORRECT — using individual rotate property
+   .inner { rotate: y 180deg; }
+   ========================================================================== */
+
+/* ==========================================================================
+   8. REDUCED MOTION — respect user preference
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card__inner,
+  .product-tile__inner,
+  .team-card__inner {
+    transition-duration: 0.01ms;
+  }
+}

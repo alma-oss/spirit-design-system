@@ -1,0 +1,98 @@
+/**
+ * inherit() CSS Function
+ *
+ * MDN: (no reference page yet) — Spec: https://drafts.csswg.org/css-values-5/#inherit-notation
+ * Reference: https://chromestatus.com/feature/5996914579472384
+ * Interop: https://github.com/web-platform-tests/interop/issues/1453
+ * Baseline: 🟣 Experimental / unknown
+ * Support: Chrome —, Firefox —, Safari — (Chromium implementation in progress)
+ * Last verified: 2026-10-27
+ *
+ * Task: Read the parent's computed custom property value and adjust it in place
+ * Why: `--depth: calc(var(--depth) + 1)` is a cycle and becomes invalid.
+ *      inherit() reads the PARENT's value instead, so nesting depth, shrinking
+ *      radii, and compounding scales work without one selector per level.
+ *
+ * CRITICAL: CSS Values 5 limits the first argument to a custom property.
+ * Standard properties — e.g. `calc(inherit(border-radius) - 4px)` — are
+ * deferred to a future level. Store the value in a custom property instead.
+ */
+
+/* ==========================================================================
+   SYNTAX REFERENCE
+
+   inherit( <custom-property-name>, <fallback>? )
+
+   inherit(--x)        → parent's computed --x, or guaranteed-invalid if unset
+   inherit(--x, 0)     → parent's --x, or 0 if the parent has no value
+   inherit(--x,)       → empty fallback (note the trailing comma)
+
+   COMPARED WITH:
+     inherit (keyword)  → copies the parent's value unchanged; no math
+     var(--x)           → this element's own value; self-reference is a cycle
+     inherit(--x)       → the parent's value; safe to modify and reassign
+   ========================================================================== */
+
+/* ==========================================================================
+   1. NESTING DEPTH — a counter that increments per level
+   Without inherit(), each level needs its own selector (see section 4).
+   ========================================================================== */
+
+.tree :is(ul, ol) {
+  --depth: calc(inherit(--depth, 0) + 1);
+  padding-inline-start: calc(var(--depth) * 0.75rem);
+  border-inline-start: 2px solid oklch(0.7 0.15 calc(200 + var(--depth) * 40));
+}
+
+/* ==========================================================================
+   2. CONCENTRIC BORDER RADII — inner radius = outer radius − padding
+   Each nested surface stays optically concentric with its parent.
+   ========================================================================== */
+
+.surface {
+  --pad: 0.5rem;
+  --radius: max(0px, calc(inherit(--radius, 1.5rem) - inherit(--pad, 0px)));
+  padding: var(--pad);
+  border-radius: var(--radius);
+}
+
+/* ==========================================================================
+   3. COMPOUNDING SCALE — each level is 90% of its parent
+   ========================================================================== */
+
+.comment-thread .comment {
+  --scale: calc(inherit(--scale, 1) * 0.9);
+  font-size: max(0.875rem, calc(1rem * var(--scale)));
+}
+
+/* ==========================================================================
+   4. FALLBACK — explicit per-level selectors
+   Detection follows var() parsing: a property value containing a supported
+   substitution function parses as valid. Verify once an engine ships.
+   ========================================================================== */
+
+@supports not (inline-size: inherit(--x, 1px)) {
+  .tree :is(ul, ol) {
+    --depth: 1;
+  }
+  .tree :is(ul, ol) :is(ul, ol) {
+    --depth: 2;
+  }
+  .tree :is(ul, ol) :is(ul, ol) :is(ul, ol) {
+    --depth: 3;
+  }
+
+  .surface {
+    --radius: 1.5rem;
+  }
+  .surface .surface {
+    --radius: 1rem;
+  }
+  .surface .surface .surface {
+    --radius: 0.5rem;
+  }
+
+  .comment-thread .comment {
+    font-size: 1rem;
+  }
+}

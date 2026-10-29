@@ -1,0 +1,35 @@
+/**
+ * CSS text-fit
+ *
+ * Spec: https://drafts.csswg.org/css-text-5/#text-fit-property
+ * Reference: https://developer.chrome.com/release-notes/150
+ * WebStatus: text-fit
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 150+, Firefox —, Safari —
+ * Last verified: 2026-08-11
+ *
+ * Task: Scale headline text to fill the available inline size.
+ */
+
+.hero-title {
+  font-size: clamp(2rem, 8vi, 6rem);
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+@supports (text-fit: grow) {
+  .hero-title {
+    font-size: 1rem;
+    text-fit: grow per-line-all;
+  }
+}
+
+.price-label {
+  font-size: clamp(1.5rem, 5cqi, 3rem);
+}
+
+@supports (text-fit: shrink consistent) {
+  .price-label {
+    text-fit: shrink consistent;
+  }
+}

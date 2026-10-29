@@ -1,0 +1,57 @@
+/**
+ * text-decoration-skip-ink: all
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
+ * Reference: https://developer.chrome.com/blog/chrome-148-beta
+ * WebStatus: text-decoration-skip-ink-all
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 148+, Firefox 75+, Safari 15.4+
+ *
+ * Task: Control how underlines and overlines skip over glyph descenders
+ * Why: `auto` skips ink for most scripts but deliberately leaves CJK glyphs
+ *      un-skipped; `all` forces ink-skipping for EVERY glyph, giving a
+ *      consistent underline across mixed Latin + CJK text
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. auto — DEFAULT
+   Underline skips descenders of Latin/Cyrillic/etc. glyphs, but draws
+   straight through CJK glyphs.
+   ========================================================================== */
+
+.prose {
+  text-decoration-line: underline;
+  text-decoration-skip-ink: auto;
+}
+
+/* ==========================================================================
+   2. all — Chrome 148+
+   Ink-skipping is applied to every glyph, including CJK characters.
+   Use for mixed-script copy where the underline should break uniformly.
+   ========================================================================== */
+
+.prose--uniform {
+  text-decoration-line: underline;
+  text-decoration-skip-ink: all;
+}
+
+/* ==========================================================================
+   3. none — UNINTERRUPTED LINE
+   The decoration draws straight through every glyph with no gaps.
+   ========================================================================== */
+
+.prose--solid {
+  text-decoration-line: underline;
+  text-decoration-skip-ink: none;
+}
+
+/* ==========================================================================
+   BEST PRACTICES
+   - Use `all` for multilingual UI (Latin + CJK) so underlines look the same
+     regardless of script.
+   - Keep `none` for links/labels where an unbroken underline is the brand
+     style, or where skip gaps look like rendering glitches.
+   - `text-decoration-skip-ink` is a progressive enhancement — every value
+     degrades to a visible underline, so no @supports gate is required.
+   ========================================================================== */
