@@ -303,6 +303,8 @@ In CI we use Netlify to test against.
 To enable visual regression testing on CI, you need to add label `run-visual-tests` to your PR.
 Then the tests will be run against the Netlify deployment on every change pushed.
 
+The tests also run automatically, without the label, on every PR that changes any file in `tests/e2e` (for example an updated visual snapshot).
+
 When the tests fail, there will be a comment in the PR with a link to the report and a message about the failure will be raised in the Slack channel `#spirit-design-system-notifications_en`.
 You can also find the report URL in the GitHub Actions run under the `Run actions/upload-artifact` section.
 Look for `Artifact download URL: https://github.com/alma-oss/spirit-design-system/actions/runs/<run-id>/artifacts/<artifact-id>`.

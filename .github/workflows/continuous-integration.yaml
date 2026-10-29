@@ -38,19 +38,23 @@ jobs:
       actions: write
       contents: read
 
+  e2e-affected:
+    name: 🔎 E2E Affected
+    uses: ./.github/workflows/e2e-affected.yaml
+    permissions:
+      pull-requests: read
+
   deploy:
     name: 🚀 Deploy
-    needs: build
-    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
+    needs: [build, e2e-affected]
+    if: ${{ !cancelled() && needs.build.result == 'success' && needs.e2e-affected.outputs.run == 'true' }}
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
   e2e-tests:
     name: 🤖 End-to-End Tests
-    needs: deploy
-    # Runs on main and on PRs labeled `run-visual-tests`
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests'))
+    needs: [deploy, e2e-affected]
+    if: ${{ !cancelled() && needs.deploy.result == 'success' && needs.e2e-affected.outputs.run == 'true' }}
     uses: ./.github/workflows/e2e.yml
     with:
       url: ${{ needs.deploy.outputs.url }}
@@ -82,7 +86,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build, deploy, e2e-tests, code-quality-gate]
+    needs: [git-checks, build, e2e-affected, deploy, e2e-tests, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:
