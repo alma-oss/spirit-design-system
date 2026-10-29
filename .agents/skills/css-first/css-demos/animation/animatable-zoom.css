@@ -1,0 +1,33 @@
+/**
+ * Animatable zoom
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Baseline: 🟣 Experimental / unknown for animation
+ * Support: Chrome 150+ for animatable zoom
+ * Last verified: 2026-08-10
+ *
+ * Task: Animate visual size while allowing the scaled box to affect layout.
+ */
+
+.zoom-card {
+  zoom: 1;
+}
+
+@supports (zoom: 1.1) {
+  .zoom-card {
+    transition: zoom 240ms ease;
+  }
+
+  .zoom-card:is(:hover, :focus-within) {
+    zoom: 1.08;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-card {
+    transition: none;
+  }
+}
+
+/* Use transform: scale() instead when surrounding layout must not reflow. */

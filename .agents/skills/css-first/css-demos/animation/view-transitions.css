@@ -1,0 +1,493 @@
+/**
+ * View Transitions — From CSS-Only MPA to Element-Scoped Transitions
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@view-transition
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-name
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-class
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-group
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-scope
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition-group
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition-image-pair
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition-old
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition-new
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition-group-children
+ *
+ * WebStatus: view-transitions-element-scoped
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 147+, Firefox —, Safari —
+ *          MPA cross-document (Chrome 126+, Safari 18.2+)
+ *          Element-scoped (Chrome 147+)
+ *
+ * Task: Add smooth transitions between page states — MPA, SPA, and scoped
+ * Why: Native snapshot-based transitions replace JS animation libraries
+ * Reference: https://lukaschylik.dev/blog/articles/css-view-transitions/
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   PSEUDO-ELEMENT TREE
+   The browser generates this tree during every view transition.
+
+   ::view-transition
+   └── ::view-transition-group(name)
+       ├── ::view-transition-image-pair(name)
+       │   ├── ::view-transition-old(name)    ← static screenshot (replaced element)
+       │   └── ::view-transition-new(name)    ← live DOM representation
+       └── ::view-transition-group-children(name)   ← container for nested groups
+           └── ::view-transition-group(child-name)  ← nested children
+
+   SELECTOR SYNTAX (all pseudo-elements except ::view-transition):
+     ::view-transition-group(hero-image)            — by view-transition-name
+     ::view-transition-group(*.card)                — by view-transition-class (dot prefix)
+     ::view-transition-group(hero-image.featured)   — name + class combo
+     ::view-transition-group(*)                     — wildcard (all named transitions)
+     ::view-transition-group(root)                  — default root group (whole document)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. CSS-ONLY MPA TRANSITIONS — @view-transition (cross-document)
+   No JavaScript required. Works on same-origin navigation (push/replace/traverse).
+   Both source and destination pages need the @view-transition rule.
+   ========================================================================== */
+
+/* Wrap in prefers-reduced-motion to respect accessibility AND remove LCP penalty */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+    types: slide, fade;
+  }
+}
+
+/* ::view-transition — root overlay container, fixed over entire viewport */
+::view-transition {
+  background-color: oklch(0% 0 0 / 0.25);
+}
+
+/* Root group — animates position + size between old/new states */
+::view-transition-group(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+
+/* image-pair uses mix-blend-mode: plus-lighter by default.
+   This prevents the mid-transition darkening that normal alpha blending causes.
+   Override only for special effects: */
+::view-transition-image-pair(root) {
+  /* isolation: auto; — uncomment to use standard blending */
+}
+
+/* old = static screenshot, new = live DOM. Both are replaced elements. */
+::view-transition-old(root) {
+  animation: vt-slide-out-up 0.4s ease-in-out both;
+}
+
+::view-transition-new(root) {
+  animation: vt-slide-in-up 0.4s ease-in-out both;
+}
+
+@keyframes vt-slide-out-up {
+  to {
+    translate: 0 -100%;
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide-in-up {
+  from {
+    translate: 0 100%;
+    opacity: 0;
+  }
+}
+
+/* --- @view-transition types + :active-view-transition-type() --- */
+
+/* Types are labels that let you apply different animations per navigation kind.
+   Target them with :active-view-transition-type() on the root element. */
+
+:active-view-transition {
+  /* Applies during ANY active view transition */
+}
+
+:active-view-transition-type(slide) {
+  &::view-transition-old(root) {
+    animation: vt-slide-out 0.4s ease-in-out both;
+  }
+
+  &::view-transition-new(root) {
+    animation: vt-slide-in 0.4s ease-in-out both;
+  }
+}
+
+:active-view-transition-type(fade) {
+  &::view-transition-old(root) {
+    animation: vt-fade-out 0.3s ease-out both;
+  }
+
+  &::view-transition-new(root) {
+    animation: vt-fade-in 0.3s ease-out both;
+  }
+}
+
+@keyframes vt-slide-out {
+  to {
+    translate: -100% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide-in {
+  from {
+    translate: 100% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   2. NAMED TRANSITIONS — view-transition-name + view-transition-class
+   Pair elements across old/new states for morph animations.
+   ========================================================================== */
+
+/* Hero image morphs between list thumbnail and detail view */
+.hero-image {
+  view-transition-name: hero;
+}
+
+.detail-image {
+  view-transition-name: hero;
+}
+
+.page-title {
+  view-transition-name: title;
+}
+
+.detail-title {
+  view-transition-name: title;
+}
+
+/* Hero group — browser auto-interpolates position + size */
+::view-transition-group(hero) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* old/new are replaced elements — use object-fit when sizes differ */
+::view-transition-old(hero),
+::view-transition-new(hero) {
+  object-fit: cover;
+}
+
+/* --- view-transition-class: shared styling via dot notation --- */
+
+.card {
+  view-transition-name: card-1;
+  view-transition-class: card;
+}
+
+.card:nth-child(2) {
+  view-transition-name: card-2;
+  view-transition-class: card;
+}
+
+.card:nth-child(3) {
+  view-transition-name: card-3;
+  view-transition-class: card;
+}
+
+/* Multiple classes are supported */
+.product {
+  view-transition-name: product-1;
+  view-transition-class: card featured;
+}
+
+/* Style all elements with class "card" at once — dot prefix */
+::view-transition-group(*.card) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(*.card) {
+  animation: vt-shrink-out 0.3s ease-out both;
+}
+
+::view-transition-new(*.card) {
+  animation: vt-grow-in 0.3s ease-out both;
+}
+
+@keyframes vt-shrink-out {
+  to {
+    scale: 0.8;
+    opacity: 0;
+  }
+}
+
+@keyframes vt-grow-in {
+  from {
+    scale: 0.8;
+    opacity: 0;
+  }
+}
+
+/* --- view-transition-name: match-element (SPA only) ---
+   Auto-pairs by DOM node identity instead of text name.
+   Ideal for lists where items reorder/filter.
+   Does NOT work cross-document (MPA) because DOM identity is lost. */
+
+.list-item {
+  view-transition-name: match-element;
+}
+
+/* ==========================================================================
+   3. NESTED VIEW TRANSITION GROUPS — view-transition-group property
+   By default all ::view-transition-group() pseudos are flat siblings under
+   ::view-transition. This breaks clipping, 3D transforms, and parent effects.
+   The view-transition-group property creates a parent-child hierarchy.
+
+   Values:
+     normal    — flat (default, no nesting)
+     contain   — this group becomes a container for descendant groups
+     nearest   — nest under closest ancestor with view-transition-group: contain
+     <name>    — nest under a specific named parent
+   ========================================================================== */
+
+/* --- contain: parent captures all named children --- */
+
+.card-container {
+  view-transition-name: container;
+  view-transition-group: contain;
+}
+
+.card-container .card-title {
+  view-transition-name: card-title;
+}
+
+.card-container .card-image {
+  view-transition-name: card-image;
+}
+
+/*
+  Resulting pseudo-tree (nested):
+    ::view-transition-group(container)
+    ├── ::view-transition-image-pair(container)
+    │   ├── ::view-transition-old(container)
+    │   └── ::view-transition-new(container)
+    └── ::view-transition-group-children(container)
+        ├── ::view-transition-group(card-title)   ← clips correctly
+        └── ::view-transition-group(card-image)   ← clips correctly
+*/
+
+/* --- nearest: child looks up for closest ancestor group --- */
+
+.gallery-item {
+  view-transition-name: gallery-item;
+  view-transition-group: nearest;
+}
+
+/* --- Named parent: nest under specific group --- */
+
+.sidebar-widget {
+  view-transition-name: widget-1;
+  view-transition-group: sidebar-container; /* nest under "sidebar-container" */
+}
+
+/* --- Clipping + 3D transforms on nested groups --- */
+
+::view-transition-group-children(container) {
+  overflow: clip;
+  border-radius: 0.75rem;
+}
+
+::view-transition-group(container) {
+  animation: vt-card-flip 0.5s ease;
+}
+
+@keyframes vt-card-flip {
+  from {
+    rotate: y 90deg;
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   4. ELEMENT-SCOPED VIEW TRANSITIONS (Chrome 147+)
+   JS: element.startViewTransition({ callback }) instead of document.startViewTransition()
+
+   The element becomes the scope root. The browser auto-applies:
+     contain: layout          — layout isolation
+     view-transition-scope: all  — prevents name collisions across scopes
+     view-transition-name: root  — scope root participates in its own transition
+     view-transition-group: contain — nested groups contained in scope
+
+   Benefits:
+     - Multiple concurrent transitions on different subtrees
+     - Rest of page stays fully interactive
+     - view-transition-name can be reused across scopes (no global uniqueness)
+     - position: fixed works normally outside the scope
+   ========================================================================== */
+
+/* view-transition-scope controls name visibility:
+     none — default, normal behavior
+     all  — isolated, outer transitions skip this name */
+
+/* --- Concurrent scoped transitions on separate subtrees --- */
+
+.sidebar-panel {
+  /* No need for contain: layout — browser adds it automatically
+     when element.startViewTransition() is called */
+}
+
+.sidebar-panel .nav-item {
+  view-transition-name: match-element;
+  view-transition-class: nav-item;
+}
+
+.main-grid {
+  /* Separate scope — can reuse same transition names */
+}
+
+.main-grid .grid-card {
+  view-transition-name: match-element;
+  view-transition-class: grid-card;
+}
+
+/* Both scopes animate independently and simultaneously */
+
+::view-transition-group(*.nav-item) {
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-group(*.grid-card) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ::view-transition-group-children() auto-clips overflow when scope root
+   has overflow: hidden/scroll/clip */
+
+/* --- Kanban board: moving tasks between columns --- */
+
+.column ul li {
+  view-transition-name: match-element;
+  view-transition-class: task-card;
+}
+
+::view-transition-group(*.task-card) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*
+  JS (minimal):
+  sourceColumn.querySelector('ul').startViewTransition({
+    callback: () => taskElement.remove()
+  })
+  targetColumn.querySelector('ul').startViewTransition({
+    callback: () => targetUl.appendChild(taskElement)
+  })
+*/
+
+/* ==========================================================================
+   5. CUSTOM OLD/NEW ANIMATIONS
+   ::view-transition-old() = static screenshot (never updates)
+   ::view-transition-new() = live DOM representation (reflects current state)
+   Both are replaced elements — object-fit and object-position work on them.
+   Default: cross-fade with mix-blend-mode: plus-lighter (no mid-transition darkening)
+   ========================================================================== */
+
+::view-transition-old(figure-caption) {
+  animation: vt-shrink-x 0.25s linear both;
+  transform-origin: right center;
+}
+
+::view-transition-new(figure-caption) {
+  animation: vt-grow-x 0.25s 0.25s linear both;
+  transform-origin: right center;
+}
+
+@keyframes vt-shrink-x {
+  from {
+    scale: 1 1;
+  }
+  to {
+    scale: 0 1;
+  }
+}
+
+@keyframes vt-grow-x {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+/* ==========================================================================
+   6. ACCESSIBILITY — always respect prefers-reduced-motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   7. PERFORMANCE NOTES
+   - View transitions do NOT affect CLS (overlay is outside document flow)
+   - ~70ms LCP overhead on mobile; negligible on desktop
+   - Combine with Speculation Rules API (prerendering) to eliminate LCP cost
+   - Default cross-fade uses transform + opacity = fully GPU-composited
+   - Keep transition callbacks lightweight to avoid INP impact
+   - Avoid blocking="render" unless actively measuring real-user impact
+   ========================================================================== */
+
+/* ==========================================================================
+   COMPLETE MPA EXAMPLE (CSS-only, no JavaScript)
+   Place on both source and destination pages.
+   ========================================================================== */
+
+/*
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.hero-image   { view-transition-name: hero; }
+.page-title   { view-transition-name: title; }
+.detail-image { view-transition-name: hero; }
+.detail-title { view-transition-name: title; }
+
+::view-transition-old(root) {
+  animation: fade-out 0.3s ease-out both;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.3s ease-out both;
+}
+
+::view-transition-group(hero) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in  { from { opacity: 0; } }
+*/

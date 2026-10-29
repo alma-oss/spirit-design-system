@@ -1,0 +1,94 @@
+/**
+ * :has() Relational Pseudo-Class
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:has
+ * WebStatus: has
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 105+, Firefox 121+, Safari 15.4+
+ *
+ * Task: Style parents based on children, siblings, or form state
+ * Why: :has() enables parent selection, quantity queries, and state-based
+ *      styling that previously required JavaScript
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. PARENT SELECTION — style parent based on what it contains
+   ========================================================================== */
+
+/* Card with an image gets different layout */
+.card:has(img) {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+/* Card without image is simpler */
+.card:not(:has(img)) {
+  padding: 1.5rem;
+}
+
+/* Form group with error */
+.field:has(:user-invalid) {
+  color: light-dark(hsl(0 70% 45%), hsl(0 70% 65%));
+}
+
+.field:has(:user-valid) {
+  color: light-dark(hsl(120 50% 35%), hsl(120 50% 55%));
+}
+
+/* ==========================================================================
+   2. QUANTITY QUERIES — style based on number of children
+   ========================================================================== */
+
+/* Grid: 1 item = full width, 2 items = two columns, 3+ = three columns */
+.grid:has(> :nth-child(2)) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid:has(> :nth-child(3)) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Show "empty state" message when list has no items */
+.list:not(:has(> *)) {
+  /* container is empty */
+}
+
+/* ==========================================================================
+   3. SIBLING / STATE AWARENESS
+   ========================================================================== */
+
+/* Style label when its input is focused */
+label:has(+ input:focus-visible) {
+  color: light-dark(hsl(220 80% 50%), hsl(220 80% 65%));
+}
+
+/* Navigation link — highlight when section is targeted */
+nav:has(+ main :target) a {
+  /* a link in nav when main has a :target */
+}
+
+/* Body-level state — disable scroll when modal is open */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* Dark mode toggle without JavaScript */
+html:has(#dark-mode:checked) {
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   4. FORM VALIDATION — whole-form awareness
+   ========================================================================== */
+
+/* Disable submit button appearance when form is invalid */
+form:has(:user-invalid) button[type='submit'] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Show success state when all required fields are valid */
+form:has(:required):not(:has(:required:not(:user-valid))) {
+  /* all required fields are valid */
+}

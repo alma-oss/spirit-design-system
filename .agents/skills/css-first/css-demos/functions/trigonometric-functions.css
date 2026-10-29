@@ -1,0 +1,256 @@
+/**
+ * CSS Trigonometric Functions — sin(), cos(), tan(), atan2()
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/sin
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/cos
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/tan
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/atan2
+ * Reference: https://web.dev/articles/css-trig-functions
+ * WebStatus: trig-functions
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 111+, Firefox 108+, Safari 15.4+
+ *
+ * Task: Position elements in circles, arcs, and radial patterns with pure CSS
+ * Why: Eliminates JavaScript math and hardcoded translate values for circular
+ *      layouts; tan() additionally derives slopes and angled-shape geometry
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. CIRCULAR MENU — Items placed around a circle
+   Core: translate with cos()/sin() to compute x/y from angle + radius
+   ========================================================================== */
+
+.radial-menu {
+  --items: 8;
+  --radius: 8rem;
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--radius) * 2 + 4rem);
+  aspect-ratio: 1;
+}
+
+.radial-menu__item {
+  position: absolute;
+  /* Each item gets --i (0-based index) via inline style or nth-child */
+  --angle: calc(360deg / var(--items) * var(--i));
+  translate: calc(cos(var(--angle)) * var(--radius)) calc(sin(var(--angle)) * -1 * var(--radius));
+}
+
+/* Assign index via nth-child — no inline styles needed */
+.radial-menu__item:nth-child(1) {
+  --i: 0;
+}
+.radial-menu__item:nth-child(2) {
+  --i: 1;
+}
+.radial-menu__item:nth-child(3) {
+  --i: 2;
+}
+.radial-menu__item:nth-child(4) {
+  --i: 3;
+}
+.radial-menu__item:nth-child(5) {
+  --i: 4;
+}
+.radial-menu__item:nth-child(6) {
+  --i: 5;
+}
+.radial-menu__item:nth-child(7) {
+  --i: 6;
+}
+.radial-menu__item:nth-child(8) {
+  --i: 7;
+}
+
+/* ==========================================================================
+   2. ANIMATED CIRCULAR REVEAL — expand items outward on trigger
+   Combine @property for animatable radius with trig positioning.
+   ========================================================================== */
+
+@property --reveal-radius {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0rem;
+}
+
+.radial-menu--animated {
+  --reveal-radius: 0rem;
+  transition: --reveal-radius 0.4s ease-out;
+}
+
+.radial-menu--animated:is(:focus-within, .open) {
+  --reveal-radius: 8rem;
+}
+
+.radial-menu--animated .radial-menu__item {
+  --angle: calc(360deg / var(--items) * var(--i));
+  translate: calc(cos(var(--angle)) * var(--reveal-radius)) calc(sin(var(--angle)) * -1 * var(--reveal-radius));
+  transition: translate 0.4s ease-out;
+
+  /* Stagger each item */
+  transition-delay: calc(var(--i) * 40ms);
+}
+
+/* ==========================================================================
+   3. SEMICIRCLE / ARC LAYOUT
+   Place items along a 180deg arc instead of full circle.
+   ========================================================================== */
+
+.arc-menu {
+  --items: 5;
+  --radius: 6rem;
+  --arc: 180deg; /* half circle */
+  --start: 180deg; /* start from left */
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.arc-menu__item {
+  position: absolute;
+  --angle: calc(var(--start) + var(--arc) / (var(--items) - 1) * var(--i));
+  translate: calc(cos(var(--angle)) * var(--radius)) calc(sin(var(--angle)) * -1 * var(--radius));
+}
+
+/* ==========================================================================
+   4. CLOCK FACE — 12 items at 30deg intervals
+   ========================================================================== */
+
+.clock {
+  --radius: 7rem;
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--radius) * 2 + 2rem);
+  aspect-ratio: 1;
+  border-radius: 100vmax;
+  border: 2px solid oklch(0.8 0 0);
+}
+
+.clock__hour {
+  position: absolute;
+  /* Clock: 12 o'clock = -90deg, each hour = 30deg */
+  --angle: calc(-90deg + 30deg * var(--h));
+  translate: calc(cos(var(--angle)) * var(--radius)) calc(sin(var(--angle)) * var(--radius));
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   5. ORBIT ANIMATION — element revolves around a center
+   ========================================================================== */
+
+@property --orbit-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.orbit {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 16rem;
+  aspect-ratio: 1;
+}
+
+.orbit__planet {
+  --orbit-radius: 6rem;
+  position: absolute;
+  animation: revolve 4s linear infinite;
+
+  translate: calc(cos(var(--orbit-angle)) * var(--orbit-radius)) calc(sin(var(--orbit-angle)) * var(--orbit-radius));
+}
+
+@keyframes revolve {
+  to {
+    --orbit-angle: 360deg;
+  }
+}
+
+/* ==========================================================================
+   6. tan() — SLOPES, DIAGONALS & ANGLED SHAPES
+   Where sin()/cos() place points on a circle, tan() derives slope geometry:
+       tan(θ) = opposite / adjacent   →   opposite = adjacent * tan(θ)
+   Feed it one known side (a run or a height) plus an angle to get the other.
+   Avoid the asymptotes (90deg, 270deg, …) — tan() is undefined there.
+   ========================================================================== */
+
+/* 6a. Diagonal positioning — drop a label along a fixed slope.
+   Vertical rise = horizontal run * tan(angle). */
+.diagonal-label {
+  --slope-angle: 30deg;
+  --run: 4rem;
+  translate: var(--run) calc(tan(var(--slope-angle)) * var(--run) * -1);
+}
+
+/* 6b. Angled section divider — for a strip of known width, the height a
+   diagonal edge climbs is width * tan(angle). One --angle drives the cut. */
+.angled-strip {
+  --width: 20rem;
+  --angle: 5deg;
+  --rise: calc(var(--width) * tan(var(--angle)));
+  inline-size: var(--width);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - var(--rise)));
+}
+
+/* 6c. Parallelogram lean — the horizontal shift for a given lean angle is
+   height * tan(angle), so the slanted sides stay exact at any --lean. */
+.parallelogram {
+  --height: 8rem;
+  --lean: 15deg;
+  --shift: calc(var(--height) * tan(var(--lean)));
+  block-size: var(--height);
+  clip-path: polygon(var(--shift) 0, 100% 0, calc(100% - var(--shift)) 100%, 0 100%);
+}
+
+/* ==========================================================================
+   7. DYNAMIC ROTATION WITH atan2()
+   Compute angle from coordinates — useful for pointing at a target.
+   ========================================================================== */
+
+.pointer {
+  /* Point toward a coordinate (--tx, --ty) from center (--cx, --cy) */
+  --tx: 100;
+  --ty: 0;
+  --cx: 50;
+  --cy: 50;
+  rotate: atan2(calc(var(--cy) - var(--ty)), calc(var(--tx) - var(--cx)));
+}
+
+/* ==========================================================================
+   8. WAVE PATTERN — sin() for rhythmic vertical offset
+   ========================================================================== */
+
+.wave-items {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.wave-items > * {
+  --wave-offset: calc(sin(calc(360deg / 8 * var(--i))) * 1.5rem);
+  translate: 0 var(--wave-offset);
+}
+
+/* ==========================================================================
+   9. SPIRAL LAYOUT — increasing radius per item
+   ========================================================================== */
+
+.spiral {
+  --base-radius: 2rem;
+  --growth: 0.8rem;
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 20rem;
+  aspect-ratio: 1;
+}
+
+.spiral__item {
+  position: absolute;
+  --angle: calc(45deg * var(--i));
+  --r: calc(var(--base-radius) + var(--growth) * var(--i));
+  translate: calc(cos(var(--angle)) * var(--r)) calc(sin(var(--angle)) * -1 * var(--r));
+}

@@ -1,0 +1,74 @@
+/**
+ * image-rendering — Crisp Scaling for Pixel Art
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering
+ * Reference: https://developer.chrome.com/blog/chrome-149-beta
+ * WebStatus: crisp-edges
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 148+, Firefox 65+, Safari 7+
+ *
+ * Task: Scale small raster images up without blurring them
+ * Why: the default smooth (bilinear) algorithm blurs pixel art, sprites,
+ *      and QR codes; `crisp-edges` preserves contrast and hard edges
+ *      instead of smoothing colors or introducing blur
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. auto — DEFAULT SMOOTH SCALING
+   Bilinear-style smoothing; correct for photos, wrong for pixel art.
+   ========================================================================== */
+
+.photo {
+  image-rendering: auto;
+}
+
+/* ==========================================================================
+   2. crisp-edges — EDGE-PRESERVING SCALING (Chrome 149+)
+   Scales while preserving contrast and edges — no color smoothing, no blur.
+   ========================================================================== */
+
+.sprite {
+  inline-size: 256px; /* upscaled from a 32px source */
+  block-size: 256px;
+  image-rendering: crisp-edges;
+}
+
+/* ==========================================================================
+   3. pixelated — NEAREST-NEIGHBOUR
+   Each source pixel becomes a sharp block. Spec-distinct from crisp-edges,
+   though Firefox and Safari render the two identically.
+   ========================================================================== */
+
+.retro-icon {
+  image-rendering: pixelated;
+}
+
+/* ==========================================================================
+   4. COMMON USE CASES
+   ========================================================================== */
+
+/* Pixel-art game canvas scaled to fill its container */
+.game-canvas {
+  inline-size: 100%;
+  block-size: auto;
+  image-rendering: pixelated;
+}
+
+/* QR code rendered larger than its intrinsic size — keep modules crisp */
+.qr-code {
+  inline-size: 12rem;
+  image-rendering: crisp-edges;
+}
+
+/* ==========================================================================
+   BEST PRACTICES
+   - Apply crisp-edges / pixelated ONLY to pixel art, sprites, icons, and
+     codes — never to photographs, where smoothing is desirable.
+   - It is purely a hint: it affects rendering, not layout, and degrades
+     safely to smooth scaling in older browsers.
+   - Pair with an integer scale factor (2x, 3x, 4x) so source pixels map to
+     whole device pixels and stay perfectly square.
+   - `background-image` honours image-rendering too — use it for tiled
+     pixel-art backgrounds, not just <img>.
+   ========================================================================== */

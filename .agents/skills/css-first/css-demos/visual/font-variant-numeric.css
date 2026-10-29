@@ -1,0 +1,132 @@
+/**
+ * font-variant-numeric — Numeric Typography Control
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
+ * WebStatus: font-variant-numeric
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 52+, Firefox 34+, Safari 9.1+
+ *
+ * Task: Pick the right numeral glyphs — equal-width digits, slashed zero,
+ *       old-style figures, real fractions, ordinals
+ * Why: By default most fonts render PROPORTIONAL digits (a "1" is narrower
+ *      than a "0"). For tables, timers, prices, and any value that updates,
+ *      that causes column misalignment and width jitter. font-variant-numeric
+ *      is the readable, high-level API for OpenType numeral features.
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. tabular-nums — EQUAL-WIDTH DIGITS  (the headline best practice)
+   Every digit gets the same advance width, so numerals line up vertically
+   and updating values never shift layout.
+   ========================================================================== */
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   2. DATA TABLES — align numeric columns
+   Apply to numeric cells so digits stack cleanly; pair with right alignment.
+   ========================================================================== */
+
+.data-table td.is-numeric {
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  font-variant-numeric: tabular-nums slashed-zero; /* also disambiguate 0/O */
+}
+
+/* ==========================================================================
+   3. LIVE VALUES — timers, counters, prices, scoreboards
+   Proportional digits make a ticking clock "wobble" as 1s and 0s swap in.
+   tabular-nums keeps the box a fixed width.
+   ========================================================================== */
+
+.countdown,
+.stopwatch,
+.live-counter,
+.price {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Reserve exact space with the ch unit — sized off the "0" advance */
+.stopwatch {
+  font-variant-numeric: tabular-nums;
+  inline-size: 8ch; /* e.g. 00:00:00 — never reflows */
+  text-align: center;
+}
+
+/* ==========================================================================
+   4. slashed-zero — DISTINGUISH 0 FROM O
+   Essential for codes, IDs, serial numbers, and inline code.
+   ========================================================================== */
+
+.code,
+.serial,
+.account-number {
+  font-variant-numeric: slashed-zero;
+}
+
+/* ==========================================================================
+   5. lining-nums vs oldstyle-nums — FIGURE STYLE
+   lining-nums  → all digits sit on the baseline, uniform height (UI, data)
+   oldstyle-nums → 3 4 7 9 carry descenders, blend into running prose
+   ========================================================================== */
+
+.ui-number {
+  font-variant-numeric: lining-nums;
+}
+
+.body-copy {
+  font-variant-numeric: oldstyle-nums; /* numbers flow with lowercase text */
+}
+
+/* ==========================================================================
+   6. FRACTIONS — render "1/2" as a real fraction glyph
+   diagonal-fractions → numerator / denominator on a slash
+   stacked-fractions  → numerator stacked over denominator
+   ========================================================================== */
+
+.recipe-amount {
+  font-variant-numeric: diagonal-fractions;
+}
+
+/* ==========================================================================
+   7. ordinal — PROPER ORDINAL MARKERS (1st, 2nd, 3rd)
+   ========================================================================== */
+
+.ranking {
+  font-variant-numeric: ordinal;
+}
+
+/* ==========================================================================
+   8. font-feature-settings — THE LOW-LEVEL FALLBACK
+   font-variant-numeric maps to OpenType features (tabular-nums → "tnum").
+   font-feature-settings is the raw escape hatch: harder to read and it
+   does NOT combine — re-declaring it resets every other feature.
+   Prefer font-variant-numeric; only reach for this for features without a
+   dedicated CSS property.
+   ========================================================================== */
+
+.tabular-legacy {
+  /* ✅ best practice — high-level, composable, self-documenting */
+  font-variant-numeric: tabular-nums;
+
+  /* ⚠️ low-level equivalent — avoid unless you have no alternative */
+  /* font-feature-settings: "tnum"; */
+}
+
+/* ==========================================================================
+   BEST PRACTICES
+   - Always set tabular-nums on tables, timers, counters, prices, and any
+     value that changes — it stops digit jitter and column misalignment.
+   - Prefer font-variant-numeric over font-feature-settings: it is readable,
+     composable (values combine), and inherits cleanly.
+   - Combine values freely: `tabular-nums slashed-zero`, `lining-nums
+     proportional-nums`, etc.
+   - Keep proportional (default) digits for running body text — tabular
+     figures look unevenly spaced in prose.
+   - Numeral features depend on the FONT shipping the OpenType tables; with
+     a font that lacks them the value is simply ignored — safe to use.
+   - Size fixed numeric fields with the `ch` unit; it tracks the "0" advance.
+   ========================================================================== */

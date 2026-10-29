@@ -1,0 +1,126 @@
+/**
+ * contrast-color() Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/contrast-color
+ * Spec: https://drafts.csswg.org/css-color-5/#contrast-color
+ * WebStatus: contrast-color
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 147+, Firefox 146+, Safari 26+
+ *
+ * Task: Automatically pick black or white text for maximum contrast
+ * Why: contrast-color() returns whichever of black/white has the
+ *      greatest contrast with the input, ensuring WCAG AA readability
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC USAGE — auto text color on any background
+   ========================================================================== */
+
+/* contrast-color() returns black or white — whichever contrasts more */
+.badge {
+  background-color: var(--badge-color, rebeccapurple);
+  color: contrast-color(var(--badge-color, rebeccapurple));
+  padding-block: 0.25rem;
+  padding-inline: 0.75rem;
+  border-radius: 100vmax;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   2. DYNAMIC BUTTON — text adapts to any brand color
+   ========================================================================== */
+
+.btn {
+  --btn-bg: light-dark(#0066cc, #3399ff);
+
+  background-color: var(--btn-bg);
+  color: contrast-color(var(--btn-bg));
+  border: none;
+  padding-block: 0.625rem;
+  padding-inline: 1.25rem;
+  border-radius: 0.375rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Variant — any background, text auto-adjusts */
+.btn--danger {
+  --btn-bg: #cc0000;
+}
+
+.btn--success {
+  --btn-bg: #008800;
+}
+
+.btn--warning {
+  --btn-bg: #ffcc00;
+  /* contrast-color(#ffcc00) → black, because yellow is light */
+}
+
+/* ==========================================================================
+   3. COLOR SWATCHES — label adapts to swatch color
+   ========================================================================== */
+
+.swatch {
+  --color: #336699;
+
+  background-color: var(--color);
+  color: contrast-color(var(--color));
+  display: grid;
+  place-items: center;
+  inline-size: 8rem;
+  block-size: 5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-family: monospace;
+}
+
+/* ==========================================================================
+   4. DARK MODE SUPPORT — works with prefers-color-scheme
+   ========================================================================== */
+
+:root {
+  --surface: light-dark(#f5f5f5, #1a1a1a);
+}
+
+body {
+  background-color: var(--surface);
+  color: contrast-color(var(--surface));
+}
+
+/* ==========================================================================
+   5. TAG CLOUD — each tag can have any color
+   ========================================================================== */
+
+.tag {
+  background-color: var(--tag-color);
+  color: contrast-color(var(--tag-color));
+  padding-block: 0.125rem;
+  padding-inline: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Usage:
+   <span class="tag" style="--tag-color: #ff6b6b">Error</span>
+   <span class="tag" style="--tag-color: #ffd93d">Warning</span>
+   <span class="tag" style="--tag-color: #6bcb77">Success</span>
+*/
+
+/* ==========================================================================
+   6. FEATURE DETECTION — fallback for unsupported browsers
+   ========================================================================== */
+
+/* Fallback: manually set text color */
+.auto-contrast {
+  background-color: var(--bg);
+  color: white;
+}
+
+@supports (color: contrast-color(red)) {
+  .auto-contrast {
+    color: contrast-color(var(--bg));
+  }
+}

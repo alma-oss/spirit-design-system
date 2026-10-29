@@ -1,0 +1,21 @@
+/**
+ * Rounded polygon() corners
+ *
+ * Spec: https://drafts.csswg.org/css-shapes-1/#funcdef-basic-shape-polygon
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Baseline: 🟣 Experimental / unknown for the round parameter
+ * Support: Chrome 150+
+ * Last verified: 2026-08-10
+ *
+ * Task: Round polygon corners without manually authored Bézier curves.
+ */
+
+.ticket {
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); /* fallback */
+}
+
+@supports (clip-path: polygon(round 1rem, 0 0, 100% 0, 100% 100%)) {
+  .ticket {
+    clip-path: polygon(round 1rem, 0 0, 100% 0, 92% 100%, 8% 100%);
+  }
+}
