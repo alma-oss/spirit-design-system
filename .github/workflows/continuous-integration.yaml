@@ -38,19 +38,42 @@ jobs:
       actions: write
       contents: read
 
+  e2e-changes:
+    name: 🔎 E2E Changes
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      pull-requests: read
+    outputs:
+      changed: ${{ steps.filter.outputs.changed }}
+    steps:
+      # Lists files through the API, so no checkout is needed and rebased branches are compared against the current base
+      - name: Detect changes in tests/e2e
+        id: filter
+        run: |
+          changed_files=$(gh api --paginate "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" --jq '.[].filename')
+          if grep -q '^tests/e2e/' <<< "$changed_files"; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
   deploy:
     name: 🚀 Deploy
-    needs: build
+    needs: [build, e2e-changes]
     # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
+    if: ${{ !cancelled() && needs.build.result == 'success' && github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || ((contains(github.event.pull_request.labels.*.name, 'run-visual-tests') || needs.e2e-changes.outputs.changed == 'true') && github.event.pull_request.head.repo.full_name == github.repository)) }}
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
   e2e-tests:
     name: 🤖 End-to-End Tests
-    needs: deploy
-    # Runs on main and on PRs labeled `run-visual-tests`
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests'))
+    needs: [deploy, e2e-changes]
+    # Runs on main, on PRs labeled `run-visual-tests` and on PRs that change anything in `tests/e2e` (e.g. snapshots)
+    if: ${{ !cancelled() && needs.deploy.result == 'success' && github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'run-visual-tests') || needs.e2e-changes.outputs.changed == 'true') }}
     uses: ./.github/workflows/e2e.yml
     with:
       url: ${{ needs.deploy.outputs.url }}
@@ -82,7 +105,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build, deploy, e2e-tests, code-quality-gate]
+    needs: [git-checks, build, e2e-changes, deploy, e2e-tests, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:
