@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { isMissingModuleError } from '@local/domains/components/utils/isMissingModuleError';
 import { compileCanonicalSource } from '@local/domains/content/compileCanonicalMdx';
 import MarkdownContent from '@local/domains/content/ui/MarkdownContent';
 import { componentBlockHeadingComponents } from '@local/mdx-components';
@@ -33,11 +34,11 @@ const WebTabPage = async ({ params }: WebTabPageProps) => {
       </ComponentsBand>
     );
   } catch (error) {
-    if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') {
-      logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
-
-      return null;
+    if (isMissingModuleError(error)) {
+      notFound();
     }
+
+    logError(`[ComponentView] Failed to load Web README for "${component}":`, error);
 
     throw error;
   }

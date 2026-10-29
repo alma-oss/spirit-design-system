@@ -1,9 +1,11 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
+import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { WebPreview } from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
+import { isMissingModuleError } from '@local/domains/components/utils/isMissingModuleError';
 import { isComponentTabHidden } from '@local/domains/content/componentDocsRepository';
 import { componentSegments } from '@local/domains/routing/routes';
 import { notFound } from 'next/navigation';
@@ -18,7 +20,11 @@ const { error: logError } = console;
 const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
   const { component } = await params;
 
-  if (!isValidComponentSlug(component) || (await isComponentTabHidden(component, componentSegments.webPreview))) {
+  if (
+    !isValidComponentSlug(component) ||
+    !getComponentViewsAvailability(component).webPreview ||
+    (await isComponentTabHidden(component, componentSegments.webPreview))
+  ) {
     notFound();
   }
 
@@ -38,9 +44,13 @@ const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
       </ComponentsBand>
     );
   } catch (error) {
+    if (isMissingModuleError(error)) {
+      notFound();
+    }
+
     logError(`[ComponentView] Failed to load Web Preview for "${component}":`, error);
 
-    return null;
+    throw error;
   }
 };
 
