@@ -60,6 +60,46 @@ describe('Navigation as toolbar', () => {
     expect(screen.getByRole('toolbar').localName).toBe('div');
   });
 
+  describe('development warnings', () => {
+    let warn: jest.SpyInstance;
+
+    beforeEach(() => {
+      warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    it('should render a div when elementType is nav', () => {
+      render(
+        <Navigation role="toolbar" elementType="nav" aria-label="CV actions">
+          <NavigationItem>
+            <Button>Share</Button>
+          </NavigationItem>
+        </Navigation>,
+      );
+
+      expect(screen.getByRole('toolbar').localName).toBe('div');
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('not allowed on `nav`'));
+    });
+
+    it('should warn when a toolbar has no accessible name', () => {
+      render(
+        <Navigation role="toolbar">
+          <NavigationItem>
+            <Button>Share</Button>
+          </NavigationItem>
+        </Navigation>,
+      );
+
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('aria-label'));
+    });
+  });
+
+  it('should not expose list semantics', () => {
+    renderToolbar();
+
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+  });
+
   it('should default the orientation to horizontal', () => {
     renderToolbar();
 

@@ -1,7 +1,7 @@
 # Toolbar
 
-A [toolbar][apg-toolbar] groups a set of controls, e.g. actions for the document being edited, into a single Tab stop.
-The `Navigation` component uses these hooks when it has `role="toolbar"`.
+A [toolbar][apg-toolbar] groups 3 or more controls, e.g. actions for the document being edited, into a single Tab stop.
+Do not use the toolbar role for one or two controls. The `Navigation` component uses these hooks when it has `role="toolbar"`.
 
 ## Features
 
@@ -9,7 +9,8 @@ The `Navigation` component uses these hooks when it has `role="toolbar"`.
 - The focused (or clicked) item becomes the active one, so Tab returns to it
 - Arrow keys matching the orientation move focus with wrapping, Left and Right are swapped in right-to-left layouts
 - Home/End move focus to the first/last item
-- Items follow the DOM order, disabled and non-interactive items are left out
+- Items follow the DOM order. Disabled, hidden and non-interactive items are left out
+- The hook is for button-like controls (`a` and `button`). Text fields, text areas and selects stay separate Tab stops and keep their own arrow keys
 - Keys already handled by an item (`event.defaultPrevented`) are ignored
 
 ## Anatomy

@@ -200,6 +200,89 @@ describe('useToolbar', () => {
     expect(screen.getByRole('button', { name: 'Inside boundary' })).not.toHaveAttribute('tabindex');
   });
 
+  it('should leave text fields and selects out of the toolbar', async () => {
+    const user = userEvent.setup();
+    const TextInput = () => {
+      const toolbarItemProps = useToolbarItem<HTMLInputElement>({});
+
+      return <input aria-label="Name" defaultValue="ab" {...toolbarItemProps} />;
+    };
+    const SelectInput = () => {
+      const toolbarItemProps = useToolbarItem<HTMLSelectElement>({});
+
+      return (
+        <select aria-label="Size" defaultValue="s" {...toolbarItemProps}>
+          <option value="s">S</option>
+          <option value="m">M</option>
+        </select>
+      );
+    };
+
+    render(
+      <Toolbar>
+        <CustomButton>First</CustomButton>
+        <TextInput />
+        <SelectInput />
+        <CustomButton>Second</CustomButton>
+      </Toolbar>,
+    );
+
+    const textField = screen.getByRole('textbox', { name: 'Name' });
+    const select = screen.getByRole('combobox', { name: 'Size' });
+
+    expect(textField).not.toHaveAttribute('tabindex');
+    expect(select).not.toHaveAttribute('tabindex');
+    expect(screen.getByRole('button', { name: 'Second' })).toHaveAttribute('tabindex', '-1');
+
+    await user.tab();
+
+    expect(screen.getByRole('button', { name: 'First' })).toHaveFocus();
+
+    await user.tab();
+
+    expect(textField).toHaveFocus();
+
+    await user.keyboard('{ArrowLeft}');
+
+    expect(textField).toHaveFocus();
+
+    await user.tab();
+
+    expect(select).toHaveFocus();
+
+    await user.keyboard('{ArrowDown}');
+
+    expect(select).toHaveFocus();
+  });
+
+  it('should keep a consumer tabIndex until the toolbar picks a tab stop', () => {
+    const Item = () => {
+      const toolbarItemProps = useToolbarItem<HTMLButtonElement>({});
+
+      return (
+        <button type="button" tabIndex={-1} {...toolbarItemProps}>
+          Item
+        </button>
+      );
+    };
+
+    render(
+      <ToolbarContextProvider
+        value={{
+          activeKey: null,
+          isEnabled: true,
+          onItemKeyDown: () => {},
+          register: () => () => {},
+          setActiveKey: () => {},
+        }}
+      >
+        <Item />
+      </ToolbarContextProvider>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Item' })).toHaveAttribute('tabindex', '-1');
+  });
+
   it('should leave items outside of a toolbar untouched', () => {
     render(<CustomButton>Alone</CustomButton>);
 

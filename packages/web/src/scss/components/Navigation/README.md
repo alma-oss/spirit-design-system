@@ -42,18 +42,22 @@ it will insert a gap between them.
 
 ### Toolbar
 
-Use `role="toolbar"` for a persistent, always-visible group of actions that is not site navigation, e.g. actions
-for the document being edited. Use a `div` instead of `nav`, because the `toolbar` role is not allowed on `nav`,
-and set `aria-orientation` to match the direction.
+Use `role="toolbar"` for a persistent, always-visible group of 3 or more actions that is not site navigation, e.g. actions
+for the document being edited. Do not use the toolbar role for one or two controls. Use a `div` instead of `nav`,
+because the `toolbar` role is not allowed on `nav`, and set `aria-orientation` to match the direction. The `ul` and
+`li` use `role="presentation"` so assistive technologies do not announce them as a list on top of the toolbar.
 
 ```html
 <div class="Navigation Navigation--vertical" role="toolbar" aria-label="CV actions" aria-orientation="vertical">
-  <ul>
-    <li class="NavigationItem NavigationItem--alignmentYCenter">
+  <ul role="presentation">
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
       <a href="#" class="NavigationAction NavigationAction--pill" tabindex="0">Preview</a>
     </li>
-    <li class="NavigationItem NavigationItem--alignmentYCenter">
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
       <button type="button" class="NavigationAction NavigationAction--pill" tabindex="-1">Download</button>
+    </li>
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <button type="button" class="NavigationAction NavigationAction--pill" tabindex="-1">Share</button>
     </li>
   </ul>
 </div>
@@ -72,7 +76,7 @@ and set `aria-orientation` to match the direction.
 
 ℹ️ The toolbar uses a roving tabindex: the active item has `tabindex="0"`, the other items `tabindex="-1"`.
 Interactive `NavigationAction`, `NavigationAvatar` and `Button` elements are the items, disabled actions (`span`) are
-skipped. Other focusable content, e.g. a form field, stays a separate Tab stop.
+skipped. Other focusable content, e.g. a form field, stays a separate Tab stop and keeps its own arrow keys.
 
 ## Navigation Item
 

@@ -15,8 +15,10 @@ import { isElementHidden } from '../../utils';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { type ToolbarContextType, useToolbarContext } from './ToolbarContext';
 
-// Non-interactive elements (e.g. a `div` avatar) must not become focusable through the toolbar.
-const INTERACTIVE_SELECTOR = 'a[href], button, input, select, textarea';
+// Links and buttons join the toolbar. Text fields, selects and text areas do not: their arrow keys
+// must keep moving the caret or changing the value (WCAG 2.1.1). Non-interactive elements
+// (e.g. a `div` avatar) must not become focusable through the toolbar either.
+const INTERACTIVE_SELECTOR = 'a[href], button';
 
 export interface UseToolbarItemProps<T extends HTMLElement> {
   /** Whether the item is disabled and left out of the toolbar */
@@ -42,7 +44,7 @@ interface ToolbarItemRegistration {
 
 /**
  * Props for an item of a toolbar provided by `useToolbar`: roving `tabIndex`, focus tracking and arrow keys.
- * Outside a toolbar, or for a disabled or non-interactive item, the consumer's handlers stay untouched.
+ * Outside a toolbar, or for a disabled, non-interactive or text-entry item, the consumer's handlers stay untouched.
  *
  * @param props Item props
  * @param props.isDisabled Whether the item is disabled and left out of the toolbar
@@ -132,7 +134,8 @@ export const useToolbarItem = <T extends HTMLElement>({
 
   return {
     ref: setRef,
-    tabIndex,
+    // Omit `tabIndex` until the toolbar picks a Tab stop, so a consumer-provided `tabIndex` is kept.
+    ...(tabIndex !== undefined && { tabIndex }),
     onFocus: (event: FocusEvent<T>) => {
       onFocus?.(event);
       setActiveKey(key);
