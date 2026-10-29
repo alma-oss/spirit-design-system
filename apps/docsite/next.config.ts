@@ -24,6 +24,8 @@ const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: Str
 };
 
 const nextConfig: NextConfig = {
+  // Spirit keeps its own agent instructions in `AGENTS.md`, so `next dev` must not generate or update them.
+  agentRules: false,
   // `tsconfig.json` maps workspace packages to their sources so type checking and linting do not need a build.
   // The production build type-checks against the built packages instead, see `tsconfig.prod.json`.
   typescript: {
