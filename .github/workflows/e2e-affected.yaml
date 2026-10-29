@@ -1,0 +1,54 @@
+name: 🔎 E2E Affected
+
+# Decides whether the deploy → e2e chain should run for the current event, so the consuming jobs
+# only read the `run` output and need no conditions of their own.
+#
+# E2E tests run when all of these hold:
+#   - the event is not the scheduled run
+#   - the commit is on `main`, or the pull request is not from a fork (forks do not receive the Netlify secrets)
+#   - on a pull request: it is labeled `run-visual-tests` or it changes anything in `tests/e2e` (e.g. snapshots)
+
+on:
+  workflow_call:
+    outputs:
+      run:
+        description: 'Whether the deploy and E2E tests should run'
+        value: ${{ jobs.affected.outputs.run }}
+
+permissions:
+  pull-requests: read
+
+jobs:
+  affected:
+    name: 🔎 Deciding on E2E Tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+    steps:
+      # Lists files through the API, so no checkout is needed and rebased branches are compared against the current base
+      - name: Decide
+        id: decide
+        run: |
+          run=false
+          if [[ "$EVENT_NAME" == "push" && "$REF" == "refs/heads/main" ]]; then
+            run=true
+          elif [[ "$EVENT_NAME" == "pull_request" && "$HEAD_REPO" == "$REPOSITORY" ]]; then
+            if [[ "$LABELED" == "true" ]]; then
+              run=true
+            else
+              changed_files=$(gh api --paginate "repos/$REPOSITORY/pulls/$PR_NUMBER/files" --jq '.[] | .filename, (.previous_filename // empty)')
+              if grep -q '^tests/e2e/' <<< "$changed_files"; then
+                run=true
+              fi
+            fi
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          REPOSITORY: ${{ github.repository }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          LABELED: ${{ contains(github.event.pull_request.labels.*.name, 'run-visual-tests') }}
