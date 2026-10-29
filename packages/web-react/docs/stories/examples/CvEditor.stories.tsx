@@ -255,13 +255,6 @@ export const CvEditor = () => {
                     onToggle={onPersonalDetailsDropdownToggle}
                     placement="bottom-end"
                   >
-                    {/* TODO: DS-2749 — Consider making Card declare a background color context
-
-                        Card sets `background-color` directly, without the local background color variable that the
-                        `bg-*` utilities and color schemes set — so a ControlButton inside a Card cannot resolve its
-                        `white` background. Not a problem here: Surface is a Box, and `backgroundColor="primary"`
-                        does declare the context. The gap on Card's side remains.
-                    */}
                     <DropdownTrigger elementType={ControlButton} size="large" isSymmetrical>
                       <VisuallyHidden>Zobrazit akce</VisuallyHidden>
                       <Icon name="more" />
