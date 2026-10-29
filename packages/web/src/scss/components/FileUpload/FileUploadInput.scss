@@ -1,6 +1,8 @@
-// 1. Make whole drop zone clickable. Cursor is hard-coded because links always use pointer.
-// 2. We need to target inner elements in a specific component state.
+// 1. Declare the background context so nested components and dynamic colors resolve against the drop zone.
+// 2. Make whole drop zone clickable. Cursor is hard-coded because links always use pointer.
+// 3. We need to target inner elements in a specific component state.
 
+@use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../settings/form-fields' as form-fields-settings;
 @use '../../tools/accessibility';
@@ -23,7 +25,9 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput__dropZone {
-    position: relative; // 1.
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background}; // 3.
+
+    position: relative; // 2.
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: repeat(3, auto);
@@ -61,7 +65,7 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput__dropZoneLabel {
-    @include pseudo-element.stretch(); // 1.
+    @include pseudo-element.stretch(); // 2.
     @include typography.generate(theme.$input-drop-zone-label-typography);
 
     color: theme.$input-drop-zone-label-color;
@@ -73,11 +77,15 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput__dropZone:hover {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background-state-hover}; // 3.
+
     border-color: theme.$input-drop-zone-border-color-state-hover;
     background-color: theme.$input-drop-zone-background-state-hover;
 }
 
 .FileUploadInput__input:where(:active) ~ .FileUploadInput__dropZone {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background-state-active}; // 3.
+
     border-color: theme.$input-drop-zone-border-color-state-active;
     background-color: theme.$input-drop-zone-background-state-active;
 }
@@ -86,12 +94,12 @@ $_field-name: 'FileUploadInput';
     box-shadow: form-fields-settings.$input-focus-shadow;
 }
 
-// stylelint-disable-next-line selector-max-class -- 2.
+// stylelint-disable-next-line selector-max-class -- 3.
 .FileUploadInput.has-drag-and-drop > .FileUploadInput__dropZone {
     border-style: dashed;
 }
 
-// stylelint-disable-next-line selector-max-class -- 2.
+// stylelint-disable-next-line selector-max-class -- 3.
 .FileUploadInput.is-dragging > .FileUploadInput__dropZone {
     border-color: theme.$input-drop-zone-border-color-state-dragging;
 }
@@ -105,6 +113,8 @@ $_field-name: 'FileUploadInput';
 }
 
 .FileUploadInput > .FileUploadInput__dropZone--disabled {
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$input-drop-zone-background-state-disabled}; // 3.
+
     border-style: dashed;
     border-color: theme.$input-drop-zone-border-color-state-disabled;
     background-color: theme.$input-drop-zone-background-state-disabled;
