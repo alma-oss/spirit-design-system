@@ -7,7 +7,7 @@ interface NotFoundContentProps {
 
 export const NotFoundContent = ({ elementType = 'div' }: NotFoundContentProps) => (
   <Flex elementType={elementType} alignmentX="center" alignmentY="center">
-    <Section size="medium">
+    <Section size="xlarge">
       <EmptyState spacing="space-900">
         <EmptyStateSection>
           <Heading elementType="h1" size="xlarge">

@@ -1,6 +1,7 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
+import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { WebPreview } from '@local/domains/components/ui/WebPreview';
 import { compilePreview } from '@local/domains/components/utils/compilePreview';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
@@ -19,7 +20,11 @@ const { error: logError } = console;
 const WebPreviewTabPage = async ({ params }: WebPreviewTabProps) => {
   const { component } = await params;
 
-  if (!isValidComponentSlug(component) || (await isComponentTabHidden(component, componentSegments.webPreview))) {
+  if (
+    !isValidComponentSlug(component) ||
+    !getComponentViewsAvailability(component).webPreview ||
+    (await isComponentTabHidden(component, componentSegments.webPreview))
+  ) {
     notFound();
   }
 
