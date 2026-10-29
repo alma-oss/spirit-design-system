@@ -1,4 +1,7 @@
-// 1. Establish a random number of grid rows that is high enough to accommodate the usual number of pricing plan
+// 1. Declare the background context so nested components and dynamic colors resolve against the plan, including its
+//    highlighted variant.
+//
+// 2. Establish a random number of grid rows that is high enough to accommodate the usual number of pricing plan
 //    features. The number of rows must be defined to allow for the subgrid layout of the subcomponents. In other words,
 //    auto rows cannot be used. The default number of rows can be overridden from outside of the component via a custom
 //    property.
@@ -7,7 +10,7 @@
 //    items), bodies, and (optional) footers are vertically aligned with each other. In this scenario, Matrix replaces
 //    the default pricing plan rows with its own rows.
 //
-// 2. Establish named grid lines for subcomponents to make the placement of individual plan items (mostly in the header)
+// 3. Establish named grid lines for subcomponents to make the placement of individual plan items (mostly in the header)
 //    easier. An additional element is needed to do so because `grid-template-rows` of the root element can be
 //    overridden to `subgrid` by the component's parent (typically the Matrix component), making the line names
 //    unavailable.
@@ -19,10 +22,15 @@
 @use 'theme';
 
 .PricingPlan {
+    --#{tokens.$css-variable-prefix}local-background-color: var(
+        --#{tokens.$css-variable-prefix}pricing-plan-background-color,
+        #{theme.$background-color}
+    ); // 3.
+
     @include typography.generate(theme.$typography);
 
     display: grid;
-    grid-template-rows: repeat(var(--#{tokens.$css-variable-prefix}pricing-plan-rows, theme.$rows), auto); // 1.
+    grid-template-rows: repeat(var(--#{tokens.$css-variable-prefix}pricing-plan-rows, theme.$rows), auto); // 2.
     min-width: theme.$min-width;
     color: theme.$color;
     border: theme.$border-width solid
@@ -41,7 +49,7 @@
         [price]
         [action]
         [note]
-        [header-end body-start]; // 2.
+        [header-end body-start]; // 3.
 
     grid-row: 1 / -1;
 }

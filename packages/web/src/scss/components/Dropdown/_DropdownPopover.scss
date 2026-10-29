@@ -1,4 +1,5 @@
-// 1. Prevent options with long text from overflowing the popover.
+// 1. Declare the background context so nested components and dynamic colors resolve against the popover.
+// 2. Prevent options with long text from overflowing the popover.
 
 @use 'sass:map';
 @use '@tokens' as tokens;
@@ -9,6 +10,7 @@
 
 .DropdownPopover {
     --#{tokens.$css-variable-prefix}placement-offset: #{theme.$offset};
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background}; // 2.
 
     @include placement.child();
 
@@ -22,13 +24,13 @@
     &[data-spirit-fullwidthmode='mobile-only'] {
         @include breakpoint.down(map.get(theme.$breakpoints, tablet)) {
             width: 100%;
-            min-width: min-content; // 1.
+            min-width: min-content; // 2.
         }
     }
 
     &[data-spirit-fullwidthmode='all'] {
         width: 100%;
-        min-width: min-content; // 1.
+        min-width: min-content; // 2.
     }
 }
 
