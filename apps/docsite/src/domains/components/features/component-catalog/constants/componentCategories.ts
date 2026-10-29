@@ -50,11 +50,11 @@ export const COMPONENT_CATEGORIES: Record<string, string[]> = {
     'UNSTABLE_Picker',
   ],
   Indicators: ['Pill', 'Tag', 'UNSTABLE_SplitTag'],
-  Layout: ['Box', 'Container', 'Flex', 'Footer', 'Grid', 'Header', 'Matrix', 'ScrollView', 'Section', 'Stack'],
+  Layout: ['Container', 'Flex', 'Grid', 'Matrix', 'Stack'],
   'Media and Icons': ['Avatar', 'Icon', 'IconBox', 'PartnerLogo', 'ProductLogo'],
   Navigation: ['Breadcrumbs', 'Navigation', 'Pagination', 'SkipLink', 'Tabs'],
   Overlays: ['ContextualHelp', 'Dialog', 'Drawer', 'Dropdown', 'Modal', 'Tooltip'],
-  Structure: ['Accordion', 'Divider', 'UNSTABLE_Tile'],
+  Structure: ['Accordion', 'Box', 'Divider', 'Footer', 'Header', 'ScrollView', 'Section', 'UNSTABLE_Tile'],
   Text: ['ActionText', 'CaptionText', 'Heading', 'Text', 'UNSTABLE_DisplayHeading', 'UNSTABLE_EyebrowText'],
   Utilities: ['Collapse', 'Hidden', 'NoSsr', 'Truncate', 'VisuallyHidden'],
 };
@@ -73,7 +73,7 @@ export const COMPONENT_CATEGORY_DESCRIPTIONS: Record<string, string> = {
   Indicators:
     'Compact labels attached to something else to show its status, count, or category. They let people scan and compare items at a glance.',
   Layout:
-    'Elements that set where content sits on a page, from page regions and width to columns, gaps, and padding. They define spacing, alignment, and the responsive grid of an interface.',
+    'Elements that only set where content sits, such as width, columns, gaps, and alignment, without a surface of their own. They define the spacing and the responsive grid of an interface.',
   'Media and Icons':
     'Imagery that stands for a person, a brand, or an idea. They carry avatars, icons, and brand marks.',
   Navigation:
@@ -81,7 +81,7 @@ export const COMPONENT_CATEGORY_DESCRIPTIONS: Record<string, string> = {
   Overlays:
     'Surfaces that appear above the page, tied to a trigger, until they are dismissed. They keep extra content or a focused task in context.',
   Structure:
-    'Surfaces and separators that group, separate, or collapse any content without dictating what goes inside. They break a page into digestible parts.',
+    'Surfaces and separators that frame, group, separate, or collapse any content without dictating what goes inside. They break a page into regions and digestible parts.',
   Text: 'Components that only render text in a predefined style, without belonging to another component. They establish hierarchy and readability across headings, body copy, and supporting text.',
   Utilities:
     'Helpers that adjust behavior or visibility without adding visual design of their own. They support accessibility, responsiveness, and rendering.',
