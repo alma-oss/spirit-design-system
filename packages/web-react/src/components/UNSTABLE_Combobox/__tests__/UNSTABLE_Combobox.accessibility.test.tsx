@@ -1,12 +1,35 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { accessibilityAriaDescribedByTest } from '@local/tests';
 import { Label } from '../..';
 import { UNSTABLE_Combobox, UNSTABLE_ComboboxOption } from '..';
 
 jest.mock('../../../hooks/useIcon');
 
 describe('UNSTABLE_Combobox accessibility', () => {
+  accessibilityAriaDescribedByTest(
+    (props) => (
+      <UNSTABLE_Combobox
+        {...props}
+        id="combobox-aria-describedby"
+        label="Languages"
+        isOpen={false}
+        onToggle={jest.fn()}
+        selectedKeys={[]}
+        onSelectionChange={jest.fn()}
+        inputValue=""
+        onInputChange={jest.fn()}
+        optionKeys={['cs']}
+      >
+        <UNSTABLE_ComboboxOption value="cs">
+          <Label>Czech</Label>
+        </UNSTABLE_ComboboxOption>
+      </UNSTABLE_Combobox>
+    ),
+    'input[role="combobox"]',
+  );
+
   it('should have accessible name and closed combobox pattern attributes by default', () => {
     render(
       <UNSTABLE_Combobox
