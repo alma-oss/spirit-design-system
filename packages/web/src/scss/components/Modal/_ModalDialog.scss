@@ -3,8 +3,10 @@
 // 3. Intentionally transition also the worse performing properties to smooth out the changes of viewport size around
 //    the tablet breakpoint. However, `top` and `bottom` are not transitioned when switching from and to `auto`.
 // 4. Override bottom padding of parent `.Modal` in the docked variant.
+// 5. Declare the background context so nested components and dynamic colors resolve against the dialog.
 
 @use 'sass:map';
+@use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/typography';
@@ -12,6 +14,7 @@
 
 .ModalDialog {
     --scroll-view-vertical-height: auto; // 1.
+    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$dialog-background-color}; // 5.
 
     @include typography.generate(theme.$typography);
 

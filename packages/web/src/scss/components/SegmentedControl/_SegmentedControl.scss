@@ -1,5 +1,6 @@
 // 1. When a Tooltip is used, an additional wrapper is added around the label, so we need to pass the transition to the label.
 // 2. Because this is another component we can't use the specific class.
+// 3. Declare the background context so nested components and dynamic colors resolve against the track.
 
 @use '@tokens' as tokens;
 @use '../../tools/component-radius-overrides';
@@ -9,6 +10,10 @@
 @use 'tools';
 
 .SegmentedControl {
+    --#{tokens.$css-variable-prefix}local-background-color: var(
+        --#{tokens.$css-variable-prefix}segmented-control-background-color
+    ); // 3.
+
     @include nested-radius.inset(
         $infix: 'segmented-control-item',
         $container-radius: theme.$border-radius,
