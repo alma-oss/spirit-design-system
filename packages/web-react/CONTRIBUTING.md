@@ -13,8 +13,8 @@ Do not forget to export and register new component in all necessary places:
 
 In the repository root:
 
-- `docs/components.schema.yaml`: list the component in `components` and place it in a category by the
-  placement rule at the top of the file
+- `docs/component-categories.yaml`: place the component in a category by the placement rule at the top of
+  the file
 
 ### File Hierarchy
 

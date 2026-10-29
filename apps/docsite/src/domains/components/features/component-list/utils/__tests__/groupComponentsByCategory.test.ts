@@ -1,4 +1,4 @@
-import { groupComponentsByCategory, UNCATEGORIZED_CATEGORY } from '../groupComponentsByCategory';
+import { groupComponentsByCategory } from '../groupComponentsByCategory';
 
 const componentCategories = {
   Actions: { description: 'Actions description.', components: ['Button'] },
@@ -33,19 +33,12 @@ describe('groupComponentsByCategory', () => {
     expect(formsCategory?.components).toEqual(['Checkbox', 'Radio', 'TextField']);
   });
 
-  it('should place unknown components in an Uncategorized group', () => {
-    const result = groupComponentsByCategory(['NonExistent', 'AlsoUnknown'], componentCategories);
-    const uncategorized = result.find(({ category }) => category === UNCATEGORIZED_CATEGORY);
-
-    expect(uncategorized?.components).toEqual(['AlsoUnknown', 'NonExistent']);
-    expect(uncategorized?.description).toBeUndefined();
-  });
-
-  it('should place Uncategorized group at the end', () => {
+  it('should leave out components missing from the categories', () => {
     const result = groupComponentsByCategory(['Button', 'Unknown'], componentCategories);
-    const categories = result.map(({ category }) => category);
 
-    expect(categories).toEqual(['Actions', UNCATEGORIZED_CATEGORY]);
+    expect(result).toEqual([
+      { category: 'Actions', description: componentCategories.Actions.description, components: ['Button'] },
+    ]);
   });
 
   it('should return an empty array for empty input', () => {

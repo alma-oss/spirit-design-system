@@ -21,11 +21,9 @@ const CategoricalComponentList = ({ components, categories }: CategoricalCompone
           <Heading elementType="h2" size="small" fontWeight="semibold" marginBottom="space-700">
             {category}
           </Heading>
-          {description && (
-            <Text elementType="p" size="large" textColor="secondary" marginBottom="space-0">
-              {description}
-            </Text>
-          )}
+          <Text elementType="p" size="large" textColor="secondary" marginBottom="space-0">
+            {description}
+          </Text>
         </div>
       </ComponentsBand>
       <ComponentsBand variant={COMPONENTS_BAND_VARIANTS.GRID}>
