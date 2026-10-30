@@ -2,10 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
 import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { FileData } from '../../config/fileConfig';
+import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { commonThemedFilesData, FileData, themedFilesData } from '../../config/fileConfig';
+import { createDefaultFontSizeBaseMap } from '../../helpers/unitHelper';
+import { exampleThemeShadowGroups, exampleThemeShadowTokens } from '../../../tests/fixtures/exampleThemeShadowTokens';
 import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import {
   generateFileContent,
   addDisclaimer,
@@ -49,6 +51,87 @@ describe('contentGenerator', () => {
       });
 
       expect(fileContent).toStrictEqual({ content: mockedExpectedResult });
+    });
+  });
+
+  describe('generateFileContent for shadow lengths', () => {
+    const findFileData = (filesData: FileData[], fileName: string) =>
+      filesData.find((fileData) => fileData.fileName === fileName) as FileData;
+
+    const dataProvider = [
+      {
+        description: 'theme-collection lengths of any shadow with a single css variables mixin',
+        fileData: findFileData(themedFilesData, 'shadows'),
+        hasJsOutput: false,
+        expectedContent: `$elevation-100-offset-y-01: 0.25rem !default;
+
+$focus-ring-spread-radius-01: 0.125rem !default;
+
+$shadow-100-blur-radius-01: 0.5rem !default;
+$shadow-100-offset-y-01: 0.125rem !default;
+$shadow-100-offset-y-02: 0.25rem !default;
+
+@mixin shadow-css-variables {
+    --spirit-elevation-100-offset-y-01: #{$elevation-100-offset-y-01};
+    --spirit-focus-ring-spread-radius-01: #{$focus-ring-spread-radius-01};
+    --spirit-shadow-100-blur-radius-01: #{$shadow-100-blur-radius-01};
+    --spirit-shadow-100-offset-y-01: #{$shadow-100-offset-y-01};
+    --spirit-shadow-100-offset-y-02: #{$shadow-100-offset-y-02};
+}
+`,
+      },
+      {
+        description: 'theme-collection shadow lengths with js output',
+        fileData: findFileData(themedFilesData, 'shadows'),
+        hasJsOutput: true,
+        expectedContent: `export const elevation100OffsetY01 = '0.25rem';
+
+export const focusRingSpreadRadius01 = '0.125rem';
+
+export const shadow100BlurRadius01 = '0.5rem';
+export const shadow100OffsetY01 = '0.125rem';
+export const shadow100OffsetY02 = '0.25rem';
+`,
+      },
+      {
+        description: 'references to shadow length css variables',
+        fileData: findFileData(commonThemedFilesData, 'shadow-tokens'),
+        hasJsOutput: false,
+        expectedContent: `$elevation-100-offset-y-01: var(--spirit-elevation-100-offset-y-01);
+
+$focus-ring-spread-radius-01: var(--spirit-focus-ring-spread-radius-01);
+
+$shadow-100-blur-radius-01: var(--spirit-shadow-100-blur-radius-01);
+$shadow-100-offset-y-01: var(--spirit-shadow-100-offset-y-01);
+$shadow-100-offset-y-02: var(--spirit-shadow-100-offset-y-02);
+`,
+      },
+      {
+        description: 'references to shadow length css variables with js output',
+        fileData: findFileData(commonThemedFilesData, 'shadow-tokens'),
+        hasJsOutput: true,
+        expectedContent: `export const elevation100OffsetY01 = 'var(--spirit-elevation-100-offset-y-01)';
+
+export const focusRingSpreadRadius01 = 'var(--spirit-focus-ring-spread-radius-01)';
+
+export const shadow100BlurRadius01 = 'var(--spirit-shadow-100-blur-radius-01)';
+export const shadow100OffsetY01 = 'var(--spirit-shadow-100-offset-y-01)';
+export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
+`,
+      },
+    ];
+
+    it.each(dataProvider)('should generate $description', ({ fileData, hasJsOutput, expectedContent }) => {
+      const { content } = generateFileContent({
+        tokens: exampleThemeShadowTokens,
+        mappedTokens,
+        tokenGroups: exampleThemeShadowGroups,
+        fileData,
+        fontSizeBaseMapOverride: createDefaultFontSizeBaseMap(),
+        hasJsOutput,
+      });
+
+      expect(content).toBe(addDisclaimer(expectedContent));
     });
   });
 
