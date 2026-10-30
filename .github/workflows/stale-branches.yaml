@@ -1,0 +1,123 @@
+# Stale Branches Workflow
+#
+# Deletes remote branches that have had no commits for more than STALE_DAYS
+# and have no open pull request. Runs once a month, or can be triggered
+# manually.
+#
+# Never deleted:
+# - the default branch
+# - protected branches
+# - branches matching KEEP_PATTERN (main, release/*)
+#
+# Manual runs default to a dry run that only reports the candidates.
+# The scheduled run really deletes. Every deleted branch is listed in the job
+# summary together with its SHA, so it can be restored:
+#   git push origin <sha>:refs/heads/<branch>
+
+name: 🧹 Stale Branches
+
+on:
+  schedule:
+    # first day of every month at 03:00
+    - cron: '0 3 1 * *'
+  # allow manual trigger
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Only list stale branches, do not delete them'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  delete-stale-branches:
+    name: 🗑️ Delete Stale Branches
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      STALE_DAYS: 180
+      KEEP_PATTERN: '^(main|release/.+)$'
+      # scheduled runs have no inputs, so they are not a dry run
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+
+    steps:
+      - name: Find stale branches
+        id: find
+        run: |
+          set -euo pipefail
+
+          CUTOFF=$(date -u -d "${STALE_DAYS} days ago" +%Y-%m-%dT%H:%M:%SZ)
+          OWNER="${GITHUB_REPOSITORY%/*}"
+          NAME="${GITHUB_REPOSITORY#*/}"
+
+          # Names of protected branches
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/branches?protected=true" \
+            --jq '.[].name' > protected.txt
+
+          # Head branches of open pull requests
+          gh pr list --repo "${GITHUB_REPOSITORY}" --state open --limit 1000 \
+            --json headRefName --jq '.[].headRefName' > open-prs.txt
+
+          # All branches with their last commit date
+          gh api graphql --paginate -F owner="${OWNER}" -F name="${NAME}" -f query='
+            query($owner: String!, $name: String!, $endCursor: String) {
+              repository(owner: $owner, name: $name) {
+                defaultBranchRef { name }
+                refs(refPrefix: "refs/heads/", first: 100, after: $endCursor) {
+                  nodes {
+                    name
+                    target { ... on Commit { oid committedDate } }
+                  }
+                  pageInfo { hasNextPage endCursor }
+                }
+              }
+            }' > branches.json
+
+          DEFAULT_BRANCH=$(jq -r '.data.repository.defaultBranchRef.name' branches.json | head -n 1)
+
+          jq -r --arg cutoff "${CUTOFF}" '
+            .data.repository.refs.nodes[]
+            | select(.target.committedDate < $cutoff)
+            | [.name, .target.oid, .target.committedDate] | @tsv
+          ' branches.json \
+            | while IFS=$'\t' read -r branch sha date; do
+                [[ "${branch}" == "${DEFAULT_BRANCH}" ]] && continue
+                [[ "${branch}" =~ ${KEEP_PATTERN} ]] && continue
+                grep -qxF -- "${branch}" protected.txt && continue
+                grep -qxF -- "${branch}" open-prs.txt && continue
+                printf '%s\t%s\t%s\n' "${branch}" "${sha}" "${date}"
+              done > stale.tsv
+
+          echo "count=$(wc -l < stale.tsv | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Delete stale branches
+        if: ${{ steps.find.outputs.count != '0' }}
+        run: |
+          set -euo pipefail
+
+          if [[ "${DRY_RUN}" == "true" ]]; then
+            echo "### 🧪 Dry run: stale branches that would be deleted" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### 🗑️ Deleted stale branches" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Branch | Last commit | SHA |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| --- | --- | --- |" >> "$GITHUB_STEP_SUMMARY"
+
+          while IFS=$'\t' read -r branch sha date; do
+            if [[ "${DRY_RUN}" != "true" ]]; then
+              gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${branch}"
+            fi
+            echo "| \`${branch}\` | ${date} | \`${sha}\` |" >> "$GITHUB_STEP_SUMMARY"
+            echo "${branch} (${date}, ${sha})"
+          done < stale.tsv
+
+      - name: Nothing to delete
+        if: ${{ steps.find.outputs.count == '0' }}
+        run: |
+          echo "✅ No stale branches found."
+          echo "✅ No stale branches found." >> "$GITHUB_STEP_SUMMARY"
