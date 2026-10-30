@@ -28,13 +28,12 @@ depends on its content — not on how it looks, nor on a frame named "Section" i
 
 ### When to Use the `section` Element
 
-A `<section>` with an accessible name becomes a landmark that screen reader users can jump to. Use `section`
-only when the band:
+A `<section>` with an accessible name becomes a landmark that screen reader users can jump to. A `<section>`
+without an accessible name does not become a landmark: there is no semantic benefit, and no harm either. Use
+`section` only when the band holds content worth jumping to, e.g. search results.
 
-- has its own heading (`h2`, `h3`, …), and
-- holds content worth jumping to, e.g. search results.
-
-Link the heading using `aria-labelledby`:
+Prefer a visible heading (`h2`, `h3`, …) and link it with `aria-labelledby`. When the band has no visible
+heading, name it with `aria-label` instead. Browsers do not render `aria-label`.
 
 ```html
 <section class="py-1100 py-tablet-1300" aria-labelledby="similar-jobs-heading">
