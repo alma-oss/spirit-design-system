@@ -31,6 +31,14 @@ const meta: Meta<typeof Section> = {
         },
       },
     },
+    elementType: {
+      control: 'text',
+      table: {
+        defaultValue: { summary: 'section' },
+        type: { summary: 'ElementType' },
+      },
+      description: 'Element to render, e.g. "section" or "div". Use "div" for bands without their own heading.',
+    },
     hasContainer: {
       control: 'boolean',
       table: {
@@ -79,6 +87,7 @@ const meta: Meta<typeof Section> = {
   args: {
     backgroundColor: undefined,
     children: 'Section',
+    elementType: 'section',
     hasContainer: true,
     size: undefined,
     textAlignment: TextAlignments.LEFT,

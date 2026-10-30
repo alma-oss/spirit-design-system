@@ -3,20 +3,79 @@
 The `Section` component is a fundamental building block to group related content into
 semantically meaningful areas, enhancing both the structure and readability of your pages.
 
-There is no dedicated CSS class for the Section. Use a semantic `<section>` element with
-[utility classes][utilities] for paddings, background color and text alignment.
+There is no dedicated CSS class for the Section. Use a `<div>` or a `<section>` element (see [Semantics](#semantics))
+with [utility classes][utilities] for paddings, background color and text alignment.
 
 ```html
-<section class="py-1100 py-tablet-1300">Content</section>
+<div class="py-1100 py-tablet-1300">Content</div>
 ```
 
 In most cases, you will want to place a [Container][container] inside the Section to center and limit
 the width of the content:
 
 ```html
-<section class="py-1100 py-tablet-1300">
+<div class="py-1100 py-tablet-1300">
   <div class="Container">Content</div>
+</div>
+```
+
+Later examples use `<section>` for brevity.
+
+## Semantics
+
+Section is a layout band with padding, background and a Container. Whether it should be a `<section>` element
+depends on its content — not on how it looks, nor on a frame named "Section" in Figma.
+
+### When to Use the `section` Element
+
+A `<section>` with an accessible name becomes a landmark that screen reader users can jump to. A `<section>`
+without an accessible name does not become a landmark: there is no semantic benefit, and no harm either. Use
+`section` only when the band holds content worth jumping to, e.g. search results.
+
+Prefer a visible heading (`h2`, `h3`, …) and link it with `aria-labelledby`. When the band has no visible
+heading, name it with `aria-label` instead. Browsers do not render `aria-label`.
+
+```html
+<section class="py-1100 py-tablet-1300" aria-labelledby="similar-jobs-heading">
+  <div class="Container">
+    <h2 id="similar-jobs-heading">Similar jobs</h2>
+    …
+  </div>
 </section>
+```
+
+Otherwise, use a `<div>`, e.g. for a background stripe, a breadcrumb strip or a padding wrapper. This also
+applies to a band holding the page's `h1`: the `h1` heads the whole page, not a subsection.
+
+```html
+<div class="py-1000 py-tablet-1100 bg-secondary">
+  <div class="Container">
+    <h1>My CV</h1>
+  </div>
+</div>
+```
+
+### One Section or Several
+
+Start a new Section only where the background changes or a new region with its own heading begins. Otherwise,
+keep the content in one Section and space it inside, e.g. with [utility classes][utilities] or [Stack][stack].
+
+```html
+<!-- ❌ Two Sections for one band -->
+<section class="py-1000 py-tablet-1100">
+  <div class="Container"><nav aria-label="Breadcrumb" class="Breadcrumbs">…</nav></div>
+</section>
+<section class="py-1000 py-tablet-1100">
+  <div class="Container"><form>…</form></div>
+</section>
+
+<!-- ✅ One Section, rendered as `div` -->
+<div class="py-1000 py-tablet-1100">
+  <div class="Container">
+    <nav aria-label="Breadcrumb" class="Breadcrumbs mb-1000">…</nav>
+    <form>…</form>
+  </div>
+</div>
 ```
 
 ## Padding
@@ -98,4 +157,5 @@ Responsive values can be defined using the `tablet` and `desktop` infixes.
 [container]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Container/README.md
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
 [react-section]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Section/README.md
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
 [utilities]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/settings/_utilities.scss

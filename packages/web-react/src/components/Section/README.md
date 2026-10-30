@@ -11,6 +11,59 @@ background color.
 <Section>Content</Section>
 ```
 
+## Semantics
+
+Section is a layout band with padding, background and a Container. Whether it should also render a `<section>`
+element depends on its content — not on how it looks, nor on a frame named "Section" in Figma.
+
+### When to Render a `section` Element
+
+A `<section>` with an accessible name becomes a landmark that screen reader users can jump to. A `<section>`
+without an accessible name does not become a landmark: there is no semantic benefit, and no harm either. Keep
+the default `section` only when the band holds content worth jumping to, e.g. search results.
+
+Prefer a visible heading (`h2`, `h3`, …) and link it with `aria-labelledby`. When the band has no visible
+heading, name it with `aria-label` instead. Browsers do not render `aria-label`.
+
+```tsx
+<Section aria-labelledby="similar-jobs-heading">
+  <Heading elementType="h2" id="similar-jobs-heading">
+    Similar jobs
+  </Heading>
+  …
+</Section>
+```
+
+Otherwise, render a `div` using `elementType`, e.g. for a background stripe, a breadcrumb strip or a padding
+wrapper. This also applies to a band holding the page's `h1`: the `h1` heads the whole page, not a subsection.
+
+```tsx
+<Section elementType="div" backgroundColor="secondary">
+  <Heading elementType="h1">My CV</Heading>
+</Section>
+```
+
+### One Section or Several
+
+Start a new Section only where the background changes or a new region with its own heading begins. Otherwise,
+keep the content in one Section and space it inside, e.g. with [spacing props][readme-style-props] or [Stack][stack].
+
+```tsx
+// ❌ Two Sections for one band
+<Section size="small">
+  <Breadcrumbs items={…} />
+</Section>
+<Section size="small">
+  <form>…</form>
+</Section>
+
+// ✅ One Section, rendered as `div`
+<Section elementType="div" size="small">
+  <Breadcrumbs items={…} marginBottom="space-1000" />
+  <form>…</form>
+</Section>
+```
+
 ## Padding
 
 You can define padding using the `paddingY`, `paddingTop` or `paddingBottom` props.
@@ -153,3 +206,4 @@ and [escape hatches][readme-escape-hatches].
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
