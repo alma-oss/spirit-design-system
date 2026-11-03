@@ -3,12 +3,14 @@
 //    for the box-sizing. The box-sizing is inherited by the children, so we need to reset it to `border-box`.
 
 @use '@tokens' as tokens;
+@use '../../tools/local';
 @use 'theme';
 
 .Header {
     --#{tokens.$css-variable-prefix}header-height: #{theme.$height};
     --#{tokens.$css-variable-prefix}navigation-height: var(--#{tokens.$css-variable-prefix}header-height);
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color}; // 2.
+
+    @include local.set-background-color(theme.$background-color); // 1.
 
     flex: none;
     box-sizing: content-box; // 2.

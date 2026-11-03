@@ -30,9 +30,10 @@ to apply different color combinations. This approach had several drawbacks:
    - `<intensity>` is either `basic` or `subtle`
 
    A color scheme class sets the following CSS custom properties on the element it is applied to:
+   - `--spirit-color-scheme-background-color` (the scheme's base background color)
    - `--spirit-local-color` (text color)
    - `--spirit-local-border-color` (border color)
-   - `--spirit-local-background-color` (background color)
+   - `--spirit-local-background-color` (effective local background context, initialized from `--spirit-color-scheme-background-color` and updated by interactive surfaces on hover/active)
 
    When state tokens are defined for a given color category, additional state-specific CSS custom
    properties (e.g. for hover and active states) or intensity-specific CSS custom properties (e.g. `border-color-subtle`) are also set.

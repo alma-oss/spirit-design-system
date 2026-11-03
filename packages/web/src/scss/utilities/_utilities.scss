@@ -4,6 +4,7 @@
 @use '../settings/cursors';
 @use '../settings/utilities' as utilities-settings;
 @use '../tools/breakpoint';
+@use '../tools/local';
 @use '../tools/utilities';
 
 @each $breakpoint-name, $breakpoint-value in tokens.$breakpoints {
@@ -42,12 +43,16 @@
 }
 
 .disabled {
-    --#{tokens.$css-variable-prefix}local-color: #{tokens.$disabled-content} !important;
-    --#{tokens.$css-variable-prefix}local-border-color: #{tokens.$disabled-border} !important;
-    --#{tokens.$css-variable-prefix}local-border-color-subtle: #{tokens.$disabled-border} !important;
-    --#{tokens.$css-variable-prefix}local-background-color: #{tokens.$disabled-background} !important;
-    --#{tokens.$css-variable-prefix}local-background-color-state-hover: #{tokens.$disabled-background} !important;
-    --#{tokens.$css-variable-prefix}local-background-color-state-active: #{tokens.$disabled-background} !important;
+    @include local.set-color(tokens.$disabled-content, $important: true);
+    @include local.set-color-basic(tokens.$disabled-content, $important: true);
+    @include local.set-color-subtle(tokens.$disabled-content, $important: true);
+    @include local.set-border-color(tokens.$disabled-border, $important: true);
+    @include local.set-border-color-subtle(tokens.$disabled-border, $important: true);
+    @include local.set-background-color(tokens.$disabled-background, $important: true);
+    @include local.set-background-color-basic(tokens.$disabled-foreground, $important: true);
+    @include local.set-background-color-subtle(tokens.$disabled-background, $important: true);
+    @include local.set-background-color-state-hover(tokens.$disabled-background, $important: true);
+    @include local.set-background-color-state-active(tokens.$disabled-background, $important: true);
 
     user-select: none !important;
     pointer-events: none !important;

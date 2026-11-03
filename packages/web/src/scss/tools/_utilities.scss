@@ -94,7 +94,8 @@
             @if meta.type-of($value) == 'map' {
                 @each $property, $property-value in $value {
                     @if $generate-custom-properties {
-                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$property-value};
+                        // stylelint-disable-next-line declaration-no-important -- We are generating utilities
+                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$property-value} !important;
                     }
 
                     // stylelint-disable-next-line declaration-no-important -- We are generating utilities
@@ -104,7 +105,8 @@
                 // Original behavior: apply same value to all properties
                 @each $property in $properties {
                     @if $generate-custom-properties {
-                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$value};
+                        // stylelint-disable-next-line declaration-no-important -- We are generating utilities
+                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$value} !important;
                     }
 
                     // stylelint-disable-next-line declaration-no-important -- We are generating utilities

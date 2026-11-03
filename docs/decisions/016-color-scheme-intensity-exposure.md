@@ -37,10 +37,10 @@ out on a basic background.
    `--spirit-local-color` and `--spirit-local-background-color` continue to resolve to the pair implied by the
    `<intensity>` in the class name. The new properties are additive; nothing about the existing contract changes.
 
-2. **Sass accessors mirror the CSS custom properties.** The `tools/color-scheme` module exposes `color-basic()`,
-   `color-subtle()`, `background-color-basic()`, and `background-color-subtle()` alongside the existing `color()` and
-   `background-color()`, each taking an optional fallback. Component CSS reads the intensities through these rather
-   than writing the CSS custom property names by hand.
+2. **Sass accessors mirror the CSS custom properties.** The `tools/local` module exposes `get-color-basic()`,
+   `get-color-subtle()`, `get-background-color-basic()`, and `get-background-color-subtle()` alongside `get-color()` and
+   `get-background-color()` (plus matching `set-*` mixins), each getter taking an optional fallback. Component CSS reads
+   the intensities through these rather than writing the CSS custom property names by hand.
 
 3. **Categories without a pair reuse what they have.** The `disabled` category has no background pair of its own, so
    the disabled foreground stands in for the basic background: it is the color of a filled element sitting on a

@@ -19,8 +19,8 @@
 //    displayed, the margin box matches the caption line box exactly, so the row does not grow.
 
 @use '../../settings/transitions';
-@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
+@use '../../tools/local';
 @use 'theme';
 
 // 1.
@@ -45,15 +45,15 @@
         // 4.a
         radial-gradient(
                 circle #{theme.$indicator-cap-radius} at calc(100% - #{theme.$indicator-cap-radius}) 50%,
-                color-scheme.background-color-basic() 100%,
+                local.get-background-color-basic() 100%,
                 transparent 100%
             )
             0 0 / var(--progress-bar-value) 100% no-repeat,
         // 4.b
-        linear-gradient(color-scheme.background-color-basic() 0 0) 0 0 /
+        linear-gradient(local.get-background-color-basic() 0 0) 0 0 /
             calc(var(--progress-bar-value) - #{theme.$indicator-cap-radius}) 100% no-repeat,
         // 4.c
-        color-scheme.background-color-subtle();
+        local.get-background-color-subtle();
 
     @media (prefers-reduced-motion: no-preference) {
         transition: --progress-bar-value transitions.$duration-200 transitions.$timing-eased-in-out;

@@ -7,9 +7,9 @@
 // 7. Invisible items should not take up space in the queue.
 
 @use '@tokens' as tokens;
-@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -34,9 +34,9 @@
 .ToastBar__box {
     max-width: theme.$bar-max-width;
     padding: theme.$bar-padding;
-    color: color-scheme.color();
+    color: local.get-color();
     border-radius: theme.$bar-border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
     box-shadow: theme.$bar-box-shadow;
     pointer-events: var(--toast-bar-pointer-events, initial); // 3.
 

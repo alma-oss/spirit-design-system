@@ -1,0 +1,474 @@
+@use 'true' as test;
+@use '../local';
+
+@include test.describe('get-color and set-color') {
+    @include test.it('should return the local content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: local.get-color();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: local.get-color(#111);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color, #111);
+            }
+        }
+    }
+
+    @include test.it('should set the local content color variable with and without !important') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-color(#111);
+                }
+
+                .b {
+                    @include local.set-color(#111, $important: true);
+                }
+            }
+
+            // stylelint-disable declaration-no-important -- Testing !important output.
+            @include test.expect() {
+                .a {
+                    --spirit-local-color: #111;
+                }
+
+                .b {
+                    --spirit-local-color: #111 !important;
+                }
+            }
+            // stylelint-enable declaration-no-important
+        }
+    }
+}
+
+@include test.describe('get-color-basic and set-color-basic') {
+    @include test.it('should return the local basic content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: local.get-color-basic();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-basic);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: local.get-color-basic(#111);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-basic, #111);
+            }
+        }
+    }
+
+    @include test.it('should set the local basic content color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-color-basic(#111);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-color-basic: #111;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-color-subtle and set-color-subtle') {
+    @include test.it('should return the local subtle content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: local.get-color-subtle();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: local.get-color-subtle(#eee);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-local-color-subtle, #eee);
+            }
+        }
+    }
+
+    @include test.it('should set the local subtle content color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-color-subtle(#eee);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-color-subtle: #eee;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-border-color and set-border-color') {
+    @include test.it('should return the local border color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: local.get-border-color();
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-local-border-color);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: local.get-border-color(#0f0);
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-local-border-color, #0f0);
+            }
+        }
+    }
+
+    @include test.it('should set the local border color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-border-color(#0f0);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-border-color: #0f0;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-border-color-subtle and set-border-color-subtle') {
+    @include test.it('should return the local subtle border color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: local.get-border-color-subtle();
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-local-border-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: local.get-border-color-subtle(#0f0);
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-local-border-color-subtle, #0f0);
+            }
+        }
+    }
+
+    @include test.it('should set the local subtle border color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-border-color-subtle(#0f0);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-border-color-subtle: #0f0;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color and set-background-color') {
+    @include test.it('should return the local background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the local background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-background-color(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-background-color: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-basic and set-background-color-basic') {
+    @include test.it('should return the local basic background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-basic();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-basic);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-basic(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-basic, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the local basic background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-background-color-basic(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-background-color-basic: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-subtle and set-background-color-subtle') {
+    @include test.it('should return the local subtle background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-subtle();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-subtle(#0f0);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-subtle, #0f0);
+            }
+        }
+    }
+
+    @include test.it('should set the local subtle background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-background-color-subtle(#0f0);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-background-color-subtle: #0f0;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-state-hover and set-background-color-state-hover') {
+    @include test.it('should return the local hover background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-state-hover();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-state-hover);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-state-hover(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-state-hover, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the local hover background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-background-color-state-hover(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-background-color-state-hover: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-state-active and set-background-color-state-active') {
+    @include test.it('should return the local active background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-state-active();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-state-active);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-state-active(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-state-active, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the local active background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-background-color-state-active(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-background-color-state-active: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-state-selected and set-background-color-state-selected') {
+    @include test.it('should return the local selected background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-state-selected();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-state-selected);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: local.get-background-color-state-selected(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-local-background-color-state-selected, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the local selected background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set-background-color-state-selected(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-local-background-color-state-selected: #f00;
+                }
+            }
+        }
+    }
+}
