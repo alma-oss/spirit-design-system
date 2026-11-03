@@ -4,6 +4,7 @@
 // Supports plain suffixes (`-content`, `-background`) and basic/subtle pairs
 // (`-content-basic` / `-content-subtle`) for the same property keys.
 
+@use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
@@ -48,7 +49,10 @@ $_category-prefixes: ('emotion-', 'accent-');
 // * $property-map: token suffix key to local CSS property name,
 //   e.g. (content: color, background: background-color, border: border-color)
 // * $subtle-modifier: BEM modifier appended for subtle tokens (default: 'subtle')
-@mixin generate($class-name, $property-map, $subtle-modifier: 'subtle') {
+// * $component-properties: local CSS property names written to the component's own `--{prefix}{component}-*`
+//   custom property instead, e.g. (background-color) for an interactive surface that derives its hover and active
+//   colors from its resting background while overwriting `--{prefix}local-background-color`
+@mixin generate($class-name, $property-map, $subtle-modifier: 'subtle', $component-properties: ()) {
     $base-class-name: spirit-string.remove-prefix($class-name, 'UNSTABLE_');
     $component-kebab: spirit-string.convert-pascal-case-to-kebab-case($base-class-name);
     $full-prefix: 'component-#{$component-kebab}-';
@@ -99,7 +103,11 @@ $_category-prefixes: ('emotion-', 'accent-');
 
             #{$variant-selector} {
                 @each $css-property, $value in $properties {
-                    @include local.set($css-property, $value);
+                    @if list.index($component-properties, $css-property) {
+                        --#{tokens.$css-variable-prefix}#{$component-kebab}-#{$css-property}: #{$value};
+                    } @else {
+                        @include local.set($css-property, $value);
+                    }
                 }
             }
         }

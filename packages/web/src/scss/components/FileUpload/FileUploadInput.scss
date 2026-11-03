@@ -80,14 +80,12 @@ $_field-name: 'FileUploadInput';
     @include local.set-background-color(theme.$input-drop-zone-background-state-hover); // 1.
 
     border-color: theme.$input-drop-zone-border-color-state-hover;
-    background-color: local.get-background-color();
 }
 
 .FileUploadInput__input:where(:active) ~ .FileUploadInput__dropZone {
     @include local.set-background-color(theme.$input-drop-zone-background-state-active); // 1.
 
     border-color: theme.$input-drop-zone-border-color-state-active;
-    background-color: local.get-background-color();
 }
 
 .FileUploadInput__input:where(:focus-visible) ~ .FileUploadInput__dropZone {
@@ -117,7 +115,6 @@ $_field-name: 'FileUploadInput';
 
     border-style: dashed;
     border-color: theme.$input-drop-zone-border-color-state-disabled;
-    background-color: local.get-background-color();
 }
 
 @include component-radius-overrides.generate(

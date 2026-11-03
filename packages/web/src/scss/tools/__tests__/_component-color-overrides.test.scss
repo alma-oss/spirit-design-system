@@ -3,7 +3,7 @@
 
 @include test.describe('component-color-overrides generate mixin') {
     @include test.it(
-        'should emit local variable overrides for discovered component tokens including basic/subtle variants'
+        'should emit local variable overrides and component state properties for discovered component tokens'
     ) {
         @include test.assert() {
             @include test.output() {
@@ -15,6 +15,10 @@
                         state-default: background-color,
                         state-hover: background-color-state-hover,
                         state-active: background-color-state-active,
+                    ),
+                    $component-properties: (
+                        background-color-state-hover,
+                        background-color-state-active,
                     )
                 );
             }
@@ -23,21 +27,23 @@
                 .Button.Button--plain {
                     --spirit-local-border-color: var(--spirit-color-component-button-plain-border);
                     --spirit-local-color: var(--spirit-color-component-button-plain-content);
-                    --spirit-local-background-color-state-active: var(
+                    --spirit-button-background-color-state-active: var(
                         --spirit-color-component-button-plain-state-active
                     );
                     --spirit-local-background-color: var(--spirit-color-component-button-plain-state-default);
-                    --spirit-local-background-color-state-hover: var(--spirit-color-component-button-plain-state-hover);
+                    --spirit-button-background-color-state-hover: var(
+                        --spirit-color-component-button-plain-state-hover
+                    );
                 }
 
                 .Button.Button--primary {
                     --spirit-local-border-color: var(--spirit-color-component-button-primary-border);
                     --spirit-local-color: var(--spirit-color-component-button-primary-content);
-                    --spirit-local-background-color-state-active: var(
+                    --spirit-button-background-color-state-active: var(
                         --spirit-color-component-button-primary-state-active
                     );
                     --spirit-local-background-color: var(--spirit-color-component-button-primary-state-default);
-                    --spirit-local-background-color-state-hover: var(
+                    --spirit-button-background-color-state-hover: var(
                         --spirit-color-component-button-primary-state-hover
                     );
                 }
@@ -45,11 +51,11 @@
                 .Button.Button--secondary {
                     --spirit-local-border-color: var(--spirit-color-component-button-secondary-border);
                     --spirit-local-color: var(--spirit-color-component-button-secondary-content);
-                    --spirit-local-background-color-state-active: var(
+                    --spirit-button-background-color-state-active: var(
                         --spirit-color-component-button-secondary-state-active
                     );
                     --spirit-local-background-color: var(--spirit-color-component-button-secondary-state-default);
-                    --spirit-local-background-color-state-hover: var(
+                    --spirit-button-background-color-state-hover: var(
                         --spirit-color-component-button-secondary-state-hover
                     );
                 }
@@ -57,11 +63,11 @@
                 .Button.Button--tertiary {
                     --spirit-local-border-color: var(--spirit-color-component-button-tertiary-border);
                     --spirit-local-color: var(--spirit-color-component-button-tertiary-content);
-                    --spirit-local-background-color-state-active: var(
+                    --spirit-button-background-color-state-active: var(
                         --spirit-color-component-button-tertiary-state-active
                     );
                     --spirit-local-background-color: var(--spirit-color-component-button-tertiary-state-default);
-                    --spirit-local-background-color-state-hover: var(
+                    --spirit-button-background-color-state-hover: var(
                         --spirit-color-component-button-tertiary-state-hover
                     );
                 }
@@ -86,6 +92,30 @@
                 .PricingPlan.PricingPlan--highlighted {
                     --spirit-local-background-color: var(--spirit-color-component-pricing-plan-highlighted-background);
                     --spirit-local-border-color: var(--spirit-color-component-pricing-plan-highlighted-border);
+                    --spirit-local-color: var(--spirit-color-component-pricing-plan-highlighted-content);
+                }
+            }
+        }
+    }
+
+    @include test.it('should write component properties to the component custom property instead of the local one') {
+        @include test.assert() {
+            @include test.output() {
+                @include component-color-overrides.generate(
+                    $class-name: 'PricingPlan',
+                    $property-map: (
+                        content: color,
+                        background: background-color,
+                    ),
+                    $component-properties: (background-color)
+                );
+            }
+
+            @include test.expect() {
+                .PricingPlan.PricingPlan--highlighted {
+                    --spirit-pricing-plan-background-color: var(
+                        --spirit-color-component-pricing-plan-highlighted-background
+                    );
                     --spirit-local-color: var(--spirit-color-component-pricing-plan-highlighted-content);
                 }
             }
