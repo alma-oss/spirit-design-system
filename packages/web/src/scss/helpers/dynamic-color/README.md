@@ -28,6 +28,12 @@ Second, add one or more `dynamic-color-*` classes to an element inside:
 
 ## How Colors Are Resolved
 
+Dynamic colors derive their values from the **effective local background context** (`--spirit-local-background-color`)
+established by the nearest ancestor surface — a component (such as `Card` or `Tag`) or a `bg-*` utility such as
+`bg-color-scheme` — falling back to the active color scheme. When an ancestor surface changes its background in an interactive state
+(such as `:hover` or `:active`), it updates `--spirit-local-background-color`, so **nested dynamic color helpers
+automatically recompute against the currently rendered surface** underneath them.
+
 Dynamic colors first try to apply the matching color scheme token and only fall back to a color computed with
 `oklch()` when no appropriate token is found. This dual behavior is what makes the helpers suitable for
 color-scheme-aware components: they pick up the active color scheme when one is present, yet keep working outside of

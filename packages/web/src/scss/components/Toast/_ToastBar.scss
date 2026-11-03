@@ -1,24 +1,31 @@
-// 1. Define a `max-height` so the item height can be animated (which cannot be achieved with the `height` property).
-// 2. Manually set `transform-origin` so items of different widths are always correctly aligned when stacked.
-// 3. Restore pointer events that have been disabled by parent `Toast` component.
-// 4. If the message is short enough, align it vertically to the center of the bar.
-// 5. Allow the action to wrap to the next line if the message is too long.
-// 6. Add margin to the action to separate it from the dismiss button.
-// 7. Invisible items should not take up space in the queue.
+// 1. The subtle border color is not used by the bar itself. It is declared for nested elements with the dynamic color
+//    border helper, e.g. a `ControlButton`, which always use the subtle border (see tools/dynamic-colors).
+// 2. Define a `max-height` so the item height can be animated (which cannot be achieved with the `height` property).
+// 3. Manually set `transform-origin` so items of different widths are always correctly aligned when stacked.
+// 4. Restore pointer events that have been disabled by parent `Toast` component.
+// 5. If the message is short enough, align it vertically to the center of the bar.
+// 6. Allow the action to wrap to the next line if the message is too long.
+// 7. Add margin to the action to separate it from the dismiss button.
+// 8. Invisible items should not take up space in the queue.
 
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
 .ToastBar {
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle()); // 1.
+    @include local.set-background-color(color-scheme.get-background-color());
+
     display: grid;
     align-content: var(--toast-alignment-y);
     justify-content: var(--toast-alignment-x);
-    max-height: theme.$bar-max-height; // 1.
-    transform-origin: var(--toast-transform-origin-x, center) bottom; // 2.
+    max-height: theme.$bar-max-height; // 2.
+    transform-origin: var(--toast-transform-origin-x, center) bottom; // 3.
 
     @media (prefers-reduced-motion: no-preference) {
         transition:
@@ -34,11 +41,11 @@
 .ToastBar__box {
     max-width: theme.$bar-max-width;
     padding: theme.$bar-padding;
-    color: color-scheme.color();
+    color: local.get-color();
     border-radius: theme.$bar-border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
     box-shadow: theme.$bar-box-shadow;
-    pointer-events: var(--toast-bar-pointer-events, initial); // 3.
+    pointer-events: var(--toast-bar-pointer-events, initial); // 4.
 
     @media (prefers-reduced-motion: no-preference) {
         transition-property: visibility, opacity;
@@ -65,14 +72,14 @@
 }
 
 .ToastBar:is(.ToastBar--dismissible, :has([data-spirit-dismiss='toast'])) .ToastBar__container {
-    align-self: center; // 4.
+    align-self: center; // 5.
 }
 
 .ToastBar__content {
     @include typography.generate(theme.$bar-typography);
 
     display: flex;
-    flex-wrap: wrap; // 5.
+    flex-wrap: wrap; // 6.
     gap: theme.$bar-message-gap-y theme.$bar-message-gap-x;
 }
 
@@ -89,7 +96,7 @@
 
 // stylelint-disable-next-line selector-max-specificity -- Specificity is needed to precisely target the action.
 .ToastBar:is(.ToastBar--dismissible, :has([data-spirit-dismiss='toast'])) .ToastBar__link {
-    margin-inline-end: theme.$bar-action-margin-inline-end; // 6.
+    margin-inline-end: theme.$bar-action-margin-inline-end; // 7.
 }
 
 @include component-color-overrides.generate(
@@ -102,8 +109,8 @@
 @include component-radius-overrides.generate($class-name: 'ToastBar', $token-prefix: 'toast', $host-element: '__box');
 
 .ToastBar.is-hidden {
-    max-height: 0; // 7.
-    margin-block: 0; // 7.
+    max-height: 0; // 8.
+    margin-block: 0; // 8.
     visibility: hidden;
     opacity: 0;
 }

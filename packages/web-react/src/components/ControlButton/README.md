@@ -125,15 +125,18 @@ the button derives its colors from that scheme using the dynamic color system:
 
 This works with any available color scheme.
 
-ControlButton reads these values from the active color scheme:
+ControlButton reads these values from the active color scheme and surface context:
 
 - **content color** (`--spirit-local-color`) — the icon and text color
-- **background color** (`--spirit-local-background-color`) — visible in the default variant, hidden with `isSubtle`
+- **background color** (`--spirit-local-background-color`) — the effective current background of the parent surface
+  (including interactive hover/active states), provided by the nearest surface (e.g. a surface component or a `bg-*`
+  utility such as `bg-color-scheme`), falling back to the active color scheme; visible in the default variant, hidden
+  with `isSubtle`
 - **subtle border color** (`--spirit-local-border-color-subtle`) — visible in the default variant, hidden with `isSubtle`
 
 ControlButton always uses the **subtle** border color so the border stands out on a basic background, and it
-**computes** the interactive (hover and active) state colors from the background color instead of reading them from
-the scheme.
+**computes** the interactive (hover and active) state colors from the effective `--spirit-local-background-color`
+instead of reading them from the scheme.
 
 ## Stretched
 

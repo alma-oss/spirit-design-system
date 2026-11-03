@@ -58,22 +58,11 @@ In practice, this means you choose one surface class and Spirit keeps text, back
 
 #### How It Works
 
-1. **Surface class** — Put `color-scheme-on-<suffix>` on a container (for example `color-scheme-on-neutral-basic`, `color-scheme-on-emotion-success-basic`,
-   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets **local** CSS custom properties for content, border, and background (with the
-   Spirit CSS variable prefix), for example `--spirit-local-color` and `--spirit-local-background-color`.
-
-   ℹ️ Every surface class also exposes both intensities of the background and content colors regardless of which variant you picked
-   (`--spirit-local-background-color-basic`, `--spirit-local-background-color-subtle`, `--spirit-local-color-basic`, and `--spirit-local-color-subtle`), so a
-   single surface class can color a component that combines them, for example a subtle surface carrying a basic-colored indicator. For
-   `color-scheme-on-disabled`, the basic background is the disabled foreground — the color of a filled element sitting on a disabled surface — and its single
-   content color serves as both content intensities.
-
-2. **Utilities or Components** — On the same element (or an ancestor that already has a surface class), use utilities that read those locals: `bg-color-scheme`,
-   `text-color-scheme`, and `border-color-scheme` so backgrounds, text, and borders stay on-palette without listing every token. See the [dynamic color helper demo][dynamic-color-demo] for examples.
-   Or read the color scheme directly in the component CSS classes (for example `Pill`).
-
-3. **Tokens** — Accent and emotion schemes follow the accent and emotion keys in [`spirit-design-tokens`][design-tokens-pkg]. New accents or emotions
-   in tokens translate into additional `color-scheme-on-*` classes when themes are built. Fixed keys such as `neutral-*`, `selected-*`, and `disabled` are defined alongside them in the same generator.
+1. **Surface class** — Put a `color-scheme-on-<suffix>` class on a container, for example `color-scheme-on-neutral-basic`.
+2. **Utilities or components** — On or inside it, use the `bg-color-scheme`, `text-color-scheme`, and `border-color-scheme` utilities.
+   Components such as `Pill` follow the color scheme on their own. See the [dynamic color helper demo][dynamic-color-demo].
+3. **Tokens** — Each accent and emotion in [`spirit-design-tokens`][design-tokens-pkg] gets its own scheme class.
+   `neutral-*`, `selected-*`, and `disabled` are fixed.
 
 ### Advanced Implementation in Product with Sass
 
@@ -102,6 +91,10 @@ Having the Sass load path configured, you can import just the components you nee
 The mixins and functions provided in this package are intended for internal use only.
 Their stability is not guaranteed under semantic versioning.
 If you choose to use them, consider copying them into your own codebase to avoid potential issues.
+
+The same applies to the `--spirit-local-*` CSS custom properties: they are the internal local color context of Spirit
+components and utilities. Use the color scheme classes, the utilities, or the read-only `--spirit-color-scheme-*`
+palette instead.
 
 ### Custom Themes
 

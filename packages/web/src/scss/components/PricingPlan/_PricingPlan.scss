@@ -18,14 +18,14 @@
 @use '@tokens' as tokens;
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
 .PricingPlan {
-    --#{tokens.$css-variable-prefix}local-background-color: var(
-        --#{tokens.$css-variable-prefix}pricing-plan-background-color,
-        #{theme.$background-color}
-    ); // 3.
+    @include local.set-background-color(
+        var(--#{tokens.$css-variable-prefix}pricing-plan-background-color, #{theme.$background-color})
+    ); // 1.
 
     @include typography.generate(theme.$typography);
 
@@ -36,7 +36,7 @@
     border: theme.$border-width solid
         var(--#{tokens.$css-variable-prefix}pricing-plan-border-color, theme.$border-color);
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}pricing-plan-background-color, theme.$background-color);
+    background-color: local.get-background-color();
 }
 
 .PricingPlan__layout {

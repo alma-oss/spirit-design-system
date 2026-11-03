@@ -1,10 +1,11 @@
 // 1. Declare the background context so nested components and dynamic colors resolve against the panel.
 
 @use '@tokens' as tokens;
+@use '../../tools/local';
 @use 'theme';
 
 .DrawerPanel {
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$panel-background-color}; // 1.
+    @include local.set-background-color(theme.$panel-background-color); // 1.
 
     display: flex;
     flex-direction: column;
@@ -13,7 +14,7 @@
     height: theme.$panel-height;
     max-height: theme.$panel-max-height;
     color: theme.$panel-text-color;
-    background-color: theme.$panel-background-color;
+    background-color: local.get-background-color();
     box-shadow: theme.$panel-shadow;
     transform: translateX(var(--#{tokens.$css-variable-prefix}drawer-translate-x));
     pointer-events: auto;
