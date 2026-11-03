@@ -10,6 +10,7 @@
 @use '../../settings/cursors';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -20,9 +21,8 @@
         var(--#{tokens.$css-variable-prefix}input-container-height) - 2 *
             var(--#{tokens.$css-variable-prefix}input-container-border-width)
     );
-    --#{tokens.$css-variable-prefix}local-background-color: var(
-        --#{tokens.$css-variable-prefix}input-container-background-color
-    ); // 6.
+
+    @include local.set-background-color(var(--#{tokens.$css-variable-prefix}input-container-background-color)); // 1.
 
     position: relative;
     isolation: isolate; // 2.
@@ -169,7 +169,7 @@
 }
 
 .InputContainer--disabled {
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color-state-disabled}; // 6.
+    @include local.set-background-color(theme.$background-color-state-disabled); // 1.
 
     color: theme.$color-state-disabled;
     border-color: theme.$border-color-state-disabled;

@@ -5,20 +5,21 @@
 @use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/placement';
 @use 'theme';
 
 .DropdownPopover {
     --#{tokens.$css-variable-prefix}placement-offset: #{theme.$offset};
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background}; // 2.
 
+    @include local.set-background-color(theme.$background); // 1.
     @include placement.child();
 
     display: none;
     width: max-content;
     padding: theme.$padding;
     border-radius: theme.$border-radius;
-    background-color: theme.$background;
+    background-color: local.get-background-color();
     box-shadow: theme.$shadow;
 
     &[data-spirit-fullwidthmode='mobile-only'] {

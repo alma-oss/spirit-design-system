@@ -1,14 +1,18 @@
-// 1. The arrow must be a standalone HTML element so the Floating UI library can position it correctly.
+// 1. The subtle border color is not used by the tooltip itself. It is declared for nested elements with the dynamic
+//    color border helper, e.g. a `ControlButton`, which always use the subtle border (see tools/dynamic-colors).
+//
+// 2. Z-index must be higher than DropdownPopover__content (z-index: 1) so the tooltip can appear above it.
+//
+// 3. The arrow must be a standalone HTML element so the Floating UI library can position it correctly.
 //    https://floating-ui.com
 //
-// 2. Reuse already generated custom properties to allow overriding the arrow appearance live in the browser.
-//
-// 3. Z-index must be higher than DropdownPopover__content (z-index: 1) so the tooltip can appear above it.
+// 4. Reuse already generated custom properties to allow overriding the arrow appearance live in the browser.
 
 @use 'sass:math';
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/placement';
 @use '../../tools/svg';
 @use '../../tools/typography';
@@ -21,7 +25,10 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     --tooltip-max-width: #{theme.$max-width};
     --#{$_tooltip-placement-prefix}-offset: #{theme.$arrow-height};
 
-    @include placement.child(2); // 3.
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle()); // 1.
+    @include local.set-background-color(color-scheme.get-background-color());
+    @include placement.child(2); // 2.
     @include placement.child-controlled($prefix: $_tooltip-placement-prefix, $offset: theme.$arrow-height);
     @include typography.generate(theme.$typography);
 
@@ -31,9 +38,9 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: color-scheme.color();
+    color: local.get-color();
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 
@@ -43,7 +50,7 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     }
 }
 
-// 1.
+// 3.
 .TooltipPopover__arrow {
     @include placement.arrow(
         $prefix: 'tooltip',
@@ -52,8 +59,8 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
         $corner-offset: theme.$arrow-corner-offset
     );
 
-    width: var(--tooltip-arrow-width); // 2.
-    height: var(--tooltip-arrow-height); // 2.
+    width: var(--tooltip-arrow-width); // 4.
+    height: var(--tooltip-arrow-height); // 4.
     background-color: inherit;
     mask-image: svg.escape(theme.$arrow-shape);
     mask-size: cover;

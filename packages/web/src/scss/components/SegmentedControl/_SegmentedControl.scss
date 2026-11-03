@@ -5,15 +5,13 @@
 @use '@tokens' as tokens;
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/nested-radius';
 @use 'theme';
 @use 'tools';
 
 .SegmentedControl {
-    --#{tokens.$css-variable-prefix}local-background-color: var(
-        --#{tokens.$css-variable-prefix}segmented-control-background-color
-    ); // 3.
-
+    @include local.set-background-color(var(--#{tokens.$css-variable-prefix}segmented-control-background-color)); // 1.
     @include nested-radius.inset(
         $infix: 'segmented-control-item',
         $container-radius: theme.$border-radius,
@@ -33,7 +31,7 @@
     color: var(--#{tokens.$css-variable-prefix}segmented-control-color);
     border: theme.$border-width solid var(--#{tokens.$css-variable-prefix}segmented-control-border-color);
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}segmented-control-background-color);
+    background-color: local.get-background-color();
 
     @media (prefers-reduced-motion: no-preference) {
         &:has([type='radio']) {
