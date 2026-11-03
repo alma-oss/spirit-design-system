@@ -30,3 +30,4 @@ packages/web-react/src/components/*/docs
 
 # Generated extract sidecar
 scripts/supernova-extract/REPORT.md
+ds-inspection
