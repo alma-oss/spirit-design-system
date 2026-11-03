@@ -65,7 +65,7 @@
 );
 
 .Tag:is(a, button) {
-    @include dynamic-colors.background-interactive();
+    @include dynamic-colors.background-interactive($base-color: color-scheme.get-background-color());
 }
 
 .Tag:is(a) {
