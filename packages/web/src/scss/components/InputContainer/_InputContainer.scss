@@ -1,10 +1,10 @@
-// 1. Declare the background context so nested components and dynamic colors resolve against the container.
-// 2. Create a stacking context so that ControlButtons inside Tags (z-index: 1) do not escape
+// 1. Create a stacking context so that ControlButtons inside Tags (z-index: 1) do not escape
 //    into the page stacking context and overlap DropdownPopovers of neighboring Pickers.
-// 3. For select, we need to place the input addon over the input to keep the interaction consistent.
-// 4. We pass the input arrows width if the input type is number.
-// 5. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
-// 6. We generate the input width based on the number of characters.
+// 2. For select, we need to place the input addon over the input to keep the interaction consistent.
+// 3. We pass the input arrows width if the input type is number.
+// 4. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
+// 5. We generate the input width based on the number of characters.
+// 6. Declare the background context so nested components and dynamic colors resolve against the container.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
@@ -22,10 +22,8 @@
             var(--#{tokens.$css-variable-prefix}input-container-border-width)
     );
 
-    @include local.set-background-color(var(--#{tokens.$css-variable-prefix}input-container-background-color)); // 1.
-
     position: relative;
-    isolation: isolate; // 2.
+    isolation: isolate; // 1.
     display: flex;
     align-items: stretch;
     width: 100%;
@@ -47,7 +45,7 @@
         min-height: var(--#{tokens.$css-variable-prefix}input-container-min-height);
     }
 
-    // 3.
+    // 2.
     &:has(> select) {
         --#{tokens.$css-variable-prefix}input-addon-grid-area: 1 / -1;
 
@@ -110,12 +108,12 @@
 .InputContainer > input {
     padding-block: theme.$input-padding-y;
 
-    // 4.
+    // 3.
     &:where([type='number']) {
         --#{tokens.$css-variable-prefix}input-container-input-arrows-width: #{theme.$input-number-arrows-width};
     }
 
-    // 5.
+    // 4.
     &:where([size]) {
         width: calc(
             var(--#{tokens.$css-variable-prefix}input-container-input-width) + 2 *
@@ -125,7 +123,7 @@
         );
     }
 
-    // 6.
+    // 5.
     @each $size in theme.$input-size-characters {
         &:where([size='#{$size}']) {
             --#{tokens.$css-variable-prefix}input-container-input-width: #{$size}ch;
@@ -133,7 +131,7 @@
     }
 }
 
-// 3.
+// 2.
 .InputContainer > select {
     grid-area: 1 / 1;
     width: 100%;
@@ -161,6 +159,25 @@
     $config: theme.$variant-config
 );
 
+.InputContainer--fill {
+    @include local.set-background-color(var(--#{tokens.$css-variable-prefix}input-container-background-color)); // 6.
+
+    @media (hover: hover) {
+        &:not(.InputContainer--disabled):hover {
+            @include local.set-background-color(
+                var(--#{tokens.$css-variable-prefix}input-container-background-color-state-hover)
+            ); // 6.
+        }
+    }
+
+    &:not(.InputContainer--disabled):has(> :is(input, select, textarea):active),
+    &:not(.InputContainer--disabled):has(> :is(input, select, textarea):focus-within) {
+        @include local.set-background-color(
+            var(--#{tokens.$css-variable-prefix}input-container-background-color-state-active)
+        ); // 6.
+    }
+}
+
 @each $validation-state-name, $validation-state-value in theme.$validation-states {
     .InputContainer--#{$validation-state-name},
     .InputContainer--#{$validation-state-name}:has(> :is(input, select, textarea):focus-visible) {
@@ -169,7 +186,7 @@
 }
 
 .InputContainer--disabled {
-    @include local.set-background-color(theme.$background-color-state-disabled); // 1.
+    @include local.set-background-color(theme.$background-color-state-disabled); // 6.
 
     color: theme.$color-state-disabled;
     border-color: theme.$border-color-state-disabled;

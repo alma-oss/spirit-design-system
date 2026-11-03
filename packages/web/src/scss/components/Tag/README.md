@@ -79,7 +79,7 @@ Tag comes in five available sizes: xsmall, small, medium, large, and xlarge.
 ## Interactive Tag
 
 Tag can be rendered as a `<button>` or `<a>` element to make it interactive. Hover and active states apply a
-dynamically derived background color via a `::before` pseudo-element overlay.
+dynamically derived background color and update `--spirit-local-background-color` so nested controls react to the current surface.
 
 ### Button
 

@@ -1,4 +1,5 @@
 @use 'true' as test;
+@use '../color-scheme';
 @use '../dynamic-colors';
 
 @include test.describe('alter-color function returns correct dynamic color') {
@@ -60,6 +61,42 @@
                         }
 
                         &:active {
+                            background-color: var(--spirit-local-background-color-state-active);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include test.it(
+        'background-interactive mixin with custom $base-color updates local background context without circular dependency'
+    ) {
+        @include test.assert() {
+            @include test.output() {
+                .test-surface {
+                    @include dynamic-colors.background-interactive($base-color: color-scheme.get-background-color());
+                }
+            }
+
+            // prettier-ignore
+            @include test.expect() {
+                .test-surface {
+                    @supports (color: oklch(from red l c h)) {
+                        --spirit-local-background-color-state-hover: oklch(from var(--spirit-color-scheme-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-hover, 0.3) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-hover, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+                        --spirit-local-background-color-state-active: oklch(from var(--spirit-color-scheme-background-color) calc(l + var(--spirit-dynamic-color-lightness-delta-background-state-active, 0.45) * (var(--spirit-dynamic-color-lightness-midpoint, 0.8) - l)) clamp(0, c * (1 + var(--spirit-dynamic-color-chroma-scale-background-state-active, 4) * (l - var(--spirit-dynamic-color-chroma-lightness-midpoint, 0.5))), var(--spirit-dynamic-color-chroma-upper-limit, 0.2)) h/100%);
+
+                        @media (hover: hover) {
+                            &:hover {
+                                --spirit-local-background-color: var(--spirit-local-background-color-state-hover);
+
+                                background-color: var(--spirit-local-background-color-state-hover);
+                            }
+                        }
+
+                        &:active {
+                            --spirit-local-background-color: var(--spirit-local-background-color-state-active);
+
                             background-color: var(--spirit-local-background-color-state-active);
                         }
                     }
