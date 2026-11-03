@@ -143,7 +143,8 @@
                     --spirit-local-color-basic: #111;
                     --spirit-local-color-subtle: #fff;
                     --spirit-local-border-color: #0f0;
-                    --spirit-local-background-color: #f00;
+                    --spirit-color-scheme-background-color: #f00;
+                    --spirit-local-background-color: var(--spirit-color-scheme-background-color);
                     --spirit-local-background-color-basic: #f00;
                     --spirit-local-background-color-subtle: #fee;
                 }
@@ -171,15 +172,15 @@
     }
 }
 
-@include test.describe('color-basic function') {
-    @include test.it('should return the local basic content color variable when no fallback is given') {
+@include test.describe('get-background-color and set-background-color') {
+    @include test.it('should return the color scheme background color variable when no fallback is given') {
         @include test.assert() {
             @include test.output() {
-                color: color-scheme.color-basic();
+                background-color: color-scheme.get-background-color();
             }
 
             @include test.expect() {
-                color: var(--spirit-local-color-basic);
+                background-color: var(--spirit-color-scheme-background-color);
             }
         }
     }
@@ -187,115 +188,27 @@
     @include test.it('should include the fallback value when given') {
         @include test.assert() {
             @include test.output() {
-                color: color-scheme.color-basic(#111);
+                background-color: color-scheme.get-background-color(#f00);
             }
 
             @include test.expect() {
-                color: var(--spirit-local-color-basic, #111);
-            }
-        }
-    }
-}
-
-@include test.describe('color-subtle function') {
-    @include test.it('should return the local subtle content color variable when no fallback is given') {
-        @include test.assert() {
-            @include test.output() {
-                color: color-scheme.color-subtle();
-            }
-
-            @include test.expect() {
-                color: var(--spirit-local-color-subtle);
+                background-color: var(--spirit-color-scheme-background-color, #f00);
             }
         }
     }
 
-    @include test.it('should include the fallback value when given') {
+    @include test.it('should set the color scheme background color variable') {
         @include test.assert() {
             @include test.output() {
-                color: color-scheme.color-subtle(#eee);
+                .a {
+                    @include color-scheme.set-background-color(#f00);
+                }
             }
 
             @include test.expect() {
-                color: var(--spirit-local-color-subtle, #eee);
-            }
-        }
-    }
-}
-
-@include test.describe('background-color-basic function') {
-    @include test.it('should return the local basic background color variable when no fallback is given') {
-        @include test.assert() {
-            @include test.output() {
-                background-color: color-scheme.background-color-basic();
-            }
-
-            @include test.expect() {
-                background-color: var(--spirit-local-background-color-basic);
-            }
-        }
-    }
-
-    @include test.it('should include the fallback value when given') {
-        @include test.assert() {
-            @include test.output() {
-                background-color: color-scheme.background-color-basic(#f00);
-            }
-
-            @include test.expect() {
-                background-color: var(--spirit-local-background-color-basic, #f00);
-            }
-        }
-    }
-}
-
-@include test.describe('background-color-subtle function') {
-    @include test.it('should return the local subtle background color variable when no fallback is given') {
-        @include test.assert() {
-            @include test.output() {
-                background-color: color-scheme.background-color-subtle();
-            }
-
-            @include test.expect() {
-                background-color: var(--spirit-local-background-color-subtle);
-            }
-        }
-    }
-
-    @include test.it('should include the fallback value when given') {
-        @include test.assert() {
-            @include test.output() {
-                background-color: color-scheme.background-color-subtle(#0f0);
-            }
-
-            @include test.expect() {
-                background-color: var(--spirit-local-background-color-subtle, #0f0);
-            }
-        }
-    }
-}
-
-@include test.describe('background-color function') {
-    @include test.it('should return the local background color variable when no fallback is given') {
-        @include test.assert() {
-            @include test.output() {
-                background-color: color-scheme.background-color();
-            }
-
-            @include test.expect() {
-                background-color: var(--spirit-local-background-color);
-            }
-        }
-    }
-
-    @include test.it('should include the fallback value when given') {
-        @include test.assert() {
-            @include test.output() {
-                background-color: color-scheme.background-color(#f00);
-            }
-
-            @include test.expect() {
-                background-color: var(--spirit-local-background-color, #f00);
+                .a {
+                    --spirit-color-scheme-background-color: #f00;
+                }
             }
         }
     }

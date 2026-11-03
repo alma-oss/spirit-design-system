@@ -1,7 +1,7 @@
 @use 'theme';
-@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/typography';
 
 .Pill {
@@ -14,9 +14,9 @@
     height: theme.$size;
     padding: theme.$padding-y theme.$padding-x;
     text-align: center;
-    color: color-scheme.color();
+    color: local.get-color();
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
 }
 
 @include component-color-overrides.generate(

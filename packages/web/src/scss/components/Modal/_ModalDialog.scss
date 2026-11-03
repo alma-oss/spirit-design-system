@@ -6,16 +6,16 @@
 // 5. Override bottom padding of parent `.Modal` in the docked variant.
 
 @use 'sass:map';
-@use '@tokens' as tokens;
 @use '../../tools/breakpoint';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
 .ModalDialog {
     --scroll-view-vertical-height: auto; // 1.
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$dialog-background-color}; // 5.
 
+    @include local.set-background-color(theme.$dialog-background-color); // 2.
     @include typography.generate(theme.$typography);
 
     display: flex;

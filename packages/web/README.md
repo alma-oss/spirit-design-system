@@ -59,8 +59,10 @@ In practice, this means you choose one surface class and Spirit keeps text, back
 #### How It Works
 
 1. **Surface class** — Put `color-scheme-on-<suffix>` on a container (for example `color-scheme-on-neutral-basic`, `color-scheme-on-emotion-success-basic`,
-   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets **local** CSS custom properties for content, border, and background (with the
-   Spirit CSS variable prefix), for example `--spirit-local-color` and `--spirit-local-background-color`.
+   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets the scheme background token (`--spirit-color-scheme-background-color`) and
+   **local** CSS custom properties for content, border, and the current background context (with the Spirit CSS variable prefix), for example `--spirit-local-color`
+   and `--spirit-local-background-color`. Interactive surfaces update `--spirit-local-background-color` on `:hover` and `:active` so nested components and dynamic
+   color helpers always react to the currently rendered background.
 
    ℹ️ Every surface class also exposes both intensities of the background and content colors regardless of which variant you picked
    (`--spirit-local-background-color-basic`, `--spirit-local-background-color-subtle`, `--spirit-local-color-basic`, and `--spirit-local-color-subtle`), so a

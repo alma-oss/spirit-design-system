@@ -4,6 +4,7 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../tools/color-scheme';
+@use '../tools/local';
 @use '../tools/map' as spirit-map;
 @use '../tools/utilities';
 
@@ -45,17 +46,9 @@ $utilities: (
                     neutral-subtle: tokens.$neutral-background-subtle,
                     selected-basic: tokens.$selected-background-basic,
                     selected-subtle: tokens.$selected-background-subtle,
+                    'color-scheme': color-scheme.get-background-color(),
                 )
             ),
-    ),
-    'background-color-without-custom-properties': (
-        responsive: false,
-        property: background-color,
-        class: bg,
-        generate-custom-properties: false,
-        values: (
-            'color-scheme': color-scheme.background-color(),
-        ),
     ),
     'background-gradient': (
         responsive: true,
@@ -92,7 +85,7 @@ $utilities: (
                     basic: tokens.$border-basic,
                 ),
                 (
-                    'color-scheme': color-scheme.border-color(),
+                    'color-scheme': local.get-border-color(),
                 )
             ),
     ),
@@ -350,7 +343,7 @@ $utilities: (
                     selected-subtle: tokens.$selected-content-subtle,
                 ),
                 (
-                    'color-scheme': color-scheme.color(),
+                    'color-scheme': local.get-color(),
                 )
             ),
     ),

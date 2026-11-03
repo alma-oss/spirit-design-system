@@ -18,14 +18,14 @@
 @use '@tokens' as tokens;
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
 .PricingPlan {
-    --#{tokens.$css-variable-prefix}local-background-color: var(
-        --#{tokens.$css-variable-prefix}pricing-plan-background-color,
-        #{theme.$background-color}
-    ); // 3.
+    @include local.set-background-color(
+        var(--#{tokens.$css-variable-prefix}pricing-plan-background-color, #{theme.$background-color})
+    ); // 1.
 
     @include typography.generate(theme.$typography);
 

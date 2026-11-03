@@ -14,6 +14,7 @@
 @use '../../tools/breakpoint';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -40,7 +41,8 @@
 .Card--boxed {
     --#{tokens.$css-variable-prefix}card-padding: #{theme.$padding}; // 5.d
     --#{tokens.$css-variable-prefix}card-padding-condensed: #{theme.$padding-condensed}; // 5.d
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color}; // 6.
+
+    @include local.set-background-color(theme.$background-color); // 6.
 
     border: theme.$border-width theme.$border-style theme.$border-color;
     border-radius: theme.$border-radius;

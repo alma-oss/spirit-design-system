@@ -6,6 +6,7 @@
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/dynamic-colors';
+@use '../../tools/local';
 @use '../../tools/reset';
 @use '../../tools/typography';
 @use 'theme';
@@ -28,10 +29,10 @@
     padding-inline: var(--#{tokens.$css-variable-prefix}tag-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}tag-padding-y);
     text-align: center;
-    color: color-scheme.color();
+    color: local.get-color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: color-scheme.border-color();
+    border-color: local.get-border-color();
     border-start-start-radius: var(
         --#{tokens.$css-variable-prefix}tag-border-start-start-radius,
         #{theme.$border-radius}
@@ -39,7 +40,7 @@
     border-start-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-start-end-radius, #{theme.$border-radius});
     border-end-start-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-start-radius, #{theme.$border-radius});
     border-end-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-end-radius, #{theme.$border-radius});
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
 }
 
 @include dictionaries.generate-sizes(
@@ -69,5 +70,5 @@
 
 .Tag:is(a) {
     text-decoration: none;
-    color: color-scheme.color();
+    color: local.get-color();
 }

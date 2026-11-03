@@ -7,8 +7,8 @@
 
 @use 'sass:math';
 @use '@tokens' as tokens;
-@use '../../tools/color-scheme';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/placement';
 @use '../../tools/svg';
 @use '../../tools/typography';
@@ -31,9 +31,9 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: color-scheme.color();
+    color: local.get-color();
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 

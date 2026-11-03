@@ -1,7 +1,7 @@
 @use '@tokens' as tokens;
-@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -16,12 +16,12 @@
     justify-content: flex-start;
     width: 100%;
     padding: theme.$padding;
-    color: color-scheme.color();
+    color: local.get-color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: color-scheme.border-color();
+    border-color: local.get-border-color();
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
 }
 
 .Alert--center {
