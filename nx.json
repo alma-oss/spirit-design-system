@@ -1,4 +1,5 @@
 {
+  "defaultBase": "origin/main",
   "pluginsConfig": {
     "@nrwl/js": {
       "analyzeSourceFiles": false

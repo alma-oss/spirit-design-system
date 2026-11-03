@@ -26,6 +26,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Computes which apps are affected by the change, for the jobs that cannot ask Nx themselves (deploy and
+  # e2e). Unit tests resolve what is affected inside their own job. Build, lint, types and format run in full:
+  # the Nx cache already skips their unchanged work, so affected would add little for its clone overhead.
+  affected:
+    name: 🎯 Affected
+    uses: ./.github/workflows/affected.yaml
+    permissions:
+      contents: read
+      actions: read
+
   git-checks:
     name: 🚦 Git Checks
     if: github.event_name == 'pull_request'
@@ -40,9 +50,10 @@ jobs:
 
   deploy:
     name: 🚀 Deploy
-    needs: build
-    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets
-    if: github.event_name != 'schedule' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
+    needs: [affected, build]
+    # Same trigger as the E2E tests it serves; fork pull requests do not receive the Netlify secrets.
+    # Skipped (counts as passed in the gates) when the demo app is not affected.
+    if: github.event_name != 'schedule' && needs.affected.outputs.demo == 'true' && (github.ref == 'refs/heads/main' || (contains(github.event.pull_request.labels.*.name, 'run-visual-tests') && github.event.pull_request.head.repo.full_name == github.repository))
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
 
@@ -70,6 +81,9 @@ jobs:
   tests:
     name: 🧪 Tests
     uses: ./.github/workflows/test.yaml
+    permissions:
+      contents: read
+      actions: read
 
   code-quality-gate:
     name: 📊 Code Quality Gate
@@ -82,7 +96,7 @@ jobs:
 
   ready-to-integrate:
     name: 🚢 Ready to Integrate
-    needs: [git-checks, build, deploy, e2e-tests, code-quality-gate]
+    needs: [git-checks, affected, build, deploy, e2e-tests, code-quality-gate]
     if: always()
     uses: ./.github/workflows/gate.yaml
     with:

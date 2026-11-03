@@ -4,6 +4,9 @@ inputs:
   node-version:
     description: 'Node.js version to use. If not provided, version is read from .nvmrc file'
     required: false
+  focus:
+    description: 'Workspace to install dependencies for. If not provided, all workspaces are installed'
+    required: false
 runs:
   using: 'composite'
   steps:
@@ -22,3 +25,5 @@ runs:
 
     - name: Install dependencies
       uses: ./.github/actions/deps-install
+      with:
+        focus: ${{ inputs.focus }}

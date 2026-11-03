@@ -1,0 +1,113 @@
+name: 🎯 Affected
+
+# Computes which apps are affected by the current change, using Nx's project graph.
+# The outputs let downstream jobs run only for what changed. Today only the deploy → e2e chain
+# gates on `demo`; the `build` job still builds every app.
+
+on:
+  workflow_call:
+    outputs:
+      demo:
+        description: 'Whether the demo app is affected (or e2e infrastructure changed)'
+        value: ${{ jobs.affected.outputs.demo }}
+      docsite:
+        description: 'Whether the docsite app is affected'
+        value: ${{ jobs.affected.outputs.docsite }}
+      storybook:
+        description: 'Whether the storybook app is affected'
+        value: ${{ jobs.affected.outputs.storybook }}
+      examples:
+        description: 'Whether any of the Next.js example apps is affected'
+        value: ${{ jobs.affected.outputs.examples }}
+
+permissions:
+  contents: read
+  # nx-set-shas reads the last successful run of the calling workflow to derive the base SHA on `main`
+  actions: read
+
+env:
+  NX_NO_CLOUD: true
+
+jobs:
+  affected:
+    name: 🎯 Computing Affected Projects
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      demo: ${{ steps.calc.outputs.demo }}
+      docsite: ${{ steps.calc.outputs.docsite }}
+      storybook: ${{ steps.calc.outputs.storybook }}
+      examples: ${{ steps.calc.outputs.examples }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # `nx affected` and the path-override diff need full history to resolve the base
+          fetch-depth: 0
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+        with:
+          # Nx builds the project graph from the workspaces' package.json files, so only the root (`nx`) is needed
+          focus: spirit
+
+      - name: Resolve affected projects
+        uses: ./.github/actions/nx-affected
+
+      - name: Compute affected projects
+        id: calc
+        run: |
+          set -euo pipefail
+
+          # The Playwright setup, its deploy target and the root demo inputs (homepage, static assets) are not
+          # part of any project.
+          E2E_PATTERN='^(index\.html$|static/|tests/|playwright\.config\.|\.github/workflows/(e2e|deploy)\.ya?ml$)'
+
+          demo_note=''
+          AFFECTED=$(yarn nx show projects --affected --base="$NX_BASE" --head="$NX_HEAD" -t build --json)
+          jq -e 'type == "array"' <<<"$AFFECTED" >/dev/null
+          echo "Affected projects (build target): $AFFECTED"
+
+          has() {
+            if jq -e --arg p "$1" 'any(.[]; . == $p)' <<<"$AFFECTED" >/dev/null; then
+              echo true
+            else
+              echo false
+            fi
+          }
+          demo=$(has '@lmc-eu/spirit-demo-app')
+          docsite=$(has '@alma-oss/spirit-docsite')
+          storybook=$(has '@alma-oss/spirit-storybook')
+          app_router=$(has '@alma-oss/spirit-example-next-with-app-router')
+          pages_router=$(has '@alma-oss/spirit-example-next-with-pages-router')
+          examples=false
+          if [ "$app_router" = true ] || [ "$pages_router" = true ]; then
+            examples=true
+          fi
+
+          if [ "$NX_AFFECTED_ALL" = true ]; then
+            demo_note=' (everything affected)'
+          elif [ "$demo" = false ] && grep -E "$E2E_PATTERN" "$CHANGED_FILES" >/dev/null; then
+            demo=true
+            demo_note=' (root demo/e2e-infra override)'
+          fi
+
+          {
+            echo "demo=$demo"
+            echo "docsite=$docsite"
+            echo "storybook=$storybook"
+            echo "examples=$examples"
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo "### 🎯 Affected apps"
+            echo ""
+            echo "| App | Affected |"
+            echo "| :-- | :-- |"
+            echo "| Demo | \`$demo\`$demo_note |"
+            echo "| Docsite | \`$docsite\` |"
+            echo "| Storybook | \`$storybook\` |"
+            echo "| Next.js examples | \`$examples\` |"
+            echo ""
+            echo "<sub>base: \`${NX_BASE:-n/a}\` · head: \`${NX_HEAD:-n/a}\`</sub>"
+          } >> "$GITHUB_STEP_SUMMARY"
