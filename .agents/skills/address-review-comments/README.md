@@ -159,6 +159,6 @@ For PRs with many comments:
 
 ## See Also
 
-- Related skill: `/review` - For reviewing PRs from the reviewer's perspective
+- Related skill: `/spirit:code-review` - For reviewing PRs from the reviewer's perspective
 - GitHub CLI docs: `gh help pr`
 - GitHub API docs: https://docs.github.com/en/rest/pulls

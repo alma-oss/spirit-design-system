@@ -16,5 +16,5 @@ without the markings.
 
 ## Related Skills
 
-- the code-review methodology — the base finding format this overlays.
-- `spirit:code-review` — passes `--conventional-comments` through to reviewers.
+- `spirit:code-review` — the review that loads this overlay when run with `--conventional-comments`;
+  its `references/methodology.md` defines the base finding format.
