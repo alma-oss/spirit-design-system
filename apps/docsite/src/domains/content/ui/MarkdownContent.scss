@@ -8,6 +8,11 @@
     border-radius: tokens.$radius-300;
 }
 
+.MarkdownContent img {
+    max-width: 100%;
+    height: auto;
+}
+
 .MarkdownContent p {
     max-width: 70ch;
 }

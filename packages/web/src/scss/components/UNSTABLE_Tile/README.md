@@ -16,9 +16,7 @@ A plain tile already renders the full surface, so no utility classes are needed 
 <div class="UNSTABLE_Tile">Content</div>
 ```
 
-Reach for `Box` utility classes when a region needs styling primitives and nothing else, for `UNSTABLE_Tile` when
-it needs the shared surface but no content structure, and for `Card` when the region really is a card composition
-with artwork, a body and a footer.
+Not sure this is the right component? See [Box, Tile, or Card][box-tile-card-guide].
 
 ## Custom Background
 
@@ -85,5 +83,6 @@ or decorate should stay a `div`.
 </div>
 ```
 
+[box-tile-card-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/design/decision-trees/box-tile-or-card.md
 [component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides
 [control-button]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ControlButton

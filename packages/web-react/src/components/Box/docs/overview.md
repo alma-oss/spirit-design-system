@@ -24,23 +24,25 @@ Up to date
 
 A **Box** is a lightweight container component used to apply **visual framing, background, or spacing** to content. Unlike **Card**, Box does not imply structured content or actions – it’s simply a way to visually separate or highlight an element or block of content (e.g., wrapping an icon, image, or short text).
 
+Not sure which one to use? See [**Box, Tile, or Card**](/design/decision-trees/box-tile-or-card).
+
 ---
 
 ### **When to Use**
 
 - To provide a **background or border** behind a single element (icon, image, badge).
 
-- To visually **separate content blocks** in layouts without the semantic weight of a Card.
-
 - To highlight **small pieces of information** without adding extra actions.
 
-- To give elements a **consistent surface** in mixed content (e.g., a set of icons framed evenly).
+- For a **custom surface** (e.g., a color scheme, an accent or emotion color, a gradient, or a dashed border).
 
 ---
 
 ### **When Not to Use**
 
 - To group **content and actions** into a meaningful unit – use [**Card**](/components/card).
+
+- For a region on the **standard surface** with free content (e.g., a settings panel) – use [**Tile**](/components/unstable-tile).
 
 - For **inline labels or states** – use **[Tag](/components/tag)** or [**Pill**](/components/pill).
 
