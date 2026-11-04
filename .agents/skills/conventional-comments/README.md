@@ -10,11 +10,11 @@ and output ordering. It is an overlay on the finding format from the code-review
 
 ## Usage
 
-Loaded (via `cat`) **only** when a review runs with `--conventional-comments`. Off by default,
-because the team has not adopted Conventional Comments as a whole and reviewers communicate clearly
-without the markings.
+Loaded (via `cat`) when a review runs with `--conventional-comments`, and in every CI review, where the
+`label (decorations):` line is always used. Off by default in the CLI, because the team has not adopted
+Conventional Comments as a whole and reviewers communicate clearly without the markings.
 
 ## Related Skills
 
-- the code-review methodology — the base finding format this overlays.
-- `spirit:code-review` — passes `--conventional-comments` through to reviewers.
+- `spirit:code-review` — the review that loads this overlay when run with `--conventional-comments` and in CI;
+  its `references/methodology.md` defines the base finding format.
