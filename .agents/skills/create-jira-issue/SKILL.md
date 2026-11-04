@@ -11,16 +11,19 @@ Draft a DS-project Jira Story, preview it for approval, file it via the `jira` M
 
 - **WHO/WHAT/WHY opening is mandatory.** The description opens with three labeled lines — no "Premise" heading, just:
   ```text
-  *WHO:* As a [persona],
-  *WHAT:* I want to [X],
-  *WHY:* So that [Y].
+  **WHO:** As a [persona],
+  **WHAT:** I want to [X],
+  **WHY:** So that [Y].
   ```
+  Write the labels as Markdown `**bold**`. A literal `*WHO:*` is parsed as Markdown italic and stored as `_WHO:_` (this happened on DS-2889: filed with `*WHO:*`, stored as `_WHO:_`, had to be rewritten).
   This scans faster than a single run-on sentence.
 - **Treat each ticket as an isolated problem.** Don't narrate its relationship to other tickets in the prose. Express dependencies via Jira issue links (`jira_create_issue_link`), not sentences like "this unblocks ticket X."
 - **Acceptance criteria stay short and clear.** Max 5 bullets, phrased as "how do I measure this is done," in plain language a non-engineer stakeholder can skim. Never include "tests pass" / "lint passes" — that's already a merge gate, not a criterion.
 - **Don't prescribe an API that hasn't been designed yet.** If the concrete shape (function signatures, type interfaces) is part of the ticket's own work, describe capabilities and cite external prior art instead of inventing code blocks that look decided. Only write out concrete signatures if the user has actually agreed on them in conversation first — never default to inventing one.
 - **Implementation notes carry the depth — gate the structure on actual complexity, not habit.** If the work is simple enough to explain in a flat list, use one `h2. Implementation notes` with up to ~5 plain bullets — don't manufacture sub-headings to fill a template. If the work genuinely spans multiple files/layers, draws on external prior art, or needs to separate current-state from approach from scope, split into `h3.` sub-headings: "What exists today" (evidence, file references), "Model to draw from" (the reasoning/prior art being drawn from), and "Scope of the work" (explicit bullets). Judge which shape fits from what you actually know about the work — don't default to the heavier one just because it's more thorough-looking.
 - **References are opt-in, not a template fixture.** Only add a References list of external links when prior art genuinely changes how someone would implement this — verify every link actually resolves (fetch/open it) before including it, never paste an unverified URL. Skip it entirely for internal-only or straightforward work.
+- **Check what already exists before drafting.** Read the code or the parent ticket for what is already done, and write acceptance criteria only for the remaining work. For "add the GTM id" the integration already read `NEXT_PUBLIC_GTM_ID`, so the ticket needed 2 criteria and 2 notes; the first draft had 5 and was cut on request.
+- **The preview must match what you claim.** If you say you removed or changed something, re-read the draft before sending it (the first DS-2890 preview said the DS-2458 mention was removed but still contained it).
 - **Always preview before writing.** Show the full drafted text to the user before calling `jira_create_issue` or `jira_update_issue`. Iterate until approved.
 
 ---
@@ -45,7 +48,7 @@ Find a related sibling ticket and read its `customfield_12151` value rather than
 
 Follow the Principles above. Structure:
 
-1. Opening: `*WHO:*`/`*WHAT:*`/`*WHY:*` three labeled lines, per the Principles above.
+1. Opening: `**WHO:**`/`**WHAT:**`/`**WHY:**` three labeled lines, per the Principles above.
 2. `h2. Acceptance criteria` — max 5 bullets, outcomes only, short and plain-language.
 3. `h2. Implementation notes` — pick the shape based on complexity:
    - **Simple/single-area work:** a flat list of up to ~5 plain bullets under `h2. Implementation notes`.
@@ -57,7 +60,7 @@ Keep Acceptance Criteria short enough to scan at a glance — push depth and det
 
 ### Step 4: Present for Review
 
-Show the full drafted text, in the exact Jira wiki markup it will be submitted as, before writing anything. Iterate on the draft until the user approves it.
+Show the full drafted text, exactly as it will be submitted (headings and bullets in wiki markup, bold and monospace as Markdown), before writing anything. Iterate on the draft until the user approves it.
 
 ### Step 5: Create the Issue
 
@@ -71,7 +74,13 @@ Then link the epic:
 jira_link_to_epic(issue_key="<new key>", epic_key="<epic from Step 2>")
 ```
 
-**Verify it actually took** — re-read `customfield_12151` via `jira_get_issue`. This call has silently reported success while leaving the field `null`; do not assume success from the response alone.
+**Verify it actually took** — re-read `customfield_12151` via `jira_get_issue`. This call has silently reported success while leaving the field `null` (DS-2889: "linked to epic DS-2453", field still `null`); do not assume success from the response alone. If it is `null`, set the field directly and re-read it again:
+
+```text
+jira_update_issue(issue_key="<new key>", fields={"customfield_12151": "<epic key>"})
+```
+
+For `Blocks`, `inward_issue_key` is the blocker: inward `GA-2242`, outward `DS-2890` stores "DS-2890 is blocked by GA-2242". A generic tool error does not prove a link was not created; re-read `issuelinks` before retrying. Related tickets are linked with `jira_create_issue_link(link_type="Relation", ...)` — "Relates to" is not a valid type name here. `jira_update_issue` replaces `labels` wholesale, so read the current labels first when the ticket may already have some.
 
 ### Step 6: Apply the Jira Wiki-Markup Gotchas
 
@@ -97,9 +106,9 @@ Give the direct issue URL(s) and summarize any issue-link relationships created 
 Shared opening and acceptance criteria (always the same):
 
 ```text
-*WHO:* As a [persona],
-*WHAT:* I want to [X],
-*WHY:* So that [Y].
+**WHO:** As a [persona],
+**WHAT:** I want to [X],
+**WHY:** So that [Y].
 
 h2. Acceptance criteria
 
@@ -147,8 +156,8 @@ h3. Scope of the [refactor/work]
 
 |                             | Description                                                                                                                                                                                 |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ❌ **Wrong persona**        | `*WHO:* As a user,` — vague, and this is internal tooling work with no end-user-facing behavior.                                                                                            |
-| ✅ **Concrete persona**     | `*WHO:* As a design system engineer maintaining Picker and Combobox, *WHAT:* I want a Collection abstraction, *WHY:* So that today's option resolution stops being fragile and duplicated.` |
+| ❌ **Wrong persona**        | `**WHO:** As a user,` — vague, and this is internal tooling work with no end-user-facing behavior.                                                                                            |
+| ✅ **Concrete persona**     | `**WHO:** As a design system engineer maintaining Picker and Combobox, **WHAT:** I want a Collection abstraction, **WHY:** So that today's option resolution stops being fragile and duplicated.` |
 | ❌ **CI as criterion**      | Acceptance criteria bullet: "yarn lint and yarn test pass."                                                                                                                                 |
 | ✅ **Outcome as criterion** | "Combobox's inline filtering hides non-matching options without scanning the DOM to determine what's currently visible."                                                                    |
 | ❌ **Invented API**         | A code block declaring `interface Collection<T> { getKeys(): ...; filter(fn): ...; }` for a hook that hasn't been designed yet.                                                             |

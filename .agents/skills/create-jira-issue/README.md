@@ -28,13 +28,13 @@ Use when you need to:
 
 | Section                  | Content                                                                                              |
 | ------------------------ | ---------------------------------------------------------------------------------------------------- |
-| **Opening**              | `*WHO:*`/`*WHAT:*`/`*WHY:*` three labeled lines — no heading                                         |
+| **Opening**              | `**WHO:**`/`**WHAT:**`/`**WHY:**` three labeled lines (Markdown bold, stored as wiki bold) — no heading                                         |
 | **Acceptance criteria**  | Max 5 bullets, measurable outcomes only — never CI/lint/test (that's a merge gate, not a criterion)  |
 | **Implementation notes** | What exists today (evidence), model to draw from (prose, no invented API), references, scope bullets |
 
 ## Key Principles
 
-- **WHO/WHAT/WHY is mandatory.** Every ticket opens with three labeled lines: `*WHO:*`, `*WHAT:*`, `*WHY:*`.
+- **WHO/WHAT/WHY is mandatory.** Every ticket opens with three labeled lines: `**WHO:**`, `**WHAT:**`, `**WHY:**`.
 - **Each ticket is an isolated problem.** Dependencies go through Jira issue links, not prose.
 - **Acceptance criteria measure success, not process.** No CI-obvious items.
 - **Don't invent an API you haven't designed yet.** Cite prior art in prose instead.
