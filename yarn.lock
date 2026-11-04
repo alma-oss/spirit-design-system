@@ -162,6 +162,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alma-oss/spirit-design-tokens@workspace:packages/design-tokens"
   dependencies:
+    "@alma-oss/spirit-figma-tokens-exporter": "workspace:^"
     "@eslint/compat": "catalog:lint"
     "@eslint/eslintrc": "catalog:lint"
     eslint: "catalog:lint"
@@ -285,6 +286,38 @@ __metadata:
     react: "catalog:frontend"
     react-dom: "catalog:frontend"
     typescript: "catalog:types"
+  languageName: unknown
+  linkType: soft
+
+"@alma-oss/spirit-figma-tokens-exporter@workspace:^, @alma-oss/spirit-figma-tokens-exporter@workspace:exporters/figma-tokens":
+  version: 0.0.0-use.local
+  resolution: "@alma-oss/spirit-figma-tokens-exporter@workspace:exporters/figma-tokens"
+  dependencies:
+    "@eslint/compat": "catalog:lint"
+    "@eslint/eslintrc": "catalog:lint"
+    "@lmc-eu/eslint-config-jest": "catalog:lint"
+    "@lmc-eu/eslint-config-typescript": "catalog:lint"
+    "@swc/core": "catalog:build"
+    "@swc/jest": "catalog:test"
+    "@types/jest": "catalog:types"
+    "@types/node": "catalog:types"
+    cosmiconfig: "catalog:script"
+    eslint: "catalog:lint"
+    eslint-config-spirit: "workspace:^"
+    jest: "catalog:test"
+    jest-config-spirit: "workspace:^"
+    npm-run-all2: "catalog:script"
+    prettier-config-spirit: "workspace:^"
+    sade: "catalog:script"
+    shx: "catalog:script"
+    tsx: "catalog:script"
+    typescript: "catalog:types"
+    vite: "catalog:build"
+    vite-plugin-dts: "catalog:build"
+    vite-plugin-externalize-deps: "catalog:build"
+    zod: "catalog:script"
+  bin:
+    spirit-figma-tokens-exporter: ./dist/bin/figma-tokens.js
   languageName: unknown
   linkType: soft
 
