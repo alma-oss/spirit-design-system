@@ -1,0 +1,260 @@
+// 1. Clip the cards at the sides and at the bottom, but let the pile reach into the gap above the scene.
+// 2. Hide the cards above the scene until the physics starts.
+// 3. Do not promote the cards to their own layer (`will-change`), rotated cards would be blurred.
+// 4. Use a solid fill instead of hatching, thin diagonal lines flicker when the card moves.
+// 5. Crop the empty margin of the animation by drawing it larger than its box. A larger box is used instead of `scale`,
+//    rotated cards would be blurred by it.
+
+@use 'sass:math';
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+@use './falling-tokens-colors' as colors;
+
+$lottie-box-size: units.px-to-rem(96px);
+$lottie-scale: 1.4; // 5.
+$lottie-size: $lottie-box-size * $lottie-scale;
+$lottie-offset: math.div($lottie-box-size - $lottie-size, 2);
+
+.FallingTokens {
+    position: relative;
+    clip-path: inset(calc(-1 * #{tokens.$space-1300}) 0 0 0); // 1.
+    width: 100%;
+    height: units.px-to-rem(400px);
+}
+
+.FallingTokens__card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    gap: tokens.$space-500;
+    align-items: center;
+    justify-content: center;
+    padding: tokens.$space-700;
+    overflow: hidden;
+    color: tokens.$text-secondary;
+    border: tokens.$border-width-100 solid tokens.$border-basic;
+    border-radius: tokens.$radius-400;
+    background-color: tokens.$background-primary;
+    transform: translateY(-100vh); // 2., 3.
+    user-select: none;
+    cursor: grab;
+}
+
+.FallingTokens.is-dragging,
+.is-dragging .FallingTokens__card {
+    cursor: grabbing;
+}
+
+.FallingTokens__card--column {
+    flex-direction: column;
+}
+
+.FallingTokens__label {
+    @include typography.generate(tokens.$code-small-regular);
+
+    white-space: nowrap;
+}
+
+.FallingTokens__label--onBrand {
+    color: tokens.$text-primary;
+}
+
+.FallingTokens__label--dark {
+    color: tokens.$text-primary;
+}
+
+.FallingTokens__hex {
+    @include typography.generate(tokens.$body-xsmall-regular);
+
+    color: tokens.$text-tertiary;
+}
+
+.FallingTokens__img {
+    display: block;
+    pointer-events: none;
+}
+
+.FallingTokens__icon {
+    flex-shrink: 0;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+}
+
+.FallingTokens__radiusDemo {
+    box-sizing: border-box;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    border-top: units.px-to-rem(2px) solid colors.$falling-tokens-demo-outline;
+    border-right: units.px-to-rem(2px) solid colors.$falling-tokens-demo-outline;
+    background: linear-gradient(225deg, colors.$falling-tokens-demo-background-start, tokens.$background-primary);
+}
+
+.FallingTokens__radiusDemo--rounded {
+    border-top-right-radius: tokens.$radius-300;
+}
+
+.FallingTokens__radiusDemo--full {
+    border: units.px-to-rem(2px) solid colors.$falling-tokens-demo-outline;
+    border-radius: tokens.$radius-full;
+}
+
+.FallingTokens__swatch {
+    flex-shrink: 0;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    border-radius: tokens.$radius-300;
+}
+
+.FallingTokens__swatch--gradient {
+    background: tokens.$gradient-primary;
+}
+
+.FallingTokens__swatch--warning {
+    background-color: tokens.$emotion-warning-background-basic;
+}
+
+.FallingTokens__card--color {
+    flex-direction: column;
+    gap: tokens.$space-400;
+    padding: tokens.$space-600 tokens.$space-500;
+}
+
+.FallingTokens__swatchBar {
+    width: 100%;
+    height: units.px-to-rem(40px);
+    border-radius: tokens.$radius-300;
+}
+
+.FallingTokens__swatchBar--green {
+    background-color: colors.$falling-tokens-green;
+}
+
+.FallingTokens__swatchBar--yellow {
+    background-color: colors.$falling-tokens-yellow;
+}
+
+.FallingTokens__text {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.FallingTokens__text--centered {
+    align-self: center;
+    align-items: center;
+}
+
+.FallingTokens__card--space {
+    box-sizing: border-box;
+    height: units.px-to-rem(56px);
+}
+
+.FallingTokens__spaceDemo {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    border-right: units.px-to-rem(2px) solid tokens.$accent-01-border-basic;
+    border-left: units.px-to-rem(2px) solid tokens.$accent-01-border-basic;
+    background-color: colors.$falling-tokens-space-fill; // 4.
+}
+
+.FallingTokens__containerDemo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    box-sizing: border-box;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    padding: 0 tokens.$space-300;
+    border-right: units.px-to-rem(2px) solid colors.$falling-tokens-container-edge;
+    border-left: units.px-to-rem(2px) solid colors.$falling-tokens-container-edge;
+
+    &::before {
+        content: '';
+        flex: 1;
+        height: units.px-to-rem(16px);
+        background-color: colors.$falling-tokens-container-fill;
+    }
+}
+
+.FallingTokens__gridDemo {
+    display: flex;
+    gap: tokens.$space-200;
+    box-sizing: border-box;
+    width: units.px-to-rem(86px);
+    height: units.px-to-rem(48px);
+    padding: tokens.$space-300 0;
+}
+
+.FallingTokens__gridColumn {
+    flex: 1;
+    background-color: colors.$falling-tokens-grid-column;
+}
+
+.FallingTokens__card--image {
+    padding: tokens.$space-400;
+}
+
+.FallingTokens__picture {
+    width: units.px-to-rem(110px);
+    height: units.px-to-rem(110px);
+    object-fit: cover;
+    border-radius: tokens.$radius-300;
+}
+
+.FallingTokens__card--hero {
+    flex-direction: column;
+    gap: tokens.$space-600;
+    padding: tokens.$space-900 tokens.$space-800;
+    border: 0;
+}
+
+.FallingTokens__heroImage {
+    width: units.px-to-rem(93px);
+}
+
+.FallingTokens__heroImage--accessibility {
+    width: units.px-to-rem(44px);
+}
+
+.FallingTokens__heroImage--bodyXlarge {
+    width: units.px-to-rem(45px);
+}
+
+.FallingTokens__card--font {
+    background-color: tokens.$neutral-background-basic;
+}
+
+.FallingTokens__card--display {
+    background-color: colors.$falling-tokens-display-background;
+}
+
+.FallingTokens__card--accessibility {
+    background-color: tokens.$emotion-success-background-subtle;
+}
+
+.FallingTokens__card--bodyXlarge {
+    background-color: tokens.$emotion-informative-background-subtle;
+}
+
+.FallingTokens__card--motion {
+    padding: tokens.$space-500 tokens.$space-500 tokens.$space-700;
+}
+
+.FallingTokens__lottieBox {
+    position: relative;
+    width: $lottie-box-size;
+    height: $lottie-box-size;
+    overflow: hidden;
+}
+
+.FallingTokens__lottie {
+    position: absolute;
+    top: $lottie-offset;
+    left: $lottie-offset;
+    width: $lottie-size;
+    height: $lottie-size;
+}
