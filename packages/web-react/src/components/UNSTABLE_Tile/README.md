@@ -14,9 +14,7 @@ A plain tile already renders the full surface, so none of the props below are ne
 <UNSTABLE_Tile>{/* Content goes here */}</UNSTABLE_Tile>
 ```
 
-Reach for `Box` when a region needs styling primitives and nothing else, for `UNSTABLE_Tile` when it needs the
-shared surface but no content structure, and for `Card` when the region really is a card composition with
-artwork, a body and a footer.
+Not sure this is the right component? See [Box, Tile, or Card][box-tile-card-guide].
 
 ## Custom Background
 
@@ -115,6 +113,7 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
+[box-tile-card-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/design/decision-trees/box-tile-or-card.md
 [control-button]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/src/components/ControlButton
 [docs-experimental-code]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/experimental-code.md
 [flex]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web-react/src/components/Flex

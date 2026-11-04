@@ -32,6 +32,10 @@ Tokens affecting the whole system and component properties
 
 [Elevation & Shadows](/design/global-tokens/elevation-and-shadows) — How to solve shadows and object layering
 
+### Decision Trees
+
+[Box, Tile, or Card](/design/decision-trees/box-tile-or-card) — Which container to use for a region of a page
+
 ### Other
 
 [Rules and Principles](/design/rules-and-principles) — The rules and principles we use in the design and development of the system

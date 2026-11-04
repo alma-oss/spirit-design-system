@@ -24,6 +24,8 @@ Up to date
 
 A **Card** is a container component used to group **related content and actions** into a clear, scannable unit. Cards help present information in a visually distinct block, often with an image, title, supporting text, and optional actions. They provide a consistent way to display structured data such as products, articles, or profiles.
 
+Not sure which one to use? See [**Box, Tile, or Card**](/design/decision-trees/box-tile-or-card).
+
 ---
 
 ### **When to Use**
@@ -41,6 +43,8 @@ A **Card** is a container component used to group **related content and actions*
 ### **When Not to Use**
 
 - For **simple framing or background styling** around one element (e.g., a single icon or image) – use [**Box**](/components/box) instead.
+
+- For **free content on the standard surface** (e.g., a settings panel or a form step) – use [**Tile**](/components/unstable-tile).
 
 - For **single pieces of content** that don’t need a distinct boundary – use plain text, lists, or sections instead.
 

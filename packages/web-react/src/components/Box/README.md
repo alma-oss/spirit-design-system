@@ -6,8 +6,9 @@ The Box component is a simple container around content or other components.
 <Box>{/* Content goes here */}</Box>
 ```
 
-For a composition about one topic — artwork or media, a body, a footer, or one link over the whole block — use
-[Card][card]. Box is the surface: padding, border, background, shadow, or a color scheme.
+Box is the surface: padding, border, background, shadow, or a color scheme.
+
+Not sure this is the right component? See [Box, Tile, or Card][box-tile-card-guide].
 
 ## Color Scheme
 
@@ -162,7 +163,7 @@ On top of the API options, the components accept [additional attributes][readme-
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
 and [escape hatches][readme-escape-hatches].
 
-[card]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Card/README.md
+[box-tile-card-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/design/decision-trees/box-tile-or-card.md
 [color-schemes-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md
 [dictionary-border]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#border
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color

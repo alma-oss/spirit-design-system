@@ -17,14 +17,9 @@ Additionally, Card can be used with [CardLink](#making-the-whole-card-clickable)
 
 See [Accessibility](#accessibility) for the article, footer, and heading rules.
 
-## Card or Box
+## Card, Tile, or Box
 
-Use Card for a block about one topic that is composed of Card subcomponents — a body, plus any of artwork, media,
-logo, or footer — or for a block the user activates as a whole through a
-[CardLink](#making-the-whole-card-clickable).
-
-Use [Box][box] for a surface that only needs padding, border, background, shadow, or a color scheme. A settings panel
-with none of that composition and no card-wide link is a Box, including when a design file labels the panel a card.
+Not sure this is the right component? See [Box, Tile, or Card][box-tile-card-guide].
 
 A [boxed Card](#boxed-cards) looks like a panel, but it is still a Card, with the card grid and an `<article>`.
 
@@ -670,6 +665,7 @@ the artwork:
 or a video.
 
 [box]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Box/README.md
+[box-tile-card-guide]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/design/decision-trees/box-tile-or-card.md
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#alignment
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [dictionary-color]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#color
