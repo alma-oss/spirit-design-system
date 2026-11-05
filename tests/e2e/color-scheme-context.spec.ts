@@ -424,7 +424,19 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
       '#progress-bar-combo',
       '--spirit-local-background-color-subtle',
     );
+    const progressSchemeBasicResolved = await resolveCssColorToRgb(
+      page,
+      '#progress-bar-combo',
+      '--spirit-color-scheme-background-color-basic',
+    );
+    const progressSchemeSubtleResolved = await resolveCssColorToRgb(
+      page,
+      '#progress-bar-combo',
+      '--spirit-color-scheme-background-color-subtle',
+    );
 
+    expect(progressBasicResolved).toBe(progressSchemeBasicResolved);
+    expect(progressSubtleResolved).toBe(progressSchemeSubtleResolved);
     expect(progressBasicResolved).not.toBe(progressSubtleResolved);
 
     // 14. Components with inner painted elements (ToastBar)
