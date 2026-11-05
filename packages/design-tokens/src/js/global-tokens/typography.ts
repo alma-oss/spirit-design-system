@@ -729,6 +729,156 @@ export const labelXsmall = {
   },
 };
 
+export const labelLargeBase = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.125rem',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelMediumBase = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: 1.25,
+  },
+};
+
+export const labelSmallBase = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: 1.1429,
+  },
+};
+
+export const labelXlargeBase = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: 1.4,
+  },
+};
+
+export const labelXsmallBase = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.75rem',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelLargeLighter = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.125rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelMediumLighter = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.25,
+  },
+};
+
+export const labelSmallLighter = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.1429,
+  },
+};
+
+export const labelXlargeLighter = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.4,
+  },
+};
+
+export const labelXsmallLighter = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.75rem',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelLargeBolder = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.125rem',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: 1.3333,
+  },
+};
+
+export const labelMediumBolder = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1rem',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: 1.25,
+  },
+};
+
+export const labelSmallBolder = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.875rem',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: 1.1429,
+  },
+};
+
+export const labelXlargeBolder = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '1.25rem',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: 1.4,
+  },
+};
+
+export const labelXsmallBolder = {
+  mobile: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '0.75rem',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    lineHeight: 1.3333,
+  },
+};
+
 export const styles = {
   actionLarge,
   actionMedium,
@@ -782,4 +932,19 @@ export const styles = {
   labelSmall,
   labelXlarge,
   labelXsmall,
+  labelLargeBase,
+  labelMediumBase,
+  labelSmallBase,
+  labelXlargeBase,
+  labelXsmallBase,
+  labelLargeLighter,
+  labelMediumLighter,
+  labelSmallLighter,
+  labelXlargeLighter,
+  labelXsmallLighter,
+  labelLargeBolder,
+  labelMediumBolder,
+  labelSmallBolder,
+  labelXlargeBolder,
+  labelXsmallBolder,
 };
