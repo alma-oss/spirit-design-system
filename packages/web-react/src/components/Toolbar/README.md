@@ -43,7 +43,8 @@ Compose it with a [`Navigation`][navigation]. Inside a toolbar, `Navigation` ren
 ```
 
 Name the toolbar with `aria-label` or `aria-labelledby`. A name is required when the page has more than one toolbar.
-`Navigation` takes its layout from `orientation`, so do not set `direction` on it.
+Inside a `Toolbar`, `Navigation` always takes its layout from the toolbar `orientation`, and its own `direction` prop is
+ignored. This keeps the layout in line with `aria-orientation` and the arrow keys, so do not set `direction` on it.
 
 ## Items
 

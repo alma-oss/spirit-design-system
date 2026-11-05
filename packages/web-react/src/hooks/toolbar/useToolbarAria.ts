@@ -9,11 +9,12 @@ import {
   useEffect,
 } from 'react';
 import { Direction, KeyboardKey } from '../../constants';
+import { type DirectionDictionaryType } from '../../types';
 import { type GridRowMove } from '../gridKeyboardNavigation';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { type ToolbarState } from './useToolbarState';
 
-export type ToolbarOrientation = (typeof Direction)[keyof typeof Direction];
+export type ToolbarOrientation = DirectionDictionaryType;
 
 export interface UseToolbarAriaProps<T extends HTMLElement> {
   onFocus?: FocusEventHandler<T>;

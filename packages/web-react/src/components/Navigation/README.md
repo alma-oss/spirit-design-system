@@ -31,7 +31,8 @@ it will apply a gap between them.
 
 For three or more actions that stay visible, such as the actions for the document being edited, wrap the `Navigation`
 in a [`Toolbar`][toolbar]. Do not use a toolbar for one or two controls, or for site navigation. Inside a toolbar,
-`Navigation` renders as a `div`, because a toolbar is not a navigation landmark.
+`Navigation` renders as a `div`, because a toolbar is not a navigation landmark. Setting `elementType="nav"` there
+logs a warning and still renders a `div`; any other `elementType` is used as is.
 
 ```tsx
 <Toolbar orientation="vertical" aria-label="CV actions">
@@ -60,10 +61,11 @@ toolbar through its first link or button, such as a `NavigationAction`, `Navigat
 
 ### API
 
-| Name        | Type                                                                                       | Default      | Required | Description                                                      |
-| ----------- | ------------------------------------------------------------------------------------------ | ------------ | -------- | ---------------------------------------------------------------- |
-| `children`  | \[`ReactElement<HTMLLIElement>` \| `ReactElement<NavigationItem>` \| Array of these types] | `null`       | ✓        | Content of the Navigation                                        |
-| `direction` | [Direction dictionary][dictionary-direction]                                               | `horizontal` | ✕        | Layout direction. Inside a `Toolbar`, this follows `orientation` |
+| Name          | Type                                                                                       | Default      | Required | Description                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------ | ------------ | -------- | ----------------------------------------------------------------------------------- |
+| `children`    | \[`ReactElement<HTMLLIElement>` \| `ReactElement<NavigationItem>` \| Array of these types] | `null`       | ✓        | Content of the Navigation                                                           |
+| `direction`   | [Direction dictionary][dictionary-direction]                                               | `horizontal` | ✕        | Layout direction. Inside a `Toolbar`, this follows `orientation`                    |
+| `elementType` | `ElementType`                                                                              | `nav`        | ✕        | Type of element used as. Inside a `Toolbar`, it is a `div` and `nav` is not allowed |
 
 The components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
