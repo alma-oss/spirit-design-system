@@ -42,6 +42,39 @@ describe('Label', () => {
     expect(screen.getByText('Text')).toHaveClass('Label--medium');
   });
 
+  it('should use base font weight by default', () => {
+    render(<Label>Text</Label>);
+
+    expect(screen.getByText('Text')).toHaveClass('Label--base');
+  });
+
+  it('should use label context fontWeight', () => {
+    render(
+      <ContextPropsProvider value={{ label: { fontWeight: 'lighter' } }}>
+        <Label>Text</Label>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Text')).toHaveClass('Label--lighter');
+  });
+
+  it('should use direct fontWeight over label context', () => {
+    render(
+      <ContextPropsProvider value={{ label: { fontWeight: 'lighter' } }}>
+        <Label fontWeight="bolder">Text</Label>
+      </ContextPropsProvider>,
+    );
+
+    expect(screen.getByText('Text')).toHaveClass('Label--bolder');
+    expect(screen.getByText('Text')).not.toHaveClass('Label--lighter');
+  });
+
+  it.each(['lighter', 'bolder'] as const)('should apply %s font weight', (fontWeight) => {
+    render(<Label fontWeight={fontWeight}>Text</Label>);
+
+    expect(screen.getByText('Text')).toHaveClass(`Label--${fontWeight}`);
+  });
+
   it('should use FormFieldsContext size when no direct prop', () => {
     render(
       <UniversalProvider values={[[FormFieldsContext, { size: 'small' }]]}>

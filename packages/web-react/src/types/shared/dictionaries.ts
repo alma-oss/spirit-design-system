@@ -104,8 +104,12 @@ export interface EmphasisProps<E> {
 }
 
 /* Font Weight */
-export type FontWeightDictionaryKeys = keyof typeof FontWeight;
+export type FontWeightDictionaryKeys = 'BASE' | 'LIGHTER' | 'BOLDER';
 export type FontWeightDictionaryType<FW = undefined> = (typeof FontWeight)[FontWeightDictionaryKeys] | FW;
+
+export type DeprecatedFontWeightDictionaryKeys = 'REGULAR' | 'SEMIBOLD' | 'BOLD';
+export type DeprecatedFontWeightDictionaryType<FW = undefined> =
+  (typeof FontWeight)[DeprecatedFontWeightDictionaryKeys] | FW;
 
 export interface FontWeightProps<FW> {
   fontWeight?: FW;
