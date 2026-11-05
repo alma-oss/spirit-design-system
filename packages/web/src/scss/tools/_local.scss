@@ -1,8 +1,8 @@
-// Getters (`get-*`) and setters (`set-*`) for local color context CSS custom properties (`--{prefix}local-*`).
+// Getters (`get-*`) and setters (`set`, `set-*`) for local color context CSS custom properties (`--{prefix}local-*`).
 
 @use '@tokens' as tokens;
 
-@mixin -set-property($name, $value, $important: false) {
+@mixin set($name, $value, $important: false) {
     @if $important {
         // stylelint-disable-next-line declaration-no-important -- Important is requested by caller (e.g. utilities).
         --#{tokens.$css-variable-prefix}local-#{$name}: #{$value} !important;
@@ -20,7 +20,7 @@
 }
 
 @mixin set-color($value, $important: false) {
-    @include -set-property('color', $value, $important);
+    @include set('color', $value, $important);
 }
 
 @function get-color-basic($fallback: null) {
@@ -32,7 +32,7 @@
 }
 
 @mixin set-color-basic($value, $important: false) {
-    @include -set-property('color-basic', $value, $important);
+    @include set('color-basic', $value, $important);
 }
 
 @function get-color-subtle($fallback: null) {
@@ -44,7 +44,7 @@
 }
 
 @mixin set-color-subtle($value, $important: false) {
-    @include -set-property('color-subtle', $value, $important);
+    @include set('color-subtle', $value, $important);
 }
 
 @function get-border-color($fallback: null) {
@@ -56,7 +56,7 @@
 }
 
 @mixin set-border-color($value, $important: false) {
-    @include -set-property('border-color', $value, $important);
+    @include set('border-color', $value, $important);
 }
 
 @function get-border-color-subtle($fallback: null) {
@@ -68,7 +68,7 @@
 }
 
 @mixin set-border-color-subtle($value, $important: false) {
-    @include -set-property('border-color-subtle', $value, $important);
+    @include set('border-color-subtle', $value, $important);
 }
 
 @function get-background-color($fallback: null) {
@@ -80,7 +80,7 @@
 }
 
 @mixin set-background-color($value, $important: false) {
-    @include -set-property('background-color', $value, $important);
+    @include set('background-color', $value, $important);
 }
 
 @function get-background-color-basic($fallback: null) {
@@ -92,7 +92,7 @@
 }
 
 @mixin set-background-color-basic($value, $important: false) {
-    @include -set-property('background-color-basic', $value, $important);
+    @include set('background-color-basic', $value, $important);
 }
 
 @function get-background-color-subtle($fallback: null) {
@@ -104,7 +104,7 @@
 }
 
 @mixin set-background-color-subtle($value, $important: false) {
-    @include -set-property('background-color-subtle', $value, $important);
+    @include set('background-color-subtle', $value, $important);
 }
 
 @function get-background-color-state-hover($fallback: null) {
@@ -116,7 +116,7 @@
 }
 
 @mixin set-background-color-state-hover($value, $important: false) {
-    @include -set-property('background-color-state-hover', $value, $important);
+    @include set('background-color-state-hover', $value, $important);
 }
 
 @function get-background-color-state-active($fallback: null) {
@@ -128,7 +128,7 @@
 }
 
 @mixin set-background-color-state-active($value, $important: false) {
-    @include -set-property('background-color-state-active', $value, $important);
+    @include set('background-color-state-active', $value, $important);
 }
 
 @function get-background-color-state-selected($fallback: null) {
@@ -140,5 +140,5 @@
 }
 
 @mixin set-background-color-state-selected($value, $important: false) {
-    @include -set-property('background-color-state-selected', $value, $important);
+    @include set('background-color-state-selected', $value, $important);
 }

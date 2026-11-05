@@ -7,6 +7,7 @@
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/breakpoint';
+@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
@@ -20,6 +21,11 @@ $_component-name: 'Button';
 .Button {
     --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}button-icon-size);
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color(color-scheme.get-border-color());
+    @include local.set-background-color(color-scheme.get-background-color());
+    @include local.set-background-color-state-hover(color-scheme.get-background-color-state-hover());
+    @include local.set-background-color-state-active(color-scheme.get-background-color-state-active());
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));
     @include responsive-properties.create-cascade(
         $property: 'column-gap',

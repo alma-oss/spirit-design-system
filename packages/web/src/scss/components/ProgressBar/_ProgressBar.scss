@@ -19,6 +19,7 @@
 //    displayed, the margin box matches the caption line box exactly, so the row does not grow.
 
 @use '../../settings/transitions';
+@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/local';
 @use 'theme';
@@ -31,6 +32,9 @@
 }
 
 .ProgressBar {
+    @include local.set-background-color-basic(color-scheme.get-background-color-basic());
+    @include local.set-background-color-subtle(color-scheme.get-background-color-subtle());
+
     appearance: none;
     display: block;
     width: 100%;

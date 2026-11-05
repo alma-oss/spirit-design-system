@@ -8,6 +8,7 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use '@tokens' as tokens;
+@use 'local';
 @use 'string' as spirit-string;
 
 $_category-prefixes: ('emotion-', 'accent-');
@@ -98,7 +99,7 @@ $_category-prefixes: ('emotion-', 'accent-');
 
             #{$variant-selector} {
                 @each $css-property, $value in $properties {
-                    --#{tokens.$css-variable-prefix}local-#{$css-property}: #{$value};
+                    @include local.set($css-property, $value);
                 }
             }
         }

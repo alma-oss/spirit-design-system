@@ -7,6 +7,7 @@
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/breakpoint';
+@use '../../tools/color-scheme';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/local';
@@ -44,7 +45,7 @@ $_component-name-infix: spirit-string.convert-pascal-case-to-kebab-case($_compon
 
 // 2.
 .ControlButton--hasBackground {
-    background-color: local.get-background-color();
+    background-color: local.get-background-color(color-scheme.get-background-color());
 }
 
 @include dictionaries.generate-sizes(

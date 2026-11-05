@@ -18,6 +18,10 @@
 .Tag {
     --#{tokens.$css-variable-prefix}element-stretched-inset: calc(-1 * #{theme.$border-width}); // 1.
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color(color-scheme.get-border-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-background-color(color-scheme.get-background-color());
     @include typography.from-css-variables($infix: 'tag');
 
     position: relative;

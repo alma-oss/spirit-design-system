@@ -1,6 +1,34 @@
 @use 'true' as test;
 @use '../local';
 
+@include test.describe('set mixin') {
+    @include test.it('should set an arbitrary local variable with and without !important') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include local.set('padding-inline', 1rem);
+                }
+
+                .b {
+                    @include local.set('padding-inline', 1rem, $important: true);
+                }
+            }
+
+            // stylelint-disable declaration-no-important -- Testing !important output.
+            @include test.expect() {
+                .a {
+                    --spirit-local-padding-inline: 1rem;
+                }
+
+                .b {
+                    --spirit-local-padding-inline: 1rem !important;
+                }
+            }
+            // stylelint-enable declaration-no-important
+        }
+    }
+}
+
 @include test.describe('get-color and set-color') {
     @include test.it('should return the local content color variable when no fallback is given') {
         @include test.assert() {

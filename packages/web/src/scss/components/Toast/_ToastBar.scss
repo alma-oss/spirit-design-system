@@ -7,6 +7,7 @@
 // 7. Invisible items should not take up space in the queue.
 
 @use '@tokens' as tokens;
+@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/local';
@@ -14,6 +15,10 @@
 @use 'theme';
 
 .ToastBar {
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-background-color(color-scheme.get-background-color());
+
     display: grid;
     align-content: var(--toast-alignment-y);
     justify-content: var(--toast-alignment-x);

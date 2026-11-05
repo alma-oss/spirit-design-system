@@ -1,10 +1,13 @@
 @use 'theme';
+@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/local';
 @use '../../tools/typography';
 
 .Pill {
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-background-color(color-scheme.get-background-color());
     @include typography.generate(theme.$typography);
 
     display: inline-flex;

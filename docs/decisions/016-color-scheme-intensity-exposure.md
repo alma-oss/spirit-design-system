@@ -29,15 +29,15 @@ out on a basic background.
 
 1. **Both intensities are always exposed.** In addition to the paired properties from
    [Color Schemes](012-color-schemes.md), every `color-scheme-on-*` class sets both intensities of the background
-   and content colors as local CSS custom properties, regardless of which intensity the class name picks:
-   - `--spirit-local-background-color-basic` and `--spirit-local-background-color-subtle`
-   - `--spirit-local-color-basic` and `--spirit-local-color-subtle`
+   and content colors as `--spirit-color-scheme-*` CSS custom properties, regardless of which intensity the class name picks:
+   - `--spirit-color-scheme-background-color-basic` and `--spirit-color-scheme-background-color-subtle`
+   - `--spirit-color-scheme-color-basic` and `--spirit-color-scheme-color-subtle`
 
    The paired properties keep the semantics they have in [Color Schemes](012-color-schemes.md):
-   `--spirit-local-color` and `--spirit-local-background-color` continue to resolve to the pair implied by the
+   `--spirit-color-scheme-color` and `--spirit-color-scheme-background-color` continue to resolve to the pair implied by the
    `<intensity>` in the class name. The new properties are additive; nothing about the existing contract changes.
 
-2. **Sass accessors mirror the CSS custom properties.** The `tools/local` module exposes `get-color-basic()`,
+2. **Sass accessors mirror the CSS custom properties.** Both `tools/color-scheme` and `tools/local` expose `get-color-basic()`,
    `get-color-subtle()`, `get-background-color-basic()`, and `get-background-color-subtle()` alongside `get-color()` and
    `get-background-color()` (plus matching `set-*` mixins), each getter taking an optional fallback. Component CSS reads
    the intensities through these rather than writing the CSS custom property names by hand.
