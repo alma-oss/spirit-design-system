@@ -1,11 +1,60 @@
 # Spirit Review Checklist
 
-What to look for in a Spirit diff. Every item comes from feedback that human reviewers raised
-repeatedly in past PRs; [`review-history-analysis.md`](review-history-analysis.md) lists the evidence.
-Items already enforced by linters or CI are intentionally absent.
+What to look for in a Spirit diff. The checklist has two parts:
 
-Each item gives a **default severity** in parentheses. Apply only the areas whose files the diff touches
-(see "Area Selection" in `SKILL.md`). Findings follow the format in `methodology.md`.
+- **General Checks** apply to every review, whatever the files.
+- **Spirit sections 1–14** come from feedback that human reviewers raised repeatedly in past PRs. The
+  root [`REVIEW.md`][review-md] logs that feedback with PR counts and evidence, and the
+  `spirit:review-feedback` skill promotes stable themes from it into these sections.
+
+Items already enforced by linters or CI are intentionally absent; see
+[Already Enforced by Tooling][already-enforced].
+
+Each item gives a **default severity** in parentheses. Apply only the Spirit sections whose files the
+diff touches (see "Area Selection" in `SKILL.md`). Findings follow the format in `methodology.md`.
+
+## General Checks
+
+These are not Spirit-specific. Report a finding only when the diff shows the concrete problem (see
+the confidence rule in `methodology.md`); never list the check names as headings.
+
+### Correctness and Bugs
+
+- **Logic errors** (blocking → question) — Inverted conditions, wrong comparisons, off-by-one and
+  boundary errors, inconsistent state transitions.
+- **Nullish and empty values** (important) — `null`/`undefined` from lookups, optional props, empty
+  arrays, and `0` or `""` as valid values are handled.
+- **Async and cleanup** (important) — Race conditions on shared state, stale closures, effects and
+  listeners that are not cleaned up, resources not released.
+
+### Security
+
+- **Injection and XSS** (blocking) — User input reaches `dangerouslySetInnerHTML`, `innerHTML`, URLs
+  (`javascript:`), shell commands, or workflow `run:` steps without escaping. CI-specific checks are in section 13.
+- **Secrets** (blocking) — No credentials, tokens, or keys in code, fixtures, logs, or error messages.
+- **External links** (important) — `target="_blank"` links carry `rel="noopener"` (`noreferrer` where
+  needed).
+- **Dependencies** (question) — A new or bumped dependency is justified and maintained (see section 4).
+
+### Silent Failures
+
+- **Swallowed errors** (important) — No empty `catch`, no broad `catch` that hides the cause, rejected
+  promises are handled, and fallbacks do not mask real errors.
+- **Placeholders** (important) — No mock, stub, or `TODO` implementation shipped in production code;
+  a `TODO` links an issue.
+
+### Type Design
+
+- **Invalid states** (minor) — Types make invalid states unrepresentable (a discriminated union instead of
+  several optional booleans).
+- **No escape hatches** (important) — No `any`, unchecked `as` assertions, or `@ts-ignore` without a reason.
+- **Narrow public surface** (minor) — Internals are not exported or exposed as mutable state.
+
+### Code Simplification
+
+- **Simplest solution** (minor) — Is there a shorter or more standard way? Remove deep nesting,
+  redundant branches, and abstractions with a single use.
+- **Clarity** (minor) — A new reader can follow the code without implicit ordering or hidden side effects.
 
 ## 1. Cross-Package Parity (`packages/web` ↔ `packages/web-react`)
 
@@ -209,11 +258,14 @@ The issues reviewers raise most often:
 - **Dead code** (minor) — Remove unused helpers, tokens, constants, and single-use wrappers.
 - **Naming** (minor) — Names say what the code does and follow existing APIs (`isStretched` as in
   `Link`); no `has*` in class modifiers; no `Type` suffix on props (reserved for TS types);
-  `UNSTABLE_` only on the public component; no names that clash with Spirit components.
+  `UNSTABLE_` only on the public component; no names that clash with Spirit components. File and
+  class naming conventions are in `.agents/instructions/code-style.md`.
 
 ## 12. Commits and PR Scope
 
-Commitlint already checks format, scope list, and issue references. Check what it cannot:
+Commit and PR conventions (types, `!`, no AI attribution, PR title and description) are defined in
+`.agents/instructions/git-workflow.md`; do not restate them. Commitlint already checks format, scope
+list, and issue references. Check what it cannot:
 
 - **Type matches intent** (important) — `feat` vs `refactor` vs `fix` vs `docs`; `!` for breaking
   a stable API.
@@ -245,3 +297,34 @@ Commitlint already checks format, scope list, and issue references. Check what i
 - **Single responsibility** (minor) — Skills reference each other instead of duplicating content;
   related skills are updated together (for example `stabilize-component` with `component-deprecation`).
 - **Current API** (important) — Examples match the current major (v5 classes, `rem` units).
+
+## Already Enforced by Tooling
+
+Do not report these; a linter or CI check catches them before a human looks. In PR mode, also skip
+anything a failing check on the PR already reports.
+
+| Theme raised by reviewers                     | Enforced by                                                            | Where                                 |
+| --------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------- |
+| `xlink:href` in SVG `<use>`                   | ESLint rule `spirit/no-xlink-href`                                     | `configs/eslint-config-spirit/rules/` |
+| Missing EOF newline, stray spaces             | Prettier, EditorConfig, `lint-staged`                                  | `lint.yaml` → `yarn format:check`     |
+| Missing braces                                | ESLint `curly`                                                         | `@lmc-eu/eslint-config-base`          |
+| Commit format, scope list, issue reference    | Commitlint (`scope-enum`, `issue-reference-format`)                    | `git.yaml`, `.husky/commit-msg`       |
+| Fixup commits left before merge               | Block-fixup-merge action                                               | `git.yaml`                            |
+| Class naming (BEM/SUIT, `UNSTABLE_` prefix)   | Stylelint `selector-class-pattern`                                     | `configs/stylelint-config-spirit/`    |
+| `!important`, `transition: all`, IDs, depth   | Stylelint extras                                                       | `@alma-oss/stylelint-config`          |
+| Import order, type imports, `useLayoutEffect` | ESLint (`import/order`, `consistent-type-imports`, restricted imports) | `packages/*/eslint.config.mjs`        |
+| Heading capitalization and terminology        | Remark and textlint                                                    | `docs-review.yaml`                    |
+| Broken Markdown links                         | Lychee (non-blocking)                                                  | `docs-review.yaml`                    |
+| Type errors                                   | `yarn types`                                                           | `lint.yaml`                           |
+| Build output and generated files committed    | Build plus clean-tree check                                            | `build.yaml`                          |
+| A visual mismatch itself                      | Playwright e2e                                                         | `e2e.yml`                             |
+
+Some themes are only partly enforced and stay in the Spirit sections for the part tooling misses:
+commitlint does not judge whether `feat` or `refactor` matches the intent, Playwright fails on a
+mismatch but does not judge whether an updated snapshot is expected, and Stylelint does not forbid raw
+`px` or hex values.
+
+When a new lint rule or CI check lands, add its theme to this table and remove the matching checklist item.
+
+[already-enforced]: #already-enforced-by-tooling
+[review-md]: https://github.com/alma-oss/spirit-design-system/blob/main/REVIEW.md

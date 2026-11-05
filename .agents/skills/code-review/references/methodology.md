@@ -1,8 +1,9 @@
 # Code Review Methodology
 
-How a Spirit review is performed and reported. `SKILL.md` defines the process, `checklist.md` defines
-what to look for. This file defines **how to judge and how to write findings**, and it is the base
-format that `spirit:conventional-comments` overlays.
+How a Spirit review is judged. `SKILL.md` defines the process, `checklist.md` defines what to look
+for, and `review-output-templates.md` defines how findings are rendered. This file defines **how to
+judge findings and what each one contains**, and it is the base format that
+`spirit:conventional-comments` overlays.
 
 ## Core Philosophy
 
@@ -25,8 +26,8 @@ Ask before asserting when intent is ambiguous, and lead with the fix rather than
 
 Do NOT report:
 
-- **Linter- and CI-detectable items.** See the "Already enforced" section of
-  [`review-history-analysis.md`](review-history-analysis.md). Formatting, import order, class-name
+- **Linter- and CI-detectable items.** See "Already Enforced by Tooling" in
+  [`checklist.md`][checklist], and any failing check on the PR. Formatting, import order, class-name
   pattern, commit-message format, `xlink:href`, broken links, and type errors are caught before a
   human ever looks. Never use a `nitpick` label.
 - **Pre-existing issues** in unchanged code, unless they are a critical security or data-loss risk,
@@ -71,19 +72,18 @@ differs, and say why.
 
 Every finding has the same fields. Lead with the fix, explain second.
 
-```text
-<severity>: <subject>
+| Field    | Content                                                                                     |
+| -------- | ------------------------------------------------------------------------------------------- |
+| Severity | One of the severities above                                                                 |
+| Subject  | One line naming the problem                                                                 |
+| Location | `path:line` or `path:start-end`; `commit <short sha>`; `DS-1234` for a missing criterion    |
+| Fix      | The concrete change, first. A suggestion fence or before/after when it is a line-level edit |
+| Why      | What is wrong and why it matters, second. One or two sentences                              |
 
-  File: <path:line>  (or <path:start-end>; `commit <short sha>` for commit findings; `DS-1234` for a missing acceptance criterion)
-
-  Fix: <concrete change — first>
-  Why: <what is wrong and why it matters — second>
-```
-
-- Include a concrete before/after or a suggestion fence whenever the fix is a line-level edit.
 - `question` findings may omit `Fix:`.
-- Keep the `Why:` to one or two sentences. Link a Spirit doc, ADR, or WAI-ARIA pattern when it adds
-  weight; never invent URLs.
+- Link a Spirit doc, ADR, or WAI-ARIA pattern in `Why:` when it adds weight; never invent URLs.
+- How the fields are rendered depends on the review context (CLI or CI). See
+  [`review-output-templates.md`][output-templates].
 
 ### Repeated Occurrences
 
@@ -91,32 +91,9 @@ When the same problem occurs in several places, report it **once** at the first 
 the other locations, ending with "Applies to the whole PR" when it is pervasive. This mirrors how the
 team reviews and keeps the review short.
 
-### CLI Rendering (Default)
-
-Plain Markdown, grouped by file or area:
-
-```text
-### packages/web-react/src/components/Tag/Tag.tsx
-
-important: The remove action re-implements `CloseButton`
-
-  File: packages/web-react/src/components/Tag/Tag.tsx:42-55
-
-  Fix: Render `<CloseButton onClick={onRemove} />` instead of `ControlButton` + `Icon` + `VisuallyHidden`.
-  Why: `CloseButton` already handles the accessible label and sizing; the copy will drift from it.
-```
-
-### GitHub PR Rendering (`--post`)
-
-Follow the comment structure in `.github/copilot-instructions.md` (Finding Format section): the
-` ```suggestion ` fence comes first when a line-level fix exists, then the bold subject line, then a
-collapsed `<details>` block with `Fix:` and `Why:` written in HTML (Markdown does not render inside
-`<details>`). The subject line is `**<severity>:** <subject>` by default, or the Conventional
-Comments label line when `--conventional-comments` is set.
-
 ### Conventional Comments Overlay
 
-Off by default: the analysis shows only part of the team uses Conventional Comments labels. With
+Off by default: only part of the team uses Conventional Comments labels. With
 `--conventional-comments`, load `.agents/skills/conventional-comments/SKILL.md` and prepend its
 `label (decorations):` line to each finding. Nothing else changes.
 
@@ -152,11 +129,10 @@ line are two findings. When two checklist areas genuinely disagree, report both.
 | **COMMENT**         | Important or minor findings, none blocking |
 | **APPROVE**         | No blocking and no important findings      |
 
-The verdict is a recommendation printed in the report. When posting, always submit the review with
-the `COMMENT` event; a human decides whether to approve.
+The verdict is a recommendation. When posting, always submit the review with the `COMMENT` event; a
+human decides whether to approve. Icons and wording are in
+[`review-output-templates.md`][output-templates-verdicts].
 
-## Reviewing AI-Generated Code
-
-AI-generated changes need **more** scrutiny: they look plausible even when wrong. Check additionally
-for subtle behavior regressions, gratuitous abstractions, re-implemented Spirit utilities, docs that
-describe internals instead of the API, and tool-specific assumptions in agent files.
+[checklist]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/code-review/references/checklist.md
+[output-templates-verdicts]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/code-review/references/review-output-templates.md#verdict-templates
+[output-templates]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/code-review/references/review-output-templates.md
