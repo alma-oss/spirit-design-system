@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { Sizes } from '../../constants';
+import { FontWeight, Sizes } from '../../constants';
 import { ContextPropsProvider, useContextProps } from '../../context';
 import { useAriaDescribedBy, useAriaDetails, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritCheckboxProps } from '../../types';
@@ -100,7 +100,7 @@ const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElemen
         isDisabled,
         isRequired,
         validationState,
-        label: { isStretched: isItem, isLabelHidden, size },
+        label: { fontWeight: FontWeight.LIGHTER, isStretched: isItem, isLabelHidden, size },
       }}
     >
       {isItem ? (
