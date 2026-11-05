@@ -1,4 +1,5 @@
 @use '@tokens' as tokens;
+@use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/local';
@@ -8,6 +9,10 @@
 .Alert {
     --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$icon-size};
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color(color-scheme.get-border-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-background-color(color-scheme.get-background-color());
     @include typography.generate(theme.$typography);
 
     display: grid;

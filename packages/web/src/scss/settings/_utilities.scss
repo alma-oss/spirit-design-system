@@ -85,7 +85,7 @@ $utilities: (
                     basic: tokens.$border-basic,
                 ),
                 (
-                    'color-scheme': local.get-border-color(),
+                    'color-scheme': local.get-border-color(color-scheme.get-border-color()),
                 )
             ),
     ),
@@ -343,7 +343,7 @@ $utilities: (
                     selected-subtle: tokens.$selected-content-subtle,
                 ),
                 (
-                    'color-scheme': local.get-color(),
+                    'color-scheme': local.get-color(color-scheme.get-color()),
                 )
             ),
     ),

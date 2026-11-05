@@ -2,11 +2,11 @@
 // 2. Don't prefix if value key is null (e.g. with shadow class)
 // 3. Remove default postfix from class name
 
-@use '@tokens' as tokens;
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
+@use 'local';
 @use 'string' as spirit-string;
 @use 'tokens' as tokens-tools;
 
@@ -94,8 +94,7 @@
             @if meta.type-of($value) == 'map' {
                 @each $property, $property-value in $value {
                     @if $generate-custom-properties {
-                        // stylelint-disable-next-line declaration-no-important -- We are generating utilities
-                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$property-value} !important;
+                        @include local.set($property, $property-value, $important: true);
                     }
 
                     // stylelint-disable-next-line declaration-no-important -- We are generating utilities
@@ -105,8 +104,7 @@
                 // Original behavior: apply same value to all properties
                 @each $property in $properties {
                     @if $generate-custom-properties {
-                        // stylelint-disable-next-line declaration-no-important -- We are generating utilities
-                        --#{tokens.$css-variable-prefix}local-#{$property}: #{$value} !important;
+                        @include local.set($property, $value, $important: true);
                     }
 
                     // stylelint-disable-next-line declaration-no-important -- We are generating utilities

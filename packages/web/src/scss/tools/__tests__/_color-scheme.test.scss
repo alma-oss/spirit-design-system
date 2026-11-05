@@ -119,7 +119,7 @@
 }
 
 @include test.describe('emit-color-scheme-classes mixin') {
-    @include test.it('should emit only local CSS variables without longhands or !important') {
+    @include test.it('should emit only color-scheme CSS variables without longhands or !important') {
         @include test.assert() {
             @include test.output() {
                 @include color-scheme.emit-color-scheme-classes(
@@ -129,9 +129,12 @@
                             color-basic: #111,
                             color-subtle: #fff,
                             border-color: #0f0,
+                            border-color-subtle: #afa,
                             background-color: #f00,
                             background-color-basic: #f00,
                             background-color-subtle: #fee,
+                            background-color-state-hover: #c00,
+                            background-color-state-active: #900,
                         ),
                     )
                 );
@@ -139,14 +142,16 @@
 
             @include test.expect() {
                 .color-scheme-on-fixture-basic {
-                    --spirit-local-color: #fff;
-                    --spirit-local-color-basic: #111;
-                    --spirit-local-color-subtle: #fff;
-                    --spirit-local-border-color: #0f0;
+                    --spirit-color-scheme-color: #fff;
+                    --spirit-color-scheme-color-basic: #111;
+                    --spirit-color-scheme-color-subtle: #fff;
+                    --spirit-color-scheme-border-color: #0f0;
+                    --spirit-color-scheme-border-color-subtle: #afa;
                     --spirit-color-scheme-background-color: #f00;
-                    --spirit-local-background-color: var(--spirit-color-scheme-background-color);
-                    --spirit-local-background-color-basic: #f00;
-                    --spirit-local-background-color-subtle: #fee;
+                    --spirit-color-scheme-background-color-basic: #f00;
+                    --spirit-color-scheme-background-color-subtle: #fee;
+                    --spirit-color-scheme-background-color-state-hover: #c00;
+                    --spirit-color-scheme-background-color-state-active: #900;
                 }
             }
         }
@@ -169,6 +174,216 @@
 
         @include test.assert-equal(map.get($values, 'color-basic'), var(--spirit-color-disabled-content));
         @include test.assert-equal(map.get($values, 'color-subtle'), var(--spirit-color-disabled-content));
+    }
+}
+
+@include test.describe('get-color and set-color') {
+    @include test.it('should return the color scheme content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.get-color();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-color-scheme-color);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.get-color(#111);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-color-scheme-color, #111);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme content color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-color(#111);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-color: #111;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-color-basic and set-color-basic') {
+    @include test.it('should return the color scheme basic content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.get-color-basic();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-color-scheme-color-basic);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.get-color-basic(#111);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-color-scheme-color-basic, #111);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme basic content color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-color-basic(#111);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-color-basic: #111;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-color-subtle and set-color-subtle') {
+    @include test.it('should return the color scheme subtle content color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.get-color-subtle();
+            }
+
+            @include test.expect() {
+                color: var(--spirit-color-scheme-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                color: color-scheme.get-color-subtle(#eee);
+            }
+
+            @include test.expect() {
+                color: var(--spirit-color-scheme-color-subtle, #eee);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme subtle content color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-color-subtle(#eee);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-color-subtle: #eee;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-border-color and set-border-color') {
+    @include test.it('should return the color scheme border color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: color-scheme.get-border-color();
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-color-scheme-border-color);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: color-scheme.get-border-color(#0f0);
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-color-scheme-border-color, #0f0);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme border color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-border-color(#0f0);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-border-color: #0f0;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-border-color-subtle and set-border-color-subtle') {
+    @include test.it('should return the color scheme subtle border color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: color-scheme.get-border-color-subtle();
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-color-scheme-border-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                border-color: color-scheme.get-border-color-subtle(#0f0);
+            }
+
+            @include test.expect() {
+                border-color: var(--spirit-color-scheme-border-color-subtle, #0f0);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme subtle border color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-border-color-subtle(#0f0);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-border-color-subtle: #0f0;
+                }
+            }
+        }
     }
 }
 
@@ -208,6 +423,216 @@
             @include test.expect() {
                 .a {
                     --spirit-color-scheme-background-color: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-basic and set-background-color-basic') {
+    @include test.it('should return the color scheme basic background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-basic();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-basic);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-basic(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-basic, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme basic background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-background-color-basic(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-background-color-basic: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-subtle and set-background-color-subtle') {
+    @include test.it('should return the color scheme subtle background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-subtle();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-subtle);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-subtle(#0f0);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-subtle, #0f0);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme subtle background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-background-color-subtle(#0f0);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-background-color-subtle: #0f0;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-state-hover and set-background-color-state-hover') {
+    @include test.it('should return the color scheme hover background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-state-hover();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-state-hover);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-state-hover(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-state-hover, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme hover background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-background-color-state-hover(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-background-color-state-hover: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-state-active and set-background-color-state-active') {
+    @include test.it('should return the color scheme active background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-state-active();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-state-active);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-state-active(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-state-active, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme active background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-background-color-state-active(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-background-color-state-active: #f00;
+                }
+            }
+        }
+    }
+}
+
+@include test.describe('get-background-color-state-selected and set-background-color-state-selected') {
+    @include test.it('should return the color scheme selected background color variable when no fallback is given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-state-selected();
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-state-selected);
+            }
+        }
+    }
+
+    @include test.it('should include the fallback value when given') {
+        @include test.assert() {
+            @include test.output() {
+                background-color: color-scheme.get-background-color-state-selected(#f00);
+            }
+
+            @include test.expect() {
+                background-color: var(--spirit-color-scheme-background-color-state-selected, #f00);
+            }
+        }
+    }
+
+    @include test.it('should set the color scheme selected background color variable') {
+        @include test.assert() {
+            @include test.output() {
+                .a {
+                    @include color-scheme.set-background-color-state-selected(#f00);
+                }
+            }
+
+            @include test.expect() {
+                .a {
+                    --spirit-color-scheme-background-color-state-selected: #f00;
                 }
             }
         }
