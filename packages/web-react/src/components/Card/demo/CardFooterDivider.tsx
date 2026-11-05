@@ -72,6 +72,21 @@ const CardFooterDivider = () => (
         <Link href="#open-positions">5 open positions</Link>
       </CardFooter>
     </Card>
+
+    <Card isBoxed>
+      <CardBody>
+        <CardTitle isHeading>
+          <CardLink href="#">Vertical without media</CardLink>
+        </CardTitle>
+        <Text marginBottom="space-0">In a nutshell, we connect… the right people with the right companies.</Text>
+      </CardBody>
+      <CardFooter hasDivider>
+        <Tag isSubtle size="small">
+          2 open positions
+        </Tag>
+      </CardFooter>
+    </Card>
+
   </Grid>
 );
 

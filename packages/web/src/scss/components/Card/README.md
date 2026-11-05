@@ -424,6 +424,9 @@ Use the `CardFooterDivider` element together with the `CardFooter--hasDivider` m
 divider line above the footer. The divider spans the entire width of the card (including padding areas in boxed
 cards) and the modifier adds spacing between the divider and the footer content.
 
+👉 The footer divider is designed for the vertical layout only. Do not combine it with the horizontal or reversed
+horizontal layout.
+
 Place `CardFooterDivider` immediately before the `<footer>` element as a direct child of `Card`:
 
 ```html

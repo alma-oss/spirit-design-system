@@ -448,6 +448,9 @@ Use the `hasDivider` prop to render a full-width divider line above the footer. 
 width of the card (including padding areas in boxed cards) and automatically adds spacing between the divider and the
 footer content.
 
+👉 The footer divider is designed for the vertical layout only. Do not combine `hasDivider` with the `horizontal` or
+`horizontal-reversed` direction.
+
 ```tsx
 <Card isBoxed>
   {/* CardMedia, CardBody, etc. */}
