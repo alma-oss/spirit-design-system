@@ -1,0 +1,130 @@
+/**
+ * Modern Media Queries — Range Syntax + Logical Queries
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
+ * WebStatus: media-query-range-syntax
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 104+, Firefox 102+, Safari 16.4+
+ *
+ * Task: Write modern, readable media queries with range syntax
+ * Why: Range syntax (width >= 900px) replaces verbose min-width/max-width;
+ *      logical properties work with writing modes
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. RANGE SYNTAX — replaces min-width / max-width
+   Core: use >= <= > < instead of min-/max- prefixes
+   ========================================================================== */
+
+/* Old: @media (min-width: 900px) */
+@media (width >= 900px) {
+  .layout {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+/* Old: @media (max-width: 599px) */
+@media (width < 600px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Old: @media (min-width: 600px) and (max-width: 899px) */
+@media (600px <= width <= 899px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Height range */
+@media (height >= 600px) {
+  .hero {
+    min-block-size: 50dvb;
+  }
+}
+
+/* ==========================================================================
+   2. LOGICAL OPERATORS — and, or (comma), not
+   ========================================================================== */
+
+/* Multiple conditions — all must match */
+@media screen and (width >= 900px) and (hover: hover) {
+  /* large screen with hover capability */
+}
+
+/* Either condition — comma = OR */
+@media (width >= 1200px), (orientation: landscape) and (height >= 800px) {
+  /* wide screen OR large landscape */
+}
+
+/* Negation */
+@media not print {
+  /* everything except print */
+}
+
+/* ==========================================================================
+   3. PREFERENCE QUERIES — user/system settings
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  /* use light-dark() function instead when possible */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --border-color: CanvasText;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    backdrop-filter: none;
+    background: Canvas;
+  }
+}
+
+/* ==========================================================================
+   4. INTERACTION QUERIES — device capability
+   See also: css-demos/interaction/hover-media-queries.css
+   ========================================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  /* mouse / trackpad user */
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* touch-only device */
+}
+
+/* ==========================================================================
+   5. NESTING — media queries inside @supports or @layer
+   ========================================================================== */
+
+@supports (container-type: inline-size) {
+  @media (width >= 900px) {
+    .container {
+      container-type: inline-size;
+    }
+  }
+}
+
+@layer responsive {
+  @media (width >= 600px) {
+    .sidebar {
+      display: block;
+    }
+  }
+}

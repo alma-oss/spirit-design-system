@@ -1,0 +1,63 @@
+/**
+ * Modern Centering with Logical Properties
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
+ * Baseline: 🟢 Widely Available
+ * Support: 99%
+ *
+ * Task: Center a card horizontally and vertically
+ * Why: Uses logical properties for RTL support with multiple modern centering approaches
+ * Last verified: 2026-02
+ */
+
+/* === 1. align-content centering (simplest, single-axis) === */
+
+.center-align-content {
+  block-size: 100dvb;
+  align-content: center;
+}
+
+/* === 2. Flexbox centering (most common) === */
+
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-block-size: 100dvb;
+}
+
+/* === 3. Grid centering (most concise) === */
+
+.center-grid {
+  display: grid;
+  place-items: center;
+  min-block-size: 100dvb;
+}
+
+/* === 4. Grid with place-content (centers the content area) === */
+
+.center-grid-content {
+  display: grid;
+  place-content: center;
+  min-block-size: 100dvb;
+}
+
+/* === 5. Auto margins with logical properties === */
+
+.center-margin {
+  max-inline-size: 40rem;
+  margin-inline: auto;
+  margin-block: auto;
+}
+
+/* === Centered card example === */
+
+.card {
+  max-inline-size: 24rem;
+  padding-inline: 1.5rem;
+  padding-block: 2rem;
+  border-radius: 0.5rem;
+  text-align: start;
+}

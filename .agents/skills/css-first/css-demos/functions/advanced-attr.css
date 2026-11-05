@@ -1,0 +1,190 @@
+/**
+ * Advanced attr() Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/attr
+ * Reference: https://developer.chrome.com/blog/advanced-attr
+ * WebStatus: attr
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Read HTML attributes as typed CSS values — colors, numbers, lengths
+ * Why: Advanced attr() with type() turns data attributes into real CSS values,
+ *      enabling data-driven styling without JavaScript or inline styles
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC attr() WITH type() — parse attributes as typed values
+   ========================================================================== */
+
+/* Read a color from a data attribute */
+.swatch {
+  background-color: attr(data-color type(<color>), #ccc);
+  inline-size: 4rem;
+  block-size: 4rem;
+  border-radius: 0.5rem;
+}
+/* <div class="swatch" data-color="#ff6b6b"></div> */
+
+/* ==========================================================================
+   2. DIMENSION UNITS — numeric attributes with CSS units
+   ========================================================================== */
+
+/* Attach a unit to a bare number */
+.rotated {
+  rotate: attr(data-rotation deg, 0deg);
+}
+/* <div class="rotated" data-rotation="45">Tilted</div> */
+
+/* Font size from attribute */
+.dynamic-text {
+  font-size: attr(data-size px, 16px);
+}
+/* <span class="dynamic-text" data-size="24">Large text</span> */
+
+/* ==========================================================================
+   3. INTEGERS AND NUMBERS — calculations with attribute values
+   ========================================================================== */
+
+.grid-item {
+  grid-column: span attr(data-span type(<integer>), 1);
+}
+/* <div class="grid-item" data-span="2">Wide item</div> */
+
+.progress-bar {
+  inline-size: calc(attr(data-value type(<number>), 0) * 1%);
+}
+/* <div class="progress-bar" data-value="75"></div> */
+
+/* ==========================================================================
+   4. CUSTOM IDENT — view-transition-name from id attribute
+   ========================================================================== */
+
+/* Each card auto-gets a unique view-transition-name from its id */
+.card {
+  view-transition-name: attr(id type(<custom-ident>), none);
+}
+/* <div class="card" id="card-1">...</div>
+   <div class="card" id="card-2">...</div> */
+
+/* ==========================================================================
+   5. CONIC GRADIENT PROGRESS — @property + attr() combo
+   ========================================================================== */
+
+/*
+ * A circular progress indicator driven entirely by data attributes.
+ * Uses @property for animatable custom properties and advanced attr()
+ * to read step counts from HTML.
+ *
+ * HTML:
+ *   <div class="progress" data-steps="5" data-current-step="2">
+ *     <span>Steps</span>
+ *   </div>
+ */
+
+@property --current-progress {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 360deg;
+}
+
+@property --progress-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+.progress {
+  @supports (x: attr(x type(*))) {
+    --current-progress: calc(
+      attr(data-current-step type(<integer>), 0) * calc(360deg / attr(data-steps type(<integer>), 1))
+    );
+    background-image: conic-gradient(
+      var(--progress-color) var(--current-progress),
+      Canvas var(--current-progress),
+      Canvas 360deg
+    );
+  }
+
+  container-type: inline-size;
+  position: relative;
+  inline-size: max(4rem, 25svi);
+  aspect-ratio: 1;
+  border-radius: 100vmax;
+  display: grid;
+  place-items: center;
+  transition:
+    --current-progress 0.25s,
+    --progress-color 0.25s;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    border-radius: inherit;
+  }
+
+  /* Rainbow ring behind the progress arc */
+  &::before {
+    inset: 1px;
+    background-image: conic-gradient(indigo, blue, turquoise, forestgreen, lime, yellow, orange, red, purple, indigo);
+    z-index: -1;
+  }
+
+  /* Inner circle cutout */
+  &::after {
+    inset: 10cqi;
+    background-color: Canvas;
+  }
+
+  > span {
+    display: inline-block;
+    z-index: 10;
+    color: CanvasText;
+    font-size: clamp(0.75rem, 10cqi, 2rem);
+  }
+}
+
+/* ==========================================================================
+   6. FALLBACK VALUES — graceful degradation
+   ========================================================================== */
+
+/* If attribute is missing or invalid, fallback is used */
+.tooltip {
+  --bg: attr(data-bg type(<color>), light-dark(#333, #eee));
+
+  background-color: var(--bg);
+  color: contrast-color(var(--bg));
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+/* ==========================================================================
+   7. raw-string — literal string without parsing
+   ========================================================================== */
+
+/* raw-string passes the value as-is, no CSS parsing */
+.label::after {
+  content: ' — ' attr(data-subtitle raw-string, '');
+}
+
+/* ==========================================================================
+   8. FEATURE DETECTION
+   ========================================================================== */
+
+/* Basic attr() in content — universally supported */
+.basic::before {
+  content: attr(data-label);
+}
+
+/* Advanced attr() with type() — gate behind @supports */
+@supports (x: attr(x type(*))) {
+  .enhanced {
+    background: attr(data-bg type(<color>), transparent);
+    rotate: attr(data-angle deg, 0deg);
+  }
+}

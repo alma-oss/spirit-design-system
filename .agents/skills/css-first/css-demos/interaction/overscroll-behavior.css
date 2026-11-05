@@ -1,0 +1,111 @@
+/**
+ * overscroll-behavior
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
+ * WebStatus: overscroll-behavior
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 144+, Firefox 150+, Safari —
+ *
+ * Task: Prevent scroll chaining, pull-to-refresh, and bounce effects
+ * Why: Native solution replaces JS scroll-locking hacks with a single declaration
+ * Last verified: 2026-08-11
+ */
+
+/* ============================================================
+ * 1. Values — auto | contain | none | chain
+ *
+ * auto    — default; scroll chains to ancestors normally
+ * contain — stops scroll chaining; no pull-to-refresh or swipe nav
+ * none    — stops chaining AND suppresses overscroll glow/bounce
+ * chain   — allows chaining but suppresses the local edge effect (Chrome 150+)
+ * ============================================================ */
+
+/* ============================================================
+ * 2. Prevent Page Scroll Behind a Modal
+ * When users scroll to the end of a dialog's content the
+ * background page stays put.
+ * ============================================================ */
+.modal__body {
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  max-block-size: 80dvh;
+}
+
+/* ============================================================
+ * 3. Lock the Root — Disable Pull-to-Refresh / Bounce
+ * Useful for app-shell PWAs that handle refresh themselves.
+ * ============================================================ */
+html {
+  overscroll-behavior: none;
+}
+
+/* ============================================================
+ * 4. Sidebar / Chat Panel — Contain Vertical Scroll
+ * A scrollable sidebar that never leaks scroll to the page.
+ * ============================================================ */
+.sidebar {
+  overflow-y: auto;
+  overscroll-behavior-block: contain; /* logical property */
+  block-size: 100dvh;
+}
+
+/* ============================================================
+ * 5. Horizontal Carousel — Contain Inline Axis
+ * Prevents horizontal overscroll from triggering browser
+ * back/forward navigation gestures.
+ * ============================================================ */
+.carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+  flex: 0 0 min(80%, 20rem);
+}
+
+/* ============================================================
+ * 6. Two-Value Shorthand
+ * First value → x-axis, second value → y-axis
+ * ============================================================ */
+.map-embed {
+  overflow: auto;
+  overscroll-behavior: contain none; /* x: contain, y: none */
+}
+
+/* ============================================================
+ * 7. Nested Scroll Containers
+ * Inner list scrolls independently; outer page unaffected.
+ * ============================================================ */
+.dropdown__menu {
+  max-block-size: 15rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ============================================================
+ * 8. Combining with Scroll Snap
+ * Contain keeps snapping self-contained in a full-page
+ * scroll-snap layout.
+ * ============================================================ */
+.snap-container {
+  block-size: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: none;
+}
+
+.snap-container > section {
+  block-size: 100dvh;
+  scroll-snap-align: start;
+}
+
+/* Allow propagation to an ancestor without a local glow/stretch effect. */
+@supports (overscroll-behavior: chain) {
+  .nested-feed {
+    overscroll-behavior-block: chain;
+  }
+}

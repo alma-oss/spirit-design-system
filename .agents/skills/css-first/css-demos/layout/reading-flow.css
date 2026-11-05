@@ -1,0 +1,123 @@
+/**
+ * reading-flow & reading-order — Visual Focus Order
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/reading-flow
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/reading-order
+ * Reference: https://developer.chrome.com/blog/reading-flow
+ * Interop: https://github.com/web-platform-tests/interop/issues/1349
+ * WebStatus: reading-flow
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 137+, Firefox —, Safari —
+ * Last verified: 2026-10-27
+ *
+ * Task: Make keyboard focus and screen readers follow the visual order of
+ *       reordered flex and grid items
+ * Why: `order`, `row-reverse`, `grid-auto-flow: dense`, and explicit grid
+ *      placement move items visually but leave Tab order in DOM order —
+ *      a WCAG 2.4.3 Focus Order failure. reading-flow resyncs them in CSS.
+ *
+ * CRITICAL: Logical DOM order is still the first fix. Use reading-flow when the
+ * visual order legitimately varies (by breakpoint, by dense packing). Without
+ * support, browsers fall back to DOM order, so that order must make sense.
+ */
+
+/* ==========================================================================
+   VALUES REFERENCE
+
+   reading-flow (on the container)   Applies to   Reading order follows
+   ─────────────────────────────────────────────────────────────────────────
+   normal                            all          DOM order (default)
+   flex-visual                       flex         Visual order, writing-mode aware
+   flex-flow                         flex         flex-flow direction
+   grid-rows                         grid         Visual order, row by row
+   grid-columns                      grid         Visual order, column by column
+   grid-order                        grid         `order` values, else DOM order
+   source-order                      block/flex/grid  DOM order, but enables
+                                                  reading-order on children
+
+   reading-order: <integer> (on items, default 0)
+     Sorts items ascending; ties use the container's reading-flow.
+     Changes reading and Tab order only — never visual order.
+
+   A container with reading-flow other than `normal` is a "reading flow
+   container". Positive tabindex values inside it are ignored.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. FLEX — row-reverse toolbar
+   DOM: Cancel, Preview, Save → displayed as [Save] [Preview] [Cancel].
+   flex-visual makes Tab follow what the user sees, in any writing mode.
+   ========================================================================== */
+
+.toolbar {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+  reading-flow: flex-visual;
+}
+
+/* ==========================================================================
+   2. GRID — dense packing
+   grid-auto-flow: dense backfills holes, scrambling DOM order. grid-rows
+   restores a left-to-right, top-to-bottom reading order.
+   ========================================================================== */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-auto-flow: dense;
+  gap: 1rem;
+  reading-flow: grid-rows;
+
+  & > .wide {
+    grid-column: span 2;
+  }
+}
+
+/* ==========================================================================
+   3. GRID — responsive reorder with `order`
+   The sidebar moves first on wide screens; grid-order keeps focus in sync.
+   ========================================================================== */
+
+.page {
+  display: grid;
+  gap: 1.5rem;
+  reading-flow: grid-order;
+
+  @media (width >= 60rem) {
+    grid-template-columns: 16rem 1fr;
+
+    & > .sidebar {
+      order: -1;
+    }
+  }
+}
+
+/* ==========================================================================
+   4. reading-order — promote one item without moving it visually
+   source-order keeps DOM order for everything else.
+   ========================================================================== */
+
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  reading-flow: source-order;
+
+  /* The recommended plan sits in the middle visually but is reached first */
+  & > .recommended {
+    reading-order: -1;
+  }
+}
+
+/* ==========================================================================
+   5. PROGRESSIVE ENHANCEMENT
+   Only reorder visually when the reading order can follow. Unsupported
+   browsers keep the DOM order for both visuals and focus.
+   ========================================================================== */
+
+@supports not (reading-flow: grid-rows) {
+  .gallery {
+    grid-auto-flow: row; /* No dense backfill → visual matches DOM */
+  }
+}

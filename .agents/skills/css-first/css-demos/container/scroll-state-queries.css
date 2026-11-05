@@ -1,0 +1,190 @@
+/**
+ * Scroll State Container Queries
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_conditional_rules/Container_scroll-state_queries
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@container#scroll-state
+ * WebStatus: container-scroll-state-queries
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 133+, Firefox —, Safari —
+ *
+ * Task: Style elements based on scroll state (scrollable, stuck, snapped)
+ * Why: Query whether an element is scrollable, stuck via position: sticky,
+ *      or snapped via scroll-snap — no JavaScript scroll listeners needed
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. STUCK STATE — detect when position: sticky is active
+   Core: container-type: scroll-state on parent, @container scroll-state(stuck:)
+   ========================================================================== */
+
+.scroll-container {
+  container-type: scroll-state;
+}
+
+.sticky-header {
+  position: sticky;
+  inset-block-start: 0;
+}
+
+/* Style header differently when stuck to top */
+@container scroll-state(stuck: top) {
+  .sticky-header {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+  }
+}
+
+/* Detect stuck to bottom */
+@container scroll-state(stuck: bottom) {
+  .sticky-footer {
+    border-block-start: 1px solid currentColor;
+  }
+}
+
+/* ==========================================================================
+   2. SNAPPED STATE — detect when scroll snap is active
+   Core: container-type: scroll-state on snap child, @container scroll-state(snapped:)
+   ========================================================================== */
+
+.carousel__slide {
+  scroll-snap-align: center;
+  container-type: scroll-state;
+}
+
+/* Only the snapped (visible) slide is fully opaque */
+@container scroll-state(snapped: inline) {
+  .carousel__slide > * {
+    opacity: 1;
+  }
+}
+
+@container not scroll-state(snapped: inline) {
+  .carousel__slide > * {
+    opacity: 0.3;
+  }
+}
+
+/* Snapped in block direction (vertical scroll) */
+@container scroll-state(snapped: block) {
+  .section > * {
+    translate: 0;
+  }
+}
+
+/* ==========================================================================
+   3. SCROLLABLE STATE — detect when content overflows
+   Core: @container scroll-state(scrollable:)
+   ========================================================================== */
+
+.content-area {
+  container-type: scroll-state;
+  overflow-y: auto;
+}
+
+/* Show scroll indicator only when content is scrollable */
+@container scroll-state(scrollable: top) {
+  .scroll-indicator-top {
+    display: block;
+  }
+}
+
+@container scroll-state(scrollable: bottom) {
+  .scroll-indicator-bottom {
+    display: block;
+  }
+}
+
+/* Show fade gradient when scrollable in inline direction */
+@container scroll-state(scrollable: inline) {
+  .fade-edge::after {
+    content: '';
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   4. SCROLLABLE MASK — responsive breadcrumb with edge fade
+   Core: mask + scroll-state(scrollable:) to reveal gradient edges
+   when content overflows inline. No JavaScript needed.
+
+   HTML:
+     <nav>
+       <ul>
+         <li><a href="#">Home</a></li>
+         <li><a href="#">About</a></li>
+         ...
+       </ul>
+     </nav>
+   ========================================================================== */
+
+@property --mask-start {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@property --mask-end {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+
+.breadcrumb-nav {
+  container-type: scroll-state inline-size;
+  overflow: auto clip;
+  position: relative;
+  display: grid;
+  align-content: center;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Sticky mask overlay via ::before */
+  &::before {
+    content: '';
+    position: sticky;
+    inset-inline-start: 0;
+    inset-block-end: 0;
+    inline-size: 100cqi;
+    block-size: 100%;
+    margin-block-end: -100%; /* collapse so it overlays content */
+    z-index: 1;
+    pointer-events: none;
+    background: var(--breadcrumb-bg, oklch(0.15 0 0));
+    mask: linear-gradient(to right, black 0%, transparent var(--mask-start), transparent var(--mask-end), black 100%);
+    transition:
+      --mask-start 0.25s ease,
+      --mask-end 0.25s ease;
+
+    @supports (container-type: scroll-state) {
+      /* Fade left edge when scrollable toward inline-start */
+      @container scroll-state(scrollable: inline-start) {
+        --mask-start: 15%;
+      }
+
+      /* Fade right edge when scrollable toward inline-end */
+      @container scroll-state(scrollable: inline-end) {
+        --mask-end: 85%;
+      }
+    }
+  }
+
+  > ul {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    white-space: nowrap;
+    display: inline-block;
+    padding-inline: 1rem;
+  }
+}

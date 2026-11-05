@@ -79,6 +79,9 @@ console
 # Shell Scripts
 *.sh
 
+# Python (no Prettier parser; used by vendored agent skills)
+*.py
+
 # Favicon
 *.ico
 

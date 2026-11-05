@@ -1,0 +1,23 @@
+/**
+ * Relative alpha colors
+ *
+ * Spec: https://drafts.csswg.org/css-color-5/#alpha
+ * Reference: https://developer.chrome.com/blog/chrome-152-beta
+ * Baseline: 🟣 Experimental / unknown for alpha()
+ * Support: Chrome 152+ (beta)
+ * Last verified: 2026-08-10
+ *
+ * Task: Replace only a color's alpha channel without converting its channels.
+ */
+
+.marker {
+  --marker-color: oklch(0.62 0.2 30);
+  background: var(--marker-color);
+  box-shadow: 0 0 1rem rgb(0 0 0 / 0.25); /* fallback */
+}
+
+@supports (color: alpha(from red / 0.5)) {
+  .marker {
+    box-shadow: 0 0 1rem alpha(from var(--marker-color) / 0.35);
+  }
+}

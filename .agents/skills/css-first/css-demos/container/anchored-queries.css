@@ -1,0 +1,122 @@
+/**
+ * Anchored Container Queries
+ *
+ * Reference: https://developer.chrome.com/blog/anchored-container-queries
+ * WebStatus: container-anchor-position-queries
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 143+, Firefox —, Safari —
+ *
+ * Task: Query which anchor position fallback is active and adapt styles
+ * Why: When anchor-positioned elements flip via position-try-fallbacks,
+ *      anchored container queries let you detect which fallback is active
+ *      and adjust content (e.g. arrow direction, alignment) accordingly
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. TOOLTIP WITH DIRECTIONAL ARROW
+   Core: container-type: anchored + @container anchored(fallback:)
+   ========================================================================== */
+
+.trigger {
+  anchor-name: --trigger;
+}
+
+.tooltip {
+  position: fixed;
+  position-anchor: --trigger;
+  position-area: block-end;
+  margin-block-start: 0.75rem;
+  position-try-fallbacks: flip-block; /* flip above if no space below */
+  container-type: anchored; /* make it a query container */
+}
+
+/* Default: tooltip below trigger, arrow points up */
+.tooltip::before {
+  content: '\25B2'; /* ▲ */
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+}
+
+/* When flip-block fallback activates: tooltip is above, arrow points down */
+@container anchored(fallback: flip-block) {
+  .tooltip::before {
+    content: '\25BC'; /* ▼ */
+    inset-block-end: unset;
+    inset-block-start: 100%;
+  }
+}
+
+/* ==========================================================================
+   2. POPOVER WITH ADAPTIVE ALIGNMENT
+   Core: query multiple fallback names
+   ========================================================================== */
+
+.menu-trigger {
+  anchor-name: --menu;
+}
+
+.menu {
+  position: fixed;
+  position-anchor: --menu;
+  position-area: block-end span-inline-end;
+  position-try-fallbacks: --above, --left;
+  container-type: anchored;
+}
+
+@position-try --above {
+  position-area: block-start span-inline-end;
+}
+
+@position-try --left {
+  position-area: inline-start span-block-end;
+}
+
+/* Adjust content based on which fallback is active */
+@container anchored(fallback: --above) {
+  .menu {
+    /* menu is above trigger — adjust shadows, arrows, etc. */
+  }
+}
+
+@container anchored(fallback: --left) {
+  .menu {
+    /* menu is to the left — adjust layout direction */
+  }
+}
+
+/* ==========================================================================
+   3. SIDEBAR TOOLTIP — combine with corner-shape arrow
+   ========================================================================== */
+
+.sidebar-trigger {
+  anchor-name: --sidebar-tip;
+}
+
+.sidebar-tooltip {
+  position: fixed;
+  position-anchor: --sidebar-tip;
+  position-area: inline-end;
+  margin-inline-start: 0.5rem;
+  position-try-fallbacks: flip-inline;
+  container-type: anchored;
+}
+
+/* Default: tooltip to the right */
+.sidebar-tooltip::before {
+  content: '';
+  position: absolute;
+  inset-inline-end: 100%;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+}
+
+/* Flipped: tooltip to the left */
+@container anchored(fallback: flip-inline) {
+  .sidebar-tooltip::before {
+    inset-inline-end: unset;
+    inset-inline-start: 100%;
+  }
+}

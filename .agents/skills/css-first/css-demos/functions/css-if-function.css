@@ -1,0 +1,140 @@
+/**
+ * CSS if() Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/if
+ * WebStatus: if
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Apply conditional values inline without at-rules
+ * Why: if() enables style, media, and supports conditions directly
+ *      in property values — no need for separate @media or @container blocks
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. STYLE QUERIES — test custom properties inline
+   ========================================================================== */
+
+.card {
+  --variant: default;
+
+  background: if(
+    style(--variant: primary): light-dark(#0066cc, #3399ff) ; style(--variant: danger): light-dark(#cc0000, #ff4444) ;
+      style(--variant: success): light-dark(#008800, #44cc44) ; else: light-dark(#f8f8f8, #222) ;
+  );
+
+  color: if(
+    style(--variant: primary): white; style(--variant: danger): white; style(--variant: success): white; else: inherit;
+  );
+}
+
+/* ==========================================================================
+   2. MEDIA QUERIES — responsive values without @media blocks
+   ========================================================================== */
+
+.container {
+  max-inline-size: if(
+    media(width >= 1200px): 1140px; media(width >= 900px): 860px; media(width >= 600px): 540px; else: 100%;
+  );
+
+  padding-inline: if(media(width >= 600px): 2rem; else: 1rem;);
+
+  margin-inline: auto;
+}
+
+/* Responsive layout direction */
+.hero {
+  display: flex;
+  flex-direction: if(media(orientation: landscape): row; else: column;);
+  gap: 2rem;
+}
+
+/* ==========================================================================
+   3. SUPPORTS QUERIES — progressive enhancement inline
+   ========================================================================== */
+
+.tooltip {
+  position: if(supports(position-anchor: --x): fixed; else: absolute;);
+}
+
+.surface {
+  background: if(supports(background: light-dark(white, black)): light-dark(#fff, #1a1a1a) ; else: #fff;);
+}
+
+/* ==========================================================================
+   4. NESTED if() — combine conditions
+   ========================================================================== */
+
+.text {
+  color: if(
+    style(--theme: brand): if(media(prefers-color-scheme: dark): #66b3ff; else: #0066cc;) ;
+      else: if(media(prefers-color-scheme: dark): #f0f0f0; else: #1a1a1a;) ;
+  );
+}
+
+/* ==========================================================================
+   5. if() IN SHORTHAND — partial conditional values
+   ========================================================================== */
+
+.divider {
+  border-block-end: 1px if(style(--divider: dashed): dashed; else: solid;) light-dark(#e0e0e0, #333);
+}
+
+/* ==========================================================================
+   6. if() WITH calc() — conditional calculations
+   ========================================================================== */
+
+.sidebar {
+  inline-size: calc(if(style(--sidebar: expanded): 300px; style(--sidebar: collapsed): 60px; else: 240px;));
+}
+
+/* ==========================================================================
+   7. LOGICAL OPERATORS — and, or, not in conditions
+   ========================================================================== */
+
+.alert {
+  padding: if(style((--size: lg) or (--size: xl)): 1.5rem; else: 0.75rem;);
+
+  display: if(style(not (--visible: true)): none; else: block;);
+}
+
+/* ==========================================================================
+   8. THEMING WITH if() — multi-scheme support
+   ========================================================================== */
+
+.themed-section {
+  --scheme: default;
+
+  background-image: if(
+    style(--scheme: ice): linear-gradient(#caf0f8, white, #caf0f8) ;
+      style(--scheme: fire): linear-gradient(#ffc971, white, #ffc971) ;
+      style(--scheme: forest): linear-gradient(#d8f3dc, white, #d8f3dc) ; else: none;
+  );
+}
+
+.themed-section h2::before {
+  content: if(style(--scheme: ice): '❄️ ' ; style(--scheme: fire): '🔥 ' ; style(--scheme: forest): '🌲 ' ; else: '' ;);
+}
+
+/* ==========================================================================
+   9. if() + revert-rule — DROP A DECLARATION WHEN THE CONDITION FAILS
+   revert-rule rolls the cascade back one rule, so an `else: revert-rule`
+   branch REMOVES this declaration instead of forcing an arbitrary fallback
+   value — the cascade then resolves it from earlier rules.
+   See specificity/revert-rule.css for the keyword itself.
+   ========================================================================== */
+
+/* Earlier rule supplies the real fallback */
+.panel {
+  display: block;
+}
+
+/* Opt into grid; otherwise behave as if this rule were not present */
+.panel {
+  display: if(style(--layout: fancy): grid; else: revert-rule;);
+}
+
+/* Apply an accent only on the brand theme — no neutral default to invent */
+.cta {
+  background-color: if(style(--theme: brand): light-dark(#0066cc, #3399ff) ; else: revert-rule;);
+}

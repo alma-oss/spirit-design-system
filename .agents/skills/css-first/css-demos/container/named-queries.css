@@ -1,0 +1,94 @@
+/**
+ * Name-Only Container Queries
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@container
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/container-name
+ * Reference: https://developer.chrome.com/blog/chrome-148-beta
+ * Support: Chrome 148+
+ *
+ * Task: Target a container by name alone — no container-type required
+ * Why: container-type establishes size/layout containment, which has a cost
+ *      and can break intrinsic sizing (a `size` container no longer grows to
+ *      fit its content). When you only need to SCOPE styles to a named region
+ *      — or run style() queries — naming the container is now enough.
+ * Last verified: 2026-05
+ */
+
+/* ==========================================================================
+   1. NAME A CONTAINER WITHOUT A TYPE
+   container-name alone makes an element addressable by @container.
+   No container-type means no size/layout containment is established.
+   ========================================================================== */
+
+.theme-region {
+  container-name: --theme;
+}
+
+/* ==========================================================================
+   2. UNCONDITIONAL NAME MATCH — scope styles to a named ancestor
+   `@container <name>` with no condition matches any descendant whose
+   nearest matching container carries that name. It acts as a scoping
+   mechanism rather than a size test.
+   ========================================================================== */
+
+@container --theme {
+  /* Applies only inside elements named --theme */
+  input {
+    background-color: oklch(0.95 0.03 150);
+    border: 1px solid oklch(0.7 0.1 150);
+  }
+
+  .badge {
+    border-radius: 999px;
+  }
+}
+
+/* ==========================================================================
+   3. STYLE QUERIES BY NAME — no container-type needed
+   Style queries read custom properties off the named container. Pair the
+   name with style() to switch a whole subtree on a single variable.
+   ========================================================================== */
+
+.card-host {
+  container-name: --card;
+}
+
+.card-host[data-density='compact'] {
+  --density: compact;
+}
+
+@container --card style(--density: compact) {
+  .card {
+    padding: 0.5rem;
+    gap: 0.25rem;
+  }
+}
+
+/* ==========================================================================
+   4. WHEN YOU STILL NEED container-type
+   Size and scroll-state queries depend on containment, so they still
+   require container-type. Name-only covers style() and plain name scoping.
+   ========================================================================== */
+
+.sized-region {
+  container-type: inline-size; /* required for the size query below */
+  container-name: --panel;
+}
+
+@container --panel (inline-size > 30rem) {
+  .panel {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* ==========================================================================
+   BEST PRACTICES
+   - Reach for name-only when you want style() queries or scoped styling
+     without paying for size containment — it avoids intrinsic-sizing bugs.
+   - Add container-type ONLY when you actually run a size or scroll-state
+     query; size queries silently never match without it.
+   - Use --dashed-ident container names; they live in their own namespace
+     and read clearly as "this is a container reference".
+   - A bare `@container <name> { … }` is a scoping tool — treat it like a
+     lighter-weight @scope keyed to a named region.
+   ========================================================================== */

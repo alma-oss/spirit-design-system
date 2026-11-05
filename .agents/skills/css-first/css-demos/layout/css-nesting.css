@@ -1,0 +1,128 @@
+/**
+ * Native CSS Nesting
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Nesting_selector
+ * WebStatus: nesting
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 120+, Firefox 117+, Safari 17.2+
+ *
+ * Task: Write component styles with native CSS nesting (no preprocessor)
+ * Why: Native CSS nesting reduces repetition and groups related styles
+ *      without Sass/Less — the & selector works natively in browsers
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC NESTING — & references the parent selector
+   ========================================================================== */
+
+.card {
+  padding-inline: 1.5rem;
+  padding-block: 1rem;
+
+  & h2 {
+    margin-block-end: 0.5rem;
+  }
+
+  & p {
+    margin-block-end: 1rem;
+  }
+
+  /* State variants */
+  &:hover {
+    /* hover state */
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   2. NESTING WITH MEDIA/CONTAINER QUERIES
+   ========================================================================== */
+
+.sidebar {
+  inline-size: 100%;
+
+  @media (inline-size >= 48rem) {
+    inline-size: 20rem;
+  }
+
+  @container (inline-size >= 40rem) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ==========================================================================
+   3. COMPOUND SELECTORS — & appends to parent
+   ========================================================================== */
+
+.btn {
+  cursor: pointer;
+
+  &.primary {
+    /* .btn.primary */
+  }
+
+  &.secondary {
+    /* .btn.secondary */
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &[aria-expanded='true'] {
+    /* .btn[aria-expanded="true"] */
+  }
+}
+
+/* ==========================================================================
+   4. DEEP NESTING — keep it shallow (2-3 levels max)
+   ========================================================================== */
+
+.nav {
+  display: flex;
+  gap: 1rem;
+
+  & a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &[aria-current='page'] {
+      font-weight: 700;
+    }
+  }
+}
+
+/* ==========================================================================
+   5. NESTING WITH :has() and :is()
+   ========================================================================== */
+
+.form-field {
+  margin-block-end: 1rem;
+
+  &:has(:user-invalid) {
+    & label {
+      color: light-dark(hsl(0 70% 45%), hsl(0 70% 65%));
+    }
+
+    & .error-message {
+      display: block;
+    }
+  }
+
+  & :is(input, select, textarea) {
+    inline-size: 100%;
+    padding-inline: 0.75rem;
+    padding-block: 0.5rem;
+  }
+}

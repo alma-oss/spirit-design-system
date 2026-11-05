@@ -1,0 +1,239 @@
+/**
+ * Scroll-Triggered Animations
+ *
+ * Reference: https://developer.chrome.com/blog/scroll-triggered-animations
+ * Baseline: 🟣 Experimental (Chrome 145+)
+ *
+ * Task: Fire time-based animations when elements cross a scroll offset
+ * Why: Unlike scroll-driven animations (which advance with scroll position),
+ *      scroll-triggered animations are normal time-based animations that
+ *      start/reverse when an element enters or exits view
+ * Last verified: 2026-02
+ */
+
+/* ==========================================================================
+   1. BASIC SCROLL-TRIGGERED ANIMATION
+   Trigger a fade-in when element enters the viewport
+   ========================================================================== */
+
+@keyframes fly-in {
+  from {
+    opacity: 0;
+    translate: 0 3rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Define the trigger: fire when element scrolls into view */
+.reveal {
+  /* Create a named trigger from a view timeline */
+  timeline-trigger-name: --reveal;
+  timeline-trigger-source: view();
+
+  /* Connect animation to trigger:
+     --trigger-name  action-on-enter  action-on-exit */
+  animation: fly-in 0.6s ease-out both;
+  animation-trigger: --reveal play-forwards play-backwards;
+}
+
+/* ==========================================================================
+   2. TRIGGER RANGE — control when the trigger fires
+   ========================================================================== */
+
+/*
+ * Activation range: the scroll offset that fires the trigger
+ * Active range: the scroll region where the trigger stays active
+ *
+ * timeline-trigger: <name> <source> <enter-point> <exit-point>;
+ * timeline-trigger: <name> <source> <enter-point> <exit-point> / <active-start> <active-end>;
+ *
+ * The active range must encompass the activation range.
+ */
+
+.section-heading {
+  timeline-trigger-name: --heading;
+  timeline-trigger-source: view();
+
+  animation: fly-in 0.5s ease-out both;
+
+  /* Fire when 100% entered, deactivate when fully exited */
+  animation-trigger: --heading play-forwards play-backwards;
+}
+
+/* ==========================================================================
+   3. DECOUPLED TRIGGERS — trigger and animation on different elements
+   ========================================================================== */
+
+/*
+ * The trigger and the animated element don't need to be the same.
+ * A parent or sibling can define the trigger, and a child consumes it.
+ */
+
+/* Parent defines the trigger */
+.form-section {
+  timeline-trigger-name: --section-visible;
+  timeline-trigger-source: view();
+}
+
+/* Children animate when the parent's trigger fires */
+.form-section .field {
+  animation: fly-in 0.4s ease-out both;
+  animation-trigger: --section-visible play-forwards play-backwards;
+}
+
+/* Stagger children with animation-delay */
+.form-section .field:nth-child(1) {
+  animation-delay: 0s;
+}
+.form-section .field:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.form-section .field:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.form-section .field:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+/* ==========================================================================
+   4. trigger-scope — limit trigger visibility
+   ========================================================================== */
+
+/*
+ * By default, named triggers are visible to the whole document.
+ * trigger-scope restricts visibility to descendants, similar to anchor-scope.
+ */
+
+.card-list {
+  /* Each card's trigger is scoped to its own subtree */
+  trigger-scope: --card-enter;
+}
+
+.card {
+  timeline-trigger-name: --card-enter;
+  timeline-trigger-source: view();
+}
+
+.card .content {
+  animation: fly-in 0.5s ease-out both;
+  animation-trigger: --card-enter play-forwards play-backwards;
+}
+
+/* ==========================================================================
+   5. ANIMATE TO AUTO HEIGHT — expand/collapse on scroll
+   ========================================================================== */
+
+@keyframes expand {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+.expandable {
+  /* Allow animating to height: auto */
+  interpolate-size: allow-keywords;
+  overflow-y: clip;
+
+  timeline-trigger-name: --expand;
+  timeline-trigger-source: view();
+
+  animation: expand 0.5s ease-out both;
+  animation-trigger: --expand play-forwards play-backwards;
+}
+
+/* ==========================================================================
+   6. SCROLLYTELLING — narrative sections triggered by scroll
+   ========================================================================== */
+
+@keyframes slide-in-start {
+  from {
+    opacity: 0;
+    translate: -4rem 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes slide-in-end {
+  from {
+    opacity: 0;
+    translate: 4rem 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.story-section {
+  timeline-trigger-name: --story;
+  timeline-trigger-source: view();
+}
+
+.story-section .text {
+  animation: slide-in-start 0.6s ease-out both;
+  animation-trigger: --story play-forwards play-backwards;
+}
+
+.story-section .visual {
+  animation: slide-in-end 0.6s ease-out both;
+  animation-trigger: --story play-forwards play-backwards;
+}
+
+/* ==========================================================================
+   7. MORPH ON SCROLL — shape/color change triggered by scroll
+   ========================================================================== */
+
+@keyframes morph {
+  from {
+    border-radius: 50%;
+    background: light-dark(#0066cc, #3399ff);
+    scale: 0.8;
+    rotate: 0deg;
+  }
+  to {
+    border-radius: 0.5rem;
+    background: light-dark(#cc0066, #ff3399);
+    scale: 1;
+    rotate: 180deg;
+  }
+}
+
+.morph-shape {
+  inline-size: 8rem;
+  block-size: 8rem;
+
+  timeline-trigger-name: --morph;
+  timeline-trigger-source: view();
+
+  animation: morph 0.8s ease-in-out both;
+  animation-trigger: --morph play-forwards play-backwards;
+}
+
+/* ==========================================================================
+   8. SCROLL-TRIGGERED vs SCROLL-DRIVEN — when to use which
+   ========================================================================== */
+
+/*
+ * SCROLL-DRIVEN (animation-timeline: view() / scroll())
+ *   - Animation progress is tied to scroll position (0%–100%)
+ *   - Pauses when scrolling stops
+ *   - Best for: progress bars, parallax, scrub effects
+ *
+ * SCROLL-TRIGGERED (animation-trigger + timeline-trigger)
+ *   - Normal time-based animation that fires at a scroll offset
+ *   - Runs to completion once triggered, even if scrolling stops
+ *   - Best for: reveal animations, staggered entries, expand/collapse
+ *
+ * They can be combined on different elements in the same page.
+ */

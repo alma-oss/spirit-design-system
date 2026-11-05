@@ -1,0 +1,180 @@
+/**
+ * scroll-margin & scroll-padding
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
+ * Baseline: 🟢 Widely Available (since 2021)
+ * Support: 96%
+ *
+ * Task: Prevent anchor-linked sections from scrolling behind fixed navigation
+ * Why: Pure CSS offset for scroll targets — no JavaScript scroll offset hacks
+ */
+
+/* ==========================================================================
+   THE PROBLEM — sections scroll behind fixed nav
+
+   HTML:
+     <nav class="main-nav">...</nav>
+     <section id="about">...</section>
+     <a href="#about">Go to About</a>
+
+   When clicking the anchor link, #about scrolls flush to the viewport top,
+   hidden behind the fixed nav.
+
+   Two solutions:
+   • scroll-margin-block-start  → on the TARGET element
+   • scroll-padding-block-start → on the SCROLL CONTAINER
+   ========================================================================== */
+
+/* ==========================================================================
+   1. scroll-margin-block-start — BEST PRACTICE for fixed nav offset
+   Applied to each scroll target section.
+   ========================================================================== */
+
+:root {
+  --nav-block-size: 4rem;
+}
+
+.main-nav {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: var(--nav-block-size);
+  z-index: 1;
+}
+
+/* Every section with an id is a scroll target */
+section[id] {
+  scroll-margin-block-start: var(--nav-block-size);
+}
+
+/* Also works on any anchor target */
+:target {
+  scroll-margin-block-start: var(--nav-block-size);
+}
+
+/* ==========================================================================
+   2. scroll-padding-block-start — on the scroll container
+   Alternative: set once on html/body instead of every section.
+   ========================================================================== */
+
+html {
+  scroll-padding-block-start: var(--nav-block-size);
+}
+
+/* ==========================================================================
+   3. WHEN TO USE WHICH
+
+   ┌────────────────────────┬──────────────────────────────────┐
+   │ scroll-padding         │ scroll-margin                    │
+   ├────────────────────────┼──────────────────────────────────┤
+   │ On the scroll container │ On the scroll target element     │
+   │ Set once, affects all  │ Per-element, different offsets    │
+   │ Like padding inward    │ Like margin outward              │
+   │ Best for: fixed nav    │ Best for: varied target offsets  │
+   └────────────────────────┴──────────────────────────────────┘
+   ========================================================================== */
+
+/* ==========================================================================
+   4. STICKY NAV (not fixed) — same pattern works
+   ========================================================================== */
+
+.sticky-nav {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: var(--nav-block-size);
+}
+
+/* scroll-padding on the nearest scroll container */
+.page-wrapper {
+  overflow-y: auto;
+  scroll-padding-block-start: var(--nav-block-size);
+}
+
+/* ==========================================================================
+   5. MULTIPLE FIXED ELEMENTS — stack offsets
+   Fixed nav + fixed banner = sum of both heights.
+   ========================================================================== */
+
+:root {
+  --banner-block-size: 2.5rem;
+  --total-fixed-offset: calc(var(--nav-block-size) + var(--banner-block-size));
+}
+
+html:has(.announcement-banner) {
+  scroll-padding-block-start: var(--total-fixed-offset);
+}
+
+/* ==========================================================================
+   6. SCROLL SNAP + scroll-margin
+   Prevents snapped items from sitting flush against container edge.
+   ========================================================================== */
+
+.snap-container {
+  scroll-snap-type: y mandatory;
+  scroll-padding-block: 1rem; /* breathing room at top and bottom */
+}
+
+.snap-container > section {
+  scroll-snap-align: start;
+  scroll-margin-block-start: 1rem; /* per-item offset */
+}
+
+/* ==========================================================================
+   7. HORIZONTAL SCROLL + scroll-margin-inline
+   Carousel items offset from container edges.
+   ========================================================================== */
+
+.carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem; /* inset from both edges */
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+  scroll-margin-inline-start: 1rem;
+  flex: 0 0 min(80%, 20rem);
+}
+
+/* ==========================================================================
+   8. LOGICAL PROPERTIES — full list
+
+   Physical              Logical
+   ────────────────      ──────────────────────────
+   scroll-margin-top     scroll-margin-block-start
+   scroll-margin-bottom  scroll-margin-block-end
+   scroll-margin-left    scroll-margin-inline-start
+   scroll-margin-right   scroll-margin-inline-end
+
+   scroll-padding-top    scroll-padding-block-start
+   scroll-padding-bottom scroll-padding-block-end
+   scroll-padding-left   scroll-padding-inline-start
+   scroll-padding-right  scroll-padding-inline-end
+
+   Shorthands:
+   scroll-margin-block:  <start> <end>
+   scroll-margin-inline: <start> <end>
+   scroll-padding-block: <start> <end>
+   scroll-padding-inline:<start> <end>
+
+   ✅ Always prefer logical properties (block/inline).
+   ========================================================================== */
+
+/* ==========================================================================
+   9. DYNAMIC NAV HEIGHT — adapt with container query units
+   If nav height can change (e.g. wrapping on small screens).
+   ========================================================================== */
+
+.main-nav {
+  container-type: inline-size;
+}
+
+/* Use a CSS variable updated via :has() or media query */
+@media (width < 40rem) {
+  :root {
+    --nav-block-size: 6rem; /* taller nav on mobile */
+  }
+}

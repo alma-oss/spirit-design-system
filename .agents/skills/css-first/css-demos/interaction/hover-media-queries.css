@@ -1,0 +1,100 @@
+/**
+ * Hover and Pointer Media Queries
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/pointer
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/any-hover
+ * Baseline: 🟢 Widely Available
+ * Support: 97%
+ *
+ * Task: Adapt interaction patterns for touch vs pointer devices
+ * Why: Hover effects break on touch devices — these queries detect
+ *      device capabilities so you only apply hover on capable devices
+ * Last verified: 2026-02
+ */
+
+/* ==========================================================================
+   1. HOVER CAPABILITY — only apply hover effects on hover-capable devices
+   ========================================================================== */
+
+/* Base: no hover effect */
+.card {
+  transition: translate 0.2s;
+}
+
+/* Only add hover lift on devices that support hover */
+@media (hover: hover) {
+  .card:hover {
+    translate: 0 -4px;
+  }
+}
+
+/* Touch-first: show tap target affordances */
+@media (hover: none) {
+  .card {
+    /* larger tap targets, no hover-dependent UI */
+  }
+}
+
+/* ==========================================================================
+   2. POINTER PRECISION — fine (mouse) vs coarse (touch)
+   ========================================================================== */
+
+/* Default sizes */
+.btn {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+}
+
+/* Larger touch targets for coarse pointers (fingers) */
+@media (pointer: coarse) {
+  .btn {
+    min-block-size: 44px; /* WCAG minimum touch target */
+    min-inline-size: 44px;
+    padding-inline: 1.5rem;
+    padding-block: 0.75rem;
+  }
+
+  input,
+  select,
+  textarea {
+    min-block-size: 44px;
+    font-size: 1rem; /* prevents iOS zoom on focus */
+  }
+}
+
+/* Precise controls for mouse users */
+@media (pointer: fine) {
+  .btn {
+    /* smaller, denser controls are fine */
+  }
+}
+
+/* ==========================================================================
+   3. ANY-HOVER / ANY-POINTER — hybrid devices (e.g. Surface, iPad + mouse)
+   ========================================================================== */
+
+/* Device has at least one hover-capable input */
+@media (any-hover: hover) {
+  .tooltip-trigger:hover + .tooltip {
+    display: block;
+  }
+}
+
+/* All inputs are coarse — purely touch device */
+@media (any-pointer: coarse) and (any-hover: none) {
+  .tooltip-trigger {
+    /* use tap/focus instead of hover for tooltips */
+  }
+}
+
+/* ==========================================================================
+   4. COMBINED WITH PREFERS-REDUCED-MOTION
+   ========================================================================== */
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    translate: 0 -4px;
+    transition: translate 0.2s;
+  }
+}

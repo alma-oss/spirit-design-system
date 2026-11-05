@@ -1,0 +1,117 @@
+/**
+ * text-justify — Justification Method Control
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
+ * Spec: CSS Text Module Level 3
+ * WebStatus: text-justify
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Control how text-align: justify distributes space — between words or characters
+ * Why: Different languages need different justification strategies.
+ *      inter-word suits Latin scripts, inter-character suits CJK.
+ *      Now controllable in CSS without language-specific hacks.
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   VALUES REFERENCE
+
+   auto             — browser picks best strategy based on language (default)
+   none             — disables justification (text-align: justify has no effect)
+   inter-word       — space added between words (word-spacing varies)
+   inter-character  — space added between characters (letter-spacing varies)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. INTER-WORD — standard for Latin/Western scripts
+   Adds space between words only. Best for English, German, French, etc.
+   ========================================================================== */
+
+.justify-words {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* ==========================================================================
+   2. INTER-CHARACTER — for CJK and monospaced displays
+   Distributes space between individual characters.
+   Essential for Japanese, Chinese text where words aren't space-separated.
+   Also useful for stylistic effect on headings or small text blocks.
+   ========================================================================== */
+
+.justify-characters {
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+/* CJK text example */
+.justify-cjk {
+  text-align: justify;
+  text-justify: inter-character;
+  lang: ja; /* browser hint — auto would also work for Japanese */
+}
+
+/* ==========================================================================
+   3. AUTO — browser decides based on content language
+   Best default for multilingual content. The browser analyzes the script
+   and applies inter-word or inter-character accordingly.
+   ========================================================================== */
+
+.justify-auto {
+  text-align: justify;
+  text-justify: auto;
+}
+
+/* ==========================================================================
+   4. NONE — disable justification
+   Useful for overriding inherited justify on specific elements
+   (code blocks, pull quotes, narrow columns where justify looks bad).
+   ========================================================================== */
+
+.justify-none {
+  text-align: justify;
+  text-justify: none;
+}
+
+/* ==========================================================================
+   5. PRACTICAL PATTERNS
+   ========================================================================== */
+
+/* Article body — justified with inter-word for readability */
+.article-body {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto; /* combine with hyphens for better line breaks */
+  max-inline-size: 65ch;
+}
+
+/* Narrow column — disable justify to avoid rivers of whitespace */
+.narrow-aside {
+  max-inline-size: 20ch;
+  text-align: start;
+  text-justify: none;
+}
+
+/* Stylistic heading — inter-character for forced expansion effect */
+.expanded-heading {
+  text-align: justify;
+  text-justify: inter-character;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   CHROME 145+ ALSO ADDS:
+   letter-spacing and word-spacing now accept percentage values,
+   calculated relative to the advance measure of the space character (U+0020).
+
+   letter-spacing: 0.5%;
+   word-spacing: 1.2%;
+
+   Useful for responsive typography where spacing scales with font size.
+   ========================================================================== */
+
+.responsive-spacing {
+  letter-spacing: 0.5%;
+  word-spacing: 1.2%;
+}

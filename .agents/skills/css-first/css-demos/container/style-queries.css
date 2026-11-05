@@ -1,0 +1,94 @@
+/**
+ * Container Style Queries
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@container#querying_custom_properties
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries
+ *
+ * WebStatus: container-style-queries
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 111+, Firefox 151+, Safari 18+
+ *
+ * Task: Style components based on parent state
+ * Why: Container style queries allow components to respond to parent custom properties,
+ *      enabling true component-driven styling without JavaScript.
+ * Last verified: 2026-08-11
+ */
+
+.card-container {
+  container-name: card;
+}
+
+/* Set theme via custom property */
+.card-container[data-theme='dark'] {
+  --theme: dark;
+}
+
+.card-container[data-theme='light'] {
+  --theme: light;
+}
+
+/* Style based on container's custom property */
+@container card style(--theme: dark) {
+  .card {
+    background: #1a1a1a;
+    color: #f0f0f0;
+    border-color: #444;
+  }
+
+  .card-button {
+    background: #4d94ff;
+    color: #000;
+  }
+}
+
+@container card style(--theme: light) {
+  .card {
+    background: white;
+    color: #333;
+    border-color: #ddd;
+  }
+
+  .card-button {
+    background: #0066cc;
+    color: white;
+  }
+}
+
+/* Query multiple properties */
+.sidebar {
+  container-name: sidebar;
+  --collapsed: false;
+  --variant: primary;
+}
+
+@container sidebar style(--collapsed: true) {
+  .sidebar-content {
+    display: none;
+  }
+
+  .sidebar-icon {
+    margin-inline: auto;
+  }
+}
+
+@container sidebar style(--variant: primary) {
+  .sidebar {
+    background: #0066cc;
+    color: white;
+  }
+}
+
+@container sidebar style(--variant: secondary) {
+  .sidebar {
+    background: #6c757d;
+    color: white;
+  }
+}
+
+/* Combine with size queries */
+@container card style(--theme: dark) and (inline-size > 600px) {
+  .card {
+    padding-inline: 3rem;
+    padding-block: 2rem;
+  }
+}

@@ -1,0 +1,187 @@
+/**
+ * @supports Feature Detection
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@supports
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_syntax/At-rule_functions
+ * WebStatus: supports-at-rule
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 148+, Firefox —, Safari —
+ *
+ * Task: Detect CSS feature support and provide progressive enhancement
+ * Why: @supports gates modern CSS behind capability checks so fallbacks
+ *      work in older browsers while modern browsers get enhanced styles
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. PROPERTY SUPPORT — check if property:value is supported
+   ========================================================================== */
+
+/* Fallback layout */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Enhancement: use container queries if supported */
+@supports (container-type: inline-size) {
+  .container {
+    container-type: inline-size;
+    max-inline-size: 100%;
+  }
+}
+
+/* Gate anchor positioning */
+@supports (position-anchor: --x) {
+  .tooltip {
+    position: fixed;
+    position-anchor: --trigger;
+    position-area: block-end;
+  }
+}
+
+/* ==========================================================================
+   2. SELECTOR SUPPORT — check if selector syntax is understood
+   Core: @supports selector()
+   ========================================================================== */
+
+/* Check for :has() support */
+@supports selector(:has(a)) {
+  .card:has(img) {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+/* Check for :user-valid support */
+@supports selector(:user-valid) {
+  input:user-valid {
+    border-color: green;
+  }
+}
+
+/* ==========================================================================
+   3. LOGICAL OPERATORS — and, or, not
+   ========================================================================== */
+
+/* Multiple conditions — all must be true */
+@supports (container-type: inline-size) and (display: grid) {
+  /* container queries + grid both supported */
+}
+
+/* Either condition — one must be true */
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+  .glass {
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Negation — feature NOT supported */
+@supports not (scroll-timeline-name: --x) {
+  /* fallback for browsers without scroll timelines */
+  .animated {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   4. FONT SUPPORT — check font tech and format
+   ========================================================================== */
+
+@supports font-tech(color-COLRv1) {
+  /* use color font features */
+}
+
+@supports font-format(woff2) {
+  /* woff2 is available */
+}
+
+/* ==========================================================================
+   5. AT-RULE SUPPORT — check if a CSS at-rule is supported
+   Core: @supports at-rule()  (Chrome 148+)
+   Lets you feature-detect an at-rule before depending on it, instead of
+   guessing from a related property.
+   ========================================================================== */
+
+/* Detect support for an at-rule by name */
+@supports at-rule(@starting-style) {
+  .toast {
+    transition: opacity 0.2s;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+/* Gate registered custom properties on @property support */
+@supports at-rule(@property) {
+  /* safe to rely on @property type checking and animation */
+}
+
+/* Combine at-rule() with property and selector checks */
+@supports at-rule(@scope) and selector(:has(*)) {
+  /* @scope + :has() both available */
+}
+
+/* ==========================================================================
+   6. NAMED FEATURES — capabilities that property tests cannot express
+   Chrome 150+; the current standardized names are intentionally limited.
+   ========================================================================== */
+
+@supports named-feature(anchor-position-follows-transforms) {
+  .anchored-overlay {
+    /* The overlay follows transforms applied to its anchor. */
+  }
+}
+
+@supports named-feature(single-axis-scroll-container) {
+  .scroll-layout {
+    /* A single-axis scroll container receives the specified behavior. */
+  }
+}
+
+/* ==========================================================================
+   7. COMMON PROGRESSIVE ENHANCEMENT PATTERNS
+   ========================================================================== */
+
+/* Anchor positioning with fallback */
+.tooltip {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 50%;
+  translate: -50% 0.5rem;
+}
+
+@supports (position-area: block-end) {
+  .tooltip {
+    position: fixed;
+    position-anchor: --tip;
+    position-area: block-end;
+    inset: unset;
+    translate: none;
+  }
+}
+
+/* light-dark() with fallback */
+.surface {
+  background: white;
+  color: #333;
+}
+
+@supports (background: light-dark(white, black)) {
+  .surface {
+    background: light-dark(white, #1a1a1a);
+    color: light-dark(#333, #eee);
+  }
+}
+
+/* corner-shape with fallback */
+.card {
+  border-radius: 1rem;
+}
+
+@supports (corner-shape: squircle) {
+  .card {
+    corner-shape: squircle;
+  }
+}

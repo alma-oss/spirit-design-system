@@ -1,0 +1,71 @@
+/**
+ * Scroll-Driven Animations
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/view
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range
+ *
+ * WebStatus: scroll-driven-animations
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 115+, Firefox —, Safari 26+
+ *
+ * Task: Create animation that responds to scroll
+ * Why: Scroll-driven animations with animation-timeline create performant,
+ *      declarative scroll effects without JavaScript or scroll listeners.
+ * Last verified: 2026-08-11
+ */
+
+/* Fade in elements as they enter viewport */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    translate: 0 20px; /* Modern translate property */
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.element {
+  animation: fade-in linear;
+  animation-timeline: view(); /* Animate based on element's visibility */
+  animation-range: entry 0% cover 30%; /* Start at entry, end at 30% coverage */
+}
+
+/* Parallax effect on scroll */
+@keyframes parallax {
+  from {
+    translate: 0 0; /* Modern translate property */
+  }
+  to {
+    translate: 0 -100px;
+  }
+}
+
+.parallax-bg {
+  animation: parallax linear;
+  animation-timeline: scroll(); /* Animate based on scroll position */
+}
+
+/* Progress indicator */
+@keyframes grow-progress {
+  from {
+    scale: 0 1; /* Modern scale property - scaleX(0) */
+  }
+  to {
+    scale: 1 1; /* Modern scale property - scaleX(1) */
+  }
+}
+
+.progress-bar {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 3px;
+  background: #0066cc;
+  transform-origin: 0 50%;
+  animation: grow-progress linear;
+  animation-timeline: scroll(root); /* Track document scroll */
+}

@@ -1,0 +1,38 @@
+/**
+ * CSS image values: image(), light-dark(), and URL request modifiers
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/image/image
+ * Reference: https://developer.chrome.com/release-notes/150
+ * WebStatus: light-dark-image
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 150+, Firefox 150+, Safari —
+ * Last verified: 2026-08-11
+ *
+ * Task: Generate color images, switch images by color scheme, and control requests.
+ */
+
+:root {
+  color-scheme: light dark;
+}
+
+.solid-image {
+  background-image: image(oklch(0.72 0.18 250));
+}
+
+.themed-hero {
+  background-color: light-dark(#eef4ff, #121826);
+}
+
+@supports (background-image: light-dark(none, none)) {
+  .themed-hero {
+    background-image: light-dark(url('hero-light.avif'), url('hero-dark.avif'));
+  }
+}
+
+@supports (background-image: url('hero.avif'cross-origin(anonymous))) {
+  .cors-image {
+    background-image: url('hero.avif'cross-origin(anonymous));
+  }
+}
+
+/* Other Chrome 150 request modifiers: integrity() and referrer-policy(). */
