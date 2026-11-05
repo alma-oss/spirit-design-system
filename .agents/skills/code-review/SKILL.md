@@ -239,11 +239,18 @@ Large diffs: when the diff exceeds roughly 3,000 changed lines (not counting sna
 (`src/**`), then docs and demos, and list skipped files under Warnings rather than skimming
 everything.
 
+**Coverage.** Before reporting, compare the changed-file list with the files you actually read. A
+changed production file you did not read in full (for example the implementation next to a changed
+interface) is either read now or listed under Warnings as "Not reviewed". Never imply full coverage
+when a file was skipped.
+
 ## Step 5 — Synthesize
 
 1. **Deduplicate** by file, line, and concern; collapse repeated occurrences into one finding with
    the other locations listed.
 2. **Cross-reference** existing PR comments (PR mode) into Tier 1 and Tier 2, per `methodology.md`.
+   Do not report as a defect a choice a human already accepted in a thread, and check that the fix
+   of every resolved thread is really in the code.
 3. **Assign the verdict** from the remaining findings.
 
 ## Step 6 — Report

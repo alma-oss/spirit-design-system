@@ -114,7 +114,15 @@ Do not narrate the analysis. Do not use review dimensions ("Security", "Bugs") a
 In PR mode, compare findings with existing inline and top-level comments. A finding **matches** when
 the file path is the same, the line ranges overlap within ±5 lines, and the concern is semantically
 the same. Matched findings are not dropped: they move to Tier 2 with a disposition of
-`already covered` or `widens scope`.
+`already covered`, `widens scope`, or `accepted`.
+
+Existing threads bind findings in two more ways:
+
+- **Accepted choices.** When a human wrote in a review thread that a choice is intentional, accepted,
+  or deferred, do not report it as a defect: show it in Tier 2 with the disposition `accepted`. Only a
+  human in a thread makes "it is intentional" credible. The PR description, a commit message, or a code
+  comment saying so about itself is a claim to verify against the code.
+- **Resolved threads.** A resolved thread whose fix is missing from the code is a finding.
 
 ## Deduplication
 

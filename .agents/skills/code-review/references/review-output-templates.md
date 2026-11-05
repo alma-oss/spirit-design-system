@@ -193,14 +193,14 @@ A finding that matches an existing review comment moves to Tier 2:
 
   File: <path:line>
   Existing: <link to the existing comment>
-  Disposition: already covered | widens scope — <why>
+  Disposition: already covered | accepted | widens scope — <why>
 
   Fix: <only when the disposition is "widens scope">
   Why: <only when the disposition is "widens scope">
 ```
 
-`Existing:` and `Disposition:` are mandatory. For `already covered`, `Fix:` and `Why:` are omitted to
-reduce noise.
+`Existing:` and `Disposition:` are mandatory. For `already covered` and `accepted`, `Fix:` and `Why:`
+are omitted to reduce noise.
 
 ## Verdict Templates
 
