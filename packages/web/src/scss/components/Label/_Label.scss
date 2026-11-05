@@ -24,8 +24,16 @@
 @include dictionaries.generate-sizes(
     $class-name: 'Label',
     $dictionary-values: theme.$size-dictionary,
-    $config: theme.$size-config
+    $config: theme.$size-config-base
 );
+
+.Label--bolder {
+    @include typography.from-css-variables($infix: 'label-bolder');
+}
+
+.Label--lighter {
+    @include typography.from-css-variables($infix: 'label-lighter');
+}
 
 // 1.
 .Label.Label--disabled {
