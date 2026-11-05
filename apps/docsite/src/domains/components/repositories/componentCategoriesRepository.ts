@@ -3,7 +3,6 @@ import { join } from 'path';
 import { getContentRoot } from '@local/domains/content/paths';
 import { parse as parseYaml } from 'yaml';
 import type { ComponentCategories } from '../features/component-catalog';
-import { fetchAllComponents } from './componentsRepository';
 
 export const COMPONENT_CATEGORIES_FILE = 'component-categories.yaml';
 
@@ -25,7 +24,13 @@ function guardCategory(
   category: string,
   definition: unknown,
 ): asserts definition is { description: string; components: string[] } {
-  if (!isRecord(definition) || !isNonEmptyString(definition.description)) {
+  if (!isRecord(definition)) {
+    throw new Error(
+      `Category "${category}" in ${COMPONENT_CATEGORIES_FILE} must be a map with a description and components.`,
+    );
+  }
+
+  if (!isNonEmptyString(definition.description)) {
     throw new Error(`Category "${category}" in ${COMPONENT_CATEGORIES_FILE} must have a description.`);
   }
 
@@ -38,7 +43,7 @@ function guardPlacement(categories: ComponentCategories, components: string[]) {
   const existing = new Set(components);
   const categorized = Object.values(categories).flatMap((definition) => definition.components);
   const unknown = categorized.filter((component) => !existing.has(component));
-  const duplicated = categorized.filter((component, index) => categorized.indexOf(component) !== index);
+  const duplicated = [...new Set(categorized.filter((component, index) => categorized.indexOf(component) !== index))];
   const categorizedSet = new Set(categorized);
   const uncategorized = components.filter((component) => !categorizedSet.has(component));
   const problems = [
@@ -71,8 +76,6 @@ export const parseComponentCategories = (raw: string, components: string[]): Com
   return categories;
 };
 
-export const fetchComponentCategories = (): ComponentCategories =>
-  parseComponentCategories(
-    readFileSync(join(getContentRoot(), COMPONENT_CATEGORIES_FILE), 'utf8'),
-    fetchAllComponents(),
-  );
+// Take the components the caller renders, so the validated list is the rendered list.
+export const fetchComponentCategories = (components: string[]): ComponentCategories =>
+  parseComponentCategories(readFileSync(join(getContentRoot(), COMPONENT_CATEGORIES_FILE), 'utf8'), components);

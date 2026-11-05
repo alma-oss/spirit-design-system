@@ -11,7 +11,7 @@ import React, { Suspense } from 'react';
 
 const ComponentsPage = () => {
   const components: string[] = fetchAllComponents();
-  const categories = fetchComponentCategories();
+  const categories = fetchComponentCategories(components);
 
   return (
     <>

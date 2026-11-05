@@ -1,10 +1,15 @@
 import { fetchComponentCategories, parseComponentCategories } from '../componentCategoriesRepository';
+import { fetchAllComponents } from '../componentsRepository';
 
 describe('fetchComponentCategories', () => {
-  const categories = fetchComponentCategories();
+  const fetchCategories = () => fetchComponentCategories(fetchAllComponents());
+
+  it('should place every existing component in exactly one category', () => {
+    expect(fetchCategories).not.toThrow();
+  });
 
   it('should have components sorted alphabetically within each category', () => {
-    for (const { components } of Object.values(categories)) {
+    for (const { components } of Object.values(fetchCategories())) {
       const sorted = [...components].sort();
 
       expect(components).toEqual(sorted);
@@ -12,7 +17,7 @@ describe('fetchComponentCategories', () => {
   });
 
   it('should have categories sorted alphabetically', () => {
-    const categoryNames = Object.keys(categories);
+    const categoryNames = Object.keys(fetchCategories());
     const sorted = [...categoryNames].sort();
 
     expect(categoryNames).toEqual(sorted);
@@ -45,8 +50,8 @@ describe('parseComponentCategories', () => {
     );
   });
 
-  it('should reject a component in more than one category', () => {
-    const raw = [...category('Actions', ['Button']), ...category('Forms', ['Button'])];
+  it('should reject a component in more than one category, naming it once', () => {
+    const raw = [...category('Actions', ['Button']), ...category('Forms', ['Button']), ...category('Text', ['Button'])];
 
     expect(() => parseComponentCategories(raw.join('\n'), ['Button'])).toThrow(
       'component-categories.yaml has components in more than one category: Button.',
@@ -62,6 +67,12 @@ describe('parseComponentCategories', () => {
   it('should reject a file that is not a map of categories', () => {
     expect(() => parseComponentCategories('- Button', ['Button'])).toThrow(
       'component-categories.yaml must be a map of categories.',
+    );
+  });
+
+  it('should reject a category that is not a map', () => {
+    expect(() => parseComponentCategories('Actions: [Button]', ['Button'])).toThrow(
+      'Category "Actions" in component-categories.yaml must be a map with a description and components.',
     );
   });
 
