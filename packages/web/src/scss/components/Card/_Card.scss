@@ -7,6 +7,7 @@
 //    b) Layout settings are applied to the grid via custom properties.
 //    c) If there is an expanded CardMedia in a boxed card, replace card padding with empty grid columns/rows.
 //    d) Padding is adjusted for different breakpoints.
+//    e) Without an expanded CardMedia, the footer divider offsets the card padding to span the full card width.
 // 6. Declare the background context so nested components and dynamic colors resolve against the card.
 
 @use 'sass:map';
@@ -128,6 +129,15 @@
             &:has(.CardFooterDivider + .CardFooter--hasDivider) {
                 --#{tokens.$css-variable-prefix}card-padding-shorthand: 0 0
                     var(--#{tokens.$css-variable-prefix}card-padding-condensed);
+            }
+
+            // 5.e
+            &:not(:has(.CardMedia--expanded)):has(.CardFooterDivider + .CardFooter--hasDivider) {
+                padding-bottom: var(--#{tokens.$css-variable-prefix}card-padding-condensed);
+            }
+
+            &:not(:has(.CardMedia--expanded)) .CardFooterDivider {
+                margin-inline: calc(-1 * var(--#{tokens.$css-variable-prefix}card-padding));
             }
         }
 
