@@ -11,7 +11,7 @@ The trigger uses the `info` icon by default. Pair it with a nearby label using [
 
 ```html
 <div class="Flex Flex--horizontal Flex--alignmentYCenter" style="--flex-spacing-x: var(--spirit-space-100);">
-  <label class="Label Label--medium" for="languages">Languages</label>
+  <label class="Label Label--base Label--medium" for="languages">Languages</label>
   <div class="Tooltip" data-spirit-element="tooltip">
     <button
       type="button"

@@ -79,7 +79,7 @@ but that is not the pattern used in this recipe.
           class="Item Item--medium cursor-pointer color-scheme-on-selected-subtle bg-color-scheme"
         >
           <span class="Item__content" role="presentation">
-            <span class="Label Label--medium">+5 km</span>
+            <span class="Label Label--base Label--medium">+5 km</span>
           </span>
           <span class="Item__slot" role="presentation">
             <svg
@@ -101,7 +101,7 @@ but that is not the pattern used in this recipe.
           class="Item Item--medium cursor-pointer"
         >
           <span class="Item__content" role="presentation">
-            <span class="Label Label--medium">+10 km</span>
+            <span class="Label Label--base Label--medium">+10 km</span>
           </span>
           <span class="Item__slot" role="presentation">
             <svg

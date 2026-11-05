@@ -18,13 +18,13 @@ Add `Label--medium` where Label currently relies on the implicit default:
 <label for="example-field" class="Label">Label Text</label>
 
 <!-- After -->
-<label for="example-field" class="Label Label--medium">Label Text</label>
+<label for="example-field" class="Label Label--base Label--medium">Label Text</label>
 ```
 
 For components like [TextField][textfield], [TextArea][textarea], [Select][select], [Slider][slider], and [FileUploader][fileuploader], the label is typically placed above the input.
 
 ```html
-<label for="example-field" class="Label Label--medium">Label Text</label>
+<label for="example-field" class="Label Label--base Label--medium">Label Text</label>
 ```
 
 ## Sizes
@@ -32,11 +32,11 @@ For components like [TextField][textfield], [TextArea][textarea], [Select][selec
 Label supports `xsmall`, `small`, `medium`, `large`, and `xlarge` sizes. Use `medium` as the default size.
 
 ```html
-<span class="Label Label--xsmall">XSmall</span>
-<span class="Label Label--small">Small</span>
-<span class="Label Label--medium">Medium (default)</span>
-<span class="Label Label--large">Large</span>
-<span class="Label Label--xlarge">XLarge</span>
+<span class="Label Label--base Label--xsmall">XSmall</span>
+<span class="Label Label--base Label--small">Small</span>
+<span class="Label Label--base Label--medium">Medium (default)</span>
+<span class="Label Label--base Label--large">Large</span>
+<span class="Label Label--base Label--xlarge">XLarge</span>
 ```
 
 ## Variants
@@ -48,7 +48,7 @@ The Label component has two other variants:
 Used for inline field components like [Checkbox][checkbox], [Radio][radio], and [Toggle][toggle], where the label is typically placed next to the input. Add the `cursor-pointer` helper class to show a pointer cursor.
 
 ```html
-<label for="example-field" class="Label Label--medium cursor-pointer">Label Text</label>
+<label for="example-field" class="Label Label--lighter Label--medium cursor-pointer">Label Text</label>
 ```
 
 ### Item Variant
@@ -56,13 +56,13 @@ Used for inline field components like [Checkbox][checkbox], [Radio][radio], and 
 Used for standalone [Item][item] components (button, link, div with `.Item` class).
 
 ```html
-<span class="Label Label--medium element-stretched">Item label</span>
+<span class="Label Label--base Label--medium element-stretched">Item label</span>
 ```
 
 For Checkbox or Radio in item mode, use the item variant with the `element-stretched` helper class:
 
 ```html
-<label for="example-field" class="Label Label--medium element-stretched">Label Text</label>
+<label for="example-field" class="Label Label--lighter Label--medium element-stretched">Label Text</label>
 ```
 
 ## Modifiers
@@ -72,7 +72,7 @@ For Checkbox or Radio in item mode, use the item variant with the `element-stret
 Adds an asterisk (\*) after the label text to indicate a required field.
 
 ```html
-<label for="example-field" class="Label Label--medium Label--required">Label Text</label>
+<label for="example-field" class="Label Label--base Label--medium Label--required">Label Text</label>
 ```
 
 ### Hidden
@@ -80,7 +80,7 @@ Adds an asterisk (\*) after the label text to indicate a required field.
 Visually hides the label while keeping it accessible to screen readers.
 
 ```html
-<label for="example-field" class="Label Label--medium accessibility-hidden">Label Text</label>
+<label for="example-field" class="Label Label--base Label--medium accessibility-hidden">Label Text</label>
 ```
 
 ### Disabled
@@ -88,7 +88,7 @@ Visually hides the label while keeping it accessible to screen readers.
 Applies disabled styling to the label.
 
 ```html
-<label for="example-field" class="Label Label--medium Label--disabled">Label Text</label>
+<label for="example-field" class="Label Label--base Label--medium Label--disabled">Label Text</label>
 ```
 
 ## Examples
@@ -97,7 +97,7 @@ Applies disabled styling to the label.
 
 ```html
 <div>
-  <label for="text-field" class="Label Label--medium">Label</label>
+  <label for="text-field" class="Label Label--base Label--medium">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field" />
   </div>
@@ -108,7 +108,7 @@ Applies disabled styling to the label.
 
 ```html
 <div>
-  <label for="text-field-required" class="Label Label--medium Label--required">Label</label>
+  <label for="text-field-required" class="Label Label--base Label--medium Label--required">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium">
     <input type="text" id="text-field-required" required />
   </div>
@@ -121,7 +121,7 @@ Applies disabled styling to the label.
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox" class="Checkbox" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="checkbox">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -134,7 +134,7 @@ Applies disabled styling to the label.
     <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--medium element-stretched" for="checkbox-item">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium element-stretched" for="checkbox-item">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -144,7 +144,7 @@ Applies disabled styling to the label.
 ```html
 <button type="button" class="Item Item--medium">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item label</span>
+    <span class="Label Label--base Label--medium element-stretched">Item label</span>
   </span>
 </button>
 ```
@@ -153,7 +153,7 @@ Applies disabled styling to the label.
 
 ```html
 <div>
-  <label for="text-field-disabled" class="Label Label--medium Label--disabled">Label</label>
+  <label for="text-field-disabled" class="Label Label--base Label--medium Label--disabled">Label</label>
   <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
     <input type="text" id="text-field-disabled" disabled />
   </div>

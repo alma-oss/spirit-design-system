@@ -144,7 +144,7 @@ any other form field:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="progress-bar-label" class="Label">Profile completeness</label>
+  <label for="progress-bar-label" class="Label Label--base">Profile completeness</label>
   <progress
     class="ProgressBar color-scheme-on-emotion-informative-subtle"
     id="progress-bar-label"
@@ -161,7 +161,7 @@ should not be visible.
 Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **The bar stays the same.** Medium is the default.
 
 ```html
-<label for="progress-bar-size-small" class="Label Label--small">Small</label>
+<label for="progress-bar-size-small" class="Label Label--base Label--small">Small</label>
 ```
 
 ## Layout
@@ -177,7 +177,7 @@ Associate the [HelperText][readme-helper-text] component with the ProgressBar us
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="progress-bar-helper-text" class="Label">Profile completeness</label>
+  <label for="progress-bar-helper-text" class="Label Label--base">Profile completeness</label>
   <progress
     class="ProgressBar color-scheme-on-emotion-informative-subtle"
     id="progress-bar-helper-text"
@@ -196,7 +196,7 @@ Pair the matching color scheme with the [ValidationText][readme-validation-text]
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="progress-bar-success" class="Label">Profile completeness</label>
+  <label for="progress-bar-success" class="Label Label--base">Profile completeness</label>
   <progress
     class="ProgressBar color-scheme-on-emotion-success-subtle"
     id="progress-bar-success"
@@ -219,7 +219,7 @@ helper class:
 
 ```html
 <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-  <label for="progress-bar-disabled" class="Label Label--disabled">Profile completeness</label>
+  <label for="progress-bar-disabled" class="Label Label--base Label--disabled">Profile completeness</label>
   <div
     class="Flex Flex--horizontal Flex--noWrap Flex--alignmentYCenter color-scheme-on-disabled"
     style="--flex-spacing-x: var(--spirit-space-600);"

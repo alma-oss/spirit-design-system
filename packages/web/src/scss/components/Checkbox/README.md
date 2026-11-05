@@ -6,7 +6,7 @@
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-default" class="Checkbox" name="default" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="checkbox-default">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-default">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -19,7 +19,7 @@
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-size-small" class="Checkbox" name="checkboxSizeSmall" />
   <div>
-    <label class="Label Label--small cursor-pointer" for="checkbox-size-small">Small</label>
+    <label class="Label Label--lighter Label--small cursor-pointer" for="checkbox-size-small">Small</label>
   </div>
 </div>
 ```
@@ -30,7 +30,9 @@
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-required" class="Checkbox" name="required" required />
   <div>
-    <label class="Label Label--medium Label--required cursor-pointer" for="checkbox-required">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium Label--required cursor-pointer" for="checkbox-required"
+      >Checkbox Label</label
+    >
   </div>
 </div>
 ```
@@ -52,7 +54,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
     aria-describedby="checkbox-warning-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="checkbox-warning">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-warning">Checkbox Label</label>
     <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text">Warning validation text</div>
   </div>
 </div>
@@ -66,7 +68,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
     aria-describedby="checkbox-danger-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="checkbox-danger">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-danger">Checkbox Label</label>
     <div class="ValidationText ValidationText--danger" id="checkbox-danger-helper-text">
       <ul>
         <li>First validation text</li>
@@ -85,7 +87,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
     aria-describedby="checkbox-warning-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="checkbox-warning">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-warning">Checkbox Label</label>
     <div class="ValidationText ValidationText--warning" id="checkbox-warning-helper-text">
       <svg class="Icon" width="20" height="20" aria-hidden="true">
         <use href="/assets/icons/svg/sprite.svg#warning" />
@@ -102,7 +104,9 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-0);">
   <input type="checkbox" id="checkbox-hidden-label" class="Checkbox" name="hiddenLabel" required />
   <div>
-    <label class="Label Label--medium accessibility-hidden" for="checkbox-hidden-label">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium accessibility-hidden" for="checkbox-hidden-label"
+      >Checkbox Label</label
+    >
   </div>
 </div>
 ```
@@ -121,7 +125,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
     aria-describedby="checkbox-helper-text-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="checkbox-helper-text">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-helper-text">Checkbox Label</label>
     <div class="HelperText" id="checkbox-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -143,7 +147,7 @@ Short labels are also easier for sighted users to scan.
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--required cursor-pointer" for="consent"
+    <label class="Label Label--lighter Label--medium Label--required cursor-pointer" for="consent"
       >I agree to the terms and conditions</label
     >
     <div id="consent-details" class="InputDetails">
@@ -171,7 +175,7 @@ Short labels are also easier for sighted users to scan.
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="consent" class="Checkbox" name="consent" aria-details="consent-details" required />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--required cursor-pointer" for="consent"
+    <label class="Label Label--lighter Label--medium Label--required cursor-pointer" for="consent"
       >I agree to the terms and conditions</label
     >
     <div id="consent-details" class="InputDetails">
@@ -213,7 +217,7 @@ Short labels are also easier for sighted users to scan.
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-disabled" class="Checkbox" name="disabled" disabled />
   <div>
-    <label class="Label Label--medium Label--disabled" for="checkbox-disabled">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium Label--disabled" for="checkbox-disabled">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -226,7 +230,7 @@ Short labels are also easier for sighted users to scan.
     <input type="checkbox" id="checkbox-item-default" class="Checkbox Checkbox--item" name="item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--medium element-stretched cursor-pointer" for="checkbox-item-default"
+    <label class="Label Label--lighter Label--medium element-stretched cursor-pointer" for="checkbox-item-default"
       >Checkbox Label</label
     >
   </div>
@@ -243,7 +247,7 @@ The input position can be set using [Flex][readme-flex] component with direction
 <div class="Flex Flex--horizontalReversed Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="checkbox" id="checkbox-position-end" class="Checkbox" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="checkbox-position-end">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-position-end">Checkbox Label</label>
   </div>
 </div>
 ```
@@ -259,7 +263,9 @@ Use responsive breakpoint modifiers to change input position at different screen
 >
   <input type="checkbox" id="checkbox-position-responsive" class="Checkbox" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="checkbox-position-responsive">Checkbox Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="checkbox-position-responsive"
+      >Checkbox Label</label
+    >
   </div>
 </div>
 ```
