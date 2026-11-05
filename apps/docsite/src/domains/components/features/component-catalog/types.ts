@@ -9,10 +9,16 @@ export interface PreviewModule {
   default: PreviewComponent;
 }
 
+export interface ComponentCategoryDefinition {
+  description: string;
+  components: string[];
+}
+
+export type ComponentCategories = Record<string, ComponentCategoryDefinition>;
+
 export interface ComponentCatalogEntry {
   name: string;
   description: string;
-  category: string;
   guides?: PreviewGuides;
   Preview?: ComponentType;
 }
