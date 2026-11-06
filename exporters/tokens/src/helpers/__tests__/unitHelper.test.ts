@@ -6,6 +6,7 @@ import {
   getFontSizeBaseMap,
   makeRelativeUnit,
   replacePxWithRemUnits,
+  unitToCss,
   type FontSizeBaseMap,
 } from '../unitHelper';
 
@@ -164,6 +165,22 @@ describe('unitHelper', () => {
     it('should handle string values', () => {
       expect(makeRelativeUnit('32', 16)).toBe('2rem');
       expect(makeRelativeUnit('40', 16)).toBe('2.5rem');
+    });
+  });
+
+  describe('unitToCss', () => {
+    it.each([
+      [Unit.percent, '%'],
+      [Unit.pixels, 'px'],
+      [Unit.rem, 'rem'],
+      [Unit.raw, ''],
+      [Unit.ms, 'ms'],
+    ])('should convert %s to "%s"', (unit, expected) => {
+      expect(unitToCss(unit)).toBe(expected);
+    });
+
+    it('should fall back to px for an unknown unit', () => {
+      expect(unitToCss('Unknown' as unknown as Unit)).toBe('px');
     });
   });
 

@@ -1,9 +1,28 @@
-import { DimensionToken, FontSizeToken, Token, TokenType } from '@supernovaio/sdk-exporters';
+// TODO: `Unit` is used as a runtime value (e.g. `Unit.pixels`), so it cannot be imported as `type Unit` (TS1361).
+//  Replace it with our own unit type/constants in a follow-up, so that the import can become type-only.
+import { DimensionToken, FontSizeToken, Token, TokenType, Unit } from '@supernovaio/sdk-exporters';
 import { FONT_SIZE_BASE, FONT_SIZE_BASE_DEFAULT, PX_UNIT } from '../constants';
 import { getDeviceAlias } from './deviceHelpers';
 import { pxToRem } from '../converters/pxToRem';
 
 export type FontSizeBaseMap = Map<string, number>;
+
+const UNIT_TO_CSS: Partial<Record<Unit, string>> = {
+  [Unit.percent]: '%',
+  [Unit.pixels]: PX_UNIT,
+  [Unit.rem]: 'rem',
+  [Unit.raw]: '',
+  [Unit.ms]: 'ms',
+};
+
+/**
+ * Converts a Supernova unit enum value (e.g. `Unit.pixels`) to the CSS unit string (e.g. "px").
+ * An unknown unit falls back to `px`, the same way Supernova's own `CSSHelper.unitToCSS` did.
+ *
+ * @param unit - Supernova unit
+ * @returns {string} CSS unit, an empty string for a raw (unit-less) value
+ */
+export const unitToCss = (unit: Unit): string => UNIT_TO_CSS[unit] ?? PX_UNIT;
 
 /**
  * Creates a default FontSizeBaseMap with the same value for all breakpoints.

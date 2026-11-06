@@ -30,9 +30,14 @@ export type BooleanValue = {
 };
 
 /**
- * An unresolved alias/reference to another token (e.g. Supernova's
- * `referencedTokenId`, Figma's `VARIABLE_ALIAS`). Resolved to a concrete
- * value by the transformation layer, not by adapters.
+ * An alias/reference to another token (e.g. Supernova's `referencedTokenId`,
+ * Figma's `VARIABLE_ALIAS`). Resolved by the `resolve-references` transformation rule (`resolveValueDeep`), which
+ * follows it through a `TokenIndex`, not by adapters.
+ *
+ * `resolved` is optional: a source that already computed the concrete value
+ * (Supernova, where the exported token carries its theme-applied value) fills
+ * it in and that value wins; a source that only has the alias leaves it out and
+ * the referenced token's own value is looked up by `tokenId`.
  */
 export type ReferenceValue = {
   type: 'reference';
