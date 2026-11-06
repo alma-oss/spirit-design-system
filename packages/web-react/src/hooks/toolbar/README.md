@@ -61,7 +61,7 @@ const MyToolbar = ({ children }) => {
   const ref = useRef(null);
   const state = useToolbarState();
   const { toolbarProps } = useToolbarAria({ orientation: 'horizontal' }, state, ref);
-  const contextValue = useMemo(() => ({ orientation: 'horizontal', register: state.register }), [state.register]);
+  const contextValue = useMemo(() => ({ register: state.register }), [state.register]);
 
   return (
     <div {...toolbarProps} aria-label="Actions" ref={ref}>

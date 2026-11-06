@@ -99,21 +99,44 @@ describe('Toolbar', () => {
 
       expect(warn).not.toHaveBeenCalled();
     });
+  });
 
-    it('should warn and render a div when Navigation elementType is nav', () => {
-      render(
-        <Toolbar aria-label="CV actions">
-          <Navigation elementType="nav">
-            <NavigationItem>
-              <Button>Share</Button>
-            </NavigationItem>
-          </Navigation>
-        </Toolbar>,
-      );
+  it('should let a Navigation elementType override the toolbar default', () => {
+    render(
+      <Toolbar aria-label="CV actions">
+        <Navigation elementType="section">
+          <NavigationItem>
+            <Button>Share</Button>
+          </NavigationItem>
+        </Navigation>
+      </Toolbar>,
+    );
 
-      expect(screen.getByRole('toolbar').querySelector('.Navigation')?.localName).toBe('div');
-      expect(warn).toHaveBeenCalledWith(expect.stringContaining('not allowed inside a `Toolbar`'));
-    });
+    expect(screen.getByRole('toolbar').querySelector('.Navigation')?.localName).toBe('section');
+  });
+
+  it('should let a Navigation direction override the toolbar orientation', () => {
+    render(
+      <Toolbar aria-label="CV actions" orientation="vertical">
+        <Navigation direction="horizontal">
+          <NavigationItem>
+            <Button>Share</Button>
+          </NavigationItem>
+        </Navigation>
+      </Toolbar>,
+    );
+
+    expect(screen.getByRole('toolbar').querySelector('.Navigation')).toHaveClass('Navigation--horizontal');
+  });
+
+  it('should render the list and its items as presentational', () => {
+    renderToolbar();
+
+    const navigation = screen.getByRole('toolbar').querySelector('.Navigation');
+
+    expect(navigation?.querySelector('ul')).toHaveAttribute('role', 'presentation');
+
+    navigation?.querySelectorAll('li').forEach((item) => expect(item).toHaveAttribute('role', 'presentation'));
   });
 
   it('should not expose list semantics of a Navigation', () => {

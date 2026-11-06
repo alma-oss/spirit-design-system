@@ -11,10 +11,7 @@ const CustomToolbar = ({ children, orientation }: { children: ReactNode; orienta
   const ref = useRef<HTMLDivElement>(null);
   const state = useToolbarState();
   const { toolbarProps } = useToolbarAria({ orientation }, state, ref);
-  const contextValue = useMemo(
-    () => ({ orientation: orientation ?? 'horizontal', register: state.register }),
-    [orientation, state.register],
-  );
+  const contextValue = useMemo(() => ({ register: state.register }), [state.register]);
 
   return (
     <div {...toolbarProps} aria-label="Actions" ref={ref}>

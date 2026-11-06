@@ -28,7 +28,7 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 ### **Toolbar**
 
-- Use a `Toolbar` for three or more actions that stay visible, for example the actions for the document being edited. Do not use it for one or two controls, or for site navigation. Inside a toolbar, `Navigation` renders as a `div`.
+- Use a [`Toolbar`][toolbar] for three or more actions that stay visible, for example the actions for the document being edited. Do not use it for one or two controls, or for site navigation. Inside a toolbar, `Navigation` renders as a `div`.
 
 - Name the `Toolbar` with `aria-label` or `aria-labelledby`. A name is required when the page has more than one toolbar. The `Navigation` layout follows the Toolbar `orientation`.
 
@@ -55,3 +55,5 @@ The majority of accessibility issues are already guaranteed by implementation. I
 ### **Mobile Menus**
 
 - When using collapsible menus or drawers, manage focus correctly – trap focus inside the menu when open and return focus to the trigger on close.
+
+[toolbar]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Toolbar/README.md

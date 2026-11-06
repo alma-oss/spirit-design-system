@@ -2,6 +2,7 @@
 
 import React, { type ForwardedRef, forwardRef, useCallback, useMemo, useRef } from 'react';
 import { Direction } from '../../constants';
+import { ContextPropsProvider } from '../../context';
 import { ToolbarContextProvider, useStyleProps, useToolbarAria, useToolbarState } from '../../hooks';
 import { type ForwardRefComponent, type SpiritToolbarProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
@@ -14,7 +15,7 @@ const _Toolbar = (props: SpiritToolbarProps, ref: ForwardedRef<HTMLDivElement>) 
   const { toolbarProps } = useToolbarAria({ onFocus, onKeyDown, orientation }, state, toolbarRef);
   const { styleProps, props: otherProps } = useStyleProps(restProps);
   const mergedStyleProps = mergeStyleProps('div', { styleProps, otherProps });
-  const contextValue = useMemo(() => ({ orientation, register: state.register }), [orientation, state.register]);
+  const contextValue = useMemo(() => ({ register: state.register }), [state.register]);
 
   const setRef = useCallback(
     (element: HTMLDivElement | null) => {
@@ -32,7 +33,15 @@ const _Toolbar = (props: SpiritToolbarProps, ref: ForwardedRef<HTMLDivElement>) 
 
   return (
     <div {...otherProps} {...mergedStyleProps} {...toolbarProps} ref={setRef}>
-      <ToolbarContextProvider value={contextValue}>{children}</ToolbarContextProvider>
+      <ContextPropsProvider
+        value={{
+          // The Toolbar owns the layout and the ARIA of the Navigation inside it.
+          toolbar: { direction: orientation, elementType: 'div', listProps: { role: 'presentation' } },
+          toolbarItem: { role: 'presentation' },
+        }}
+      >
+        <ToolbarContextProvider value={contextValue}>{children}</ToolbarContextProvider>
+      </ContextPropsProvider>
     </div>
   );
 };

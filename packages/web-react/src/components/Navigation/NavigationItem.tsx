@@ -3,8 +3,10 @@
 import classNames from 'classnames';
 import React, { type ReactElement, useRef } from 'react';
 import { AlignmentYExtended } from '../../constants';
+import { useContextProps } from '../../context';
 import { useStyleProps, useToolbarItem } from '../../hooks';
 import { type SpiritNavigationItemProps } from '../../types';
+import { mergeProps } from '../../utils';
 import { useNavigationStyleProps } from './useNavigationStyleProps';
 
 const defaultProps: Partial<SpiritNavigationItemProps> = {
@@ -12,13 +14,14 @@ const defaultProps: Partial<SpiritNavigationItemProps> = {
 };
 
 const NavigationItem = (props: SpiritNavigationItemProps): ReactElement => {
-  const propsWithDefaults = { ...defaultProps, ...props };
+  const mergedProps = useContextProps<Partial<SpiritNavigationItemProps>>(props, 'toolbarItem');
+  const propsWithDefaults = mergeProps(defaultProps, mergedProps);
   const { children, ...restProps } = propsWithDefaults;
   const itemRef = useRef<HTMLLIElement>(null);
 
   const { classProps, props: modifiedProps } = useNavigationStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const { isInToolbar } = useToolbarItem(itemRef);
+  useToolbarItem(itemRef);
 
   return (
     <li
@@ -26,7 +29,6 @@ const NavigationItem = (props: SpiritNavigationItemProps): ReactElement => {
       className={classNames(classProps.item, styleProps.className)}
       style={styleProps.style}
       ref={itemRef}
-      {...(isInToolbar ? { role: 'presentation' } : undefined)}
     >
       {children}
     </li>

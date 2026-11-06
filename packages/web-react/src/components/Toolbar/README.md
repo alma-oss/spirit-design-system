@@ -43,8 +43,11 @@ Compose it with a [`Navigation`][navigation]. Inside a toolbar, `Navigation` ren
 ```
 
 Name the toolbar with `aria-label` or `aria-labelledby`. A name is required when the page has more than one toolbar.
-Inside a `Toolbar`, `Navigation` always takes its layout from the toolbar `orientation`, and its own `direction` prop is
-ignored. This keeps the layout in line with `aria-orientation` and the arrow keys, so do not set `direction` on it.
+Inside a `Toolbar`, `Navigation` takes its layout from the toolbar `orientation` and renders as a `div`. The `Toolbar`
+passes these defaults, and the `role="presentation"` of the list and its items, through the `toolbar` and `toolbarItem`
+[context props][readme-props-context] namespaces. A direct `direction` or `elementType` prop overrides them. Do not set
+`direction`, so the layout stays in line with `aria-orientation` and the arrow keys, and do not set `elementType="nav"`,
+because a toolbar is not a navigation landmark.
 
 ## Items
 
@@ -88,5 +91,6 @@ and [escape hatches][readme-escape-hatches].
 [navigation]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Navigation/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
+[readme-props-context]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#shared-and-inherited-props
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [toolbar-hooks]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/toolbar/README.md
