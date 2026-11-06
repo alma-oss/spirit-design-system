@@ -2,6 +2,12 @@ import {
   type BorderToken,
   type BorderWidthToken,
   type ColorToken,
+  type GradientToken,
+  GradientType,
+  type ShadowToken,
+  ShadowType,
+  type Token,
+  Unit,
   type DimensionToken,
   type FontSizeToken,
   type LetterSpacingToken,
@@ -13,6 +19,9 @@ import {
   TokenType,
 } from '@supernovaio/sdk-exporters';
 import { exampleDimensionAndStringTokens } from '../../../../../tests/fixtures/exampleDimensionAndStringTokens';
+import { exampleColorsTokens } from '../../../../../tests/fixtures/exampleColorTokens';
+import { exampleGradientTokens } from '../../../../../tests/fixtures/exampleGradientTokens';
+import { exampleShadowTokens } from '../../../../../tests/fixtures/exampleShadowTokens';
 import { exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
 import { TokenTypeEnum } from '../../../../core/types';
 import { mapToken } from '../tokenMapper';
@@ -339,15 +348,178 @@ describe('tokenMapper', () => {
 
     it('returns null for token types not yet supported by the adapter', () => {
       const token = {
-        id: 'colorRef',
-        name: 'color-primary',
-        tokenType: TokenType.color,
-        value: { color: { r: 0, g: 0, b: 0 }, opacity: { measure: 1 }, referencedTokenId: null },
-      } as unknown as ColorToken;
+        id: 'durationRef',
+        name: 'duration-short',
+        tokenType: TokenType.duration,
+        value: { measure: 100, unit: 'Ms', referencedTokenId: null },
+      } as unknown as Token;
 
       const result = mapToken(token, exampleGroups);
 
       expect(result).toBeNull();
+    });
+
+    describe('color tokens', () => {
+      it('maps a color token to a hex color with alpha', () => {
+        const token = exampleColorsTokens.get('actionColorRef') as ColorToken;
+
+        const result = mapToken(token, exampleGroups);
+
+        expect(result).toMatchObject({
+          id: 'actionColorRef',
+          type: TokenTypeEnum.Color,
+          value: { type: 'color', format: 'hex', value: '#ca2026ff' },
+          source: { adapter: 'supernova', originalId: 'actionColorRef', originalType: 'Color' },
+        });
+      });
+
+      it('rounds channels and alpha like Supernova does', () => {
+        const token = {
+          ...exampleColorsTokens.get('actionColorRef'),
+          value: {
+            color: { r: 12.6, g: 99.4, b: 254.5, referencedTokenId: null },
+            opacity: { unit: Unit.raw, measure: 0.333, referencedTokenId: null },
+            referencedTokenId: null,
+          },
+        } as unknown as ColorToken;
+
+        expect(mapToken(token, exampleGroups)?.value).toEqual({ type: 'color', format: 'hex', value: '#0d63ff55' });
+      });
+
+      it('maps an alias to a reference that keeps the already computed value', () => {
+        const token = {
+          ...exampleColorsTokens.get('actionColorRef'),
+          value: { ...(exampleColorsTokens.get('actionColorRef') as ColorToken).value, referencedTokenId: 'primary' },
+        } as unknown as ColorToken;
+
+        expect(mapToken(token, exampleGroups)?.value).toEqual({
+          type: 'reference',
+          tokenId: 'primary',
+          resolved: { type: 'color', format: 'hex', value: '#ca2026ff' },
+        });
+      });
+    });
+
+    describe('shadow tokens', () => {
+      it('maps shadow layers to a composite keyed by layer index', () => {
+        const token = exampleShadowTokens.get('shadowRef') as ShadowToken;
+
+        const result = mapToken(token, exampleGroups);
+
+        expect(result).toMatchObject({ id: 'shadowRef', type: TokenTypeEnum.Shadow });
+        expect(result?.value).toEqual({
+          type: 'composite',
+          value: {
+            '0': {
+              type: 'composite',
+              value: {
+                inset: { type: 'boolean', value: false },
+                x: { type: 'number', value: 0, unit: 'px' },
+                y: { type: 'number', value: 2, unit: 'px' },
+                blur: { type: 'number', value: 8, unit: 'px' },
+                spread: { type: 'number', value: 0, unit: 'px' },
+                // the layer's own opacity (0.15) overrides the color's (1)
+                color: { type: 'color', format: 'hex', value: '#00000026' },
+              },
+            },
+          },
+        });
+      });
+
+      it('maps an inner shadow layer to inset', () => {
+        const [layer] = (exampleShadowTokens.get('shadowRef') as ShadowToken).value;
+        const token = {
+          ...exampleShadowTokens.get('shadowRef'),
+          value: [{ ...layer, type: ShadowType.inner }],
+        } as unknown as ShadowToken;
+
+        const mapped = mapToken(token, exampleGroups)?.value;
+
+        expect(mapped).toMatchObject({
+          value: { '0': { value: { inset: { type: 'boolean', value: true } } } },
+        });
+      });
+    });
+
+    describe('gradient tokens', () => {
+      it('maps gradient layers to a composite keyed by layer index', () => {
+        const token = exampleGradientTokens.get('gradientRef') as GradientToken;
+
+        const result = mapToken(token, exampleGroups);
+
+        expect(result).toMatchObject({ id: 'gradientRef', type: TokenTypeEnum.Gradient });
+        expect(result?.value).toEqual({
+          type: 'composite',
+          value: {
+            '0': {
+              type: 'composite',
+              value: {
+                type: { type: 'string', value: 'linear' },
+                from: {
+                  type: 'composite',
+                  value: {
+                    x: { type: 'number', value: 0.2058823534702224 },
+                    y: { type: 'number', value: 0.4999999778582067 },
+                  },
+                },
+                to: {
+                  type: 'composite',
+                  value: {
+                    x: { type: 'number', value: 0.999999947627349 },
+                    y: { type: 'number', value: 0.4999999728606128 },
+                  },
+                },
+                stops: {
+                  type: 'composite',
+                  value: {
+                    '0': {
+                      type: 'composite',
+                      value: {
+                        position: { type: 'number', value: 0 },
+                        color: { type: 'color', format: 'hex', value: '#ffffffff' },
+                      },
+                    },
+                    '1': {
+                      type: 'composite',
+                      value: {
+                        position: { type: 'number', value: 1 },
+                        color: { type: 'color', format: 'hex', value: '#ffffff00' },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        });
+      });
+
+      it.each([
+        [GradientType.radial, 'radial'],
+        [GradientType.angular, 'angular'],
+      ])('maps a %s gradient layer', (nativeType, type) => {
+        const [layer] = (exampleGradientTokens.get('gradientRef') as GradientToken).value;
+        const token = {
+          ...exampleGradientTokens.get('gradientRef'),
+          value: [{ ...layer, type: nativeType }],
+        } as unknown as GradientToken;
+
+        expect(mapToken(token, exampleGroups)?.value).toMatchObject({
+          value: { '0': { value: { type: { type: 'string', value: type } } } },
+        });
+      });
+
+      it('maps a layer that aliases another gradient to a reference', () => {
+        const [layer] = (exampleGradientTokens.get('gradientRef') as GradientToken).value;
+        const token = {
+          ...exampleGradientTokens.get('gradientRef'),
+          value: [{ ...layer, referencedTokenId: 'other-gradient' }],
+        } as unknown as GradientToken;
+
+        expect(mapToken(token, exampleGroups)?.value).toMatchObject({
+          value: { '0': { type: 'reference', tokenId: 'other-gradient', resolved: { type: 'composite' } } },
+        });
+      });
     });
 
     it('returns an empty group path when the parent group cannot be found', () => {

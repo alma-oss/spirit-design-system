@@ -16,6 +16,8 @@ import {
   TokenGroup,
   TokenType,
 } from '@supernovaio/sdk-exporters';
+import { createSupernovaTokenIndex } from '../adapters/supernova/tokenIndex';
+import type { TokenIndex } from '../core/types';
 import {
   addEmptyLineBetweenTokenGroups,
   cssVariableReference,
@@ -35,7 +37,7 @@ import {
 
 export const tokenToStyleByType = (
   token: Token,
-  mappedTokens: Map<string, unknown>,
+  tokenIndex: TokenIndex,
   tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
   hasParentPrefix: boolean,
@@ -48,7 +50,7 @@ export const tokenToStyleByType = (
     hasJsOutput,
     fontSizeBaseMap,
     tokenPrefix,
-    mappedTokens,
+    tokenIndex,
   };
 
   switch (token.tokenType) {
@@ -117,17 +119,11 @@ export const generateStylesFromTokens = (
   fontSizeBaseMap: FontSizeBaseMap = createDefaultFontSizeBaseMap(),
 ): string => {
   const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+  // Temporary: replace with `createTokenIndex(collection.tokens)` once the generators read a `TokenCollection`
+  const tokenIndex = createSupernovaTokenIndex(mappedTokens, tokenGroups);
 
   const cssTokens = sortedTokens.map((token) => ({
-    css: tokenToStyleByType(
-      token,
-      mappedTokens,
-      tokenGroups,
-      tokenPrefix,
-      hasParentPrefix,
-      hasJsOutput,
-      fontSizeBaseMap,
-    ),
+    css: tokenToStyleByType(token, tokenIndex, tokenGroups, tokenPrefix, hasParentPrefix, hasJsOutput, fontSizeBaseMap),
     parentGroupId: token.parentGroupId,
   }));
 

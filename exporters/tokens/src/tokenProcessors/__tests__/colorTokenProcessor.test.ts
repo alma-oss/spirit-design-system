@@ -1,5 +1,6 @@
 import { ColorToken, TokenGroup } from '@supernovaio/sdk-exporters';
 import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
+import { createTokenIndex } from '../../core/tokenIndex';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processColorToken } from '../colorTokenProcessor';
@@ -9,7 +10,7 @@ jest.mock('../../../config', () => ({
 }));
 
 const tokenGroups: Array<TokenGroup> = exampleGroups;
-const mappedTokens: Map<string, unknown> = new Map();
+const tokenIndex = createTokenIndex([]);
 
 describe('colorTokenProcessor', () => {
   describe('processColorToken', () => {
@@ -19,7 +20,7 @@ describe('colorTokenProcessor', () => {
         tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: false,
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processColorToken(token, ctx);
@@ -34,7 +35,7 @@ describe('colorTokenProcessor', () => {
         tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: true,
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processColorToken(token, ctx);

@@ -1,13 +1,32 @@
 import {
+  type ColorToken,
+  type ColorTokenValue,
+  type GradientToken,
+  type GradientTokenValue,
+  GradientType,
+  type ShadowToken,
+  type ShadowTokenValue,
+  ShadowType,
   type StringToken,
   type Token,
   type TokenGroup as SupernovaTokenGroup,
   TokenType,
   type Unit,
 } from '@supernovaio/sdk-exporters';
-import { CSSHelper } from '@supernovaio/export-helpers';
+import { PX_UNIT } from '../../../constants';
 import { getDeviceAlias } from '../../../helpers/deviceHelpers';
-import { type DesignToken, type TokenMetadata, type SourceMetadata, TokenTypeEnum } from '../../../core/types';
+import { unitToCss } from '../../../helpers/unitHelper';
+import {
+  type ColorValue,
+  type CompositeValue,
+  type DesignToken,
+  type NumberValue,
+  type ReferenceValue,
+  type TokenMetadata,
+  type TokenValue,
+  type SourceMetadata,
+  TokenTypeEnum,
+} from '../../../core/types';
 
 /**
  * Normalizes a Supernova unit enum value (e.g. `Unit.pixels`, "Pixels") to
@@ -18,8 +37,7 @@ import { type DesignToken, type TokenMetadata, type SourceMetadata, TokenTypeEnu
  *
  * @param unit
  */
-const normalizeUnit = (unit: unknown): string | undefined =>
-  unit === undefined ? undefined : CSSHelper.unitToCSS(unit as Unit);
+const normalizeUnit = (unit: unknown): string | undefined => (unit === undefined ? undefined : unitToCss(unit as Unit));
 
 /** Numeric-value token whose measure/unit live directly on `token.value` (dimension, radius, space, size, fontSize, lineHeight, letterSpacing, borderWidth). */
 type NumericValueToken = Token & { value?: { measure: number; unit: unknown } };
@@ -57,18 +75,31 @@ const buildSource = (token: Token): SourceMetadata => ({
   originalType: token.tokenType,
 });
 
-const mapStringToken = (token: StringToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken => ({
+/**
+ * Builds the `DesignToken` envelope every mapper shares; each mapper only decides the type and the value.
+ *
+ * @param token
+ * @param tokenGroups
+ * @param type
+ * @param value
+ */
+const buildDesignToken = (
+  token: Token,
+  tokenGroups: Array<SupernovaTokenGroup>,
+  type: TokenTypeEnum,
+  value: TokenValue,
+): DesignToken => ({
   id: token.id,
   name: token.name,
-  type: TokenTypeEnum.String,
-  value: {
-    type: 'string',
-    value: token.value.text,
-  },
+  type,
+  value,
   description: token.description || undefined,
   metadata: buildMetadata(token, tokenGroups),
   source: buildSource(token),
 });
+
+const mapStringToken = (token: StringToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken =>
+  buildDesignToken(token, tokenGroups, TokenTypeEnum.String, { type: 'string', value: token.value.text });
 
 /**
  * Maps a numeric-value token. Returns `null` when the measure is missing,
@@ -90,19 +121,11 @@ const mapNumericToken = (
     return null;
   }
 
-  return {
-    id: token.id,
-    name: token.name,
-    type,
-    value: {
-      type: 'number',
-      value: measure,
-      unit: normalizeUnit(token.value?.unit),
-    },
-    description: token.description || undefined,
-    metadata: buildMetadata(token, tokenGroups),
-    source: buildSource(token),
-  };
+  return buildDesignToken(token, tokenGroups, type, {
+    type: 'number',
+    value: measure,
+    unit: normalizeUnit(token.value?.unit),
+  });
 };
 
 /**
@@ -123,23 +146,123 @@ const mapBorderToken = (
     return null;
   }
 
-  return {
-    id: token.id,
-    name: token.name,
-    type: TokenTypeEnum.Border,
-    value: {
-      type: 'number',
-      value: measure,
-      unit: normalizeUnit(token.value?.width?.unit),
-    },
-    description: token.description || undefined,
-    metadata: buildMetadata(token, tokenGroups),
-    source: buildSource(token),
-  };
+  return buildDesignToken(token, tokenGroups, TokenTypeEnum.Border, {
+    type: 'number',
+    value: measure,
+    unit: normalizeUnit(token.value?.width?.unit),
+  });
 };
 
+const HEX_RADIX = 16;
+const HEX_CHANNEL_LENGTH = 2;
+const MAX_CHANNEL = 255;
+
+const toHexChannel = (channel: number): string =>
+  Math.round(channel).toString(HEX_RADIX).padStart(HEX_CHANNEL_LENGTH, '0');
+
 /**
- * Maps a Supernova token to the internal model. Only `string` tokens, `border`,
+ * Wraps a value in a reference when the native value points at another token, keeping the value the source already
+ * computed as `resolved`. The processed token already carries its computed (theme-applied) value, whereas the token
+ * map references are looked up in holds the untouched originals, so that value must win over the referenced token's
+ * own one.
+ *
+ * @param referencedTokenId
+ * @param value
+ */
+const withReference = (referencedTokenId: string | null | undefined, value: TokenValue): TokenValue =>
+  referencedTokenId
+    ? ({ type: 'reference', tokenId: referencedTokenId, resolved: value } satisfies ReferenceValue)
+    : value;
+
+/**
+ * Maps a native color to a `hex` color with alpha (`#rrggbbaa`) - the one format every color of this exporter is
+ * rendered from, so nothing is lost. Channels and alpha are rounded the way Supernova's own hex formatting does.
+ *
+ * @param color
+ * @param opacity - Overrides the color's own opacity (a shadow layer carries a separate one)
+ */
+const mapColorValue = (color: ColorTokenValue, opacity: number = color.opacity.measure): TokenValue => {
+  const { r, g, b } = color.color;
+  const value: ColorValue = {
+    type: 'color',
+    format: 'hex',
+    value: `#${toHexChannel(r)}${toHexChannel(g)}${toHexChannel(b)}${toHexChannel(MAX_CHANNEL * opacity)}`,
+  };
+
+  return withReference(color.referencedTokenId, value);
+};
+
+const mapNumber = (value: number, unit?: string): NumberValue => ({ type: 'number', value, unit });
+
+const mapPoint = ({ x, y }: { x: number; y: number }): CompositeValue => ({
+  type: 'composite',
+  value: { x: mapNumber(x), y: mapNumber(y) },
+});
+
+/**
+ * Layers (of a shadow or a gradient) become a composite keyed by layer index.
+ *
+ * @param layers
+ */
+const mapLayers = (layers: TokenValue[]): CompositeValue => ({
+  type: 'composite',
+  value: Object.fromEntries(layers.map((layer, layerIndex) => [String(layerIndex), layer])),
+});
+
+const mapShadowLayer = (layer: ShadowTokenValue): TokenValue =>
+  withReference(layer.referencedTokenId, {
+    type: 'composite',
+    value: {
+      inset: { type: 'boolean', value: layer.type === ShadowType.inner },
+      x: mapNumber(layer.x, PX_UNIT),
+      y: mapNumber(layer.y, PX_UNIT),
+      blur: mapNumber(layer.radius, PX_UNIT),
+      spread: mapNumber(layer.spread, PX_UNIT),
+      color: mapColorValue(layer.color, layer.opacity?.measure),
+    },
+  });
+
+const GRADIENT_TYPES: Partial<Record<GradientType, string>> = {
+  [GradientType.linear]: 'linear',
+  [GradientType.radial]: 'radial',
+  [GradientType.angular]: 'angular',
+};
+
+const mapGradientLayer = (layer: GradientTokenValue): TokenValue =>
+  withReference(layer.referencedTokenId, {
+    type: 'composite',
+    value: {
+      // An unknown native type renders as linear, same as Supernova's own helper does.
+      type: { type: 'string', value: GRADIENT_TYPES[layer.type] ?? 'linear' },
+      from: mapPoint(layer.from),
+      to: mapPoint(layer.to),
+      stops: mapLayers(
+        layer.stops.map((stop) => ({
+          type: 'composite',
+          value: { position: mapNumber(stop.position), color: mapColorValue(stop.color) },
+        })),
+      ),
+    },
+  });
+
+/**
+ * Maps a `color` token to a `hex` color value; shadows and gradients map to composites (see `formatShadowValue` /
+ * `formatGradientValue` for the shape). A native `referencedTokenId` becomes a reference.
+ *
+ * @param token
+ * @param tokenGroups
+ */
+const mapColorToken = (token: ColorToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken =>
+  buildDesignToken(token, tokenGroups, TokenTypeEnum.Color, mapColorValue(token.value));
+
+const mapShadowToken = (token: ShadowToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken =>
+  buildDesignToken(token, tokenGroups, TokenTypeEnum.Shadow, mapLayers(token.value.map(mapShadowLayer)));
+
+const mapGradientToken = (token: GradientToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken =>
+  buildDesignToken(token, tokenGroups, TokenTypeEnum.Gradient, mapLayers(token.value.map(mapGradientLayer)));
+
+/**
+ * Maps a Supernova token to the internal model. Only `string`, `color`, `shadow`, `gradient` tokens, `border`,
  * and the numeric types listed in `NUMERIC_TOKEN_TYPES` are supported so far -
  * other types return `null` and are filtered out by the adapter, the same way
  * `stylesGenerator.tokenToStyleByType` silently skips types it doesn't have a
@@ -156,6 +279,18 @@ export const mapToken = (token: Token, tokenGroups: Array<SupernovaTokenGroup>):
 
   if (token.tokenType === TokenType.border) {
     return mapBorderToken(token, tokenGroups);
+  }
+
+  if (token.tokenType === TokenType.color) {
+    return mapColorToken(token as ColorToken, tokenGroups);
+  }
+
+  if (token.tokenType === TokenType.shadow) {
+    return mapShadowToken(token as ShadowToken, tokenGroups);
+  }
+
+  if (token.tokenType === TokenType.gradient) {
+    return mapGradientToken(token as GradientToken, tokenGroups);
   }
 
   const numericType = NUMERIC_TOKEN_TYPES[token.tokenType];
