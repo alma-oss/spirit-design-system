@@ -7,6 +7,7 @@ import {
   TokenGroup,
   TokenType,
 } from '@supernovaio/sdk-exporters';
+import { createTokenIndex } from '../../core/tokenIndex';
 import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
 import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGradientTokens } from '../../../tests/fixtures/exampleGradientTokens';
@@ -24,6 +25,7 @@ import {
 import { type FontSizeBaseMap } from '../../helpers/unitHelper';
 
 const mappedTokens: Map<string, Token> = new Map([]);
+const tokenIndex = createTokenIndex([]);
 const tokenGroups: Array<TokenGroup> = exampleGroups;
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
   ['mobile', 14],
@@ -162,7 +164,7 @@ describe('stylesGenerator', () => {
         const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
         const styles = tokenToStyleByType(
           token,
-          mappedTokens,
+          tokenIndex,
           tokenGroups,
           tokenPrefix,
           hasParentPrefix,

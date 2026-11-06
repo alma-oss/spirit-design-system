@@ -1,5 +1,6 @@
 import { GradientToken, TokenGroup } from '@supernovaio/sdk-exporters';
 import { exampleGradientTokens } from '../../../tests/fixtures/exampleGradientTokens';
+import { createTokenIndex } from '../../core/tokenIndex';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processGradientToken } from '../gradientTokenProcessor';
@@ -9,7 +10,7 @@ jest.mock('../../../config', () => ({
 }));
 
 const tokenGroups: Array<TokenGroup> = exampleGroups;
-const mappedTokens: Map<string, unknown> = new Map();
+const tokenIndex = createTokenIndex([]);
 
 describe('gradientTokenProcessor', () => {
   describe('processGradientToken', () => {
@@ -20,7 +21,7 @@ describe('gradientTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processGradientToken(token, ctx);
@@ -36,7 +37,7 @@ describe('gradientTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: true,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processGradientToken(token, ctx);
@@ -51,7 +52,7 @@ describe('gradientTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processGradientToken(token, ctx);
@@ -66,7 +67,7 @@ describe('gradientTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processGradientToken(token, ctx);
@@ -81,7 +82,7 @@ describe('gradientTokenProcessor', () => {
         hasParentPrefix: true,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
       };
 
       const result = processGradientToken(token, ctx);
