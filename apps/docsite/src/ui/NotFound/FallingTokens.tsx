@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element -- decorative static SVG and PNG images from the public folder */
 
-import { Lottie } from 'lottie-react';
+import { Lottie, type LottieHandle } from 'lottie-react';
 import { useEffect, useRef, useState } from 'react';
 import './FallingTokens.scss';
 
@@ -21,6 +21,8 @@ const CEILING_OFFSET = 56;
 const FULL_SIZE_WIDTH = 640;
 // The cards can be moved only by a mouse on a screen that is not a phone. On a phone they just fall and stay.
 const DRAG_QUERY = '(pointer: fine) and (min-width: 48rem)';
+// The first frame of the confetti is empty (the layers start at frame 1), so users who prefer reduced motion get this one.
+const CONFETTI_STILL_FRAME = 24;
 
 // A copy of the array in a random order (Fisher–Yates), so the cards fall in a different order each time.
 const shuffle = <T,>(items: T[]) => {
@@ -37,10 +39,11 @@ const shuffle = <T,>(items: T[]) => {
 /**
  * Cards with design tokens that fall to the bottom of the section and pile up there.
  * The physics runs on Matter.js, which is loaded lazily by a dynamic import, so other pages do not get it in their bundle.
- * Users who prefer reduced motion do not load it at all, they get the cards lying still and the confetti stopped.
+ * Users who prefer reduced motion do not load it at all, they get the cards lying still and the confetti stopped on a still frame.
  */
 const FallingTokens = () => {
   const stageRef = useRef<HTMLDivElement>(null);
+  const lottieRef = useRef<LottieHandle>(null);
   // Unknown until the component is mounted, so the server and the first client render stay the same.
   const [isMotionAllowed, setIsMotionAllowed] = useState<boolean | undefined>(undefined);
 
@@ -82,6 +85,9 @@ const FallingTokens = () => {
         rowHeight = Math.max(rowHeight, fullHeight * scale);
       });
 
+      // The scene grows to fit all the rows, otherwise the upper ones would end up outside of it (on a narrow screen).
+      stage.style.minHeight = `${rows.length * (rowHeight + CARD_GAP / 2)}px`;
+
       rows.forEach((row, rowIndex) => {
         const y = stage.clientHeight - (rows.length - rowIndex) * (rowHeight + CARD_GAP / 2);
         row.forEach(({ el, x: left, fullWidth, fullHeight }) => {
@@ -98,9 +104,17 @@ const FallingTokens = () => {
           return;
         }
 
-        const resizeObserver = new ResizeObserver(layoutStatically);
+        // The layout changes the height of the scene, so it runs in the next frame, not inside of the observer callback.
+        let frameId = 0;
+        const resizeObserver = new ResizeObserver(() => {
+          cancelAnimationFrame(frameId);
+          frameId = requestAnimationFrame(layoutStatically);
+        });
         resizeObserver.observe(stage);
-        stopPhysics = () => resizeObserver.disconnect();
+        stopPhysics = () => {
+          cancelAnimationFrame(frameId);
+          resizeObserver.disconnect();
+        };
       });
     };
 
@@ -162,7 +176,7 @@ const FallingTokens = () => {
 
       // The cards start in rows above the section, so they do not overlap. The cards of each row are spread over the
       // whole width, so they land next to each other and do not pile up on one side.
-      const scale = getScale();
+      let scale = getScale();
       const rows: { el: HTMLElement; width: number; height: number; fullWidth: number; fullHeight: number }[][] = [[]];
       let rowWidth = 0;
       shuffle(getCards()).forEach((el) => {
@@ -235,6 +249,7 @@ const FallingTokens = () => {
       }
 
       let calmFrames = 0;
+      let isRunning = true;
       Events.on(engine, 'afterUpdate', () => {
         items.forEach(({ el, body, fullWidth, fullHeight }) => {
           if (Math.abs(body.angle) > MAX_ANGLE) {
@@ -257,11 +272,53 @@ const FallingTokens = () => {
 
           if (calmFrames > 60) {
             Runner.stop(runner);
+            isRunning = false;
           }
         }
       });
 
-      const resizeObserver = new ResizeObserver(buildWalls);
+      // The scene changed its size (the window was resized or the device rotated). The walls move, the cards are scaled
+      // with the scene and kept inside of it, and the simulation is resumed if it has already stopped.
+      let stageWidth = stage.clientWidth;
+      let stageHeight = stage.clientHeight;
+      const refit = () => {
+        const width = stage.clientWidth;
+        const height = stage.clientHeight;
+
+        if (width === stageWidth && height === stageHeight) {
+          return;
+        }
+
+        stageWidth = width;
+        stageHeight = height;
+        buildWalls();
+
+        const nextScale = getScale();
+        const ratio = nextScale / scale;
+        scale = nextScale;
+
+        items.forEach(({ body }) => {
+          if (ratio !== 1) {
+            Body.scale(body, ratio, ratio);
+          }
+
+          const halfWidth = (body.bounds.max.x - body.bounds.min.x) / 2;
+          const halfHeight = (body.bounds.max.y - body.bounds.min.y) / 2;
+          Body.setPosition(body, {
+            x: Math.min(Math.max(body.position.x, halfWidth), width - halfWidth),
+            y: Math.min(body.position.y, height - halfHeight),
+          });
+        });
+
+        calmFrames = 0;
+
+        if (!isRunning) {
+          isRunning = true;
+          Runner.run(runner, engine);
+        }
+      };
+
+      const resizeObserver = new ResizeObserver(refit);
       resizeObserver.observe(stage);
 
       Runner.run(runner, engine);
@@ -456,12 +513,16 @@ const FallingTokens = () => {
       <div className="FallingTokens__card FallingTokens__card--column FallingTokens__card--motion" data-token-card>
         {/* The animation has an empty margin, so it is drawn larger than its box and cropped by it. */}
         <div className="FallingTokens__lottieBox">
-          {/* Users who prefer reduced motion get the still first frame. */}
+          {/* The confetti plays once. Users who prefer reduced motion get a still frame with the confetti in the air. */}
           {isMotionAllowed !== undefined && (
             <Lottie
+              lottieRef={lottieRef}
               src="/lottie/confetti.json"
               autoplay={isMotionAllowed}
-              loop={isMotionAllowed}
+              loop={false}
+              subscriptions={
+                isMotionAllowed ? undefined : { ready: () => lottieRef.current?.seek(CONFETTI_STILL_FRAME) }
+              }
               className="FallingTokens__lottie"
             />
           )}
