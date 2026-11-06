@@ -7,6 +7,9 @@ import { ToolbarContextProvider, useStyleProps, useToolbarAria, useToolbarState 
 import { type ForwardRefComponent, type SpiritToolbarProps } from '../../types';
 import { mergeStyleProps } from '../../utils';
 
+// The list and its items are presentational, so they are not announced on top of the toolbar.
+const PRESENTATION_PROPS = { role: 'presentation' };
+
 const _Toolbar = (props: SpiritToolbarProps, ref: ForwardedRef<HTMLDivElement>) => {
   const { children, onFocus, onKeyDown, orientation = Direction.HORIZONTAL, ...restProps } = props;
   const toolbarRef = useRef<HTMLDivElement | null>(null);
@@ -36,8 +39,8 @@ const _Toolbar = (props: SpiritToolbarProps, ref: ForwardedRef<HTMLDivElement>) 
       <ContextPropsProvider
         value={{
           // The Toolbar owns the layout and the ARIA of the Navigation inside it.
-          toolbar: { direction: orientation, elementType: 'div', listProps: { role: 'presentation' } },
-          toolbarItem: { role: 'presentation' },
+          toolbar: { direction: orientation, elementType: 'div', listProps: PRESENTATION_PROPS },
+          toolbarItem: PRESENTATION_PROPS,
         }}
       >
         <ToolbarContextProvider value={contextValue}>{children}</ToolbarContextProvider>
