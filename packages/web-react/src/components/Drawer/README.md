@@ -154,7 +154,24 @@ By default it has no inner spacing. Set the `hasSpacing` prop to apply inner spa
 <DrawerPanelBody hasSpacing>{/* Drawer content goes here */}</DrawerPanelBody>
 ```
 
-👉 For examples with `Navigation` content inside `DrawerPanelBody`, see the [Header][header-readme] component.
+👉 For examples with `Navigation` content inside `DrawerPanelBody`, see the [Header][header] component.
+
+### Scrolling with ScrollView
+
+To make content overflow more obvious to users, you can wrap the `DrawerPanelBody` in a [ScrollView][scroll-view]
+that takes over the responsibility for scrolling and provides visual overflow decorators.
+
+Wrap `DrawerPanelBody`, not the other way around. This way the spacing set by `hasSpacing` stays inside
+the `ScrollView` and scrolls together with the content, and the scroll events are not intercepted by `DrawerPanelBody`.
+
+```tsx
+<DrawerPanel>
+  <DrawerPanelHeader>…</DrawerPanelHeader>
+  <ScrollView overflowDecorators="borders">
+    <DrawerPanelBody hasSpacing>{/* Long drawer content goes here */}</DrawerPanelBody>
+  </ScrollView>
+</DrawerPanel>
+```
 
 ### API
 
@@ -221,8 +238,9 @@ export const Example = () => {
 ```
 
 [close-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/CloseButton/README.md
-[header-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md
+[header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Header/README.md
 [mdn-dialog-element]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+[scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/ScrollView/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
