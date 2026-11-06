@@ -40,6 +40,50 @@ it will insert a gap between them.
 
 ℹ️ Don't forget to add the `aria-label` attribute to the `Navigation` component for correct accessible title.
 
+### Toolbar
+
+Use `role="toolbar"` for three or more actions that stay visible, for example the actions for the document being edited.
+Do not use it for one or two controls, or for site navigation.
+
+Put the role on the `.Navigation` root, and use a `div` instead of `nav`. The `toolbar` role is not allowed on `nav`.
+Set `aria-orientation` to match the direction. Give the `ul` and `li` `role="presentation"`, so assistive technologies
+do not announce them as a list as well as a toolbar.
+
+In React, wrap the Navigation in [`Toolbar`][web-react-toolbar]. That component owns the role, the name, and the keyboard
+interaction. The Navigation is only the layout.
+
+```html
+<div class="Navigation Navigation--vertical" role="toolbar" aria-label="CV actions" aria-orientation="vertical">
+  <ul role="presentation">
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <a href="#" class="NavigationAction NavigationAction--pill" tabindex="0">Preview</a>
+    </li>
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <button type="button" class="NavigationAction NavigationAction--pill" tabindex="-1">Download</button>
+    </li>
+    <li class="NavigationItem NavigationItem--alignmentYCenter" role="presentation">
+      <button type="button" class="NavigationAction NavigationAction--pill" tabindex="-1">Share</button>
+    </li>
+  </ul>
+</div>
+```
+
+> **JS interaction is not part of Spirit.** There is a demo-only example showing one possible implementation
+> of the toolbar [keyboard interaction][apg-toolbar]. In your project, implement it to match your own
+> requirements and framework:
+
+- **Tab** moves focus into and out of the toolbar. The toolbar is a single Tab stop and remembers the last focused
+  action.
+- **Arrow Left/Right** (horizontal) or **Arrow Up/Down** (vertical) move focus between actions and wrap around.
+  Left and Right are swapped in right-to-left layouts.
+- **Home/End** move focus to the first/last action.
+- **Enter** activates the focused action natively, **Space** activates buttons.
+
+ℹ️ The toolbar uses a roving tabindex. The active item has `tabindex="0"`, and the other items have `tabindex="-1"`.
+The items are interactive `NavigationAction`, `NavigationAvatar`, and `Button` elements. Disabled actions render as a
+`span` and are skipped. Other focusable content, such as a form field, stays its own Tab stop and keeps its own arrow
+keys.
+
 ## Navigation Item
 
 The `NavigationItem` is a container for a navigation action or any other action.
@@ -257,5 +301,7 @@ With Buttons and NavigationAvatar:
 </nav>
 ```
 
+[apg-toolbar]: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 [web-collapse]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Collapse/README.md
 [web-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
+[web-react-toolbar]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Toolbar/README.md

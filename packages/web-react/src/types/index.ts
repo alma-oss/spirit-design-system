@@ -55,6 +55,7 @@ export * from './textFieldBase';
 export * from './timeline';
 export * from './toast';
 export * from './toggle';
+export * from './toolbar';
 export * from './tooltip';
 export * from './truncate';
 export * from './validationText';

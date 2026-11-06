@@ -8,11 +8,13 @@ import NavigationAvatarBasic from './NavigationAvatarBasic';
 import NavigationAvatarWithDropdown from './NavigationAvatarWithDropdown';
 import NavigationAvatarWithLink from './NavigationAvatarWithLink';
 import NavigationHorizontal from './NavigationHorizontal';
+import NavigationHorizontalToolbar from './NavigationHorizontalToolbar';
 import NavigationHorizontalWithBoxAction from './NavigationHorizontalWithBoxAction';
 import NavigationHorizontalWithButtons from './NavigationHorizontalWithButtons';
 import NavigationHorizontalWithDropdown from './NavigationHorizontalWithDropdown';
 import NavigationHorizontalWithPillAction from './NavigationHorizontalWithPillAction';
 import NavigationVertical from './NavigationVertical';
+import NavigationVerticalToolbar from './NavigationVerticalToolbar';
 import NavigationVerticalWithBoxAction from './NavigationVerticalWithBoxAction';
 import NavigationVerticalWithBoxActionAndStartIcons from './NavigationVerticalWithBoxActionAndStartIcons';
 import NavigationVerticalWithButtons from './NavigationVerticalWithButtons';
@@ -49,6 +51,12 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Vertical Subnavigation: Open Parent and Selected Child" stackAlignment="stretch">
         <NavigationVerticalWithCollapse />
+      </DocsSection>
+      <DocsSection title="Horizontal Toolbar" stackAlignment="stretch">
+        <NavigationHorizontalToolbar />
+      </DocsSection>
+      <DocsSection title="Vertical Toolbar" stackAlignment="stretch">
+        <NavigationVerticalToolbar />
       </DocsSection>
       <DocsSection title="Horizontal Navigation with Pill NavigationAction" stackAlignment="stretch">
         <NavigationHorizontalWithPillAction />

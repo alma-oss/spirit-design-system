@@ -22,7 +22,7 @@
 // a component is missing, listed twice, misspelled, or out of order.
 
 export const COMPONENT_CATEGORIES: Record<string, string[]> = {
-  Actions: ['ActionGroup', 'Button', 'ButtonLink', 'CloseButton', 'ControlButton', 'Link', 'SplitButton'],
+  Actions: ['ActionGroup', 'Button', 'ButtonLink', 'CloseButton', 'ControlButton', 'Link', 'SplitButton', 'Toolbar'],
   'Data Display': ['Card', 'File', 'Item', 'PricingPlan', 'Timeline', 'UNSTABLE_Table'],
   Feedback: ['Alert', 'EmptyState', 'ProgressBar', 'Skeleton', 'Spinner', 'Toast'],
   'Form Parts': [

@@ -68,6 +68,7 @@ export * from './TextFieldBase';
 export * from './Timeline';
 export * from './Toast';
 export * from './Toggle';
+export * from './Toolbar';
 export * from './Tooltip';
 export * from './Truncate';
 export * from './UNSTABLE_Combobox';

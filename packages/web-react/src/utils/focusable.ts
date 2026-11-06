@@ -19,3 +19,13 @@ export const FOCUSABLE_SELECTOR =
  */
 export const getFocusableElements = (container: HTMLElement): HTMLElement[] =>
   Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
+
+/**
+ * Whether the element is hidden by the `hidden` attribute on itself or an ancestor, or by CSS
+ * (`display`, `visibility` or `content-visibility`). CSS is detected only where `checkVisibility` is supported.
+ *
+ * @param element - The element to check.
+ * @returns {boolean} Whether the element is hidden.
+ */
+export const isElementHidden = (element: HTMLElement): boolean =>
+  Boolean(element.closest('[hidden]')) || element.checkVisibility?.({ visibilityProperty: true }) === false;
