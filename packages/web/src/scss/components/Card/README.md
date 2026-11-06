@@ -661,8 +661,7 @@ the artwork:
     </h4>
     <p>Card content</p>
   </div>
-  <div class="CardFooterDivider" aria-hidden="true"></div>
-  <footer class="CardFooter CardFooter--hasDivider CardFooter--alignmentXLeft">
+  <footer class="CardFooter CardFooter--alignmentXLeft">
     <a href="#" class="Button Button--small Button--primary">Primary</a>
     <a href="#" class="Button Button--small Button--secondary">Secondary</a>
   </footer>

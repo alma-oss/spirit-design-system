@@ -86,7 +86,6 @@ const CardFooterDivider = () => (
         </Tag>
       </CardFooter>
     </Card>
-
   </Grid>
 );
 

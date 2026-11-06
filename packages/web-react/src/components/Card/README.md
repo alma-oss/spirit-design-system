@@ -686,7 +686,7 @@ the artwork:
     </CardTitle>
     <p>Card content</p>
   </CardBody>
-  <CardFooter hasDivider>
+  <CardFooter>
     <ButtonLink size="small">Primary</ButtonLink>
     <ButtonLink size="small">Secondary</ButtonLink>
   </CardFooter>
