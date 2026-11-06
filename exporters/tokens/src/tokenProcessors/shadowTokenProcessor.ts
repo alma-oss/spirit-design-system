@@ -1,8 +1,11 @@
 import { ShadowToken, TokenGroup } from '@supernovaio/sdk-exporters';
-import { ColorFormat, CSSHelper } from '@supernovaio/export-helpers';
+import type { TokenIndex } from '../core/types';
 import { formatTokenStyleByOutput, getTokenGroup, tokenVariableName } from '../helpers/tokenHelper';
 import { transformColorsToVariables, findAllHexColorsInStringAndNormalize } from '../helpers/colorHelper';
 import { formatLayerSuffix } from '../helpers/stringHelper';
+import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
+import { formatShadowValue } from '../formatters/cssValue';
+import { resolveTokenReferences } from '../transformations';
 import { replacePxWithRem } from '../formatters/unitFormatter';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { getFontSizeBaseForBreakpoint, type FontSizeBaseMap } from '../helpers/unitHelper';
@@ -12,7 +15,7 @@ type ShadowTokenProcessorContext = {
   hasParentPrefix: boolean;
   hasJsOutput: boolean;
   tokenPrefix: string;
-  mappedTokens: Map<string, unknown>;
+  tokenIndex: TokenIndex;
   fontSizeBaseMap: FontSizeBaseMap;
 };
 
@@ -82,19 +85,26 @@ export const transformShadowLengthsToVariables = (name: string, shadow: string, 
 /**
  * Processes shadow tokens (with length and color variable transformation and px->rem conversion).
  *
+ * Naming stays on the native token (it needs the SDK's `NamingHelper`). The value is read through the internal
+ * `DesignToken` model via the Supernova adapter's mapper; references between tokens are resolved by the
+ * `resolve-references` transformation rule through the model's token index (see #DS-2872).
+ *
  * @param shadowToken - The shadow token to process
- * @param ctx - Processing context with token groups, prefix, fontSizeBaseMap, and output options
+ * @param ctx - Processing context with token groups, token index, prefix, fontSizeBaseMap, and output options
  * @returns {string|null} Formatted token style string or null
  */
 export const processShadowToken = (shadowToken: ShadowToken, ctx: ShadowTokenProcessorContext): string | null => {
-  const { tokenGroups, hasParentPrefix, hasJsOutput, tokenPrefix, mappedTokens, fontSizeBaseMap } = ctx;
+  const { tokenGroups, hasParentPrefix, hasJsOutput, tokenPrefix, tokenIndex, fontSizeBaseMap } = ctx;
   const name = tokenVariableName(shadowToken, tokenGroups, hasParentPrefix);
-  let shadow = CSSHelper.shadowTokenValueToCSS(shadowToken.value, mappedTokens as unknown as Map<string, never>, {
-    allowReferences: true,
-    decimals: 3,
-    colorFormat: ColorFormat.hashHex8,
-    tokenToVariableRef: () => '',
-  });
+
+  const mappedToken = mapToken(shadowToken, tokenGroups);
+  if (!mappedToken) {
+    return null;
+  }
+
+  const designToken = resolveTokenReferences(mappedToken, tokenIndex);
+
+  let shadow = formatShadowValue(designToken.value);
 
   // add group name to the variable if it is not already in the name
   const groupName = hasParentPrefix ? undefined : getTokenGroup(shadowToken);

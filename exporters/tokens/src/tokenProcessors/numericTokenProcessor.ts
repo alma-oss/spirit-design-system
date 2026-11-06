@@ -11,11 +11,10 @@ import {
   TokenType,
   type Unit,
 } from '@supernovaio/sdk-exporters';
-import { CSSHelper } from '@supernovaio/export-helpers';
 import { formatTokenStyleByOutput, tokenVariableName } from '../helpers/tokenHelper';
 import { handleSpecialCase } from '../helpers/specialCaseHelper';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
-import { getFontSizeBaseForBreakpoint, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { getFontSizeBaseForBreakpoint, unitToCss, type FontSizeBaseMap } from '../helpers/unitHelper';
 import { formatUnitValue, type UnitFormatContext } from '../formatters/unitFormatter';
 import { FONT_SIZE_BASE } from '../constants';
 import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
@@ -161,7 +160,7 @@ export const processNumericToken = (
       transformed.value.type === 'number' ? formatNumberValue(transformed.value, specialCasedValue === 0) : undefined;
   } else {
     const value = handleSpecialCase(name, numericToken.value?.measure);
-    const unit = CSSHelper.unitToCSS(numericToken.value?.unit as Unit);
+    const unit = unitToCss(numericToken.value?.unit as Unit);
 
     formattedValue = formatMeasure(numericToken, tokenType, name, value, unit, baseFontSize);
   }

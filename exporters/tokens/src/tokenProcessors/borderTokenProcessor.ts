@@ -1,7 +1,7 @@
 import { BorderToken, BorderWidthToken, TokenGroup, type Unit } from '@supernovaio/sdk-exporters';
-import { CSSHelper } from '@supernovaio/export-helpers';
 import { formatTokenStyleByOutput, tokenVariableName } from '../helpers/tokenHelper';
 import { handleSpecialCase } from '../helpers/specialCaseHelper';
+import { unitToCss } from '../helpers/unitHelper';
 import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 
 type BorderTokenProcessorContext = {
@@ -33,7 +33,7 @@ export const processBorderToken = (
 
   let value: number | undefined;
   // The adapter normalizes the unit to CSS form already; the native fallback
-  // branches below still need CSSHelper to do that conversion themselves.
+  // branches below still need `unitToCss` to do that conversion themselves.
   let unit: string | undefined;
 
   if (mappedValue) {
@@ -41,10 +41,10 @@ export const processBorderToken = (
     unit = mappedValue.unit;
   } else if ('width' in borderToken.value && borderToken.value.width) {
     value = borderToken.value.width.measure;
-    unit = CSSHelper.unitToCSS(borderToken.value.width.unit);
+    unit = unitToCss(borderToken.value.width.unit);
   } else if ('measure' in borderToken.value) {
     value = borderToken.value.measure;
-    unit = borderToken.value.unit ? CSSHelper.unitToCSS(borderToken.value.unit as unknown as Unit) : undefined;
+    unit = borderToken.value.unit ? unitToCss(borderToken.value.unit as unknown as Unit) : undefined;
   }
 
   if (value === undefined) {

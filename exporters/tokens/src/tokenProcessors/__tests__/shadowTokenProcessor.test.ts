@@ -1,5 +1,6 @@
 import { ShadowToken, TokenGroup } from '@supernovaio/sdk-exporters';
 import { exampleShadowTokens } from '../../../tests/fixtures/exampleShadowTokens';
+import { createTokenIndex } from '../../core/tokenIndex';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processShadowToken, transformShadowLengthsToVariables } from '../shadowTokenProcessor';
@@ -10,7 +11,7 @@ jest.mock('../../../config', () => ({
 }));
 
 const tokenGroups: Array<TokenGroup> = exampleGroups;
-const mappedTokens: Map<string, unknown> = new Map();
+const tokenIndex = createTokenIndex([]);
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
   ['mobile', 14],
   ['tablet', 16],
@@ -49,7 +50,7 @@ describe('shadowTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
         fontSizeBaseMap,
       };
 
@@ -67,7 +68,7 @@ describe('shadowTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: true,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
         fontSizeBaseMap,
       };
 
@@ -85,7 +86,7 @@ describe('shadowTokenProcessor', () => {
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
         fontSizeBaseMap,
       };
 
@@ -101,7 +102,7 @@ describe('shadowTokenProcessor', () => {
         hasParentPrefix: true,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
-        mappedTokens,
+        tokenIndex,
         fontSizeBaseMap,
       };
 
