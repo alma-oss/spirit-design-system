@@ -60,7 +60,9 @@ not what is found:
 
 - **CLI** — a developer runs the review locally. This is the default.
 - **CI** — the review runs unattended. Detected when the `CI` or `GITHUB_ACTIONS` environment variable
-  is `true`, or when `--post` is set. Findings are attached to code lines and carry no `File:` line.
+  is `true`, or when `--post` is set. Findings posted as inline review comments carry no `File:` line
+  because the code line anchors them; in a report that is only printed or written to a file, every
+  finding keeps its `File:` location.
 
 `--cli` or `--ci` overrides the detection. `--post` with `--cli` stops with an error, because posted
 comments always use the CI rendering.
@@ -82,12 +84,13 @@ gh pr view <pr> --json number,title,body,baseRefName,headRefOid,files,commits,ur
 gh pr diff <pr>
 gh api repos/{owner}/{repo}/pulls/<pr>/comments --paginate    # inline review comments
 gh api repos/{owner}/{repo}/issues/<pr>/comments --paginate   # conversation comments
+gh api repos/{owner}/{repo}/pulls/<pr>/reviews --paginate     # review bodies
 gh api graphql -F owner={owner} -F repo={repo} -F pr=<pr> -f query='
   query($owner: String!, $repo: String!, $pr: Int!) {
     repository(owner: $owner, name: $repo) {
-      pullRequest(number: $pr) { reviewThreads(first: 100) { nodes { isResolved path line } } }
+      pullRequest(number: $pr) { reviewThreads(first: 100) { nodes { id isResolved path line comments(first: 1) { nodes { id body } } } } }
     }
-  }' --jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not)] | length'
+  }' --jq '.data.repository.pullRequest.reviewThreads.nodes'   # keep resolution state per thread
 git fetch origin +pull/<pr>/head:refs/remotes/origin/pr-<pr>   # PR head for git grep and file reads
 
 # Local branch mode
@@ -131,7 +134,7 @@ Review Brief
 - Jira: <DS-1234 — <n> criteria: <n> met, <n> partial, <n> missing | none found | unavailable>
 - Changed files: <count>, grouped by checklist area
 - Areas to apply: <checklist sections>
-- Prior comments: <count of unresolved threads> (PR mode)
+- Prior comments: <count of unresolved threads, counted from the thread records> (PR mode)
 ```
 
 **Jira.** Look for an issue key (`DS-1234`) in the PR body, branch name, and commit messages. When

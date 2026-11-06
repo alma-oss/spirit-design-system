@@ -7,6 +7,7 @@
  *        [--repo alma-oss/spirit-design-system]
  *
  * With `--since`, only PRs merged after that moment are fetched (for example the "Latest merged" value in `REVIEW.md`).
+ * All matching PRs are fetched in that case, so `--limit` applies to baseline runs only.
  */
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -22,7 +23,9 @@ const { values: args } = parseArgs({
   },
 });
 
-const LIMIT = Number(args.limit);
+// `--limit` samples a baseline run only. An incremental `--since` run must exhaust all matching PRs, because the
+// printed `Latest mergedAt` becomes the next checkpoint and any PR skipped here would never be mined.
+const LIMIT = args.since ? Number.POSITIVE_INFINITY : Number(args.limit);
 const MAX_BODY_LENGTH = 600;
 const MAX_BUFFER_BYTES = 256 * 1024 * 1024;
 

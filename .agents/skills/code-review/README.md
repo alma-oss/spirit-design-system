@@ -34,10 +34,10 @@ Without `--post`, nothing leaves your machine: the review is printed in the term
 The context decides how findings are rendered, not what is found. It is detected automatically, so you
 normally do not pass a flag:
 
-| Context | Detected when                                             | Rendering                                                                                  |
-| ------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| CLI     | Default, for a developer running the review locally       | Markdown grouped by file, each finding with `File:`, `Fix:`, and `Why:`                    |
-| CI      | `CI` or `GITHUB_ACTIONS` is `true`, or `--post` is passed | Comments attached to code lines, with a suggestion fence and a collapsed `<details>` block |
+| Context | Detected when                                             | Rendering                                                                                                                 |
+| ------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| CLI     | Default, for a developer running the review locally       | Markdown grouped by file, each finding with `File:`, `Fix:`, and `Why:`                                                   |
+| CI      | `CI` or `GITHUB_ACTIONS` is `true`, or `--post` is passed | Comments attached to code lines (`File:` kept when not posted), with a suggestion fence and a collapsed `<details>` block |
 
 Use `--cli` or `--ci` to override the detection, for example `--ci` to preview locally how a posted
 review will look. The CI rendering follows the template in `.github/copilot-instructions.md`.

@@ -94,8 +94,9 @@ line, give the verdict, and still print warnings.
 
 ## CI Rendering
 
-In CI, each finding is a review comment attached to the code line, so the `File:` line is not
-repeated. This is the same structure as the Finding Format in `.github/copilot-instructions.md`, so
+For findings posted as inline review comments, omit the `File:` line because the code line anchors them.
+For CI reports printed or written without `--post`, retain a `File: path:line` location for every finding.
+Otherwise use the structure below, based on the Finding Format in `.github/copilot-instructions.md`, so
 both reviewers look alike:
 
 - The ` ```suggestion ` fence comes first when a line-level fix exists. Nothing comes before it.

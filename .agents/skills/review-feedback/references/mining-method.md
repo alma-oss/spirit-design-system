@@ -35,7 +35,8 @@ node .agents/skills/review-feedback/scripts/mine-review-history.mjs --limit 200 
 ```
 
 Add `--since <date or ISO timestamp>` to fetch only PRs merged after that moment, for a periodic run
-(use the "Latest merged" value from `REVIEW.md`). The script prints the latest `mergedAt` it saw, so the
+(use the "Latest merged" value from `REVIEW.md`). A `--since` run ignores `--limit` and fetches every matching
+PR, so no PR is skipped before the new checkpoint. The script prints the latest `mergedAt` it saw, so the
 next run starts exactly where this one ended.
 
 The script writes `prs.json` (raw data) and `comments.md` (one line per human comment, grouped by
