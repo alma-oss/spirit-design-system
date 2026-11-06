@@ -43,7 +43,7 @@ Learn more about the [Dropdown][readme-dropdown] component in its documentation.
     <div class="DropdownPopover placement-bottom-start" data-spirit-placement="bottom-start" id="dropdown-1">
       <a href="#" class="Item Item--medium">
         <span class="Item__content" role="presentation">
-          <span class="Label Label--medium element-stretched">Information</span>
+          <span class="Label Label--base Label--medium element-stretched">Information</span>
         </span>
       </a>
     </div>

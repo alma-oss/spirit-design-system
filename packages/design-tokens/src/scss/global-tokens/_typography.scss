@@ -729,6 +729,156 @@ $label-xsmall: (
     ),
 ) !default;
 
+$label-large-base: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.125rem,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-medium-base: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1rem,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.25,
+    ),
+) !default;
+
+$label-small-base: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.875rem,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.1429,
+    ),
+) !default;
+
+$label-xlarge-base: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.25rem,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.4,
+    ),
+) !default;
+
+$label-xsmall-base: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.75rem,
+        font-style: normal,
+        font-weight: 600,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-large-lighter: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.125rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-medium-lighter: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.25,
+    ),
+) !default;
+
+$label-small-lighter: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.875rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.1429,
+    ),
+) !default;
+
+$label-xlarge-lighter: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.25rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.4,
+    ),
+) !default;
+
+$label-xsmall-lighter: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.75rem,
+        font-style: normal,
+        font-weight: 400,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-large-bolder: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.125rem,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.3333,
+    ),
+) !default;
+
+$label-medium-bolder: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1rem,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.25,
+    ),
+) !default;
+
+$label-small-bolder: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.875rem,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.1429,
+    ),
+) !default;
+
+$label-xlarge-bolder: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 1.25rem,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.4,
+    ),
+) !default;
+
+$label-xsmall-bolder: (
+    mobile: (
+        font-family: "'Inter', sans-serif",
+        font-size: 0.75rem,
+        font-style: normal,
+        font-weight: 700,
+        line-height: 1.3333,
+    ),
+) !default;
+
 $styles: (
     action-large: $action-large,
     action-medium: $action-medium,
@@ -782,4 +932,19 @@ $styles: (
     label-small: $label-small,
     label-xlarge: $label-xlarge,
     label-xsmall: $label-xsmall,
+    label-large-base: $label-large-base,
+    label-medium-base: $label-medium-base,
+    label-small-base: $label-small-base,
+    label-xlarge-base: $label-xlarge-base,
+    label-xsmall-base: $label-xsmall-base,
+    label-large-lighter: $label-large-lighter,
+    label-medium-lighter: $label-medium-lighter,
+    label-small-lighter: $label-small-lighter,
+    label-xlarge-lighter: $label-xlarge-lighter,
+    label-xsmall-lighter: $label-xsmall-lighter,
+    label-large-bolder: $label-large-bolder,
+    label-medium-bolder: $label-medium-bolder,
+    label-small-bolder: $label-small-bolder,
+    label-xlarge-bolder: $label-xlarge-bolder,
+    label-xsmall-bolder: $label-xsmall-bolder,
 ) !default;

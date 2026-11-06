@@ -2,6 +2,7 @@ import type { AriaRole, ElementType, ReactNode } from 'react';
 import { type InputPositions } from '../../constants';
 import {
   type FillVariantDictionaryType,
+  type FontWeightDictionaryType,
   type SizeExtendedDictionaryType,
   type SizesDictionaryType,
   type ValidationStatesDictionaryType,
@@ -53,6 +54,12 @@ export type FormFieldStyleProps = Pick<FormFieldContextValue, 'isDisabled'>;
 
 export type LabelStyleProps = FormFieldStyleProps &
   Pick<FormFieldContextValue, 'isLabelHidden' | 'isRequired'> & {
+    /**
+     * Label text weight.
+     *
+     * @default 'base'
+     */
+    fontWeight?: FontWeightDictionaryType;
     /** Whether the label should show a pointer cursor (e.g. next to Checkbox, Radio, Toggle). */
     hasPointerCursor?: boolean;
     /** Whether the label uses the element-stretched helper (item mode). */

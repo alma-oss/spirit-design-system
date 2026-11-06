@@ -1,7 +1,8 @@
 @use '@tokens' as tokens;
 @use '../../settings/dictionaries';
+@use '../../tools/tokens' as tokens-tools;
 
-$typography: tokens.$label-medium;
+$typography: tokens-tools.get-variable-if-exists('label-medium-base', tokens.$label-medium);
 $color-state-default: tokens.$form-field-label;
 $color-state-disabled: tokens.$disabled-content;
 $required-typography: tokens.$body-small-regular;
@@ -9,20 +10,74 @@ $required-margin-left: tokens.$space-200;
 $required-color: tokens.$form-field-danger;
 
 $size-dictionary: dictionaries.$size-extended;
-$size-config: (
+$size-config-base: (
     xsmall: (
-        typography: tokens.$label-xsmall,
+        typography: tokens-tools.get-variable-if-exists('label-xsmall-base', tokens.$label-xsmall),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-xsmall-bolder', tokens.$label-xsmall),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-xsmall-lighter', tokens.$label-xsmall),
     ),
     small: (
-        typography: tokens.$label-small,
+        typography: tokens-tools.get-variable-if-exists('label-small-base', tokens.$label-small),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-small-bolder', tokens.$label-small),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-small-lighter', tokens.$label-small),
     ),
     medium: (
-        typography: tokens.$label-medium,
+        typography: tokens-tools.get-variable-if-exists('label-medium-base', tokens.$label-medium),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-medium-bolder', tokens.$label-medium),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-medium-lighter', tokens.$label-medium),
     ),
     large: (
-        typography: tokens.$label-large,
+        typography: tokens-tools.get-variable-if-exists('label-large-base', tokens.$label-large),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-large-bolder', tokens.$label-large),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-large-lighter', tokens.$label-large),
     ),
     xlarge: (
-        typography: tokens.$label-xlarge,
+        typography: tokens-tools.get-variable-if-exists('label-xlarge-base', tokens.$label-xlarge),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-xlarge-bolder', tokens.$label-xlarge),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-xlarge-lighter', tokens.$label-xlarge),
+    ),
+);
+
+$size-config-lighter: (
+    xsmall: (
+        typography: tokens-tools.get-variable-if-exists('label-xsmall-lighter', tokens.$label-xsmall),
+    ),
+    small: (
+        typography: tokens-tools.get-variable-if-exists('label-small-lighter', tokens.$label-small),
+    ),
+    medium: (
+        typography: tokens-tools.get-variable-if-exists('label-medium-lighter', tokens.$label-medium),
+    ),
+    large: (
+        typography: tokens-tools.get-variable-if-exists('label-large-lighter', tokens.$label-large),
+    ),
+    xlarge: (
+        typography: tokens-tools.get-variable-if-exists('label-xlarge-lighter', tokens.$label-xlarge),
+    ),
+);
+
+$size-config-bolder: (
+    xsmall: (
+        typography: tokens-tools.get-variable-if-exists('label-xsmall-bolder', tokens.$label-xsmall),
+    ),
+    small: (
+        typography: tokens-tools.get-variable-if-exists('label-small-base', tokens.$label-small),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-small-bolder', tokens.$label-small),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-small-lighter', tokens.$label-small),
+    ),
+    medium: (
+        typography: tokens-tools.get-variable-if-exists('label-medium-base', tokens.$label-medium),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-medium-bolder', tokens.$label-medium),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-medium-lighter', tokens.$label-medium),
+    ),
+    large: (
+        typography: tokens-tools.get-variable-if-exists('label-large-base', tokens.$label-large),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-large-bolder', tokens.$label-large),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-large-lighter', tokens.$label-large),
+    ),
+    xlarge: (
+        typography: tokens-tools.get-variable-if-exists('label-xlarge-base', tokens.$label-xlarge),
+        typography-bolder: tokens-tools.get-variable-if-exists('label-xlarge-bolder', tokens.$label-xlarge),
+        typography-lighter: tokens-tools.get-variable-if-exists('label-xlarge-lighter', tokens.$label-xlarge),
     ),
 );

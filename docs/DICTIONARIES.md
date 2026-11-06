@@ -84,9 +84,10 @@ The Emphasis dictionary is **deprecated** for the `Heading` and `Text` component
 
 ### Font Weight
 
-| Dictionary  | Values                        | Code name  |
-| ----------- | ----------------------------- | ---------- |
-| Font Weight | `regular`, `semibold`, `bold` | FontWeight |
+| Dictionary               | Values                        | Code name  |
+| ------------------------ | ----------------------------- | ---------- |
+| Font Weight              | `base`, `lighter`, `bolder`   | FontWeight |
+| Font Weight (deprecated) | `regular`, `semibold`, `bold` | FontWeight |
 
 ### Gradient
 

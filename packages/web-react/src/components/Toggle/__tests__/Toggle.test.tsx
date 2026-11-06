@@ -158,6 +158,12 @@ describe('Toggle', () => {
     expect(validationRoot.querySelector('svg')).toBeInTheDocument();
   });
 
+  it('should set label font weight to lighter', () => {
+    render(<Toggle id="toggle-font-weight" label="Toggle Label" />);
+
+    expect(screen.getByText('Toggle Label')).toHaveClass('Label--lighter');
+  });
+
   it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
     render(<Toggle id="toggle-size" label="Toggle Label" size={size} />);
 
