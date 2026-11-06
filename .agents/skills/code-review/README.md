@@ -14,6 +14,7 @@ Invoke the skill from Claude Code or Cursor in the repository root:
 ```text
 /spirit:code-review                     # auto-detect: open PR → branch → staged → unstaged
 /spirit:code-review 3058                # review a GitHub PR (also #3058 or the PR URL)
+/spirit:code-review 3058 --post         # review the PR and post it as a single COMMENT review
 /spirit:code-review --local             # current branch vs origin/main
 /spirit:code-review --staged            # staged changes only
 /spirit:code-review --diff changes.diff # a unified diff file
