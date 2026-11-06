@@ -1,0 +1,272 @@
+@use '@alma-oss/spirit-web/src/scss/tools/typography';
+@use '@alma-oss/spirit-web/src/scss/tools/units';
+@use '@tokens' as tokens;
+@use '../../domains/homepage/ui/docsite-tokens' as docsite;
+
+// Cards with design tokens (Figma file 0rP28fqkiNA0lcy4cPM7nd, nodes 1143:6875 and 1152:2697).
+// The card chrome uses Spirit tokens. The demos inside the cards show colors and values of the tokens they are named
+// after, so those are raw values on purpose.
+
+// The scene for the physics, Matter.js sets the transform of the cards.
+.FallingTokens {
+    position: relative;
+
+    // Clips the cards at the sides and at the bottom, but lets the pile reach into the gap above the scene (`space-1300`).
+    // The cards waiting above the scene are still hidden.
+    clip-path: inset(calc(-1 * #{tokens.$space-1300}) 0 0 0);
+    width: 100%;
+    height: units.px-to-rem(400px);
+}
+
+.FallingTokens__card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    gap: tokens.$space-500;
+    align-items: center;
+    justify-content: center;
+    padding: tokens.$space-700;
+    overflow: hidden;
+    color: tokens.$text-secondary;
+    border: tokens.$border-width-100 solid tokens.$border-basic;
+    border-radius: tokens.$radius-400;
+    background-color: tokens.$background-primary;
+
+    // Hidden above the scene until the physics starts.
+    transform: translateY(-100vh);
+    user-select: none;
+    cursor: grab;
+
+    // Do not promote the cards to their own layer (`will-change`), rotated cards would be blurred.
+}
+
+.FallingTokens.is-dragging,
+.is-dragging .FallingTokens__card {
+    cursor: grabbing;
+}
+
+.FallingTokens__card--column {
+    flex-direction: column;
+}
+
+.FallingTokens__label {
+    @include typography.generate(tokens.$code-small-regular);
+
+    white-space: nowrap;
+}
+
+// The hero cards in the dark colors use the on-brand theme, so the label is white.
+.FallingTokens__label--onBrand {
+    color: tokens.$text-primary;
+}
+
+.FallingTokens__label--dark {
+    color: docsite.$falling-tokens-dark;
+}
+
+.FallingTokens__hex {
+    @include typography.generate(tokens.$body-xsmall-regular);
+
+    color: tokens.$text-tertiary;
+}
+
+.FallingTokens__img {
+    display: block;
+    pointer-events: none;
+}
+
+.FallingTokens__icon {
+    flex-shrink: 0;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+}
+
+// ----- Demos of the tokens -----
+
+.FallingTokens__radiusDemo {
+    box-sizing: border-box;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    border-top: units.px-to-rem(2px) solid docsite.$falling-tokens-demo-outline;
+    border-right: units.px-to-rem(2px) solid docsite.$falling-tokens-demo-outline;
+    background: linear-gradient(
+        225deg,
+        docsite.$falling-tokens-demo-background-start 0.83%,
+        docsite.$falling-tokens-demo-background-end 99.17%
+    );
+}
+
+.FallingTokens__radiusDemo--rounded {
+    border-top-right-radius: tokens.$radius-300;
+}
+
+.FallingTokens__radiusDemo--full {
+    border: units.px-to-rem(2px) solid docsite.$falling-tokens-demo-outline;
+    border-radius: tokens.$radius-full;
+}
+
+.FallingTokens__swatch {
+    flex-shrink: 0;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    border-radius: tokens.$radius-300;
+}
+
+.FallingTokens__swatch--gradient {
+    background: linear-gradient(docsite.$falling-tokens-gradient-start, docsite.$falling-tokens-gradient-end);
+}
+
+.FallingTokens__swatch--warning {
+    background-color: docsite.$falling-tokens-warning;
+}
+
+.FallingTokens__card--color {
+    flex-direction: column;
+    gap: tokens.$space-400;
+    padding: tokens.$space-600 tokens.$space-500;
+}
+
+.FallingTokens__swatchBar {
+    width: 100%;
+    height: units.px-to-rem(40px);
+    border-radius: tokens.$radius-300;
+}
+
+.FallingTokens__swatchBar--green {
+    background-color: docsite.$falling-tokens-green;
+}
+
+.FallingTokens__swatchBar--yellow {
+    background-color: docsite.$falling-tokens-yellow;
+}
+
+.FallingTokens__text {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.FallingTokens__text--centered {
+    align-self: center;
+    align-items: center;
+}
+
+.FallingTokens__card--space {
+    box-sizing: border-box;
+    height: units.px-to-rem(56px);
+}
+
+.FallingTokens__spaceDemo {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    border-right: units.px-to-rem(2px) solid docsite.$falling-tokens-space-edge;
+    border-left: units.px-to-rem(2px) solid docsite.$falling-tokens-space-edge;
+
+    // A solid fill instead of hatching, thin diagonal lines flickered when the card moved.
+    background-color: docsite.$falling-tokens-space-fill;
+}
+
+.FallingTokens__containerDemo {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    box-sizing: border-box;
+    width: units.px-to-rem(30px);
+    height: units.px-to-rem(30px);
+    padding: 0 tokens.$space-300;
+    border-right: units.px-to-rem(2px) solid docsite.$falling-tokens-container-edge;
+    border-left: units.px-to-rem(2px) solid docsite.$falling-tokens-container-edge;
+
+    &::before {
+        content: '';
+        flex: 1;
+        height: units.px-to-rem(16px);
+        background-color: docsite.$falling-tokens-container-fill;
+    }
+}
+
+.FallingTokens__gridDemo {
+    display: flex;
+    gap: tokens.$space-200;
+    box-sizing: border-box;
+    width: units.px-to-rem(86px);
+    height: units.px-to-rem(48px);
+    padding: tokens.$space-300 0;
+}
+
+.FallingTokens__gridColumn {
+    flex: 1;
+    background-color: docsite.$falling-tokens-grid-column;
+}
+
+// ----- Cards with a picture -----
+
+.FallingTokens__card--image {
+    padding: tokens.$space-400;
+}
+
+.FallingTokens__picture {
+    width: units.px-to-rem(110px);
+    height: units.px-to-rem(110px);
+    object-fit: cover;
+    border-radius: tokens.$radius-300;
+}
+
+.FallingTokens__card--hero {
+    flex-direction: column;
+    gap: tokens.$space-600;
+    padding: tokens.$space-900 tokens.$space-800;
+    border: 0;
+}
+
+.FallingTokens__heroImage {
+    width: units.px-to-rem(93px);
+}
+
+.FallingTokens__heroImage--accessibility {
+    width: units.px-to-rem(44px);
+}
+
+.FallingTokens__heroImage--bodyXlarge {
+    width: units.px-to-rem(45px);
+}
+
+.FallingTokens__card--font {
+    background-color: docsite.$falling-tokens-dark;
+}
+
+.FallingTokens__card--display {
+    background-color: docsite.$falling-tokens-display-background;
+}
+
+.FallingTokens__card--accessibility {
+    background-color: docsite.$falling-tokens-accessibility-background;
+}
+
+.FallingTokens__card--bodyXlarge {
+    background-color: docsite.$falling-tokens-body-xlarge-background;
+}
+
+.FallingTokens__card--motion {
+    padding: tokens.$space-500 tokens.$space-500 tokens.$space-700;
+}
+
+// The animation (500 × 500 px) has an empty margin, so it is drawn 1.4 times larger than its box, which crops the
+// margin. A larger box is used instead of `scale`, rotated cards would be blurred by it.
+.FallingTokens__lottieBox {
+    position: relative;
+    width: units.px-to-rem(96px);
+    height: units.px-to-rem(96px);
+    overflow: hidden;
+}
+
+.FallingTokens__lottie {
+    position: absolute;
+    top: units.px-to-rem(-19.2px);
+    left: units.px-to-rem(-19.2px);
+    width: units.px-to-rem(134.4px);
+    height: units.px-to-rem(134.4px);
+}
