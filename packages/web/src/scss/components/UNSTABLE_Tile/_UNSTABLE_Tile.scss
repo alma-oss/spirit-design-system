@@ -5,24 +5,25 @@
 // 3. The shadow is static for now; DS-2774 tracks a general shadow API that can take it over.
 
 @use '@tokens' as tokens;
-@use '../../tools/color-scheme';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use 'theme';
 
 .UNSTABLE_Tile {
-    // 1.
-    --#{tokens.$css-variable-prefix}local-color: #{theme.$color};
-    --#{tokens.$css-variable-prefix}local-border-color: #{theme.$border-color};
-    --#{tokens.$css-variable-prefix}local-background-color: #{theme.$background-color};
     --#{tokens.$css-variable-prefix}tile-box-shadow: #{theme.$box-shadow};
 
+    // 1.
+    @include local.set-color(theme.$color);
+    @include local.set-border-color(theme.$border-color);
+    @include local.set-background-color(theme.$background-color);
+
     padding: theme.$padding;
-    color: color-scheme.color();
+    color: local.get-color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: color-scheme.border-color();
+    border-color: local.get-border-color();
     border-radius: theme.$border-radius; // 2.
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
 }
 
 .UNSTABLE_Tile--shadow {

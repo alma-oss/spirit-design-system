@@ -11,6 +11,7 @@
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/responsive-properties';
 @use '../../tools/typography';
 @use 'theme';
@@ -20,6 +21,11 @@ $_component-name: 'Button';
 .Button {
     --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}button-icon-size);
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color(color-scheme.get-border-color());
+    @include local.set-background-color(color-scheme.get-background-color());
+    @include local.set-background-color-state-hover(color-scheme.get-background-color-state-hover());
+    @include local.set-background-color-state-active(color-scheme.get-background-color-state-active());
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));
     @include responsive-properties.create-cascade(
         $property: 'column-gap',
@@ -41,10 +47,10 @@ $_component-name: 'Button';
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    color: color-scheme.color();
+    color: local.get-color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: color-scheme.border-color();
+    border-color: local.get-border-color();
     border-start-start-radius: var(
         --#{tokens.$css-variable-prefix}button-border-start-start-radius,
         #{theme.$border-radius}
@@ -58,7 +64,7 @@ $_component-name: 'Button';
         #{theme.$border-radius}
     );
     border-end-end-radius: var(--#{tokens.$css-variable-prefix}button-border-end-end-radius, #{theme.$border-radius});
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
     user-select: none;
     cursor: cursors.$buttons;
 
@@ -66,15 +72,15 @@ $_component-name: 'Button';
     &:active,
     &:focus {
         text-decoration: none;
-        color: color-scheme.color();
+        color: local.get-color();
     }
 
     &:hover {
-        background-color: color-scheme.background-color-state-hover();
+        background-color: local.get-background-color-state-hover();
     }
 
     &:active {
-        background-color: color-scheme.background-color-state-active();
+        background-color: local.get-background-color-state-active();
     }
 }
 
@@ -124,8 +130,8 @@ $_component-name: 'Button';
 // We need to override the default disabled styles for plain buttons, because we want them to be still plain.
 // stylelint-disable declaration-no-important, selector-max-class
 .Button.Button--plain.disabled {
-    --#{tokens.$css-variable-prefix}local-border-color: transparent !important;
-    --#{tokens.$css-variable-prefix}local-background-color: transparent !important;
+    @include local.set-border-color(transparent, $important: true);
+    @include local.set-background-color(transparent, $important: true);
 }
 // stylelint-enable
 
@@ -149,6 +155,6 @@ $_component-name: 'Button';
     position: absolute;
     top: 50%;
     left: 50%;
-    color: color-scheme.color();
+    color: local.get-color();
     transform: translate(-50%, -50%);
 }

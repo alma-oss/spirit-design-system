@@ -15,16 +15,28 @@ Spirit resolves colors in four layers, each narrowing the previous one:
 │
 └── <section class="color-scheme-on-emotion-success-subtle bg-color-scheme">
     │                                               color scheme — picks a combination and
-    │                                               publishes --spirit-local-*;
-    │                                               bg-color-scheme is what paints the background
+    │                                               publishes --spirit-color-scheme-*;
+    │                                               bg-color-scheme paints the background and sets
+    │                                               --spirit-local-background-color
     │
-    ├── <span class="Pill">                         component CSS — reads the locals itself
+    ├── <span class="Pill">                         component CSS — establishes its surface and reads the locals
     ├── <h2 class="text-color-scheme">              utility — paints the text
     └── <hr class="border-color-scheme">            utility — paints the border
 ```
 
-ℹ️ **A `color-scheme-on-*` CSS class paints nothing by itself.** It only sets CSS custom properties, on its own element
+ℹ️ **A `color-scheme-on-*` CSS class paints nothing by itself.** It only sets `--spirit-color-scheme-*` CSS custom properties, on its own element
 and, by inheritance, its descendants. Utility CSS classes or the component's own style rules do the painting.
+
+## Scheme Palette vs Current Local Color Context
+
+Spirit separates **color scheme definitions** from the **currently rendered local color context**:
+
+1. **Color Scheme Palette (`--spirit-color-scheme-*`)**:
+   Defined **only** by `.color-scheme-on-*` classes. Represents the static source tokens of the scheme (`--spirit-color-scheme-color`, `--spirit-color-scheme-border-color`, `--spirit-color-scheme-background-color`, etc.). They do not change during interactive states such as `:hover` or `:active`.
+2. **Current Local Color Context (`--spirit-local-background-color`, `--spirit-local-color`, `--spirit-local-border-color`, …)**:
+   Represents the effective color context on an element and its subtree. Surface components that consume a color scheme (`Tag`, `Button`, `Alert`, `Pill`, `ToastBar`, `TooltipPopover`, `ProgressBar`) initialize their `--spirit-local-*` custom properties from `--spirit-color-scheme-*` so per-component token overrides (`component-color-overrides`) and `.disabled` can override them locally. For any element that establishes a surface (including `Card--boxed`, `UNSTABLE_Tile`, `ModalDialog`, `DrawerPanel`, `DropdownPopover`, `InputContainer--fill`, `Item`, or `bg-*` utilities), `--spirit-local-background-color` reflects the **actual currently rendered background**, including interactive states (`:hover`, `:active`, `:checked`), component color overrides, and utility overrides.
+
+Because interactive scheme surfaces (such as `Tag:is(a, button)`) calculate their dynamic hover/active states from `--spirit-color-scheme-background-color` (`color-scheme.get-background-color()`) and write the resulting active surface color to `--spirit-local-background-color`, nested dynamic elements (such as a `ControlButton` inside an interactive `Tag`) automatically react to their parent's hovered or active background without circular CSS custom property dependencies.
 
 ## When to Use
 
@@ -35,7 +47,7 @@ operate at different scopes:
 | Tool                                                     | What it does                          | Reach for it when                                              |
 | -------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------------- |
 | Theme (`theme-light-default`, `theme-light-on-brand`)    | Redefines `--spirit-color-*`          | An entire page region should use a different palette           |
-| Color scheme (`color-scheme-on-*`)                       | Sets `--spirit-local-*`               | One region or component needs a specific semantic surface      |
+| Color scheme (`color-scheme-on-*`)                       | Sets `--spirit-color-scheme-*`        | One region or component needs a specific semantic surface      |
 | Scheme utilities (`bg-`, `text-`, `border-color-scheme`) | Paints one property from the scheme   | Applying the active scheme to plain markup                     |
 | Dynamic color helpers (`dynamic-color-*`)                | Derives borders and interactive fills | Interactive children inside a scheme, or outside any scheme    |
 | Background utilities (`bg-emotion-success-basic`, …)     | Paints one hard-coded color           | A genuine one-off, and you accept picking the other colors too |
@@ -88,38 +100,37 @@ emphatic elements like badges and filled buttons, `subtle` for large calm areas 
 
 ### CSS Custom Properties
 
-Every scheme CSS class publishes two sets of CSS custom properties, each with a Sass accessor in the
-`tools/color-scheme` module that takes an optional `$fallback`.
+Every scheme CSS class publishes `--spirit-color-scheme-*` custom properties. Both `tools/color-scheme` (for `--spirit-color-scheme-*`) and `tools/local` (for `--spirit-local-*`) provide matching `get-*` functions and `set-*` mixins, with each `get-*` function taking an optional `$fallback`.
 
 #### The Picked Combination
 
 The pair implied by the `<intensity>` in the CSS class name — the contrast-checked set most components need. The two
 state properties are the same in both intensities, because the tokens define them per category.
 
-| CSS custom property                            | Sass accessor                     | Holds                                          |
-| ---------------------------------------------- | --------------------------------- | ---------------------------------------------- |
-| `--spirit-local-color`                         | `color()`                         | Content color paired with the picked intensity |
-| `--spirit-local-border-color`                  | `border-color()`                  | Border color paired with the picked intensity  |
-| `--spirit-local-background-color`              | `background-color()`              | Background paired with the picked intensity    |
-| `--spirit-local-background-color-state-hover`  | `background-color-state-hover()`  | Hover background                               |
-| `--spirit-local-background-color-state-active` | `background-color-state-active()` | Active background                              |
+| CSS custom property                                   | Sass getter / setter (`color-scheme.*`)                                       | Holds                                      |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------ |
+| `--spirit-color-scheme-color`                         | `get-color()` / `set-color()`                                                 | Content color paired with picked intensity |
+| `--spirit-color-scheme-border-color`                  | `get-border-color()` / `set-border-color()`                                   | Border color paired with picked intensity  |
+| `--spirit-color-scheme-background-color`              | `get-background-color()` / `set-background-color()`                           | Background color of the picked scheme      |
+| `--spirit-color-scheme-background-color-state-hover`  | `get-background-color-state-hover()` / `set-background-color-state-hover()`   | Hover background                           |
+| `--spirit-color-scheme-background-color-state-active` | `get-background-color-state-active()` / `set-background-color-state-active()` | Active background                          |
 
 #### The Full Palette
 
 Set regardless of the picked intensity, for a region that shows both — see
 [Combining Both Intensities](#combining-both-intensities).
 
-| CSS custom property                      | Sass accessor               | Holds                |
-| ---------------------------------------- | --------------------------- | -------------------- |
-| `--spirit-local-color-basic`             | `color-basic()`             | Basic content color  |
-| `--spirit-local-color-subtle`            | `color-subtle()`            | Subtle content color |
-| `--spirit-local-border-color-subtle`     | `border-color-subtle()`     | Subtle border color  |
-| `--spirit-local-background-color-basic`  | `background-color-basic()`  | Basic background     |
-| `--spirit-local-background-color-subtle` | `background-color-subtle()` | Subtle background    |
+| CSS custom property                             | Sass getter / setter (`color-scheme.*`)                           | Holds                |
+| ----------------------------------------------- | ----------------------------------------------------------------- | -------------------- |
+| `--spirit-color-scheme-color-basic`             | `get-color-basic()` / `set-color-basic()`                         | Basic content color  |
+| `--spirit-color-scheme-color-subtle`            | `get-color-subtle()` / `set-color-subtle()`                       | Subtle content color |
+| `--spirit-color-scheme-border-color-subtle`     | `get-border-color-subtle()` / `set-border-color-subtle()`         | Subtle border color  |
+| `--spirit-color-scheme-background-color-basic`  | `get-background-color-basic()` / `set-background-color-basic()`   | Basic background     |
+| `--spirit-color-scheme-background-color-subtle` | `get-background-color-subtle()` / `set-background-color-subtle()` | Subtle background    |
 
 - **There is no `--spirit-local-border-color-basic`.** The dynamic color helpers always want a border that still reads
   against a basic background.
-- **No CSS class sets `--spirit-local-background-color-state-selected`.** Only its accessor exists, read by
+- **No CSS class sets `--spirit-local-background-color-state-selected`.** Its getter (`local.get-background-color-state-selected()`) is read by
   `dynamic-colors.background-selected()` with a computed fallback.
 - **`color-scheme-on-disabled` sets less:** the three content and three background properties plus
   `--spirit-local-border-color` — no subtle border, no states. See
@@ -139,21 +150,21 @@ declare it on their container — see [Declare the Scheme Once](#declare-the-sch
 ```
 
 The utilities `bg-color-scheme`, `text-color-scheme`, and `border-color-scheme` emit `!important`, like all Spirit
-utilities.
+utilities. Background utilities (`bg-*` and `bg-color-scheme`) also set `--spirit-local-background-color` with `!important`, ensuring that when a utility overrides a component's background, the inherited local background context stays synchronized with the painted background across all interactive states.
 
 ### In Component Styles
 
-Read the locals through the Sass accessors, with the component's own token as the fallback for when no scheme is
+Read the locals through `tools/local`, with the component's own token as the fallback for when no scheme is
 present:
 
 ```scss
-@use '../../tools/color-scheme';
+@use '../../tools/local';
 @use 'theme';
 
 .MyComponent {
-  color: color-scheme.color(theme.$content);
-  background-color: color-scheme.background-color(theme.$background);
-  border-color: color-scheme.border-color(theme.$border);
+  color: local.get-color(theme.$content);
+  background-color: local.get-background-color(theme.$background);
+  border-color: local.get-border-color(theme.$border);
 }
 ```
 
@@ -234,11 +245,11 @@ scheme CSS class instead ([rationale][adr-intensity-exposure]):
 
 ```scss
 .MyComponent {
-  background-color: color-scheme.background-color-subtle(theme.$surface-background);
+  background-color: local.get-background-color-subtle(theme.$surface-background);
 }
 
 .MyComponent__indicator {
-  background-color: color-scheme.background-color-basic(theme.$indicator-background);
+  background-color: local.get-background-color-basic(theme.$indicator-background);
 }
 ```
 
@@ -320,10 +331,10 @@ color, like `Tooltip`.
   background-color: tokens.$neutral-background-subtle;
 }
 
-// ✅ Good: reads the active scheme, falls back to the token when there is none
+// ✅ Good: reads the active local color context, falls back to the token when there is none
 .MyComponent {
-  color: color-scheme.color(theme.$content);
-  background-color: color-scheme.background-color(theme.$background);
+  color: local.get-color(theme.$content);
+  background-color: local.get-background-color(theme.$background);
 }
 ```
 
@@ -341,10 +352,6 @@ color, like `Tooltip`.
 
 Current behavior that is expected to change. Do not build on it.
 
-- **`disabled` does not set the intensity locals.** It overrides the picked combination and the state colors, but not
-  `--spirit-local-color-basic`/`-subtle` or `--spirit-local-background-color-basic`/`-subtle`. A component reading
-  those inside `disabled` gets the surrounding scheme's colors or its fallback instead of disabled ones, contrary to
-  [Substitutability of Categories](#substitutability-of-categories).
 - **React components disable their schemes inconsistently.** `Tag` removes its scheme CSS class when `isDisabled` is
   set, while a selected `Item` keeps `color-scheme-on-selected-subtle` and relies on `disabled` overriding it.
 

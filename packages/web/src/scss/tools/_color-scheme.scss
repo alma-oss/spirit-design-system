@@ -1,4 +1,4 @@
-// Generates `.color-scheme-on-*` classes: `--local-color`, `--local-border-color`, and `--local-background-color`.
+// Generates `.color-scheme-on-*` classes: `--color-scheme-*` CSS custom properties.
 // Basic backgrounds are paired with subtle text colors and vice versa.
 // Pairing logic and token references match the former utilities map (see color-scheme-values).
 //
@@ -21,6 +21,142 @@ $_accent-prefix: 'accent-';
 $_accent-tokens-key: 'accent-colors';
 $_emotion-prefix: 'emotion-';
 $_emotion-tokens-key: 'emotion-colors';
+
+@mixin -set-property($name, $value) {
+    --#{tokens.$css-variable-prefix}color-scheme-#{$name}: #{$value};
+}
+
+@function get-color($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-color);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-color, $fallback);
+}
+
+@mixin set-color($value) {
+    @include -set-property('color', $value);
+}
+
+@function get-color-basic($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-color-basic);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-color-basic, $fallback);
+}
+
+@mixin set-color-basic($value) {
+    @include -set-property('color-basic', $value);
+}
+
+@function get-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-color-subtle, $fallback);
+}
+
+@mixin set-color-subtle($value) {
+    @include -set-property('color-subtle', $value);
+}
+
+@function get-border-color($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-border-color);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-border-color, $fallback);
+}
+
+@mixin set-border-color($value) {
+    @include -set-property('border-color', $value);
+}
+
+@function get-border-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-border-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-border-color-subtle, $fallback);
+}
+
+@mixin set-border-color-subtle($value) {
+    @include -set-property('border-color-subtle', $value);
+}
+
+@function get-background-color($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color, $fallback);
+}
+
+@mixin set-background-color($value) {
+    @include -set-property('background-color', $value);
+}
+
+@function get-background-color-basic($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-basic);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-basic, $fallback);
+}
+
+@mixin set-background-color-basic($value) {
+    @include -set-property('background-color-basic', $value);
+}
+
+@function get-background-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-subtle, $fallback);
+}
+
+@mixin set-background-color-subtle($value) {
+    @include -set-property('background-color-subtle', $value);
+}
+
+@function get-background-color-state-hover($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-hover);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-hover, $fallback);
+}
+
+@mixin set-background-color-state-hover($value) {
+    @include -set-property('background-color-state-hover', $value);
+}
+
+@function get-background-color-state-active($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-active);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-active, $fallback);
+}
+
+@mixin set-background-color-state-active($value) {
+    @include -set-property('background-color-state-active', $value);
+}
+
+@function get-background-color-state-selected($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-selected);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-selected, $fallback);
+}
+
+@mixin set-background-color-state-selected($value) {
+    @include -set-property('background-color-state-selected', $value);
+}
 
 @function generate-color-scheme-map($tokens-group, $prefix: '') {
     $result: ();
@@ -152,94 +288,6 @@ $_emotion-tokens-key: 'emotion-colors';
     );
 }
 
-@function color($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-color);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-color, $fallback);
-}
-
-@function color-basic($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-color-basic);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-color-basic, $fallback);
-}
-
-@function color-subtle($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-color-subtle);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-color-subtle, $fallback);
-}
-
-@function border-color($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-border-color);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-border-color, $fallback);
-}
-
-@function border-color-subtle($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-border-color-subtle);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-border-color-subtle, $fallback);
-}
-
-@function background-color($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color, $fallback);
-}
-
-@function background-color-basic($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-basic);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-basic, $fallback);
-}
-
-@function background-color-subtle($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-subtle);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-subtle, $fallback);
-}
-
-@function background-color-state-hover($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-state-hover);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-state-hover, $fallback);
-}
-
-@function background-color-state-active($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-state-active);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-state-active, $fallback);
-}
-
-@function background-color-state-selected($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-state-selected);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-state-selected, $fallback);
-}
-
 @mixin emit-color-scheme-classes($values, $class-prefix: 'color-scheme-on') {
     @each $key, $pair in $values {
         $color: map.get($pair, color);
@@ -255,48 +303,48 @@ $_emotion-tokens-key: 'emotion-colors';
 
         .#{$class-prefix}-#{$key} {
             @if $color {
-                --#{tokens.$css-variable-prefix}local-color: #{$color};
+                @include set-color($color);
             }
 
             // 2.
             @if $color-basic {
-                --#{tokens.$css-variable-prefix}local-color-basic: #{$color-basic};
+                @include set-color-basic($color-basic);
             }
 
             // 2.
             @if $color-subtle {
-                --#{tokens.$css-variable-prefix}local-color-subtle: #{$color-subtle};
+                @include set-color-subtle($color-subtle);
             }
 
             @if $border-color {
-                --#{tokens.$css-variable-prefix}local-border-color: #{$border-color};
+                @include set-border-color($border-color);
             }
 
             // 1.
             @if $border-color-subtle {
-                --#{tokens.$css-variable-prefix}local-border-color-subtle: #{$border-color-subtle};
+                @include set-border-color-subtle($border-color-subtle);
             }
 
             @if $background-color {
-                --#{tokens.$css-variable-prefix}local-background-color: #{$background-color};
+                @include set-background-color($background-color);
             }
 
             // 2.
             @if $background-color-basic {
-                --#{tokens.$css-variable-prefix}local-background-color-basic: #{$background-color-basic};
+                @include set-background-color-basic($background-color-basic);
             }
 
             // 2.
             @if $background-color-subtle {
-                --#{tokens.$css-variable-prefix}local-background-color-subtle: #{$background-color-subtle};
+                @include set-background-color-subtle($background-color-subtle);
             }
 
             @if $background-color-state-hover {
-                --#{tokens.$css-variable-prefix}local-background-color-state-hover: #{$background-color-state-hover};
+                @include set-background-color-state-hover($background-color-state-hover);
             }
 
             @if $background-color-state-active {
-                --#{tokens.$css-variable-prefix}local-background-color-state-active: #{$background-color-state-active};
+                @include set-background-color-state-active($background-color-state-active);
             }
         }
     }
