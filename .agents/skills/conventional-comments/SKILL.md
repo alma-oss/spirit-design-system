@@ -10,8 +10,9 @@ description: >-
 # Conventional Comments Overlay
 
 Loaded only when a review runs with `--conventional-comments`. It does **not** change the finding
-structure defined in the code-review methodology (`Fix:` before `Why:`, suggestion-fence first in PR
-mode) — it only prepends a `label (decorations):` line to each finding. Off by default because the
+structure defined in the code-review methodology
+(`.agents/skills/code-review/references/methodology.md` and `review-output-templates.md`: `Fix:` before
+`Why:`, suggestion-fence first in CI mode) — it only prepends a `label (decorations):` line to each finding. Off by default because the
 team has not adopted Conventional Comments as a whole and the reviewers communicate clearly without
 markings.
 
