@@ -11,6 +11,9 @@
     },
     "start": {
       "dependsOn": ["@alma-oss/spirit-icons:build"]
+    },
+    "start:ui": {
+      "dependsOn": ["@alma-oss/spirit-icons:build", "@alma-oss/spirit-web-react:build"]
     }
   },
   "implicitDependencies": ["@alma-oss/spirit-icons", "@alma-oss/spirit-web-react"]
