@@ -30,6 +30,14 @@ Spirit Design System is an open-source design system developed by Alma Career (f
 - When verifying your changes, refer to the [Common Tasks section of the Development Guide][development-guide-common-tasks]
   for running tests and linters. Always run the appropriate tests and linters before finishing your work.
 
+## Generative UI (Story UI)
+
+- Storybook includes [Story UI][story-ui], which generates screens from a natural-language prompt using only Spirit components.
+- The Spirit context it sends to the model lives in [`apps/storybook/story-ui-docs/`][story-ui-docs] and its strict rules in [`apps/storybook/story-ui-considerations.md`][story-ui-considerations].
+- Start it with `yarn storybook:ui`. Copy `apps/storybook/.env.example` to `apps/storybook/.env` first and set
+  `ANTHROPIC_API_KEY`, `GEMINI_API_KEY` or both; `DEFAULT_PROVIDER` picks the default one.
+- Any agent generating Spirit UI follows the same rules: no inline styles, no `UNSAFE_*` props and no ad-hoc CSS classes. Layout comes only from Spirit components and design tokens.
+
 ## Additional Resources
 
 For comprehensive guidelines, see:
@@ -44,3 +52,6 @@ For comprehensive guidelines, see:
 [development-guide-common-tasks]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#common-tasks
 [nextjs-docs]: node_modules/next/dist/docs/index.md
 [readme]: https://github.com/alma-oss/spirit-design-system/blob/main/README.md
+[story-ui]: https://github.com/southleft/story-ui
+[story-ui-considerations]: apps/storybook/story-ui-considerations.md
+[story-ui-docs]: apps/storybook/story-ui-docs/
