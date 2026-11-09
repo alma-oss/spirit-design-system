@@ -17,18 +17,20 @@ import {
   type SpaceToken,
   type StringToken,
   TokenType,
+  type TypographyToken,
 } from '@supernovaio/sdk-exporters';
 import { exampleDimensionAndStringTokens } from '../../../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleColorsTokens } from '../../../../../tests/fixtures/exampleColorTokens';
 import { exampleGradientTokens } from '../../../../../tests/fixtures/exampleGradientTokens';
 import { exampleShadowTokens } from '../../../../../tests/fixtures/exampleShadowTokens';
 import { exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
+import { exampleTypographyTokens } from '../../../../../tests/fixtures/exampleTypographyTokens';
 import { TokenTypeEnum } from '../../../../core/types';
 import { mapToken } from '../tokenMapper';
 
 describe('tokenMapper', () => {
   describe('mapToken', () => {
-    it('maps a string token to the internal model', () => {
+    it('should map a string token to the internal model', () => {
       const token = exampleDimensionAndStringTokens.get('stringRef') as StringToken;
 
       const result = mapToken(token, exampleGroups);
@@ -52,7 +54,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a dimension token to the internal model', () => {
+    it('should map a dimension token to the internal model', () => {
       const token = exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken;
 
       const result = mapToken(token, exampleGroups);
@@ -87,7 +89,7 @@ describe('tokenMapper', () => {
       expect(result).toBeNull();
     });
 
-    it('maps a radius token to the internal model', () => {
+    it('should map a radius token to the internal model', () => {
       const token = {
         id: 'radiusRef',
         name: 'radius-small',
@@ -117,7 +119,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a space token to the internal model', () => {
+    it('should map a space token to the internal model', () => {
       const token = {
         id: 'spaceRef',
         name: 'space-small',
@@ -147,7 +149,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a size token to the internal model', () => {
+    it('should map a size token to the internal model', () => {
       const token = {
         id: 'sizeRef',
         name: 'size-small',
@@ -177,7 +179,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a fontSize token to the internal model', () => {
+    it('should map a fontSize token to the internal model', () => {
       const token = {
         id: 'fontSizeRef',
         name: 'font-size-body',
@@ -207,7 +209,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a lineHeight token to the internal model', () => {
+    it('should map a lineHeight token to the internal model', () => {
       const token = {
         id: 'lineHeightRef',
         name: 'line-height-body',
@@ -237,7 +239,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a letterSpacing token to the internal model', () => {
+    it('should map a letterSpacing token to the internal model', () => {
       const token = {
         id: 'letterSpacingRef',
         name: 'letter-spacing-body',
@@ -267,7 +269,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a borderWidth token to the internal model', () => {
+    it('should map a borderWidth token to the internal model', () => {
       const token = {
         id: 'borderWidthRef',
         name: 'border-width-thin',
@@ -297,7 +299,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('maps a border token to the internal model, using only the width', () => {
+    it('should map a border token to the internal model, using only the width', () => {
       const token = {
         id: 'borderRef',
         name: 'border-default',
@@ -333,7 +335,7 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('returns null for a border token with no width', () => {
+    it('should return null for a border token with no width', () => {
       const token = {
         id: 'borderRef',
         name: 'border-undefined',
@@ -346,7 +348,7 @@ describe('tokenMapper', () => {
       expect(result).toBeNull();
     });
 
-    it('returns null for token types not yet supported by the adapter', () => {
+    it('should return null for token types not yet supported by the adapter', () => {
       const token = {
         id: 'durationRef',
         name: 'duration-short',
@@ -522,7 +524,68 @@ describe('tokenMapper', () => {
       });
     });
 
-    it('returns an empty group path when the parent group cannot be found', () => {
+    describe('typography', () => {
+      const typographyToken = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+
+      it('should map a typography token to a composite of the members the exporter reads', () => {
+        const result = mapToken(typographyToken, exampleGroups);
+
+        expect(result).toMatchObject({
+          id: 'typographyRef1',
+          type: TokenTypeEnum.Typography,
+          source: { adapter: 'supernova', originalId: 'typographyRef1', originalType: 'Typography' },
+        });
+        expect(result?.value).toEqual({
+          type: 'composite',
+          value: {
+            fontFamily: { type: 'string', value: 'Inter' },
+            fontWeight: { type: 'string', value: 'Bold' },
+            fontSize: {
+              type: 'reference',
+              tokenId: 'font-size-id',
+              resolved: { type: 'number', value: 40, unit: 'px' },
+            },
+            lineHeight: {
+              type: 'reference',
+              tokenId: 'line-height-id',
+              resolved: { type: 'number', value: 52, unit: 'px' },
+            },
+          },
+        });
+      });
+
+      it('should map dimensions that do not alias another token to plain numbers', () => {
+        const token = {
+          ...typographyToken,
+          value: {
+            ...typographyToken.value,
+            fontSize: { unit: Unit.pixels, measure: 14, referencedTokenId: null },
+            lineHeight: { unit: Unit.percent, measure: 120, referencedTokenId: null },
+          },
+        } as TypographyToken;
+
+        expect(mapToken(token, exampleGroups)?.value).toMatchObject({
+          value: {
+            fontSize: { type: 'number', value: 14, unit: 'px' },
+            lineHeight: { type: 'number', value: 120, unit: '%' },
+          },
+        });
+      });
+
+      it('should leave out a font size and a line height the style does not have', () => {
+        const token = {
+          ...typographyToken,
+          value: { ...typographyToken.value, fontSize: undefined, lineHeight: null },
+        } as unknown as TypographyToken;
+
+        expect(Object.keys((mapToken(token, exampleGroups)?.value as { value: object }).value)).toEqual([
+          'fontFamily',
+          'fontWeight',
+        ]);
+      });
+    });
+
+    it('should return an empty group path when the parent group cannot be found', () => {
       const token = {
         ...(exampleDimensionAndStringTokens.get('stringRef') as StringToken),
         parentGroupId: 'missing-group',

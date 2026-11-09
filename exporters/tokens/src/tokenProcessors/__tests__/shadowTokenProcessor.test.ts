@@ -4,7 +4,7 @@ import { createTokenIndex } from '../../core/tokenIndex';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processShadowToken, transformShadowLengthsToVariables } from '../shadowTokenProcessor';
-import { type FontSizeBaseMap } from '../../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../../helpers/types';
 
 jest.mock('../../../config', () => ({
   exportConfiguration: sampleConfigurationDefault,

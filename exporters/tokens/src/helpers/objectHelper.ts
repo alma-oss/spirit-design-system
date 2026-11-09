@@ -1,6 +1,7 @@
 import { Token, TokenType } from '@supernovaio/sdk-exporters';
-import { StylesObjectType } from '../generators/stylesObjectGenerator';
+import { isTypographyStyleLeaf, type StylesObjectType } from '../core/types';
 import { handleInvariantTokenAlias } from './specialCaseHelper';
+import type { KeyValueTemplateCallback } from './types';
 import { toCamelCase, toPlural } from './stringHelper';
 import { COLOR_SCSS_SUFFIX } from '../constants';
 
@@ -10,7 +11,13 @@ export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType)
     (result, [key, value]) => {
       let mergedValue;
 
-      if (typeof value === 'object' && value !== null && typeof result[key] === 'object') {
+      if (
+        typeof value === 'object' &&
+        value !== null &&
+        !isTypographyStyleLeaf(value) &&
+        typeof result[key] === 'object' &&
+        !isTypographyStyleLeaf(result[key])
+      ) {
         mergedValue = deepMergeObjects(result[key] as StylesObjectType, value as StylesObjectType);
       } else {
         mergedValue = value;
@@ -26,9 +33,11 @@ export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType)
   const endObject: StylesObjectType = {};
 
   Object.entries(mergedObject).forEach(([key, value]) => {
-    if (typeof value === 'object' && value !== null && value.moveToTheEnd === 'true') {
+    const flaggedValue = value as { moveToTheEnd?: string };
+
+    if (typeof value === 'object' && value !== null && flaggedValue.moveToTheEnd === 'true') {
       // Move this entry to endObject
-      delete value.moveToTheEnd; // Exclude "moveToTheEnd" flag
+      delete flaggedValue.moveToTheEnd; // Exclude "moveToTheEnd" flag
       endObject[key] = value;
     } else {
       // Keep it in the main object
@@ -38,54 +47,6 @@ export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType)
 
   // Return finalObject with endObject entries moved to the end
   return { ...finalObject, ...endObject };
-};
-
-export function convertToScss(obj: StylesObjectType): string {
-  return Object.entries(obj)
-    .map(([key, value]) => {
-      if (typeof value === 'object' && value !== null) {
-        const nestedScss = convertToScss(value as StylesObjectType);
-
-        return `${key}: (\n${nestedScss}\n),\n`;
-      }
-
-      return `${key}: ${value},\n`;
-    })
-    .join('')
-    .slice(0, -1);
-}
-
-export const convertToJs = (obj: StylesObjectType): string => {
-  return Object.entries(obj)
-    .map(([key, value]) => {
-      const match = key.match(/^_(\d+)/); // Match keys starting with _ followed by a number
-      const newKey = match ? `'${match[1]}'` : key; // Replace with the number as a string if matched
-      let resultEntry = `${newKey}: ${value},\n`;
-
-      if (typeof value === 'object' && value !== null) {
-        const nestedObject = convertToJs(value as StylesObjectType);
-
-        resultEntry = `${newKey}: {\n${nestedObject}\n},\n`;
-      }
-
-      if (newKey === value) {
-        resultEntry = `${newKey},\n`;
-      }
-
-      return resultEntry;
-    })
-    .join('')
-    .slice(0, -1);
-};
-
-export const formatTypographyName = (tokenNameParts: string[]): string => {
-  return tokenNameParts.length === 4
-    ? tokenNameParts.filter((_, index) => index !== 1).join('-')
-    : tokenNameParts.join('-');
-};
-
-export const getBreakpoint = (tokenNameParts: string[]): string => {
-  return tokenNameParts.length === 4 ? tokenNameParts[1] : 'mobile';
 };
 
 export const getTokenAlias = (token: Token, hasJsOutput: boolean): string => {
@@ -110,4 +71,26 @@ export const normalizeFirstNamePart = (part: string, tokenType: TokenType, hasJs
   }
 
   return hasJsOutput ? toPlural(part.toLowerCase()) : `$${toPlural(part.toLowerCase())}`;
+};
+
+/**
+ * Passes every defined entry of an object to the callback and collects the results. Entries with an `undefined`
+ * value are skipped.
+ *
+ * @param object
+ * @param callback
+ */
+export const passObjectKeyValueToCallback = <Shape extends Record<string, string | number | undefined>>(
+  object: Shape,
+  callback: KeyValueTemplateCallback,
+) => {
+  return Object.entries(object).reduce<string[]>((accumulator, [key, value]) => {
+    if (value === undefined) {
+      return accumulator;
+    }
+
+    accumulator.push(callback(key, value));
+
+    return accumulator;
+  }, []);
 };

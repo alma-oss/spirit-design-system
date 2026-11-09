@@ -3,7 +3,7 @@ import { getTokenAlias, normalizeFirstNamePart } from '../helpers/objectHelper';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { tokenVariableName } from '../helpers/tokenHelper';
 import { toCamelCase, toPlural } from '../helpers/stringHelper';
-import type { StylesObjectType } from '../generators/stylesObjectGenerator';
+import type { StylesObjectType } from '../core/types';
 
 export const handleNonTypographyTokens = (
   tokenNameParts: string[],

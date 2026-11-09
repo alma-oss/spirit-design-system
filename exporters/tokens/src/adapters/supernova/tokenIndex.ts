@@ -8,7 +8,7 @@ import { mapToken } from './mappers/tokenMapper';
  * yet is still known, just not readable.
  *
  * Temporary bridge: the generators still work with Supernova's native `mappedTokens` and build the processors' token
- * index from it (see `generateStylesFromTokens`). Once they read from a `TokenCollection`, they use
+ * index from it once per file (see `generateFileContent`). Once they read from a `TokenCollection`, they use
  * `createTokenIndex(collection.tokens)` from `core/tokenIndex.ts` instead and this file can be deleted together with
  * its test.
  *

@@ -14,10 +14,12 @@ import {
 import { formatTokenStyleByOutput, tokenVariableName } from '../helpers/tokenHelper';
 import { handleSpecialCase } from '../helpers/specialCaseHelper';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
-import { getFontSizeBaseForBreakpoint, unitToCss, type FontSizeBaseMap } from '../helpers/unitHelper';
-import { formatUnitValue, type UnitFormatContext } from '../formatters/unitFormatter';
+import { getFontSizeBaseForBreakpoint, unitToCss } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
+import { toNumericTokenType, mapToken } from '../adapters/supernova/mappers/tokenMapper';
+import { formatUnitValue } from '../formatters/unitFormatter';
+import type { UnitFormatContext } from '../formatters/types';
 import { FONT_SIZE_BASE } from '../constants';
-import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 import { TransformationEngine, pxToRemRule } from '../transformations';
 import type { NumberValue } from '../core/types';
 
@@ -78,8 +80,7 @@ const formatMeasure = (
   baseFontSize: number,
 ) => {
   const ctx: UnitFormatContext = {
-    token,
-    tokenType,
+    tokenType: toNumericTokenType(tokenType),
     baseFontSize,
     isFontSizeBaseToken: isFontSizeBaseToken(token, name),
   };
