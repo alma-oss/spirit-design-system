@@ -70,8 +70,8 @@ apps/docsite/public/lottie/
 # Story UI: locally generated stories and machine-local state
 apps/storybook/stories/generated/
 apps/storybook/stories/.story-mappings.json
-apps/storybook/.story-ui/
-apps/storybook/.story-ui-history/
+apps/storybook/**/.story-ui/
+apps/storybook/**/.story-ui-history/
 
 # Ignore File
 .*ignore
