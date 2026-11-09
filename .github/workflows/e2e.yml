@@ -49,7 +49,7 @@ jobs:
             -e PW_PAGE_RETRIES="${{ vars.PW_PAGE_RETRIES || '5' }}" \
             -e WEBSITE_URL="${{ inputs.url }}" \
             mcr.microsoft.com/playwright:v${{ steps.playwright-version.outputs.version }}-noble \
-            sh -c "corepack install && corepack enable && yarn test:e2e --shard=${{ matrix.shard }}/${{ env.SHARD_TOTAL }} --reporter=blob"
+            sh -c "npm install --global --force corepack && corepack install && corepack enable && yarn test:e2e --shard=${{ matrix.shard }}/${{ env.SHARD_TOTAL }} --reporter=blob"
 
       # Partial reports of the shards are merged into one HTML report by the `report` job
       - name: Upload blob report
