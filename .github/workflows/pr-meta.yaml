@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Assign to author
-        uses: toshimaru/auto-author-assign@a78a94b219445cece8ccf0d45fec60af449f212a # v3.1.0
+        uses: toshimaru/auto-author-assign@415448809ea5ba0e171b251632720b009df3d8d6 # v3.1.1
 
       - name: Add labels
         uses: TimonVS/pr-labeler-action@f9c084306ce8b3f488a8f3ee1ccedc6da131d1af # v5.0.0
