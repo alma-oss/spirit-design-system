@@ -41,8 +41,9 @@
   },
   "dependencies": {
     "@alma-oss/spirit-design-tokens": "4.0.3",
-    "jsdom": "catalog:build",
-    "svg2react-icon": "catalog:script"
+    "@svgr/core": "catalog:build",
+    "@svgr/plugin-jsx": "catalog:build",
+    "jsdom": "catalog:build"
   },
   "devDependencies": {
     "@eslint/compat": "catalog:lint",

@@ -15,7 +15,7 @@ export const generateReactIndex = (reactDir: string): void => {
 
     tsxFiles.forEach((file) => {
       const componentName = file.replace('.tsx', '');
-      // svg2react-icon generates default exports, so we re-export them as named exports
+      // generated components use default exports, so we re-export them as named exports
       lines.push(`export { default as ${componentName} } from './${componentName}';`);
     });
 
