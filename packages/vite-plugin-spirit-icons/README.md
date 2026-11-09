@@ -55,7 +55,7 @@ export function MyComponent() {
 The plugin generates icon assets through a multi-step build process:
 
 1. **SVG Processing** — Normalizes SVG colors based on icon type (default, dualtone, colored) and creates a sprite sheet
-2. **React Component Generation** — Converts SVGs to React components using `svg2react-icon`
+2. **React Component Generation** — Converts SVGs to React components using `@svgr/core`
 3. **Constants Generation** — Creates a TypeScript constants file with SVG innerHTML for each icon
 4. **Output Structure** — Generates entry points for React components, raw SVGs, and icon constants
 
