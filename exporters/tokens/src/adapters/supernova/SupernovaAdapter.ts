@@ -29,7 +29,7 @@ export class SupernovaAdapter implements SourceAdapter {
     }
 
     // Same exclusion rules as the native pipeline (e.g. internal `figma-` tokens), applied before mapping.
-    const mappedTokens = filterExcludedTokens(tokens)
+    const mappedTokens = filterExcludedTokens(tokens, tokenGroups)
       .map((token) => mapToken(token, tokenGroups))
       .filter((token): token is DesignToken => token !== null);
 

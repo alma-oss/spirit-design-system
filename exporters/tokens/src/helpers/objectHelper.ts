@@ -1,7 +1,7 @@
 import { Token, TokenType } from '@supernovaio/sdk-exporters';
 import { StylesObjectType } from '../generators/stylesObjectGenerator';
 import { handleInvariantTokenAlias } from './specialCaseHelper';
-import { toCamelCase, toPlural } from './stringHelper';
+import { removePairQuotes, toCamelCase, toKebabCase, toPlural } from './stringHelper';
 import { COLOR_SCSS_SUFFIX } from '../constants';
 
 export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType): StylesObjectType => {
@@ -110,4 +110,48 @@ export const normalizeFirstNamePart = (part: string, tokenType: TokenType, hasJs
   }
 
   return hasJsOutput ? toPlural(part.toLowerCase()) : `$${toPlural(part.toLowerCase())}`;
+};
+
+export const jsObjectTemplate = (strings: string[]) => `{
+${strings.join(',\n')},
+}`;
+
+export const scssObjectTemplate = (strings: string[]) => `(
+${strings.join(',\n')},
+)`;
+
+export type KeyValueTemplateCallback = (key: string, value: string | number) => string;
+
+export const jsKeyValueTemplate: KeyValueTemplateCallback = (key, value) => {
+  return `${key}: ${/\s/.test(value as string) ? `"${value}"` : value}`;
+};
+
+export const scssKeyValueTemplate: KeyValueTemplateCallback = (key, value) => {
+  const formattedKey = toKebabCase(key);
+  let formattedValue;
+
+  if (typeof value === 'string' && value.includes(', ')) {
+    formattedValue = `"${value}"`;
+  } else if (typeof value === 'number') {
+    formattedValue = value;
+  } else {
+    formattedValue = removePairQuotes(value as string);
+  }
+
+  return `${formattedKey}: ${formattedValue}`;
+};
+
+export const passObjectKeyValueToCallback = <Shape extends Record<string, string | number | undefined>>(
+  object: Shape,
+  callback: KeyValueTemplateCallback,
+) => {
+  return Object.entries(object).reduce<string[]>((accumulator, [key, value]) => {
+    if (value === undefined) {
+      return accumulator;
+    }
+
+    accumulator.push(callback(key, value));
+
+    return accumulator;
+  }, []);
 };

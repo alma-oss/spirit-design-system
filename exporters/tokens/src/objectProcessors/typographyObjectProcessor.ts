@@ -1,188 +1,110 @@
-import { Token, TokenGroup, TypographyToken, type TypographyTokenValue } from '@supernovaio/sdk-exporters';
+import type { Token, TokenGroup } from '@supernovaio/sdk-exporters';
+import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
+import { readTypography, readTypographyReferences, withTypographyDimensions } from '../core/typography';
+import { type NumberValue, type TokenIndex, TokenTypeEnum, type TokenValue } from '../core/types';
 import { formatTypographyName, getBreakpoint } from '../helpers/objectHelper';
-import { tokenVariableName, typographyValue } from '../helpers/tokenHelper';
-import { getFontSizeBaseForBreakpoint, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { tokenVariableName } from '../helpers/tokenHelper';
+import { typographyValue } from '../helpers/typographyHelper';
+import { getFontSizeBaseForBreakpoint, isPxValue, unitToCss, type FontSizeBaseMap } from '../helpers/unitHelper';
 import { toCamelCase } from '../helpers/stringHelper';
 import type { DeviceDimensionEntries, DeviceDimensionMap, StylesObjectType } from '../generators/stylesObjectGenerator';
 
-export const cloneTypographyValue = (value: TypographyTokenValue): TypographyTokenValue => {
-  const cloned: Partial<TypographyTokenValue> = {
-    referencedTokenId: value.referencedTokenId ?? null,
-  };
+const toNumberValue = ({ measure, unit }: DeviceDimensionEntries[string]): NumberValue => ({
+  type: 'number',
+  value: measure,
+  unit: unitToCss(unit),
+});
 
-  if (value.fontFamily) {
-    cloned.fontFamily = { ...value.fontFamily };
+const resolveDeviceEntries = (
+  referenceId: string | null | undefined,
+  deviceDimensions: DeviceDimensionMap,
+  tokenGroups: Array<TokenGroup>,
+  hasParentPrefix: boolean,
+  tokenById?: Map<string, Token>,
+): DeviceDimensionEntries | undefined => {
+  if (!referenceId) {
+    return undefined;
   }
 
-  if (value.fontWeight) {
-    cloned.fontWeight = { ...value.fontWeight };
-  }
-
-  if (value.fontSize) {
-    cloned.fontSize = { ...value.fontSize };
-  }
-
-  if (value.textDecoration) {
-    cloned.textDecoration = { ...value.textDecoration };
-  }
-
-  if (value.textCase) {
-    cloned.textCase = { ...value.textCase };
-  }
-
-  if (value.letterSpacing) {
-    cloned.letterSpacing = { ...value.letterSpacing };
-  }
-
-  if (value.lineHeight) {
-    cloned.lineHeight = { ...value.lineHeight };
-  }
-
-  if (value.paragraphIndent) {
-    cloned.paragraphIndent = { ...value.paragraphIndent };
-  }
-
-  if (value.paragraphSpacing) {
-    cloned.paragraphSpacing = { ...value.paragraphSpacing };
-  }
-
-  return cloned as TypographyTokenValue;
-};
-
-const applyDeviceDimension = (
-  clonedValue: TypographyTokenValue,
-  deviceValues: DeviceDimensionEntries | undefined,
-  device: string,
-  key: 'fontSize' | 'lineHeight',
-) => {
-  const deviceDimension = deviceValues?.[device];
-
-  if (!deviceDimension) {
-    return;
-  }
-
-  if (key === 'fontSize') {
-    const existing = clonedValue.fontSize;
-    if (existing) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- omit referencedTokenId from spread
-      const { referencedTokenId: _omit, ...existingWithoutRefId } = existing;
-      clonedValue.fontSize = {
-        ...existingWithoutRefId,
-        referencedTokenId: existing.referencedTokenId ?? null,
-        measure: deviceDimension.measure,
-        unit: deviceDimension.unit,
-      };
-    } else {
-      clonedValue.fontSize = {
-        measure: deviceDimension.measure,
-        unit: deviceDimension.unit,
-        referencedTokenId: null,
-      };
+  const referencedToken = tokenById?.get(referenceId);
+  if (referencedToken) {
+    const baseVariableName = tokenVariableName(referencedToken, tokenGroups, hasParentPrefix);
+    const byVariableName = deviceDimensions.get(baseVariableName);
+    if (byVariableName) {
+      return byVariableName;
     }
 
-    return;
+    const originKey = referencedToken.origin?.name?.toLowerCase();
+
+    return originKey ? deviceDimensions.get(originKey) : undefined;
   }
 
-  const existing = clonedValue.lineHeight;
-  if (existing) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- omit referencedTokenId from spread
-    const { referencedTokenId: _omit, ...existingWithoutRefId } = existing;
-    clonedValue.lineHeight = {
-      ...existingWithoutRefId,
-      referencedTokenId: existing.referencedTokenId ?? null,
-      measure: deviceDimension.measure,
-      unit: deviceDimension.unit,
-    };
-  } else {
-    clonedValue.lineHeight = {
-      measure: deviceDimension.measure,
-      unit: deviceDimension.unit,
-      referencedTokenId: null,
-    };
-  }
+  return deviceDimensions.get(referenceId);
 };
 
+const collectDeviceNames = (...deviceEntries: Array<DeviceDimensionEntries | undefined>): Set<string> =>
+  new Set(deviceEntries.flatMap((entries) => Object.keys(entries ?? {})));
+
 const getDeviceTypographyValues = (
-  typographyToken: TypographyToken,
+  typography: TokenValue,
   tokenGroups: Array<TokenGroup>,
   hasParentPrefix: boolean,
   deviceDimensions?: DeviceDimensionMap,
   tokenById?: Map<string, Token>,
-): Map<string, TypographyTokenValue> | null => {
+): Map<string, TokenValue> | null => {
   if (!deviceDimensions) {
     return null;
   }
 
-  const { fontSize, lineHeight } = typographyToken.value;
-  const fontSizeReferenceId = fontSize?.referencedTokenId;
-  const lineHeightReferenceId = lineHeight?.referencedTokenId;
-
-  const resolveDeviceEntries = (referenceId: string | null | undefined) => {
-    if (!referenceId) {
-      return undefined;
-    }
-
-    const referencedToken = tokenById?.get(referenceId);
-    if (referencedToken) {
-      const baseVariableName = tokenVariableName(referencedToken, tokenGroups, hasParentPrefix);
-      const byVariableName = deviceDimensions.get(baseVariableName);
-      if (byVariableName) {
-        return byVariableName;
-      }
-
-      const originKey = referencedToken.origin?.name?.toLowerCase();
-
-      return originKey ? deviceDimensions.get(originKey) : undefined;
-    }
-
-    return deviceDimensions.get(referenceId);
-  };
-
-  const fontSizeDevices = resolveDeviceEntries(fontSizeReferenceId);
-  const lineHeightDevices = resolveDeviceEntries(lineHeightReferenceId);
-
-  if (!fontSizeDevices && !lineHeightDevices) {
-    return null;
-  }
-
-  const devices = new Set<string>();
-  const addDeviceKeys = (deviceValues?: Record<string, unknown>) => {
-    if (!deviceValues) {
-      return;
-    }
-
-    Object.keys(deviceValues).forEach((device) => devices.add(device));
-  };
-
-  addDeviceKeys(fontSizeDevices);
-  addDeviceKeys(lineHeightDevices);
+  const { fontSize: fontSizeReferenceId, lineHeight: lineHeightReferenceId } = readTypographyReferences(typography);
+  const fontSizeDevices = resolveDeviceEntries(
+    fontSizeReferenceId,
+    deviceDimensions,
+    tokenGroups,
+    hasParentPrefix,
+    tokenById,
+  );
+  const lineHeightDevices = resolveDeviceEntries(
+    lineHeightReferenceId,
+    deviceDimensions,
+    tokenGroups,
+    hasParentPrefix,
+    tokenById,
+  );
+  const devices = collectDeviceNames(fontSizeDevices, lineHeightDevices);
 
   if (devices.size === 0) {
     return null;
   }
 
-  const deviceTypographyMap = Array.from(devices).reduce<Map<string, TypographyTokenValue>>((accumulator, device) => {
-    const clonedValue = cloneTypographyValue(typographyToken.value);
+  const deviceTypographyMap = Array.from(devices).reduce<Map<string, TokenValue>>((accumulator, device) => {
+    const fontSizeDimension = fontSizeDevices?.[device];
+    const lineHeightDimension = lineHeightDevices?.[device];
 
-    applyDeviceDimension(clonedValue, fontSizeDevices, device, 'fontSize');
-    applyDeviceDimension(clonedValue, lineHeightDevices, device, 'lineHeight');
-
-    accumulator.set(device, clonedValue);
+    accumulator.set(
+      device,
+      withTypographyDimensions(typography, {
+        ...(fontSizeDimension && { fontSize: toNumberValue(fontSizeDimension) }),
+        ...(lineHeightDimension && { lineHeight: toNumberValue(lineHeightDimension) }),
+      }),
+    );
 
     return accumulator;
-  }, new Map<string, TypographyTokenValue>());
+  }, new Map<string, TokenValue>());
 
   return deviceTypographyMap.size > 0 ? deviceTypographyMap : null;
 };
 
 const hasDeviceVariation = (
-  deviceTypographyValues: Map<string, TypographyTokenValue>,
+  deviceTypographyValues: Map<string, TokenValue>,
   baseFontSizeMeasure: number | undefined,
   baseLineHeightMeasure: number | undefined,
+  tokenIndex?: TokenIndex,
 ): boolean => {
   return Array.from(deviceTypographyValues.values()).some((value) => {
-    const deviceFontSize = value.fontSize?.measure;
-    const deviceLineHeight = value.lineHeight?.measure;
+    const { fontSize, lineHeight } = readTypography(value, tokenIndex);
+    const deviceFontSize = fontSize?.value;
+    const deviceLineHeight = lineHeight?.value;
 
     return (
       (deviceFontSize !== undefined && baseFontSizeMeasure !== undefined && deviceFontSize !== baseFontSizeMeasure) ||
@@ -193,28 +115,41 @@ const hasDeviceVariation = (
   });
 };
 
-const collectDeviceKeys = (
-  deviceTypographyValues: Map<string, TypographyTokenValue> | null,
+const getDeviceKeys = (
+  deviceTypographyValues: Map<string, TokenValue> | null,
   fontSizeBaseMap: FontSizeBaseMap | undefined,
+  breakpoint: string,
 ): string[] => {
-  const deviceKeys = deviceTypographyValues
-    ? Array.from(deviceTypographyValues.keys())
-    : Array.from(fontSizeBaseMap?.keys() ?? []);
+  const baseKeys = deviceTypographyValues ? deviceTypographyValues.keys() : (fontSizeBaseMap?.keys() ?? []);
 
-  return deviceKeys;
+  // The current breakpoint and `mobile` are always present, even when the device data does not mention them
+  return Array.from(new Set([...baseKeys, breakpoint, 'mobile'])).filter(Boolean);
 };
 
-const ensureDeviceInKeys = (deviceKeys: string[], device: string): void => {
-  if (device && !deviceKeys.includes(device)) {
-    deviceKeys.push(device);
-  }
-};
+/**
+ * Font size base used for the px -> rem conversion; `0` when no base is configured (values stay in px).
+ *
+ * @param fontSizeBaseMap
+ * @param device
+ */
+const getDeviceFontSizeBase = (fontSizeBaseMap: FontSizeBaseMap | undefined, device: string): number =>
+  fontSizeBaseMap ? getFontSizeBaseForBreakpoint(fontSizeBaseMap, device) : 0;
+
+/**
+ * Px font sizes need per-device values when the configured font size base differs between devices.
+ *
+ * @param fontSizeBaseMap
+ * @param fontSize
+ */
+const hasResponsiveFontSizeBase = (fontSizeBaseMap: FontSizeBaseMap | undefined, fontSize?: NumberValue): boolean =>
+  !!fontSizeBaseMap && new Set(fontSizeBaseMap.values()).size > 1 && isPxValue(fontSize) && !!fontSize.value;
 
 const shouldCreateDeviceVariations = (
-  deviceTypographyValues: Map<string, TypographyTokenValue> | null,
+  deviceTypographyValues: Map<string, TokenValue> | null,
   hasResponsiveBase: boolean,
   baseFontSizeMeasure: number | undefined,
   baseLineHeightMeasure: number | undefined,
+  tokenIndex?: TokenIndex,
 ): boolean => {
   if (!deviceTypographyValues && !hasResponsiveBase) {
     return false;
@@ -228,9 +163,27 @@ const shouldCreateDeviceVariations = (
     return false;
   }
 
-  return hasDeviceVariation(deviceTypographyValues, baseFontSizeMeasure, baseLineHeightMeasure);
+  return hasDeviceVariation(deviceTypographyValues, baseFontSizeMeasure, baseLineHeightMeasure, tokenIndex);
 };
 
+/**
+ * Adds a typography token to the styles object, one entry per breakpoint (or device).
+ *
+ * Naming stays on the native token (it needs the SDK's `NamingHelper`). The value is read through the internal
+ * `DesignToken` model via the Supernova adapter's mapper, so rendering it does not depend on Supernova's typography
+ * token class (see #DS-2873).
+ *
+ * @param tokenNameParts
+ * @param token
+ * @param tokenGroups
+ * @param hasParentPrefix
+ * @param stylesObjectRef
+ * @param hasJsOutput
+ * @param deviceDimensions
+ * @param fontSizeBaseMap
+ * @param tokenById
+ * @param tokenIndex Index used to resolve references in the typography value (e.g. to font size or line height tokens)
+ */
 export const handleTypographyTokens = (
   tokenNameParts: string[],
   token: Token,
@@ -241,78 +194,59 @@ export const handleTypographyTokens = (
   deviceDimensions?: DeviceDimensionMap,
   fontSizeBaseMap?: FontSizeBaseMap,
   tokenById?: Map<string, Token>,
+  tokenIndex?: TokenIndex,
 ): void => {
-  const typographyToken = token as TypographyToken;
-  const reducedNameParts = tokenNameParts.slice(0, 2);
+  const designToken = mapToken(token, tokenGroups);
+
+  if (designToken?.type !== TokenTypeEnum.Typography) {
+    return;
+  }
+
+  const typography = designToken.value;
+  const { fontSize, lineHeight } = readTypography(typography, tokenIndex);
   const name = formatTypographyName(tokenNameParts).toLowerCase();
   const breakpoint = getBreakpoint(tokenNameParts).toLowerCase();
   const isItalic = name.includes('italic');
   const deviceTypographyValues = getDeviceTypographyValues(
-    typographyToken,
+    typography,
     tokenGroups,
     hasParentPrefix,
     deviceDimensions,
     tokenById,
   );
-  // If font-size-base is not provided, keep px values (no px->rem conversion).
-  const shouldConvertToRem = !!fontSizeBaseMap && fontSizeBaseMap.size > 0;
-  const baseFontSize = shouldConvertToRem ? getFontSizeBaseForBreakpoint(fontSizeBaseMap, breakpoint) : 0;
-  const fontSizeUnit = typographyToken.value.fontSize?.unit;
-  const fontSizeMeasure = typographyToken.value.fontSize?.measure;
-  const hasResponsiveBase =
-    shouldConvertToRem &&
-    new Set(Array.from(fontSizeBaseMap.values())).size > 1 &&
-    fontSizeUnit === 'Pixels' &&
-    !!fontSizeMeasure;
-
-  const baseFontSizeMeasure = typographyToken.value.fontSize?.measure;
-  const baseLineHeightMeasure = typographyToken.value.lineHeight?.measure;
+  const hasResponsiveBase = hasResponsiveFontSizeBase(fontSizeBaseMap, fontSize);
   const shouldCreateVariations = shouldCreateDeviceVariations(
     deviceTypographyValues,
     hasResponsiveBase,
-    baseFontSizeMeasure,
-    baseLineHeightMeasure,
+    fontSize?.value,
+    lineHeight?.value,
+    tokenIndex,
   );
+  const renderTypography = (value: TokenValue, device: string): string | object =>
+    typographyValue(value, isItalic, hasJsOutput, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex);
 
-  let currentObject = stylesObjectRef;
-  reducedNameParts.forEach((part, index) => {
-    const tokenName = hasJsOutput ? toCamelCase(name) : `$${name}`;
-    const modifiedPart = index === 0 ? tokenName : part;
+  if (tokenNameParts.length === 0) {
+    return;
+  }
 
-    if (index === reducedNameParts.length - 1) {
-      const targetObject =
-        index === 0
-          ? ((currentObject[modifiedPart] = currentObject[modifiedPart] || {}) as StylesObjectType)
-          : currentObject;
+  const objectKey = hasJsOutput ? toCamelCase(name) : `$${name}`;
+  const targetObject = (stylesObjectRef[objectKey] = stylesObjectRef[objectKey] || {}) as StylesObjectType;
 
-      if (shouldCreateVariations) {
-        const deviceKeys = collectDeviceKeys(deviceTypographyValues, fontSizeBaseMap);
+  if (!shouldCreateVariations) {
+    targetObject[breakpoint] = renderTypography(typography, breakpoint);
 
-        ensureDeviceInKeys(deviceKeys, breakpoint);
-        ensureDeviceInKeys(deviceKeys, 'mobile');
+    return;
+  }
 
-        for (const device of deviceKeys) {
-          const deviceValue =
-            deviceTypographyValues?.get(device) ||
-            (device === 'mobile' || device === breakpoint || hasResponsiveBase
-              ? cloneTypographyValue(typographyToken.value)
-              : undefined);
+  for (const device of getDeviceKeys(deviceTypographyValues, fontSizeBaseMap, breakpoint)) {
+    const deviceValue =
+      deviceTypographyValues?.get(device) ||
+      (device === 'mobile' || device === breakpoint || hasResponsiveBase ? typography : undefined);
 
-          if (!deviceValue) {
-            return;
-          }
-
-          const deviceBaseFontSize = shouldConvertToRem ? getFontSizeBaseForBreakpoint(fontSizeBaseMap!, device) : 0;
-          targetObject[device] = typographyValue(deviceValue, isItalic, hasJsOutput, deviceBaseFontSize);
-        }
-
-        return;
-      }
-
-      targetObject[breakpoint] = typographyValue(typographyToken.value, isItalic, hasJsOutput, baseFontSize);
-    } else {
-      currentObject[modifiedPart] = currentObject[modifiedPart] || {};
-      currentObject = currentObject[modifiedPart] as StylesObjectType;
+    if (!deviceValue) {
+      break;
     }
-  });
+
+    targetObject[device] = renderTypography(deviceValue, device);
+  }
 };

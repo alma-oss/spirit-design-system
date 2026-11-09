@@ -1,13 +1,13 @@
-import { type Supernova, type TokenTheme } from '@supernovaio/sdk-exporters';
+import { type Supernova, type Token, type TokenTheme } from '@supernovaio/sdk-exporters';
 import { exampleDimensionAndStringTokens } from '../../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGroups } from '../../../../tests/fixtures/exampleGroups';
+import { exampleTypographyTokens } from '../../../../tests/fixtures/exampleTypographyTokens';
+import { TokenTypeEnum } from '../../../core/types';
 import { SupernovaAdapter } from '../SupernovaAdapter';
 
 const exampleThemes = [{ id: 'theme-1', name: 'Dark' } as unknown as TokenTheme];
 
-const createSdk = () => {
-  const tokens = Array.from(exampleDimensionAndStringTokens.values());
-
+const createSdk = (tokens = Array.from(exampleDimensionAndStringTokens.values())) => {
   return {
     tokens: {
       getTokens: jest.fn().mockResolvedValue(tokens),
@@ -19,7 +19,7 @@ const createSdk = () => {
 
 describe('SupernovaAdapter', () => {
   describe('fetchTokens', () => {
-    it('maps supported tokens, groups and themes to the internal model', async () => {
+    it('should map supported tokens, groups and themes to the internal model', async () => {
       const sdk = createSdk();
       const adapter = new SupernovaAdapter(sdk);
 
@@ -32,7 +32,19 @@ describe('SupernovaAdapter', () => {
       expect(collection.metadata.source).toBe('supernova');
     });
 
-    it('filters tokens and groups by brandId when provided', async () => {
+    it('should map typography tokens and keep excluding Link and Italic styles', async () => {
+      const italic = { ...exampleTypographyTokens.get('typographyRef1'), id: 'typographyItalic', name: 'Bold-Italic' };
+      const sdk = createSdk([...Array.from(exampleTypographyTokens.values()), italic] as Token[]);
+      const adapter = new SupernovaAdapter(sdk);
+
+      const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
+
+      expect(collection.tokens.map((token) => [token.id, token.type])).toEqual([
+        ['typographyRef1', TokenTypeEnum.Typography],
+      ]);
+    });
+
+    it('should filter tokens and groups by brandId when provided', async () => {
       const sdk = createSdk();
       const adapter = new SupernovaAdapter(sdk);
 

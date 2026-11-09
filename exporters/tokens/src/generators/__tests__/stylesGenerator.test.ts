@@ -24,7 +24,6 @@ import {
 } from '../stylesGenerator';
 import { type FontSizeBaseMap } from '../../helpers/unitHelper';
 
-const mappedTokens: Map<string, Token> = new Map([]);
 const tokenIndex = createTokenIndex([]);
 const tokenGroups: Array<TokenGroup> = exampleGroups;
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
@@ -261,7 +260,7 @@ describe('stylesGenerator', () => {
         const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
         const styles = generateStylesFromTokens(
           filteredTokens,
-          mappedTokens,
+          tokenIndex,
           tokenGroups,
           tokenPrefix,
           hasParentPrefix,

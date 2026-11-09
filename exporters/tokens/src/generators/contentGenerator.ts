@@ -1,4 +1,7 @@
 import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+// TODO: Remove together with the Supernova imports above, `createTokenIndex(collection.tokens)` replaces it.
+import { createSupernovaTokenIndex } from '../adapters/supernova/tokenIndex';
+import type { TokenIndex } from '../core/types';
 import { FileData } from '../config/fileConfig';
 import { indentAndFormat } from '../formatters/stylesFormatter';
 import { convertToJs, convertToScss, deepMergeObjects } from '../helpers/objectHelper';
@@ -21,8 +24,9 @@ export const filterTokensByTypeAndGroup = (
   type: TokenType,
   group: string,
   excludeGroupNames?: string[] | null,
+  tokenGroups?: TokenGroup[],
 ) => {
-  const filteredTokens = filterExcludedTokens(tokens);
+  const filteredTokens = filterExcludedTokens(tokens, tokenGroups);
 
   return filteredTokens.filter((token) => {
     const hasMatchingType = token.tokenType === type;
@@ -37,8 +41,13 @@ export const filterTokensByTypeAndGroup = (
   });
 };
 
-export const filterTokensByType = (tokens: Token[], type: TokenType, excludeGroupNames?: string[] | null) => {
-  const filteredTokens = filterExcludedTokens(tokens);
+export const filterTokensByType = (
+  tokens: Token[],
+  type: TokenType,
+  excludeGroupNames?: string[] | null,
+  tokenGroups?: TokenGroup[],
+) => {
+  const filteredTokens = filterExcludedTokens(tokens, tokenGroups);
 
   return filteredTokens.filter((token) => {
     const hasMatchingType = token.tokenType === type;
@@ -72,6 +81,7 @@ const processTokensForType = (
   filteredTokens: Token[],
   tokenType: TokenType,
   mappedTokens: Map<string, Token>,
+  tokenIndex: TokenIndex,
   tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
   hasParentPrefix: boolean,
@@ -98,7 +108,7 @@ const processTokensForType = (
         )
       : generateStylesFromTokens(
           filteredTokens,
-          mappedTokens,
+          tokenIndex,
           tokenGroups,
           tokenPrefix,
           hasParentPrefix,
@@ -122,6 +132,7 @@ const processTokensForType = (
     deviceDimensions,
     fontSizeBaseMap,
     mappedTokens,
+    tokenIndex,
   );
 
   return {
@@ -230,6 +241,8 @@ export const generateFileContent = ({
     tokenTypes,
   } = fileData;
   const namingTokenGroups = hasTopLevelGroupPrefix ? tokenGroups : omitTopLevelGroupFromPaths(tokenGroups);
+  // Temporary: replace with `createTokenIndex(collection.tokens)` once the generators read a `TokenCollection`
+  const tokenIndex = createSupernovaTokenIndex(mappedTokens, namingTokenGroups);
 
   // Check if group filtering should be applied
   // Apply group filtering if:
@@ -247,7 +260,7 @@ export const generateFileContent = ({
   // Iterate over token types and groups to filter tokens
   const getTokenListsForType = (tokenType: TokenType): Token[][] => {
     if (!shouldFilterByGroup) {
-      return [filterTokensByType(fileTokens, tokenType, excludeGroupNames)];
+      return [filterTokensByType(fileTokens, tokenType, excludeGroupNames, tokenGroups)];
     }
 
     // When excludeGroupNames is provided but no groupNames, we need to filter by type first
@@ -255,10 +268,10 @@ export const generateFileContent = ({
     const tokensToConsider =
       groupNames && groupNames.length > 0 && groupNames[0] !== ''
         ? fileTokens
-        : filterTokensByType(fileTokens, tokenType, excludeGroupNames);
+        : filterTokensByType(fileTokens, tokenType, excludeGroupNames, tokenGroups);
 
     return getGroups(tokensToConsider, excludeGroupNames, groupNames).map((group) =>
-      filterTokensByTypeAndGroup(fileTokens, tokenType, group, excludeGroupNames),
+      filterTokensByTypeAndGroup(fileTokens, tokenType, group, excludeGroupNames, tokenGroups),
     );
   };
 
@@ -268,6 +281,7 @@ export const generateFileContent = ({
         filteredTokens,
         tokenType,
         mappedTokens,
+        tokenIndex,
         namingTokenGroups,
         tokenPrefix,
         hasParentPrefix,

@@ -4,6 +4,7 @@ import {
   createDefaultFontSizeBaseMap,
   getFontSizeBaseForBreakpoint,
   getFontSizeBaseMap,
+  isPxValue,
   makeRelativeUnit,
   replacePxWithRemUnits,
   unitToCss,
@@ -206,5 +207,18 @@ describe('unitHelper', () => {
     it('should handle decimal px values', () => {
       expect(replacePxWithRemUnits('0.5px 1.5px', 16)).toBe('0.0313rem 0.0938rem');
     });
+  });
+
+  describe('isPxValue', () => {
+    it('should accept a dimension in px', () => {
+      expect(isPxValue({ type: 'number', value: 16, unit: 'px' })).toBe(true);
+    });
+
+    it.each([{ type: 'number', value: 1, unit: 'rem' }, { type: 'number', value: 1 }, undefined] as const)(
+      'should reject %j',
+      (dimension) => {
+        expect(isPxValue(dimension)).toBe(false);
+      },
+    );
   });
 });

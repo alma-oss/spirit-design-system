@@ -12,7 +12,6 @@ export const JS_INDENTATION = '  ';
 // `Number.prototype.toFixed` requires the digits argument to be an integer in [0, 100]
 // (per the ECMAScript spec); anything outside that range throws a `RangeError`.
 export const MAX_TO_FIXED_DIGITS = 100;
-export const PIXEL_UNIT = 'Pixels';
 export const REM_UNIT = 'rem';
 export const PX_UNIT = 'px';
 export const SCSS_DIRECTORY = 'scss';

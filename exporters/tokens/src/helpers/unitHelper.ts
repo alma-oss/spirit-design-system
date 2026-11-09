@@ -4,6 +4,7 @@ import { DimensionToken, FontSizeToken, Token, TokenType, Unit } from '@supernov
 import { FONT_SIZE_BASE, FONT_SIZE_BASE_DEFAULT, PX_UNIT } from '../constants';
 import { getDeviceAlias } from './deviceHelpers';
 import { pxToRem } from '../converters/pxToRem';
+import type { NumberValue } from '../core/types';
 
 export type FontSizeBaseMap = Map<string, number>;
 
@@ -157,3 +158,10 @@ export const replacePxWithRemUnits = (value: string, baseFontSize: number = FONT
     pxToRem(number, { baseFontSize }),
   );
 };
+
+/**
+ * Tells whether a dimension of the internal token model is in `px`.
+ *
+ * @param dimension
+ */
+export const isPxValue = (dimension?: NumberValue): dimension is NumberValue => dimension?.unit === PX_UNIT;

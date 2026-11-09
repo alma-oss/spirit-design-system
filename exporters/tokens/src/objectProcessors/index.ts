@@ -1,4 +1,4 @@
-export { handleTypographyTokens, cloneTypographyValue } from './typographyObjectProcessor';
+export { handleTypographyTokens } from './typographyObjectProcessor';
 export { handleNonTypographyTokens } from './nonTypographyObjectProcessor';
 export {
   addGlobalColorsToStylesObject,

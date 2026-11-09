@@ -1,4 +1,5 @@
 import { Token, TokenGroup, TokenType, Unit } from '@supernovaio/sdk-exporters';
+import type { TokenIndex } from '../core/types';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { deepMergeObjects } from '../helpers/objectHelper';
 import { sortTokens } from '../helpers/tokenHelper';
@@ -32,6 +33,7 @@ export const createStylesObjectStructureFromTokenNameParts = (
   deviceDimensions?: DeviceDimensionMap,
   fontSizeBaseMap?: FontSizeBaseMap,
   tokenById?: Map<string, Token>,
+  tokenIndex?: TokenIndex,
 ): StylesObjectType => {
   const { tokenType, name: tokenName } = token;
   const devicePart = getDeviceAlias(token);
@@ -56,6 +58,7 @@ export const createStylesObjectStructureFromTokenNameParts = (
       deviceDimensions,
       fontSizeBaseMap,
       tokenById,
+      tokenIndex,
     );
   } else {
     handleNonTypographyTokens(tokenNameParts, token, tokenGroups, hasParentPrefix, stylesObjectRef, hasJsOutput);
@@ -73,6 +76,7 @@ export const generateStylesObjectFromTokens = (
   deviceDimensions?: DeviceDimensionMap,
   fontSizeBaseMap?: FontSizeBaseMap,
   tokenById?: Map<string, Token>,
+  tokenIndex?: TokenIndex,
 ): StylesObjectType => {
   const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
   const stylesObject = sortedTokens.reduce((stylesObjectAccumulator, token) => {
@@ -85,6 +89,7 @@ export const generateStylesObjectFromTokens = (
       deviceDimensions,
       fontSizeBaseMap,
       tokenById,
+      tokenIndex,
     );
 
     // Merge the current object into the accumulator

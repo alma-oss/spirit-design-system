@@ -7,10 +7,11 @@ import { commonThemedFilesData, FileData, themedFilesData } from '../../config/f
 import { createDefaultFontSizeBaseMap } from '../../helpers/unitHelper';
 import { exampleThemeShadowGroups, exampleThemeShadowTokens } from '../../../tests/fixtures/exampleThemeShadowTokens';
 import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
+import { createGroup, exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import {
   generateFileContent,
   addDisclaimer,
+  filterTokensByType,
   filterTokensByTypeAndGroup,
   generateScssObjectOutput,
   generateJsObjectOutput,
@@ -51,6 +52,41 @@ describe('contentGenerator', () => {
       });
 
       expect(fileContent).toStrictEqual({ content: mockedExpectedResult });
+    });
+
+    describe('typography font weight tokens', () => {
+      const groupsWithFontWeight = [...exampleGroups, createGroup('fontWeight', 'Font Weight', ['Typography'])];
+      const fontWeightToken = {
+        ...exampleDimensionAndStringTokens.get('stringRef'),
+        id: 'fontWeightBold',
+        name: 'Bold',
+        parentGroupId: 'fontWeight',
+        origin: { name: 'Typography/Font Weight/Bold' },
+      } as unknown as Token;
+      const tokens = [...Array.from(exampleDimensionAndStringTokens.values()), fontWeightToken];
+
+      it.each([
+        { description: 'by type', groupNames: undefined },
+        { description: 'by group', groupNames: ['Grid', 'Typography'] },
+      ])('should leave them out when filtering $description', ({ groupNames }) => {
+        const { content } = generateFileContent({
+          tokens,
+          mappedTokens,
+          tokenGroups: groupsWithFontWeight,
+          fileData: {
+            fileName: 'testFile',
+            tokenTypes: [TokenType.string],
+            groupNames,
+            hasStylesObject: false,
+            hasParentPrefix: true,
+            sortByNumValue: false,
+          },
+          hasJsOutput: false,
+        });
+
+        expect(content).toContain('columns');
+        expect(content).not.toContain('font-weight');
+      });
     });
   });
 
@@ -193,6 +229,21 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
       const filteredTokens = filterTokensByTypeAndGroup(tokens, TokenType.dimension, 'Grid');
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
+    });
+
+    it('should filter font weight tokens when the token groups are given', () => {
+      const groups = [createGroup('fontWeight', 'Font Weight', ['Typography'])];
+      const fontWeightToken = {
+        ...exampleDimensionAndStringTokens.get('stringRef'),
+        name: 'Bold',
+        parentGroupId: 'fontWeight',
+        origin: { name: 'Typography/Font Weight/Bold' },
+      } as unknown as Token;
+
+      expect(filterTokensByTypeAndGroup([fontWeightToken], TokenType.string, 'Typography', null, groups)).toStrictEqual(
+        [],
+      );
+      expect(filterTokensByType([fontWeightToken], TokenType.string, null, groups)).toStrictEqual([]);
     });
   });
 
