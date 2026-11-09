@@ -1,5 +1,5 @@
 import { breakpoints } from '@alma-oss/spirit-design-tokens';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Card,
   CardBody,
@@ -23,67 +23,15 @@ import { type GridColumns } from '../../../src/types';
 // mobile and in the 1024:300 ratio from the tablet breakpoint up. The crops are requested from the image CDN, so
 // CardMedia can display them in their delivered ratio with the `auto` size.
 const COVER_BREAKPOINT = `(min-width: ${breakpoints.tablet})`;
-const COVER_RATIO_MOBILE = { width: 480, height: 300 };
-const COVER_RATIO_DESKTOP = { width: 1024, height: 300 };
-const CDN_IMAGE_URL = 'https://xah625or3v.cloudimg.io/_freyaimg_prod_/439621670';
-const DEFAULT_COVER_CROPS = {
-  desktop: `${CDN_IMAGE_URL}/2666afac-c888-11f1-afe0-0242ac110005.jpg?tl_px=0,3262&br_px=8000,5606&width=2048`,
-  mobile: `${CDN_IMAGE_URL}/2666afac-c888-11f1-afe0-0242ac110005.jpg?tl_px=2125,3262&br_px=5875,5606&width=960`,
-};
-const DEFAULT_LOGO = `${CDN_IMAGE_URL}/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=584`;
+const CDN_URL = 'https://xah625or3v.cloudimg.io';
 
-type CoverCrops = typeof DEFAULT_COVER_CROPS;
-
-// Simulates the image CDN for an uploaded cover: crops the centre of the image to the given ratio, without scaling.
-const cropToRatio = (image: HTMLImageElement, ratio: { width: number; height: number }) => {
-  const targetRatio = ratio.width / ratio.height;
-  const { naturalWidth, naturalHeight } = image;
-  const width = Math.round(naturalWidth / naturalHeight > targetRatio ? naturalHeight * targetRatio : naturalWidth);
-  const height = Math.round(width / targetRatio);
-  const canvas = document.createElement('canvas');
-
-  canvas.width = width;
-  canvas.height = height;
-  canvas
-    .getContext('2d')
-    ?.drawImage(image, (naturalWidth - width) / 2, (naturalHeight - height) / 2, width, height, 0, 0, width, height);
-
-  return canvas.toDataURL('image/jpeg', 0.9);
-};
-
-const useCoverCrops = (src?: string) => {
-  const [crops, setCrops] = useState<CoverCrops>(DEFAULT_COVER_CROPS);
-
-  useEffect(() => {
-    if (!src) {
-      setCrops(DEFAULT_COVER_CROPS);
-
-      return;
-    }
-
-    const image = new Image();
-
-    image.onload = () =>
-      setCrops({
-        desktop: cropToRatio(image, COVER_RATIO_DESKTOP),
-        mobile: cropToRatio(image, COVER_RATIO_MOBILE),
-      });
-    image.src = src;
-
-    // Ignore the pending load when the cover changes or is cleared in the meantime.
-    return () => {
-      image.onload = null;
-    };
-  }, [src]);
-
-  return crops;
-};
+type CoverCrops = { desktop: string; mobile: string };
 
 type Employer = {
   description: string;
   employees: string;
-  hasCover: boolean;
-  hasLogo: boolean;
+  cover?: CoverCrops;
+  logo?: string;
   industry: string;
   name: string;
   offers: number;
@@ -91,30 +39,38 @@ type Employer = {
 
 const EMPLOYERS: Employer[] = [
   {
+    cover: {
+      desktop: `${CDN_URL}/_freyaimg_prod_/439621670/2666afac-c888-11f1-afe0-0242ac110005.jpg?tl_px=0,3262&br_px=8000,5606&width=2048`,
+      mobile: `${CDN_URL}/_freyaimg_prod_/439621670/2666afac-c888-11f1-afe0-0242ac110005.jpg?tl_px=2125,3262&br_px=5875,5606&width=960`,
+    },
     description:
       'Moderní loterijní společnost, založená na špičkových technologiích, výjimečná svými produkty a komunikací se zákazníky.',
     employees: '500 - 999',
-    hasCover: true,
-    hasLogo: true,
     industry: 'Obchod a prodej, nákup',
+    logo: `${CDN_URL}/_freyaimg_prod_/439621670/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=584`,
     name: 'Allwyn Česko a.s.',
     offers: 5,
   },
   {
+    cover: {
+      desktop: `${CDN_URL}/_cpimg_prod_/20314537/ba77800c-6d06-11ea-8cde-0242ac110010.jpg?tl_px=0,4&br_px=1313,389&width=2048`,
+      mobile: `${CDN_URL}/_cpimg_prod_/20314537/ba77800c-6d06-11ea-8cde-0242ac110010.jpg?tl_px=341,0&br_px=971,394&width=960`,
+    },
     description:
       'Rodinná firma z Jablonce nad Nisou, která navrhuje a vyrábí šperky už více než dvacet let. V ateliéru kombinujeme tradiční zlatnické řemeslo s moderním designem a prodáváme přes vlastní butiky i e-shop po celé republice.',
     employees: '100 - 199',
-    hasCover: true,
-    hasLogo: true,
     industry: 'Umělecká řemeslná výroba',
+    logo: `${CDN_URL}/_cpimg_prod_/20314537/baa8680c-6d06-11ea-a491-0242ac110010.png?width=200&height=100&func=bound`,
     name: 'Mezinárodní společnost pro výrobu a distribuci šperků a bižuterie Jablonec nad Nisou, s.r.o.',
     offers: 1,
   },
   {
+    cover: {
+      desktop: `${CDN_URL}/_cpimg_prod_/1703023432/575481e4-2c06-11ec-8642-0242ac110005.jpg?tl_px=545,31&br_px=1805,400&width=2048`,
+      mobile: `${CDN_URL}/_cpimg_prod_/1703023432/575481e4-2c06-11ec-8642-0242ac110005.jpg?tl_px=880,31&br_px=1470,400&width=960`,
+    },
     description: 'Stavíme datové platformy a integrace pro retail, logistiku a veřejnou správu.',
     employees: '10 - 49',
-    hasCover: true,
-    hasLogo: false,
     industry: 'Informační technologie',
     name: 'Datová kovárna',
     offers: 3,
@@ -122,11 +78,88 @@ const EMPLOYERS: Employer[] = [
   {
     description: 'Logistické služby a skladování pro e-commerce po celé České republice.',
     employees: '50 - 99',
-    hasCover: false,
-    hasLogo: true,
     industry: 'Doprava a logistika',
+    logo: `${CDN_URL}/_freyaimg_prod_/439621670/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=584`,
     name: 'Moravská Logistika a.s.',
     offers: 12,
+  },
+  {
+    cover: {
+      desktop: `${CDN_URL}/_cpimg_prod_/7910630/ba654d90-88e5-11ec-b6d2-0242ac110007.jpg?tl_px=448,211&br_px=1472,511&width=2048`,
+      mobile: `${CDN_URL}/_cpimg_prod_/7910630/ba654d90-88e5-11ec-b6d2-0242ac110007.jpg?tl_px=720,211&br_px=1200,511&width=960`,
+    },
+    description:
+      'Kdo by neznal zeleného mimozemšťana? To, že je Alza leaderem na české a slovenské e-commerce scéně asi taky víš. Jsme ale také stabilní česká firma s tradicí.',
+    employees: '2500 - 2999',
+    industry: 'Informační technologie',
+    logo: `${CDN_URL}/_cpimg_prod_/7910630/db7f211a-59cc-11ec-87b6-0242ac11000c.png?width=200&tl_px=0,9&br_px=350,110`,
+    name: 'Alza.cz a.s.',
+    offers: 21,
+  },
+  {
+    cover: {
+      desktop: `${CDN_URL}/_cpimg_prod_/27512/9d218e70-1242-11f1-9312-0242ac110009.jpg?tl_px=448,0&br_px=1472,300&width=2048`,
+      mobile: `${CDN_URL}/_cpimg_prod_/27512/9d218e70-1242-11f1-9312-0242ac110009.jpg?tl_px=720,0&br_px=1200,300&width=960`,
+    },
+    description:
+      'Jsme výrobce nealkoholických nápojů, čajů, kávy, přírodní kosmetiky a provozovatel gastro sítí. Vyrábíme v 15 závodech na 5 evropských trzích.',
+    employees: '500 - 999',
+    industry: 'Potravinářství',
+    logo: `${CDN_URL}/_cpimg_prod_/27512/2626ff42-1430-11ef-aacb-0242ac11000c.png?width=200&tl_px=0,1&br_px=1500,531`,
+    name: 'Kofola',
+    offers: 29,
+  },
+  {
+    cover: {
+      desktop: `${CDN_URL}/_freyaimg_prod_/8228690/f9887724-5fe4-11f1-8025-0242ac110011.png?tl_px=0,0&br_px=1024,300&width=2048`,
+      mobile: `${CDN_URL}/_freyaimg_prod_/8228690/f9887724-5fe4-11f1-8025-0242ac110011.png?tl_px=272,0&br_px=752,300&width=960`,
+    },
+    description:
+      'Více než 17 000 kolegů a kolegyň propojuje celé Česko službami, které usnadňují každodenní život lidem, firmám i státu.',
+    employees: '10 000 a více',
+    industry: 'Pošty, Zasilatelství',
+    logo: `${CDN_URL}/_freyaimg_prod_/8228690/50cfd7b4-5fe7-11f1-ac06-0242ac110011.jpg?tl_px=0,0&br_px=714,546&width=584`,
+    name: 'Česká pošta, s.p.',
+    offers: 15,
+  },
+  {
+    cover: {
+      desktop: `${CDN_URL}/_freyaimg_prod_/2285017/9d55a284-4792-11f1-a65d-0242ac110011.jpg?tl_px=0,58&br_px=1389,465&width=2048`,
+      mobile: `${CDN_URL}/_freyaimg_prod_/2285017/9d55a284-4792-11f1-a65d-0242ac110011.jpg?tl_px=369,58&br_px=1020,465&width=960`,
+    },
+    description:
+      'Rozhýbejte s námi svět. Jsme jedním z předních poskytovatelů kamionových, leteckých, námořních přeprav i skladové logistiky.',
+    employees: '500 - 999',
+    industry: 'Logistika',
+    logo: `${CDN_URL}/_freyaimg_prod_/2285017/c118a284-4792-11f1-9c5d-0242ac110011.jpg?tl_px=0,0&br_px=593,390&width=584`,
+    name: 'DSV Global Transport and Logistics',
+    offers: 29,
+  },
+  {
+    cover: {
+      desktop: `${CDN_URL}/_cpimg_prod_/77321/f17476d4-43cc-11f1-9cc2-0242ac11000b.jpg?tl_px=940,3038&br_px=3084,3666&width=2048`,
+      mobile: `${CDN_URL}/_cpimg_prod_/77321/f17476d4-43cc-11f1-9cc2-0242ac11000b.jpg?tl_px=1509,3038&br_px=2514,3666&width=960`,
+    },
+    description:
+      'Usilujeme o otevřenou, informovanou, angažovanou a zodpovědnou společnost, která není lhostejná k problémům doma ani za hranicemi naší země.',
+    employees: '1000 - 1499',
+    industry: 'Sociální péče',
+    logo: `${CDN_URL}/_cpimg_prod_/77321/dd872c54-08f0-11ed-8ea6-0242ac110007.jpg?width=200&tl_px=0,0&br_px=766,426`,
+    name: 'Člověk v tísni, o.p.s.',
+    offers: 16,
+  },
+  {
+    cover: {
+      desktop: `${CDN_URL}/_cpimg_prod_/233975/91d48698-d69c-11f1-88e8-0242ac110006.png?tl_px=448,1&br_px=1472,301&width=2048`,
+      mobile: `${CDN_URL}/_cpimg_prod_/233975/91d48698-d69c-11f1-88e8-0242ac110006.png?tl_px=720,1&br_px=1200,301&width=960`,
+    },
+    description:
+      'ASB Group je dynamická poradenská společnost působící v regionu CEE: v České republice, Polsku, na Slovensku a v Maďarsku.',
+    employees: '100 - 199',
+    industry: 'Administrativa a správní činnosti',
+    logo: `${CDN_URL}/_cpimg_prod_/233975/e91b957e-6d06-11ea-8113-0242ac110010.jpg?width=200&height=100&func=bound`,
+    name: 'ASB Czech Republic, s.r.o.',
+    offers: 3,
   },
 ];
 
@@ -143,69 +176,52 @@ const formatOffers = (count: number) => {
 };
 
 type CardEmployerGalleryProps = {
-  cover: string[];
   gridCols: GridColumns;
-  logo: string[];
   numCards: number;
 };
 
 export default {
   title: 'Examples/Compositions/Card',
   argTypes: {
-    cover: {
-      control: { type: 'file', accept: 'image/*' },
-      description:
-        'Cover image. It is displayed in the 480:300 ratio on mobile and in the 1024:300 ratio from the tablet breakpoint up.',
-      name: 'cover',
-    },
     gridCols: {
       control: 'select',
       name: 'grid columns',
       description: 'Number of columns in the grid from the tablet breakpoint up.',
       options: [1, 2, 3],
     },
-    logo: {
-      control: { type: 'file', accept: 'image/*' },
-      description: 'Employer logo.',
-      name: 'logo',
-    },
     numCards: {
       control: 'select',
       name: 'number of cards',
       description: 'Number of employer cards to display.',
-      options: [1, 2, 3, 4],
+      options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     },
   },
   args: {
-    cover: [],
     gridCols: 2,
-    logo: [],
-    numCards: 4,
+    numCards: 6,
   },
 };
 
 export const CardEmployerGallery = (args: CardEmployerGalleryProps) => {
-  const { cover, gridCols, logo, numCards } = args;
-  const coverCrops = useCoverCrops(cover[0]);
-  const logoSrc = logo[0] ?? DEFAULT_LOGO;
+  const { gridCols, numCards } = args;
 
   return (
     <Container size="large">
       <Grid cols={{ mobile: 1, tablet: gridCols }}>
         {EMPLOYERS.slice(0, numCards).map((employer) => (
           <Card key={employer.name} isBoxed>
-            {employer.hasCover && (
+            {employer.cover && (
               <CardMedia isExpanded>
                 <picture>
-                  <source media={COVER_BREAKPOINT} srcSet={coverCrops.desktop} />
-                  <img src={coverCrops.mobile} alt="" />
+                  <source media={COVER_BREAKPOINT} srcSet={employer.cover.desktop} />
+                  <img src={employer.cover.mobile} alt="" />
                 </picture>
               </CardMedia>
             )}
-            {employer.hasLogo && (
+            {employer.logo && (
               <CardLogo>
                 <PartnerLogo size="small">
-                  <img src={logoSrc} alt="" />
+                  <img src={employer.logo} alt="" />
                 </PartnerLogo>
               </CardLogo>
             )}
