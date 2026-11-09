@@ -1,4 +1,5 @@
-import { Token, TokenGroup, TokenType, TypographyToken, TypographyTokenValue } from '@supernovaio/sdk-exporters';
+import { Token, TokenGroup, TokenType, TypographyToken } from '@supernovaio/sdk-exporters';
+import { renderTypographyLeaves } from '../../../tests/fixtures/renderTypographyLeaves';
 import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
 import {
   exampleDeviceUpdatedTokens,
@@ -14,10 +15,9 @@ import { filterExcludedTokens } from '../../filters/excludedTokens';
 import {
   createStylesObjectStructureFromTokenNameParts,
   generateStylesObjectFromTokens,
-  StylesObjectType,
 } from '../stylesObjectGenerator';
+import type { StylesObjectType } from '../../core/types';
 import {
-  cloneTypographyValue,
   colorGroupsReducer,
   createGlobalColorsObject,
   createGlobalTypographyObject,
@@ -202,7 +202,7 @@ describe('stylesObjectGenerator', () => {
     ];
 
     it.each(dataProvider)('$description', ({ tokens, expectedStyles, hasJsOutput }) => {
-      const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
+      const filteredTokens = filterExcludedTokens(Array.from(tokens.values()), tokenGroups);
       const styles = generateStylesObjectFromTokens(
         filteredTokens,
         tokenGroups,
@@ -214,7 +214,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual(expectedStyles);
+      expect(renderTypographyLeaves(styles, hasJsOutput)).toStrictEqual(expectedStyles);
     });
 
     it('should generate flat typography tokens and include them in styles', () => {
@@ -229,7 +229,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual({
+      expect(renderTypographyLeaves(styles, false)).toStrictEqual({
         $caption: {
           mobile:
             '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 14px,\nfont-style: normal,\nfont-weight: 400,\nline-height: 1.4286,\n)',
@@ -253,7 +253,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual({
+      expect(renderTypographyLeaves(styles, true)).toStrictEqual({
         caption: {
           mobile:
             "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 400,\nlineHeight: 1.4286,\n}",
@@ -277,7 +277,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual({
+      expect(renderTypographyLeaves(styles, false)).toStrictEqual({
         $eyebrow: {
           mobile:
             '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 12px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3333,\n)',
@@ -368,7 +368,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(cssObject).toStrictEqual(expectedObject);
+      expect(renderTypographyLeaves(cssObject, hasJsOutput)).toStrictEqual(expectedObject);
     });
   });
 
@@ -439,7 +439,7 @@ describe('stylesObjectGenerator', () => {
           fontSizeBaseMap,
         );
 
-        expect(stylesObjectRef).toStrictEqual(expectedStyles);
+        expect(renderTypographyLeaves(stylesObjectRef, hasJsOutput)).toStrictEqual(expectedStyles);
       },
     );
   });
@@ -503,25 +503,5 @@ describe('stylesObjectGenerator', () => {
         'heading-xlarge-bold': '$heading-xlarge-bold',
       });
     });
-  });
-});
-
-describe('cloneTypographyValue', () => {
-  it('should deeply clone typography value', () => {
-    const originalValue = {
-      fontFamily: { text: 'Inter' },
-      fontWeight: { text: 'Bold' },
-      fontSize: { unit: 'Pixels', measure: 16 },
-      letterSpacing: { unit: 'Pixels', measure: 0 },
-      paragraphIndent: { unit: 'Pixels', measure: 0 },
-      paragraphSpacing: { unit: 'Pixels', measure: 0 },
-      referencedTokenId: null,
-    } as TypographyTokenValue;
-
-    const clonedValue = cloneTypographyValue(originalValue);
-
-    expect(clonedValue).toStrictEqual(originalValue);
-    expect(clonedValue.fontFamily).not.toBe(originalValue.fontFamily);
-    expect(clonedValue.fontSize).not.toBe(originalValue.fontSize);
   });
 });

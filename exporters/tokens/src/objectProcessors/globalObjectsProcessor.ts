@@ -1,5 +1,5 @@
 import { COLOR_JS_SUFFIX, COLOR_KEY, COLOR_SCSS_SUFFIX, TYPOGRAPHY_KEY } from '../constants';
-import type { StylesObjectType } from '../generators/stylesObjectGenerator';
+import { isTypographyStyleLeaf, type StylesObjectType } from '../core/types';
 
 export const parseGroupName = (colorVariable: string, hasJsOutput: boolean) => {
   const suffix = hasJsOutput ? COLOR_JS_SUFFIX : COLOR_SCSS_SUFFIX;
@@ -33,15 +33,13 @@ export const createGlobalTypographyObject = (typographyKeys: Array<string>) => {
   return typographyKeys.reduce(typographyGroupReducer, {});
 };
 
-const hasTypographyDeclaration = (value: unknown, hasJsOutput: boolean): boolean => {
-  const typographyProperty = hasJsOutput ? 'fontFamily' : 'font-family';
-
-  if (typeof value === 'string') {
-    return value.includes(typographyProperty);
+const hasTypographyDeclaration = (value: unknown): boolean => {
+  if (isTypographyStyleLeaf(value)) {
+    return true;
   }
 
   if (typeof value === 'object' && value !== null) {
-    return Object.values(value).some((nestedValue) => hasTypographyDeclaration(nestedValue, hasJsOutput));
+    return Object.values(value).some(hasTypographyDeclaration);
   }
 
   return false;
@@ -70,7 +68,7 @@ export const addGlobalTypographyToStylesObject = (
   hasJsOutput: boolean,
 ): StylesObjectType => {
   const typographyKeys = Object.entries(stylesObject)
-    .filter(([, value]) => hasTypographyDeclaration(value, hasJsOutput))
+    .filter(([, value]) => hasTypographyDeclaration(value))
     .map(([key]) => key);
 
   if (typographyKeys.length === 0) {

@@ -50,6 +50,42 @@ describe('resolveValueDeep', () => {
     );
   });
 
+  describe('with trustResolved', () => {
+    const trust = { trustResolved: true };
+
+    it('should take the resolved value without looking the token up', () => {
+      const value: TokenValue = { type: 'reference', tokenId: 'missing', resolved: color('#00ff00ff') };
+
+      expect(resolveValueDeep(value, createTokenIndex([]), trust)).toEqual(color('#00ff00ff'));
+    });
+
+    it('should take the resolved value at every reference of a chain', () => {
+      const index = createTokenIndex([
+        createToken('brand', { type: 'reference', tokenId: 'missing', resolved: color('#00ff00ff') }),
+      ]);
+
+      expect(resolveValueDeep(reference('brand'), index, trust)).toEqual(color('#00ff00ff'));
+    });
+
+    it('should take the resolved value of a member of a composite value', () => {
+      const value = composite({ color: { type: 'reference', tokenId: 'missing', resolved: color('#00ff00ff') } });
+
+      expect(resolveValueDeep(value, createTokenIndex([]), trust)).toEqual(composite({ color: color('#00ff00ff') }));
+    });
+
+    it('should still require a reference without a resolved value to exist', () => {
+      expect(() => resolveValueDeep(reference('missing'), createTokenIndex([]), trust)).toThrow(
+        'Trying to retrieve unknown referenced token missing',
+      );
+    });
+
+    it('should still throw for circular references', () => {
+      const index = createTokenIndex([createToken('a', reference('b')), createToken('b', reference('a'))]);
+
+      expect(() => resolveValueDeep(reference('a'), index, trust)).toThrow('Circular reference');
+    });
+  });
+
   it('should throw for a reference to an unknown token', () => {
     expect(() => resolveValueDeep(reference('missing'), createTokenIndex([]))).toThrow(
       'Trying to retrieve unknown referenced token missing',

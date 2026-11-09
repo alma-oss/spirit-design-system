@@ -1,6 +1,7 @@
 import type { TokenValue } from '../../core/types';
 import { formatColorValue } from './colorFormatter';
-import { expectType, formatLayers, member, memberOfType, roundToDecimals } from './helpers';
+import { roundToDecimals } from '../../helpers/numberHelper';
+import { expectType, formatLayers, member, memberOfType } from './helpers';
 
 const DECIMALS = 3;
 

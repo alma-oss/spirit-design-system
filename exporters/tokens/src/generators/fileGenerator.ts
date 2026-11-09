@@ -7,7 +7,6 @@ import {
   TokenGroup,
   TokenTheme,
   TokenType,
-  Unit,
 } from '@supernovaio/sdk-exporters';
 import {
   commonThemedFilesData,
@@ -27,14 +26,20 @@ import {
 import { filterColorCollections } from '../helpers/colorHelper';
 import { getDeviceAlias, getDeviceThemes } from '../helpers/deviceHelpers';
 import { toCamelCase } from '../helpers/stringHelper';
-import { getFontSizeBaseMap, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { getFontSizeBaseMap } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 import { tokenVariableName } from '../helpers/tokenHelper';
 import { generateFileContent } from './contentGenerator';
-import { DeviceDimensionEntries, DeviceDimensionMap, type DeviceDimensionValue } from './stylesObjectGenerator';
+import {
+  type DeviceDimensionEntries,
+  type DeviceDimensionMap,
+  type DeviceDimensionValue,
+  SOURCE_UNIT,
+} from '../core/types';
 import { type OutputFile } from '../writers/fileWriter';
 
 const isDeviceTypographyUnit = (unit: unknown): unit is DeviceDimensionValue['unit'] => {
-  return unit === Unit.pixels || unit === Unit.percent || unit === Unit.rem;
+  return unit === SOURCE_UNIT.pixels || unit === SOURCE_UNIT.percent || unit === SOURCE_UNIT.rem;
 };
 
 const toTypographyUnit = (unit: unknown): DeviceDimensionValue['unit'] | null => {

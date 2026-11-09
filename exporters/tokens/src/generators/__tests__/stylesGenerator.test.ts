@@ -22,9 +22,8 @@ import {
   generateStylesFromTokens,
   tokenToStyleByType,
 } from '../stylesGenerator';
-import { type FontSizeBaseMap } from '../../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../../helpers/types';
 
-const mappedTokens: Map<string, Token> = new Map([]);
 const tokenIndex = createTokenIndex([]);
 const tokenGroups: Array<TokenGroup> = exampleGroups;
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
@@ -258,10 +257,10 @@ describe('stylesGenerator', () => {
       ({ tokens, hasJsOutput, hasParentPrefix, hasTokenPrefix, expectedStyles }) => {
         const prefixTokens = Array.from(examplePrefixToken.values());
         const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
-        const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
+        const filteredTokens = filterExcludedTokens(Array.from(tokens.values()), tokenGroups);
         const styles = generateStylesFromTokens(
           filteredTokens,
-          mappedTokens,
+          tokenIndex,
           tokenGroups,
           tokenPrefix,
           hasParentPrefix,
@@ -295,7 +294,7 @@ describe('stylesGenerator', () => {
     it.each(dataProvider)('$description', ({ hasJsOutput, hasTokenPrefix, expectedStyles }) => {
       const prefixTokens = Array.from(examplePrefixToken.values());
       const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
-      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()));
+      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()), tokenGroups);
       const styles = generateCssVariableReferencesFromTokens(
         filteredTokens,
         tokenGroups,
