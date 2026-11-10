@@ -19,6 +19,10 @@ A first-pass review that reflects how Spirit maintainers actually review. This f
   themes that tooling already enforces.
 - `review-output-templates.md` — how findings and the report are rendered for the CLI and for CI.
 
+Also read the repository's root `REVIEW.md`, the log of feedback that human reviewers raise repeatedly.
+Treat it as extra review focus: it can raise the priority of an area, but it never silences a real
+defect. When the file is missing, add a warning and continue.
+
 ## Operating Rules
 
 These rules make the skill safe to run unattended (for example from a GitHub Action):
@@ -298,6 +302,7 @@ into the body; if that fails too, print the report and the error.
 
 ## Related Skills
 
+- `spirit:review-feedback` — the feedback loop that keeps `REVIEW.md` and the checklist current.
 - `spirit:accept-jira-issue` — Jira access, criteria extraction, and deploy preview verification are
   reused from it.
 - `spirit:conventional-comments` — the optional label overlay.
