@@ -4,7 +4,7 @@ What to look for in a Spirit diff. The checklist is split so a review loads only
 
 - **General Checks** ([`checklist/general.md`][general]) apply to every change that touches code, whatever the files.
 - **Spirit sections 1–14** (`checklist/NN-*.md`) come from feedback that human reviewers raised repeatedly in past
-  PRs. Load only the sections that "Area Selection" in `SKILL.md` picks for the diff.
+  PRs, logged with evidence in [`REVIEW-FEEDBACK.md`][review-md]. Load only the sections that "Area Selection" in `SKILL.md` picks for the diff.
 - This file lists the sections and what tooling already enforces. Load it on every run.
 
 Items already enforced by linters or CI are intentionally absent from the sections; see
@@ -67,6 +67,7 @@ mismatch but does not judge whether an updated snapshot is expected, and Styleli
 When a new lint rule or CI check lands, add its theme to this table and remove the matching checklist item.
 
 [already-enforced]: #already-enforced-by-tooling
+[review-md]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/REVIEW-FEEDBACK.md
 [general]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/code-review/references/checklist/general.md
 [s01]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/code-review/references/checklist/01-cross-package-parity.md
 [s02]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/code-review/references/checklist/02-breaking-changes-and-migrations.md
