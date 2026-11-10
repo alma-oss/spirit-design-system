@@ -2,7 +2,8 @@
 
 Commit and PR conventions (types, `!`, no AI attribution, PR title and description) are defined in
 `.agents/instructions/git-workflow.md`; do not restate them. Commitlint already checks format, scope
-list, and issue references. Check what it cannot:
+list, and issue references. The `Merge Blocked by Git Fixup` check blocks unsquashed `fixup!` commits, so do not
+report them; when that check is failing, mention it under Warnings. Check what tooling cannot:
 
 - **Type matches intent** (important) — `feat` vs `refactor` vs `fix` vs `docs`; `!` for breaking
   a stable API.
