@@ -131,11 +131,11 @@ line are two findings. When two checklist areas genuinely disagree, report both.
 
 ## Verdicts
 
-| Verdict             | Condition                                  |
-| ------------------- | ------------------------------------------ |
-| **REQUEST CHANGES** | Any blocking finding                       |
-| **COMMENT**         | Important or minor findings, none blocking |
-| **APPROVE**         | No blocking and no important findings      |
+| Verdict             | Condition                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| **REQUEST CHANGES** | Any blocking finding                                                                   |
+| **COMMENT**         | At least one important finding, none blocking                                          |
+| **APPROVE**         | No blocking and no important findings; minor findings, questions, and notes may remain |
 
 The verdict is a recommendation. When posting, always submit the review with the `COMMENT` event; a
 human decides whether to approve. Icons and wording are in

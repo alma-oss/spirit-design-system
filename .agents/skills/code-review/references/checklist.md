@@ -120,7 +120,7 @@ for the removed API.
 ## 4. Reuse and Duplication (All Code)
 
 - **Existing Spirit building blocks** (important) — Do not re-implement what exists:
-  `CloseButton` for remove and dismiss actions, `UncontrolledTooltip`, `useToggle`, `useButtonLink`,
+  `CloseButton` for remove and dismiss actions, `UncontrolledTooltip`, `useToggle`, `useButtonLinkProps`,
   `mergeProps`, `filterDOMProps`, `ContextPropsProvider`, shared string helpers. Search with
   `git grep` before accepting a new helper.
 - **Exported constants over literals** (minor) — Demos, stories, `*.figma.ts`, docsite and exporters

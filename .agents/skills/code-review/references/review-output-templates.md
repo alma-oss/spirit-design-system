@@ -136,7 +136,9 @@ Without a suggestion:
 </details>
 ```
 
-When `--conventional-comments` is set, the subject line is the Conventional Comments label line instead.
+When `--conventional-comments` is set, the subject line is the Conventional Comments label line instead,
+written exactly as in `.github/copilot-instructions.md` so both reviewers look alike:
+`**{label} ({decorations}):** {subject}`. Everything else (suggestion fence first, `<details>` block) stays the same.
 
 ### Findings Without an Inline Anchor
 
@@ -205,11 +207,11 @@ are omitted to reduce noise.
 
 ## Verdict Templates
 
-| Verdict                | Condition                                  | Template                                                        |
-| ---------------------- | ------------------------------------------ | --------------------------------------------------------------- |
-| ❌ **REQUEST CHANGES** | Any blocking finding                       | `❌ REQUEST CHANGES — N blocking: <one line per blocker>`       |
-| 🟡 **COMMENT**         | Important or minor findings, none blocking | `🟡 COMMENT — N findings, none blocking. Address before merge.` |
-| ✅ **APPROVE**         | No blocking and no important findings      | `✅ APPROVE — No blocking or important findings.`               |
+| Verdict                | Condition                                                                              | Template                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| ❌ **REQUEST CHANGES** | Any blocking finding                                                                   | `❌ REQUEST CHANGES — N blocking: <one line per blocker>`                 |
+| 🟡 **COMMENT**         | At least one important finding, none blocking                                          | `🟡 COMMENT — N important findings, none blocking. Address before merge.` |
+| ✅ **APPROVE**         | No blocking and no important findings; minor findings, questions, and notes may remain | `✅ APPROVE — No blocking or important findings.`                         |
 
 The verdict is a recommendation. When posting, always submit the review with the `COMMENT` event; a
 human decides whether to approve.
