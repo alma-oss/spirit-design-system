@@ -22,6 +22,7 @@ stable, it is promoted into the skill's checklist during a periodic refresh (eve
 Checklist: section <number>
 ```
 
+- **Theme** headings use title case because the markdown linter requires it.
 - **N PRs** counts the distinct PRs where reviewers raised the theme.
 - **Typical severity** uses the `spirit:code-review` severities. "A to B" means it depends on impact.
 - **Checklist** is the section of [`checklist.md`][checklist] that encodes the theme.
@@ -39,7 +40,7 @@ Checklist: section <number>
 
 Ordered by the number of PRs, highest first.
 
-### Wrong ARIA pattern, labels, semantics, or invalid HTML (27 PRs, blocking to important)
+### Wrong ARIA Pattern, Labels, Semantics, or Invalid HTML (27 PRs, Blocking to Important)
 
 Roles follow the WAI-ARIA pattern the component claims, with the matching keyboard contract. References resolve, labels are unique and translatable, and live regions are deliberate and documented.
 
@@ -49,7 +50,7 @@ Roles follow the WAI-ARIA pattern the component claims, with the matching keyboa
 
 Checklist: section 6
 
-### New behavior, branches, and edge cases lack tests (26 PRs, important to blocking)
+### New Behavior, Branches, and Edge Cases Lack Tests (26 PRs, Important to Blocking)
 
 New props, branches, hooks, and repositories have unit tests, including disabled, keyboard, error, and edge cases (scalar, empty, `undefined`). Components with interaction or ARIA changes also get their `*.accessibility.test.tsx`.
 
@@ -61,7 +62,7 @@ New props, branches, hooks, and repositories have unit tests, including disabled
 
 Checklist: section 7
 
-### Unclear or inconsistent names (26 PRs, minor)
+### Unclear or Inconsistent Names (26 PRs, Minor)
 
 Names say what the code does and follow existing APIs: no `has*` in class modifiers, no `Type` suffix on props, no near-identical function names, no names that clash with Spirit components.
 
@@ -71,7 +72,7 @@ Names say what the code does and follow existing APIs: no `has*` in class modifi
 
 Checklist: section 11
 
-### Commit type does not match intent, missing `!`, AI trailers (23 PRs, important)
+### Commit Type Does Not Match Intent, Missing `!`, AI Trailers (23 PRs, Important)
 
 `feat` vs `refactor` vs `fix` follows the intent, `!` marks a breaking change to a stable API, the subject reads well in the changelog, and there are no `Co-authored-by` trailers or AI attribution.
 
@@ -81,7 +82,7 @@ Checklist: section 11
 
 Checklist: section 12
 
-### Docs duplicate other docs, expose internals, or are not consumer-facing (22 PRs, important)
+### Docs Duplicate Other Docs, Expose Internals, or Are Not Consumer-Facing (22 PRs, Important)
 
 READMEs and docs explain why and the constraints for the consumer. They link to other docs instead of repeating them and leave out internals, preview links, and name-dropping.
 
@@ -93,7 +94,7 @@ READMEs and docs explain why and the constraints for the consumer. They link to 
 
 Checklist: section 9
 
-### Change applied to only one of `web` / `web-react` (22 PRs, important)
+### Change Applied to Only One of `web` / `web-react` (22 PRs, Important)
 
 A prop, modifier, class, or demo added in one package needs its counterpart in the other, or the PR says why not. Behavior and README wording match for the same input.
 
@@ -105,7 +106,7 @@ A prop, modifier, class, or demo added in one package needs its counterpart in t
 
 Checklist: section 1
 
-### Dead code, stale classes, or leftovers after a rename (21 PRs, important)
+### Dead Code, Stale Classes, or Leftovers After a Rename (21 PRs, Important)
 
 After a rename or removal, search both packages, docs, stories, fixtures, and skills for the old name. Markup does not reference classes that no longer exist, and unused helpers and tokens go.
 
@@ -117,7 +118,7 @@ After a rename or removal, search both packages, docs, stories, fixtures, and sk
 
 Checklist: section 11
 
-### Unexpected, stale, or missing e2e snapshot changes (18 PRs, important)
+### Unexpected, Stale, or Missing E2E Snapshot Changes (18 PRs, Important)
 
 Every changed PNG under `tests/e2e/**-snapshots/` is explained by the diff. A refactor leaves snapshots unchanged, obsolete PNGs are deleted, and web and React do not get separate screenshots of the same demo.
 
@@ -129,7 +130,7 @@ Every changed PNG under `tests/e2e/**-snapshots/` is explained by the diff. A re
 
 Checklist: section 7
 
-### Raw markup or styles instead of Spirit layout components (18 PRs, minor)
+### Raw Markup or Styles Instead of Spirit Layout Components (18 PRs, Minor)
 
 Demos and README examples use `Stack`, `Flex`, `Grid`, `Box`, `Container`, and their spacing props instead of raw `div`/`span`, margin utilities, or `UNSAFE_style`.
 
@@ -139,7 +140,7 @@ Demos and README examples use `Stack`, `Flex`, `Grid`, `Box`, `Container`, and t
 
 Checklist: section 8
 
-### Logic in the wrong module, cross-component coupling, docsite layout (18 PRs, important)
+### Logic in the Wrong Module, Cross-Component Coupling, Docsite Layout (18 PRs, Important)
 
 Data access lives in repositories, generic code knows nothing about specific components, and docsite features do not import from each other. Shared code moves up a level.
 
@@ -149,7 +150,7 @@ Data access lives in repositories, generic code knows nothing about specific com
 
 Checklist: section 3, 10
 
-### Re-implemented Spirit components, hooks, or utilities (17 PRs, important)
+### Re-Implemented Spirit Components, Hooks, or Utilities (17 PRs, Important)
 
 Do not re-implement what exists (`CloseButton`, `UncontrolledTooltip`, `useButtonLink`, `mergeProps`, `filterDOMProps`). Search with `git grep` before accepting a new helper.
 
@@ -161,7 +162,7 @@ Do not re-implement what exists (`CloseButton`, `UncontrolledTooltip`, `useButto
 
 Checklist: section 4
 
-### README API table and sections incomplete (17 PRs, important)
+### README API Table and Sections Incomplete (17 PRs, Important)
 
 Every new or renamed prop has a README row with the correct type, default, required flag, and description. Both package READMEs describe the same API and sections.
 
@@ -173,7 +174,7 @@ Every new or renamed prop has a README row with the correct type, default, requi
 
 Checklist: section 9
 
-### Breaking change without migration guide or codemod (16 PRs, blocking)
+### Breaking Change Without Migration Guide or Codemod (16 PRs, Blocking)
 
 Removing or renaming a public prop, class, token, or default in a stable API ships entries in both migration guides and, for web-react, a codemod with fixtures. Experimental (`UNSTABLE_*`) APIs are exempt.
 
@@ -185,7 +186,7 @@ Removing or renaming a public prop, class, token, or default in a stable API shi
 
 Checklist: section 2
 
-### New variant or composition has no static demo or story (16 PRs, important)
+### New Variant or Composition Has No Static Demo or Story (16 PRs, Important)
 
 Every new variant, state, or composition has a static demo in `preview.html` / `demo/`, so visual tests cover it. Dynamic-only examples slip through.
 
@@ -197,7 +198,7 @@ Every new variant, state, or composition has a static demo in `preview.html` / `
 
 Checklist: section 8
 
-### Raw values, fallback tokens, or sizing in React instead of CSS (15 PRs, important)
+### Raw Values, Fallback Tokens, or Sizing in React Instead of CSS (15 PRs, Important)
 
 Sizes, spacing, radii, and colors use design tokens in `rem`. Component tokens are used where they exist, and icon and element sizes come from CSS, not React props.
 
@@ -209,7 +210,7 @@ Sizes, spacing, radii, and colors use design tokens in `rem`. Component tokens a
 
 Checklist: section 5
 
-### Workaround or non-obvious code without an explaining comment (15 PRs, important)
+### Workaround or Non-Obvious Code Without an Explaining Comment (15 PRs, Important)
 
 Hacks, specificity bumps, and non-obvious regexes carry a comment saying why, linked to the upstream issue or Jira ticket when temporary.
 
@@ -221,7 +222,7 @@ Hacks, specificity bumps, and non-obvious regexes carry a comment saying why, li
 
 Checklist: section 11
 
-### Skill lacks a trigger, assumes tools, or duplicates other skills (15 PRs, important)
+### Skill Lacks a Trigger, Assumes Tools, or Duplicates Other Skills (15 PRs, Important)
 
 A skill's `description` says what it does and "Use when …", works in Claude Code and Cursor, and relies on common tooling. Skills reference each other instead of duplicating content.
 
@@ -233,7 +234,7 @@ A skill's `description` says what it does and "Use when …", works in Claude Co
 
 Checklist: section 14
 
-### Props equal to the default are passed in demos and docs (14 PRs, minor)
+### Props Equal to the Default Are Passed in Demos and Docs (14 PRs, Minor)
 
 Demos, READMEs, stories, and tests do not pass props equal to the default. Examples showcase non-default values. Usually "Applies to the whole PR".
 
@@ -243,7 +244,7 @@ Demos, READMEs, stories, and tests do not pass props equal to the default. Examp
 
 Checklist: section 8
 
-### Out-of-scope work in the PR instead of a follow-up issue (14 PRs, important)
+### Out-of-Scope Work in the PR Instead of a Follow-Up Issue (14 PRs, Important)
 
 Unrelated changes go to a separate PR, and out-of-scope findings become a Jira issue linked from the PR.
 
@@ -253,7 +254,7 @@ Unrelated changes go to a separate PR, and out-of-scope findings become a Jira i
 
 Checklist: section 12
 
-### Duplicated or copied types instead of derived ones (14 PRs, minor)
+### Duplicated or Copied Types Instead of Derived Ones (14 PRs, Minor)
 
 Reuse component prop types instead of copying them, derive unions from constants, and do not expose props the component ignores (`Omit` them).
 
@@ -263,7 +264,7 @@ Reuse component prop types instead of copying them, derive unions from constants
 
 Checklist: section 4
 
-### Literals instead of exported constants (13 PRs, minor)
+### Literals Instead of Exported Constants (13 PRs, Minor)
 
 Demos, stories, `*.figma.ts`, docsite, and exporters use exported constants (`BackgroundColors`, `EmotionColors`, `Sizes`, key constants) instead of string literals.
 
@@ -273,7 +274,7 @@ Demos, stories, `*.figma.ts`, docsite, and exporters use exported constants (`Ba
 
 Checklist: section 4
 
-### Props instead of composition, context precedence, style-prop shape (13 PRs, important)
+### Props Instead of Composition, Context Precedence, Style-Prop Shape (13 PRs, Important)
 
 Content areas are slots or composition, not text props. Context props follow local prop, then context prop, then default. Style hooks return `{ classProps, styleProps, props }`.
 
@@ -285,7 +286,7 @@ Content areas are slots or composition, not text props. Context props follow loc
 
 Checklist: section 3
 
-### Props, demos, or sections not sorted alphabetically (11 PRs, minor)
+### Props, Demos, or Sections Not Sorted Alphabetically (11 PRs, Minor)
 
 Props in tables, components, stories, SCSS maps, and migration guide sections are sorted alphabetically. Reviewers flag this with 🔤.
 
@@ -297,7 +298,7 @@ Props in tables, components, stories, SCSS maps, and migration guide sections ar
 
 Checklist: section 9
 
-### Migration guide structure, wording, or non-BC entries (10 PRs, important)
+### Migration Guide Structure, Wording, or Non-BC Entries (10 PRs, Important)
 
 Migration guides list only user-facing breaking changes, follow the existing template, and use the same structure in both packages.
 
@@ -307,7 +308,7 @@ Migration guides list only user-facing breaking changes, follow the existing tem
 
 Checklist: section 2
 
-### README statements or examples do not match the implementation (10 PRs, important)
+### README Statements or Examples Do Not Match the Implementation (10 PRs, Important)
 
 Documented defaults and behavior hold for that package, and snippets mirror the real markup and props so copy-paste works.
 
@@ -317,7 +318,7 @@ Documented defaults and behavior hold for that package, and snippets mirror the 
 
 Checklist: section 9
 
-### Unhandled error paths, `null` lookups, wrong fallbacks (9 PRs, blocking to question)
+### Unhandled Error Paths, `null` Lookups, Wrong Fallbacks (9 PRs, Blocking to Question)
 
 Non-happy paths are handled: `null` from DOM lookups, missing provider values, empty or scalar inputs, and API errors. Blocking when the diff shows wrong output, otherwise ask.
 
@@ -327,7 +328,7 @@ Non-happy paths are handled: `null` from DOM lookups, missing provider values, e
 
 Checklist: section 3
 
-### Implementation differs from Figma (8 PRs, question)
+### Implementation Differs From Figma (8 PRs, Question)
 
 Colors, sizes, spacing, and weights match the design. Ask for a screenshot comparison when the PR changes visuals without one.
 
@@ -337,7 +338,7 @@ Colors, sizes, spacing, and weights match the design. Ask for a screenshot compa
 
 Checklist: section 5
 
-### Complex selectors, cross-component classes, reduced motion (6 PRs, important)
+### Complex Selectors, Cross-Component Classes, Reduced Motion (6 PRs, Important)
 
 A component's SCSS does not select another component's classes, prefers `:is()` and `:first-child` over extra modifiers, and wraps animations in `prefers-reduced-motion`.
 
@@ -347,7 +348,7 @@ A component's SCSS does not select another component's classes, prefers `:is()` 
 
 Checklist: section 5
 
-### ADR documents a workflow instead of recording a decision (5 PRs, important)
+### ADR Documents a Workflow Instead of Recording a Decision (5 PRs, Important)
 
 `docs/decisions/*.md` says what was decided, not how. Workflow documentation goes elsewhere, and a changed decision gets a new ADR that supersedes the old one.
 
@@ -355,7 +356,7 @@ Checklist: section 5
 
 Checklist: section 9
 
-### CI workflows: injection, status functions, permissions (4 PRs, blocking to question)
+### CI Workflows: Injection, Status Functions, Permissions (4 PRs, Blocking to Question)
 
 Inputs reach `run:` via `env:`, not inline `${{ }}`. `if:` conditions that should run after a failure use `!cancelled()`, and removed permissions are checked against every step.
 
@@ -365,7 +366,7 @@ Inputs reach `run:` via `env:`, not inline `${{ }}`. `if:` conditions that shoul
 
 Checklist: section 13
 
-### Hardcoded user-facing strings instead of translations (2 PRs, important)
+### Hardcoded User-Facing Strings Instead of Translations (2 PRs, Important)
 
 User-facing strings, including `aria-label` text, come from `packages/web-react/src/translations/defaults.ts`, not literals.
 
@@ -373,7 +374,7 @@ User-facing strings, including `aria-label` text, come from `packages/web-react/
 
 Checklist: section 3
 
-### Stale `lmc-eu` organization name (2 PRs, important)
+### Stale `lmc-eu` Organization Name (2 PRs, Important)
 
 Links and fixtures use `alma-oss`, not `lmc-eu`.
 

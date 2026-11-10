@@ -62,7 +62,8 @@ already enforces it, do not add it to `REVIEW.md`; record it under "Already Enfo
 
 Update the theme sections, the "Collected" date, the "Latest merged" timestamp, the PR range, and the
 comment count in the "Dataset" section. Every theme is a `### <Theme> (<N> PRs, <typical severity>)` section
-with the rule, the quoted examples, and a `Checklist: section <number>` line (see "How to Read a Theme" in
+with the rule, the quoted examples, and a `Checklist: section <number>` line. Write headings in title case
+(`yarn lint:markdown` enforces it) (see "How to Read a Theme" in
 `REVIEW.md`). Keep the sections ordered by PR count, highest first; do not renumber the checklist sections.
 
 ## Step 5 — Promote (Periodic)
