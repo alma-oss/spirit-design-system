@@ -3,9 +3,7 @@
 A first-pass code review grounded in how Spirit maintainers actually review. It combines general
 checks (bugs, security, silent failures, type design, simplification) with a Spirit checklist built
 from human review comments, filtered against what CI and linters already enforce, so the review flags
-what humans keep asking for and stays quiet on the rest. The recurring feedback is logged in the root
-[`REVIEW.md`][review-md], which the review reads, and the [`spirit:review-feedback`][review-feedback]
-skill keeps it current.
+what humans keep asking for and stays quiet on the rest.
 
 ## How to Run
 
@@ -87,21 +85,18 @@ when GitHub API access is restricted, combined with `--output` to upload the rep
     └── review-output-templates.md          # CLI and CI rendering, writing style, verdict templates
 ```
 
-The skill also reads the root [`REVIEW.md`][review-md]. Deeper knowledge is reused from existing skills
+Deeper knowledge is reused from existing skills
 rather than copied: `spirit:accessibility`, `spirit:breaking-change-checklist`,
 `spirit:component-deprecation`, `spirit:stabilize-component`, `spirit:docsite-composition`, and
 `spirit:docsite-styles` are loaded when matching files change.
 
 ## Keeping It Current
 
-Review habits and tooling change. The [`spirit:review-feedback`][review-feedback] skill mines merged
-PRs, logs new themes in `REVIEW.md`, and every month or two promotes stable themes into
-`references/checklist.md`. When a new lint rule or CI check lands, move the theme it covers to
-"Already Enforced by Tooling" in the checklist.
+Review habits and tooling change. When a new lint rule or CI check lands, move the theme it covers to
+"Already Enforced by Tooling" in `references/checklist.md`.
 
 ## Related Skills
 
-- [`spirit:review-feedback`][review-feedback] — the feedback loop behind `REVIEW.md` and the checklist.
 - [`spirit:accept-jira-issue`][accept-jira-issue] — Jira access, acceptance criteria extraction, and deploy preview checks are reused from it.
 - [`spirit:conventional-comments`][conventional-comments] — the optional label overlay.
 - [`spirit:address-review-comments`][address-review-comments] — responding to review feedback as the author.
@@ -110,5 +105,3 @@ PRs, logs new themes in `REVIEW.md`, and every month or two promotes stable them
 [address-review-comments]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/address-review-comments/README.md
 [ai-agents]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/ai-agents.md
 [conventional-comments]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/conventional-comments/README.md
-[review-feedback]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/review-feedback/README.md
-[review-md]: https://github.com/alma-oss/spirit-design-system/blob/main/REVIEW.md
