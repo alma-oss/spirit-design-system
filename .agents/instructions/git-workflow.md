@@ -1,8 +1,3 @@
----
-description: Git workflow guidelines including branch naming, commit messages, and pull requests
-alwaysApply: true
----
-
 # Git Workflow Guidelines
 
 This document covers branch naming, commit messages, and pull request conventions.

@@ -1,8 +1,3 @@
----
-description: Code style guidelines including formatting tools and naming conventions
-alwaysApply: true
----
-
 # Code Style Guidelines
 
 This document covers code formatting and naming conventions not enforced by linting tools.

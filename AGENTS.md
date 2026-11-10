@@ -1,46 +1,102 @@
-# Spirit Design System - AI Instructions
+# Spirit Design System
 
-This file provides AI assistants with context and guidelines for working with this codebase.
+Open-source design system by Alma Career: a Yarn and Nx monorepo with React components,
+vanilla SCSS and JS, design tokens, icons, and tooling.
 
-## Quick Links
+## Repository Map
 
-- [Main Readme][readme]
-- [Contributing Guide][contributing]
-- [Git Workflow Guidelines][agents-git-workflow] – branch naming, commit messages, and PRs
-- [Code Style Guidelines][agents-code-style] – formatting tools and naming conventions
+| Path                                          | Contents                                                            |
+| --------------------------------------------- | ------------------------------------------------------------------- |
+| `packages/web-react`                          | React components (`@alma-oss/spirit-web-react`)                     |
+| `packages/web`                                | The same components in vanilla SCSS and JS (`@alma-oss/spirit-web`) |
+| `packages/design-tokens`                      | Design tokens for SCSS, JS, and TS                                  |
+| `packages/icons`                              | SVG and React icons                                                 |
+| `packages/codemods`                           | Migration transforms between major versions                         |
+| `apps/docsite`, `apps/storybook`, `apps/demo` | Documentation site, Storybook, demo app                             |
+| `configs/`                                    | Shared ESLint, Stylelint, Prettier, Jest, and TypeScript configs    |
+| `docs/decisions/`                             | Architecture decision records                                       |
 
-## Project Overview
+Folders with their own rules have a nested `AGENTS.md`:
+[`apps/docsite`][docsite-agents], [`packages/web`][web-agents], and [`packages/web-react`][web-react-agents].
 
-Spirit Design System is an open-source design system developed by Alma Career (formerly LMC). It's a comprehensive monorepo containing React components, vanilla JS/CSS implementations, design tokens, icons, and tooling.
+## Setup
 
-## Working with the Codebase
-
-- This project is using `yarn` as the package manager.
-  Use `yarn` commands for installing dependencies, running scripts, and managing packages. Do not use `npm` or `pnpm`.
-- This project uses **Yarn Catalogs** for centralized dependency version management.
-  Never use `yarn add <package>` directly — it bypasses the catalog system. Instead:
-  1. Add the version to the appropriate catalog in `.yarnrc.yml` under the `catalogs:` section.
+- Use the Node version in `.nvmrc`. Use Yarn only, never `npm` or `pnpm`.
+- Install with `make install`, then build the packages with `make build` before starting an app.
+- Never run `yarn add`. Add a dependency through Yarn Catalogs:
+  1. Add the version under `catalogs:` in `.yarnrc.yml`.
   2. Reference it in `package.json` as `"<package>": "catalog:<catalog-name>"`.
   3. Run `yarn install`.
-- When starting working with the codebase, refer to the
-  [Getting Started section of the Development Guide][development-guide-getting-started] for base tooling
-  and repository management.
-  Always use these tools for working with packages and gaining insights into the project structure and dependencies.
-- Dependencies may have changed since your training data. Read the version-matched docs shipped with the package or its changelog before changing its APIs, config, or conventions, for example the [Next.js guide][nextjs-docs].
-- When verifying your changes, refer to the [Common Tasks section of the Development Guide][development-guide-common-tasks]
-  for running tests and linters. Always run the appropriate tests and linters before finishing your work.
+- Before changing a dependency's API or config, read its version-matched docs or changelog in `node_modules`,
+  for example `node_modules/next/dist/docs/index.md`.
 
-## Additional Resources
+## Commands
 
-For comprehensive guidelines, see:
+```bash
+yarn workspace @alma-oss/spirit-web-react test                  # lint, types, and unit tests of one package
+yarn workspace @alma-oss/spirit-web-react test:unit <file-path> # unit tests matching a path pattern
+yarn workspace @alma-oss/spirit-web test
+make format-fix                                                 # Prettier
+yarn lint:markdown && yarn lint:text                            # after editing any Markdown file
+make test-e2e                                                   # visual tests in Docker, start Docker first
+make test-e2e-update                                            # update snapshots after an intended visual change
+make test                                                       # whole repository, run before opening a PR
+```
 
-- `docs/contribution/` - Development and contribution guides
-- `docs/decisions/` - Architecture decision records
+Run the checks for every package you touched before you finish.
+End-to-end testing details are in the [E2E Testing guide][e2e-testing].
 
-[agents-code-style]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/instructions/code-style.md
-[agents-git-workflow]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/instructions/git-workflow.md
-[contributing]: https://github.com/alma-oss/spirit-design-system/blob/main/CONTRIBUTING.md
-[development-guide-getting-started]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#getting-started
-[development-guide-common-tasks]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md#common-tasks
-[nextjs-docs]: node_modules/next/dist/docs/index.md
-[readme]: https://github.com/alma-oss/spirit-design-system/blob/main/README.md
+## Code Conventions
+
+- Write TypeScript only. Formatting and naming come from the config files listed in [Code Style][agents-code-style].
+- A component change lands in both `web` and `web-react`, with identical demos, previews, and README examples.
+- A new or changed prop also needs a Storybook story, unit tests, and a demo.
+- Experimental API uses the `UNSTABLE_` prefix or a feature flag.
+  See [Experimental Code][experimental-code] and [Feature Flags][feature-flags].
+- Styles use design tokens, never hard-coded values.
+  JS media queries use `breakpoints` from `@alma-oss/spirit-design-tokens`.
+- Do not pass a prop whose value equals the component default.
+- Before changing an established pattern, check `docs/decisions/` for its decision record.
+
+## Building UI with Spirit
+
+Any agent that builds UI from Spirit uses only Spirit components and design tokens:
+no inline styles, no `UNSAFE_*` props, and no ad-hoc CSS classes.
+
+## Git and Pull Requests
+
+- Commit or push only when the user asks.
+- Before the first commit, ask for the Jira issue ID (`DS-1234`) if the user has not given it.
+- Name a branch `type/DS-XXXX-short-description`.
+- Write a commit header as `type(scope): description #DS-XXXX`: lowercase, imperative, at most 100 characters,
+  component names in backticks. Valid scopes are in `.commitlintrc.mjs`.
+- Add no AI attribution to commits or PRs: no `Co-authored-by` trailer and no "Generated with" footer.
+- Fill in `.github/PULL_REQUEST_TEMPLATE.md` and link the full Jira issue URL.
+- Full rules are in [Git Workflow][agents-git-workflow].
+
+## Boundaries
+
+- Never publish packages, run `make version` or `make publish`, force-push `main`,
+  edit generated `CHANGELOG.md` files, or read or write `.env*` files.
+- Ask first before a breaking change to a stable API, a new dependency, or removing a public export.
+
+## Skills
+
+Use a skill from [`.agents/skills/`][skills] instead of improvising a procedure it covers:
+
+- `spirit:stabilize-component`: promote `UNSTABLE_X` to `X`.
+- `spirit:component-deprecation`: deprecate a component or a prop.
+- `spirit:breaking-change-checklist`: migration guide and codemod for a breaking change.
+- `spirit:figma-to-code`: implement a Figma design in React.
+- `spirit:accessibility`: WCAG 2.2 audit of a component.
+- `spirit:atomic-commits` and `spirit:create-pr`: commits and pull requests.
+
+[agents-code-style]: .agents/instructions/code-style.md
+[agents-git-workflow]: .agents/instructions/git-workflow.md
+[docsite-agents]: apps/docsite/AGENTS.md
+[e2e-testing]: docs/contribution/e2e-testing.md
+[experimental-code]: docs/contribution/experimental-code.md
+[feature-flags]: docs/contribution/feature-flags.md
+[skills]: .agents/skills/README.md
+[web-agents]: packages/web/AGENTS.md
+[web-react-agents]: packages/web-react/AGENTS.md
