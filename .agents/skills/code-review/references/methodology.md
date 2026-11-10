@@ -93,7 +93,8 @@ team reviews and keeps the review short.
 
 ### Conventional Comments Overlay
 
-Off by default: only part of the team uses Conventional Comments labels. With
+Off by default in the CLI: only part of the team uses Conventional Comments labels. CI rendering always
+uses the `label (decorations):` line to stay in parity with `.github/copilot-instructions.md`. With
 `--conventional-comments`, load `.agents/skills/conventional-comments/SKILL.md` and prepend its
 `label (decorations):` line to each finding. Nothing else changes.
 

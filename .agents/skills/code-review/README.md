@@ -20,13 +20,13 @@ Invoke the skill from Claude Code or Cursor in the repository root:
 /spirit:code-review --diff changes.diff # a unified diff file
 ```
 
-| Flag                      | Effect                                                                |
-| ------------------------- | --------------------------------------------------------------------- |
-| `--base <ref>`            | Base for `--local` (default `origin/main`)                            |
-| `--cli`, `--ci`           | Force the review context (see below); detected by default             |
-| `--post`                  | Post the review to the PR as a single `COMMENT` review (PR mode only) |
-| `--conventional-comments` | Prefix findings with Conventional Comments labels                     |
-| `--output <file>`         | Also write the report to a Markdown file                              |
+| Flag                      | Effect                                                                 |
+| ------------------------- | ---------------------------------------------------------------------- |
+| `--base <ref>`            | Base for `--local` (default `origin/main`)                             |
+| `--cli`, `--ci`           | Force the review context (see below); detected by default              |
+| `--post`                  | Post the review to the PR as a single `COMMENT` review (PR mode only)  |
+| `--conventional-comments` | Prefix CLI findings with Conventional Comments labels (CI always does) |
+| `--output <file>`         | Also write the report to a Markdown file                               |
 
 Without `--post`, nothing leaves your machine: the review is printed in the terminal.
 

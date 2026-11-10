@@ -100,9 +100,24 @@ Otherwise use the structure below, based on the Finding Format in `.github/copil
 both reviewers look alike:
 
 - The ` ```suggestion ` fence comes first when a line-level fix exists. Nothing comes before it.
-- Then the bold subject line: `**<icon> <severity>:** <subject>`.
+- Then the bold subject line: `**{label} ({decorations}):** {subject}`, exactly as in
+  `.github/copilot-instructions.md`. Decorations are always present; see
+  [Severity to Label Mapping][label-mapping].
 - Then a collapsed `<details>` block with `Fix:` and `Why:`. Markdown does not render inside
   `<details>`, so use HTML: inline code as `<code>…</code>`, code blocks as `<pre><code>…</code></pre>`.
+
+### Severity to Label Mapping
+
+| Severity  | Label                            | Decorations                                 |
+| --------- | -------------------------------- | ------------------------------------------- |
+| blocking  | `issue`                          | `blocking` (add `security` when it applies) |
+| important | `issue`, `todo`, or `suggestion` | `non-blocking`                              |
+| minor     | `suggestion` or `chore`          | `if-minor`                                  |
+| question  | `question`                       | `non-blocking`                              |
+| note      | `note` or `thought`              | `non-blocking`                              |
+| praise    | `praise`                         | `non-blocking`                              |
+
+Use `non-blocking` when no other decoration applies. Combine decorations as needed, e.g. `blocking, security`.
 
 With a suggestion:
 
@@ -111,7 +126,7 @@ With a suggestion:
 {suggested code}
 ```
 
-**🟠 important:** {subject}
+**{label} ({decorations}):** {subject}
 
 <details>
   <summary>Explanation</summary>
@@ -125,7 +140,7 @@ With a suggestion:
 Without a suggestion:
 
 ```markdown
-**🟠 important:** {subject}
+**{label} ({decorations}):** {subject}
 
 <details>
   <summary>Explanation</summary>
@@ -136,9 +151,8 @@ Without a suggestion:
 </details>
 ```
 
-When `--conventional-comments` is set, the subject line is the Conventional Comments label line instead,
-written exactly as in `.github/copilot-instructions.md` so both reviewers look alike:
-`**{label} ({decorations}):** {subject}`. Everything else (suggestion fence first, `<details>` block) stays the same.
+The CI subject line always uses the Conventional Comments label line, so the `--conventional-comments`
+flag only affects CLI rendering.
 
 ### Findings Without an Inline Anchor
 
@@ -146,7 +160,7 @@ Findings that cannot attach to a changed line (commit findings, missing acceptan
 outside the diff) go into the review body. They keep the location because nothing else anchors them:
 
 ```markdown
-**🟡 minor:** {subject}
+**{label} ({decorations}):** {subject}
 
 <details>
   <summary>Explanation</summary>
@@ -216,4 +230,5 @@ are omitted to reduce noise.
 The verdict is a recommendation. When posting, always submit the review with the `COMMENT` event; a
 human decides whether to approve.
 
+[label-mapping]: #severity-to-label-mapping
 [review-contexts]: #review-contexts
