@@ -3,7 +3,9 @@
 A first-pass code review grounded in how Spirit maintainers actually review. It combines general
 checks (bugs, security, silent failures, type design, simplification) with a Spirit checklist built
 from human review comments, filtered against what CI and linters already enforce, so the review flags
-what humans keep asking for and stays quiet on the rest.
+what humans keep asking for and stays quiet on the rest. The recurring feedback is logged in the
+[feedback log][feedback-log], and the root [`REVIEW.md`][review-md] gives the review its instructions.
+The [`spirit:review-feedback`][review-feedback] skill keeps the log current.
 
 ## How to Run
 
@@ -101,18 +103,12 @@ Review habits and tooling change. When a new lint rule or CI check lands, move t
 "Already Enforced by Tooling" in `references/checklist.md` and remove the matching item from the file in
 `references/checklist/`.
 
-### Refreshing the Checklist From Review Feedback
-
-Mining past PR reviews is expensive: a full refresh costs over 100,000 tokens of context. Keep it cheap:
-
-- Run refreshes incrementally with a date, for example `--since 2026-09-01` (the date of the last refresh),
-  and record that date when the checklist is updated. Do a full refresh only on request.
-- Process the feedback in chronological slices, and run **each slice in its own agent or context**.
-  Pass only the resulting candidate checklist items back, not the raw comments, so the context does not
-  grow with every slice.
+To refresh the checklist from review feedback, use [`spirit:review-feedback`][review-feedback], which also
+describes how to keep the mining cheap.
 
 ## Related Skills
 
+- [`spirit:review-feedback`][review-feedback] — the feedback loop behind the feedback log and the checklist.
 - [`spirit:accept-jira-issue`][accept-jira-issue] — Jira access and acceptance criteria extraction are reused from it.
 - [`spirit:conventional-comments`][conventional-comments] — the optional label overlay.
 - [`spirit:address-review-comments`][address-review-comments] — responding to review feedback as the author.
@@ -121,3 +117,6 @@ Mining past PR reviews is expensive: a full refresh costs over 100,000 tokens of
 [address-review-comments]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/address-review-comments/README.md
 [ai-agents]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/ai-agents.md
 [conventional-comments]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/conventional-comments/README.md
+[feedback-log]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/review-feedback/references/feedback-log.md
+[review-feedback]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/review-feedback/README.md
+[review-md]: https://github.com/alma-oss/spirit-design-system/blob/main/REVIEW.md

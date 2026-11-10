@@ -25,6 +25,8 @@ Load these on demand only:
 - `ci-rendering-and-posting.md` — only in the CI context or with `--post`: the GitHub review rendering and
   the posting procedure.
 
+Also read the repository root `REVIEW.md`, which sets the review scope and severity per package.
+
 ## Operating Rules
 
 These rules make the skill safe to run unattended (for example from a GitHub Action):
@@ -295,6 +297,7 @@ Load `references/ci-rendering-and-posting.md` and follow its "Posting" section. 
 
 ## Related Skills
 
+- `spirit:review-feedback` — the feedback loop that keeps the feedback log and the checklist current.
 - `spirit:accept-jira-issue` — Jira access and criteria extraction are reused from it, and its `verify.mjs`
   script can check computed styles on a deploy preview.
 - `spirit:conventional-comments` — the optional label overlay.
