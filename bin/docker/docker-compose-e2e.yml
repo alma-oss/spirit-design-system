@@ -17,6 +17,7 @@ services:
     command:
       - -c
       - |
+        npm install --global --force corepack
         corepack enable
         corepack install
         ${NPM_INSTALL_COMMAND:-yarn install}
