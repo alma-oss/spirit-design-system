@@ -262,6 +262,8 @@ The testing script includes:
 ### Unit Testing
 
 You can run unit testing via `test:unit` scripts.
+The top-level `yarn test:unit` runs only the projects affected against `origin/main`;
+use `yarn test:unit:all` to run everything (for example after a Node.js or tooling bump).
 For all available scripts see the package's `package.json` file.
 
 ### Manual Testing

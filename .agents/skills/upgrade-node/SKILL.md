@@ -125,7 +125,7 @@ node .agents/skills/upgrade-node/scripts/scan-node-refs.mjs --expect-min <newMin
 node --version
 yarn install
 yarn build
-yarn test:unit
+yarn test:unit:all
 ```
 
 If `--expect-min` fails, fix remaining files and re-run the scan until it passes.

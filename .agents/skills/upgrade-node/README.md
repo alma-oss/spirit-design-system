@@ -23,7 +23,7 @@ Use when you need to:
 3. Inspects git history for prior Node upgrade commits
 4. Shows a change summary and waits for approval
 5. Applies all file updates
-6. Re-runs the scan with `--expect-min` and executes `yarn install`, `yarn build`, `yarn test:unit`
+6. Re-runs the scan with `--expect-min` and executes `yarn install`, `yarn build`, `yarn test:unit:all`
 
 ## Scan Script
 
@@ -67,7 +67,7 @@ The script reports:
 → "CI matrix?" → [24, 26, 28]
 → "Add migration guide for v6?" → yes (latest: migration-v6.md)
 → [change table] → Apply
-→ scan --expect-min 24 → yarn install → yarn build → yarn test:unit
+→ scan --expect-min 24 → yarn install → yarn build → yarn test:unit:all
 ```
 
 ## Prerequisites
