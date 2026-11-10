@@ -257,7 +257,8 @@ For additional personal MCP servers, add them to `~/.cursor/mcp.json`. For permi
 
 ## Agent Instructions
 
-Beyond tool configuration, agents are guided by the root `AGENTS.md` and by instruction files in `.agents/instructions/`.
+Beyond tool configuration, agents are guided by the root `AGENTS.md`, by nested `AGENTS.md` files in packages and apps, and by the reference instructions in `.agents/instructions/`.
+Keep rules that agents must always follow in `AGENTS.md`, because agents do not load linked files on their own.
 
 ## Project-Specific Skills
 
