@@ -3,13 +3,14 @@
  * Collects human review feedback from recently merged PRs, used to refresh
  * `REVIEW.md`. See `references/mining-method.md` of the `spirit:review-feedback` skill.
  *
- * Usage: node mine-review-history.mjs [--limit 200] [--since <date or ISO timestamp>] [--out /tmp/review-history]
- *        [--repo alma-oss/spirit-design-system]
+ * Usage: node mine-review-history.mjs [--limit 200] [--since <date or ISO timestamp> [--until <date or ISO timestamp>]]
+ *        [--out /tmp/review-history] [--repo alma-oss/spirit-design-system]
  *
  * With `--since`, only PRs merged after that moment are fetched (for example the "Latest merged" value in `REVIEW.md`).
  * All matching PRs are fetched in that case, so `--limit` applies to baseline runs only. GitHub Search returns at
  * most 1,000 results, so a `--since` run that matches more PRs fails instead of publishing a checkpoint that
- * skips some.
+ * skips some. Add `--until` to mine a bounded window (merged after `--since`, up to and including `--until`), and use
+ * it as `--since` of the next window, so a long period can be mined in several runs without skipping any PR.
  *
  * A baseline run scans every PR the search returns, orders them by merge time, and keeps the newest `--limit` PRs with
  * human feedback. The search can only sort by creation time, so selecting by merge time needs the whole result set.
@@ -25,13 +26,38 @@ const { values: args } = parseArgs({
     out: { type: 'string', default: '/tmp/review-history' },
     repo: { type: 'string', default: 'alma-oss/spirit-design-system' },
     since: { type: 'string' },
+    until: { type: 'string' },
   },
 });
+
+if (args.until && !args.since) {
+  process.stderr.write('Error: --until needs --since, because a window is bounded on both sides.\n');
+  process.exit(1);
+}
+
+// Search qualifiers compare dates, but `--since` is an exclusive moment (the previous checkpoint), so the PRs merged
+// exactly at that moment are dropped after fetching. An unparsable value fails here instead of matching nothing.
+const toTime = (value) => {
+  const time = Date.parse(value);
+
+  if (Number.isNaN(time)) {
+    process.stderr.write(`Error: "${value}" is not a date or an ISO timestamp.\n`);
+    process.exit(1);
+  }
+
+  return time;
+};
+const sinceTime = args.since ? toTime(args.since) : null;
+
+if (args.until) {
+  toTime(args.until);
+}
 
 // `--limit` samples a baseline run only. An incremental `--since` run must exhaust all matching PRs, because the
 // printed `Latest mergedAt` becomes the next checkpoint and any PR skipped here would never be mined.
 const LIMIT = args.since ? Number.POSITIVE_INFINITY : Number(args.limit);
-// Long comments are shortened (and reported) so that `comments.md` stays readable for clustering.
+// Long comments are shortened in `comments.md` (and reported) so that it stays readable for clustering. `prs.json`
+// keeps the complete text.
 const MAX_BODY_LENGTH = 2000;
 // GitHub Search never returns more than this many results, however many pages are requested.
 const SEARCH_RESULT_CAP = 1000;
@@ -62,10 +88,8 @@ query($searchQuery: String!, $cursor: String) {
 // GitHub reports bot accounts (Copilot, Netlify, Dependabot, ...) with the `Bot` type, so no login matching is needed.
 const isHuman = (account) => account?.type === 'User';
 
-let shortened = 0;
-
-const clean = (body) => {
-  const text = body
+const clean = (body) =>
+  body
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/<summary>[\s\S]*?<\/summary>/g, '')
     .replace(/<\/?details\b[^>]*>/g, '')
@@ -73,14 +97,7 @@ const clean = (body) => {
     .replace(/\n{2,}/g, '\n')
     .trim();
 
-  if (text.length > MAX_BODY_LENGTH) {
-    shortened += 1;
-
-    return text.slice(0, MAX_BODY_LENGTH);
-  }
-
-  return text;
-};
+const mergedQualifier = args.since ? ` merged:${args.since}..${args.until ?? '*'}` : '';
 
 const fetchPage = (cursor) => {
   const ghArgs = [
@@ -89,7 +106,7 @@ const fetchPage = (cursor) => {
     '-f',
     `query=${QUERY}`,
     '-f',
-    `searchQuery=repo:${args.repo} is:pr is:merged${args.since ? ` merged:>${args.since}` : ''} sort:created-desc`,
+    `searchQuery=repo:${args.repo} is:pr is:merged${mergedQualifier} sort:created-desc`,
   ];
 
   if (cursor) {
@@ -141,14 +158,17 @@ for (;;) {
   issueCount = count;
 
   if (args.since && issueCount > SEARCH_RESULT_CAP) {
-    const found = `${issueCount} PRs were merged after ${args.since}, but GitHub Search returns at most`;
-    const advice = 'Run again with a later --since, or split the period into several runs, so no PR is skipped.';
+    const found = `${issueCount} PRs match this period, but GitHub Search returns at most ${SEARCH_RESULT_CAP}.`;
+    const advice = 'Split it into windows with --since and --until, and start each window at the previous --until.';
 
-    process.stderr.write(`Error: ${found} ${SEARCH_RESULT_CAP}. ${advice}\n`);
+    process.stderr.write(`Error: ${found} ${advice} A later --since alone would skip the PRs in between.\n`);
     process.exit(1);
   }
 
-  for (const pr of nodes) {
+  // The search qualifier is inclusive, but `--since` is the previous checkpoint, which was mined already.
+  const unmined = nodes.filter((pr) => sinceTime === null || Date.parse(pr.mergedAt) > sinceTime);
+
+  for (const pr of unmined) {
     scanned += 1;
     entries.push({ ...toFeedback(pr), truncated: isTruncated(pr) });
   }
@@ -167,17 +187,20 @@ const prs = entries
   .slice(0, LIMIT);
 
 // Truncation is checked for every PR in the mined merge window, including PRs whose fetched entries hold no human
-// feedback: later pages may still contain some.
-const oldestMergedAt = prs.at(-1)?.mergedAt;
+// feedback: later pages may still contain some. A `--since` run mines all scanned PRs, so its window is all of them. A
+// baseline run mines the PRs from the oldest kept one onwards, or all of them when none has feedback.
+const windowStart = args.since ? null : prs.at(-1)?.mergedAt ?? null;
 const truncated = entries
-  .filter((entry) => entry.truncated && oldestMergedAt && entry.mergedAt >= oldestMergedAt)
+  .filter((entry) => entry.truncated && (!windowStart || entry.mergedAt >= windowStart))
   .sort(byMergedAtDesc)
   .map((entry) => entry.number);
 
+const shorten = (body) => body.slice(0, MAX_BODY_LENGTH);
 const lines = prs.flatMap((pr) => [
   `\n### #${pr.number} ${pr.title} (by ${pr.author}, ${pr.mergedAt.slice(0, 10)})`,
-  ...pr.feedback.map((item) => `- [${item.where}] ${item.by}: ${item.body}`),
+  ...pr.feedback.map((item) => `- [${item.where}] ${item.by}: ${shorten(item.body)}`),
 ]);
+const shortened = prs.flatMap((pr) => pr.feedback).filter((item) => item.body.length > MAX_BODY_LENGTH).length;
 
 mkdirSync(args.out, { recursive: true });
 writeFileSync(join(args.out, 'prs.json'), JSON.stringify(prs, null, 2));
@@ -198,8 +221,14 @@ if (latestMergedAt) {
   process.stderr.write(`Latest mergedAt: ${latestMergedAt} (record it as "Latest merged" in REVIEW.md)\n`);
 }
 
+if (args.until) {
+  process.stderr.write(`Window ends at ${args.until}: use it as --since of the next window\n`);
+}
+
 if (shortened > 0) {
-  process.stderr.write(`Warning: ${shortened} comments were shortened to ${MAX_BODY_LENGTH} characters\n`);
+  const count = `${shortened} comments were shortened to ${MAX_BODY_LENGTH} characters in comments.md`;
+
+  process.stderr.write(`Warning: ${count} (prs.json keeps them complete)\n`);
 }
 
 if (truncated.length > 0) {
