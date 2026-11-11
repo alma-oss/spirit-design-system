@@ -22,7 +22,7 @@ stable, it is promoted into the skill's checklist during a periodic refresh (eve
 Checklist: section <number>
 ```
 
-- **Theme** headings use title case because the markdown linter requires it.
+- **Theme** headings use title case because the Markdown linter requires it.
 - **N PRs** counts the distinct PRs where reviewers raised the theme.
 - **Typical severity** uses the `spirit:code-review` severities. "A to B" means it depends on impact.
 - **Checklist** is the section of [`checklist.md`][checklist] that encodes the theme.
