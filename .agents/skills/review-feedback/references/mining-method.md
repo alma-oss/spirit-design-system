@@ -34,14 +34,18 @@ Follow it for every refresh so the counts stay comparable between runs.
 node .agents/skills/review-feedback/scripts/mine-review-history.mjs --limit 200 --out /tmp/review-history
 ```
 
+A baseline run scans every PR the GitHub search returns (at most 1,000), orders them by merge time, and keeps the
+newest `--limit` PRs with human feedback.
+
 Add `--since <date or ISO timestamp>` to fetch only PRs merged after that moment, for a periodic run
 (use the "Latest merged" value from `REVIEW.md`). A `--since` run ignores `--limit` and fetches every matching
-PR, so no PR is skipped before the new checkpoint. The script prints the latest `mergedAt` it saw, so the
-next run starts exactly where this one ended.
+PR, so no PR is skipped before the new checkpoint. When more than 1,000 PRs match, GitHub Search cannot return them
+all, so the script stops with an error: run it again with a later `--since`. The script prints the latest `mergedAt`
+it saw, so the next run starts exactly where this one ended.
 
 The script writes `prs.json` (raw data) and `comments.md` (one line per human comment, grouped by
 PR) into the output directory. It warns about PRs whose feedback exceeded 100 entries per list, since
-those were truncated.
+those were truncated, and about comments longer than 2,000 characters, which are shortened.
 
 ## Validating Changes
 
