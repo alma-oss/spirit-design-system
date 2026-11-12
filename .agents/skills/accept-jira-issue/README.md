@@ -7,7 +7,7 @@ Decide with evidence whether a Jira issue can be accepted: verify each acceptanc
 ```text
 /spirit:accept-jira-issue DS-2831
 /spirit:accept-jira-issue DS-2831 DS-2774
-/spirit:accept-jira-issue https://jira.almacareer.tech/browse/DS-2860
+/spirit:accept-jira-issue https://almacareer.atlassian.net/browse/DS-2860
 ```
 
 Or ask in plain language: "check if DS-2831 meets its acceptance criteria and whether I can accept it".

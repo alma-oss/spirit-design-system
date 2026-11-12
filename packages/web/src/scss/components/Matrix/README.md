@@ -240,7 +240,7 @@ As of now, only **single-column components** are supported in Matrix.
 [pricing-plan]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/PricingPlan/README.md
 [scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ScrollView/README.md#horizontal-scrolling
 [stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
-[jira-pricing-safari-bug]: https://jira.almacareer.tech/browse/DS-2051
+[jira-pricing-safari-bug]: https://almacareer.atlassian.net/browse/DS-2051
 [mdn-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
 [mdn-grid-row]: https://developer.mozilla.org/en-US/docs/Glossary/Grid_Row
 [mdn-subgrid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid

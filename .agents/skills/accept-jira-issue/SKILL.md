@@ -29,7 +29,7 @@ Process issues one at a time. With several keys (`DS-2831 DS-2774`), finish Step
 
 ### Step 0: Preflight
 
-- Parse every argument matching `[A-Z]+-\d+` (bare keys or `https://jira.almacareer.tech/browse/<KEY>` URLs).
+- Parse every argument matching `[A-Z]+-\d+` (bare keys or `https://almacareer.atlassian.net/browse/<KEY>` URLs).
 - Check Jira access by getting the first issue. Use the Jira MCP if available; otherwise REST with `JIRA_PERSONAL_TOKEN` (see recipes).
   - If every Jira call fails with a generic error, tell the user to connect to the company VPN.
   - If the user recently changed the Jira token, some MCP clients only pick it up after a restart — say so.

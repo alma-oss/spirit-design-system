@@ -12,7 +12,7 @@ import { test } from '../../helpers/fixtures';
 test.describe('Checkbox Accessibility', () => {
   const testUrl = normalizeUrl(WEB_REACT_SERVER_URL, WEB_REACT_COMPONENTS_URI, 'Checkbox');
   // TODO by @dlouhak: Re-enable 'color-contrast' rule once the tokens are updated to meet contrast requirements
-  // https://jira.almacareer.tech/browse/DS-2317
+  // https://almacareer.atlassian.net/browse/DS-2317
   const a11yConfig = { ...getWCAG2AAConfig(), disableRules: ['color-contrast'] };
 
   test('Checkbox component has no a11y violations', async ({ page, pageRetries }) => {

@@ -49,7 +49,7 @@ Returns `{ toggleSelection, replaceSelection, isSelected, removeItem, removeAll 
 
 ## useSelectionAria
 
-Provides keyboard and roving-tabindex behaviour for a selection tag grid. Tag-grid keyboard is the first slice here; roving tabindex refinements are tracked in [DS-2520](https://jira.almacareer.tech/browse/DS-2520) and [DS-2521](https://jira.almacareer.tech/browse/DS-2521).
+Provides keyboard and roving-tabindex behaviour for a selection tag grid. Tag-grid keyboard is the first slice here; roving tabindex refinements are tracked in [DS-2520](https://almacareer.atlassian.net/browse/DS-2520) and [DS-2521](https://almacareer.atlassian.net/browse/DS-2521).
 
 ### API
 

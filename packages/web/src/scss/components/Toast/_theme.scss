@@ -19,7 +19,7 @@ $padding-x-desktop: tokens.$space-1100;
 $padding-y: tokens.$space-900;
 
 // Temporary stacking workaround until Toast uses the Popover API top layer.
-// @see https://jira.almacareer.tech/browse/DS-2602
+// @see https://almacareer.atlassian.net/browse/DS-2602
 $z-index: 1000;
 
 $queue-collapse-after: 3;

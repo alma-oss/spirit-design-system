@@ -32,7 +32,7 @@ The PR body follows `.github/PULL_REQUEST_TEMPLATE.md`:
 | ---------------------- | --------------------------------------------------------------------------------- |
 | **Description**        | Why the change was needed; what was changed and why that approach (2–5 sentences) |
 | **Additional context** | Edge cases, Figma/Storybook links, deferred follow-ups — omit if nothing to add   |
-| **Issue reference**    | Full Jira URL, e.g. `https://jira.almacareer.tech/browse/DS-XXXX`                 |
+| **Issue reference**    | Full Jira URL, e.g. `https://almacareer.atlassian.net/browse/DS-XXXX`             |
 
 ## Key Principles
 
