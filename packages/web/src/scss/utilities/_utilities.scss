@@ -47,8 +47,6 @@
     @include local.set-border-color(tokens.$disabled-border, $important: true);
     @include local.set-border-color-subtle(tokens.$disabled-border, $important: true);
     @include local.set-background-color(tokens.$disabled-background, $important: true);
-    @include local.set-background-color-state-hover(tokens.$disabled-background, $important: true);
-    @include local.set-background-color-state-active(tokens.$disabled-background, $important: true);
 
     user-select: none !important;
     pointer-events: none !important;

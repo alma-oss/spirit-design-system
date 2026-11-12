@@ -43,6 +43,10 @@ const resolveCssColorToRgb = async (page: Page, selector: string, cssPropertyOrE
     return resolved;
   }, cssPropertyOrExpression);
 
+// Mirrors the default hover coefficients of `dynamic-colors.alter-color()`.
+const getDynamicHoverColor = (baseColor: string): string =>
+  `oklch(from ${baseColor} calc(l + 0.3 * (0.8 - l)) clamp(0, calc(c * (1 + 4 * (l - 0.5))), 0.2) h / 100%)`;
+
 const hoverAtCorner = async (page: Page, selector: string): Promise<void> => {
   await page.locator(selector).hover({
     // eslint-disable-next-line id-length -- Playwright position API requires x and y
@@ -201,11 +205,6 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
     // 2 & 4. Hovered interactive surface & ControlButton inside hovered Tag
     const buttonTagDefault = await getComputedColors(page, '#interactive-button-tag');
     const nestedControlDefault = await getComputedColors(page, '#nested-control-button');
-    const nestedControlHoverVarDefault = await resolveCssColorToRgb(
-      page,
-      '#nested-control-button',
-      '--spirit-local-background-color-state-hover',
-    );
 
     expect(nestedControlDefault.backgroundColor).toBe(buttonTagDefault.backgroundColor);
 
@@ -227,20 +226,19 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
     expect(buttonTagHoveredScheme).toBe(buttonTagDefault.backgroundColor);
 
     const nestedControlWhenTagHovered = await getComputedColors(page, '#nested-control-button');
-    const nestedControlHoverVarWhenTagHovered = await resolveCssColorToRgb(
+    const nestedControlHoverWhenTagHovered = await resolveCssColorToRgb(
       page,
       '#nested-control-button',
-      '--spirit-local-background-color-state-hover',
+      getDynamicHoverColor(buttonTagHovered.backgroundColor),
     );
 
     expect(nestedControlWhenTagHovered.backgroundColor).toBe(buttonTagHovered.backgroundColor);
-    expect(nestedControlHoverVarWhenTagHovered).not.toBe(nestedControlHoverVarDefault);
 
     // 5. ControlButton hovered inside hovered Tag
     await page.locator('#nested-control-button').hover();
     const nestedControlBothHovered = await getComputedColors(page, '#nested-control-button');
 
-    expect(nestedControlBothHovered.backgroundColor).toBe(nestedControlHoverVarWhenTagHovered);
+    expect(nestedControlBothHovered.backgroundColor).toBe(nestedControlHoverWhenTagHovered);
     expect(nestedControlBothHovered.backgroundColor).not.toBe(buttonTagHovered.backgroundColor);
 
     // 3. Active interactive surface
@@ -306,7 +304,10 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
     await page.locator('#primary-button').hover();
     const primaryButtonHovered = await getComputedColors(page, '#primary-button');
 
+    const primaryHoveredLocal = await resolveCssColorToRgb(page, '#primary-button', '--spirit-local-background-color');
+
     expect(primaryButtonHovered.backgroundColor).not.toBe(primaryButtonDefault.backgroundColor);
+    expect(primaryHoveredLocal).toBe(primaryButtonHovered.backgroundColor);
 
     await page.mouse.move(0, 0);
 
@@ -373,10 +374,10 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
       '#addon-button-in-outline',
       '--spirit-local-background-color',
     );
-    const addonInOutlineDefaultHoverVar = await resolveCssColorToRgb(
+    const addonInOutlineExpectedHover = await resolveCssColorToRgb(
       page,
       '#addon-button-in-outline',
-      '--spirit-local-background-color-state-hover',
+      getDynamicHoverColor(parentSurfaceBg),
     );
     const controlInItemDefault = await resolveCssColorToRgb(
       page,
@@ -397,7 +398,7 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
     );
 
     expect(addonInOutlineHoveredLocal).toBe(parentSurfaceBg);
-    expect(addonInOutlineHovered.backgroundColor).toBe(addonInOutlineDefaultHoverVar);
+    expect(addonInOutlineHovered.backgroundColor).toBe(addonInOutlineExpectedHover);
 
     await page.mouse.move(0, 0);
 

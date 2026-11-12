@@ -106,39 +106,3 @@
 @mixin set-background-color-subtle($value, $important: false) {
     @include set('background-color-subtle', $value, $important);
 }
-
-@function get-background-color-state-hover($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-state-hover);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-state-hover, $fallback);
-}
-
-@mixin set-background-color-state-hover($value, $important: false) {
-    @include set('background-color-state-hover', $value, $important);
-}
-
-@function get-background-color-state-active($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-state-active);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-state-active, $fallback);
-}
-
-@mixin set-background-color-state-active($value, $important: false) {
-    @include set('background-color-state-active', $value, $important);
-}
-
-@function get-background-color-state-selected($fallback: null) {
-    @if not $fallback {
-        @return var(--#{tokens.$css-variable-prefix}local-background-color-state-selected);
-    }
-
-    @return var(--#{tokens.$css-variable-prefix}local-background-color-state-selected, $fallback);
-}
-
-@mixin set-background-color-state-selected($value, $important: false) {
-    @include set('background-color-state-selected', $value, $important);
-}

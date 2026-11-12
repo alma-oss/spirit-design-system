@@ -1,6 +1,9 @@
 // 1. Clip the loading spinner to fix button flickering during spinner animation.
 // 2. Mobile breakpoint does not have an infix and we do not need asymmetrical classes for it, because the
 //    default is already asymmetrical.
+// 3. Write the hover and active background (component color override with the scheme state as fallback) into the
+//    local context and paint from it, so nested elements follow it and `.disabled` wins. Declared after the component
+//    color overrides, which set the resting local background color with the same specificity.
 
 @use 'sass:map';
 @use 'sass:string';
@@ -17,6 +20,14 @@
 @use 'theme';
 
 $_component-name: 'Button';
+$_background-color-state-hover: var(
+    --#{tokens.$css-variable-prefix}button-background-color-state-hover,
+    #{color-scheme.get-background-color-state-hover()}
+);
+$_background-color-state-active: var(
+    --#{tokens.$css-variable-prefix}button-background-color-state-active,
+    #{color-scheme.get-background-color-state-active()}
+);
 
 .Button {
     --#{tokens.$css-variable-prefix}icon-composition-size: var(--#{tokens.$css-variable-prefix}button-icon-size);
@@ -24,8 +35,6 @@ $_component-name: 'Button';
     @include local.set-color(color-scheme.get-color());
     @include local.set-border-color(color-scheme.get-border-color());
     @include local.set-background-color(color-scheme.get-background-color());
-    @include local.set-background-color-state-hover(color-scheme.get-background-color-state-hover());
-    @include local.set-background-color-state-active(color-scheme.get-background-color-state-active());
     @include typography.from-css-variables($infix: string.to-lower-case($_component-name));
     @include responsive-properties.create-cascade(
         $property: 'column-gap',
@@ -74,14 +83,6 @@ $_component-name: 'Button';
         text-decoration: none;
         color: local.get-color();
     }
-
-    &:hover {
-        background-color: local.get-background-color-state-hover();
-    }
-
-    &:active {
-        background-color: local.get-background-color-state-active();
-    }
 }
 
 @include component-color-overrides.generate(
@@ -92,8 +93,26 @@ $_component-name: 'Button';
         state-default: background-color,
         state-hover: background-color-state-hover,
         state-active: background-color-state-active,
+    ),
+    $component-properties: (
+        background-color-state-hover,
+        background-color-state-active,
     )
 );
+
+// 3.
+.Button:hover {
+    @include local.set-background-color($_background-color-state-hover);
+
+    background-color: local.get-background-color();
+}
+
+.Button:active {
+    @include local.set-background-color($_background-color-state-active);
+
+    background-color: local.get-background-color();
+}
+
 @include dictionaries.generate-sizes(
     $class-name: $_component-name,
     $dictionary-values: theme.$size-dictionary,
