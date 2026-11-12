@@ -415,8 +415,31 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
       '--spirit-local-background-color',
     );
 
+    const plainButtonDefault = await getComputedColors(page, '#plain-button-in-surface');
+    const plainButtonDefaultResolved = await resolveCssColorToRgb(
+      page,
+      '#plain-button-in-surface',
+      '--spirit-color-component-button-plain-state-default',
+    );
+    const childInPlainButtonDefault = await getComputedColors(page, '#child-in-plain-button');
+
     expect(addonInOutlineDefault).toBe(parentSurfaceBg);
     expect(controlInItemDefault).toBe(parentSurfaceBg);
+    expect(plainButtonDefault.backgroundColor).toBe(plainButtonDefaultResolved);
+    expect(childInPlainButtonDefault.backgroundColor).toBe(parentSurfaceBg);
+
+    // A hovered plain Button paints its hover state and passes it to nested dynamic elements
+    await page.locator('#plain-button-in-surface').hover({
+      // eslint-disable-next-line id-length -- Playwright position API requires x and y
+      position: { x: 12, y: 24 },
+    });
+    const plainButtonHovered = await getComputedColors(page, '#plain-button-in-surface');
+    const childInPlainButtonHovered = await getComputedColors(page, '#child-in-plain-button');
+
+    expect(plainButtonHovered.backgroundColor).not.toBe(plainButtonDefaultResolved);
+    expect(childInPlainButtonHovered.backgroundColor).toBe(plainButtonHovered.backgroundColor);
+
+    await page.mouse.move(0, 0);
 
     // Hovering an outline InputContainer and its nested ControlButton keeps the parent surface context
     await page.locator('#addon-button-in-outline').hover();
