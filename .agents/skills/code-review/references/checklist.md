@@ -3,7 +3,9 @@
 What to look for in a Spirit diff. The checklist has two parts:
 
 - **General Checks** apply to every review, whatever the files.
-- **Spirit sections 1–14** come from feedback that human reviewers raised repeatedly in past PRs.
+- **Spirit sections 1–14** come from feedback that human reviewers raised repeatedly in past PRs. The
+  root [`REVIEW.md`][review-md] logs that feedback with PR counts and evidence, and the
+  `spirit:review-feedback` skill promotes stable themes from it into these sections.
 
 Items already enforced by linters or CI are intentionally absent; see
 [Already Enforced by Tooling][already-enforced].
@@ -329,3 +331,4 @@ mismatch but does not judge whether an updated snapshot is expected, and Styleli
 When a new lint rule or CI check lands, add its theme to this table and remove the matching checklist item.
 
 [already-enforced]: #already-enforced-by-tooling
+[review-md]: https://github.com/alma-oss/spirit-design-system/blob/main/REVIEW.md
