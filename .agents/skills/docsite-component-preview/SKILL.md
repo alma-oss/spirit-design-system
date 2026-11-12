@@ -2,8 +2,8 @@
 name: spirit:docsite-component-preview
 description: >-
   Add or change a component card illustration on the Spirit docsite /components listing. Covers the SVG
-  file, its registration, and keeping the detail Web Preview untouched. Use when adding a component to the
-  documentation or updating the picture on its card.
+  file, the placeholder for a component without one, and keeping the detail Web Preview untouched. Use when
+  adding a component to the documentation or updating the picture on its card.
 category: spirit
 displayName: Spirit Docsite Component Preview
 ---
@@ -21,13 +21,18 @@ The card shows one wireframe SVG per component, 120 × 96 px, from
 
 - The slug is the kebab-case component name (`ButtonLink` → `button-link`, `UNSTABLE_Combobox` →
   `unstable-combobox`), the same as in the component URL.
-- Keep the SVG as it was delivered. Do not hand-edit colors or shapes. Regenerate the file from the wireframe
-  source instead.
+- Keep the SVG as it was delivered. Do not hand-edit colors or shapes.
 
 ## Registration
 
 There is nothing to register. The catalog reads `public/component-illustrations` and shows the SVG whose file
 name matches the component slug.
+
+## Category and Description
+
+Add a new component to its category in `component-catalog/constants/componentCategories.ts` by the placement rule
+at the top of the file. Do not move existing components or change category descriptions or
+`componentDescriptions.ts` unless someone asks for new categories or public copy.
 
 ## A Component with No Illustration
 
@@ -37,10 +42,6 @@ Do not add a file. The card shows the placeholder. Do not invent an illustration
 
 Do not edit `preview.html` or `apps/docsite/src/domains/components/utils/compilePreview.ts`. Those belong
 to the component-detail Web Preview.
-
-Add a new component to its category in `docs/component-categories.yaml` by the placement rule at the top of
-the file. Do not move existing components or change category descriptions or `componentDescriptions.ts`
-unless someone asks for new categories or public copy.
 
 ## The Frame Is a Picture
 
