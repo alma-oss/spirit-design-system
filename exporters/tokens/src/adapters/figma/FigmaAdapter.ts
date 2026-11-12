@@ -4,6 +4,7 @@ import { indexVariables } from './aliases';
 import { collectionFamily } from './conventions';
 import { DiagnosticCollector } from './diagnostics';
 import { FigmaApiError } from './FigmaApiError';
+import { keepKnownReferences } from './mappers/references';
 import { mapStyle } from './mappers/styleMapper';
 import { mapVariable } from './mappers/variableMapper';
 import type { MapContext } from './mappers/context';
@@ -120,9 +121,11 @@ export const mapFigmaSource = (source: FigmaSource, diagnostics: DiagnosticColle
 
   diagnostics.throwIfErrors();
 
+  const knownTokens = keepKnownReferences(tokens);
+
   return {
-    tokens,
-    groups: deriveGroups(tokens),
+    tokens: knownTokens,
+    groups: deriveGroups(knownTokens),
     themes: mapThemes(source.collections.find((collection) => collectionFamily(collection.name) === 'theme')),
   };
 };

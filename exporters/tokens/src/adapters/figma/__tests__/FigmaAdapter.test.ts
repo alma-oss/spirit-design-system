@@ -1,3 +1,5 @@
+import { createTokenIndex } from '../../../core/tokenIndex';
+import { resolveValueDeep } from '../../../core/resolveValue';
 import { readTypography } from '../../../core/typography';
 import { TokenTypeEnum, type DesignToken } from '../../../core/types';
 import { FigmaAdapter } from '../FigmaAdapter';
@@ -56,6 +58,24 @@ const createVariables = (): RestVariable[] => [
     resolvedType: 'COLOR',
     variableCollectionId: 'c-theme',
     valuesByMode: { t1: WHITE, t2: BLACK },
+    scopes: ['ALL_FILLS'],
+  }),
+  variable({
+    id: 'v-prim-color',
+    name: 'Red/500',
+    resolvedType: 'COLOR',
+    variableCollectionId: 'c-primitives',
+    valuesByMode: { p1: { r: 1, g: 0, b: 0, a: 1 } },
+  }),
+  variable({
+    id: 'v-accent',
+    name: 'Color/Accent',
+    resolvedType: 'COLOR',
+    variableCollectionId: 'c-theme',
+    valuesByMode: {
+      t1: { type: 'VARIABLE_ALIAS', id: 'v-prim-color' },
+      t2: { type: 'VARIABLE_ALIAS', id: 'v-color' },
+    },
     scopes: ['ALL_FILLS'],
   }),
   variable({
@@ -252,17 +272,36 @@ describe('FigmaAdapter', () => {
       expect(byId(tokens, 'v-font-size:d2').metadata.device).toBe('desktop');
     });
 
-    it('should keep an alias as a reference carrying the resolved value', async () => {
+    it('should keep a color alias to an exported token as a reference carrying the resolved value', async () => {
       const { tokens } = await fetchTokens(createFetch());
 
+      expect(byId(tokens, 'v-accent:t2').value).toEqual({
+        type: 'reference',
+        tokenId: 'v-color:t2',
+        resolved: { type: 'color', format: 'hex', value: '#000000ff' },
+      });
+    });
+
+    it('should resolve an alias to an unexported token to its value', async () => {
+      const { tokens } = await fetchTokens(createFetch());
+
+      expect(byId(tokens, 'v-accent:t1').value).toEqual({ type: 'color', format: 'hex', value: '#ff0000ff' });
       expect(byId(tokens, 'v-radius')).toMatchObject({
         type: TokenTypeEnum.Radius,
-        value: {
-          type: 'reference',
-          tokenId: 'v-radius-base',
-          resolved: { type: 'number', value: 4, unit: 'px' },
-        },
+        value: { type: 'number', value: 4, unit: 'px' },
       });
+    });
+
+    it('should hand over values the pipeline can resolve through an index of the collection', async () => {
+      const { tokens } = await fetchTokens(createFetch());
+      const index = createTokenIndex(tokens);
+      const resolvable = [TokenTypeEnum.Color, TokenTypeEnum.Shadow, TokenTypeEnum.Gradient];
+
+      tokens
+        .filter((token) => resolvable.includes(token.type))
+        .forEach((token) => {
+          expect(() => resolveValueDeep(token.value, index)).not.toThrow();
+        });
     });
 
     it('should map typography with a device-bound font size as a reference', async () => {

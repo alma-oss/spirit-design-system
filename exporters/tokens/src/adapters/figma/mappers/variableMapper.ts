@@ -84,7 +84,11 @@ export const mapVariable = (
       id: tokenIdFor(variable, collection, modeId),
       path,
       type: classification.type,
-      value: withReference(resolved, isAlias(raw) ? raw.id : undefined, context, modeId),
+      // Only colors keep the alias: numbers and strings are plain values in the model, like Supernova hands them over.
+      value:
+        classification.type === TokenTypeEnum.Color
+          ? withReference(resolved, isAlias(raw) ? raw.id : undefined, context, modeId)
+          : resolved,
       originalId: variable.id,
       originalType: variable.resolvedType,
       description: variable.description,
