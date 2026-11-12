@@ -1,5 +1,5 @@
 import { breakpoints } from '@alma-oss/spirit-design-tokens';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardBody,
@@ -17,7 +17,8 @@ import {
   Truncate,
   VisuallyHidden,
 } from '../../../src/components';
-import { type GridColumns } from '../../../src/types';
+import { Sizes } from '../../../src/constants';
+import { CardSizes, type CardSizesDictionaryType, type GridColumns } from '../../../src/types';
 
 // Employers upload a single cover image through Teamio. Like on Jobs.cz, it is displayed in the 480:300 ratio on
 // mobile and in the 1024:300 ratio from the tablet breakpoint up. The crops are requested from the image CDN, so
@@ -175,91 +176,191 @@ const formatOffers = (count: number) => {
   return `${count} nabídek`;
 };
 
+// Controls would be flooded with two attributes per card, so the cover and the logo can be replaced on one selected
+// card at a time. An uploaded file takes precedence over the URL; leave both empty to keep the original image.
+const NO_CARD = 0;
+
+// The cards have a maximum width: 288px on mobile and 384px from the tablet breakpoint up. They shrink on narrower
+// screens.
+const CARD_WIDTH_MOBILE = 288;
+const CARD_WIDTH_TABLET = 384;
+
+// The grid spacing is set explicitly, so the container can account for it in its maximum width.
+const GRID_SPACING = { mobile: 'space-700', tablet: 'space-1000' } as const;
+
+const useIsTablet = () => {
+  const [isTablet, setIsTablet] = useState(() => window.matchMedia(COVER_BREAKPOINT).matches);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(COVER_BREAKPOINT);
+    const handleChange = (event: MediaQueryListEvent) => setIsTablet(event.matches);
+
+    setIsTablet(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return isTablet;
+};
+
 type CardEmployerGalleryProps = {
+  coverFile?: string[];
+  coverSize: CardSizesDictionaryType;
+  coverUrl?: string;
+  customizeCard: number;
   gridCols: GridColumns;
+  logoFile?: string[];
+  logoUrl?: string;
+  logoSize: 'small' | 'medium' | 'large';
   numCards: number;
 };
+
+// Storybook renders controls without a category first and sorts the rest alphabetically by name (see preview.ts), so
+// every control is categorized and the subcategories keep the customize card, cover, and logo in this order.
+const CUSTOMIZE_CATEGORY = 'Customize card';
+const GENERAL_CATEGORY = 'General';
+
+const imageArgTypes = (kind: 'cover' | 'logo') => ({
+  [`${kind}File`]: {
+    control: { type: 'file', accept: 'image/*' },
+    name: `${kind} file`,
+    table: { category: CUSTOMIZE_CATEGORY, subcategory: kind === 'cover' ? 'Cover' : 'Logo' },
+    description: `Image file replacing the ${kind} of the customized card.`,
+    if: { arg: 'customizeCard', neq: NO_CARD },
+  },
+  [`${kind}Url`]: {
+    control: 'text',
+    name: `${kind} URL`,
+    table: { category: CUSTOMIZE_CATEGORY, subcategory: kind === 'cover' ? 'Cover' : 'Logo' },
+    description: `URL of the image replacing the ${kind} of the customized card. Ignored when a file is uploaded.`,
+    if: { arg: 'customizeCard', neq: NO_CARD },
+  },
+});
 
 export default {
   title: 'Examples/Compositions/Card',
   argTypes: {
+    customizeCard: {
+      control: { type: 'select', labels: { [NO_CARD]: 'None' } },
+      name: 'customize card',
+      description: 'Number of the card whose cover and logo can be replaced.',
+      options: [NO_CARD, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      table: { category: CUSTOMIZE_CATEGORY },
+    },
+    ...imageArgTypes('cover'),
+    ...imageArgTypes('logo'),
     gridCols: {
       control: 'select',
       name: 'grid columns',
       description: 'Number of columns in the grid from the tablet breakpoint up.',
       options: [1, 2, 3],
+      table: { category: GENERAL_CATEGORY },
     },
     numCards: {
       control: 'select',
       name: 'number of cards',
       description: 'Number of employer cards to display.',
       options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      table: { category: GENERAL_CATEGORY },
+    },
+    coverSize: {
+      control: 'select',
+      name: 'cover size',
+      description: 'Size of the CardMedia with the cover.',
+      options: [...Object.values(CardSizes)],
+      table: { category: GENERAL_CATEGORY },
+    },
+    logoSize: {
+      control: 'select',
+      name: 'logo size',
+      description: 'Size of the PartnerLogo in the CardLogo.',
+      options: [...Object.values(Sizes)],
+      table: { category: GENERAL_CATEGORY },
     },
   },
   args: {
+    customizeCard: NO_CARD,
+    coverSize: 'small',
     gridCols: 2,
+    logoSize: 'small',
     numCards: 6,
   },
 };
 
 export const CardEmployerGallery = (args: CardEmployerGalleryProps) => {
-  const { gridCols, numCards } = args;
+  const { coverFile, coverSize, coverUrl, customizeCard, gridCols, logoFile, logoUrl, logoSize, numCards } = args;
+
+  const isTablet = useIsTablet();
+  const columns = isTablet ? gridCols : 1;
+  const cardWidth = isTablet ? CARD_WIDTH_TABLET : CARD_WIDTH_MOBILE;
+  const gridSpacing = isTablet ? GRID_SPACING.tablet : GRID_SPACING.mobile;
+  // The container limits the size of the cards because to prevent enlarging of the cover images
+  const maxWidth = `calc(${columns} * ${cardWidth}px + ${columns - 1} * var(--spirit-${gridSpacing}) + 2 * var(--container-padding-inline))`;
 
   return (
-    <Container size="large">
-      <Grid cols={{ mobile: 1, tablet: gridCols }}>
-        {EMPLOYERS.slice(0, numCards).map((employer) => (
-          <Card key={employer.name} isBoxed>
-            {employer.cover && (
-              <CardMedia size="small" isExpanded>
-                <picture>
-                  <source media={COVER_BREAKPOINT} srcSet={employer.cover.desktop} />
-                  <img src={employer.cover.mobile} alt="" />
-                </picture>
-              </CardMedia>
-            )}
-            {employer.logo && (
-              <CardLogo>
-                <PartnerLogo size="medium">
-                  <img src={employer.logo} alt="" />
-                </PartnerLogo>
-              </CardLogo>
-            )}
-            <CardBody>
-              {/* Both the title and the description can be truncated with Truncate; set the limits as needed. */}
-              <CardTitle elementType="h2">
-                <Link href="#">{employer.name}</Link>
-              </CardTitle>
-              <Flex alignmentY="center" spacing="space-600" isWrapping marginBottom="space-700">
-                <Text elementType="span" size="small" textColor="secondary">
-                  <VisuallyHidden>Obor: </VisuallyHidden>
-                  {employer.industry}
-                </Text>
-                <Flex elementType="span" alignmentY="center" spacing="space-300">
-                  <Icon name="profile" boxSize={20} color="secondary" />
+    <Container size="large" UNSAFE_style={{ maxWidth }}>
+      <Grid cols={{ mobile: 1, tablet: gridCols }} spacing={GRID_SPACING}>
+        {EMPLOYERS.slice(0, numCards).map((employer, index) => {
+          const isCustomized = customizeCard === index + 1;
+          const customCover = coverFile?.[0] || coverUrl;
+          const customLogo = logoFile?.[0] || logoUrl;
+          const cover = isCustomized && customCover ? { desktop: customCover, mobile: customCover } : employer.cover;
+          const logo = isCustomized && customLogo ? customLogo : employer.logo;
+
+          return (
+            <Card key={employer.name} isBoxed>
+              {cover && (
+                <CardMedia size={coverSize} isExpanded>
+                  <picture>
+                    <source media={COVER_BREAKPOINT} srcSet={cover.desktop} />
+                    <img src={cover.mobile} alt="" />
+                  </picture>
+                </CardMedia>
+              )}
+              {logo && (
+                <CardLogo>
+                  <PartnerLogo size={logoSize}>
+                    <img src={logo} alt="" />
+                  </PartnerLogo>
+                </CardLogo>
+              )}
+              <CardBody>
+                {/* Both the title and the description can be truncated with Truncate; set the limits as needed. */}
+                <CardTitle elementType="h2">
+                  <Link href="#">{employer.name}</Link>
+                </CardTitle>
+                <Flex alignmentY="center" spacing="space-600" isWrapping marginBottom="space-700">
                   <Text elementType="span" size="small" textColor="secondary">
-                    <VisuallyHidden>Počet zaměstnanců: </VisuallyHidden>
-                    {employer.employees}
+                    <VisuallyHidden>Obor: </VisuallyHidden>
+                    {employer.industry}
                   </Text>
+                  <Flex elementType="span" alignmentY="center" spacing="space-300">
+                    <Icon name="profile" boxSize={20} color="secondary" />
+                    <Text elementType="span" size="small" textColor="secondary">
+                      <VisuallyHidden>Počet zaměstnanců: </VisuallyHidden>
+                      {employer.employees}
+                    </Text>
+                  </Flex>
                 </Flex>
-              </Flex>
-              <Text size="small" textColor="secondary">
-                <Truncate limit={4}>{employer.description}</Truncate>
-              </Text>
-            </CardBody>
-            {/* Without an expanded CardMedia, the footer divider does not span the full width of the card yet.
-                This is a known bug tracked in DS-2912 and will be fixed in the Card component. */}
-            <CardFooter hasDivider>
-              <Text elementType="span" size="small">
-                {/* The employer name makes the link purpose clear in a list of links, where the card heading is not read. */}
-                <Link href="#">
-                  {formatOffers(employer.offers)}
-                  <VisuallyHidden> – {employer.name}</VisuallyHidden>
-                </Link>
-              </Text>
-            </CardFooter>
-          </Card>
-        ))}
+                <Text size="small" textColor="secondary">
+                  <Truncate limit={4}>{employer.description}</Truncate>
+                </Text>
+              </CardBody>
+              {/* Without an expanded CardMedia, the footer divider does not span the full width of the card yet.
+                  This is a known bug tracked in DS-2912 and will be fixed in the Card component. */}
+              <CardFooter hasDivider>
+                <Text elementType="span" size="small">
+                  {/* The employer name makes the link purpose clear in a list of links, where the card heading is not read. */}
+                  <Link href="#">
+                    {formatOffers(employer.offers)}
+                    <VisuallyHidden> – {employer.name}</VisuallyHidden>
+                  </Link>
+                </Text>
+              </CardFooter>
+            </Card>
+          );
+        })}
       </Grid>
     </Container>
   );
