@@ -143,16 +143,18 @@
                 // stylelint-disable -- We need to allow this to make sass-true work
                 .multi-prop-test-basic {
                     --spirit-local-background-color: #f00 !important;
-                    background-color: #f00 !important;
+                    background-color: var(--spirit-local-background-color) !important;
                     --spirit-local-color: #fff !important;
-                    color: #fff !important;
+                    color: var(--spirit-local-color) !important;
                 }
                 // stylelint-enable
             }
         }
     }
 
-    @include test.it('should generate single-property utilities with custom properties and !important') {
+    @include test.it(
+        'should generate single-property utilities that write and paint from the local custom property with !important'
+    ) {
         $sample-utility: (
             property: background-color,
             class: bg,
@@ -171,7 +173,7 @@
                 // stylelint-disable -- We need to allow this to make sass-true work
                 .bg-primary {
                     --spirit-local-background-color: #fff !important;
-                    background-color: #fff !important;
+                    background-color: var(--spirit-local-background-color) !important;
                 }
                 // stylelint-enable
             }
