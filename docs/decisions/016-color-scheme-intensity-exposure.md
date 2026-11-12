@@ -39,7 +39,7 @@ out on a basic background.
 
 2. **Sass accessors mirror the CSS custom properties.** Both `tools/color-scheme` and `tools/local` expose `get-color-basic()`,
    `get-color-subtle()`, `get-background-color-basic()`, and `get-background-color-subtle()` alongside `get-color()` and
-   `get-background-color()` (plus matching `set-*` mixins), each getter taking an optional fallback. Component CSS reads
+   `get-background-color()` (plus matching `set-*` mixins in `tools/local`), each getter taking an optional fallback. Component CSS reads
    the intensities through these rather than writing the CSS custom property names by hand.
 
 3. **Categories without a pair reuse what they have.** The `disabled` category has no background pair of its own, so

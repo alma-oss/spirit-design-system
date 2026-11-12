@@ -34,7 +34,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-color, $fallback);
 }
 
-@mixin set-color($value) {
+@mixin -set-color($value) {
     @include -set-property('color', $value);
 }
 
@@ -46,7 +46,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-color-basic, $fallback);
 }
 
-@mixin set-color-basic($value) {
+@mixin -set-color-basic($value) {
     @include -set-property('color-basic', $value);
 }
 
@@ -58,7 +58,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-color-subtle, $fallback);
 }
 
-@mixin set-color-subtle($value) {
+@mixin -set-color-subtle($value) {
     @include -set-property('color-subtle', $value);
 }
 
@@ -70,7 +70,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-border-color, $fallback);
 }
 
-@mixin set-border-color($value) {
+@mixin -set-border-color($value) {
     @include -set-property('border-color', $value);
 }
 
@@ -82,7 +82,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-border-color-subtle, $fallback);
 }
 
-@mixin set-border-color-subtle($value) {
+@mixin -set-border-color-subtle($value) {
     @include -set-property('border-color-subtle', $value);
 }
 
@@ -94,7 +94,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color, $fallback);
 }
 
-@mixin set-background-color($value) {
+@mixin -set-background-color($value) {
     @include -set-property('background-color', $value);
 }
 
@@ -106,7 +106,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-basic, $fallback);
 }
 
-@mixin set-background-color-basic($value) {
+@mixin -set-background-color-basic($value) {
     @include -set-property('background-color-basic', $value);
 }
 
@@ -118,7 +118,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-subtle, $fallback);
 }
 
-@mixin set-background-color-subtle($value) {
+@mixin -set-background-color-subtle($value) {
     @include -set-property('background-color-subtle', $value);
 }
 
@@ -130,7 +130,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-hover, $fallback);
 }
 
-@mixin set-background-color-state-hover($value) {
+@mixin -set-background-color-state-hover($value) {
     @include -set-property('background-color-state-hover', $value);
 }
 
@@ -142,7 +142,7 @@ $_emotion-tokens-key: 'emotion-colors';
     @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-active, $fallback);
 }
 
-@mixin set-background-color-state-active($value) {
+@mixin -set-background-color-state-active($value) {
     @include -set-property('background-color-state-active', $value);
 }
 
@@ -152,10 +152,6 @@ $_emotion-tokens-key: 'emotion-colors';
     }
 
     @return var(--#{tokens.$css-variable-prefix}color-scheme-background-color-state-selected, $fallback);
-}
-
-@mixin set-background-color-state-selected($value) {
-    @include -set-property('background-color-state-selected', $value);
 }
 
 @function generate-color-scheme-map($tokens-group, $prefix: '') {
@@ -303,48 +299,48 @@ $_emotion-tokens-key: 'emotion-colors';
 
         .#{$class-prefix}-#{$key} {
             @if $color {
-                @include set-color($color);
+                @include -set-color($color);
             }
 
             // 2.
             @if $color-basic {
-                @include set-color-basic($color-basic);
+                @include -set-color-basic($color-basic);
             }
 
             // 2.
             @if $color-subtle {
-                @include set-color-subtle($color-subtle);
+                @include -set-color-subtle($color-subtle);
             }
 
             @if $border-color {
-                @include set-border-color($border-color);
+                @include -set-border-color($border-color);
             }
 
             // 1.
             @if $border-color-subtle {
-                @include set-border-color-subtle($border-color-subtle);
+                @include -set-border-color-subtle($border-color-subtle);
             }
 
             @if $background-color {
-                @include set-background-color($background-color);
+                @include -set-background-color($background-color);
             }
 
             // 2.
             @if $background-color-basic {
-                @include set-background-color-basic($background-color-basic);
+                @include -set-background-color-basic($background-color-basic);
             }
 
             // 2.
             @if $background-color-subtle {
-                @include set-background-color-subtle($background-color-subtle);
+                @include -set-background-color-subtle($background-color-subtle);
             }
 
             @if $background-color-state-hover {
-                @include set-background-color-state-hover($background-color-state-hover);
+                @include -set-background-color-state-hover($background-color-state-hover);
             }
 
             @if $background-color-state-active {
-                @include set-background-color-state-active($background-color-state-active);
+                @include -set-background-color-state-active($background-color-state-active);
             }
         }
     }
