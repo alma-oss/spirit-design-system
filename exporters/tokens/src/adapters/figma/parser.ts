@@ -1,6 +1,4 @@
 import { FigmaExportError } from './FigmaExportError';
-import { chunk, figmaFileUrl, requestJson } from './client';
-import { NODE_BATCH_SIZE } from './constants';
 import type {
   FigmaRgba,
   FigmaVariableScope,
@@ -43,7 +41,7 @@ interface RestVariable {
   variableCollectionId: string;
 }
 
-interface VariablesResponse {
+export interface VariablesResponse {
   meta: {
     variableCollections: Record<string, RestCollection>;
     variables: Record<string, RestVariable>;
@@ -57,13 +55,13 @@ interface RestStyleMeta {
   style_type: string;
 }
 
-interface StylesResponse {
+export interface StylesResponse {
   meta: {
     styles: RestStyleMeta[];
   };
 }
 
-interface FileResponse {
+export interface FileResponse {
   name: string;
 }
 
@@ -87,11 +85,11 @@ interface RestNode {
   type: string;
 }
 
-interface NodesResponse {
+export interface NodesResponse {
   nodes: Record<string, { document?: RestNode } | null>;
 }
 
-const STYLE_TYPES = new Set(['TEXT', 'FILL', 'EFFECT']);
+export const STYLE_TYPES = new Set(['TEXT', 'FILL', 'EFFECT']);
 
 const aliasFrom = (value: unknown): { type: 'VARIABLE_ALIAS'; id: string } | undefined => {
   if (Array.isArray(value)) {
@@ -278,46 +276,4 @@ export const toFigmaSource = (
     })),
     styles: mappedStyles,
   };
-};
-
-const fetchNodes = async (
-  fileKey: string,
-  ids: string[],
-  token: string,
-  fetchImplementation: typeof fetch,
-): Promise<NodesResponse['nodes']> => {
-  const responses = await Promise.all(
-    chunk(ids, NODE_BATCH_SIZE).map((batch) => {
-      const searchParams = new URLSearchParams({ ids: batch.join(',') });
-
-      return requestJson<NodesResponse>(
-        fetchImplementation,
-        `${figmaFileUrl(fileKey, '/nodes')}?${searchParams}`,
-        token,
-      );
-    }),
-  );
-
-  return Object.assign({}, ...responses.map((response) => response.nodes));
-};
-
-export const readFigmaSource = async (
-  fileKey: string,
-  token: string,
-  fetchImplementation: typeof fetch = fetch,
-): Promise<FigmaSource> => {
-  const [file, variablesResponse, stylesResponse] = await Promise.all([
-    requestJson<FileResponse>(fetchImplementation, `${figmaFileUrl(fileKey)}?depth=1`, token),
-    requestJson<VariablesResponse>(fetchImplementation, figmaFileUrl(fileKey, '/variables/local'), token),
-    requestJson<StylesResponse>(fetchImplementation, figmaFileUrl(fileKey, '/styles'), token),
-  ]);
-  const styles = stylesResponse.meta.styles ?? [];
-  const nodes = await fetchNodes(
-    fileKey,
-    styles.filter((style) => STYLE_TYPES.has(style.style_type)).map((style) => style.node_id),
-    token,
-    fetchImplementation,
-  );
-
-  return toFigmaSource({ key: fileKey, name: file.name }, variablesResponse, styles, nodes);
 };
