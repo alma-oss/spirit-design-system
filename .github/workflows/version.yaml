@@ -1,8 +1,7 @@
 name: 🚀 Version
-run-name: Version, dry-run:${{ inputs.dryrun }}
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       dryrun:
         description: 'Dry run'
@@ -14,11 +13,17 @@ on:
         required: false
         default: 'no'
         type: string
+    outputs:
+      sha:
+        description: 'SHA of the release commit, set only when commits and tags were pushed'
+        value: ${{ jobs.version.outputs.sha }}
 
 jobs:
   version:
     name: 🏷️ Version
     runs-on: ubuntu-24.04
+    outputs:
+      sha: ${{ steps.release.outputs.sha }}
 
     # Git operations and releases use the app token (see below); GITHUB_TOKEN only needs read access.
     permissions:
@@ -79,6 +84,7 @@ jobs:
           git --no-pager show --stat --patch HEAD
 
       - name: Bump version and Create GitHub Releases
+        id: release
         if: ${{ !inputs.dryrun && inputs.confirm == 'yes' }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
@@ -86,3 +92,4 @@ jobs:
           echo "🚀 Creating versions, pushing, and publishing GitHub releases..."
           make version
           echo "✅ Versions bumped, tags pushed, and GitHub releases created"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
