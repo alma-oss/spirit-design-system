@@ -101,7 +101,9 @@ The token needs the `file_content:read` and `file_variables:read` scopes. The fi
   lives in. Ambiguous or conflicting definitions are errors.
 - A global variable becomes one token (`<variable id>`), a theme or device variable one token per mode
   (`<variable id>:<mode id>`), tagged with `metadata.theme` or `metadata.device`.
-- An alias becomes a `reference` carrying the value resolved in that mode.
+- A color alias to another exported token becomes a `reference` carrying the value resolved in that mode. An alias to a
+  token that is not exported (Primitives) and any numeric or string alias is a plain value, so every reference left can
+  be followed through a `TokenIndex` built from the collection.
 - Dimensions are emitted in `px`; the px-to-rem rule converts them.
 - `figma-*` variables and typography styles containing `Link` or `Italic` are excluded.
 - Malformed names, ambiguous scopes, missing aliases and alias cycles are reported together in one error, so a run
