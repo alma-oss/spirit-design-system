@@ -118,7 +118,7 @@ When creating pull requests:
 
 - Use the PR template from `.github/PULL_REQUEST_TEMPLATE.md`
 - Component names in PR title and body must be in backticks (e.g., `Hidden`, `VisuallyHidden`)
-- Include issue references as full Jira links (e.g., https://jira.almacareer.tech/browse/DS-2311)
+- Include issue references as full Jira links (e.g., https://almacareer.atlassian.net/browse/DS-2311)
 - Do not include AI attribution (e.g., "Generated with Claude Code", "Co-authored-by: Cursor")
 
 ### PR Title Format

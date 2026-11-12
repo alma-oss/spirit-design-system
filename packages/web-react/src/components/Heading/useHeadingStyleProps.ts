@@ -8,7 +8,7 @@ export function useHeadingStyleProps<S = void, Emph = void, C = void, FW = void>
   const { emphasis, fontWeight, isItalic, size, textColor, ...restProps } = props;
   const isItalicEmphasis = emphasis === Emphasis.ITALIC;
 
-  // @see https://jira.almacareer.tech/browse/DS-2738
+  // @see https://almacareer.atlassian.net/browse/DS-2738
   useDeprecationMessage({
     method: 'custom',
     trigger: emphasis !== undefined,

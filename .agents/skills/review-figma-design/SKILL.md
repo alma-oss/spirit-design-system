@@ -334,7 +334,7 @@ If running in Spirit, perform the following:
 
 2. **Populate JIRA column** — for each row in the Required DS Changes table, check whether a
    matching `DS-` ticket was found in the git log. If yes, link it as
-   `[DS-XXXX](https://jira.almacareer.tech/browse/DS-XXXX)`. If no matching ticket was found,
+   `[DS-XXXX](https://almacareer.atlassian.net/browse/DS-XXXX)`. If no matching ticket was found,
    write _to be created_.
 
 ### Step 8: Identify Required DS Changes
@@ -604,7 +604,7 @@ _(With Figma URL — node IDs as clickable links):_
 
    ![Finding 1: Short description](finding-1.png)
 
-2. ⚠️ **Specific finding** — [description, ticket reference if covered e.g. [DS-XXXX](https://jira.almacareer.tech/browse/DS-XXXX)].
+2. ⚠️ **Specific finding** — [description, ticket reference if covered e.g. [DS-XXXX](https://almacareer.atlassian.net/browse/DS-XXXX)].
 
    ![Finding 2: Short description](finding-2.png)
 
@@ -614,7 +614,7 @@ _(Without Figma URL — node IDs in HTML comments, invisible in rendered output)
 
    ![Finding 1: Short description](finding-1.png)
 
-2. ⚠️ **Specific finding** — [description, ticket reference if covered e.g. [DS-XXXX](https://jira.almacareer.tech/browse/DS-XXXX)].<!-- node:34809:7083 -->
+2. ⚠️ **Specific finding** — [description, ticket reference if covered e.g. [DS-XXXX](https://almacareer.atlassian.net/browse/DS-XXXX)].<!-- node:34809:7083 -->
 
    ![Finding 2: Short description](finding-2.png)
 
