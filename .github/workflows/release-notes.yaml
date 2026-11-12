@@ -2,8 +2,7 @@ name: 📝 Release Notes
 
 on:
   # TEMPORARY: test trigger, remove before merge
-  push:
-    branches: [feat/automate-release-notes]
+  pull_request:
     paths: ['.github/workflows/release-notes.yaml']
   workflow_call:
     inputs:
