@@ -260,11 +260,6 @@ For additional personal MCP servers, add them to `~/.cursor/mcp.json`. For permi
 Beyond tool configuration, agents are guided by the root `AGENTS.md`, by nested `AGENTS.md` files in packages and apps, and by the reference instructions in `.agents/instructions/`.
 Keep rules that agents must always follow in `AGENTS.md`, because agents do not load linked files on their own.
 
-Claude Code reads `AGENTS.md` natively since v2.1.277, so the repository has no `CLAUDE.md`.
-A nested `AGENTS.md` loads when Claude Code reads a file in that folder.
-Do not add a `CLAUDE.md`: with the default setting, Claude Code then skips `AGENTS.md` in that folder.
-See the [Claude Code memory documentation][claude-memory].
-
 ## Project-Specific Skills
 
 Spirit ships with slash commands that extend agent capabilities. They live in `.agents/skills/` and are documented in the [Skills README][skills-readme].
@@ -272,6 +267,5 @@ Spirit ships with slash commands that extend agent capabilities. They live in `.
 Invoke them with the `spirit:` namespace prefix, e.g. `/spirit:release-notes`.
 
 [agents-git-workflow]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/instructions/git-workflow.md
-[claude-memory]: https://code.claude.com/docs/en/memory
 [mcp]: https://modelcontextprotocol.io/
 [skills-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/README.md

@@ -4,6 +4,7 @@
 
 - Component stories live next to their component in `packages/web-react/src/components/<Component>/stories/`.
   This app only holds the Storybook configuration, decorators, and theme.
+- Documentation pages (MDX) live in `packages/web-react/docs/stories/`.
 
 ## Rules
 

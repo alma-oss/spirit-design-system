@@ -81,6 +81,7 @@ no inline styles, no `UNSAFE_*` props, and no ad-hoc CSS classes.
 - Never publish packages, run `make version` or `make publish`, force-push `main`,
   edit generated `CHANGELOG.md` files, or read or write `.env*` files.
 - Ask first before a breaking change to a stable API, a new dependency, or removing a public export.
+- Never edit Figma files. Read designs only, and put evidence in Jira or the pull request.
 
 ## Skills
 

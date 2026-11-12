@@ -4,12 +4,12 @@
 
 - `src/svg/` holds the SVG icons synchronized from the Figma Assets file (the `Brand=Spirit` variant).
   Never edit or add an icon by hand.
-- `scripts/` holds the build verification, `dist/` is build output, and `types/icons.d.ts` is a tracked type stub for the tsconfig `paths` (do not delete it).
+- `scripts/` holds the build verification and `types/icons.d.ts` is a tracked type stub for the tsconfig `paths` (do not delete it).
 
 ## Rules
 
-- Synchronize icons with `yarn icons:sync` from the repository root. It needs `FIGMA_ACCESS_TOKEN` in the environment.
-  Never write the token to a file, a commit, or a log.
+- Do not run `yarn icons:sync` on your own. It overwrites `src/svg/` with the current Figma state, including unreleased icons.
+  The Sync Assets workflow does it.
 - Removing or renaming an icon is a breaking change. Follow the `spirit:breaking-change-checklist` skill.
 - Before finishing, run `yarn workspace @alma-oss/spirit-icons lint`, `types`, and `build`.
   The build runs `build:verify`.
