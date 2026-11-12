@@ -4,6 +4,8 @@
 // 3. Write the hover and active background (component color override with the scheme state as fallback) into the
 //    local context and paint from it, so nested elements follow it and `.disabled` wins. Declared after the component
 //    color overrides, which set the resting local background color with the same specificity.
+// 4. Plain buttons are transparent at rest, so they keep the inherited local background color for nested dynamic
+//    colors. Only the hover and active states they paint write the local background color.
 
 @use 'sass:map';
 @use 'sass:string';
@@ -111,6 +113,13 @@ $_background-color-state-active: var(
     @include local.set-background-color($_background-color-state-active);
 
     background-color: local.get-background-color();
+}
+
+// 4.
+.Button.Button--plain:not(:hover, :active, .disabled) {
+    @include local.set-background-color(inherit);
+
+    background-color: theme.$plain-background-color;
 }
 
 @include dictionaries.generate-sizes(
