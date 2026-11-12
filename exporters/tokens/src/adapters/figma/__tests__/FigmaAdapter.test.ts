@@ -16,6 +16,8 @@ type RestVariable = {
   variableCollectionId: string;
   valuesByMode: Record<string, unknown>;
   scopes?: string[];
+  remote?: boolean;
+  deletedButReferenced?: boolean;
 };
 
 const variable = (overrides: RestVariable) => ({ key: `key-${overrides.id}`, scopes: [], ...overrides });
@@ -383,6 +385,36 @@ describe('FigmaAdapter', () => {
 
       expect(onWarning).toHaveBeenCalledWith(expect.stringContaining('Skipping collection "Primitives"'));
       expect(onWarning).toHaveBeenCalledWith(expect.stringContaining('Skipping unused effect style Shadow/Unused'));
+    });
+
+    it('should skip remote variables and warn about deleted ones', async () => {
+      const onWarning = jest.fn();
+      const variables = createVariables();
+      variables.push(
+        variable({
+          id: 'v-remote',
+          name: 'Spacing/900',
+          resolvedType: 'FLOAT',
+          variableCollectionId: 'c-global',
+          valuesByMode: { g1: 1 },
+          scopes: ['GAP'],
+          remote: true,
+        }),
+        variable({
+          id: 'v-deleted',
+          name: 'Spacing/950',
+          resolvedType: 'FLOAT',
+          variableCollectionId: 'c-global',
+          valuesByMode: { g1: 1 },
+          scopes: ['GAP'],
+          deletedButReferenced: true,
+        }),
+      );
+
+      const { tokens } = await fetchTokens(createFetch({ variables }), onWarning);
+
+      expect(tokens.map((token) => token.id)).not.toEqual(expect.arrayContaining(['v-remote', 'v-deleted']));
+      expect(onWarning).toHaveBeenCalledWith('Skipping deleted variable "Spacing/950".');
     });
 
     it('should fail with one aggregated report for every problem of the file', async () => {

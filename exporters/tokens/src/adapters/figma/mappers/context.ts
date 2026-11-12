@@ -69,8 +69,8 @@ export const tokenIdFor = (variable: FigmaVariable, collection: FigmaCollection,
 
 /**
  * Id of the token an alias points at, in the mode the alias was read in (the target's default mode when it has no
- * such mode). The target may live in a collection that is not exported (Primitives); the reference then relies on the
- * `resolved` value.
+ * such mode). The target may live in a collection that is not exported (Primitives); `keepKnownReferences` later
+ * replaces such a reference with its `resolved` value.
  *
  * @param targetId - Figma id of the aliased variable
  * @param context

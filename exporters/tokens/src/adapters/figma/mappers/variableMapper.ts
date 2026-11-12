@@ -5,8 +5,6 @@ import { splitPath } from '../naming';
 import type { FigmaCollection, FigmaVariable, FigmaVariableValue } from '../types';
 import { buildDesignToken, mapColor, mapNumber, tokenIdFor, withReference, type MapContext } from './context';
 
-const NUMERIC_STRING = /^-?\d+(\.\d+)?$/;
-
 const mapValue = (type: TokenTypeEnum, unit: string | undefined, raw: FigmaVariableValue | undefined) => {
   if (raw === undefined) {
     return undefined;
@@ -20,11 +18,7 @@ const mapValue = (type: TokenTypeEnum, unit: string | undefined, raw: FigmaVaria
     return typeof raw === 'string' ? ({ type: 'string', value: raw } satisfies TokenValue) : undefined;
   }
 
-  if (typeof raw === 'number') {
-    return mapNumber(raw, unit);
-  }
-
-  return typeof raw === 'string' && NUMERIC_STRING.test(raw.trim()) ? mapNumber(Number(raw)) : undefined;
+  return typeof raw === 'number' ? mapNumber(raw, unit) : undefined;
 };
 
 /**
