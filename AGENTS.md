@@ -68,7 +68,7 @@ no inline styles, no `UNSAFE_*` props, and no ad-hoc CSS classes.
 ## Git and Pull Requests
 
 - Commit or push only when the user asks.
-- Before the first commit, ask for the Jira issue ID (`DS-1234`) if the user has not given it.
+- Before creating a branch or the first commit, ask for the Jira issue ID (`DS-1234`) if the user has not given it.
 - Name a branch `type/DS-XXXX-short-description`.
 - Write a commit header as `type(scope): description #DS-XXXX`: lowercase, imperative, at most 100 characters,
   component names in backticks. Valid scopes are in `.commitlintrc.mjs`.
