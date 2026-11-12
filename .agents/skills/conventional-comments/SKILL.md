@@ -1,20 +1,24 @@
 ---
 name: spirit:conventional-comments
 description: >-
-  Conventional Comments vocabulary (labels, decorations, ordering) for Spirit code review. Loaded
-  only when a review is run with `--conventional-comments`; it overlays label markings onto the
-  finding format from the code-review methodology. Use when the team explicitly wants CC-formatted
-  review output. Off by default.
+  Conventional Comments vocabulary (labels, decorations, ordering) for Spirit code review. It overlays
+  label markings onto the finding format from the code-review methodology. Off by default in the CLI
+  (loaded with `--conventional-comments`); CI rendering always uses it. Use when the team explicitly
+  wants CC-formatted review output, or when rendering findings for a GitHub review.
 ---
 
 # Conventional Comments Overlay
 
-Loaded only when a review runs with `--conventional-comments`. It does **not** change the finding
-structure defined in the code-review methodology
-(`.agents/skills/code-review/references/methodology.md` and `review-output-templates.md`: `Fix:` before
-`Why:`, suggestion-fence first in CI mode) — it only prepends a `label (decorations):` line to each finding. Off by default because the
-team has not adopted Conventional Comments as a whole and the reviewers communicate clearly without
-markings.
+Off by default in the CLI; CI rendering always uses it. It is loaded when a review runs with
+`--conventional-comments` and in every CI review (CI findings always carry the `label (decorations):` line).
+It does **not** change the finding structure defined in the code-review methodology
+(`.agents/skills/code-review/references/methodology.md`, `review-output-templates.md`, and
+`ci-rendering-and-posting.md`: `Fix:` before `Why:`, suggestion-fence first in CI mode) — it only
+prepends a `label (decorations):` line to each finding. It is off by default in the CLI because the team
+has not adopted Conventional Comments as a whole and the reviewers communicate clearly without markings.
+
+This file is the only place that maps the methodology severities to labels and decorations; the code-review
+references link here instead of repeating the mapping.
 
 Reference: <https://conventionalcomments.org/>
 
@@ -52,6 +56,9 @@ linter-detectable items are not reported at all (see the code-review methodology
 | **(security)**     | Security-related                      | Any finding with security implications                |
 
 Combine when needed, e.g. `(blocking, security)`. Default to `(non-blocking)`.
+
+From the methodology severity: `blocking` takes `(blocking)`, `minor` takes `(if-minor)`, and every other
+severity takes `(non-blocking)`. Add `security` whenever it applies.
 
 ## Output Ordering
 

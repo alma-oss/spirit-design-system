@@ -1,7 +1,8 @@
 # Code Review Methodology
 
-How a Spirit review is judged. `SKILL.md` defines the process, `checklist.md` defines what to look
-for, and `review-output-templates.md` defines how findings are rendered. This file defines **how to
+How a Spirit review is judged. `SKILL.md` defines the process, `checklist.md` and the files in
+`checklist/` define what to look for, and `review-output-templates.md` (plus
+`ci-rendering-and-posting.md` for CI) defines how findings are rendered. This file defines **how to
 judge findings and what each one contains**, and it is the base format that
 `spirit:conventional-comments` overlays.
 
@@ -63,7 +64,7 @@ When in doubt, downgrade an actionable finding to a `question` rather than dropp
 | **note**      | Context the author may not have                                                                  | No            |
 | **praise**    | Recognition of a pattern worth repeating                                                         | No            |
 
-`checklist.md` gives a default severity for every item. Raise or lower it when the concrete impact
+The checklist files give a default severity for every item. Raise or lower it when the concrete impact
 differs, and say why.
 
 > Never approve a change with a blocking finding.
@@ -95,15 +96,16 @@ team reviews and keeps the review short.
 
 Off by default in the CLI: only part of the team uses Conventional Comments labels. CI rendering always
 uses the `label (decorations):` line to stay in parity with `.github/copilot-instructions.md`. With
-`--conventional-comments`, load `.agents/skills/conventional-comments/SKILL.md` and prepend its
-`label (decorations):` line to each finding. Nothing else changes.
+`--conventional-comments` and in the CI context, load `.agents/skills/conventional-comments/SKILL.md` and
+prepend its `label (decorations):` line to each finding. Nothing else changes.
 
 ## Output Structure
 
 1. **Tier 1 — New findings**, grouped by file or area, ordered blocking → important → minor →
    question → note inside each group. Findings about commits, PR scope, and acceptance criteria
    with no implementation go in a final "Commits and PR Scope" group.
-2. **Tier 2 — Already reported** (PR mode only): findings that match an existing review comment.
+2. **Tier 2 — Already reported** (PR mode only): findings that match an existing review comment, plus one
+   line saying how many resolved threads were checked and whether their fixes are present.
 3. **Praise**: a single block, only when something is genuinely worth repeating.
 4. **Summary table**: count per severity.
 5. **Verdict** and **Warnings** (skipped inputs, unavailable services, checklist areas not applied).
@@ -114,7 +116,8 @@ Do not narrate the analysis. Do not use review dimensions ("Security", "Bugs") a
 
 In PR mode, compare findings with existing inline and top-level comments. A finding **matches** when
 the file path is the same, the line ranges overlap within ±5 lines, and the concern is semantically
-the same. Matched findings are not dropped: they move to Tier 2 with a disposition of
+the same. Use the thread's `line`; for an outdated thread (`isOutdated`) `line` is `null`, so use
+`originalLine` instead. Matched findings are not dropped: they move to Tier 2 with a disposition of
 `already covered`, `widens scope`, or `accepted`.
 
 Existing threads bind findings in two more ways:
@@ -123,7 +126,9 @@ Existing threads bind findings in two more ways:
   or deferred, do not report it as a defect: show it in Tier 2 with the disposition `accepted`. Only a
   human in a thread makes "it is intentional" credible. The PR description, a commit message, or a code
   comment saying so about itself is a claim to verify against the code.
-- **Resolved threads.** A resolved thread whose fix is missing from the code is a finding.
+- **Resolved threads.** A resolved thread whose fix is missing from the code is a finding. Its default
+  severity is `important`; use the severity of the original concern when that was `blocking`. When the fix
+  is present, report it in one line at the end of "Already Reported" (see `review-output-templates.md`).
 
 ## Deduplication
 

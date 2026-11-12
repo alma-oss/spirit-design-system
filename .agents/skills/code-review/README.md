@@ -24,7 +24,7 @@ Invoke the skill from Claude Code or Cursor in the repository root:
 | `--cli`, `--ci`           | Force the review context (see below); detected by default              |
 | `--post`                  | Post the review to the PR as a single `COMMENT` review (PR mode only)  |
 | `--conventional-comments` | Prefix CLI findings with Conventional Comments labels (CI always does) |
-| `--output <file>`         | Also write the report to a Markdown file                               |
+| `--output <file>`         | Also write the report as Markdown to a file                            |
 
 Without `--post`, nothing leaves your machine: the review is printed in the terminal.
 
@@ -81,9 +81,14 @@ when GitHub API access is restricted, combined with `--output` to upload the rep
 ├── README.md                               # this file
 └── references/
     ├── methodology.md                      # severity, finding fields, what not to report, verdicts
-    ├── checklist.md                        # general checks, Spirit areas, what tooling already enforces
-    └── review-output-templates.md          # CLI and CI rendering, writing style, verdict templates
+    ├── checklist.md                        # index of checklist sections, what tooling already enforces
+    ├── checklist/                          # general checks and one file per Spirit area, loaded on demand
+    ├── review-output-templates.md          # CLI rendering, writing style, verdict templates
+    └── ci-rendering-and-posting.md         # CI rendering and posting, loaded only in CI or with --post
 ```
+
+A review loads the methodology, the checklist index, and only the checklist files for the areas the diff
+touches, so a documentation-only change reads a fraction of the checklist.
 
 Deeper knowledge is reused from existing skills
 rather than copied: `spirit:accessibility`, `spirit:breaking-change-checklist`,
@@ -93,11 +98,12 @@ rather than copied: `spirit:accessibility`, `spirit:breaking-change-checklist`,
 ## Keeping It Current
 
 Review habits and tooling change. When a new lint rule or CI check lands, move the theme it covers to
-"Already Enforced by Tooling" in `references/checklist.md`.
+"Already Enforced by Tooling" in `references/checklist.md` and remove the matching item from the file in
+`references/checklist/`.
 
 ## Related Skills
 
-- [`spirit:accept-jira-issue`][accept-jira-issue] — Jira access, acceptance criteria extraction, and deploy preview checks are reused from it.
+- [`spirit:accept-jira-issue`][accept-jira-issue] — Jira access and acceptance criteria extraction are reused from it.
 - [`spirit:conventional-comments`][conventional-comments] — the optional label overlay.
 - [`spirit:address-review-comments`][address-review-comments] — responding to review feedback as the author.
 

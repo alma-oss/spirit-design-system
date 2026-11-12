@@ -15,9 +15,15 @@ A first-pass review that reflects how Spirit maintainers actually review. This f
 **process**. Load these references from `.agents/skills/code-review/references/` before reviewing:
 
 - `methodology.md` — what not to report, severity, finding fields, output structure, verdicts.
-- `checklist.md` — what to look for (general checks and Spirit areas), with default severities, and the
-  themes that tooling already enforces.
-- `review-output-templates.md` — how findings and the report are rendered for the CLI and for CI.
+- `checklist.md` — the index of checklist sections and the themes that tooling already enforces.
+- `review-output-templates.md` — how findings and the report are rendered for the CLI.
+
+Load these on demand only:
+
+- `checklist/general.md` and the `checklist/NN-*.md` files that Step 3 selects for the diff, not the whole
+  checklist.
+- `ci-rendering-and-posting.md` — only in the CI context or with `--post`: the GitHub review rendering and
+  the posting procedure.
 
 ## Operating Rules
 
@@ -42,17 +48,17 @@ These rules make the skill safe to run unattended (for example from a GitHub Act
 /spirit:code-review [<pr> | --local | --staged | --diff <file>] [--base <ref>] [--cli | --ci] [--post] [--conventional-comments] [--output <file>]
 ```
 
-| Argument                  | Effect                                                                                 |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| `<pr>`                    | PR mode. Accepts `123`, `#123`, or a full PR URL                                       |
-| `--local`                 | Current branch vs its merge base with `--base`                                         |
-| `--staged`                | Staged changes only                                                                    |
-| `--diff <file>`           | Review a unified diff from a file (CI or other remote environments)                    |
-| `--base <ref>`            | Base for `--local`. Default: `origin/main`, falling back to `main`                     |
-| `--cli`, `--ci`           | Force the review context. Default: detected, see below                                 |
-| `--post`                  | PR mode only. Post the review to the PR as a `COMMENT` review. Default: print only     |
-| `--conventional-comments` | Overlay Conventional Comments labels (`.agents/skills/conventional-comments/SKILL.md`) |
-| `--output <file>`         | Also write the report as Markdown to this file                                         |
+| Argument                  | Effect                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `<pr>`                    | PR mode. Accepts `123`, `#123`, or a full PR URL                                                       |
+| `--local`                 | Current branch vs its merge base with `--base`                                                         |
+| `--staged`                | Staged changes only                                                                                    |
+| `--diff <file>`           | Review a unified diff from a file (CI or other remote environments)                                    |
+| `--base <ref>`            | Base for `--local`. Default: `origin/main`, falling back to `main`                                     |
+| `--cli`, `--ci`           | Force the review context. Default: detected, see below                                                 |
+| `--post`                  | PR mode only. Post the review to the PR as a `COMMENT` review. Default: print only                     |
+| `--conventional-comments` | Overlay Conventional Comments labels (`.agents/skills/conventional-comments/SKILL.md`); CI always does |
+| `--output <file>`         | Also write the report as Markdown to this file                                                         |
 
 **Review context.** The context decides how findings are rendered (see `review-output-templates.md`),
 not what is found:
@@ -62,6 +68,8 @@ not what is found:
   is `true`, or when `--post` is set. Findings posted as inline review comments carry no `File:` line
   because the code line anchors them; in a report that is only printed or written to a file, every
   finding keeps its `File:` location.
+
+Load `ci-rendering-and-posting.md` in the CI context and with `--post`; a CLI run never needs it.
 
 `--cli` or `--ci` overrides the detection. `--post` with `--cli` stops with an error, because posted
 comments always use the CI rendering.
@@ -81,15 +89,14 @@ comments always use the CI rendering.
 # PR mode
 gh pr view <pr> --json number,title,body,baseRefName,headRefOid,files,commits,url
 gh pr diff <pr>
-gh api repos/{owner}/{repo}/pulls/<pr>/comments --paginate    # inline review comments
 gh api repos/{owner}/{repo}/issues/<pr>/comments --paginate   # conversation comments
 gh api repos/{owner}/{repo}/pulls/<pr>/reviews --paginate     # review bodies
 gh api graphql -F owner={owner} -F repo={repo} -F pr=<pr> -f query='
   query($owner: String!, $repo: String!, $pr: Int!) {
     repository(owner: $owner, name: $repo) {
-      pullRequest(number: $pr) { reviewThreads(first: 100) { nodes { id isResolved path line comments(first: 100) { nodes { id body author { login } } } } } }
+      pullRequest(number: $pr) { reviewThreads(first: 100) { nodes { id isResolved isOutdated path line originalLine comments(first: 100) { nodes { id url body author { login } } } } } }
     }
-  }' --jq '.data.repository.pullRequest.reviewThreads.nodes'   # keep resolution state per thread
+  }' --jq '.data.repository.pullRequest.reviewThreads.nodes'   # inline comments, resolution state, and outdated lines
 git fetch origin +pull/<pr>/head:refs/remotes/origin/pr-<pr>   # PR head for git grep and file reads
 
 # Local branch mode
@@ -132,6 +139,7 @@ Review Brief
 - Intent: <PR title and description, or commit subjects>
 - Jira: <DS-1234 — <n> criteria: <n> met, <n> partial, <n> missing | none found | unavailable>
 - Changed files: <count>, grouped by checklist area
+- Scope: <code | documentation-only: General Checks and leftover search skipped>
 - Areas to apply: <checklist sections>
 - Prior comments: <count of unresolved threads, counted from the thread records> (PR mode)
 ```
@@ -162,24 +170,30 @@ The brief is printed at the top of the CLI report and omitted from posted review
 
 ## Step 3 — Area Selection
 
-Map each changed path to checklist sections. Apply the General Checks, section 11 (comments, naming,
-leftovers), and section 12 (commits and PR scope) to every review.
+Map each changed path to checklist sections and load only those files from `checklist/`. Apply section 11
+(comments, naming, leftovers) and section 12 (commits and PR scope) to every review, and the General
+Checks to every review that changes code.
 
-| Changed paths                                                  | Checklist sections   | Also load                                                            |
-| -------------------------------------------------------------- | -------------------- | -------------------------------------------------------------------- |
-| `packages/web-react/src/**/*.{ts,tsx}`                         | 1, 3, 4, 6, 7        | —                                                                    |
-| `packages/web/src/**/*.{scss,ts,js,mjs,html}`                  | 1, 4, 5, 6, 7        | —                                                                    |
-| `packages/web-react/src/translations/**`                       | 3 (translations), 11 | —                                                                    |
-| `**/*.scss` anywhere                                           | 5                    | —                                                                    |
-| `**/demo/**`, `**/preview.html`, `**/stories/**`, `*.figma.ts` | 1, 4, 8              | —                                                                    |
-| `**/README.md`, `docs/**`                                      | 9                    | —                                                                    |
-| `docs/migrations/**`, `packages/codemods/**`, any `!` commit   | 2                    | `.agents/skills/breaking-change-checklist/SKILL.md`                  |
-| `tests/e2e/**`                                                 | 7                    | —                                                                    |
-| `apps/docsite/**`                                              | 10 (+ 5 for SCSS)    | `docsite-composition` and `docsite-styles` skills                    |
-| `.github/**`                                                   | 13                   | —                                                                    |
-| `.agents/**`, `AGENTS.md`                                      | 14                   | —                                                                    |
-| `*.tsx`, `*.html`, `*.hbs` with interactive or ARIA changes    | 6                    | `.agents/skills/accessibility/references/accessibility-checklist.md` |
-| Removal or rename of a prop, class, token, or component        | 2, 11 (leftovers)    | `component-deprecation` or `stabilize-component` skill as relevant   |
+A change is **documentation-only** when every changed file is a README, `docs/**`, `.agents/**`, or
+`AGENTS.md`. For such a change skip the General Checks, the leftover search (Step 4, item 3, and the
+Leftovers item of section 11), and the other area files that do not match; say so in the brief. Tests, demos, stories, and
+workflows are code: the General Checks apply to them.
+
+| Changed paths                                                                          | Checklist sections   | Also load                                                                  |
+| -------------------------------------------------------------------------------------- | -------------------- | -------------------------------------------------------------------------- |
+| `packages/web-react/src/**/*.{ts,tsx}`                                                 | 1, 3, 4, 6, 7        | —                                                                          |
+| `packages/web/src/**/*.{scss,ts,js,mjs,html}`                                          | 1, 4, 5, 6, 7        | —                                                                          |
+| `packages/web-react/src/translations/**`                                               | 3 (translations), 11 | —                                                                          |
+| `**/*.scss` anywhere                                                                   | 5                    | —                                                                          |
+| `**/demo/**`, `**/preview.html`, `**/stories/**`, `*.figma.ts`                         | 1, 4, 8              | —                                                                          |
+| `**/README.md`, `docs/**`                                                              | 9                    | —                                                                          |
+| `docs/migrations/**`, `packages/codemods/**`, any `!` commit                           | 2                    | `.agents/skills/breaking-change-checklist/SKILL.md`                        |
+| `tests/e2e/**`                                                                         | 7                    | —                                                                          |
+| `apps/docsite/**`                                                                      | 10 (+ 5 for SCSS)    | `docsite-composition` skill; `docsite-styles` skill only when SCSS changed |
+| `.github/**`                                                                           | 13                   | —                                                                          |
+| `.agents/**`, `AGENTS.md`                                                              | 14                   | —                                                                          |
+| `*.tsx`, `*.html`, `*.hbs`, or README markup examples with interactive or ARIA changes | 6                    | `.agents/skills/accessibility/references/accessibility-checklist.md`       |
+| Removal or rename of a prop, class, token, or component                                | 2, 11 (leftovers)    | `component-deprecation` or `stabilize-component` skill as relevant         |
 
 Paths outside this table (for example `packages/design-tokens`, `packages/icons`, `exporters/`)
 get sections 4, 11, and 12 only, plus a warning that no specialized checklist applies.
@@ -207,8 +221,8 @@ Then work through the steps:
    open its counterpart README, demo, and implementation, and apply checklist section 1. When a
    prop, class, or translation key is removed, the counterparts also include
    `packages/web-react/DEPRECATIONS.md` and the transforms in `packages/codemods/src/transforms/`.
-3. **Search for leftovers.** For every removed or renamed identifier, search the snapshot under
-   review and report remaining references:
+3. **Search for leftovers** (skipped for documentation-only changes). For every removed or renamed
+   identifier, search the snapshot under review and report remaining references:
 
    | Mode            | Command                                               |
    | --------------- | ----------------------------------------------------- |
@@ -228,11 +242,12 @@ Then work through the steps:
 6. **Verify claimed behavior** (PR mode). When the PR title, description, or Jira issue promises
    runtime behavior the code alone cannot prove (an HTTP status, a redirect, what renders for a
    given URL), or the author says they did not verify something, check it on the Netlify deploy
-   preview. Find the preview, check that it is fresh (its "Latest commit" equals the PR head), and
-   build page URLs as described in Step 3 of `.agents/skills/accept-jira-issue/SKILL.md` and the
-   "Netlify Deploy Previews" section of its `references/verification-recipes.md`. Observe only what
-   the claim needs: an HTTP status or redirect with `node` and `fetch(url, { redirect: 'manual' })`, computed styles with its `scripts/verify.mjs`
-   when a browser is available. Quote the URL and the observed result in the finding. Compare
+   preview. Read the preview URL from the Netlify bot comment of the `spirit-design-system-docsite` site
+   (`gh pr view <pr> --json comments --jq '.comments[] | select(.author.login == "netlify") | .body'`),
+   compare its "Latest commit" with `headRefOid` (a different commit means the preview is stale), and
+   append the page path to the preview URL. Observe only what the claim needs: an HTTP status or redirect
+   with `node` and `fetch(url, { redirect: 'manual' })`, computed styles with
+   `.agents/skills/accept-jira-issue/scripts/verify.mjs` when a browser is available. Quote the URL and the observed result in the finding. Compare
    against an unchanged page on the same preview before calling a result a regression. When there is
    no preview, it is stale or still building, or the network is unavailable, add a warning instead.
 
@@ -243,8 +258,11 @@ everything.
 
 **Coverage.** Before reporting, compare the changed-file list with the files you actually read. A
 changed production file you did not read in full (for example the implementation next to a changed
-interface) is either read now or listed under Warnings as "Not reviewed". Never imply full coverage
-when a file was skipped.
+interface) is either read now or listed under Warnings as "Not reviewed". Production files are the
+code that ships or runs: everything except READMEs, `docs/**`, `.agents/**`, `AGENTS.md`, tests, and
+snapshots. Documentation files are reviewed from the diff and never need a "Not reviewed" entry, but read
+the code they describe (`types.ts`, the implementation) before judging a claim in them. Never imply full
+coverage when a file was skipped.
 
 ## Step 5 — Synthesize
 
@@ -252,8 +270,9 @@ when a file was skipped.
    the other locations listed.
 2. **Cross-reference** existing PR comments (PR mode) into Tier 1 and Tier 2, per `methodology.md`.
    Do not report as a defect a choice a human already accepted in a thread, and check that the fix
-   of every resolved thread is really in the code.
-3. **Assign the verdict** from the remaining findings.
+   of every resolved thread is really in the code (a missing fix is an `important` finding; a present
+   fix is one summary line in "Already Reported").
+3. **Assign the verdict** from the remaining findings, using the conditions in `methodology.md`.
 
 ## Step 6 — Report
 
@@ -269,37 +288,13 @@ With `--output <file>`, write the same Markdown to the file.
 
 ## Step 7 — Post (`--post`, PR Mode Only)
 
-Post exactly one review. Never approve or request changes automatically; the verdict is stated in
-the review body and a human decides.
-
-1. Render each finding in the CI format from `review-output-templates.md`: suggestion fence first, then
-   the subject line, then the collapsed `<details>` block with `Fix:` and `Why:`.
-2. Findings on lines inside the PR diff become inline comments (`side: "RIGHT"`, `line`, and
-   `start_line` for ranges) without a `File:` line, because the comment is anchored to the code. All
-   other findings (they keep their location), Tier 2 items, praise, the summary table, and the
-   verdict go into the review body.
-3. Write the payload to a temporary file and submit it:
-
-```bash
-gh api repos/{owner}/{repo}/pulls/<pr>/reviews --method POST --input <payload.json>
-```
-
-```json
-{
-  "commit_id": "<headRefOid>",
-  "event": "COMMENT",
-  "body": "<summary, out-of-diff findings, verdict>",
-  "comments": [{ "path": "<file>", "line": 42, "side": "RIGHT", "body": "<finding>" }]
-}
-```
-
-If posting fails (permissions, a line no longer in the diff), retry once with all findings moved
-into the body; if that fails too, print the report and the error.
+Load `references/ci-rendering-and-posting.md` and follow its "Posting" section. It posts exactly one
+`COMMENT` review; the skill never approves or requests changes automatically.
 
 ## Related Skills
 
-- `spirit:accept-jira-issue` — Jira access, criteria extraction, and deploy preview verification are
-  reused from it.
+- `spirit:accept-jira-issue` — Jira access and criteria extraction are reused from it, and its `verify.mjs`
+  script can check computed styles on a deploy preview.
 - `spirit:conventional-comments` — the optional label overlay.
 - `spirit:address-review-comments` — the author side: responding to this review.
 - `spirit:accessibility`, `spirit:breaking-change-checklist`, `spirit:component-deprecation`,
