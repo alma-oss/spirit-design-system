@@ -47,7 +47,7 @@ const EMPLOYERS: Employer[] = [
       'Moderní loterijní společnost, založená na špičkových technologiích, výjimečná svými produkty a komunikací se zákazníky.',
     employees: '500 - 999',
     industry: 'Obchod a prodej, nákup',
-    logo: `${CDN_URL}/_freyaimg_prod_/439621670/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=584`,
+    logo: `${CDN_URL}/_freyaimg_prod_/439621670/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Allwyn Česko a.s.',
     offers: 5,
   },
@@ -60,7 +60,7 @@ const EMPLOYERS: Employer[] = [
       'Rodinná firma z Jablonce nad Nisou, která navrhuje a vyrábí šperky už více než dvacet let. V ateliéru kombinujeme tradiční zlatnické řemeslo s moderním designem a prodáváme přes vlastní butiky i e-shop po celé republice.',
     employees: '100 - 199',
     industry: 'Umělecká řemeslná výroba',
-    logo: `${CDN_URL}/_cpimg_prod_/20314537/baa8680c-6d06-11ea-a491-0242ac110010.png?width=200&height=100&func=bound`,
+    logo: `${CDN_URL}/_cpimg_prod_/20314537/baa8680c-6d06-11ea-a491-0242ac110010.png?width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Mezinárodní společnost pro výrobu a distribuci šperků a bižuterie Jablonec nad Nisou, s.r.o.',
     offers: 1,
   },
@@ -79,7 +79,7 @@ const EMPLOYERS: Employer[] = [
     description: 'Logistické služby a skladování pro e-commerce po celé České republice.',
     employees: '50 - 99',
     industry: 'Doprava a logistika',
-    logo: `${CDN_URL}/_freyaimg_prod_/439621670/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=584`,
+    logo: `${CDN_URL}/_freyaimg_prod_/439621670/57416ab4-f5e2-11f0-bd3b-0242ac110003.png?tl_px=74,147&br_px=2433,812&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Moravská Logistika a.s.',
     offers: 12,
   },
@@ -92,7 +92,7 @@ const EMPLOYERS: Employer[] = [
       'Kdo by neznal zeleného mimozemšťana? To, že je Alza leaderem na české a slovenské e-commerce scéně asi taky víš. Jsme ale také stabilní česká firma s tradicí.',
     employees: '2500 - 2999',
     industry: 'Informační technologie',
-    logo: `${CDN_URL}/_cpimg_prod_/7910630/db7f211a-59cc-11ec-87b6-0242ac11000c.png?width=200&tl_px=0,9&br_px=350,110`,
+    logo: `${CDN_URL}/_cpimg_prod_/7910630/db7f211a-59cc-11ec-87b6-0242ac11000c.png?tl_px=0,9&br_px=350,110&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Alza.cz a.s.',
     offers: 21,
   },
@@ -105,7 +105,7 @@ const EMPLOYERS: Employer[] = [
       'Jsme výrobce nealkoholických nápojů, čajů, kávy, přírodní kosmetiky a provozovatel gastro sítí. Vyrábíme v 15 závodech na 5 evropských trzích.',
     employees: '500 - 999',
     industry: 'Potravinářství',
-    logo: `${CDN_URL}/_cpimg_prod_/27512/2626ff42-1430-11ef-aacb-0242ac11000c.png?width=200&tl_px=0,1&br_px=1500,531`,
+    logo: `${CDN_URL}/_cpimg_prod_/27512/2626ff42-1430-11ef-aacb-0242ac11000c.png?tl_px=0,1&br_px=1500,531&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Kofola',
     offers: 29,
   },
@@ -118,7 +118,7 @@ const EMPLOYERS: Employer[] = [
       'Více než 17 000 kolegů a kolegyň propojuje celé Česko službami, které usnadňují každodenní život lidem, firmám i státu.',
     employees: '10 000 a více',
     industry: 'Pošty, Zasilatelství',
-    logo: `${CDN_URL}/_freyaimg_prod_/8228690/50cfd7b4-5fe7-11f1-ac06-0242ac110011.jpg?tl_px=0,0&br_px=714,546&width=584`,
+    logo: `${CDN_URL}/_freyaimg_prod_/8228690/50cfd7b4-5fe7-11f1-ac06-0242ac110011.jpg?tl_px=0,0&br_px=714,546&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Česká pošta, s.p.',
     offers: 15,
   },
@@ -131,7 +131,7 @@ const EMPLOYERS: Employer[] = [
       'Rozhýbejte s námi svět. Jsme jedním z předních poskytovatelů kamionových, leteckých, námořních přeprav i skladové logistiky.',
     employees: '500 - 999',
     industry: 'Logistika',
-    logo: `${CDN_URL}/_freyaimg_prod_/2285017/c118a284-4792-11f1-9c5d-0242ac110011.jpg?tl_px=0,0&br_px=593,390&width=584`,
+    logo: `${CDN_URL}/_freyaimg_prod_/2285017/c118a284-4792-11f1-9c5d-0242ac110011.jpg?tl_px=0,0&br_px=593,390&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'DSV Global Transport and Logistics',
     offers: 29,
   },
@@ -144,7 +144,7 @@ const EMPLOYERS: Employer[] = [
       'Usilujeme o otevřenou, informovanou, angažovanou a zodpovědnou společnost, která není lhostejná k problémům doma ani za hranicemi naší země.',
     employees: '1000 - 1499',
     industry: 'Sociální péče',
-    logo: `${CDN_URL}/_cpimg_prod_/77321/dd872c54-08f0-11ed-8ea6-0242ac110007.jpg?width=200&tl_px=0,0&br_px=766,426`,
+    logo: `${CDN_URL}/_cpimg_prod_/77321/dd872c54-08f0-11ed-8ea6-0242ac110007.jpg?tl_px=0,0&br_px=766,426&width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'Člověk v tísni, o.p.s.',
     offers: 16,
   },
@@ -157,7 +157,7 @@ const EMPLOYERS: Employer[] = [
       'ASB Group je dynamická poradenská společnost působící v regionu CEE: v České republice, Polsku, na Slovensku a v Maďarsku.',
     employees: '100 - 199',
     industry: 'Administrativa a správní činnosti',
-    logo: `${CDN_URL}/_cpimg_prod_/233975/e91b957e-6d06-11ea-8113-0242ac110010.jpg?width=200&height=100&func=bound`,
+    logo: `${CDN_URL}/_cpimg_prod_/233975/e91b957e-6d06-11ea-8113-0242ac110010.jpg?width=90&height=45&func=fit&bg_colour=ffffff`,
     name: 'ASB Czech Republic, s.r.o.',
     offers: 3,
   },
@@ -211,7 +211,7 @@ export const CardEmployerGallery = (args: CardEmployerGalleryProps) => {
         {EMPLOYERS.slice(0, numCards).map((employer) => (
           <Card key={employer.name} isBoxed>
             {employer.cover && (
-              <CardMedia isExpanded>
+              <CardMedia size="small" isExpanded>
                 <picture>
                   <source media={COVER_BREAKPOINT} srcSet={employer.cover.desktop} />
                   <img src={employer.cover.mobile} alt="" />
@@ -220,7 +220,7 @@ export const CardEmployerGallery = (args: CardEmployerGalleryProps) => {
             )}
             {employer.logo && (
               <CardLogo>
-                <PartnerLogo size="small">
+                <PartnerLogo size="medium">
                   <img src={employer.logo} alt="" />
                 </PartnerLogo>
               </CardLogo>
