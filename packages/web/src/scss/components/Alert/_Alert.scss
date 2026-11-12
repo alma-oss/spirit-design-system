@@ -1,3 +1,6 @@
+// 1. The subtle border color is not used by the alert itself. It is declared for nested elements with the dynamic
+//    color border helper, e.g. a `ControlButton`, which always use the subtle border (see tools/dynamic-colors).
+
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
@@ -11,7 +14,7 @@
 
     @include local.set-color(color-scheme.get-color());
     @include local.set-border-color(color-scheme.get-border-color());
-    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle()); // 1.
     @include local.set-background-color(color-scheme.get-background-color());
     @include typography.generate(theme.$typography);
 

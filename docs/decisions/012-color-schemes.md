@@ -4,7 +4,7 @@ Date: 2026-07-03
 
 Status: accepted
 
-Amended by: [016](016-color-scheme-intensity-exposure.md)
+Amended by: [016](016-color-scheme-intensity-exposure.md), [017](017-color-scheme-palette-and-local-color-context.md)
 
 👉 This is the decision record. For a practical guide to using color schemes, see [Color Schemes][color-schemes-guide].
 
@@ -29,12 +29,10 @@ to apply different color combinations. This approach had several drawbacks:
    - `<category>` is the color category (e.g., `accent-brand`, `emotion-danger`, `neutral`, `selected`)
    - `<intensity>` is either `basic` or `subtle`
 
-   A color scheme class sets the following `--spirit-color-scheme-*` CSS custom properties on the element it is applied to:
-   - `--spirit-color-scheme-color` (text color)
-   - `--spirit-color-scheme-border-color` (border color)
-   - `--spirit-color-scheme-background-color` (background color)
-
-   Surface components and utilities that consume a color scheme initialize or read `--spirit-local-*` custom properties (such as `--spirit-local-background-color`, `--spirit-local-color`, and `--spirit-local-border-color`) from `--spirit-color-scheme-*` so interactive surfaces, component color overrides, and `.disabled` can update the local context without mutating the scheme palette.
+   A color scheme class sets the following CSS custom properties on the element it is applied to:
+   - `--spirit-local-color` (text color)
+   - `--spirit-local-border-color` (border color)
+   - `--spirit-local-background-color` (background color)
 
    When state tokens are defined for a given color category, additional state-specific CSS custom
    properties (e.g. for hover and active states) or intensity-specific CSS custom properties (e.g. `border-color-subtle`) are also set.

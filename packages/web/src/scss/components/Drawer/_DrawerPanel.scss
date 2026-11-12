@@ -14,7 +14,7 @@
     height: theme.$panel-height;
     max-height: theme.$panel-max-height;
     color: theme.$panel-text-color;
-    background-color: theme.$panel-background-color;
+    background-color: local.get-background-color();
     box-shadow: theme.$panel-shadow;
     transform: translateX(var(--#{tokens.$css-variable-prefix}drawer-translate-x));
     pointer-events: auto;

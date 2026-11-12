@@ -59,19 +59,12 @@ In practice, this means you choose one surface class and Spirit keeps text, back
 #### How It Works
 
 1. **Surface class** — Put `color-scheme-on-<suffix>` on a container (for example `color-scheme-on-neutral-basic`, `color-scheme-on-emotion-success-basic`,
-   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets the scheme CSS custom properties (`--spirit-color-scheme-*`, with the Spirit CSS variable prefix), for example `--spirit-color-scheme-color`, `--spirit-color-scheme-border-color`,
-   and `--spirit-color-scheme-background-color`. Surface components and background utilities establish the current **local** color context (`--spirit-local-*`), and interactive surfaces update `--spirit-local-background-color` on `:hover` and `:active` so nested components and dynamic
-   color helpers always react to the currently rendered background.
+   `color-scheme-on-accent-01-subtle`, or `color-scheme-on-disabled`). Each one sets the scheme colors as CSS custom properties, for example
+   `--spirit-color-scheme-color` and `--spirit-color-scheme-background-color` (with the Spirit CSS variable prefix).
 
-   ℹ️ Every surface class also exposes both intensities of the background and content colors regardless of which variant you picked
-   (`--spirit-color-scheme-background-color-basic`, `--spirit-color-scheme-background-color-subtle`, `--spirit-color-scheme-color-basic`, and `--spirit-color-scheme-color-subtle`), so a
-   single surface class can color a component that combines them, for example a subtle surface carrying a basic-colored indicator. For
-   `color-scheme-on-disabled`, the basic background is the disabled foreground — the color of a filled element sitting on a disabled surface — and its single
-   content color serves as both content intensities.
-
-2. **Utilities or Components** — On the same element (or an ancestor that already has a surface class), use utilities that read the scheme and local overrides: `bg-color-scheme`,
-   `text-color-scheme`, and `border-color-scheme` so backgrounds, text, and borders stay on-palette without listing every token. See the [dynamic color helper demo][dynamic-color-demo] for examples.
-   Or read the color context in the component CSS classes (for example `Pill`).
+2. **Utilities or Components** — On the surface element or inside it, use the `bg-color-scheme`, `text-color-scheme`, and `border-color-scheme` utilities so backgrounds,
+   text, and borders stay on-palette without listing every token, or use components that follow the color scheme (for example `Pill`).
+   See the [dynamic color helper demo][dynamic-color-demo] for examples.
 
 3. **Tokens** — Accent and emotion schemes follow the accent and emotion keys in [`spirit-design-tokens`][design-tokens-pkg]. New accents or emotions
    in tokens translate into additional `color-scheme-on-*` classes when themes are built. Fixed keys such as `neutral-*`, `selected-*`, and `disabled` are defined alongside them in the same generator.

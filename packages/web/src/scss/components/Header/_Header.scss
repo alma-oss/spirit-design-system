@@ -15,7 +15,7 @@
     flex: none;
     box-sizing: content-box; // 2.
     height: var(--#{tokens.$css-variable-prefix}header-height);
-    background-color: theme.$background-color;
+    background-color: local.get-background-color();
 }
 
 .Header--bottomDivider {

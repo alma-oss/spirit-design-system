@@ -47,7 +47,7 @@
 
     border: theme.$border-width theme.$border-style theme.$border-color;
     border-radius: theme.$border-radius;
-    background-color: theme.$background-color;
+    background-color: local.get-background-color();
 
     &:has(.CardLink) {
         @media (hover: hover) {

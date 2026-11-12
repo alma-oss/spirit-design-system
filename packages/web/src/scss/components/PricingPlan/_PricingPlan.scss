@@ -36,7 +36,7 @@
     border: theme.$border-width solid
         var(--#{tokens.$css-variable-prefix}pricing-plan-border-color, theme.$border-color);
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}pricing-plan-background-color, theme.$background-color);
+    background-color: local.get-background-color();
 }
 
 .PricingPlan__layout {

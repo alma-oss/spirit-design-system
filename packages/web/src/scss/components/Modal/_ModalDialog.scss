@@ -32,7 +32,7 @@
     overflow-y: var(--modal-body-overflow-y, visible);
     color: theme.$dialog-text-color;
     border-radius: theme.$dialog-border-radius;
-    background-color: theme.$dialog-background-color;
+    background-color: local.get-background-color();
     box-shadow: theme.$dialog-shadow;
     transform: translateY(var(--modal-translate-y)) scale(var(--modal-scale));
     transform-origin: var(--modal-transform-origin);

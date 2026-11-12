@@ -54,13 +54,13 @@
 .UNSTABLE_Table--striped tbody tr:nth-child(odd) {
     @include local.set-background-color(theme.$background-color-striped); // 1.
 
-    background-color: theme.$background-color-striped;
+    background-color: local.get-background-color();
 }
 
 .UNSTABLE_Table--hoverable tbody tr:hover {
     @include local.set-background-color(theme.$background-color-striped); // 1.
 
-    background-color: theme.$background-color-striped;
+    background-color: local.get-background-color();
 }
 
 .UNSTABLE_Table tr:last-child td {

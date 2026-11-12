@@ -19,7 +19,7 @@
     width: max-content;
     padding: theme.$padding;
     border-radius: theme.$border-radius;
-    background-color: theme.$background;
+    background-color: local.get-background-color();
     box-shadow: theme.$shadow;
 
     &[data-spirit-fullwidthmode='mobile-only'] {

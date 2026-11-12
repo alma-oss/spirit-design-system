@@ -31,7 +31,7 @@
     color: var(--#{tokens.$css-variable-prefix}segmented-control-color);
     border: theme.$border-width solid var(--#{tokens.$css-variable-prefix}segmented-control-border-color);
     border-radius: theme.$border-radius;
-    background-color: var(--#{tokens.$css-variable-prefix}segmented-control-background-color);
+    background-color: local.get-background-color();
 
     @media (prefers-reduced-motion: no-preference) {
         &:has([type='radio']) {
