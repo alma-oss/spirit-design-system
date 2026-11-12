@@ -1,1 +1,13 @@
 build
+
+# Story UI
+# Local secrets (API key); the committed template is .env.example
+.env
+!.env.example
+# Generated stories are personal drafts; keep only the directory
+stories/generated/*
+!stories/generated/.gitkeep
+# Story UI title→file map, history and machine-local caches
+stories/.story-mappings.json
+.story-ui-history/
+.story-ui/

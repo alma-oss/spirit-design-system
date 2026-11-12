@@ -24,6 +24,9 @@ export default [
       // Internal output folders
       'static',
 
+      // Story UI: locally generated stories
+      'apps/storybook/stories/generated',
+
       // No JSON-aware parser is configured, so JSON/JSONC files (including tsconfig.json,
       // which allows comments) fail to parse as plain JS. Nothing here lints JSON on purpose.
       // @see { @link https://github.com/lmc-eu/code-quality-tools/issues/270 }

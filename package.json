@@ -34,6 +34,7 @@
     "icons:sync": "yarn workspace @alma-oss/spirit-icons sync",
     "prepare": "is-ci || husky install",
     "storybook": "lerna run start --scope=@alma-oss/spirit-storybook",
+    "storybook:ui": "lerna run start:ui --scope=@alma-oss/spirit-storybook",
     "test": "yarn packages:test",
     "test:unit": "yarn packages:test:unit",
     "test:unit:coverage": "yarn packages:test:unit:coverage",

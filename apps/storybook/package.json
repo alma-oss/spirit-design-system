@@ -11,7 +11,10 @@
   },
   "scripts": {
     "start": "storybook dev --config-dir ./ --port 6006 --no-open",
-    "build": "storybook build --config-dir ./ --output-dir ./build --stats-json"
+    "build": "storybook build --config-dir ./ --output-dir ./build --stats-json",
+    "start:story-ui": "story-ui start",
+    "start:story-ui-mcp": "story-ui mcp",
+    "start:ui": "cross-env STORY_UI=true npm-run-all --parallel start start:story-ui"
   },
   "devDependencies": {
     "@alma-oss/spirit-common": "workspace:^",
@@ -26,7 +29,10 @@
     "@storybook/mcp": "catalog:storybook",
     "@storybook/react": "catalog:storybook",
     "@storybook/react-vite": "catalog:storybook",
+    "@tpitre/story-ui": "catalog:storybook",
     "@vitejs/plugin-react": "catalog:build",
+    "cross-env": "catalog:script",
+    "npm-run-all2": "catalog:script",
     "postcss": "catalog:build",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
