@@ -101,6 +101,16 @@ Review habits and tooling change. When a new lint rule or CI check lands, move t
 "Already Enforced by Tooling" in `references/checklist.md` and remove the matching item from the file in
 `references/checklist/`.
 
+### Refreshing the Checklist From Review Feedback
+
+Mining past PR reviews is expensive: a full refresh costs over 100,000 tokens of context. Keep it cheap:
+
+- Run refreshes incrementally with a date, for example `--since 2026-09-01` (the date of the last refresh),
+  and record that date when the checklist is updated. Do a full refresh only on request.
+- Process the feedback in chronological slices, and run **each slice in its own agent or context**.
+  Pass only the resulting candidate checklist items back, not the raw comments, so the context does not
+  grow with every slice.
+
 ## Related Skills
 
 - [`spirit:accept-jira-issue`][accept-jira-issue] — Jira access and acceptance criteria extraction are reused from it.

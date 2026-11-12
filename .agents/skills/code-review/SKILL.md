@@ -145,7 +145,9 @@ Review Brief
 ```
 
 **Jira.** Look for an issue key (`DS-1234`) in the PR body, branch name, and commit messages. When
-Jira is reachable, fetch the issue and check the change against each acceptance criterion. Reuse
+no key is found, do not load `accept-jira-issue` at all; record "none found" in the brief and check
+only the PR title and description. When a key is found and Jira is reachable, fetch the issue and
+check the change against each acceptance criterion. Load the Jira parts of that skill only then, and reuse
 Step 0 (Jira access, MCP or REST fallback) and Step 1 (extracting and numbering the criteria) of
 `.agents/skills/accept-jira-issue/SKILL.md`, and the Jira section of its
 `references/verification-recipes.md`; do not re-implement them. Unlike that skill, this review only
