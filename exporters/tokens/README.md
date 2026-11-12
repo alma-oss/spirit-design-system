@@ -77,6 +77,36 @@ Once activated, the original data will be generated alongside other outputs and 
 - \_original-tokens.json
 - \_original-groups.json
 
+## Source Adapters
+
+The exporter reads tokens through a source adapter (`src/adapters`) that maps the source's own format to the internal
+token model (`src/core/types`). The Supernova adapter is the one the pipeline runs on today.
+
+### Figma Adapter
+
+`FigmaAdapter` (`src/adapters/figma`) reads a Figma Config file through the Figma REST API: local variables, style
+metadata, and the style nodes (properties and variable bindings). One file is one brand. It is not wired into the
+pipeline yet.
+
+```ts
+const adapter = new FigmaAdapter({ token: process.env.FIGMA_ACCESS_TOKEN, onWarning: console.warn });
+const collection = await adapter.fetchTokens({ source: { fileKey: 'BXRF3VABXQm2TGkL0nwS4i' } });
+```
+
+The token needs the `file_content:read` and `file_variables:read` scopes. The file key is not a secret.
+
+- Only the `Global tokens`, `Theme tokens` and `Device` collections are exported. `Primitives` and remote variables
+  are alias sources; other collections are skipped with a warning.
+- Figma has four generic variable types, so the token type is inferred from the variable's scopes and the group it
+  lives in. Ambiguous or conflicting definitions are errors.
+- A global variable becomes one token (`<variable id>`), a theme or device variable one token per mode
+  (`<variable id>:<mode id>`), tagged with `metadata.theme` or `metadata.device`.
+- An alias becomes a `reference` carrying the value resolved in that mode.
+- Dimensions are emitted in `px`; the px-to-rem rule converts them.
+- `figma-*` variables and typography styles containing `Link` or `Italic` are excluded.
+- Malformed names, ambiguous scopes, missing aliases and alias cycles are reported together in one error, so a run
+  shows every problem of the file. Unused effect and paint styles only produce warnings.
+
 ## Naming Rules for Themes
 
 For the proper functionality of themes in the Spirit Tokens Exporter in Supernova, all theme names must adhere to specific conventions.
