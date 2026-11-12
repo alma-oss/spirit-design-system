@@ -82,14 +82,14 @@
     },
     {
       "groupName": "Lock html-dom-parser on 5.0.13",
-      "description": "Prevent updates to html-dom-parser until https://jira.almacareer.tech/browse/DS-1980 is resolved",
+      "description": "Prevent updates to html-dom-parser until https://almacareer.atlassian.net/browse/DS-1980 is resolved",
       "matchManagers": ["npm"],
       "matchPackageNames": ["html-dom-parser"],
       "allowedVersions": "5.0.13"
     },
     {
       "groupName": "Lock html-react-parser on 5.1.1",
-      "description": "Prevent updates to html-react-parser until https://jira.almacareer.tech/browse/DS-1980 is resolved",
+      "description": "Prevent updates to html-react-parser until https://almacareer.atlassian.net/browse/DS-1980 is resolved",
       "matchManagers": ["npm"],
       "matchPackageNames": ["html-react-parser"],
       "allowedVersions": "5.1.1"

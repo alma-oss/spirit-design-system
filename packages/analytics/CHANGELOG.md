@@ -65,7 +65,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **analytics:** reformat malformed changelog ([a7e743e](https://github.com/alma-oss/spirit-design-system/commit/a7e743e3020d8bb904484250203ffddebd1876fc))
 - **repo:** migrate links in changelogs ([9feea1b](https://github.com/alma-oss/spirit-design-system/commit/9feea1b51b44ba7a7e99f73b50e311c6ea6d6f46)), closes [#DS-1626](https://github.com/alma-oss/spirit-design-system/issues/DS-1626)
-- **repo:** replace `jira.lmc.cz` with `jira.almacareer.tech` links ([aab1d4f](https://github.com/alma-oss/spirit-design-system/commit/aab1d4f8dfb3026b08d6345d673d3a1844fb6008))
+- **repo:** replace `jira.lmc.cz` with `almacareer.atlassian.net` links ([aab1d4f](https://github.com/alma-oss/spirit-design-system/commit/aab1d4f8dfb3026b08d6345d673d3a1844fb6008))
 
 ### Dependencies
 

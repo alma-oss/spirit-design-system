@@ -9,7 +9,7 @@
 //    d) The `z-index` property ensures toasts render above page content. It is exposed as a CSS custom property
 //       (`--spirit-toast-z-index`) so consumers can adjust stacking when needed. Temporary workaround until Toast
 //       uses the Popover API top layer — remove with DS-2602.
-//       @see https://jira.almacareer.tech/browse/DS-2602
+//       @see https://almacareer.atlassian.net/browse/DS-2602
 //
 // 2. Use grid layout to control horizontal (x) and vertical (y) alignment of the messages.
 //
