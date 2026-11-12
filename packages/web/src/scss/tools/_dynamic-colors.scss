@@ -1,6 +1,6 @@
 // When oklch() is supported by the browser, we can use it to generate dynamic colors.
-// Dynamic colors are based on the `--spirit-local-background-color` variable (or an explicit `$base-color` such as
-// `color-scheme.get-background-color()` for components that establish their own color scheme). When neither a color scheme
+// Dynamic colors are based on the `--spirit-local-background-color` variable (or an explicit `$base-color` such as the
+// resting background of an interactive surface that establishes its own color scheme). When neither a color scheme
 // nor a background utility is applied higher in the DOM, the helpers fall back to the `$background-primary` token so
 // they always produce a usable color.
 //
@@ -12,6 +12,10 @@
 //    and subtle variant — there is just a single pair of them.
 // 2. When a color scheme is present, borders always use its subtle border color — whether the scheme is a basic or
 //    subtle variant — so the border stands out on a basic background.
+// 3. With an explicit `$base-color` (a stable resting background, e.g. of an interactive surface), the state color is
+//    written into `--…local-background-color` and painted from it, so nested elements follow it and `.disabled` wins.
+//    A state derived from the inherited local background, or painted on a pseudo-element, is painted directly,
+//    because writing it back into the local background would make it depend on itself.
 //
 // @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch
 
@@ -104,44 +108,49 @@ $_chroma-upper-limit: var(
     }
 }
 
+// Paints one interactive state, optionally writing it into `--…local-background-color` first (see 3.).
+@mixin -background-interactive-state($state-color, $write-local) {
+    @if $write-local {
+        @include local.set-background-color($state-color);
+
+        background-color: local.get-background-color();
+    } @else {
+        background-color: $state-color;
+    }
+}
+
 // Mixin to generate dynamic background colors for interactive states.
 // Parameters are:
 // * $target: which element to target, e.g. a pseudo-selector: `::before`
 // * $base-color: the base background color to derive hover/active colors from (defaults to inherited local context)
 @mixin background-interactive($target: '', $base-color: $_background-color) {
+    // 3.
+    $write-local: $base-color != $_background-color and $target == '';
+
     @supports (color: oklch(from red l c h)) {
         // 1.
-        @include local.set-background-color-state-hover(
-            alter-color(
-                $color: $base-color,
-                $lightness-delta: $_lightness-delta-background-state-hover,
-                $chroma-scale: $_chroma-scale-background-state-hover
-            )
-        );
-        @include local.set-background-color-state-active(
-            alter-color(
-                $color: $base-color,
-                $lightness-delta: $_lightness-delta-background-state-active,
-                $chroma-scale: $_chroma-scale-background-state-active
-            )
-        );
-
         @media (hover: hover) {
             &:hover#{$target} {
-                @if $base-color != $_background-color and $target == '' {
-                    @include local.set-background-color(local.get-background-color-state-hover());
-                }
-
-                background-color: local.get-background-color-state-hover();
+                @include -background-interactive-state(
+                    $state-color: alter-color(
+                            $color: $base-color,
+                            $lightness-delta: $_lightness-delta-background-state-hover,
+                            $chroma-scale: $_chroma-scale-background-state-hover
+                        ),
+                    $write-local: $write-local
+                );
             }
         }
 
         &:active#{$target} {
-            @if $base-color != $_background-color and $target == '' {
-                @include local.set-background-color(local.get-background-color-state-active());
-            }
-
-            background-color: local.get-background-color-state-active();
+            @include -background-interactive-state(
+                $state-color: alter-color(
+                        $color: $base-color,
+                        $lightness-delta: $_lightness-delta-background-state-active,
+                        $chroma-scale: $_chroma-scale-background-state-active
+                    ),
+                $write-local: $write-local
+            );
         }
     }
 }
@@ -149,13 +158,11 @@ $_chroma-upper-limit: var(
 // Mixin to generate dynamic background color for selected items.
 @mixin background-selected($base-color: $_background-color) {
     @supports (color: oklch(from red l c h)) {
-        background-color: local.get-background-color-state-selected(
-            color-scheme.get-background-color-state-selected(
-                alter-color(
-                    $color: $base-color,
-                    $lightness-delta: $_lightness-delta-background-selected,
-                    $chroma-scale: $_chroma-scale-background-selected
-                )
+        background-color: color-scheme.get-background-color-state-selected(
+            alter-color(
+                $color: $base-color,
+                $lightness-delta: $_lightness-delta-background-selected,
+                $chroma-scale: $_chroma-scale-background-selected
             )
         );
     }
