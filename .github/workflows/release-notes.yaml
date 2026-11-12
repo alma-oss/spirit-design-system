@@ -57,7 +57,7 @@ jobs:
       - name: Generate Release Notes
         uses: anthropics/claude-code-action@5eb090f3c3afd701a0672cd32981197ca27688f6 # v1.0.253
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          anthropic_api_key: ${{ secrets.RELEASE_NOTES_ANTHROPIC_API_KEY }}
           # The Spirit GitHub App token, so the action does not need an OIDC token for the Claude GitHub App
           github_token: ${{ steps.app-token.outputs.token }}
           prompt: |
@@ -114,5 +114,5 @@ jobs:
         run: yarn post-release-notes "$PWD/docs/release-notes/${RELEASE_DATE}.md"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_RELEASE_CHANNEL_ID: ${{ secrets.SLACK_RELEASE_CHANNEL_ID }}
+          SLACK_RELEASE_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           RELEASE_NOTES_PR_URL: ${{ steps.pr.outputs.url }}
