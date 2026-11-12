@@ -1,6 +1,10 @@
 name: 📝 Release Notes
 
 on:
+  # TEMPORARY: test trigger, remove before merge
+  push:
+    branches: [feat/automate-release-notes]
+    paths: ['.github/workflows/release-notes.yaml']
   workflow_call:
     inputs:
       ref:
