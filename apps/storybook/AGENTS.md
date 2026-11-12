@@ -4,7 +4,6 @@
 
 - Component stories live next to their component in `packages/web-react/src/components/<Component>/stories/`.
   This app only holds the Storybook configuration, decorators, and theme.
-- Untracked `.story-ui*` and `stories/` folders are local experiments. Do not commit or tidy them.
 
 ## Rules
 

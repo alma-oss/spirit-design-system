@@ -4,7 +4,7 @@
 
 - `src/svg/` holds the SVG icons synchronized from the Figma Assets file (the `Brand=Spirit` variant).
   Never edit or add an icon by hand.
-- `scripts/` holds the build verification, `dist/` and `types/` are build output.
+- `scripts/` holds the build verification, `dist/` is build output, and `types/icons.d.ts` is a tracked type stub for the tsconfig `paths` (do not delete it).
 
 ## Rules
 
