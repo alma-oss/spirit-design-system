@@ -67,7 +67,7 @@
             flex-direction: row-reverse;
         }
 
-        // @see https://jira.almacareer.tech/browse/DS-1630 - Add 'verticalReversed' selector
+        // @see https://almacareer.atlassian.net/browse/DS-1630 - Add 'verticalReversed' selector
         .Flex--#{$infix}vertical {
             display: grid; // 2.
         }

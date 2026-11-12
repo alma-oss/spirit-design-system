@@ -764,8 +764,8 @@ Popover API is strongly recommended.
 [contextual-help]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ContextualHelp/README.md
 [decision-listbox-grid]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/decisions/014-listbox-vs-grid-for-selectable-options.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
-[jira-listbox-react]: https://jira.almacareer.tech/browse/DS-2770
-[jira-selection-live-region]: https://jira.almacareer.tech/browse/DS-2759
+[jira-listbox-react]: https://almacareer.atlassian.net/browse/DS-2770
+[jira-selection-live-region]: https://almacareer.atlassian.net/browse/DS-2759
 [mdn-dialog-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/dialog_role
 [mdn-grid-role]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/grid_role
 [picker-themes-demo]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/index.html

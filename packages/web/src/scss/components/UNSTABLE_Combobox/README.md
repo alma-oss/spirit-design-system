@@ -724,7 +724,7 @@ input for option navigation; Space and printable characters type into the filter
 
 [contextual-help]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/ContextualHelp/README.md
 [dropdown]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Dropdown/README.md
-[jira-selection-live-region]: https://jira.almacareer.tech/browse/DS-2759
+[jira-selection-live-region]: https://almacareer.atlassian.net/browse/DS-2759
 [picker-selection-role]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/UNSTABLE_Picker/README.md#selection-area-dynamic-role
 [smashing-magazine-placeholder]: https://www.smashingmagazine.com/2018/06/placeholder-attribute/
 [splittag]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/UNSTABLE_SplitTag/README.md
