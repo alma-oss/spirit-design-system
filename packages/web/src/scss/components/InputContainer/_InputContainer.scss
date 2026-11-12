@@ -162,11 +162,15 @@
 .InputContainer--fill {
     @include local.set-background-color(var(--#{tokens.$css-variable-prefix}input-container-background-color)); // 6.
 
+    background-color: local.get-background-color();
+
     @media (hover: hover) {
         &:not(.InputContainer--disabled):hover {
             @include local.set-background-color(
                 var(--#{tokens.$css-variable-prefix}input-container-background-color-state-hover)
             ); // 6.
+
+            background-color: local.get-background-color();
         }
     }
 
@@ -175,6 +179,8 @@
         @include local.set-background-color(
             var(--#{tokens.$css-variable-prefix}input-container-background-color-state-active)
         ); // 6.
+
+        background-color: local.get-background-color();
     }
 }
 
@@ -190,7 +196,7 @@
 
     color: theme.$color-state-disabled;
     border-color: theme.$border-color-state-disabled;
-    background-color: theme.$background-color-state-disabled;
+    background-color: local.get-background-color();
 }
 
 .InputContainer--disabled:focus-within {

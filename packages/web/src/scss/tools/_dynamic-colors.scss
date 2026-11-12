@@ -1,21 +1,22 @@
 // When oklch() is supported by the browser, we can use it to generate dynamic colors.
 // Dynamic colors are based on the `--spirit-local-background-color` variable (or an explicit `$base-color` such as the
-// resting background of an interactive surface that establishes its own color scheme). When neither a color scheme
-// nor a background utility is applied higher in the DOM, the helpers fall back to the `$background-primary` token so
-// they always produce a usable color.
+// resting background of an interactive surface that establishes its own color scheme).
 //
 // Dynamic colors first try to apply the matching color scheme token and only fall back to a computed color when no
-// appropriate token is found. The exceptions to this rule are:
+// appropriate token is found. The exceptions to this rule are described in 2. and 4.
 //
-// 1. For interactive states, the background color is always computed so the resulting color does not diverge too much
-//    from the background. Hover/active color scheme tokens do exist, but they do not differentiate between the basic
-//    and subtle variant — there is just a single pair of them.
+// 1. When neither a surface component, a color scheme, nor a background utility is applied higher in the DOM, the
+//    helpers fall back to the color scheme background or the `$background-primary` token so they always produce
+//    a usable color.
 // 2. When a color scheme is present, borders always use its subtle border color — whether the scheme is a basic or
 //    subtle variant — so the border stands out on a basic background.
 // 3. With an explicit `$base-color` (a stable resting background, e.g. of an interactive surface), the state color is
 //    written into `--…local-background-color` and painted from it, so nested elements follow it and `.disabled` wins.
 //    A state derived from the inherited local background, or painted on a pseudo-element, is painted directly,
 //    because writing it back into the local background would make it depend on itself.
+// 4. For interactive states, the background color is always computed so the resulting color does not diverge too much
+//    from the background. Hover/active color scheme tokens do exist, but they do not differentiate between the basic
+//    and subtle variant — there is just a single pair of them.
 //
 // @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch
 
@@ -23,9 +24,7 @@
 @use 'color-scheme';
 @use 'local';
 
-// Base background color the dynamic colors are derived from. Falls back to the color scheme background or primary
-// background token so the helpers keep working even when no surface component or background utility set
-// `--…local-background-color` higher in the DOM.
+// 1.
 $_background-color: local.get-background-color(color-scheme.get-background-color(tokens.$background-primary));
 
 // Default coefficients for dynamic color generation (fine-tuned for the default light Spirit theme).
@@ -121,14 +120,14 @@ $_chroma-upper-limit: var(
 
 // Mixin to generate dynamic background colors for interactive states.
 // Parameters are:
-// * $target: which element to target, e.g. a pseudo-selector: `::before`
 // * $base-color: the base background color to derive hover/active colors from (defaults to inherited local context)
-@mixin background-interactive($target: '', $base-color: $_background-color) {
+// * $target: which element to target, e.g. a pseudo-selector: `::before`
+@mixin background-interactive($base-color: $_background-color, $target: '') {
     // 3.
     $write-local: $base-color != $_background-color and $target == '';
 
     @supports (color: oklch(from red l c h)) {
-        // 1.
+        // 4.
         @media (hover: hover) {
             &:hover#{$target} {
                 @include -background-interactive-state(

@@ -35,7 +35,7 @@
     &:not(.disabled, :disabled):active {
         @include local.set-background-color(theme.$background-color-state-active);
 
-        background-color: theme.$background-color-state-active;
+        background-color: local.get-background-color();
     }
 
     @media (hover: hover) {
@@ -43,7 +43,7 @@
             @include local.set-background-color(theme.$background-color-state-hover);
 
             text-decoration: none;
-            background-color: theme.$background-color-state-hover;
+            background-color: local.get-background-color();
         }
     }
 
