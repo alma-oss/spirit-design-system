@@ -99,7 +99,7 @@ const collection = (id: string, name: string, modes: Array<[string, string]>) =>
   modes: modes.map(([modeId, modeName]) => ({ modeId, name: modeName })),
 });
 
-const createCollections = () => [
+export const createCollections = () => [
   collection('c-global', 'Global tokens', [['g1', 'Mode 1']]),
   collection('c-theme', 'Theme tokens', [
     ['t1', 'Light'],
@@ -136,7 +136,7 @@ const typographyNode = (id: string, name: string, extra = {}) => ({
   ...extra,
 });
 
-const NODES = {
+export const NODES = {
   n1: {
     document: typographyNode('n1', 'Typography/Body', {
       boundVariables: { fontSize: { type: 'VARIABLE_ALIAS', id: 'v-font-size' } },
@@ -182,8 +182,15 @@ const toRecord = <Item extends { id: string }>(items: Item[]) =>
 
 export const createFigmaFetch = ({
   variables = createVariables(),
+  collections = createCollections(),
+  nodes = NODES,
   failOn,
-}: { variables?: RestVariable[]; failOn?: string } = {}): jest.Mock => {
+}: {
+  variables?: RestVariable[];
+  collections?: ReturnType<typeof createCollections>;
+  nodes?: Record<string, unknown>;
+  failOn?: string;
+} = {}): jest.Mock => {
   const respond = (body: unknown, ok = true) =>
     Promise.resolve({ ok, status: ok ? 200 : 403, statusText: 'x', json: async () => body });
 
@@ -195,7 +202,7 @@ export const createFigmaFetch = ({
     if (url.includes('/variables/local')) {
       return respond({
         meta: {
-          variableCollections: toRecord(createCollections()),
+          variableCollections: toRecord(collections),
           variables: toRecord(variables.map((item) => variable(item))),
         },
       });
@@ -206,7 +213,7 @@ export const createFigmaFetch = ({
     }
 
     if (url.includes('/nodes')) {
-      return respond({ nodes: NODES });
+      return respond({ nodes });
     }
 
     return respond({ name: 'SPIRIT (Config)' });
