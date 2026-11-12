@@ -17,7 +17,9 @@ vanilla SCSS and JS, design tokens, icons, and tooling.
 | `docs/decisions/`                             | Architecture decision records                                       |
 
 Folders with their own rules have a nested `AGENTS.md`:
-[`apps/docsite`][docsite-agents], [`packages/web`][web-agents], and [`packages/web-react`][web-react-agents].
+[`apps/docsite`][docsite-agents], [`apps/storybook`][storybook-agents], [`packages/codemods`][codemods-agents],
+[`packages/design-tokens`][design-tokens-agents], [`packages/icons`][icons-agents], [`packages/web`][web-agents],
+and [`packages/web-react`][web-react-agents].
 
 ## Setup
 
@@ -37,7 +39,7 @@ yarn workspace @alma-oss/spirit-web-react test                  # lint, types, a
 yarn workspace @alma-oss/spirit-web-react test:unit <file-path> # unit tests matching a path pattern
 yarn workspace @alma-oss/spirit-web test
 make format-fix                                                 # Prettier
-yarn lint:markdown && yarn lint:text                            # after editing any Markdown file
+yarn lint:docs                                                  # after editing any Markdown file
 make test-e2e                                                   # visual tests in Docker, start Docker first
 make test-e2e-update                                            # update snapshots after an intended visual change
 make test                                                       # whole repository, run before opening a PR
@@ -93,10 +95,14 @@ Use a skill from [`.agents/skills/`][skills] instead of improvising a procedure 
 
 [agents-code-style]: .agents/instructions/code-style.md
 [agents-git-workflow]: .agents/instructions/git-workflow.md
+[codemods-agents]: packages/codemods/AGENTS.md
+[design-tokens-agents]: packages/design-tokens/AGENTS.md
 [docsite-agents]: apps/docsite/AGENTS.md
 [e2e-testing]: docs/contribution/e2e-testing.md
 [experimental-code]: docs/contribution/experimental-code.md
 [feature-flags]: docs/contribution/feature-flags.md
+[icons-agents]: packages/icons/AGENTS.md
 [skills]: .agents/skills/README.md
+[storybook-agents]: apps/storybook/AGENTS.md
 [web-agents]: packages/web/AGENTS.md
 [web-react-agents]: packages/web-react/AGENTS.md

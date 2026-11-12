@@ -4,8 +4,17 @@ applyTo: '**'
 
 # Spirit Design System - AI Instructions for GitHub Copilot
 
-Project context, commands, and conventions live in the root [AGENTS.md](../AGENTS.md) and in nested `AGENTS.md` files.
-This file adds only code review instructions.
+Copilot code review reads the root [AGENTS.md](../AGENTS.md) but does not document reading nested `AGENTS.md` files.
+This file therefore repeats the nested rules that a diff can break.
+
+## Nested Rules
+
+- `packages/web`: a component styles only its own BEM block (`.Component`, `.Component--modifier`, `.Component__element`), never other components' classes.
+- `packages/web-react`: a new component is exported from `src/components/index.ts` and in the `exports` of `package.json` (`exports:regenerate`).
+- `packages/web-react`: the demo registers through `index.html` and `preview/index.ts`.
+- `packages/design-tokens/src` and `packages/icons/src/svg` are generated and never edited by hand.
+- `packages/codemods`: every codemod has a fixture pair and a test for each scenario.
+- `apps/docsite`: pages use `@alma-oss/spirit-web-react` components, no `UNSAFE_className` unless the gap is documented, no CSS modules.
 
 ## Code Review Instructions
 

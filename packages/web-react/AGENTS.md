@@ -9,6 +9,7 @@ A component lives in `src/components/<Component>/`. Use `Button` as the referenc
 - `README.md` documents the API; keep its examples identical to the `web` package README
 - `demo/` holds one file per example and `demo/preview.tsx`, which renders them in `DocsSection`s
 - `stories/<Component>.stories.tsx`, `__tests__/` with unit and `*.accessibility.test.tsx` tests
+- `index.html` (Handlebars `web-react/demo` partial) and `preview/index.ts` (re-exports `demo/preview`) register the component in the dev demo
 - `docs/` holds the docsite pages and `playground.json`
 - `figma/<Component>.figma.ts` holds the Figma Code Connect mapping
 
