@@ -1,6 +1,8 @@
 // 1. Format numeric key names to match Figma variable names, e.g. 1 => '01'
 // 2. Don't prefix if value key is null (e.g. with shadow class)
 // 3. Remove default postfix from class name
+// 4. Utilities with generated custom properties paint from the local context they write, so a later rule that
+//    overrides the same local with `!important` on the same element (e.g. `.disabled`) wins for the paint too.
 
 @use 'sass:list';
 @use 'sass:map';
@@ -54,6 +56,20 @@
     @return $result;
 }
 
+// Declares one utility property. With generated custom properties, the value is written into the local context and
+// painted from it (see 4.).
+@mixin -declare($property, $value, $generate-custom-properties) {
+    @if $generate-custom-properties {
+        @include local.set($property, $value, $important: true);
+
+        // stylelint-disable-next-line declaration-no-important -- We are generating utilities
+        #{$property}: local.get($property) !important;
+    } @else {
+        // stylelint-disable-next-line declaration-no-important -- We are generating utilities
+        #{$property}: $value !important;
+    }
+}
+
 // Dynamically generates utility classes based on a given utility map.
 // It iterates over the values defined in the utility map and creates CSS classes with the specified properties.
 // Parameters are:
@@ -93,22 +109,12 @@
             // Check if $value is a map (for multi-property utilities with different values per property)
             @if meta.type-of($value) == 'map' {
                 @each $property, $property-value in $value {
-                    @if $generate-custom-properties {
-                        @include local.set($property, $property-value, $important: true);
-                    }
-
-                    // stylelint-disable-next-line declaration-no-important -- We are generating utilities
-                    #{$property}: $property-value !important;
+                    @include -declare($property, $property-value, $generate-custom-properties);
                 }
             } @else {
                 // Original behavior: apply same value to all properties
                 @each $property in $properties {
-                    @if $generate-custom-properties {
-                        @include local.set($property, $value, $important: true);
-                    }
-
-                    // stylelint-disable-next-line declaration-no-important -- We are generating utilities
-                    #{$property}: $value !important;
+                    @include -declare($property, $value, $generate-custom-properties);
                 }
             }
         }

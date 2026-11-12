@@ -11,6 +11,14 @@
     }
 }
 
+@function get($name, $fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-#{$name});
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-#{$name}, $fallback);
+}
+
 @function get-color($fallback: null) {
     @if not $fallback {
         @return var(--#{tokens.$css-variable-prefix}local-color);

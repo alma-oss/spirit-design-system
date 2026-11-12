@@ -4,7 +4,6 @@
 @use 'sass:map';
 @use '@tokens' as tokens;
 @use '../tools/color-scheme';
-@use '../tools/local';
 @use '../tools/map' as spirit-map;
 @use '../tools/utilities';
 
@@ -61,7 +60,7 @@ $utilities: (
         responsive: false,
         property: border-color,
         class: border,
-        generate-custom-properties: false,
+        generate-custom-properties: true,
         values: spirit-map.merge-multiple(
                 utilities.generate-token-map(
                     $tokens-group: $accent-tokens-key,
@@ -83,9 +82,7 @@ $utilities: (
                 ),
                 (
                     basic: tokens.$border-basic,
-                ),
-                (
-                    'color-scheme': local.get-border-color(color-scheme.get-border-color()),
+                    'color-scheme': color-scheme.get-border-color(),
                 )
             ),
     ),
@@ -313,7 +310,7 @@ $utilities: (
         responsive: false,
         property: color,
         class: text,
-        generate-custom-properties: false,
+        generate-custom-properties: true,
         values: spirit-map.merge-multiple(
                 utilities.generate-token-map(
                     $tokens-group: $accent-tokens-key,
@@ -341,9 +338,7 @@ $utilities: (
                     neutral-subtle: tokens.$neutral-content-subtle,
                     selected-basic: tokens.$selected-content-basic,
                     selected-subtle: tokens.$selected-content-subtle,
-                ),
-                (
-                    'color-scheme': local.get-color(color-scheme.get-color()),
+                    'color-scheme': color-scheme.get-color(),
                 )
             ),
     ),

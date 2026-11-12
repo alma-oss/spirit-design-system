@@ -101,6 +101,16 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
         '    ×',
         '  </span>',
         '</button>',
+        '<div id="alert-with-nested-scheme" class="Alert Alert--success color-scheme-on-emotion-success-subtle" role="alert">',
+        '  <div id="nested-scheme-in-alert" class="color-scheme-on-emotion-danger-basic text-color-scheme border-color-scheme border-solid border-100">',
+        '    Nested danger scheme',
+        '    <span id="nested-scheme-in-alert-child">Child</span>',
+        '    <span id="disabled-scheme-text" class="text-color-scheme disabled">Disabled</span>',
+        '  </div>',
+        '</div>',
+        '<div id="disabled-scheme-surface" class="color-scheme-on-emotion-success-basic bg-color-scheme text-color-scheme disabled p-400">',
+        '  Disabled scheme surface',
+        '</div>',
         '<span id="overridden-tag" class="Tag Tag--customOverride Tag--medium color-scheme-on-emotion-success-basic">',
         '  Overridden Tag',
         '  <button id="overridden-tag-child" type="button" class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive text-color-scheme">',
@@ -324,6 +334,49 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
     expect(overriddenInteractiveChildHovered.backgroundColor).toBe(overriddenInteractiveHovered.backgroundColor);
 
     await page.mouse.move(0, 0);
+
+    // Scheme utilities on an element with its own scheme replace the local context inherited from the parent surface
+    const alertWithNestedScheme = await getComputedColors(page, '#alert-with-nested-scheme');
+    const nestedSchemeInAlert = await getComputedColors(page, '#nested-scheme-in-alert');
+    const nestedSchemeColorResolved = await resolveCssColorToRgb(
+      page,
+      '#nested-scheme-in-alert',
+      '--spirit-color-scheme-color',
+    );
+    const nestedSchemeBorderResolved = await resolveCssColorToRgb(
+      page,
+      '#nested-scheme-in-alert',
+      '--spirit-color-scheme-border-color',
+    );
+    const nestedSchemeChildLocalColor = await resolveCssColorToRgb(
+      page,
+      '#nested-scheme-in-alert-child',
+      '--spirit-local-color',
+    );
+    const disabledSchemeText = await getComputedColors(page, '#disabled-scheme-text');
+    const disabledContentResolved = await resolveCssColorToRgb(
+      page,
+      '#disabled-scheme-text',
+      '--spirit-color-disabled-content',
+    );
+
+    expect(nestedSchemeInAlert.color).toBe(nestedSchemeColorResolved);
+    expect(nestedSchemeInAlert.color).not.toBe(alertWithNestedScheme.color);
+    expect(nestedSchemeInAlert.borderColor).toBe(nestedSchemeBorderResolved);
+    expect(nestedSchemeInAlert.borderColor).not.toBe(alertWithNestedScheme.borderColor);
+    expect(nestedSchemeChildLocalColor).toBe(nestedSchemeColorResolved);
+    expect(disabledSchemeText.color).toBe(disabledContentResolved);
+
+    // Generated utilities paint from the local context, so `.disabled` on the same element wins
+    const disabledSchemeSurface = await getComputedColors(page, '#disabled-scheme-surface');
+    const disabledBackgroundResolved = await resolveCssColorToRgb(
+      page,
+      '#disabled-scheme-surface',
+      '--spirit-color-disabled-background',
+    );
+
+    expect(disabledSchemeSurface.backgroundColor).toBe(disabledBackgroundResolved);
+    expect(disabledSchemeSurface.color).toBe(disabledContentResolved);
 
     // Non-OKLCH component using predefined state tokens (Button)
     const primaryButtonDefault = await getComputedColors(page, '#primary-button');
