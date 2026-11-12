@@ -132,6 +132,11 @@ const lineHeightFrom = (style: NonNullable<RestNode['style']>): FigmaLineHeight 
     return { unit: 'PIXELS', value: style.lineHeightPx };
   }
 
+  // Automatic line height: Figma reports 100% of the intrinsic height and leaves `lineHeightPercentFontSize` out
+  if (style.lineHeightUnit === 'INTRINSIC_%' && style.lineHeightPercent === 100) {
+    return { unit: 'AUTO' };
+  }
+
   const percent = style.lineHeightPercentFontSize ?? style.lineHeightPercent;
 
   if (style.lineHeightUnit !== 'PIXELS' && typeof percent === 'number') {
