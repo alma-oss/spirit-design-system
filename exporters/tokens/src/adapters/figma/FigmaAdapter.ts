@@ -9,7 +9,7 @@ import { mapStyle } from './mappers/styleMapper';
 import { mapVariable } from './mappers/variableMapper';
 import type { MapContext } from './mappers/context';
 import { toParamCase } from './naming';
-import { readFigmaSource } from './rest';
+import { readFigmaSource } from './source';
 import type { FigmaCollection, FigmaSource } from './types';
 
 export type FigmaAdapterOptions = {
