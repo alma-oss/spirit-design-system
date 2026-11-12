@@ -91,7 +91,16 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
         '    --spirit-local-color: rgb(250, 240, 255);',
         '    --spirit-local-border-color: rgb(90, 20, 160);',
         '  }',
+        '  .Tag.Tag--customInteractive {',
+        '    --spirit-tag-background-color: rgb(120, 40, 200);',
+        '  }',
         '</style>',
+        '<button id="overridden-interactive-tag" type="button" class="Tag Tag--customInteractive Tag--medium color-scheme-on-emotion-success-basic">',
+        '  Overridden Interactive Tag',
+        '  <span id="overridden-interactive-tag-child" class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive">',
+        '    ×',
+        '  </span>',
+        '</button>',
         '<span id="overridden-tag" class="Tag Tag--customOverride Tag--medium color-scheme-on-emotion-success-basic">',
         '  Overridden Tag',
         '  <button id="overridden-tag-child" type="button" class="ControlButton ControlButton--xsmall ControlButton--hasBackground ControlButton--symmetrical dynamic-color-border dynamic-color-background-interactive text-color-scheme">',
@@ -294,6 +303,27 @@ test.describe('Color Schemes and Dynamic Color Context Architecture', () => {
     expect(overriddenTag.backgroundColor).toBe('rgb(120, 40, 200)');
     expect(overriddenTag.color).toBe('rgb(250, 240, 255)');
     expect(overriddenChild.backgroundColor).toBe('rgb(120, 40, 200)');
+
+    // Interactive surfaces derive hover from the overridden resting background, not from the scheme palette
+    const overriddenInteractiveDefault = await getComputedColors(page, '#overridden-interactive-tag');
+
+    expect(overriddenInteractiveDefault.backgroundColor).toBe('rgb(120, 40, 200)');
+
+    await hoverAtCorner(page, '#overridden-interactive-tag');
+    const overriddenInteractiveHovered = await getComputedColors(page, '#overridden-interactive-tag');
+    const overriddenInteractiveHoveredLocal = await resolveCssColorToRgb(
+      page,
+      '#overridden-interactive-tag',
+      '--spirit-local-background-color',
+    );
+    const overriddenInteractiveChildHovered = await getComputedColors(page, '#overridden-interactive-tag-child');
+
+    expect(overriddenInteractiveHovered.backgroundColor).not.toBe(overriddenInteractiveDefault.backgroundColor);
+    expect(overriddenInteractiveHovered.backgroundColor).not.toBe(buttonTagHovered.backgroundColor);
+    expect(overriddenInteractiveHoveredLocal).toBe(overriddenInteractiveHovered.backgroundColor);
+    expect(overriddenInteractiveChildHovered.backgroundColor).toBe(overriddenInteractiveHovered.backgroundColor);
+
+    await page.mouse.move(0, 0);
 
     // Non-OKLCH component using predefined state tokens (Button)
     const primaryButtonDefault = await getComputedColors(page, '#primary-button');
