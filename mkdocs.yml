@@ -19,6 +19,7 @@ nav:
   - Concepts:
       - Collections: content/collections.md
       - Color Schemes: content/color-schemes.md
+      - Local Color Context: content/local-color-context.md
       - Disclosures: content/disclosures.md
       - Selection: content/selection.md
       - Content Truncating: content/truncating.md
