@@ -5,7 +5,7 @@ import { TokenTypeEnum, type DesignToken } from '../../../core/types';
 import { FigmaAdapter } from '../FigmaAdapter';
 import { FigmaApiError } from '../FigmaApiError';
 import { FigmaExportError } from '../FigmaExportError';
-import { createFigmaFetch, createVariables, variable } from '../__fixtures__/figma';
+import { NODES, createCollections, createFigmaFetch, createVariables, variable } from '../__fixtures__/figma';
 
 const fetchTokens = (fetchMock: jest.Mock, onWarning?: (message: string) => void) =>
   new FigmaAdapter({ token: 'token', fetch: fetchMock as unknown as typeof fetch, onWarning }).fetchTokens({
@@ -158,6 +158,40 @@ describe('FigmaAdapter', () => {
                 type: { value: 'linear' },
                 from: { value: { x: { value: 0 }, y: { value: 0.5 } } },
                 to: { value: { x: { value: 1 }, y: { value: 0.5 } } },
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('should mark the default mode of the theme collection as the default theme', async () => {
+      const collections = createCollections().map((item) =>
+        item.id === 'c-theme' ? { ...item, defaultModeId: 't2' } : item,
+      );
+      const { themes } = await fetchTokens(createFigmaFetch({ collections }));
+
+      expect(themes).toEqual([
+        { id: 't1', name: 'light', isDefault: false },
+        { id: 't2', name: 'dark', isDefault: true },
+      ]);
+    });
+
+    it('should apply the opacity of a gradient paint to its stops', async () => {
+      const [{ document }] = [NODES.n4];
+      const fill = { ...document.fills[0], opacity: 0.5 };
+      const nodes = { ...NODES, n4: { document: { ...document, fills: [fill] } } };
+      const { tokens } = await fetchTokens(createFigmaFetch({ nodes }));
+
+      expect(byId(tokens, 'n4').value).toMatchObject({
+        value: {
+          '0': {
+            value: {
+              stops: {
+                value: {
+                  '0': { value: { color: { value: '#ffffff80' } } },
+                  '1': { value: { color: { value: '#00000080' } } },
+                },
               },
             },
           },

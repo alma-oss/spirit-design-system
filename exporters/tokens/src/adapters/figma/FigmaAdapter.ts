@@ -46,7 +46,11 @@ const deriveGroups = (tokens: DesignToken[]): TokenGroup[] => {
 };
 
 const mapThemes = (collection: FigmaCollection | undefined): Theme[] =>
-  (collection?.modes ?? []).map((mode, index) => ({ id: mode.id, name: modeName(mode.name), isDefault: index === 0 }));
+  (collection?.modes ?? []).map((mode) => ({
+    id: mode.id,
+    name: modeName(mode.name),
+    isDefault: mode.id === collection?.defaultModeId,
+  }));
 
 /**
  * Maps an already fetched Figma file to the internal model. Kept apart from the network so a snapshot of the same

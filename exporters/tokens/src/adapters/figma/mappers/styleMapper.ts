@@ -97,7 +97,12 @@ const mapGradientLayer = (paint: FigmaPaint, context: MapContext): TokenValue =>
       (paint.gradientStops ?? []).map((stop) =>
         mapComposite({
           position: mapNumber(stop.position),
-          color: mapColorWithBinding(stop.color, stop.boundVariables?.color?.id, context),
+          // The paint's opacity applies on top of every stop's own alpha
+          color: mapColorWithBinding(
+            stop.color && { ...stop.color, a: stop.color.a * (paint.opacity ?? 1) },
+            stop.boundVariables?.color?.id,
+            context,
+          ),
         }),
       ),
     ),
