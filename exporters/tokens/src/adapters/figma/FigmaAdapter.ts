@@ -1,6 +1,7 @@
 import type { DesignToken, Theme, TokenCollection, TokenGroup } from '../../core/types';
 import type { AdapterConfig, SourceAdapter } from '../SourceAdapter';
 import { indexVariables } from './aliases';
+import { parseSourceConfig } from './config';
 import { collectionFamily } from './conventions';
 import { DiagnosticCollector } from './diagnostics';
 import { FigmaApiError } from './FigmaApiError';
@@ -144,19 +145,14 @@ export class FigmaAdapter implements SourceAdapter {
 
   async fetchTokens(config: AdapterConfig): Promise<TokenCollection> {
     const { token, fetch: fetchImplementation = fetch, onWarning } = this.options;
-    const fileKey = config.source.fileKey as string | undefined;
 
     if (!token) {
       throw new FigmaApiError('A Figma access token is required.');
     }
 
-    if (!fileKey) {
-      throw new FigmaApiError('A Figma file key is required (source.fileKey).');
-    }
-
+    const { fileKey, brandId } = parseSourceConfig(config);
     const source = await readFigmaSource(fileKey, token, fetchImplementation);
     const diagnostics = new DiagnosticCollector();
-    const brandId = (config.source.brandId as string | undefined) ?? config.filters?.brandId;
     const { tokens, groups, themes } = mapFigmaSource(source, diagnostics, brandId);
 
     diagnostics.warnings.forEach((warning) => onWarning?.(warning));
