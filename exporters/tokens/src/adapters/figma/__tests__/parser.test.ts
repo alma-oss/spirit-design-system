@@ -16,6 +16,12 @@ describe('toFigmaSource', () => {
     ['pixels', { lineHeightUnit: 'PIXELS', lineHeightPx: 20 }, { unit: 'PIXELS', value: 20 }],
     ['percent', { lineHeightUnit: 'INTRINSIC_%', lineHeightPercentFontSize: 120 }, { unit: 'PERCENT', value: 120 }],
     ['auto', { lineHeightUnit: 'INTRINSIC_%' }, { unit: 'AUTO' }],
+    ['intrinsic 100%', { lineHeightUnit: 'INTRINSIC_%', lineHeightPercent: 100 }, { unit: 'AUTO' }],
+    [
+      'intrinsic percent of the font size',
+      { lineHeightUnit: 'INTRINSIC_%', lineHeightPercent: 120, lineHeightPercentFontSize: 150 },
+      { unit: 'PERCENT', value: 150 },
+    ],
   ])('should read %s line height of a text style', (_name, style, expected) => {
     expect(textStyle(style).lineHeight).toEqual(expected);
   });
