@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.6.2...%40alma-oss%2Fspirit-storybook%400.6.3) (2026-11-13)
+
+### Chores
+
+- **storybook:** serve local placeholder images ([361a8c0](https://github.com/alma-oss/spirit-design-system/commit/361a8c0e491c979dadb97bed3a0b81f1b7ccb3a0))
+
 ## [0.6.2](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-storybook%400.6.1...%40alma-oss%2Fspirit-storybook%400.6.2) (2026-10-19)
 
 ### Styles

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-analytics%403.0.1...%40alma-oss%2Fspirit-analytics%403.0.2) (2026-11-13)
+
+### Styles
+
+- **analytics:** fix documentation content according to the textlint rules ([3250ce5](https://github.com/alma-oss/spirit-design-system/commit/3250ce5b2cbfbda01ecf48772349145ef0568cbc))
+
 ## [3.0.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-analytics%403.0.0...%40alma-oss%2Fspirit-analytics%403.0.1) (2026-10-19)
 
 ### Chores

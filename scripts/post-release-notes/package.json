@@ -1,6 +1,6 @@
 {
   "name": "@alma-oss/spirit-post-release-notes",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Post release notes as a Slack Canvas of the Spirit Design System",
   "type": "module",
   "private": true,

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.13](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.12...%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.13) (2026-11-13)
+
+### Styles
+
+- **repo:** fix documentation content according to the textlint rules ([2250ddb](https://github.com/alma-oss/spirit-design-system/commit/2250ddbb4d837426a84b3935c73f1b06bd3c82e2))
+
 ## [0.4.12](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.11...%40alma-oss%2Fspirit-example-next-with-pages-router%400.4.12) (2026-10-19)
 
 ### Bug Fixes

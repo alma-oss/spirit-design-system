@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.2.1...%40lmc-eu%2Fspirit-demo-app%403.2.2) (2026-11-13)
+
+### Chores
+
+- **demo:** remove unused Netlify build config #DS-2886 ([58c066a](https://github.com/alma-oss/spirit-design-system/commit/58c066ae739ebfd2ff6bf9d7cc82251eaec56632)), references [#DS-2886](https://github.com/alma-oss/spirit-design-system/issues/DS-2886)
+
 ## [3.2.1](https://github.com/alma-oss/spirit-design-system/compare/%40lmc-eu%2Fspirit-demo-app%403.2.0...%40lmc-eu%2Fspirit-demo-app%403.2.1) (2026-10-19)
 
 ### Styles

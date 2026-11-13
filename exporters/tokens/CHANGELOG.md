@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-tokens-exporter%404.4.1...%40alma-oss%2Fspirit-tokens-exporter%404.5.0) (2026-11-13)
+
+### Features
+
+- **exporter-tokens:** add pxToRemRule #DS-2335 ([a17570c](https://github.com/alma-oss/spirit-design-system/commit/a17570cfa11fba847c7181ca45503312a78531fb)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** add source adapter interface #DS-2335 ([98c8aa1](https://github.com/alma-oss/spirit-design-system/commit/98c8aa174117154296de8ac62aba9ad35319aade)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** add transformation layer core types #DS-2335 ([326469d](https://github.com/alma-oss/spirit-design-system/commit/326469d5dc95a4a281fc996c096cc85d7ff66197)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** export shadow lengths per theme #DS-2832 ([5869b41](https://github.com/alma-oss/spirit-design-system/commit/5869b415cacf552f8684cb916de9e948a0205b9f)), references [#DS-2832](https://github.com/alma-oss/spirit-design-system/issues/DS-2832)
+- **exporter-tokens:** implement supernova adapter for string tokens #DS-2335 ([2e118b1](https://github.com/alma-oss/spirit-design-system/commit/2e118b171f63c97dbaff711d18856ad8212b48bf)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** implement TransformationEngine #DS-2335 ([62a73c6](https://github.com/alma-oss/spirit-design-system/commit/62a73c608c5d0b7a7552eaff2ae61f1411f6ac06)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** introduce internal token model types #DS-2335 ([76dafa6](https://github.com/alma-oss/spirit-design-system/commit/76dafa62408d63c697685011bc2a766d79dcb2cc)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate border tokens to the adapter #DS-2335 ([0484e8d](https://github.com/alma-oss/spirit-design-system/commit/0484e8de7a5ce6f8468ffd6870d4f1cbdf6f0b40)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate borderWidth tokens to the adapter #DS-2335 ([a91456b](https://github.com/alma-oss/spirit-design-system/commit/a91456b42c219d289e627193c89e2473666338e2)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate dimension tokens to the adapter #DS-2335 ([99f8b9d](https://github.com/alma-oss/spirit-design-system/commit/99f8b9da15400299f2822f5b97589371e2c95847)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate fontSize tokens to the adapter #DS-2335 ([4e0ee13](https://github.com/alma-oss/spirit-design-system/commit/4e0ee13171e2d7ae65402a6b60aa9399cc2ade72)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate letterSpacing tokens to the adapter #DS-2335 ([3f92f65](https://github.com/alma-oss/spirit-design-system/commit/3f92f65a7b8ffb9c8a9a302615b684ba30b3055b)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate lineHeight tokens to the adapter #DS-2335 ([28ad8e2](https://github.com/alma-oss/spirit-design-system/commit/28ad8e2eded91a7052da891d7f48efcb392436ac)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate radius tokens to the adapter #DS-2335 ([fbbf21f](https://github.com/alma-oss/spirit-design-system/commit/fbbf21ff1bf34e6134a4d96e7af020ce159b67de)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate size tokens to the adapter #DS-2335 ([6c0b298](https://github.com/alma-oss/spirit-design-system/commit/6c0b298a3c0b369af8212dde132a078cd40ce023)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** migrate space tokens to the adapter #DS-2335 ([a30b589](https://github.com/alma-oss/spirit-design-system/commit/a30b58988b4276cfb1ba86881dae3191a42fb991)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** read color, shadow and gradient tokens through the internal model #DS-2872 ([c444d63](https://github.com/alma-oss/spirit-design-system/commit/c444d63b2723d16a2f21260e3ce21346cba3c242)), references [#DS-2872](https://github.com/alma-oss/spirit-design-system/issues/DS-2872)
+
+### Chores
+
+- **exporter-tokens:** regenerate `exporter.cjs` ([99e9feb](https://github.com/alma-oss/spirit-design-system/commit/99e9febd52f3e0cfe52d80ad05a3ccd5c8c92685))
+
+### Code Refactoring
+
+- **exporter-tokens:** extract structured px-to-rem conversion #DS-2335 ([6533615](https://github.com/alma-oss/spirit-design-system/commit/65336159a8ff89306ac90efa60e5f1ea35909990)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** normalize units at the adapter boundary #DS-2335 ([bb07f12](https://github.com/alma-oss/spirit-design-system/commit/bb07f129e200cadf12f7ad5feaf919284dc84bb3)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** read string token values via the adapter #DS-2335 ([1cf5122](https://github.com/alma-oss/spirit-design-system/commit/1cf51224c4208247438de4d329c27844af86860c)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+- **exporter-tokens:** wire the transformation engine into numeric tokens #DS-2335 ([dd26853](https://github.com/alma-oss/spirit-design-system/commit/dd26853ff7f930a9f37b63ae4d59419d658c1403)), references [#DS-2335](https://github.com/alma-oss/spirit-design-system/issues/DS-2335)
+
 ## [4.4.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-tokens-exporter%404.4.0...%40alma-oss%2Fspirit-tokens-exporter%404.4.1) (2026-10-19)
 
 ### Bug Fixes

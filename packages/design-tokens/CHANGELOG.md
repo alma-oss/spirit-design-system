@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.2.1...%40alma-oss%2Fspirit-design-tokens%405.3.0) (2026-11-13)
+
+### Features
+
+- **design-tokens:** expose shadow lengths as custom properties #DS-2832 ([762945b](https://github.com/alma-oss/spirit-design-system/commit/762945bb2f5506706f36e871be95a0161d3c9730)), references [#DS-2832](https://github.com/alma-oss/spirit-design-system/issues/DS-2832)
+
+### Styles
+
+- **design-tokens:** fix documentation content according to the textlint rules ([aa4f04e](https://github.com/alma-oss/spirit-design-system/commit/aa4f04e431f856d40035749f295591beddbe8e99))
+
 ## [5.2.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-design-tokens%405.2.0...%40alma-oss%2Fspirit-design-tokens%405.2.1) (2026-10-19)
 
 ### Documentation

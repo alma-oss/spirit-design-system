@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-docsite%400.8.0...%40alma-oss%2Fspirit-docsite%400.9.0) (2026-11-13)
+
+### Features
+
+- **docsite:** add component cards with live previews ([becc0f1](https://github.com/alma-oss/spirit-design-system/commit/becc0f1d1e80dcb5642ed9c5e8bc72ddcd41912e))
+- **docsite:** add component catalog with react previews of components ([9a6aba0](https://github.com/alma-oss/spirit-design-system/commit/9a6aba0b18e278a01b2c22a99eb640fb836d0692))
+- **docsite:** add cookie consent and google tag manager #DS-2458 ([4ff9287](https://github.com/alma-oss/spirit-design-system/commit/4ff92878864f9754493ec3f45786cb43396dc245)), references [#DS-2458](https://github.com/alma-oss/spirit-design-system/issues/DS-2458)
+- **docsite:** add header and playground to component pages ([c426f0f](https://github.com/alma-oss/spirit-design-system/commit/c426f0f305d6bb039ab026b1eb2bb25bad0970db))
+- **docsite:** add search to the components listing ([7aed81c](https://github.com/alma-oss/spirit-design-system/commit/7aed81c782be1c164db72e1c1c5c8669ce72114b))
+- **docsite:** introduce redesigned homepage ([54efee7](https://github.com/alma-oss/spirit-design-system/commit/54efee77d68449f514d800271830d0f5d8009bd6))
+- **docsite:** redesign 404 page with falling token cards #DS-2865 ([ce309f2](https://github.com/alma-oss/spirit-design-system/commit/ce309f248e7ea289139243ec1c8af5983ef50485)), references [#DS-2865](https://github.com/alma-oss/spirit-design-system/issues/DS-2865)
+- **docsite:** redesign the components listing with live previews ([49907d7](https://github.com/alma-oss/spirit-design-system/commit/49907d72408aaec4f9a763693f8acd8198ea2329))
+- **docsite:** render component documentation as full-width blocks ([62f18b9](https://github.com/alma-oss/spirit-design-system/commit/62f18b90e9e66c349c90b8899706da4550ddc096))
+- **docsite:** replace component card previews with wireframe illustrations #DS-2911 ([72be32f](https://github.com/alma-oss/spirit-design-system/commit/72be32fe5630fee5ff65e1bf0c1a449fb38f19ea)), references [#DS-2911](https://github.com/alma-oss/spirit-design-system/issues/DS-2911)
+- **docsite:** use `UNSTABLE_EyebrowText` on the homepage ([d448f4a](https://github.com/alma-oss/spirit-design-system/commit/d448f4aacc4359f3a4cb78a4de1a3423f8388a31))
+- **web-react:** add toolbar to `Navigation` #DS-2750 ([9788b67](https://github.com/alma-oss/spirit-design-system/commit/9788b6766f2b56d0f9977ab5d0b21da6ef9d4dd8)), references [#DS-2750](https://github.com/alma-oss/spirit-design-system/issues/DS-2750)
+- **web-react:** introduce experimental `UNSTABLE_EyebrowText` ([9717a81](https://github.com/alma-oss/spirit-design-system/commit/9717a81572daa5cc1ea04d23919723e4dbfadc75))
+
+### Bug Fixes
+
+- **docsite:** add default for the component children slot ([ee23d95](https://github.com/alma-oss/spirit-design-system/commit/ee23d95f3b2feab68eed045676ce60a820484eef))
+- **docsite:** count up the homepage stats once they scroll into view ([71d2531](https://github.com/alma-oss/spirit-design-system/commit/71d25314dd52a41dd85c6c4164f6a9ef4b9b158f))
+- **docsite:** mount the components overview and split homepage features ([e1cc7db](https://github.com/alma-oss/spirit-design-system/commit/e1cc7db317b3e801d7d329961cfab2a1889c8632))
+- **docsite:** remove gtag consent handling from page code ([19400bc](https://github.com/alma-oss/spirit-design-system/commit/19400bc0cf47dbbaf0e821208b5115ea3257490d))
+- **docsite:** return 404 for missing component pages ([7a6d81f](https://github.com/alma-oss/spirit-design-system/commit/7a6d81f6f46203c8cb73f037fe4020a3db73a272))
+- **docsite:** ship component header and playground data in the build ([09a12a9](https://github.com/alma-oss/spirit-design-system/commit/09a12a9bca2158bee0da00c8f4761d8106dc2082))
+
+### Documentation
+
+- **docsite:** add a skill for the component detail page #DS-2850 ([0c2cef8](https://github.com/alma-oss/spirit-design-system/commit/0c2cef8b64c3823ac423ef2ff7ca0fa08c4f1b6f)), references [#DS-2850](https://github.com/alma-oss/spirit-design-system/issues/DS-2850)
+- **docsite:** add agent rules and skills for docsite work ([2056446](https://github.com/alma-oss/spirit-design-system/commit/20564462b418d82dd857da61c15665af0dea442e))
+- **docsite:** improve component categorization #DS-2650 ([506e7c8](https://github.com/alma-oss/spirit-design-system/commit/506e7c84877150f531c58ea63e047f89946d79ec)), references [#DS-2650](https://github.com/alma-oss/spirit-design-system/issues/DS-2650)
+- **repo, web, web-react:** introduce `Box`, `Tile` and `Card` decision tree #DS-2784 ([696f1cd](https://github.com/alma-oss/spirit-design-system/commit/696f1cd614847d2ef551878624a515535f81a62c)), references [#DS-2784](https://github.com/alma-oss/spirit-design-system/issues/DS-2784)
+
+### Chores
+
+- **docsite:** serve local placeholder images ([fcaf6cf](https://github.com/alma-oss/spirit-design-system/commit/fcaf6cfe70afffcdd31ebe1ab5a50aee3b849a68))
+- **repo:** add a docsite catalog #DS-2458 ([d94efd4](https://github.com/alma-oss/spirit-design-system/commit/d94efd4793643cd8b8934ddcc1a5b7521f999f71)), references [#DS-2458](https://github.com/alma-oss/spirit-design-system/issues/DS-2458)
+- **repo:** migrate root `CLAUDE.md` to `AGENTS.md` #DS-2851 ([0ff9726](https://github.com/alma-oss/spirit-design-system/commit/0ff972654c4964c2a255af989923f1d691564a71)), references [#DS-2851](https://github.com/alma-oss/spirit-design-system/issues/DS-2851)
+- **repo:** store docsite tsbuildinfo in next cache ([3e21199](https://github.com/alma-oss/spirit-design-system/commit/3e21199daa7d8c2460e4168f5a61e40b9416f396))
+
+### Styles
+
+- **docsite:** format component playground files ([f54435e](https://github.com/alma-oss/spirit-design-system/commit/f54435e493cd2a7f616f610b02f50e2d9669b117))
+- **docsite:** lint every domain stylesheet #DS-2850 ([7d6ca80](https://github.com/alma-oss/spirit-design-system/commit/7d6ca800a8f639afa111fd49cba8d9a3d73d8cee)), references [#DS-2850](https://github.com/alma-oss/spirit-design-system/issues/DS-2850)
+- **repo:** fix documentation content according to the textlint rules ([2250ddb](https://github.com/alma-oss/spirit-design-system/commit/2250ddbb4d837426a84b3935c73f1b06bd3c82e2))
+
+### Code Refactoring
+
+- **docsite:** add named exports to shared component documentation ui ([a2e8adf](https://github.com/alma-oss/spirit-design-system/commit/a2e8adf345fe8346ae5c7451bff10940caa3dfeb))
+- **docsite:** compose the homepage from Spirit components and global styles ([7d2b90b](https://github.com/alma-oss/spirit-design-system/commit/7d2b90bc43f101c6148f2688225cc6007b33cccb))
+- **docsite:** move component categories to a yaml file #DS-2650 ([e9ab322](https://github.com/alma-oss/spirit-design-system/commit/e9ab322c76fe1f1a70a4128e3287dab8d8f47e10)), references [#DS-2650](https://github.com/alma-oss/spirit-design-system/issues/DS-2650)
+- **docsite:** move the components sort into its own feature ([e925e11](https://github.com/alma-oss/spirit-design-system/commit/e925e1178d1d492f99b80ca5e6ffb29fe0a69f69))
+- **docsite:** share external links from root config #DS-2850 ([22a84f8](https://github.com/alma-oss/spirit-design-system/commit/22a84f84d1244e142498193e27c44b3949484976)), references [#DS-2850](https://github.com/alma-oss/spirit-design-system/issues/DS-2850)
+- **docsite:** share page actions on the components listing #DS-2850 ([b3c6472](https://github.com/alma-oss/spirit-design-system/commit/b3c64728582e601ebda50937e90a2cb8d5d85c5c)), references [#DS-2850](https://github.com/alma-oss/spirit-design-system/issues/DS-2850)
+
 ## [0.8.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-docsite%400.7.0...%40alma-oss%2Fspirit-docsite%400.8.0) (2026-10-19)
 
 ### Features

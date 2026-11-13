@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-codemods%403.2.0...%40alma-oss%2Fspirit-codemods%403.2.1) (2026-11-13)
+
+### Styles
+
+- **codemods:** fix documentation content according to the textlint rules ([51c18f9](https://github.com/alma-oss/spirit-design-system/commit/51c18f90a4323224dca13b8b7b64b4ea752458cc))
+
 ## [3.2.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-codemods%403.1.0...%40alma-oss%2Fspirit-codemods%403.2.0) (2026-10-19)
 
 ### Features

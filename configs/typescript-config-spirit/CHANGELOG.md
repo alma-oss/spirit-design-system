@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.5](https://github.com/alma-oss/spirit-design-system/compare/typescript-config-spirit%400.1.4...typescript-config-spirit%400.1.5) (2026-11-13)
+
+### Styles
+
+- **repo:** fix documentation content according to the textlint rules ([2250ddb](https://github.com/alma-oss/spirit-design-system/commit/2250ddbb4d837426a84b3935c73f1b06bd3c82e2))
+
 ## [0.1.4](https://github.com/alma-oss/spirit-design-system/compare/typescript-config-spirit@0.1.3...typescript-config-spirit@0.1.4) (2026-03-04)
 
 ### Chores

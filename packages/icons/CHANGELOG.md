@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-icons%404.1.1...%40alma-oss%2Fspirit-icons%404.1.2) (2026-11-13)
+
+### Styles
+
+- **icons:** fix documentation content according to the textlint rules ([fac9010](https://github.com/alma-oss/spirit-design-system/commit/fac9010ad4d3933648ffea0d1af6ad2d3f554810))
+
+### Code Refactoring
+
+- **vite-plugin-spirit-icons:** replace `svg2react-icon` with `@svgr/core` #DS-2926 ([15dfc72](https://github.com/alma-oss/spirit-design-system/commit/15dfc72185b9381eb30f45e0031194a998d3731f)), references [#DS-2926](https://github.com/alma-oss/spirit-design-system/issues/DS-2926)
+
 ## [4.1.1](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-icons%404.1.0...%40alma-oss%2Fspirit-icons%404.1.1) (2026-10-19)
 
 ### Chores

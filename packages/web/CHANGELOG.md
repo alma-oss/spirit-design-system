@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.3.0...%40alma-oss%2Fspirit-web%405.4.0) (2026-11-13)
+
+### Features
+
+- **web-react:** add toolbar to `Navigation` #DS-2750 ([9788b67](https://github.com/alma-oss/spirit-design-system/commit/9788b6766f2b56d0f9977ab5d0b21da6ef9d4dd8)), references [#DS-2750](https://github.com/alma-oss/spirit-design-system/issues/DS-2750)
+- **web-react:** introduce experimental `UNSTABLE_EyebrowText` ([9717a81](https://github.com/alma-oss/spirit-design-system/commit/9717a81572daa5cc1ea04d23919723e4dbfadc75))
+- **web,web-react:** add `size` to remaining form fields #DS-2852 ([7682c97](https://github.com/alma-oss/spirit-design-system/commit/7682c97235686fa21b5989f4706b837ddf75d592)), references [#DS-2852](https://github.com/alma-oss/spirit-design-system/issues/DS-2852)
+- **web:** document startSlot/endSlot addon composition for UNSTABLE_Combobox #DS-2789 ([f5cc2de](https://github.com/alma-oss/spirit-design-system/commit/f5cc2de50ab35c9c5c78d30f3b5c4a176604696c)), references [#DS-2789](https://github.com/alma-oss/spirit-design-system/issues/DS-2789)
+
+### Bug Fixes
+
+- **web-react:** apply `Section` padding overrides over all size breakpoints #DS-2756 ([6eaabc6](https://github.com/alma-oss/spirit-design-system/commit/6eaabc61f48f4c2f7b9fb0ab58002fe274efa161)), references [#DS-2756](https://github.com/alma-oss/spirit-design-system/issues/DS-2756)
+- **web,web-react:** span `Card` footer divider full width without expanded media #DS-2912 ([118249e](https://github.com/alma-oss/spirit-design-system/commit/118249ee3f3e702a92b94dec55fa9227ffb852a0)), references [#DS-2912](https://github.com/alma-oss/spirit-design-system/issues/DS-2912)
+- **web:** declare background color context in boxed `Card` #DS-2749 ([23c3f34](https://github.com/alma-oss/spirit-design-system/commit/23c3f34147f0169b67cfb2faacfe5630b9eb818f)), references [#DS-2749](https://github.com/alma-oss/spirit-design-system/issues/DS-2749)
+
+### Documentation
+
+- **repo, web, web-react:** introduce `Box`, `Tile` and `Card` decision tree #DS-2784 ([696f1cd](https://github.com/alma-oss/spirit-design-system/commit/696f1cd614847d2ef551878624a515535f81a62c)), references [#DS-2784](https://github.com/alma-oss/spirit-design-system/issues/DS-2784)
+- **web, web-react:** add `Section` semantics guidance #DS-2780 ([9caec06](https://github.com/alma-oss/spirit-design-system/commit/9caec06bde56d706fee826b487a853352695fe20)), references [#DS-2780](https://github.com/alma-oss/spirit-design-system/issues/DS-2780)
+- **web, web-react:** document `Grid` sidebar layout and source order #DS-2755 ([e2683eb](https://github.com/alma-oss/spirit-design-system/commit/e2683eb29d46f339612b638109da51ae3c08b400)), references [#DS-2755](https://github.com/alma-oss/spirit-design-system/issues/DS-2755)
+- **web,web-react:** improve `Card` README #DS-2754 ([62c9507](https://github.com/alma-oss/spirit-design-system/commit/62c9507903913b65a60f994a7eaa8e935fe187b6)), references [#DS-2754](https://github.com/alma-oss/spirit-design-system/issues/DS-2754)
+- **web,web-react:** place `ProgressBar` outside busy and live regions ([f969ec4](https://github.com/alma-oss/spirit-design-system/commit/f969ec4df5f1be9b5f240607990fc88289d9d5a1))
+- **web,web-react:** refine `ProgressBar` busy region guidance ([e6cad7f](https://github.com/alma-oss/spirit-design-system/commit/e6cad7f3f2d36ce0d2555d6a1da18a5f660ed1f7))
+
+### Chores
+
+- **web:** replace external placeholder images with local ones ([19113a4](https://github.com/alma-oss/spirit-design-system/commit/19113a4d8dd1d897338803d4b5fb4c5602cc4f1e))
+
+### Styles
+
+- **web:** fix documentation content according to the textlint rules ([5c3c980](https://github.com/alma-oss/spirit-design-system/commit/5c3c980e792e4dbe0fb213779193baf985492460))
+
 ## [5.3.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web%405.2.0...%40alma-oss%2Fspirit-web%405.3.0) (2026-10-19)
 
 ### Features

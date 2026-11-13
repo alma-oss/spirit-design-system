@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.5.0...%40alma-oss%2Fspirit-web-react%405.6.0) (2026-11-13)
+
+### Features
+
+- **docsite:** add header and playground to component pages ([c426f0f](https://github.com/alma-oss/spirit-design-system/commit/c426f0f305d6bb039ab026b1eb2bb25bad0970db))
+- **web-react:** add figma code connect for 7 components #DS-2707 ([a4a7677](https://github.com/alma-oss/spirit-design-system/commit/a4a7677d2416b9c0f2e97dba3bdaaf126759bde9)), references [#DS-2707](https://github.com/alma-oss/spirit-design-system/issues/DS-2707)
+- **web-react:** add toolbar to `Navigation` #DS-2750 ([9788b67](https://github.com/alma-oss/spirit-design-system/commit/9788b6766f2b56d0f9977ab5d0b21da6ef9d4dd8)), references [#DS-2750](https://github.com/alma-oss/spirit-design-system/issues/DS-2750)
+- **web-react:** introduce experimental `UNSTABLE_EyebrowText` ([9717a81](https://github.com/alma-oss/spirit-design-system/commit/9717a81572daa5cc1ea04d23919723e4dbfadc75))
+- **web-react:** replace hasClearButton with startSlot/endSlot addons on UNSTABLE_Combobox #DS-2789 ([fc9c6d6](https://github.com/alma-oss/spirit-design-system/commit/fc9c6d672a1c9d4d1c04bd1be8fd5fb562f4845e)), references [#DS-2789](https://github.com/alma-oss/spirit-design-system/issues/DS-2789)
+- **web,web-react:** add `size` to remaining form fields #DS-2852 ([7682c97](https://github.com/alma-oss/spirit-design-system/commit/7682c97235686fa21b5989f4706b837ddf75d592)), references [#DS-2852](https://github.com/alma-oss/spirit-design-system/issues/DS-2852)
+
+### Bug Fixes
+
+- **web-react:** apply `Section` padding overrides over all size breakpoints #DS-2756 ([6eaabc6](https://github.com/alma-oss/spirit-design-system/commit/6eaabc61f48f4c2f7b9fb0ab58002fe274efa161)), references [#DS-2756](https://github.com/alma-oss/spirit-design-system/issues/DS-2756)
+- **web,web-react:** span `Card` footer divider full width without expanded media #DS-2912 ([118249e](https://github.com/alma-oss/spirit-design-system/commit/118249ee3f3e702a92b94dec55fa9227ffb852a0)), references [#DS-2912](https://github.com/alma-oss/spirit-design-system/issues/DS-2912)
+
+### Documentation
+
+- **docsite:** improve component categorization #DS-2650 ([506e7c8](https://github.com/alma-oss/spirit-design-system/commit/506e7c84877150f531c58ea63e047f89946d79ec)), references [#DS-2650](https://github.com/alma-oss/spirit-design-system/issues/DS-2650)
+- **repo, web, web-react:** introduce `Box`, `Tile` and `Card` decision tree #DS-2784 ([696f1cd](https://github.com/alma-oss/spirit-design-system/commit/696f1cd614847d2ef551878624a515535f81a62c)), references [#DS-2784](https://github.com/alma-oss/spirit-design-system/issues/DS-2784)
+- **web-react:** drop the card background TODO now that boxed `Card` declares it #DS-2749 ([c032d1f](https://github.com/alma-oss/spirit-design-system/commit/c032d1fb4d8c690143eaff8686a2bd2293146635)), references [#DS-2749](https://github.com/alma-oss/spirit-design-system/issues/DS-2749)
+- **web, web-react:** add `Section` semantics guidance #DS-2780 ([9caec06](https://github.com/alma-oss/spirit-design-system/commit/9caec06bde56d706fee826b487a853352695fe20)), references [#DS-2780](https://github.com/alma-oss/spirit-design-system/issues/DS-2780)
+- **web, web-react:** document `Grid` sidebar layout and source order #DS-2755 ([e2683eb](https://github.com/alma-oss/spirit-design-system/commit/e2683eb29d46f339612b638109da51ae3c08b400)), references [#DS-2755](https://github.com/alma-oss/spirit-design-system/issues/DS-2755)
+- **web,web-react:** improve `Card` README #DS-2754 ([62c9507](https://github.com/alma-oss/spirit-design-system/commit/62c9507903913b65a60f994a7eaa8e935fe187b6)), references [#DS-2754](https://github.com/alma-oss/spirit-design-system/issues/DS-2754)
+- **web,web-react:** place `ProgressBar` outside busy and live regions ([f969ec4](https://github.com/alma-oss/spirit-design-system/commit/f969ec4df5f1be9b5f240607990fc88289d9d5a1))
+- **web,web-react:** refine `ProgressBar` busy region guidance ([e6cad7f](https://github.com/alma-oss/spirit-design-system/commit/e6cad7f3f2d36ce0d2555d6a1da18a5f660ed1f7))
+
+### Chores
+
+- **web-react:** replace external placeholder images with local ones ([d9c0c99](https://github.com/alma-oss/spirit-design-system/commit/d9c0c99e28cb57a3616a62efa22316c5bd412835))
+
+### Styles
+
+- **docsite:** format component playground files ([f54435e](https://github.com/alma-oss/spirit-design-system/commit/f54435e493cd2a7f616f610b02f50e2d9669b117))
+- **web-react:** fix documentation content according to the textlint rules ([1267faa](https://github.com/alma-oss/spirit-design-system/commit/1267faa19336f10717d93e5be6f13ae5c16ca461))
+
+### Code Refactoring
+
+- **docsite:** move component categories to a yaml file #DS-2650 ([e9ab322](https://github.com/alma-oss/spirit-design-system/commit/e9ab322c76fe1f1a70a4128e3287dab8d8f47e10)), references [#DS-2650](https://github.com/alma-oss/spirit-design-system/issues/DS-2650)
+
+### Tests
+
+- **web-react:** add `aria-describedby` and `aria-details` a11y tests #DS-2497 ([0903f12](https://github.com/alma-oss/spirit-design-system/commit/0903f120b8c458d785946a95a927cde276c0a6b1)), references [#DS-2497](https://github.com/alma-oss/spirit-design-system/issues/DS-2497)
+
 ## [5.5.0](https://github.com/alma-oss/spirit-design-system/compare/%40alma-oss%2Fspirit-web-react%405.4.0...%40alma-oss%2Fspirit-web-react%405.5.0) (2026-10-19)
 
 ### Features
