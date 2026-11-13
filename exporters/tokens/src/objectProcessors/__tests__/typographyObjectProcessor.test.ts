@@ -1,9 +1,9 @@
-import { Token, TokenGroup, TypographyToken, TypographyTokenValue, Unit } from '@supernovaio/sdk-exporters';
+import { Token, TokenGroup, TypographyToken, Unit } from '@supernovaio/sdk-exporters';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import type { DeviceDimensionMap, StylesObjectType } from '../../generators/stylesObjectGenerator';
-import { cloneTypographyValue, handleTypographyTokens } from '../typographyObjectProcessor';
+import { handleTypographyTokens } from '../typographyObjectProcessor';
 
 const tokenGroups: Array<TokenGroup> = exampleGroups;
 jest.mock('../../../config', () => ({
@@ -11,60 +11,6 @@ jest.mock('../../../config', () => ({
 }));
 
 describe('typographyObjectProcessor', () => {
-  describe('cloneTypographyValue', () => {
-    it('should deeply clone typography value', () => {
-      const originalValue = {
-        fontFamily: { text: 'Inter' },
-        fontWeight: { text: 'Bold' },
-        fontSize: { unit: 'Pixels' as Unit, measure: 16, referencedTokenId: null },
-        letterSpacing: { unit: 'Pixels' as Unit, measure: 0, referencedTokenId: null },
-        paragraphIndent: { unit: 'Pixels' as Unit, measure: 0, referencedTokenId: null },
-        paragraphSpacing: { unit: 'Pixels' as Unit, measure: 0, referencedTokenId: null },
-        referencedTokenId: null,
-      } as TypographyTokenValue;
-
-      const clonedValue = cloneTypographyValue(originalValue);
-
-      expect(clonedValue).toStrictEqual(originalValue);
-      expect(clonedValue.fontFamily).not.toBe(originalValue.fontFamily);
-      expect(clonedValue.fontSize).not.toBe(originalValue.fontSize);
-    });
-
-    it('should clone typography value with all optional properties', () => {
-      const originalValue = {
-        fontFamily: { text: 'Inter' },
-        fontWeight: { text: 'Bold' },
-        fontSize: { unit: 'Pixels' as Unit, measure: 16, referencedTokenId: null },
-        lineHeight: { unit: 'Pixels' as Unit, measure: 24, referencedTokenId: null },
-        textDecoration: { value: 'None' },
-        textCase: { value: 'Original' },
-        letterSpacing: { unit: 'Pixels' as Unit, measure: 0, referencedTokenId: null },
-        paragraphIndent: { unit: 'Pixels' as Unit, measure: 0, referencedTokenId: null },
-        paragraphSpacing: { unit: 'Pixels' as Unit, measure: 0, referencedTokenId: null },
-        referencedTokenId: null,
-      } as TypographyTokenValue;
-
-      const clonedValue = cloneTypographyValue(originalValue);
-
-      expect(clonedValue).toStrictEqual(originalValue);
-      expect(clonedValue.lineHeight).not.toBe(originalValue.lineHeight);
-      expect(clonedValue.textDecoration).not.toBe(originalValue.textDecoration);
-    });
-
-    it('should clone typography value without optional properties', () => {
-      const originalValue = {
-        fontSize: { unit: 'Pixels' as Unit, measure: 16, referencedTokenId: null },
-        referencedTokenId: null,
-      } as TypographyTokenValue;
-
-      const clonedValue = cloneTypographyValue(originalValue);
-
-      expect(clonedValue.referencedTokenId).toBeNull();
-      expect(clonedValue.fontSize).toEqual(originalValue.fontSize);
-      expect(clonedValue.fontSize).not.toBe(originalValue.fontSize);
-    });
-  });
-
   describe('handleTypographyTokens', () => {
     it('should handle typography token without device dimensions', () => {
       const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
@@ -80,11 +26,11 @@ describe('typographyObjectProcessor', () => {
       const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
       const stylesObject: StylesObjectType = {};
       const deviceDimensions: DeviceDimensionMap = new Map();
-      deviceDimensions.set('font-size-id', {
+      deviceDimensions.set('font-size', {
         mobile: { measure: 32, unit: Unit.pixels },
         desktop: { measure: 40, unit: Unit.pixels },
       });
-      deviceDimensions.set('line-height-id', {
+      deviceDimensions.set('line-height', {
         mobile: { measure: 48, unit: Unit.pixels },
         desktop: { measure: 52, unit: Unit.pixels },
       });
@@ -115,13 +61,77 @@ describe('typographyObjectProcessor', () => {
         tokenById,
       );
 
-      expect(stylesObject).toHaveProperty('$heading-xlarge-bold');
+      expect(stylesObject).toStrictEqual({
+        '$heading-xlarge-bold': {
+          mobile:
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 32px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.5,\n)',
+          desktop:
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3,\n)',
+        },
+      });
+    });
 
-      const typographyObj = stylesObject['$heading-xlarge-bold'] as { [key: string]: unknown };
+    it('should override only the dimension a device collection provides', () => {
+      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const stylesObject: StylesObjectType = {};
+      const deviceDimensions: DeviceDimensionMap = new Map([
+        ['font-size-id', { mobile: { measure: 36, unit: Unit.pixels }, desktop: { measure: 40, unit: Unit.pixels } }],
+      ]);
 
-      expect(typographyObj).toHaveProperty('mobile');
-      // Desktop might not be present if device dimensions don't include it
-      expect(Object.keys(typographyObj).length).toBeGreaterThan(0);
+      handleTypographyTokens(
+        ['Heading', 'XLarge', 'Bold'],
+        token,
+        tokenGroups,
+        true,
+        stylesObject,
+        false,
+        deviceDimensions,
+      );
+
+      expect(stylesObject).toStrictEqual({
+        '$heading-xlarge-bold': {
+          mobile:
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 36px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.4444,\n)',
+          desktop:
+            '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 40px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3,\n)',
+        },
+      });
+    });
+
+    it('should keep a single-sized style on one breakpoint', () => {
+      const token = {
+        ...exampleTypographyTokens.get('typographyRef1'),
+        value: {
+          ...(exampleTypographyTokens.get('typographyRef1') as TypographyToken).value,
+          fontSize: { unit: Unit.pixels, measure: 14, referencedTokenId: null },
+          lineHeight: { unit: Unit.pixels, measure: 20, referencedTokenId: null },
+        },
+      } as TypographyToken;
+      const stylesObject: StylesObjectType = {};
+
+      handleTypographyTokens(['Caption'], token, tokenGroups, true, stylesObject, true, new Map());
+
+      expect(stylesObject).toStrictEqual({
+        caption: {
+          mobile:
+            "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.4286,\n}",
+        },
+      });
+    });
+
+    it('should skip a token the model does not map to a typography', () => {
+      const stylesObject: StylesObjectType = {};
+
+      handleTypographyTokens(
+        ['Grid', 'spacing'],
+        { id: 'x', name: 'x', tokenType: 'string', value: { text: 'x' } } as unknown as Token,
+        tokenGroups,
+        true,
+        stylesObject,
+        false,
+      );
+
+      expect(stylesObject).toStrictEqual({});
     });
 
     it('should handle typography token with fontSizeBaseMap', () => {

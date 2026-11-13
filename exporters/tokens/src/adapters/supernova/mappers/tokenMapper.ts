@@ -11,10 +11,12 @@ import {
   type Token,
   type TokenGroup as SupernovaTokenGroup,
   TokenType,
+  type TypographyToken,
   type Unit,
 } from '@supernovaio/sdk-exporters';
 import { PX_UNIT } from '../../../constants';
 import { getDeviceAlias } from '../../../helpers/deviceHelpers';
+import { getTokenGroupPath } from '../../../helpers/groupHelper';
 import { unitToCss } from '../../../helpers/unitHelper';
 import {
   type ColorValue,
@@ -57,16 +59,10 @@ const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
   [TokenType.borderWidth]: TokenTypeEnum.BorderWidth,
 };
 
-const buildGroupPath = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): string[] => {
-  const group = tokenGroups.find((candidate) => candidate.id === token.parentGroupId);
-
-  return group ? [...group.path, group.name] : [];
-};
-
 const buildMetadata = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): TokenMetadata => ({
   brandId: token.brandId,
   device: getDeviceAlias(token) || undefined,
-  groupPath: buildGroupPath(token, tokenGroups),
+  groupPath: getTokenGroupPath(token, tokenGroups),
 });
 
 const buildSource = (token: Token): SourceMetadata => ({
@@ -261,9 +257,44 @@ const mapShadowToken = (token: ShadowToken, tokenGroups: Array<SupernovaTokenGro
 const mapGradientToken = (token: GradientToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken =>
   buildDesignToken(token, tokenGroups, TokenTypeEnum.Gradient, mapLayers(token.value.map(mapGradientLayer)));
 
+type NativeDimension = { measure: number; unit: unknown; referencedTokenId?: string | null };
+
 /**
- * Maps a Supernova token to the internal model. Only `string`, `color`, `shadow`, `gradient` tokens, `border`,
- * and the numeric types listed in `NUMERIC_TOKEN_TYPES` are supported so far -
+ * Maps a font size or a line height of a typography. Returns `undefined` when the style has none, so the member is
+ * left out. A native `referencedTokenId` (the dimension a device collection overrides) becomes a reference.
+ *
+ * @param dimension
+ */
+const mapTypographyDimension = (dimension: NativeDimension | null | undefined): TokenValue | undefined =>
+  dimension?.measure === undefined
+    ? undefined
+    : withReference(dimension.referencedTokenId, mapNumber(dimension.measure, normalizeUnit(dimension.unit)));
+
+/**
+ * Maps a `typography` token to a composite of the members the exporter reads (see `core/typography.ts` for the
+ * shape): font family, font weight, font size and line height.
+ *
+ * @param token
+ * @param tokenGroups
+ */
+const mapTypographyToken = (token: TypographyToken, tokenGroups: Array<SupernovaTokenGroup>): DesignToken => {
+  const { fontFamily, fontWeight, fontSize, lineHeight } = token.value;
+  const members: Record<string, TokenValue | undefined> = {
+    fontFamily: { type: 'string', value: fontFamily.text },
+    fontWeight: { type: 'string', value: fontWeight.text },
+    fontSize: mapTypographyDimension(fontSize),
+    lineHeight: mapTypographyDimension(lineHeight),
+  };
+
+  return buildDesignToken(token, tokenGroups, TokenTypeEnum.Typography, {
+    type: 'composite',
+    value: Object.fromEntries(Object.entries(members).filter((entry): entry is [string, TokenValue] => !!entry[1])),
+  });
+};
+
+/**
+ * Maps a Supernova token to the internal model. Only `string`, `color`, `shadow`, `gradient`, `typography` tokens,
+ * `border`, and the numeric types listed in `NUMERIC_TOKEN_TYPES` are supported so far -
  * other types return `null` and are filtered out by the adapter, the same way
  * `stylesGenerator.tokenToStyleByType` silently skips types it doesn't have a
  * case for. Support is added type by type as each generator/processor is
@@ -291,6 +322,10 @@ export const mapToken = (token: Token, tokenGroups: Array<SupernovaTokenGroup>):
 
   if (token.tokenType === TokenType.gradient) {
     return mapGradientToken(token as GradientToken, tokenGroups);
+  }
+
+  if (token.tokenType === TokenType.typography) {
+    return mapTypographyToken(token as TypographyToken, tokenGroups);
   }
 
   const numericType = NUMERIC_TOKEN_TYPES[token.tokenType];
