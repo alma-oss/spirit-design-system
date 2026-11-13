@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, useContext } from 'react';
-import { SizesExtended } from '../../constants';
+import { FontWeight, SizesExtended } from '../../constants';
 import { FormFieldsContext, InlineElementsContext, useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type SpiritLabelProps, type WithFormFieldContext } from '../../types';
@@ -10,6 +10,7 @@ import { useLabelStyleProps } from './useLabelStyleProps';
 
 const defaultProps: Partial<SpiritLabelProps> = {
   elementType: 'label',
+  fontWeight: FontWeight.BASE,
   hasPointerCursor: false,
   isDisabled: false,
   isLabelHidden: false,
@@ -25,6 +26,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
   const {
     children,
     elementType: ElementTag = 'label' as ElementType,
+    fontWeight,
     for: labelFor,
     hasPointerCursor,
     htmlFor,
@@ -37,6 +39,7 @@ const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX
   } = propsWithDefaults;
 
   const { classProps } = useLabelStyleProps({
+    fontWeight,
     hasPointerCursor,
     isDisabled,
     isStretched,

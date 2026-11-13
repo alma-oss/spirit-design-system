@@ -17,7 +17,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import {
-  type FontWeightDictionaryType,
+  type DeprecatedFontWeightDictionaryType,
   type SizeExtendedDictionaryType,
   type SizesDictionaryType,
 } from '../../../types';
@@ -55,7 +55,7 @@ describe('Text', () => {
     render(
       <Text
         size={size as SizesDictionaryType as SizeExtendedDictionaryType}
-        fontWeight={fontWeight as FontWeightDictionaryType}
+        fontWeight={fontWeight as DeprecatedFontWeightDictionaryType}
       >
         Text
       </Text>,

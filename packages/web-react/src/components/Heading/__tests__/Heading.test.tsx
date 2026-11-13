@@ -17,7 +17,7 @@ import {
   validHtmlAttributesTest,
 } from '@local/tests';
 import {
-  type FontWeightDictionaryType,
+  type DeprecatedFontWeightDictionaryType,
   type SizeExtendedDictionaryType,
   type SizesDictionaryType,
 } from '../../../types';
@@ -55,7 +55,7 @@ describe('Heading', () => {
     render(
       <Heading
         size={size as SizesDictionaryType<string> as SizeExtendedDictionaryType<string>}
-        fontWeight={fontWeight as FontWeightDictionaryType}
+        fontWeight={fontWeight as DeprecatedFontWeightDictionaryType}
         elementType="h1"
       />,
     );

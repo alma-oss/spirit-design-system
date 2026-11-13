@@ -14,7 +14,7 @@ the native input element and styles it to look like a toggle switch.
 >
   <input type="checkbox" id="toggle-default" class="Toggle" name="default" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="toggle-default">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-default">Toggle Label</label>
   </div>
 </div>
 ```
@@ -24,7 +24,7 @@ the native input element and styles it to look like a toggle switch.
 Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **The toggle control stays the same.** Medium is the default.
 
 ```html
-<label class="Label Label--large cursor-pointer" for="toggle-size-large">Large</label>
+<label class="Label Label--lighter Label--large cursor-pointer" for="toggle-size-large">Large</label>
 ```
 
 ## Indicators
@@ -39,7 +39,7 @@ modifier class to the input. This will add visual indicators to the toggle switc
 >
   <input type="checkbox" id="toggle-indicators" class="Toggle Toggle--indicators" name="default" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="toggle-indicators">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-indicators">Toggle Label</label>
   </div>
 </div>
 ```
@@ -56,7 +56,9 @@ Add the `required` attribute to the input to mark it as required and add the
 >
   <input type="checkbox" id="toggle-required" class="Toggle" name="required" required />
   <div>
-    <label class="Label Label--medium Label--required cursor-pointer" for="toggle-required">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium Label--required cursor-pointer" for="toggle-required"
+      >Toggle Label</label
+    >
   </div>
 </div>
 ```
@@ -70,7 +72,9 @@ Add the `required` attribute to the input to mark it as required and add the
 >
   <input type="checkbox" id="toggle-hidden-label" class="Toggle" name="hidden-label" />
   <div>
-    <label class="Label Label--medium accessibility-hidden" for="toggle-hidden-label">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium accessibility-hidden" for="toggle-hidden-label"
+      >Toggle Label</label
+    >
   </div>
 </div>
 ```
@@ -97,7 +101,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
     aria-describedby="toggle-helper-text-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="toggle-helper-text">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-helper-text">Toggle Label</label>
     <div class="HelperText" id="toggle-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -117,7 +121,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 >
   <input type="checkbox" id="toggle-success" class="Toggle Toggle--success" name="default" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="toggle-success">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-success">Toggle Label</label>
   </div>
 </div>
 
@@ -134,7 +138,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
     checked
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="toggle-warning">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-warning">Toggle Label</label>
     <div class="ValidationText ValidationText--warning" id="toggle-warning-validation-text">Validation text</div>
   </div>
 </div>
@@ -151,7 +155,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
     aria-describedby="toggle-danger-validation-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label for="toggle-danger" class="Label Label--medium cursor-pointer">Toggle Label</label>
+    <label for="toggle-danger" class="Label Label--lighter Label--medium cursor-pointer">Toggle Label</label>
     <ul class="ValidationText ValidationText--danger" id="toggle-danger-validation-text">
       <li>First validation text</li>
       <li>Second validation text</li>
@@ -184,7 +188,7 @@ components mix CSS with JS by design and handle prefixes their own way.**
     aria-describedby="toggle-success-validation-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="toggle-success">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-success">Toggle Label</label>
     <div
       class="ValidationText ValidationText--success"
       id="toggle-success-validation-text"
@@ -215,7 +219,7 @@ Short labels are also easier for sighted users to scan.
 >
   <input type="checkbox" id="consent" class="Toggle" name="consent" required aria-details="consent-details" />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--required cursor-pointer" for="consent"
+    <label class="Label Label--lighter Label--medium Label--required cursor-pointer" for="consent"
       >I agree to the terms and conditions</label
     >
     <div id="consent-details" class="InputDetails">
@@ -246,7 +250,7 @@ Short labels are also easier for sighted users to scan.
 >
   <input type="checkbox" id="consent" class="Toggle" name="consent" required aria-details="consent-details" />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--required cursor-pointer" for="consent"
+    <label class="Label Label--lighter Label--medium Label--required cursor-pointer" for="consent"
       >I agree to the terms and conditions</label
     >
     <div id="consent-details" class="InputDetails">
@@ -291,7 +295,7 @@ Short labels are also easier for sighted users to scan.
 >
   <input type="checkbox" id="toggle-disabled" class="Toggle" name="default" disabled />
   <div>
-    <label class="Label Label--medium Label--disabled" for="toggle-disabled">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium Label--disabled" for="toggle-disabled">Toggle Label</label>
   </div>
 </div>
 ```
@@ -309,7 +313,7 @@ The input position can be set using [Flex][readme-flex] direction and horizontal
 >
   <input type="checkbox" id="toggle-position-start" class="Toggle" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="toggle-position-start">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-position-start">Toggle Label</label>
   </div>
 </div>
 ```
@@ -323,7 +327,7 @@ The input position can be set using [Flex][readme-flex] direction and horizontal
 >
   <input type="checkbox" id="toggle-position-end" class="Toggle" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="toggle-position-end">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-position-end">Toggle Label</label>
   </div>
 </div>
 ```
@@ -339,7 +343,9 @@ Use responsive breakpoint modifiers to change input position at different screen
 >
   <input type="checkbox" id="toggle-position-responsive" class="Toggle" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="toggle-position-responsive">Toggle Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="toggle-position-responsive"
+      >Toggle Label</label
+    >
   </div>
 </div>
 ```

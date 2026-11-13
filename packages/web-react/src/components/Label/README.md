@@ -26,17 +26,18 @@ You can override an inherited value by passing the prop directly:
 
 ### API
 
-| Name               | Type                                        | Default  | Required | Description                                                                |
-| ------------------ | ------------------------------------------- | -------- | -------- | -------------------------------------------------------------------------- |
-| `children`         | `ReactNode`                                 | —        | ✕        | Label content                                                              |
-| `elementType`      | `ElementType`                               | `label`  | ✕        | Type of element used as root (e.g. `label`, `span`)                        |
-| `for` / `htmlFor`  | `string`                                    | —        | ✕        | ID of the associated form control (for `elementType="label"`)              |
-| `hasPointerCursor` | `bool`                                      | `false`  | ✕        | Applies a pointer cursor; set automatically by Checkbox, Radio, and Toggle |
-| `isDisabled`       | `bool`                                      | `false`  | ✕        | Disabled state; when not set, taken from parent context                    |
-| `isLabelHidden`    | `bool`                                      | `false`  | ✕        | Visually hide label while keeping it accessible; from parent context       |
-| `isRequired`       | `bool`                                      | `false`  | ✕        | Shows required indicator; when not set, taken from parent context          |
-| `isStretched`      | `bool`                                      | `false`  | ✕        | Applies `element-stretched` helper; set automatically in item mode         |
-| `size`             | [Size Extended dictionary][dictionary-size] | `medium` | ✕        | Typography size; inherited from size-aware parent context                  |
+| Name               | Type                                             | Default  | Required | Description                                                                |
+| ------------------ | ------------------------------------------------ | -------- | -------- | -------------------------------------------------------------------------- |
+| `children`         | `ReactNode`                                      | —        | ✕        | Label content                                                              |
+| `elementType`      | `ElementType`                                    | `label`  | ✕        | Type of element used as root (e.g. `label`, `span`)                        |
+| `fontWeight`       | [Font Weight dictionary][dictionary-font-weight] | `base`   | ✕        | Text weight                                                                |
+| `for` / `htmlFor`  | `string`                                         | —        | ✕        | ID of the associated form control (for `elementType="label"`)              |
+| `hasPointerCursor` | `bool`                                           | `false`  | ✕        | Applies a pointer cursor; set automatically by Checkbox, Radio, and Toggle |
+| `isDisabled`       | `bool`                                           | `false`  | ✕        | Disabled state; when not set, taken from parent context                    |
+| `isLabelHidden`    | `bool`                                           | `false`  | ✕        | Visually hide label while keeping it accessible; from parent context       |
+| `isRequired`       | `bool`                                           | `false`  | ✕        | Shows required indicator; when not set, taken from parent context          |
+| `isStretched`      | `bool`                                           | `false`  | ✕        | Applies `element-stretched` helper; set automatically in item mode         |
+| `size`             | [Size Extended dictionary][dictionary-size]      | `medium` | ✕        | Typography size; inherited from size-aware parent context                  |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -55,6 +56,20 @@ Label inherits it unless a direct `size` prop overrides the context.
 </Label>
 ```
 
+## Font Weight
+
+The default weight is `base`. Use `lighter` or `bolder` when the label should contrast with that default.
+A parent can set `fontWeight` through context props. A direct `fontWeight` prop overrides that context.
+
+```tsx
+<Label elementType="span" fontWeight="lighter">
+  Lighter label
+</Label>
+<Label elementType="span" fontWeight="bolder">
+  Bolder label
+</Label>
+```
+
 ## Pointer Cursor
 
 When used inside [Checkbox][readme-checkbox], [Radio][readme-radio], or [Toggle][readme-toggle],
@@ -69,6 +84,7 @@ You can also set it explicitly on a standalone Label:
 </Label>
 ```
 
+[dictionary-font-weight]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#font-weight
 [dictionary-size]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#size
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-checkbox]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Checkbox/README.md

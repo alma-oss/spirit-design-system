@@ -8,6 +8,12 @@ describe('useLabelStyleProps', () => {
     expect(result.current.classProps).toContain('Label');
   });
 
+  it.each(['base', 'lighter', 'bolder'] as const)('should return %s font weight class', (fontWeight) => {
+    const { result } = renderHook(() => useLabelStyleProps({ fontWeight }));
+
+    expect(result.current.classProps).toContain(`Label--${fontWeight}`);
+  });
+
   it('should return size class when size is set', () => {
     const { result } = renderHook(() => useLabelStyleProps({ size: 'small' }));
 
