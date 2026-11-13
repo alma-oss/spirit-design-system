@@ -122,7 +122,7 @@ export const CardMediaOptions = () => (
     <GridItem UNSAFE_className="d-grid" columnEnd={{ tablet: 'span 2', desktop: 'span 4' }}>
       <Card direction="horizontal" isBoxed>
         <CardMedia size="medium" isExpanded>
-          <img src="https://picsum.photos/id/200/360/240" alt="" />
+          <img src="/assets/images/image-landscape.svg" alt="" />
         </CardMedia>
         <CardBody>
           <CardEyebrow>Media options</CardEyebrow>
@@ -150,7 +150,7 @@ export const CardMediaOptions = () => (
     <GridItem UNSAFE_className="d-grid" columnEnd={{ tablet: 'span 2', desktop: 'span 4' }}>
       <Card direction="horizontal" isBoxed>
         <CardMedia size="medium" isExpanded backgroundColor="emotion-warning-basic" fit={ObjectFit.CONTAIN}>
-          <img src="https://picsum.photos/id/200/360/240" alt="" />
+          <img src="/assets/images/image-landscape.svg" alt="" />
         </CardMedia>
         <CardBody>
           <CardEyebrow>Media options</CardEyebrow>

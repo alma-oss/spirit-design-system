@@ -13,7 +13,7 @@ const CardArticle = () => (
   <Grid cols={{ mobile: 1, tablet: 2 }}>
     <Card direction="horizontal" alignmentY="center">
       <CardMedia size="medium" isExpanded>
-        <img src="https://picsum.photos/id/200/180/180" alt="" />
+        <img src="/assets/images/image-square.svg" alt="" />
       </CardMedia>
       <CardBody>
         <Stack spacing="space-400">

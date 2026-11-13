@@ -4,7 +4,7 @@ import Avatar from '../Avatar';
 
 const RESPONSIVE_SIZE = { mobile: 'xsmall', tablet: 'medium', desktop: 'xlarge' } as const;
 const ARIA_LABEL = 'Profile of Jiří Bárta';
-const IMAGE_URL = 'https://picsum.photos/id/823/162/162';
+const IMAGE_URL = '/assets/images/avatar.svg';
 
 type AvatarConfig = {
   key: string;

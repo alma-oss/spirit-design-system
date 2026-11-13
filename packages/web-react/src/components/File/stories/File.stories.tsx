@@ -8,7 +8,7 @@ import ReadMe from '../README.md?raw';
 import type { FileProps } from '../types';
 import { File, FileImagePreview } from '..';
 
-const IMAGE_PREVIEW_URL = 'https://picsum.photos/seed/storybook-unstable-file/48/48';
+const IMAGE_PREVIEW_URL = '/assets/images/image-square.svg';
 
 type FileStoryArgs = FileProps & {
   /** Renders edit button with a Storybook action (not a real `File` prop). */

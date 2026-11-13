@@ -9,7 +9,7 @@ export default {
   },
 };
 
-const heroImage = 'https://picsum.photos/seed/hero-banner/1200/460';
+const heroImage = '/assets/images/image-landscape.svg';
 
 export const WithCards = () => (
   <Section size="xlarge">

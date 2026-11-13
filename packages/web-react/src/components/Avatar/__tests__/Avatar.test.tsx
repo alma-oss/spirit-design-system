@@ -90,7 +90,7 @@ describe('Avatar', () => {
   it('should render image', () => {
     render(
       <Avatar title="Jiří Bárta">
-        <img src="https://via.placeholder.com/150" alt="" data-testid="test-image" />
+        <img src="/assets/images/image-square.svg" alt="" data-testid="test-image" />
       </Avatar>,
     );
 

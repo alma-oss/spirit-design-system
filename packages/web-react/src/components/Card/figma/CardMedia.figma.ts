@@ -38,7 +38,7 @@ export default {
   example: figma.code`
     <Card${direction ? figma.code` direction="${direction}"` : ''}${isBoxed ? figma.code` isBoxed` : ''}>
       <CardMedia${isExpanded ? figma.code` isExpanded` : ''}>
-        <img src="https://picsum.photos/seed/card-media/800/450" alt="" />
+        <img src="/assets/images/image-landscape.svg" alt="" />
       </CardMedia>
       <CardBody>
         ${showEyebrow ? figma.code`<CardEyebrow>${eyebrowText}</CardEyebrow>` : ''}

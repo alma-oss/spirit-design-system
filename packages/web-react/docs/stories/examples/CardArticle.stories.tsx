@@ -95,7 +95,7 @@ export const CardArticle = (args: CardArticleCompositionProps) => {
       {Array.from({ length: numCards }, (_, index) => (
         <Card key={index} direction="horizontal" alignmentY="center">
           <CardMedia size={mediaSize} isExpanded>
-            <img src="https://picsum.photos/id/200/180/180" alt="" />
+            <img src="/assets/images/image-square.svg" alt="" />
           </CardMedia>
           <CardBody>
             <Stack spacing="space-400">

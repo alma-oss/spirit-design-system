@@ -24,7 +24,7 @@ const meta: Meta<typeof Avatar> = {
         in this demo are not customizable.`,
       mapping: {
         icon: <Icon name="profile" />,
-        image: <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />,
+        image: <img src="/assets/images/avatar.svg" alt="Jiří Bárta" aria-hidden="true" />,
         text: <span aria-hidden="true">JB</span>,
       },
     },
