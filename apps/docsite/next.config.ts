@@ -40,6 +40,7 @@ const nextConfig: NextConfig = {
     // exists here because Nx's default `build: { dependsOn: ['^build'] }` (nx.json) builds
     // @alma-oss/spirit-web (a docsite dependency) before docsite, populating it first.
     '/assets/icons/svg/sprite.svg': ['../../packages/web/public/icons/svg/sprite.svg'],
+    '/assets/images/[name]': ['../../static/assets/images/*.svg'],
     '/components/**': [
       '../../packages/web/src/scss/components/**/README.md',
       '../../packages/web/src/scss/components/**/preview.html',
