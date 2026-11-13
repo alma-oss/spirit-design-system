@@ -7,7 +7,8 @@
     "build": {
       "outputs": ["{projectRoot}/build"],
       "cache": true,
-      "dependsOn": ["^build", "@alma-oss/spirit-icons:build", "@alma-oss/spirit-web-react:build"]
+      "dependsOn": ["^build", "@alma-oss/spirit-icons:build", "@alma-oss/spirit-web-react:build"],
+      "inputs": ["default", "^default", "{workspaceRoot}/static/assets/images/**/*"]
     },
     "start": {
       "dependsOn": ["@alma-oss/spirit-icons:build"]
