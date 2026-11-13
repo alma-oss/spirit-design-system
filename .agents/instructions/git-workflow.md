@@ -1,8 +1,3 @@
----
-description: Git workflow guidelines including branch naming, commit messages, and pull requests
-alwaysApply: true
----
-
 # Git Workflow Guidelines
 
 This document covers branch naming, commit messages, and pull request conventions.
@@ -44,7 +39,7 @@ Follow the [Conventional Commits][conventional-commits] specification with lower
 
 ### Before Committing
 
-**IMPORTANT:** Before creating any commit, you MUST ask the user for the Jira issue ID (e.g., `DS-1234`) if one was not already provided in the conversation. Do not skip this step.
+**IMPORTANT:** Before creating a branch or any commit, you MUST ask the user for the Jira issue ID (e.g., `DS-1234`) if one was not already provided in the conversation. Do not skip this step.
 
 ### Format
 

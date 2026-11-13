@@ -4,34 +4,17 @@ applyTo: '**'
 
 # Spirit Design System - AI Instructions for GitHub Copilot
 
-## Project Overview
+Copilot code review reads the root [AGENTS.md](../AGENTS.md) but does not document reading nested `AGENTS.md` files.
+This file therefore repeats the nested rules that a diff can break.
 
-Spirit Design System is an open-source design system developed by Alma Career (formerly LMC). It's a comprehensive monorepo containing React components, vanilla JS/CSS implementations, design tokens, icons, and tooling.
+## Nested Rules
 
-### Architecture & Technologies
-
-#### Core Technologies
-
-- **TypeScript** - Primary language for all JavaScript/React code
-- **React** - Component library implementation with Next.js support
-- **SCSS/Sass** - Styling with design token integration
-- **Node.js** - Build tooling and development environment
-- **Lerna** - Monorepo management and publishing (legacy; being phased out in favor of Nx)
-- **Yarn Workspaces** - Dependency management
-- **Nx** - Build system and task orchestration (new standard for builds and task running)
-
-#### Package Structure
-
-```
-packages/
-├── analytics/          # Analytics tools for design system adoption
-├── codemods/           # Migration transforms between versions
-├── common/             # Shared build scripts and utilities
-├── design-tokens/      # Design tokens (SCSS/JS/TS)
-├── icons/              # SVG and React icon library
-├── web/                # Vanilla CSS/JS implementation
-└── web-react/          # React components library
-```
+- `packages/web`: a component styles only its own BEM block (`.Component`, `.Component--modifier`, `.Component__element`), never other components' classes.
+- `packages/web-react`: a new component is exported from `src/components/index.ts` and in the `exports` of `package.json` (`exports:regenerate`).
+- `packages/web-react`: the demo registers through `index.html` and `preview/index.ts`.
+- `packages/design-tokens/src` and `packages/icons/src/svg` are generated and never edited by hand.
+- `packages/codemods`: every codemod has a fixture pair and a test for each scenario.
+- `apps/docsite`: pages use `@alma-oss/spirit-web-react` components, no `UNSAFE_className` unless the gap is documented, no CSS modules.
 
 ## Code Review Instructions
 
@@ -137,4 +120,4 @@ When reviewing AI-generated changes, additionally check for:
 - **Use design tokens** instead of hardcoded values
 - **Include comprehensive error boundaries** where needed
 - **Optimize for tree-shaking** and bundle size
-- **Follow accessibility best practices** (WCAG 2.1 AA)
+- **Follow accessibility best practices** (WCAG 2.2 AA)
