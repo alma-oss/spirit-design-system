@@ -1,0 +1,313 @@
+import type { TokenSource, TokenVariable } from '../sync/adapters/figma/model';
+
+const white = { r: 1, g: 1, b: 1, a: 1 };
+const black = { r: 0, g: 0, b: 0, a: 0.1 };
+const accent = { r: 0.847, g: 0, b: 0.565, a: 1 };
+const accentOnBrand = { r: 1, g: 1, b: 1, a: 1 };
+
+const variable = (
+  input: Omit<TokenVariable, 'defaultModeId' | 'hiddenFromPublishing' | 'codeSyntax' | 'description'> &
+    Partial<TokenVariable>,
+): TokenVariable => ({
+  hiddenFromPublishing: false,
+  codeSyntax: {},
+  description: '',
+  defaultModeId: '',
+  ...input,
+});
+
+export const fontStacks = {
+  Inter: "'Inter', sans-serif",
+};
+
+export const createTokenSource = (): TokenSource => {
+  const source: TokenSource = {
+    file: { key: 'BXRF3VABXQm2TGkL0nwS4i', name: 'SPIRIT Config' },
+    collections: [
+      {
+        id: 'global',
+        name: 'Global tokens',
+        key: 'global-key',
+        hiddenFromPublishing: false,
+        defaultModeId: 'global-default',
+        modes: [{ id: 'global-default', name: 'Value' }],
+        variableIds: [],
+      },
+      {
+        id: 'theme',
+        name: 'Theme tokens',
+        key: 'theme-key',
+        hiddenFromPublishing: false,
+        defaultModeId: 'theme-default',
+        modes: [
+          { id: 'theme-default', name: 'theme-light-default' },
+          { id: 'theme-on-brand', name: 'theme-light-on-brand' },
+        ],
+        variableIds: [],
+      },
+      {
+        id: 'device',
+        name: 'Device',
+        key: 'device-key',
+        hiddenFromPublishing: false,
+        defaultModeId: 'device-mobile',
+        modes: [
+          { id: 'device-mobile', name: 'mobile' },
+          { id: 'device-tablet', name: 'tablet' },
+          { id: 'device-desktop', name: 'desktop' },
+        ],
+        variableIds: [],
+      },
+      {
+        id: 'brand',
+        name: 'Brand',
+        key: 'brand-key',
+        hiddenFromPublishing: false,
+        defaultModeId: 'brand-spirit',
+        modes: [{ id: 'brand-spirit', name: 'Spirit' }],
+        variableIds: [],
+      },
+    ],
+    variables: [
+      variable({
+        id: 'border',
+        name: 'border/width-100',
+        key: 'border',
+        collectionId: 'global',
+        resolvedType: 'FLOAT',
+        valuesByMode: { 'global-default': 1 },
+        scopes: ['STROKE_FLOAT'],
+        remote: false,
+      }),
+      variable({
+        id: 'radius',
+        name: 'radius/radius-100',
+        key: 'radius',
+        collectionId: 'global',
+        resolvedType: 'FLOAT',
+        valuesByMode: { 'global-default': 2 },
+        scopes: ['CORNER_RADIUS'],
+        remote: false,
+      }),
+      variable({
+        id: 'space',
+        name: 'spacing/space-700',
+        key: 'space',
+        collectionId: 'global',
+        resolvedType: 'FLOAT',
+        valuesByMode: { 'global-default': 16 },
+        scopes: ['GAP'],
+        remote: false,
+      }),
+      variable({
+        id: 'columns',
+        name: 'grid/Columns',
+        key: 'columns',
+        collectionId: 'global',
+        resolvedType: 'STRING',
+        valuesByMode: { 'global-default': '12' },
+        scopes: ['ALL_SCOPES'],
+        remote: false,
+      }),
+      variable({
+        id: 'prefix',
+        name: 'css-variable-prefix',
+        key: 'prefix',
+        collectionId: 'global',
+        resolvedType: 'STRING',
+        valuesByMode: { 'global-default': 'spirit-' },
+        scopes: ['ALL_SCOPES'],
+        remote: false,
+      }),
+      variable({
+        id: 'figma-hidden',
+        name: 'figma-hidden',
+        key: 'figma-hidden',
+        collectionId: 'global',
+        resolvedType: 'STRING',
+        valuesByMode: { 'global-default': 'nope' },
+        scopes: ['ALL_SCOPES'],
+        remote: false,
+      }),
+      variable({
+        id: 'alias-color',
+        name: 'Shadow/shadow-100-color-01',
+        key: 'alias-color',
+        collectionId: 'global',
+        resolvedType: 'COLOR',
+        valuesByMode: { 'global-default': { type: 'VARIABLE_ALIAS', id: 'remote-color' } },
+        scopes: ['ALL_FILLS'],
+        remote: false,
+      }),
+      variable({
+        id: 'accent',
+        name: 'accent/01/background-basic',
+        key: 'accent',
+        collectionId: 'theme',
+        resolvedType: 'COLOR',
+        valuesByMode: { 'theme-default': accent, 'theme-on-brand': accentOnBrand },
+        scopes: ['ALL_FILLS'],
+        remote: false,
+      }),
+      variable({
+        id: 'brand-alias',
+        name: 'accent/brand-fallback',
+        key: 'brand-alias',
+        collectionId: 'theme',
+        resolvedType: 'COLOR',
+        valuesByMode: {
+          'theme-default': { type: 'VARIABLE_ALIAS', id: 'brand-color' },
+          'theme-on-brand': { type: 'VARIABLE_ALIAS', id: 'brand-color' },
+        },
+        scopes: ['ALL_FILLS'],
+        remote: false,
+      }),
+      variable({
+        id: 'breakpoint',
+        name: 'breakpoint',
+        key: 'breakpoint',
+        collectionId: 'device',
+        resolvedType: 'FLOAT',
+        valuesByMode: { 'device-mobile': 375, 'device-tablet': 768, 'device-desktop': 1280 },
+        scopes: ['WIDTH_HEIGHT'],
+        remote: false,
+      }),
+      variable({
+        id: 'font-size-base',
+        name: 'font-size-base',
+        key: 'font-size-base',
+        collectionId: 'device',
+        resolvedType: 'FLOAT',
+        valuesByMode: { 'device-mobile': 16, 'device-tablet': 16, 'device-desktop': 16 },
+        scopes: ['FONT_SIZE'],
+        remote: false,
+      }),
+      variable({
+        id: 'font-family-body',
+        name: 'typography/font-family/Body',
+        key: 'font-family-body',
+        collectionId: 'device',
+        resolvedType: 'STRING',
+        valuesByMode: { 'device-mobile': 'Inter', 'device-tablet': 'Inter', 'device-desktop': 'Inter' },
+        scopes: ['FONT_FAMILY'],
+        remote: false,
+      }),
+      variable({
+        id: 'heading-size',
+        name: 'typography/heading/xlarge/font-size',
+        key: 'heading-size',
+        collectionId: 'device',
+        resolvedType: 'FLOAT',
+        valuesByMode: { 'device-mobile': 32, 'device-tablet': 40, 'device-desktop': 48 },
+        scopes: ['FONT_SIZE'],
+        remote: false,
+      }),
+      variable({
+        id: 'remote-color',
+        name: 'Primitive/shadow',
+        key: 'remote-color',
+        collectionId: 'library',
+        defaultModeId: 'default',
+        resolvedType: 'COLOR',
+        valuesByMode: { default: black },
+        scopes: ['ALL_FILLS'],
+        remote: true,
+      }),
+      variable({
+        id: 'brand-color',
+        name: 'global/spacing/space-400',
+        key: 'brand-color',
+        collectionId: 'brand',
+        resolvedType: 'COLOR',
+        valuesByMode: { 'brand-spirit': white },
+        scopes: ['ALL_FILLS'],
+        remote: true,
+      }),
+    ],
+    styles: [
+      {
+        type: 'TEXT',
+        id: 'text-style',
+        name: 'Body/Large/Bold',
+        key: 'text-style',
+        remote: false,
+        fontSize: 18,
+        fontName: { family: 'Inter', style: 'Bold' },
+        fontWeight: 700,
+        letterSpacing: { unit: 'PIXELS', value: 0 },
+        lineHeight: { unit: 'PIXELS', value: 28 },
+        boundVariables: { fontSize: { type: 'VARIABLE_ALIAS', id: 'heading-size' } },
+      },
+      {
+        type: 'TEXT',
+        id: 'italic-style',
+        name: 'Body/Large/Italic',
+        key: 'italic-style',
+        remote: false,
+        fontSize: 18,
+        fontName: { family: 'Inter', style: 'Italic' },
+        letterSpacing: { unit: 'PIXELS', value: 0 },
+        lineHeight: { unit: 'PIXELS', value: 28 },
+      },
+      {
+        type: 'TEXT',
+        id: 'link-style',
+        name: 'Body/Large/Link Bold',
+        key: 'link-style',
+        remote: false,
+        fontSize: 18,
+        fontName: { family: 'Inter', style: 'Bold' },
+        fontWeight: 700,
+        letterSpacing: { unit: 'PIXELS', value: 0 },
+        lineHeight: { unit: 'PIXELS', value: 28 },
+      },
+      {
+        type: 'EFFECT',
+        id: 'shadow-style',
+        name: 'Shadow/shadow-100',
+        key: 'shadow-style',
+        remote: false,
+        effects: [{ type: 'DROP_SHADOW', visible: true, radius: 8, spread: 0, offset: { x: 0, y: 2 }, color: black }],
+      },
+      {
+        type: 'PAINT',
+        id: 'gradient-style',
+        name: 'Gradient/primary',
+        key: 'gradient-style',
+        remote: false,
+        paints: [
+          {
+            type: 'GRADIENT_LINEAR',
+            visible: true,
+            gradientHandlePositions: [
+              { x: 0.5, y: 0 },
+              { x: 0.5, y: 1 },
+              { x: 1, y: 0 },
+            ],
+            gradientStops: [
+              { position: 0, color: white },
+              { position: 1, color: { r: 0.8, g: 0.7, b: 1, a: 1 } },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'PAINT',
+        id: 'solid-style',
+        name: 'Unused/solid',
+        key: 'solid-style',
+        remote: false,
+        paints: [{ type: 'SOLID', visible: true, color: white }],
+      },
+    ],
+  };
+
+  const defaults = new Map(source.collections.map((collection) => [collection.id, collection.defaultModeId]));
+
+  source.variables = source.variables.map((item) => ({
+    ...item,
+    defaultModeId: item.defaultModeId || defaults.get(item.collectionId) || '',
+  }));
+
+  return source;
+};
