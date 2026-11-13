@@ -58,7 +58,7 @@ Extract the Jira issue ID from:
 
 If no Jira issue ID was found (branch, commits, and conversation all lack one), use `AskUserQuestion` to ask:
 
-> "What is the Jira issue URL for this PR? (e.g. https://jira.almacareer.tech/browse/DS-XXXX) — or type 'none' to skip."
+> "What is the Jira issue URL for this PR? (e.g. https://almacareer.atlassian.net/browse/DS-XXXX) — or type 'none' to skip."
 
 Do not proceed to drafting until you have the answer.
 
@@ -80,7 +80,7 @@ Fill the PR template sections:
 
 **Issue reference**:
 
-- Full Jira URL: `https://jira.almacareer.tech/browse/DS-XXXX`
+- Full Jira URL: `https://almacareer.atlassian.net/browse/DS-XXXX`
 - If none, leave the placeholder comment as-is.
 
 ### Step 5: Present for Review
@@ -153,7 +153,7 @@ Skip this step when the PR is a draft, there is no Jira issue (the user answered
 
 ### Issue reference
 
-{full Jira URL, e.g. https://jira.almacareer.tech/browse/DS-XXXX}
+{full Jira URL, e.g. https://almacareer.atlassian.net/browse/DS-XXXX}
 ```
 
 ---

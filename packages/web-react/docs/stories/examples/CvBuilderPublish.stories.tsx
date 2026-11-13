@@ -334,7 +334,7 @@ export const CvBuilderPublish = () => {
                       empty: 'Uveďte název firmy',
                     },
                   }}
-                  /* @ts-ignore – ReactNode isn't supported by the `label` -- @see https://jira.almacareer.tech/browse/DS-2790 */
+                  /* @ts-ignore – ReactNode isn't supported by the `label` -- @see https://almacareer.atlassian.net/browse/DS-2790 */
                   label={
                     <>
                       Chcete životopis skrýt před některými firmami?{' '}

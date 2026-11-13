@@ -7,7 +7,7 @@ Decide with evidence whether a Jira issue can be accepted: verify each acceptanc
 ```text
 /spirit:accept-jira-issue DS-2831
 /spirit:accept-jira-issue DS-2831 DS-2774
-/spirit:accept-jira-issue https://jira.almacareer.tech/browse/DS-2860
+/spirit:accept-jira-issue https://almacareer.atlassian.net/browse/DS-2860
 ```
 
 Or ask in plain language: "check if DS-2831 meets its acceptance criteria and whether I can accept it".
@@ -52,13 +52,13 @@ The skill works in any agent that reads `.agents/skills`. It needs:
 
 | Capability  | Preferred              | Fallback                                                             |
 | ----------- | ---------------------- | -------------------------------------------------------------------- |
-| Jira        | Jira MCP server        | REST with `JIRA_PERSONAL_TOKEN`                                      |
+| Jira        | Jira MCP server        | REST with `JIRA_EMAIL` and `JIRA_API_TOKEN`                          |
 | GitHub      | GitHub MCP server      | `gh` CLI, authenticated                                              |
 | Browser     | Any browser automation | `scripts/verify.mjs` (Playwright from the repository + local Chrome) |
-| Attachments | —                      | `scripts/jira-attach.sh` with `JIRA_PERSONAL_TOKEN`                  |
+| Attachments | —                      | `scripts/jira-attach.sh` with `JIRA_EMAIL` and `JIRA_API_TOKEN`      |
 
-- Jira is on-prem and requires the company VPN.
-- `JIRA_PERSONAL_TOKEN` is a Jira personal access token (Jira → Profile → Personal Access Tokens). Store it however you prefer — export it in your shell profile, keep it in a git-ignored `.env.local`, or inject it from a secret manager (for example `op run`, `doppler run`, or your OS keychain).
+- Jira is Atlassian Cloud (`almacareer.atlassian.net`); no VPN is needed.
+- `JIRA_EMAIL` is your Atlassian account email and `JIRA_API_TOKEN` is an API token (Atlassian account → Security → API tokens). Store it however you prefer — export it in your shell profile, keep it in a git-ignored `.env.local`, or inject it from a secret manager (for example `op run`, `doppler run`, or your OS keychain).
 - Run `yarn install` so `@playwright/test` is available. The script uses your installed Google Chrome and falls back to the Playwright browser (`yarn playwright install chromium`).
 
 ## Key Principles

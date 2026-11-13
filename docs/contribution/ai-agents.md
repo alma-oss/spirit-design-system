@@ -48,7 +48,7 @@ Provide a set defined in `.mcp.json` at the repository root.
 (\*) The `figma` server connects to a locally running Figma Desktop app (`http://127.0.0.1:3845/mcp`),
 so Figma must be open for it to work.
 
-(\*\*) The `github` and `jira` servers require authentication tokens.
+(\*\*) The `github` server requires an authentication token. The `jira` server is the [Atlassian remote MCP server][atlassian-mcp]; sign in through the client when it connects.
 
 ### Recommended `.mcp.json`
 
@@ -79,10 +79,7 @@ The structure is the same as Claude Code and Cursor.
     },
     "jira": {
       "type": "http",
-      "url": "https://jira.almacareer.tech/mcp",
-      "headers": {
-        "Authorization": "Token ${JIRA_TOKEN}"
-      }
+      "url": "https://mcp.atlassian.com/v2/mcp"
     }
   }
 }
@@ -266,5 +263,6 @@ Spirit ships with slash commands that extend agent capabilities. They live in `.
 Invoke them with the `spirit:` namespace prefix, e.g. `/spirit:release-notes`.
 
 [agents-git-workflow]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/instructions/git-workflow.md
+[atlassian-mcp]: https://support.atlassian.com/atlassian-ai-gateway/docs/get-started-with-the-atlassian-remote-mcp-server/
 [mcp]: https://modelcontextprotocol.io/
 [skills-readme]: https://github.com/alma-oss/spirit-design-system/blob/main/.agents/skills/README.md

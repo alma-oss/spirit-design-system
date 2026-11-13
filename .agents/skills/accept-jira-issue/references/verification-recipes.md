@@ -4,9 +4,9 @@ Concrete commands for each step, with fallbacks for environments without a given
 
 ## Jira
 
-Base URL: `https://jira.almacareer.tech` (on-prem, requires company VPN).
+Base URL: `https://almacareer.atlassian.net` (Atlassian Cloud).
 
-If there is no Jira MCP, use REST with a personal access token from the environment. How the token gets into `JIRA_PERSONAL_TOKEN` is up to each user — shell profile, `.env.local`, or a secret manager that injects environment variables.
+If there is no Jira MCP, use REST with basic auth from the environment (`JIRA_EMAIL` and an API token in `JIRA_API_TOKEN`). How the token gets into `JIRA_API_TOKEN` is up to each user — shell profile, `.env.local`, or a secret manager that injects environment variables.
 
 | Operation        | MCP operation      | REST equivalent                                                                 |
 | ---------------- | ------------------ | ------------------------------------------------------------------------------- |
@@ -18,13 +18,13 @@ If there is no Jira MCP, use REST with a personal access token from the environm
 | Attach file      | —                  | `scripts/jira-attach.sh <KEY> <file>…`                                          |
 
 ```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/issue/DS-2831?fields=summary,status,description,comment"
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
+  "https://almacareer.atlassian.net/rest/api/2/issue/DS-2831?fields=summary,status,description,comment"
 ```
 
 Pitfalls:
 
-- Every call failing with a generic error (and listing projects returning an empty list) means no VPN.
+- Every call failing with `401` means a wrong `JIRA_EMAIL` or an expired or wrong `JIRA_API_TOKEN`.
 - Some MCP clients pick up a changed token only after restarting the session.
 - The `comment` field embedded in the issue response is paginated on its own and can hold fewer comments than exist — fetch the dedicated `/comment?maxResults=50` endpoint when reading the ticket.
 - The comment returned by the write call is not the stored body — re-fetch.

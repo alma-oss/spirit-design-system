@@ -1,7 +1,7 @@
 /* eslint-disable spirit-jest/no-disabled-tests */
 /**
  * @todo Enable skipped tests
- * @see { @link https://jira.almacareer.tech/browse/DS-1796 }
+ * @see { @link https://almacareer.atlassian.net/browse/DS-1796 }
  */
 import { ResizeObserver } from '@juggle/resize-observer';
 import { renderHook } from '@testing-library/react';

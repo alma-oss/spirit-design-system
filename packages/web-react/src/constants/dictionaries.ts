@@ -141,7 +141,7 @@ export const SizesExtended = {
 
 // Exclude unwanted tokens so we can iterate over Container sizes.
 // Max-width and padding will be moved out of this map in the future.
-// @see https://jira.almacareer.tech/browse/DS-2142
+// @see https://almacareer.atlassian.net/browse/DS-2142
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { MAXWIDTH, PADDING, ...ContainerTokenSizes } = createUppercaseKeyDictionary(containers);
 export { ContainerTokenSizes };
