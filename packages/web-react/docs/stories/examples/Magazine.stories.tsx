@@ -56,7 +56,7 @@ export const WithCards = () => (
           <Grid cols={{ mobile: 1, tablet: 2, desktop: 4 }} spacing="space-1000">
             <Card>
               <CardMedia>
-                <img src="https://picsum.photos/seed/magazine1/600/360" alt="" />
+                <img src="/assets/images/image-landscape.svg" alt="" />
               </CardMedia>
               <CardBody>
                 <CardEyebrow>Brow Styling Techniques</CardEyebrow>
@@ -72,7 +72,7 @@ export const WithCards = () => (
 
             <Card>
               <CardMedia>
-                <img src="https://picsum.photos/seed/magazine2/600/360" alt="" />
+                <img src="/assets/images/image-landscape.svg" alt="" />
               </CardMedia>
               <CardBody>
                 <CardEyebrow>Eyebrow Innovations</CardEyebrow>
@@ -87,7 +87,7 @@ export const WithCards = () => (
 
             <Card>
               <CardMedia>
-                <img src="https://picsum.photos/seed/magazine3/600/360" alt="" />
+                <img src="/assets/images/image-landscape.svg" alt="" />
               </CardMedia>
               <CardBody>
                 <CardEyebrow>Perfecting Your Eyebrows</CardEyebrow>
@@ -103,7 +103,7 @@ export const WithCards = () => (
 
             <Card>
               <CardMedia>
-                <img src="https://picsum.photos/seed/magazine4/600/360" alt="" />
+                <img src="/assets/images/image-landscape.svg" alt="" />
               </CardMedia>
               <CardBody>
                 <CardEyebrow>Perfecting Your Eyebrows</CardEyebrow>

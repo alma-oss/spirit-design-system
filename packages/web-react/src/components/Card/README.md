@@ -188,7 +188,7 @@ To display larger images or videos, use the CardMedia subcomponent.
 
 ```tsx
 <CardMedia>
-  <img src="https://via.placeholder.com/300x200" alt="" />
+  <img src="path/to/image.jpg" alt="" />
 </CardMedia>
 ```
 
@@ -271,7 +271,7 @@ Available values are based on the CSS [object-fit][mdn-object-fit] property:
 
 ```tsx
 <CardMedia fit="contain">
-  <img src="https://via.placeholder.com/300x200" alt="" />
+  <img src="path/to/image.jpg" alt="" />
 </CardMedia>
 ```
 
@@ -283,7 +283,7 @@ You can set the background color of the CardMedia container using the `backgroun
 
 ```tsx
 <CardMedia backgroundColor="primary">
-  <img src="https://via.placeholder.com/300x200" alt="" />
+  <img src="path/to/image.jpg" alt="" />
 </CardMedia>
 ```
 
@@ -569,7 +569,7 @@ CardMedia image in a link:
 ```tsx
 <CardMedia>
   <Link href="#" aria-hidden="true">
-    <img src="https://via.placeholder.com/300x200" alt="" />
+    <img src="path/to/image.jpg" alt="" />
   </Link>
 </CardMedia>
 ```

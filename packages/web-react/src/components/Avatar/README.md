@@ -94,7 +94,7 @@ Add an image, it will be resized to fit the avatar.
 
 ```tsx
 <Avatar aria-label="Profile of Jiří Bárta">
-  <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />
+  <img src="path/to/avatar.jpg" alt="Jiří Bárta" aria-hidden="true" />
 </Avatar>
 ```
 

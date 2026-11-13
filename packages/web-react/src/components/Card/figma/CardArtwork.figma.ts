@@ -24,7 +24,7 @@ if (type === 'Iconbox') {
   // Illustration
   example = figma.code`
     <CardArtwork>
-      <img src="https://picsum.photos/seed/card/200/200" alt="" />
+      <img src="/assets/images/image-square.svg" alt="" />
     </CardArtwork>`;
 }
 

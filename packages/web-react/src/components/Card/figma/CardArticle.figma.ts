@@ -22,7 +22,7 @@ const paragraphText = getText(instance, 'Paragraph  text');
 const linkText = getText(instance, 'Link');
 
 const media = figma.code`<CardMedia${size ? figma.code` size="${size}"` : ''} isExpanded>
-  <img src="https://picsum.photos/seed/article/180/180" alt="" />
+  <img src="/assets/images/image-square.svg" alt="" />
 </CardMedia>`;
 
 let example;

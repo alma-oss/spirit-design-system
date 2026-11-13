@@ -39,7 +39,7 @@ const FileUploadInputWithAttachment = () => (
           </>
         }
         onDismiss={visualOnlyNoopOnDismiss}
-        previewSlot={<FileImagePreview imagePreview="https://picsum.photos/seed/upload1/48/48" label="Image preview" />}
+        previewSlot={<FileImagePreview imagePreview="/assets/images/image-square.svg" label="Image preview" />}
         strings={{
           removeAria: 'Remove file vacation-photo.jpg from list',
         }}

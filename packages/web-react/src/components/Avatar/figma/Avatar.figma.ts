@@ -28,7 +28,7 @@ if (style === 'Initials') {
 } else if (style === 'Photo') {
   example = figma.code`
     <Avatar${isSquare ? figma.code` isSquare` : ''}${size ? figma.code` size="${size}"` : ''} aria-label="John Doe">
-      <img src="https://picsum.photos/seed/avatar/150/150" alt="" aria-hidden="true" />
+      <img src="/assets/images/avatar.svg" alt="" aria-hidden="true" />
     </Avatar>`;
 } else {
   example = figma.code`
