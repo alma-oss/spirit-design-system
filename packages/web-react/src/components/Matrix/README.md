@@ -79,7 +79,7 @@ However, you can also explicitly set the `rows` prop if you want to control the 
 ⚠️ For multi-line Matrix layouts, the number of item rows `itemRows` must be set explicitly. This is required by the [`subgrid`][mdn-subgrid] feature.
 
 ⚠️ Be careful when adding margin to Matrix items. It is a known issue that
-adding a top margin to an item causes a [rendering bug][jira-pricing-safari-bug]
+adding a top margin to an item causes a [rendering bug][ticket-ds-2051]
 in Safari.
 
 ## Matrix Vs. Grid
@@ -123,10 +123,10 @@ and [escape hatches][readme-escape-hatches].
 
 [dictionary-breakpoint]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/DICTIONARIES.md#breakpoint
 [grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Grid/README.md
-[jira-pricing-safari-bug]: https://almacareer.atlassian.net/browse/DS-2051
 [mdn-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
 [mdn-subgrid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props
 [stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Stack/README.md
+[ticket-ds-2051]: https://almacareer.atlassian.net/browse/DS-2051

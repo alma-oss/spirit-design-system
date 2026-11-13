@@ -49,7 +49,7 @@ Returns `{ toggleSelection, replaceSelection, isSelected, removeItem, removeAll 
 
 ## useSelectionAria
 
-Provides keyboard and roving-tabindex behaviour for a selection tag grid. Tag-grid keyboard is the first slice here; roving tabindex refinements are tracked in [DS-2520](https://almacareer.atlassian.net/browse/DS-2520) and [DS-2521](https://almacareer.atlassian.net/browse/DS-2521).
+Provides keyboard and roving-tabindex behaviour for a selection tag grid. Tag-grid keyboard is the first slice here; roving tabindex refinements are tracked in [DS-2520][ticket-ds-2520] and [DS-2521][ticket-ds-2521].
 
 ### API
 
@@ -131,3 +131,5 @@ const Example = ({ options }) => {
 
 [collection-hooks]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/hooks/collection/README.md
 [selection-pattern]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/selection.md
+[ticket-ds-2520]: https://almacareer.atlassian.net/browse/DS-2520
+[ticket-ds-2521]: https://almacareer.atlassian.net/browse/DS-2521

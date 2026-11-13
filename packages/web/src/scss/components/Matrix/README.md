@@ -186,7 +186,7 @@ for tablets and larger screens, with a single column of content on mobile:
 [`subgrid`][mdn-subgrid] feature.
 
 ⚠️ Be careful when adding margin to Matrix items. It is a known issue that
-adding a top margin to an item causes a [rendering bug][jira-pricing-safari-bug]
+adding a top margin to an item causes a [rendering bug][ticket-ds-2051]
 in Safari.
 
 ### Custom Vertical Spacing
@@ -237,10 +237,10 @@ implementation of the nested components.
 As of now, only **single-column components** are supported in Matrix.
 
 [grid]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Grid/README.md
-[pricing-plan]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/PricingPlan/README.md
-[scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ScrollView/README.md#horizontal-scrolling
-[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
-[jira-pricing-safari-bug]: https://almacareer.atlassian.net/browse/DS-2051
 [mdn-grid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
 [mdn-grid-row]: https://developer.mozilla.org/en-US/docs/Glossary/Grid_Row
 [mdn-subgrid]: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid
+[pricing-plan]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/PricingPlan/README.md
+[scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ScrollView/README.md#horizontal-scrolling
+[stack]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Stack/README.md
+[ticket-ds-2051]: https://almacareer.atlassian.net/browse/DS-2051
