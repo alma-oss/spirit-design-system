@@ -12,7 +12,7 @@ It can be a circle or a square with rounded corners and can have different sizes
 </div>
 
 <a href="#" class="Avatar Avatar--xsmall" aria-label="Profile of Jiří Bárta">
-  <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />
+  <img src="path/to/avatar.jpg" alt="Jiří Bárta" aria-hidden="true" />
 </a>
 ```
 
@@ -104,7 +104,7 @@ Add an image, it will be resized to fit the avatar.
 
 ```html
 <div class="Avatar Avatar--medium" aria-label="Profile of Jiří Bárta">
-  <img src="https://picsum.photos/id/823/162/162" alt="Jiří Bárta" aria-hidden="true" />
+  <img src="path/to/avatar.jpg" alt="Jiří Bárta" aria-hidden="true" />
 </div>
 ```
 

@@ -233,7 +233,7 @@ If you need a vertical spacing, you can use `Stack` with `Stack--spacing` on the
   <!-- File with uploading state -->
   <li class="File">
     <div class="File__preview">
-      <img src="https://picsum.photos/seed/avatar1/48/48" width="48" height="48" alt="Image preview" />
+      <img src="path/to/avatar.jpg" width="48" height="48" alt="Image preview" />
     </div>
     <div class="File__content">
       <div class="File__text">
