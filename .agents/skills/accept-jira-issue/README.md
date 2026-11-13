@@ -72,5 +72,5 @@ The skill works in any agent that reads `.agents/skills`. It needs:
 
 - **SKILL.md** — Full workflow, verdict rules, example report
 - **references/verification-recipes.md** — Jira/GitHub/Netlify/browser commands and the fallbacks for each
-- **references/jira-comment-template.md** — Accept, clarify, and decline comment templates that survive Jira's markup conversion
+- **references/jira-comment-template.md** — Accept, clarify, and decline comment templates formatted as Markdown for Jira Cloud
 - Related skill: `/spirit:create-jira-issue` — Writing tickets with measurable acceptance criteria
