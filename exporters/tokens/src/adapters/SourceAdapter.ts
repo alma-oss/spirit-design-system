@@ -11,12 +11,15 @@ export type AdapterConfig = {
 /**
  * All source adapters must implement this interface.
  *
- * IMPORTANT: an adapter returns raw, unthemed tokens - it must not resolve
- * themes or device variants itself. For Supernova, that resolution happens
- * later via `sdk.tokens.computeTokensByApplyingThemes`, once per theme/device,
- * inside the generation layer (see `generators/fileGenerator.ts`). A future
- * source without an equivalent SDK-side resolver would need to solve this
- * differently; that is not addressed here.
+ * Themes and devices are handled in one of two ways, depending on the source:
+ *
+ * - Supernova: the adapter returns raw, unthemed tokens. The resolution happens later via
+ *   `sdk.tokens.computeTokensByApplyingThemes`, once per theme/device, inside the generation layer
+ *   (see `generators/fileGenerator.ts`).
+ * - Figma: the adapter reads the modes of a theme or device collection itself and returns one token per mode,
+ *   tagged with `metadata.theme` / `metadata.device`.
+ *
+ * Which of the two the pipeline should expect from every source is open (see DS-2875).
  */
 export interface SourceAdapter {
   /** Unique adapter identifier, e.g. 'supernova', 'figma'. */
