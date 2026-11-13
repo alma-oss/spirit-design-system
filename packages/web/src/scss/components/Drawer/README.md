@@ -89,6 +89,32 @@ to apply inner spacing consistent with `DrawerPanelHeader`, so you don't have to
 
 👉 For examples with `Navigation` content inside `DrawerPanelBody`, see the [Header][readme-header] component.
 
+### Scrolling with ScrollView
+
+To make content overflow more obvious to users, you can wrap the `DrawerPanelBody` in a [ScrollView][readme-scroll-view]
+that takes over the responsibility for scrolling and provides visual overflow decorators.
+
+Wrap `DrawerPanelBody`, not the other way around. This way the spacing set by `DrawerPanelBody--spacing` stays inside
+the `ScrollView` and scrolls together with the content, and the scroll events are not intercepted by `DrawerPanelBody`.
+
+```html
+<div class="DrawerPanel">
+  <header class="DrawerPanelHeader">
+    <!-- Close button goes here -->
+  </header>
+  <div class="ScrollView ScrollView--vertical" data-spirit-toggle="scrollView">
+    <div class="ScrollView__viewport" data-spirit-element="viewport">
+      <div class="ScrollView__content" data-spirit-element="content">
+        <div class="DrawerPanelBody DrawerPanelBody--spacing">
+          <!-- Long drawer content goes here -->
+        </div>
+      </div>
+    </div>
+    <div class="ScrollView__overflowDecorators ScrollView__overflowDecorators--borders" aria-hidden="true"></div>
+  </div>
+</div>
+```
+
 ## Accessibility
 
 Always provide an accessible name for the `Drawer` using the `aria-label` attribute so screen readers can announce what the dialog contains:
@@ -140,4 +166,5 @@ const offcanvas = new Offcanvas(drawerElement, { modal: false });
 The drawer panel will slide in as usual, but the rest of the page stays clickable and scrollable.
 
 [readme-control-button]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ControlButton/README.md
+[readme-scroll-view]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/ScrollView/README.md
 [readme-header]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web/src/scss/components/Header/README.md
