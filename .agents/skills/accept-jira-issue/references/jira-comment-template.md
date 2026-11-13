@@ -1,6 +1,6 @@
 # Jira Comment Templates
 
-Templates for the acceptance comment. They avoid the patterns that this on-prem Jira corrupts when a comment goes through the Markdown-to-wiki conversion.
+Templates for the acceptance comment. They avoid the patterns that this Jira corrupts when a comment goes through the Markdown-to-wiki conversion.
 
 ## Formatting Rules
 

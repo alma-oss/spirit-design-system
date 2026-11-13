@@ -47,17 +47,16 @@ Never carry a name in this skill — a stale username mentions the wrong person 
 order: whoever the user named in the conversation → the DS project lead, the closest API-resolvable
 proxy → ask with `AskUserQuestion`, offering the lead as the first option and **No mention** as the
 last. When there is no product manager to accept the work, the user picks **No mention** and the
-comment opens with the component line, without the `[~<pm-username>] ` prefix.
+comment opens with the component line, without the `[~accountid:<pm-account-id>] ` prefix.
 
 ```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/project/DS" \
-  | jq -r '.lead | "\(.displayName) \(.name)"'
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
+  "https://almacareer.atlassian.net/rest/api/2/project/DS" \
+  | jq -r '.lead | "\(.displayName) \(.accountId)"'
 ```
 
-The mention token is `[~<name>]` from `jira_get_user_profile`'s `name` field — **not** the address you
-searched with; the two often differ by mail domain. This is Jira Server/DC, so `[~accountid:...]`
-does not work.
+The mention token is `[~accountid:<accountId>]`, using the `accountId` of the user (from the project lead above
+or from a user search) — not their email address or display name.
 
 ### Step 3: Collect the Links
 
@@ -100,8 +99,8 @@ touches it:
 ```bash
 jq -n --rawfile body /tmp/acceptance.txt '{body: ($body | sub("\n+$"; ""))}' > /tmp/acceptance.json
 curl -s -w '\nHTTP %{http_code}\n' -X POST \
-  -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" -H "Content-Type: application/json" \
-  --data-binary @/tmp/acceptance.json "https://jira.almacareer.tech/rest/api/2/issue/DS-XXXX/comment"
+  -u "$JIRA_EMAIL:$JIRA_API_TOKEN" -H "Content-Type: application/json" \
+  --data-binary @/tmp/acceptance.json "https://almacareer.atlassian.net/rest/api/2/issue/DS-XXXX/comment"
 ```
 
 Expect `HTTP 201`, then read the response's `body` and confirm it matches what was approved.
@@ -124,7 +123,7 @@ party is about to walk into: unanswered reviewer questions, failing checks, an u
 ## Comment Template
 
 ```text
-[~<pm-username>] {{<Component>}} (<vanilla CSS|React|vanilla CSS and React>) is ready for acceptance.
+[~accountid:<pm-account-id>] {{<Component>}} (<vanilla CSS|React|vanilla CSS and React>) is ready for acceptance.
 
 * Documentation: [<Component> README on the branch|<README html_url>]
 * Demo: [<Component> on the deploy preview|<preview url>]
@@ -133,7 +132,7 @@ party is about to walk into: unanswered reviewer questions, failing checks, an u
 
 With both implementations in scope, label the bullets so each says what it opens — `Documentation`,
 `Documentation (React)`, `Demo (vanilla CSS)`, `Demo (React)`, `Storybook`, `Pull request` — rather
-than several bullets all reading "Demo". With **No mention**, drop the `[~<pm-username>] ` prefix and
+than several bullets all reading "Demo". With **No mention**, drop the `[~accountid:<pm-account-id>] ` prefix and
 keep the rest. Markup rules and this instance's corruption bugs:
 [`../create-jira-issue/references/wiki-markup-cheatsheet.md`](../create-jira-issue/references/wiki-markup-cheatsheet.md).
 

@@ -1,7 +1,11 @@
 # Transitioning a DS Issue to Done
 
-Everything the `Done` transition needs on `jira.almacareer.tech` (Jira Server/DC, REST API v2).
-`JIRA_PERSONAL_TOKEN` is in the shell environment; the scheme is `Bearer`, not `Token`.
+Everything the `Done` transition needs on `almacareer.atlassian.net` (Jira Cloud, REST API v2).
+`JIRA_EMAIL` and `JIRA_API_TOKEN` are in the shell environment; the scheme is basic auth (`curl -u`).
+
+> **Not verified on Jira Cloud.** The transition ID and the `customfield_*` IDs below were observed on the
+> former on-prem Jira. They are not returned on Cloud (checked on DS-2831), so look up the real IDs
+> (`/rest/api/2/field`, `/transitions`) before relying on them.
 
 ## Resolve the Transition by Target Status
 
@@ -9,8 +13,8 @@ Transition IDs are workflow-specific — never reuse one from a previous run. `j
 lists names without their target statuses, so go through REST:
 
 ```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/issue/DS-XXXX/transitions" \
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
+  "https://almacareer.atlassian.net/rest/api/2/issue/DS-XXXX/transitions" \
   | jq -r '.transitions[] | "\(.id) \(.name) -> \(.to.name)"'
 ```
 
@@ -30,8 +34,8 @@ HTTP 400 — "Code review is required but status is not set (in Set quality stat
 Read the gates first:
 
 ```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/issue/DS-XXXX?fields=status,customfield_10224,customfield_10225,customfield_10306,customfield_10305,customfield_10222,customfield_10223,customfield_10226,customfield_10227,customfield_11550,customfield_11552,customfield_18257,customfield_18258"
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
+  "https://almacareer.atlassian.net/rest/api/2/issue/DS-XXXX?fields=status,customfield_10224,customfield_10225,customfield_10306,customfield_10305,customfield_10222,customfield_10223,customfield_10226,customfield_10227,customfield_11550,customfield_11552,customfield_18257,customfield_18258"
 ```
 
 | Gate                | Required flag       | Status (`Passed`/`Failed`) | Done by             |
@@ -70,9 +74,9 @@ cat > /tmp/acceptance-transition.json <<'JSON'
 }
 JSON
 curl -s -w 'HTTP %{http_code}\n' -X POST \
-  -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" -H "Content-Type: application/json" \
+  -u "$JIRA_EMAIL:$JIRA_API_TOKEN" -H "Content-Type: application/json" \
   --data-binary @/tmp/acceptance-transition.json \
-  "https://jira.almacareer.tech/rest/api/2/issue/DS-XXXX/transitions"
+  "https://almacareer.atlassian.net/rest/api/2/issue/DS-XXXX/transitions"
 ```
 
 `HTTP 204` with no body means success. A `400` returns the validator's message, which names the
@@ -84,6 +88,6 @@ more fields.
 Status codes are not proof — re-read the issue:
 
 ```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/issue/DS-XXXX?fields=status,customfield_10225,customfield_10305,comment"
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
+  "https://almacareer.atlassian.net/rest/api/2/issue/DS-XXXX?fields=status,customfield_10225,customfield_10305,comment"
 ```

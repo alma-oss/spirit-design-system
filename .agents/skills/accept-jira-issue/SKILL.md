@@ -30,8 +30,8 @@ Process issues one at a time. With several keys (`DS-2831 DS-2774`), finish Step
 ### Step 0: Preflight
 
 - Parse every argument matching `[A-Z]+-\d+` (bare keys or `https://almacareer.atlassian.net/browse/<KEY>` URLs).
-- Check Jira access by getting the first issue. Use the Jira MCP if available; otherwise REST with `JIRA_PERSONAL_TOKEN` (see recipes).
-  - If every Jira call fails with a generic error, tell the user to connect to the company VPN.
+- Check Jira access by getting the first issue. Use the Jira MCP if available; otherwise REST with `JIRA_EMAIL` and `JIRA_API_TOKEN` (see recipes).
+  - If every Jira call fails with `401`, tell the user to check `JIRA_EMAIL` and `JIRA_API_TOKEN`.
   - If the user recently changed the Jira token, some MCP clients only pick it up after a restart — say so.
 - Check GitHub access: a GitHub MCP, or `gh auth status`. If one of them fails (401, 404), switch to the other — see recipes.
 
@@ -152,7 +152,7 @@ Report to the user in two parts, separated by a `─` divider line.
 
 1. Draft the comment from [`references/jira-comment-template.md`](references/jira-comment-template.md) — the pass template for ACCEPT / CLARIFY, the decline template for DECLINE.
 2. Show the exact comment text, the screenshots to attach, the transition to apply, and — for ACCEPT on a Spirit issue with a PR — the PR label to add. Ask the user to choose: **post comment + transition** (+ label for ACCEPT), **post comment only**, or **skip**. CLARIFY offers only **post comment only** or **skip**.
-3. Attach screenshots first with [`scripts/jira-attach.sh`](scripts/jira-attach.sh). It needs `JIRA_PERSONAL_TOKEN` in the environment. If it isn't set, ask the user to provide it the way they normally store secrets. If the token is missing or an upload fails, drop the "Screenshots attached" line from the draft, show the revised comment, and get approval again before posting — comments cannot be edited.
+3. Attach screenshots first with [`scripts/jira-attach.sh`](scripts/jira-attach.sh). It needs `JIRA_EMAIL` and `JIRA_API_TOKEN` in the environment. If it isn't set, ask the user to provide it the way they normally store secrets. If the token is missing or an upload fails, drop the "Screenshots attached" line from the draft, show the revised comment, and get approval again before posting — comments cannot be edited.
 4. Post the comment. Then **re-fetch the issue comments** and read the stored body — the write response is not reliable. If formatting is garbled, tell the user; comments cannot be edited, only re-posted.
 5. Transition: list the issue's available transitions, pick the one **named** `Accept` (ACCEPT) or `Deny` (DECLINE) — never by a hard-coded id — apply it, then re-fetch the status and report it.
 6. Label the PR (ACCEPT only, after the transition succeeded and the user approved it): add the `jira-accepted` label to the implementing PR, then re-read the PR labels and report them. The label already exists in the repository ("Issue is accepted in Jira"); if it does not, tell the user instead of creating it. Skip this step when no PR was found or the issue is not a Spirit one. Do not add the label for CLARIFY or DECLINE. The commands are in [`references/verification-recipes.md`](references/verification-recipes.md#github).

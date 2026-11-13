@@ -29,7 +29,7 @@ Run it on the branch whose PR is ready. Use when you need to:
 ## Output
 
 ```text
-[~<pm-username>] {{ProgressBar}} (vanilla CSS) is ready for acceptance.
+[~accountid:<pm-account-id>] {{ProgressBar}} (vanilla CSS) is ready for acceptance.
 
 * Documentation: [ProgressBar README on the branch|https://github.com/alma-oss/spirit-design-system/blob/<branch>/packages/web/src/scss/components/ProgressBar/README.md]
 * Demo: [ProgressBar on the deploy preview|https://deploy-preview-<PR>--spirit-design-system.netlify.app/packages/web/src/scss/components/progressbar/]
@@ -41,8 +41,8 @@ fields were left empty, and anything still open on the PR.
 
 ## Setup
 
-- **`JIRA_PERSONAL_TOKEN`** in the environment — the comment and the transition go through `curl` with
-  `Authorization: Bearer`, not `Token`.
+- **`JIRA_EMAIL` and `JIRA_API_TOKEN`** in the environment — the comment and the transition go through `curl` with
+  basic auth (`-u "$JIRA_EMAIL:$JIRA_API_TOKEN"`).
 - **`jira` MCP server** for reads only. `jira_add_comment` corrupts wiki markup on write, and there is
   no comment-edit or comment-delete tool to recover with.
 - **`gh` CLI**, authenticated, for the PR and the README existence check.

@@ -29,8 +29,6 @@ export const useScrollControl = (ref: MutableRefObject<HTMLDialogElement | null>
     /**
      * Cleanup scrolling when unmounting
      *
-     * @see https://almacareer.atlassian.net/browse/DS-1126
-     *
      * When the use of the Dialog in page is optimized by the condition like
      * `isOpen && <Dialog />`, the Dialog component will be unmounted sooner
      * than the Dialog is closed correctly and all side effects are fulfilled.
