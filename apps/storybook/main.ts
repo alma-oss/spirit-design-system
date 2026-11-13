@@ -26,6 +26,9 @@ const config: StorybookConfig = {
     },
   },
 
+  // Placeholder images used by demos and stories; apps/demo serves the same path from repo-root `static/`.
+  staticDirs: [{ from: '../../static/assets/images', to: '/assets/images' }],
+
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-mcp'],
 
   core: {
