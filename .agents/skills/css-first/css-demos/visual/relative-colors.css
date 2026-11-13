@@ -1,0 +1,179 @@
+/**
+ * Relative Color Syntax — Color Conversion & Channel Manipulation
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Using_relative_colors
+ * WebStatus: relative-color
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 125+, Firefox 128+, Safari 18+
+ *
+ * Task: Create color variants, convert between color spaces, manipulate channels
+ * Why: Generate tints, shades, complementary colors, and opacity variants from
+ *      a single base color — no hardcoded hex values, fully dynamic theming
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   SYNTAX:
+   color-function(from <origin-color> <channel1> <channel2> <channel3> / <alpha>)
+
+   The origin color is converted to the output color space automatically.
+   Channel variables (r, g, b, h, s, l, c, etc.) become available for calc().
+   ========================================================================== */
+
+/* ==========================================================================
+   1. LIGHTEN / DARKEN — adjust lightness in oklch
+   ========================================================================== */
+
+:root {
+  --base: oklch(0.6 0.15 250);
+}
+
+.lighter {
+  background: oklch(from var(--base) calc(l + 0.15) c h);
+}
+
+.darker {
+  background: oklch(from var(--base) calc(l - 0.15) c h);
+}
+
+/* ==========================================================================
+   2. ADJUST OPACITY — semi-transparent from opaque
+   ========================================================================== */
+
+.overlay {
+  background: oklch(from var(--base) l c h / 0.5);
+}
+
+/* Relative to existing alpha */
+.more-transparent {
+  background: oklch(from var(--base) l c h / calc(alpha * 0.5));
+}
+
+/* ==========================================================================
+   3. DESATURATE / SATURATE — adjust chroma
+   ========================================================================== */
+
+.muted {
+  color: oklch(from var(--base) l calc(c * 0.3) h);
+}
+
+.vivid {
+  color: oklch(from var(--base) l calc(c * 1.5) h);
+}
+
+/* ==========================================================================
+   4. COMPLEMENTARY COLOR — rotate hue 180deg
+   ========================================================================== */
+
+.complementary {
+  background: oklch(from var(--base) l c calc(h + 180));
+}
+
+/* ==========================================================================
+   5. TRIADIC / ANALOGOUS PALETTES
+   ========================================================================== */
+
+.triadic-1 {
+  background: var(--base);
+}
+.triadic-2 {
+  background: oklch(from var(--base) l c calc(h + 120));
+}
+.triadic-3 {
+  background: oklch(from var(--base) l c calc(h + 240));
+}
+
+.analogous-1 {
+  background: oklch(from var(--base) l c calc(h - 30));
+}
+.analogous-2 {
+  background: var(--base);
+}
+.analogous-3 {
+  background: oklch(from var(--base) l c calc(h + 30));
+}
+
+/* ==========================================================================
+   6. COLOR SPACE CONVERSION
+   Pass any color, output in a different space.
+   ========================================================================== */
+
+/* Hex → oklch */
+.converted {
+  background: oklch(from #3b82f6 l c h);
+}
+
+/* Named color → hsl with adjustments */
+.adjusted {
+  background: hsl(from rebeccapurple h calc(s * 1.2) calc(l + 10));
+}
+
+/* RGB → LCH for perceptual uniformity */
+.perceptual {
+  background: lch(from rgb(59 130 246) l c h);
+}
+
+/* ==========================================================================
+   7. DYNAMIC THEME — single custom property drives all variants
+   ========================================================================== */
+
+:root {
+  --theme: oklch(0.55 0.2 260);
+
+  --theme-light: oklch(from var(--theme) calc(l + 0.25) c h);
+  --theme-lighter: oklch(from var(--theme) calc(l + 0.35) calc(c * 0.5) h);
+  --theme-dark: oklch(from var(--theme) calc(l - 0.15) c h);
+  --theme-muted: oklch(from var(--theme) l calc(c * 0.2) h);
+  --theme-transparent: oklch(from var(--theme) l c h / 0.15);
+  --theme-complement: oklch(from var(--theme) l c calc(h + 180));
+}
+
+/* ==========================================================================
+   8. HOVER / FOCUS STATES — derived from element's own color
+   ========================================================================== */
+
+.button {
+  --btn-color: oklch(0.55 0.2 260);
+  background: var(--btn-color);
+  color: white;
+}
+
+.button:hover {
+  background: oklch(from var(--btn-color) calc(l - 0.08) c h);
+}
+
+.button:active {
+  background: oklch(from var(--btn-color) calc(l - 0.15) c h);
+}
+
+.button:focus-visible {
+  outline-color: oklch(from var(--btn-color) l c h / 0.5);
+}
+
+/* ==========================================================================
+   9. TINT / SHADE SCALE — 5-step palette from one color
+   ========================================================================== */
+
+.palette {
+  --color: oklch(0.55 0.18 150);
+
+  --50: oklch(from var(--color) 0.95 calc(c * 0.3) h);
+  --100: oklch(from var(--color) 0.9 calc(c * 0.5) h);
+  --300: oklch(from var(--color) 0.75 calc(c * 0.8) h);
+  --500: var(--color);
+  --700: oklch(from var(--color) 0.4 c h);
+  --900: oklch(from var(--color) 0.25 calc(c * 0.8) h);
+}
+
+/* ==========================================================================
+   10. @supports FALLBACK
+   ========================================================================== */
+
+@supports not (color: oklch(from red l c h)) {
+  .lighter {
+    background: oklch(0.75 0.15 250);
+  }
+  .darker {
+    background: oklch(0.45 0.15 250);
+  }
+}

@@ -1,0 +1,125 @@
+/**
+ * calc-size() Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/calc-size
+ * Spec: https://drafts.csswg.org/css-values-5/#calc-size
+ * Interop: https://github.com/web-platform-tests/interop/issues/1373
+ * WebStatus: calc-size
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 129+, Firefox —, Safari —
+ * Last verified: 2026-10-27
+ *
+ * Task: Do math on intrinsic sizes (auto, fit-content, min-/max-content) and
+ *       animate to the result
+ * Why: calc() rejects intrinsic keywords. calc-size() takes one as a basis,
+ *      exposes it as `size`, and returns an animatable length-like value.
+ *
+ * Prefer `interpolate-size: allow-keywords` for plain `0 → auto` transitions
+ * (see animation/starting-style.css). Reach for calc-size() only when the
+ * target needs arithmetic on the intrinsic size.
+ */
+
+/* ==========================================================================
+   SYNTAX REFERENCE
+
+   calc-size( <basis>, <calc-sum> )
+
+   <basis>     auto | fit-content | min-content | max-content | content
+               | <calc-sum> | calc-size() | any
+   <calc-sum>  math using `size` (the resolved basis): + − × ÷, round(), max()…
+
+   calc-size(auto, size)                → same as auto, but animatable
+   calc-size(fit-content, size + 2rem)  → intrinsic width plus breathing room
+   calc-size(auto, round(up, size, 1.5rem)) → snap to a vertical rhythm
+   calc-size(any, 300px * 1.5)          → 450px; `size` is not allowed with any
+
+   LIMITS:
+     Cannot animate between two DIFFERENT intrinsic keywords (auto ↔ min-content).
+     Cannot mix intrinsic sizes in one expression (max-content − min-content).
+     Using calc-size() implicitly enables interpolate-size for that value.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. EXPANDABLE PREVIEW — reveal content plus padding room
+   ========================================================================== */
+
+.preview {
+  block-size: 4lh; /* Collapsed: four lines */
+  overflow: clip;
+  transition: block-size 300ms ease;
+
+  &:is(:hover, :focus-within, .is-open) {
+    block-size: calc-size(auto, size + 1rem);
+  }
+}
+
+/* ==========================================================================
+   2. VERTICAL RHYTHM — round content height up to the baseline grid
+   ========================================================================== */
+
+.rhythm-block {
+  --rhythm: 1.5rem;
+  block-size: calc-size(auto, round(up, size, var(--rhythm)));
+}
+
+/* ==========================================================================
+   3. PILL BUTTONS — fit-content width with guaranteed minimum
+   ========================================================================== */
+
+.pill {
+  inline-size: calc-size(fit-content, max(6rem, size + 1.5rem));
+  text-align: center;
+}
+
+/* Auto-growing input that never collapses below 10ch */
+.grow-input {
+  field-sizing: content;
+  inline-size: calc-size(fit-content, max(10ch, size + 2ch));
+}
+
+/* ==========================================================================
+   4. ACCORDION — animate details content to auto with extra space
+   ========================================================================== */
+
+details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 300ms ease,
+    content-visibility 300ms allow-discrete;
+}
+
+details[open]::details-content {
+  block-size: calc-size(auto, size + 0.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview,
+  details::details-content {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   5. PROGRESSIVE ENHANCEMENT
+   Unsupported browsers drop the declaration; give them a plain keyword.
+   ========================================================================== */
+
+@supports not (block-size: calc-size(auto, size)) {
+  .preview:is(:hover, :focus-within, .is-open) {
+    block-size: auto;
+  }
+  .rhythm-block {
+    block-size: auto;
+  }
+  .pill {
+    inline-size: fit-content;
+    min-inline-size: 6rem;
+  }
+  .grow-input {
+    min-inline-size: 10ch;
+  }
+  details[open]::details-content {
+    block-size: auto;
+  }
+}

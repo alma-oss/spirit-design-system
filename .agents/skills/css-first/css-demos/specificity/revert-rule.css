@@ -1,0 +1,69 @@
+/**
+ * revert-rule — Roll Back the Cascade by One Rule
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/revert-rule
+ * Reference: https://developer.chrome.com/blog/chrome-148-beta
+ * Support: Chrome 148+
+ *
+ * Task: Discard the current rule's declaration and fall back to whatever
+ *       the cascade would have produced without it
+ * Why: `revert` reverts a whole origin and `revert-layer` reverts a whole
+ *      layer — `revert-rule` reverts just the current rule. It shines with
+ *      conditionals, letting you "delete" a declaration when a test fails.
+ * Last verified: 2026-05
+ */
+
+/* ==========================================================================
+   1. THE REVERT FAMILY — three scopes of rollback
+   revert        → roll back to the previous CASCADE ORIGIN (author→user→UA)
+   revert-layer  → roll back to the previous CASCADE LAYER in this origin
+   revert-rule   → roll back to the previous matching RULE        (Chrome 148+)
+   ========================================================================== */
+
+/* ==========================================================================
+   2. BASIC ROLLBACK — drop this rule's value
+   The cascade resolves as if the declaration using revert-rule were absent.
+   ========================================================================== */
+
+.btn {
+  color: green;
+}
+
+.btn {
+  color: revert-rule; /* this rule's `color` is dropped → effectively green */
+}
+
+/* ==========================================================================
+   3. CONDITIONAL DECLARATIONS — revert-rule + if()
+   Inside if(), revert-rule removes the property entirely when the condition
+   fails, instead of forcing an arbitrary fallback value.
+   ========================================================================== */
+
+.layout {
+  display: block; /* previous rule = the real fallback */
+}
+
+.layout {
+  /* use grid only when --mode is fancy; otherwise behave as if unset here */
+  display: if(style(--mode: fancy): grid; else: revert-rule);
+}
+
+/* ==========================================================================
+   4. STYLE-ATTRIBUTE ESCAPE HATCH
+   Used in a style="" attribute, revert-rule makes the cascade act as if the
+   inline declaration were not present — handy to neutralize injected styles.
+   ========================================================================== */
+
+/* <div style="color: revert-rule"> → falls back to stylesheet color */
+
+/* ==========================================================================
+   BEST PRACTICES
+   - Reach for revert-rule inside if() / conditional values: it cleanly
+     "removes" a declaration rather than guessing a fallback constant.
+   - Choose the narrowest tool: revert-rule for one rule, revert-layer for a
+     whole @layer, revert for a whole origin.
+   - Inside an animation (the animation origin) revert-rule behaves like
+     revert-layer — keep that in mind for @keyframes values.
+   - It is a CSS-wide keyword, so it works on `all` and every property, but
+     only takes effect when an earlier matching rule exists to fall back to.
+   ========================================================================== */

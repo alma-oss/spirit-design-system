@@ -1,0 +1,176 @@
+/**
+ * isolation: isolate — Stacking Context Control
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
+ * WebStatus: isolation
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 41+, Firefox 36+, Safari 8+
+ *
+ * Task: Fix z-index issues by creating explicit stacking contexts
+ * Why: isolation: isolate is the cleanest way to create a stacking context —
+ *      no side effects unlike position, opacity, or transform hacks
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   THE PROBLEM — z-index wars
+
+   z-index only works within a stacking context. Without isolation,
+   child z-index values leak out and compete globally.
+
+   ❌ WRONG — escalating z-index values
+   .header   { z-index: 100; }
+   .modal    { z-index: 9999; }
+   .tooltip  { z-index: 99999; }
+   .dropdown { z-index: 999999; }      ← z-index inflation
+
+   ✅ CORRECT — isolation creates scoped stacking contexts
+   Each component manages its own z-index internally.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. COMPONENT ISOLATION — scope z-index per component
+   Each component's internal z-index values stay contained.
+   ========================================================================== */
+
+.card {
+  isolation: isolate; /* new stacking context */
+}
+
+.card__image {
+  z-index: 0;
+}
+
+.card__badge {
+  z-index: 1; /* above image, but only within .card */
+}
+
+.card__overlay {
+  z-index: 2; /* above badge, but only within .card */
+}
+
+/* ==========================================================================
+   2. HEADER / MODAL / TOOLTIP PATTERN
+   Use isolation on each layer — z-index values stay small.
+   ========================================================================== */
+
+.page-header {
+  isolation: isolate;
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1; /* relative to page, not global */
+}
+
+.dropdown-menu {
+  z-index: 1; /* scoped inside .page-header */
+}
+
+.modal-overlay {
+  isolation: isolate;
+  z-index: 2; /* one above header */
+}
+
+.modal-content {
+  z-index: 1; /* scoped inside .modal-overlay */
+}
+
+.toast-container {
+  isolation: isolate;
+  z-index: 3; /* above modal */
+}
+
+/* ==========================================================================
+   3. MIX-BLEND-MODE ISOLATION
+   Without isolation, blend modes leak to ancestors.
+   ========================================================================== */
+
+/* ❌ WRONG — blend affects everything behind it */
+.blend-leaky {
+  mix-blend-mode: multiply;
+}
+
+/* ✅ CORRECT — blend contained within parent */
+.blend-container {
+  isolation: isolate; /* blend stops here */
+}
+
+.blend-container__child {
+  mix-blend-mode: multiply; /* only blends with siblings */
+}
+
+/* ==========================================================================
+   4. SIDEBAR + CONTENT PATTERN
+   Each section manages its own stacking independently.
+   ========================================================================== */
+
+.layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.sidebar {
+  isolation: isolate;
+}
+
+.sidebar__tooltip {
+  z-index: 1; /* won't interfere with main content */
+}
+
+.main-content {
+  isolation: isolate;
+}
+
+.main-content__popover {
+  z-index: 1; /* won't interfere with sidebar */
+}
+
+/* ==========================================================================
+   5. WHY isolation: isolate vs OTHER STACKING TRIGGERS
+
+   Many properties accidentally create stacking contexts:
+   ┌────────────────────────────────┬─────────────────────────────┐
+   │ ❌ Side effects                │ ✅ No side effects          │
+   ├────────────────────────────────┼─────────────────────────────┤
+   │ position: relative; z-index: 0 │ isolation: isolate          │
+   │ transform: translateZ(0)       │                             │
+   │ opacity: 0.99                  │                             │
+   │ will-change: transform         │                             │
+   │ contain: paint                 │                             │
+   └────────────────────────────────┴─────────────────────────────┘
+
+   isolation: isolate is purpose-built. It creates a stacking context
+   with zero visual or layout side effects.
+   ========================================================================== */
+
+/* ==========================================================================
+   6. RECOMMENDED STACKING SCALE
+   Use isolation + small z-index values in a predictable order.
+   ========================================================================== */
+
+:root {
+  --z-base: 0;
+  --z-above: 1;
+  --z-dropdown: 2;
+  --z-sticky: 3;
+  --z-overlay: 4;
+  --z-modal: 5;
+  --z-toast: 6;
+}
+
+/* Each layer isolates its children */
+.layer-sticky {
+  isolation: isolate;
+  z-index: var(--z-sticky);
+}
+.layer-overlay {
+  isolation: isolate;
+  z-index: var(--z-overlay);
+}
+.layer-modal {
+  isolation: isolate;
+  z-index: var(--z-modal);
+}
+.layer-toast {
+  isolation: isolate;
+  z-index: var(--z-toast);
+}

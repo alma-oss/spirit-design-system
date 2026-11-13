@@ -1,0 +1,160 @@
+/**
+ * Entry/Exit Animations with @starting-style + interpolate-size
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/interpolate-size
+ * WebStatus: starting-style
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 117+, Firefox 129+, Safari 17.5+
+ *
+ * Task: Animate elements entering/exiting the DOM (dialogs, popovers, display changes)
+ * Why: @starting-style defines "from" state when element first renders;
+ *      interpolate-size enables transitions to/from auto, min-content, max-content
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. DIALOG ENTRY/EXIT ANIMATION
+   Core: @starting-style sets initial state before element is displayed
+   ========================================================================== */
+
+dialog {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.3s,
+    translate 0.3s,
+    overlay 0.3s,
+    display 0.3s;
+  transition-behavior: allow-discrete; /* allows animating display property */
+
+  @starting-style {
+    /* state when dialog first opens */
+    opacity: 0;
+    translate: 0 -1rem;
+  }
+}
+
+/* Exit state — when dialog is closed */
+dialog:not([open]) {
+  opacity: 0;
+  translate: 0 1rem;
+}
+
+/* Backdrop fade */
+dialog::backdrop {
+  background: rgb(0 0 0 / 0);
+  transition:
+    background 0.3s,
+    overlay 0.3s,
+    display 0.3s;
+  transition-behavior: allow-discrete;
+
+  @starting-style {
+    background: rgb(0 0 0 / 0);
+  }
+}
+
+dialog[open]::backdrop {
+  background: rgb(0 0 0 / 0.5);
+}
+
+/* ==========================================================================
+   1b. DIALOG BODY SCROLL LOCK
+   Best practice: prevent background scroll when dialog is open.
+   scrollbar-gutter: stable prevents layout shift from scrollbar disappearing.
+   MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+   ========================================================================== */
+
+html:has(dialog[open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* ==========================================================================
+   2. POPOVER ENTRY/EXIT
+   Core: same pattern — @starting-style + allow-discrete for display
+   ========================================================================== */
+
+[popover] {
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity 0.2s,
+    scale 0.2s,
+    overlay 0.2s,
+    display 0.2s;
+  transition-behavior: allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+[popover]:not(:popover-open) {
+  opacity: 0;
+  scale: 0.95;
+}
+
+/* ==========================================================================
+   3. INTERPOLATE-SIZE — animate to/from intrinsic sizes
+   Core: enables transitions on auto, min-content, max-content, fit-content
+   ========================================================================== */
+
+:root {
+  interpolate-size: allow-keywords; /* opt-in globally */
+}
+
+/* Expandable panel — animates height from 0 to auto */
+.expandable {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 0.3s ease;
+}
+
+.expandable.open {
+  block-size: auto; /* transitions smoothly with interpolate-size */
+}
+
+/* Collapsible sidebar — animates width to/from fit-content */
+.sidebar {
+  inline-size: fit-content;
+  transition: inline-size 0.3s ease;
+}
+
+.sidebar.collapsed {
+  inline-size: 0;
+}
+
+/* ==========================================================================
+   4. DETAILS/SUMMARY ANIMATION
+   Core: @starting-style + interpolate-size for native HTML accordion
+   ========================================================================== */
+
+details {
+  interpolate-size: allow-keywords;
+}
+
+details > *:not(summary) {
+  opacity: 1;
+  block-size: auto;
+  overflow: hidden;
+  transition:
+    opacity 0.3s,
+    block-size 0.3s,
+    content-visibility 0.3s;
+  transition-behavior: allow-discrete;
+}
+
+details:not([open]) > *:not(summary) {
+  opacity: 0;
+  block-size: 0;
+}
+
+details[open] > *:not(summary) {
+  @starting-style {
+    opacity: 0;
+    block-size: 0;
+  }
+}

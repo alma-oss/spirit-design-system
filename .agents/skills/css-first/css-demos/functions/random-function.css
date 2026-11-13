@@ -1,0 +1,51 @@
+/**
+ * random() CSS Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/random
+ * Spec: https://drafts.csswg.org/css-values-5/#random
+ * WebStatus: random-function
+ * Baseline: 🟡 Limited Availability
+ * Support: Safari 26.2+; no stable Chrome or Firefox support recorded
+ * Last verified: 2026-09-25
+ *
+ * Task: Vary decorative shapes without JavaScript.
+ * Why: A named random key can reuse one value across properties of an element.
+ */
+
+/* Example markup: <div class="confetti" aria-hidden="true">
+     <span class="confetti__piece"></span> ...
+   </div>
+   Keep the pieces decorative; random colors must not determine text contrast. */
+.confetti {
+  position: relative;
+  overflow: hidden;
+  block-size: 12rem;
+}
+
+.confetti__piece {
+  position: absolute;
+  inset-block-start: 25%;
+  inset-inline-start: 25%;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: 50%;
+  background: rebeccapurple;
+}
+
+.confetti__piece:where(:nth-child(2)) {
+  inset-block-start: 65%;
+  inset-inline-start: 70%;
+}
+
+@supports (width: random(1px, 2px)) {
+  .confetti__piece {
+    /* The key shares a value between size properties on each piece. */
+    inline-size: random(--piece-size, 0.5rem, 1.25rem, 0.25rem);
+    block-size: random(--piece-size, 0.5rem, 1.25rem, 0.25rem);
+    inset-block-start: random(5%, 90%);
+    inset-inline-start: random(5%, 90%);
+    background: hsl(random(0, 360) 75% 55%);
+  }
+}
+
+/* random() is resolved as a CSS value; it does not continuously reroll. */

@@ -1,0 +1,147 @@
+/**
+ * stretch Sizing Keyword
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/stretch
+ * WebStatus: stretch
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Fill containing block while respecting margins
+ * Why: Unlike 100% which sizes the content/border box, stretch sizes the
+ *      margin box — so margins don't cause overflow
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   THE PROBLEM — 100% + margin = overflow
+
+   ❌ WRONG — element overflows its container
+   .full-width {
+     inline-size: 100%;
+     margin-inline: 1rem;             ← adds to 100% → overflow!
+   }
+
+   ✅ CORRECT — stretch accounts for margins
+   .full-width {
+     inline-size: stretch;
+     margin-inline: 1rem;             ← subtracted from available space
+   }
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BASIC — fill width respecting margins
+   ========================================================================== */
+
+.stretch-full {
+  inline-size: stretch;
+  margin-inline: 1rem; /* no overflow */
+}
+
+/* ==========================================================================
+   2. FORM INPUT — full width with spacing
+   Common pattern: input should fill container but keep side margins.
+   ========================================================================== */
+
+.form-input {
+  inline-size: stretch;
+  margin-inline: 1rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  border: 1px solid oklch(0.8 0 0);
+  border-radius: 0.375rem;
+}
+
+/* ==========================================================================
+   3. STICKY FOOTER BAR — full width minus margins
+   ========================================================================== */
+
+.bottom-bar {
+  position: fixed;
+  inset-block-end: 0;
+  inline-size: stretch;
+  margin-inline: 1rem;
+  margin-block-end: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: oklch(0.2 0 0);
+}
+
+/* ==========================================================================
+   4. COMPARISON: stretch vs 100% vs -webkit-fill-available
+
+   ┌─────────────────────────┬──────────────────────────────────┐
+   │ Value                    │ Behavior                         │
+   ├─────────────────────────┼──────────────────────────────────┤
+   │ inline-size: 100%        │ Sizes content/border box to 100% │
+   │                          │ Margins ADD to total → overflow  │
+   ├─────────────────────────┼──────────────────────────────────┤
+   │ inline-size: stretch     │ Sizes MARGIN BOX to container    │
+   │                          │ Margins SUBTRACT → no overflow   │
+   ├─────────────────────────┼──────────────────────────────────┤
+   │ -webkit-fill-available   │ Legacy prefix, same intent       │
+   │                          │ Non-standard, avoid              │
+   └─────────────────────────┴──────────────────────────────────┘
+   ========================================================================== */
+
+/* ==========================================================================
+   5. BLOCK-SIZE STRETCH — vertical fill
+   ========================================================================== */
+
+.sidebar-panel {
+  block-size: stretch;
+  margin-block: 1rem; /* fills height minus margins */
+}
+
+/* ==========================================================================
+   6. FLEX CHILD — stretch without flex: 1
+   In flex containers, stretch fills remaining inline space.
+   ========================================================================== */
+
+.flex-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.flex-row .search-input {
+  inline-size: stretch; /* fills remaining space */
+}
+
+/* ==========================================================================
+   7. GRID CHILD — stretch for specific cells
+   ========================================================================== */
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+}
+
+.grid-layout .content {
+  inline-size: stretch;
+  margin-inline-end: 1rem;
+}
+
+/* ==========================================================================
+   8. APPLIES TO THESE PROPERTIES
+
+   inline-size: stretch
+   block-size: stretch
+   min-inline-size: stretch
+   min-block-size: stretch
+   max-inline-size: stretch
+   max-block-size: stretch
+   (and physical equivalents: width, height, min-width, etc.)
+
+   ✅ Always prefer logical property variants.
+   ========================================================================== */
+
+/* ==========================================================================
+   9. @supports FALLBACK
+   ========================================================================== */
+
+@supports not (inline-size: stretch) {
+  .stretch-full,
+  .form-input,
+  .bottom-bar {
+    inline-size: calc(100% - 2rem); /* approximate with calc */
+  }
+}

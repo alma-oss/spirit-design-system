@@ -1,0 +1,322 @@
+/**
+ * Customizable Select Element
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/appearance#base-select
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/::picker(select)
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/selectedcontent
+ * Reference: https://developer.chrome.com/blog/a-customizable-select
+ * WebStatus: customizable-select
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 135+, Firefox —, Safari —
+ *
+ * Task: Style native <select> with full visual control — picker, options, icons, animations
+ * Why: Replaces JS-heavy custom dropdowns with native semantics, accessibility, and keyboard support
+ *      Progressive enhancement — non-supporting browsers get standard <select> with no breakage
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   HOW IT WORKS
+
+   appearance: base-select removes OS chrome and enables:
+   - Rich HTML inside <option> (images, SVG, spans — previously stripped)
+   - Picker rendered in top-layer (like popover)
+   - Picker positioned via anchor() relative to select button
+   - New pseudo-elements: ::picker(select), ::picker-icon, ::checkmark
+   - New pseudo-class: :open (select button when picker is visible)
+   - <selectedcontent> element clones selected option into the button
+
+   HTML STRUCTURE:
+     <select>
+       <button>                           ← custom trigger (must be first child, inert)
+         <selectedcontent></selectedcontent>  ← cloned preview of selected option
+       </button>
+       <option value="a">
+         <span class="icon" aria-hidden="true">🍎</span>
+         <span class="label">Apple</span>
+       </option>
+       <optgroup>
+         <legend>Citrus</legend>
+         <option value="b">Orange</option>
+       </optgroup>
+     </select>
+   ========================================================================== */
+
+/* ============================================================
+ * 1. OPT IN — appearance: base-select
+ * Both the select AND its picker must opt in.
+ * This changes the HTML parser behavior inside <select>.
+ * ============================================================ */
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+/* ============================================================
+ * 2. SELECT BUTTON
+ * After opt-in, <select> itself renders as the trigger button.
+ * ============================================================ */
+select {
+  font: inherit;
+  border: 2px solid oklch(0.8 0 0);
+  border-radius: 0.5rem;
+  background: oklch(0.97 0 0);
+  padding-block: 0.625rem;
+  padding-inline: 0.75rem;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+
+select:hover,
+select:focus-visible {
+  border-color: oklch(0.6 0.15 270);
+  background: oklch(0.94 0.02 270);
+  outline: none;
+}
+
+/* :open — select button when picker is visible */
+select:open {
+  border-color: oklch(0.5 0.18 270);
+  background: oklch(0.92 0.03 270);
+}
+
+/* ============================================================
+ * 3. PICKER ICON — ::picker-icon
+ * The dropdown arrow inside the button. Rotates when open.
+ * ============================================================ */
+select::picker-icon {
+  color: oklch(0.55 0 0);
+  transition: rotate 0.35s ease;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+/* ============================================================
+ * 4. DROP-DOWN PICKER — ::picker(select)
+ * The popover containing all options. Rendered in top-layer.
+ * Has an implicit anchor reference to the select button.
+ * ============================================================ */
+::picker(select) {
+  border: 2px solid oklch(0.85 0 0);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  box-shadow: 0 4px 16px oklch(0 0 0 / 0.12);
+
+  /* Entry animation */
+  opacity: 0;
+  translate: 0 -0.5rem;
+  transition:
+    opacity 0.3s,
+    translate 0.3s,
+    display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete;
+}
+
+/* Picker uses popover — :popover-open for visible state */
+::picker(select):popover-open {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* @starting-style for entry animation */
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+    translate: 0 -0.5rem;
+  }
+}
+
+/* Anchor positioning — picker relative to select button */
+/*
+::picker(select) {
+  top: calc(anchor(bottom) + 4px);
+  left: anchor(left);
+}
+*/
+
+/* ============================================================
+ * 5. OPTION STYLING
+ * With base-select, <option> supports display, flexbox,
+ * rich HTML content (SVG, images, multiple spans).
+ * ============================================================ */
+option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.625rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+option:hover,
+option:focus-visible {
+  background: oklch(0.92 0.04 270);
+}
+
+option:checked {
+  font-weight: 600;
+  background: oklch(0.95 0.03 270);
+}
+
+/* Zebra striping */
+option:nth-of-type(odd) {
+  background: oklch(0.98 0 0);
+}
+
+/* Rich content icons */
+option .icon {
+  font-size: 1.6rem;
+  text-box: trim-both cap alphabetic;
+  /* aria-hidden="true" on decorative icons to avoid duplicate announcements */
+}
+
+/* SVG icons inside options */
+option svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+ * 6. CHECKMARK — ::checkmark
+ * Indicator on the currently selected option.
+ * Can be repositioned with flexbox and restyled with content.
+ * Not included in accessibility tree.
+ * ============================================================ */
+option::checkmark {
+  order: 1;
+  margin-inline-start: auto;
+  /* content: "☑️"; — override default checkmark */
+}
+
+/* ============================================================
+ * 7. <selectedcontent> — Cloned Preview
+ * Placed inside an explicit <button> child of <select>.
+ * Clones the currently selected <option> into the button.
+ * Can be styled differently from the picker options.
+ *
+ * HTML:
+ *   <select>
+ *     <button><selectedcontent></selectedcontent></button>
+ *     <option value="a"><span class="icon">🍎</span> Apple</option>
+ *   </select>
+ * ============================================================ */
+
+/* Differential styling — hide icons in closed select but keep in picker */
+selectedcontent .icon {
+  display: none;
+}
+
+/* Or show only the icon and hide the label */
+/*
+selectedcontent .label {
+  display: none;
+}
+*/
+
+/* ============================================================
+ * 8. GROUPED OPTIONS — <optgroup> + <legend>
+ *
+ *   <optgroup>
+ *     <legend>Fruits</legend>
+ *     <option>Apple</option>
+ *   </optgroup>
+ * ============================================================ */
+optgroup {
+  border: 1px solid oklch(0.9 0 0);
+  border-radius: 0.5rem;
+  padding-block-start: 0.25rem;
+  margin-block-start: 0.25rem;
+}
+
+optgroup legend {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: oklch(0.55 0 0);
+  padding-block: 0.375rem;
+  padding-inline: 0.625rem;
+  text-align: center;
+}
+
+/* ============================================================
+ * 9. @supports FALLBACK
+ * Progressive enhancement — non-supporting browsers get the
+ * standard <select> with no visual breakage.
+ * The <button> and <selectedcontent> are ignored.
+ * Rich content in <option> is stripped to text nodes.
+ * ============================================================ */
+@supports not (appearance: base-select) {
+  select {
+    padding: 0.5rem;
+    border: 1px solid oklch(0.75 0 0);
+    border-radius: 0.25rem;
+    background: oklch(0.98 0 0);
+  }
+}
+
+/* ============================================================
+ * 10. LISTBOX MODE — <select multiple> and <select size> (Chrome 145+)
+ * Renders in-flow as a visible list, not as a popup picker.
+ * Same base-select opt-in, same styling primitives.
+ *
+ * <select multiple>
+ *   <option>Option A</option>
+ *   <option>Option B</option>
+ * </select>
+ * ============================================================ */
+select[multiple],
+select[size] {
+  appearance: base-select;
+  border: 2px solid oklch(0.8 0 0);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+select[multiple] option,
+select[size] option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.625rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+select[multiple] option:checked,
+select[size] option:checked {
+  background: oklch(0.92 0.06 270);
+  font-weight: 600;
+}
+
+/* ============================================================
+ * 11. COMPLETE EXAMPLE — Country picker with flags
+ *
+ * <select>
+ *   <button><selectedcontent></selectedcontent></button>
+ *   <option value="us">
+ *     <img src="flags/us.svg" alt="" width="20" height="15">
+ *     <span class="label">United States</span>
+ *   </option>
+ *   <option value="sk">
+ *     <img src="flags/sk.svg" alt="" width="20" height="15">
+ *     <span class="label">Slovakia</span>
+ *   </option>
+ * </select>
+ *
+ * option img {
+ *   inline-size: 1.25rem;
+ *   block-size: auto;
+ *   border-radius: 0.125rem;
+ * }
+ * ============================================================ */

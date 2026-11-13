@@ -1,0 +1,23 @@
+/**
+ * Balanced Flex Wrapping
+ *
+ * Spec: https://drafts.csswg.org/css-flexbox-2/
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Baseline: 🟣 Experimental / unknown
+ * Support: Chrome 150+
+ * Last verified: 2026-08-10
+ *
+ * Task: Distribute items across wrapped flex lines more evenly.
+ */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap; /* interoperable fallback */
+  gap: 0.5rem;
+}
+
+@supports (flex-wrap: balance) {
+  .tag-list {
+    flex-wrap: balance;
+  }
+}

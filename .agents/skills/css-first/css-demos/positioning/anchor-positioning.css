@@ -1,0 +1,95 @@
+/**
+ * Anchor Positioning for Tooltips
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-name
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/position-anchor
+ * Spec: https://www.w3.org/TR/css-anchor-position-2/
+ *
+ * WebStatus: anchor-positioning
+ * Baseline: 🟡 Limited Availability
+ * Support: 75% (Chrome 125+, Edge 125+)
+ *
+ * Task: Create a tooltip positioned relative to a button
+ * Why: CSS Anchor Positioning eliminates JavaScript for tooltip positioning,
+ *      with automatic position adjustments and collision detection.
+ * Last verified: 2026-08-11
+ */
+
+.button {
+  anchor-name: --my-button;
+}
+
+.tooltip {
+  position: absolute;
+  /* Chrome 151 changed the initial value to normal; name the anchor explicitly. */
+  position-anchor: --my-button;
+  position-area: top; /* Position above the anchor */
+  margin-block-end: 0.5rem;
+
+  /* Styling */
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  background: #333;
+  color: white;
+  border-radius: 0.25rem;
+  inline-size: max-content;
+}
+
+/* Fallback for browsers without anchor positioning */
+@supports not (position-anchor: --my-button) {
+  .tooltip {
+    /* Traditional positioning as fallback */
+    top: 100%;
+    left: 50%;
+    translate: -50% 0;
+  }
+}
+
+/* Position to the right if there's no space above */
+.tooltip-right {
+  position: absolute;
+  position-anchor: --my-button;
+  position-area: right;
+  margin-inline-start: 0.5rem;
+}
+
+/* Advanced: Position with position-try fallbacks */
+.tooltip-smart {
+  position: absolute;
+  position-anchor: --my-button;
+  position-area: top;
+
+  /* Try different positions if collision occurs */
+  position-try-options: --bottom, --left, --right;
+}
+
+@position-try --bottom {
+  position-area: bottom;
+  margin-block-start: 0.5rem;
+}
+
+@position-try --left {
+  position-area: left;
+  margin-inline-end: 0.5rem;
+}
+
+@position-try --right {
+  position-area: right;
+  margin-inline-start: 0.5rem;
+}
+
+/* Anchored container queries (Level 2) */
+.tooltip-anchored {
+  position: absolute;
+  position-anchor: --my-button;
+  position-area: top;
+  position-try-fallbacks: bottom;
+  container-type: anchored;
+}
+
+@container anchored(fallback: bottom) {
+  .tooltip-anchored {
+    position-area: bottom;
+  }
+}

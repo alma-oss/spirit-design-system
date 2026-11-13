@@ -1,0 +1,131 @@
+/**
+ * Multi-Column Wrapping — column-wrap & column-height
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/column-wrap
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/column-height
+ * Spec: CSS Multi-column Layout Module Level 2
+ * Reference: https://developer.chrome.com/blog/multicol-wrapping
+ * Baseline: 🟣 Experimental (Chrome 145+)
+ *
+ * Task: Make multi-column layouts wrap into rows instead of overflowing inline
+ * Why: Previously, content exceeding a height-constrained multicol container
+ *      created horizontal overflow columns. Now columns wrap into new rows
+ *      in the block direction — no JS or complex workarounds needed.
+ */
+
+/* ==========================================================================
+   THE PROBLEM (before column-wrap)
+
+   With a fixed height on a multicol container, overflow columns extend
+   horizontally, forcing the user to scroll sideways:
+
+   .old-multicol {
+     column-count: 3;
+     height: 300px;
+     ← overflow columns go inline, creating horizontal scrollbar
+   }
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BASIC COLUMN WRAPPING — columns wrap into new rows
+   ========================================================================== */
+
+.wrapped-columns {
+  column-count: 3;
+  column-height: 20rem;
+  column-wrap: wrap;
+  gap: 1rem;
+}
+
+/*
+  column-height sets the block-size of each row of columns.
+  column-wrap: wrap causes overflow columns to start a new row
+  instead of extending inline.
+
+  Result:
+    Row 1: [col1] [col2] [col3]
+    Row 2: [col4] [col5] [col6]
+    ... (as many rows as content needs)
+*/
+
+/* ==========================================================================
+   2. BALANCED COLUMNS — even distribution across rows
+   ========================================================================== */
+
+.balanced-columns {
+  column-count: 3;
+  column-height: 15rem;
+  column-wrap: balance;
+  gap: 1rem;
+}
+
+/* balance — distributes content evenly across columns in each row */
+
+/* ==========================================================================
+   3. BALANCE-ALL — even distribution across ALL rows
+   ========================================================================== */
+
+.balanced-all-columns {
+  column-count: 4;
+  column-height: 12rem;
+  column-wrap: balance-all;
+  gap: 1rem;
+}
+
+/* balance-all — balances content across columns AND across rows */
+
+/* ==========================================================================
+   4. FULL-VIEWPORT COLUMN CAROUSEL
+   Columns fill the viewport height. Scroll vertically to see next rows.
+   Great for long-form content on narrow/mobile screens.
+   ========================================================================== */
+
+.column-carousel {
+  column-count: 2;
+  column-height: 100dvb; /* dynamic viewport block-size */
+  column-wrap: wrap;
+  gap: 2rem;
+}
+
+/* ==========================================================================
+   5. ARTICLE LAYOUT — magazine-style multi-column with wrapping
+   ========================================================================== */
+
+.article-columns {
+  column-count: 3;
+  column-height: 30rem;
+  column-wrap: balance;
+  column-gap: 2rem;
+  column-rule: 1px solid oklch(0.8 0 0);
+}
+
+/* ==========================================================================
+   6. @supports FALLBACK
+   Non-supporting browsers get standard multicol (no wrapping).
+   ========================================================================== */
+
+@supports not (column-wrap: wrap) {
+  .wrapped-columns,
+  .balanced-columns,
+  .balanced-all-columns {
+    /* Falls back to standard overflow behavior — still readable */
+    overflow-x: auto;
+  }
+}
+
+/* ==========================================================================
+   VALUES REFERENCE
+
+   column-wrap:
+     auto        — default, no wrapping (overflow inline)
+     wrap        — overflow columns wrap into new rows
+     balance     — balance content evenly in each row
+     balance-all — balance content across all rows
+
+   column-height:
+     auto        — default, determined by container height
+     <length>    — explicit block-size for each row of columns
+
+   NOTE: Row gap decorations (styling gaps between rows) are coming
+   via the CSS Gap Decorations spec — currently in developer trial.
+   ========================================================================== */

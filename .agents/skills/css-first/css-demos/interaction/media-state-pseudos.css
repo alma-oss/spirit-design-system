@@ -1,0 +1,40 @@
+/**
+ * Media element state pseudo-classes
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:playing
+ * Reference: https://developer.chrome.com/blog/chrome-152-beta
+ * WebStatus: media-pseudos
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome —, Firefox 150+, Safari 15.4+
+ * Release note: Chrome 152 beta, announced 2026-07-30
+ * Last verified: 2026-08-11
+ *
+ * Task: Style audio and video elements from their native playback state.
+ */
+
+.player :is(audio, video) {
+  outline: 0.25rem solid transparent;
+  transition:
+    opacity 160ms ease,
+    outline-color 160ms ease;
+}
+
+.player :is(audio, video):playing {
+  outline-color: limegreen;
+}
+
+.player :is(audio, video):paused {
+  opacity: 0.72;
+}
+
+.player :is(audio, video):is(:seeking, :buffering, :stalled) {
+  cursor: progress;
+}
+
+.player :is(audio, video):muted {
+  outline-color: orange;
+}
+
+.player :is(audio, video):volume-locked {
+  filter: grayscale(1);
+}

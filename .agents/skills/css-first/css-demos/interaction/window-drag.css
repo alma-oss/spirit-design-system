@@ -1,0 +1,21 @@
+/**
+ * window-drag for installed desktop web apps
+ *
+ * Reference: https://developer.chrome.com/blog/chrome-152-beta
+ * Baseline: 🟣 Experimental / unknown
+ * Support: Chrome 152+ in installed desktop web apps
+ * Last verified: 2026-08-10
+ *
+ * Task: Turn a custom app header into a native draggable title-bar region.
+ */
+
+.app-titlebar {
+  window-drag: move;
+  user-select: none;
+}
+
+.app-titlebar :is(button, a, input, select, textarea) {
+  window-drag: none;
+}
+
+/* The property has no title-bar effect in a normal browser tab. */

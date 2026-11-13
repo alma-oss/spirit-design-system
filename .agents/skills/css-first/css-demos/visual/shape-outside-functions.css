@@ -1,0 +1,117 @@
+/**
+ * shape-outside — rect(), xywh(), path(), shape()
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/shape-outside
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/path
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/shape
+ * Reference: https://developer.chrome.com/blog/chrome-149-beta
+ * Support: rect(), xywh(), path(), shape() in shape-outside — Chrome 149+
+ *
+ * Task: Wrap inline text around a non-rectangular float exclusion shape
+ * Why: shape-outside already supported circle()/ellipse()/polygon(); these
+ *      functions add rectangle coordinates (rect/xywh), raw SVG paths
+ *      (path), and CSS-native, unit-aware geometry (shape)
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   SETUP — shape-outside only affects FLOATED elements with a known size.
+   The float reserves space; shape-outside reshapes how text flows past it.
+   ========================================================================== */
+
+.figure {
+  float: inline-start;
+  inline-size: 12rem;
+  block-size: 12rem;
+  shape-margin: 1rem; /* breathing room between shape and text */
+}
+
+/* ==========================================================================
+   1. rect() — inset rectangle from the reference box edges
+   rect(<top> <right> <bottom> <left>) — `auto` keeps the box edge.
+   ========================================================================== */
+
+.figure--rect {
+  float: inline-start;
+  inline-size: 14rem;
+  block-size: 10rem;
+  shape-outside: rect(2rem auto auto 0); /* text clears a top-left band */
+  shape-margin: 0.75rem;
+}
+
+/* ==========================================================================
+   2. xywh() — rectangle from an origin point plus width/height
+   xywh(<x> <y> <width> <height>) — often clearer than rect().
+   ========================================================================== */
+
+.figure--xywh {
+  float: inline-end;
+  inline-size: 14rem;
+  block-size: 14rem;
+  shape-outside: xywh(0 0 60% 100%); /* exclude the left 60% column */
+  shape-margin: 1rem;
+}
+
+/* ==========================================================================
+   3. path() — wrap around a raw SVG path
+   Single quoted SVG-path string; all lengths are implicitly in pixels and
+   var() is not allowed inside the string.
+   ========================================================================== */
+
+.figure--path {
+  float: inline-start;
+  inline-size: 200px;
+  block-size: 200px;
+  shape-outside: path('M 0 0 L 200 100 L 0 200 Z'); /* triangle */
+  shape-margin: 0.5rem;
+}
+
+/* ==========================================================================
+   4. shape() — CSS-native shape commands (preferred)
+   Unlike path(), shape() uses real CSS units, percentages, calc(), and
+   custom properties, and each command reads as plain CSS.
+   ========================================================================== */
+
+.figure--shape {
+  float: inline-start;
+  inline-size: 12rem;
+  block-size: 12rem;
+  shape-outside: shape(from 0 0, line to 100% 50%, line to 0 100%, close);
+  shape-margin: 1rem;
+}
+
+/* shape() can mix units and calc() — impossible with path() */
+.figure--shape-fluid {
+  float: inline-end;
+  inline-size: clamp(8rem, 20vw, 16rem);
+  block-size: 12rem;
+  shape-outside: shape(from 0 0, curve to 100% 100% with 100% 0, line to 0 100%, close);
+  shape-margin: 1rem;
+}
+
+/* ==========================================================================
+   5. PROGRESSIVE ENHANCEMENT
+   Older engines ignore unknown shape-outside values and fall back to the
+   float's rectangular margin box — text still wraps, just squarely.
+   ========================================================================== */
+
+@supports not (shape-outside: shape(from 0 0, line to 100% 100%)) {
+  .figure--shape,
+  .figure--shape-fluid {
+    shape-outside: none; /* explicit rectangular wrap fallback */
+  }
+}
+
+/* ==========================================================================
+   BEST PRACTICES
+   - shape-outside needs a float AND an explicit size; without both there is
+     no exclusion area and nothing wraps.
+   - Prefer shape() over path(): it accepts rem/%/calc() and custom
+     properties, so the shape scales with the layout instead of being locked
+     to pixel coordinates.
+   - Use rect()/xywh() for simple rectangular cutouts — they are shorter and
+     now match Firefox and Safari behavior.
+   - Add shape-margin so text never touches the shape edge.
+   - shape-outside is decorative: it changes text flow only, never the
+     element's own box — keep content readable without it.
+   ========================================================================== */

@@ -1,0 +1,442 @@
+/**
+ * clip-path: shape() — Responsive Clipping & Scroll Morphing
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+ * Reference: https://developer.chrome.com/blog/css-shape
+ * WebStatus: shape-function
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 135+, Firefox 148+, Safari 18.4+
+ *
+ * Task: Create responsive clip shapes with curves, animate/morph them on scroll
+ * Why: shape() accepts CSS units + custom properties — unlike path() which is
+ *      SVG-only fixed pixels. Enables responsive curved clipping and smooth morphing.
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC SHAPES — shape() vs polygon() vs path()
+
+   polygon() — straight edges only, no curves
+   path()    — SVG syntax, fixed px units, not responsive
+   shape()   — CSS units, curves, custom properties, responsive
+   ========================================================================== */
+
+/* Simple rounded tab shape — impossible with polygon() */
+.tab {
+  clip-path: shape(
+    from 0% 100%,
+    line to 0% 10%,
+    curve to 10% 0% with 0% 0%,
+    line to 90% 0%,
+    curve to 100% 10% with 100% 0%,
+    line to 100% 100%,
+    close
+  );
+}
+
+/* Wave bottom edge — responsive to container width */
+.wave-section {
+  clip-path: shape(
+    from 0% 0%,
+    line to 100% 0%,
+    line to 100% 80%,
+    curve to 50% 90% with 80% 100%,
+    curve to 0% 80% with 20% 100%,
+    close
+  );
+}
+
+/* ==========================================================================
+   2. SCROLL-DRIVEN SHAPE MORPHING
+   Animate shape coordinates on scroll using @property + scroll timeline.
+   Each @property allows the browser to interpolate individual coordinates.
+   ========================================================================== */
+
+/* Point coordinates */
+@property --p1-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+@property --p1-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --p2-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --p2-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+@property --p3-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+@property --p3-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --p4-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --p4-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+/* Cubic bezier control points */
+@property --cp1-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 77.6%;
+}
+@property --cp1-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --cp2-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --cp2-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 22.4%;
+}
+@property --cp3-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --cp3-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 77.6%;
+}
+@property --cp4-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 77.6%;
+}
+@property --cp4-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --cp5-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 22.4%;
+}
+@property --cp5-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}
+@property --cp6-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --cp6-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 77.6%;
+}
+@property --cp7-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+@property --cp7-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 22.4%;
+}
+@property --cp8-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 22.4%;
+}
+@property --cp8-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+.morphing-shape {
+  position: sticky;
+  top: 50svb;
+  left: 50%;
+  translate: -50% -50%;
+  inline-size: min(50svi, 400px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-family: system-ui;
+  font-size: clamp(1rem, 5svi, 2rem);
+
+  clip-path: shape(
+    from var(--p1-x) var(--p1-y),
+    curve to var(--p2-x) var(--p2-y) with var(--cp1-x) var(--cp1-y) / var(--cp2-x) var(--cp2-y),
+    curve to var(--p3-x) var(--p3-y) with var(--cp3-x) var(--cp3-y) / var(--cp4-x) var(--cp4-y),
+    curve to var(--p4-x) var(--p4-y) with var(--cp5-x) var(--cp5-y) / var(--cp6-x) var(--cp6-y),
+    curve to var(--p1-x) var(--p1-y) with var(--cp7-x) var(--cp7-y) / var(--cp8-x) var(--cp8-y),
+    close
+  );
+
+  animation: morph-shapes linear forwards;
+  animation-timeline: scroll();
+}
+
+@keyframes morph-shapes {
+  /* Circle (0–20%) */
+  0%,
+  20% {
+    --p1-x: 50%;
+    --p1-y: 0%;
+    --p2-x: 100%;
+    --p2-y: 50%;
+    --p3-x: 50%;
+    --p3-y: 100%;
+    --p4-x: 0%;
+    --p4-y: 50%;
+
+    --cp1-x: 77.6%;
+    --cp1-y: 0%;
+    --cp2-x: 100%;
+    --cp2-y: 22.4%;
+    --cp3-x: 100%;
+    --cp3-y: 77.6%;
+    --cp4-x: 77.6%;
+    --cp4-y: 100%;
+    --cp5-x: 22.4%;
+    --cp5-y: 100%;
+    --cp6-x: 0%;
+    --cp6-y: 77.6%;
+    --cp7-x: 0%;
+    --cp7-y: 22.4%;
+    --cp8-x: 22.4%;
+    --cp8-y: 0%;
+
+    background-color: oklch(0.65 0.15 200);
+  }
+
+  /* Triangle (25–45%) — straight lines via coincident control points */
+  25%,
+  45% {
+    --p1-x: 50%;
+    --p1-y: 0%;
+    --p2-x: 100%;
+    --p2-y: 100%;
+    --p3-x: 0%;
+    --p3-y: 100%;
+    --p4-x: 50%;
+    --p4-y: 0%;
+
+    --cp1-x: 50%;
+    --cp1-y: 0%;
+    --cp2-x: 100%;
+    --cp2-y: 100%;
+    --cp3-x: 100%;
+    --cp3-y: 100%;
+    --cp4-x: 0%;
+    --cp4-y: 100%;
+    --cp5-x: 0%;
+    --cp5-y: 100%;
+    --cp6-x: 50%;
+    --cp6-y: 0%;
+    --cp7-x: 50%;
+    --cp7-y: 0%;
+    --cp8-x: 50%;
+    --cp8-y: 0%;
+
+    background-color: oklch(0.72 0.14 140);
+  }
+
+  /* Heart (50–70%) */
+  50%,
+  70% {
+    --p1-x: 50%;
+    --p1-y: 15%;
+    --p2-x: 100%;
+    --p2-y: 35%;
+    --p3-x: 50%;
+    --p3-y: 100%;
+    --p4-x: 0%;
+    --p4-y: 35%;
+
+    --cp1-x: 75%;
+    --cp1-y: 0%;
+    --cp2-x: 100%;
+    --cp2-y: 10%;
+    --cp3-x: 100%;
+    --cp3-y: 65%;
+    --cp4-x: 75%;
+    --cp4-y: 85%;
+    --cp5-x: 25%;
+    --cp5-y: 85%;
+    --cp6-x: 0%;
+    --cp6-y: 65%;
+    --cp7-x: 0%;
+    --cp7-y: 10%;
+    --cp8-x: 25%;
+    --cp8-y: 0%;
+
+    background-color: oklch(0.6 0.22 10);
+  }
+
+  /* Star / Sun (75–95%) */
+  75%,
+  95% {
+    --p1-x: 100%;
+    --p1-y: 50%;
+    --p2-x: 50%;
+    --p2-y: 0%;
+    --p3-x: 0%;
+    --p3-y: 50%;
+    --p4-x: 50%;
+    --p4-y: 100%;
+
+    --cp1-x: 85%;
+    --cp1-y: 30%;
+    --cp2-x: 70%;
+    --cp2-y: 15%;
+    --cp3-x: 30%;
+    --cp3-y: 15%;
+    --cp4-x: 15%;
+    --cp4-y: 30%;
+    --cp5-x: 15%;
+    --cp5-y: 70%;
+    --cp6-x: 30%;
+    --cp6-y: 85%;
+    --cp7-x: 70%;
+    --cp7-y: 85%;
+    --cp8-x: 85%;
+    --cp8-y: 70%;
+
+    background-color: oklch(0.8 0.16 85);
+  }
+
+  /* Back to circle (100%) */
+  100% {
+    --p1-x: 50%;
+    --p1-y: 0%;
+    --p2-x: 100%;
+    --p2-y: 50%;
+    --p3-x: 50%;
+    --p3-y: 100%;
+    --p4-x: 0%;
+    --p4-y: 50%;
+
+    --cp1-x: 77.6%;
+    --cp1-y: 0%;
+    --cp2-x: 100%;
+    --cp2-y: 22.4%;
+    --cp3-x: 100%;
+    --cp3-y: 77.6%;
+    --cp4-x: 77.6%;
+    --cp4-y: 100%;
+    --cp5-x: 22.4%;
+    --cp5-y: 100%;
+    --cp6-x: 0%;
+    --cp6-y: 77.6%;
+    --cp7-x: 0%;
+    --cp7-y: 22.4%;
+    --cp8-x: 22.4%;
+    --cp8-y: 0%;
+
+    background-color: oklch(0.65 0.15 200);
+  }
+}
+
+/* ==========================================================================
+   3. SHAPE COMMANDS REFERENCE
+
+   from <x> <y>              — starting point
+   line to <x> <y>           — straight line
+   vline to <y>              — vertical line (keeps current x)
+   hline to <x>             — horizontal line (keeps current y)
+   curve to <x> <y>
+     with <cp1x> <cp1y>      — quadratic bezier (1 control point)
+   curve to <x> <y>
+     with <cp1x> <cp1y>
+     / <cp2x> <cp2y>         — cubic bezier (2 control points)
+   arc to <x> <y> of <rx> <ry>
+     [<rotation>] [cw|ccw] [large|small]  — elliptical arc
+   close                      — close path back to start
+   ========================================================================== */
+
+/* ==========================================================================
+   4. SIMPLE HOVER MORPH — transition between shapes
+   ========================================================================== */
+
+@property --blob-r {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+.blob {
+  --blob-r: 50%;
+  inline-size: 12rem;
+  aspect-ratio: 1;
+  background: oklch(0.65 0.2 270);
+  transition: --blob-r 0.5s ease;
+
+  clip-path: shape(
+    from 50% 0%,
+    curve to 100% 50% with calc(50% + var(--blob-r)) 0% / 100% calc(50% - var(--blob-r)),
+    curve to 50% 100% with 100% calc(50% + var(--blob-r)) / calc(50% + var(--blob-r)) 100%,
+    curve to 0% 50% with calc(50% - var(--blob-r)) 100% / 0% calc(50% + var(--blob-r)),
+    curve to 50% 0% with 0% calc(50% - var(--blob-r)) / calc(50% - var(--blob-r)) 0%,
+    close
+  );
+}
+
+.blob:hover {
+  --blob-r: 30%; /* squishes into a rounded square */
+}
+
+/* ==========================================================================
+   5. RESPONSIVE NOTCHED CARD — mixing % and fixed units
+   Key advantage of shape() over path(): responsive CSS units
+   ========================================================================== */
+
+.notched-card {
+  clip-path: shape(
+    from 0% 0%,
+    line to calc(100% - 2rem) 0%,
+    line to 100% 2rem,
+    line to 100% 100%,
+    line to 0% 100%,
+    close
+  );
+  padding: 2rem;
+  background: oklch(0.95 0 0);
+}
+
+/* ==========================================================================
+   6. @supports FALLBACK
+   ========================================================================== */
+
+@supports not (clip-path: shape(from 0% 0%, line to 100% 100%, close)) {
+  .morphing-shape,
+  .blob,
+  .notched-card {
+    clip-path: none;
+    border-radius: 1rem;
+  }
+}

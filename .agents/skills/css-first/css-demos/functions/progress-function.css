@@ -1,0 +1,37 @@
+/**
+ * progress() CSS Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress
+ * Spec: https://drafts.csswg.org/css-values-5/#progress
+ * WebStatus: progress-function
+ * Baseline: 🔵 Newly Available (since 2026-09-01)
+ * Support: Chrome 138+, Firefox 155+, Safari 26+
+ * Last verified: 2026-09-25
+ *
+ * Task: Map a value between two bounds to a unitless 0–1 ratio.
+ * Why: The ratio can drive visual properties without repeating range math.
+ */
+
+/* An illustration, not an accessible data progress indicator. For actual task
+   progress, use the native <progress> element and keep its value in sync. */
+.range-demo {
+  --current-width: 40rem;
+  inline-size: var(--current-width);
+  max-inline-size: 100%;
+}
+
+.range-demo__fill {
+  inline-size: 50%; /* Usable fallback when progress() is unavailable. */
+  block-size: 0.75rem;
+  background: rebeccapurple;
+}
+
+@supports (width: calc(progress(5, 0, 10) * 100%)) {
+  .range-demo__fill {
+    /* 20rem maps to 0%, 60rem to 100%; values outside clamp by default. */
+    inline-size: calc(progress(var(--current-width), 20rem, 60rem) * 100%);
+  }
+}
+
+/* To extrapolate beyond 0–1, use progress(no-clamp VALUE, START, END).
+   All three inputs must resolve to the same type, such as <length>. */

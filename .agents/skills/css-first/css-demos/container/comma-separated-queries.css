@@ -1,0 +1,38 @@
+/**
+ * Comma-separated container queries
+ *
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Spec: https://drafts.csswg.org/css-conditional-5/
+ * Baseline: 🟣 Experimental / unknown for the comma-separated syntax
+ * Support: Chrome 150+
+ * Last verified: 2026-08-10
+ *
+ * Task: Apply one container rule when any query in a list matches.
+ */
+
+.card-shell {
+  container: card / inline-size;
+}
+
+/* Interoperable fallback: repeat the declaration in separate rules. */
+@container card (inline-size > 50rem) {
+  .card__actions {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+@container card style(--density: compact) {
+  .card__actions {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+/* Chrome 150+: one rule matches if either query is true. */
+@container card (inline-size > 50rem), style(--density: compact) {
+  .card__actions {
+    display: flex;
+    gap: 1rem;
+  }
+}

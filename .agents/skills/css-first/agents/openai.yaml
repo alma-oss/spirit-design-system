@@ -1,0 +1,4 @@
+interface:
+  display_name: 'CSS First'
+  short_description: 'Modern CSS with live Baseline guidance'
+  default_prompt: 'Use $css-first to solve this UI task with modern CSS and current Baseline data.'
