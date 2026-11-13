@@ -1,0 +1,71 @@
+name: 📣 Publish Release Notes
+
+# Runs once the release notes PR is merged, so the Canvas always shows the reviewed text
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/release-notes/*.md'
+  workflow_dispatch:
+    inputs:
+      file:
+        description: 'Release notes file to post again, e.g. docs/release-notes/2026-10-02.md'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    name: 📣 Post Slack Canvas
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      - name: Find Release Notes
+        id: files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_FILE: ${{ inputs.file }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            FILES="$INPUT_FILE"
+          else
+            # Only newly added notes are announced, so editing an old file does not post it again
+            FILES=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${{ github.event.before }}...${GITHUB_SHA}" \
+              --jq '.files[] | select(.status == "added" and (.filename | test("^docs/release-notes/[^/]+\\.md$"))) | .filename')
+          fi
+          if [ -z "$FILES" ]; then
+            echo "::notice::No new release notes in this push, nothing to post."
+          fi
+          {
+            echo "list<<EOF"
+            echo "$FILES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          PR_URL=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" --jq '.[0].html_url // empty' || true)
+          echo "pr-url=$PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Post Slack Canvas
+        if: ${{ steps.files.outputs.list != '' }}
+        env:
+          FILES: ${{ steps.files.outputs.list }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          RELEASE_NOTES_PR_URL: ${{ steps.files.outputs.pr-url }}
+        run: |
+          echo "$FILES" | while IFS= read -r FILE; do
+            test -f "$FILE" || { echo "::error::$FILE does not exist"; exit 1; }
+            yarn post-release-notes "$PWD/$FILE"
+          done
