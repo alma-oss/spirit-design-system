@@ -59,7 +59,7 @@ Use an `<img>` element inside `.File__preview` for image attachments:
 ```html
 <li class="File">
   <div class="File__preview">
-    <img src="https://picsum.photos/seed/avatar1/44/44" width="44" height="44" alt="Profile photo" />
+    <img src="path/to/avatar.jpg" width="44" height="44" alt="Profile photo" />
   </div>
   <!-- … same content and actions as above … -->
 </li>
@@ -85,7 +85,7 @@ The image can be positioned/cropped via CSS custom properties:
   "
 >
   <div class="File__preview">
-    <img src="https://picsum.photos/seed/avatar1/44/44" width="44" height="44" alt="Profile photo" />
+    <img src="path/to/avatar.jpg" width="44" height="44" alt="Profile photo" />
   </div>
   <!-- … same content and actions as above … -->
 </li>

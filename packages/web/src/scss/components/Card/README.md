@@ -160,7 +160,7 @@ To display larger images or videos, use the CardMedia subcomponent.
 ```html
 <div class="CardMedia CardMedia--auto">
   <div class="CardMedia__canvas">
-    <img src="https://via.placeholder.com/300x200" alt="" />
+    <img src="path/to/image.jpg" alt="" />
   </div>
 </div>
 ```
@@ -257,7 +257,7 @@ Available values are based on the CSS [object-fit][mdn-object-fit] property:
 ```html
 <div class="CardMedia CardMedia--auto" style="--spirit-card-media-object-fit: contain;">
   <div class="CardMedia__canvas">
-    <img src="https://via.placeholder.com/300x200" alt="" />
+    <img src="path/to/image.jpg" alt="" />
   </div>
 </div>
 ```
@@ -271,7 +271,7 @@ You can set the background color of the CardMedia container using [background co
 ```html
 <div class="CardMedia CardMedia--auto bg-primary">
   <div class="CardMedia__canvas">
-    <img src="https://via.placeholder.com/300x200" alt="" />
+    <img src="path/to/image.jpg" alt="" />
   </div>
 </div>
 ```
@@ -540,7 +540,7 @@ CardMedia image in a link:
 <div class="CardMedia CardMedia--auto">
   <div class="CardMedia__canvas">
     <a href="#" aria-hidden="true">
-      <img src="https://via.placeholder.com/300x200" alt="" />
+      <img src="path/to/image.jpg" alt="" />
     </a>
   </div>
 </div>
