@@ -4,11 +4,13 @@
 // 3. We pass the input arrows width if the input type is number.
 // 4. If the input has a size attribute, we calculate the width based on the input width, padding, border width and arrows width.
 // 5. We generate the input width based on the number of characters.
+// 6. Declare the background context so nested components and dynamic colors resolve against the container.
 
 @use '@tokens' as tokens;
 @use '../../settings/cursors';
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -157,6 +159,25 @@
     $config: theme.$variant-config
 );
 
+.InputContainer--fill {
+    @include local.set-background-color(var(--#{tokens.$css-variable-prefix}input-container-background-color)); // 6.
+
+    @media (hover: hover) {
+        &:not(.InputContainer--disabled):hover {
+            @include local.set-background-color(
+                var(--#{tokens.$css-variable-prefix}input-container-background-color-state-hover)
+            ); // 6.
+        }
+    }
+
+    &:not(.InputContainer--disabled):has(> :is(input, select, textarea):active),
+    &:not(.InputContainer--disabled):has(> :is(input, select, textarea):focus-within) {
+        @include local.set-background-color(
+            var(--#{tokens.$css-variable-prefix}input-container-background-color-state-active)
+        ); // 6.
+    }
+}
+
 @each $validation-state-name, $validation-state-value in theme.$validation-states {
     .InputContainer--#{$validation-state-name},
     .InputContainer--#{$validation-state-name}:has(> :is(input, select, textarea):focus-visible) {
@@ -165,6 +186,8 @@
 }
 
 .InputContainer--disabled {
+    @include local.set-background-color(theme.$background-color-state-disabled); // 6.
+
     color: theme.$color-state-disabled;
     border-color: theme.$border-color-state-disabled;
     background-color: theme.$background-color-state-disabled;

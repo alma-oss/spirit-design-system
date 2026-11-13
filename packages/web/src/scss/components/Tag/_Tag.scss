@@ -1,4 +1,6 @@
 // 1. This is used to stretch the element to the edges of the container.
+// 2. The resting background lives in its own custom property, so interactive tags derive their hover and active
+//    colors from it (including component color overrides) while they overwrite the local background color.
 
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
@@ -6,9 +8,13 @@
 @use '../../tools/component-radius-overrides';
 @use '../../tools/dictionaries';
 @use '../../tools/dynamic-colors';
+@use '../../tools/local';
 @use '../../tools/reset';
 @use '../../tools/typography';
 @use 'theme';
+
+// 2.
+$_background-color: var(--#{tokens.$css-variable-prefix}tag-background-color, #{color-scheme.get-background-color()});
 
 .Tag:where(button) {
     @include reset.button();
@@ -17,6 +23,10 @@
 .Tag {
     --#{tokens.$css-variable-prefix}element-stretched-inset: calc(-1 * #{theme.$border-width}); // 1.
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color(color-scheme.get-border-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-background-color($_background-color);
     @include typography.from-css-variables($infix: 'tag');
 
     position: relative;
@@ -28,10 +38,10 @@
     padding-inline: var(--#{tokens.$css-variable-prefix}tag-padding-x);
     padding-block: var(--#{tokens.$css-variable-prefix}tag-padding-y);
     text-align: center;
-    color: color-scheme.color();
+    color: local.get-color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: color-scheme.border-color();
+    border-color: local.get-border-color();
     border-start-start-radius: var(
         --#{tokens.$css-variable-prefix}tag-border-start-start-radius,
         #{theme.$border-radius}
@@ -39,7 +49,7 @@
     border-start-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-start-end-radius, #{theme.$border-radius});
     border-end-start-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-start-radius, #{theme.$border-radius});
     border-end-end-radius: var(--#{tokens.$css-variable-prefix}tag-border-end-end-radius, #{theme.$border-radius});
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
 }
 
 @include dictionaries.generate-sizes(
@@ -54,20 +64,22 @@
     background-color: transparent;
 }
 
+// 2.
 @include component-color-overrides.generate(
     $class-name: 'Tag',
     $property-map: (
         content: color,
         background: background-color,
         border: border-color,
-    )
+    ),
+    $component-properties: (background-color)
 );
 
 .Tag:is(a, button) {
-    @include dynamic-colors.background-interactive();
+    @include dynamic-colors.background-interactive($base-color: $_background-color);
 }
 
 .Tag:is(a) {
     text-decoration: none;
-    color: color-scheme.color();
+    color: local.get-color();
 }

@@ -1,7 +1,12 @@
+// 1. Declare the background context so nested components and dynamic colors resolve against the panel.
+
 @use '@tokens' as tokens;
+@use '../../tools/local';
 @use 'theme';
 
 .DrawerPanel {
+    @include local.set-background-color(theme.$panel-background-color); // 1.
+
     display: flex;
     flex-direction: column;
     box-sizing: border-box;

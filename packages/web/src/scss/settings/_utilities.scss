@@ -45,17 +45,9 @@ $utilities: (
                     neutral-subtle: tokens.$neutral-background-subtle,
                     selected-basic: tokens.$selected-background-basic,
                     selected-subtle: tokens.$selected-background-subtle,
+                    'color-scheme': color-scheme.get-background-color(),
                 )
             ),
-    ),
-    'background-color-without-custom-properties': (
-        responsive: false,
-        property: background-color,
-        class: bg,
-        generate-custom-properties: false,
-        values: (
-            'color-scheme': color-scheme.background-color(),
-        ),
     ),
     'background-gradient': (
         responsive: true,
@@ -68,7 +60,7 @@ $utilities: (
         responsive: false,
         property: border-color,
         class: border,
-        generate-custom-properties: false,
+        generate-custom-properties: true,
         values: spirit-map.merge-multiple(
                 utilities.generate-token-map(
                     $tokens-group: $accent-tokens-key,
@@ -90,9 +82,7 @@ $utilities: (
                 ),
                 (
                     basic: tokens.$border-basic,
-                ),
-                (
-                    'color-scheme': color-scheme.border-color(),
+                    'color-scheme': color-scheme.get-border-color(),
                 )
             ),
     ),
@@ -320,7 +310,7 @@ $utilities: (
         responsive: false,
         property: color,
         class: text,
-        generate-custom-properties: false,
+        generate-custom-properties: true,
         values: spirit-map.merge-multiple(
                 utilities.generate-token-map(
                     $tokens-group: $accent-tokens-key,
@@ -348,9 +338,7 @@ $utilities: (
                     neutral-subtle: tokens.$neutral-content-subtle,
                     selected-basic: tokens.$selected-content-basic,
                     selected-subtle: tokens.$selected-content-subtle,
-                ),
-                (
-                    'color-scheme': color-scheme.color(),
+                    'color-scheme': color-scheme.get-color(),
                 )
             ),
     ),

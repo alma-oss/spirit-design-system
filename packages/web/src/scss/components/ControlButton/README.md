@@ -64,14 +64,14 @@ using the [dynamic color system][dynamic-color]:
 
 This works with any available color scheme.
 
-ControlButton reads these values from the active color scheme:
+ControlButton reads these values from the active color scheme and surface context:
 
 - **content color** (`--spirit-local-color`) — the icon and text color
-- **background color** (`--spirit-local-background-color`) — visible with the `ControlButton--hasBackground` modifier
+- **background color** (`--spirit-local-background-color`) — the effective current background of the parent surface (including interactive hover/active states), visible with the `ControlButton--hasBackground` modifier
 - **subtle border color** (`--spirit-local-border-color-subtle`) — visible with the `dynamic-color-border` helper
 
 ControlButton always uses the **subtle** border color so the border stands out on a basic background, and it
-**computes** the interactive (hover and active) state colors from the background color instead of reading them from
+**computes** the interactive (hover and active) state colors from the effective `--spirit-local-background-color` instead of reading them from
 the scheme.
 
 ## Variants
@@ -81,7 +81,7 @@ the scheme.
 Add the `ControlButton--hasBackground` modifier class to the button to make
 the background visible in the default state. The modifier class reads the
 `--spirit-local-background-color` CSS variable which is provided by the active
-color scheme (e.g. a `color-scheme-on-*` class).
+surface context (e.g. a `color-scheme-on-*` class, a surface component, or a `bg-*` utility).
 
 ```html
 <button

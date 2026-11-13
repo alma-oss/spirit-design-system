@@ -1,4 +1,6 @@
-@use '@tokens' as tokens;
+// 1. Declare the background context so nested components and dynamic colors resolve against the row.
+
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
@@ -50,10 +52,14 @@
 }
 
 .UNSTABLE_Table--striped tbody tr:nth-child(odd) {
+    @include local.set-background-color(theme.$background-color-striped); // 1.
+
     background-color: theme.$background-color-striped;
 }
 
 .UNSTABLE_Table--hoverable tbody tr:hover {
+    @include local.set-background-color(theme.$background-color-striped); // 1.
+
     background-color: theme.$background-color-striped;
 }
 

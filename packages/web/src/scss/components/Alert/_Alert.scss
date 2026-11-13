@@ -2,12 +2,17 @@
 @use '../../tools/color-scheme';
 @use '../../tools/component-color-overrides';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/typography';
 @use 'theme';
 
 .Alert {
     --#{tokens.$css-variable-prefix}icon-composition-size: #{theme.$icon-size};
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color(color-scheme.get-border-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-background-color(color-scheme.get-background-color());
     @include typography.generate(theme.$typography);
 
     display: grid;
@@ -16,12 +21,12 @@
     justify-content: flex-start;
     width: 100%;
     padding: theme.$padding;
-    color: color-scheme.color();
+    color: local.get-color();
     border-width: theme.$border-width;
     border-style: theme.$border-style;
-    border-color: color-scheme.border-color();
+    border-color: local.get-border-color();
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
 }
 
 .Alert--center {

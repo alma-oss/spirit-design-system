@@ -9,6 +9,7 @@
 @use '@tokens' as tokens;
 @use '../../tools/color-scheme';
 @use '../../tools/component-radius-overrides';
+@use '../../tools/local';
 @use '../../tools/placement';
 @use '../../tools/svg';
 @use '../../tools/typography';
@@ -21,6 +22,9 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     --tooltip-max-width: #{theme.$max-width};
     --#{$_tooltip-placement-prefix}-offset: #{theme.$arrow-height};
 
+    @include local.set-color(color-scheme.get-color());
+    @include local.set-border-color-subtle(color-scheme.get-border-color-subtle());
+    @include local.set-background-color(color-scheme.get-background-color());
     @include placement.child(2); // 3.
     @include placement.child-controlled($prefix: $_tooltip-placement-prefix, $offset: theme.$arrow-height);
     @include typography.generate(theme.$typography);
@@ -31,9 +35,9 @@ $_tooltip-placement-prefix: '#{tokens.$css-variable-prefix}placement';
     text-align: left;
     white-space: normal;
     word-break: normal;
-    color: color-scheme.color();
+    color: local.get-color();
     border-radius: theme.$border-radius;
-    background-color: color-scheme.background-color();
+    background-color: local.get-background-color();
     box-shadow: theme.$box-shadow;
     word-wrap: break-word;
 
