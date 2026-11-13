@@ -1,8 +1,8 @@
 name: 🎯 Affected
 
 # Computes which apps are affected by the current change, using Nx's project graph, and decides whether the
-# deploy → e2e chain should run. The outputs let downstream jobs run only for what changed. Today only the
-# deploy → e2e chain gates on `e2e`; the `build` job still builds every app.
+# deploy → e2e chain should run. The outputs let downstream jobs run only for what changed: the `build` job builds
+# only the affected apps and the deploy → e2e chain gates on `e2e`.
 #
 # The deploy and E2E tests run (`e2e`) when:
 #   - the commit is on `main` (always: the deploy there is the production one, so it is never skipped)
