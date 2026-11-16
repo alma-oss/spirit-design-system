@@ -1,7 +1,7 @@
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 import {
   assertNoA11yViolations,
-  getWCAG2AAConfig,
+  getWcagConfig,
   retryPageGoto,
   waitForPageLoad,
   WEB_REACT_COMPONENTS_URI,
@@ -11,7 +11,7 @@ import { test } from '../../helpers/fixtures';
 
 test.describe('Modal Accessibility', () => {
   const testUrl = normalizeUrl(WEB_REACT_SERVER_URL, WEB_REACT_COMPONENTS_URI, 'Modal');
-  const a11yConfig = getWCAG2AAConfig();
+  const a11yConfig = getWcagConfig();
 
   test('Modal component (closed state) has no a11y violations', async ({ page, pageRetries }) => {
     await retryPageGoto(page, testUrl, { retries: pageRetries });

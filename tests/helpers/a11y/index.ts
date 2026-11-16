@@ -9,7 +9,7 @@ export type {
 
 export { IMPACT_BADGES } from './types';
 
-export { getCommonExclusions, getWCAG2AAConfig } from './config';
+export { getCommonExclusions, getWcagConfig } from './config';
 
 export { formatViolations, formatNode, formatViolationError, getImpactBadge } from './formatters';
 

@@ -28,7 +28,7 @@ By default, it is **visually hidden** and becomes visible when focused via keybo
 
 - To allow **keyboard and screen reader users** to bypass repetitive blocks of content (like a navigation bar, banners, or tables) and reach the main content quickly.
 
-- To comply with [**WCAG 2.0 Guideline 2.4.1 – Bypass Blocks**](https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html).
+- To comply with [**WCAG 2.2 Guideline 2.4.1 – Bypass Blocks**](https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html).
 
 - In applications or websites with **complex layouts** or **long navigation menus**.
 
