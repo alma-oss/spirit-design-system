@@ -8,7 +8,7 @@ category: spirit
 
 Decide, with evidence, whether a Jira issue can be accepted. Read the acceptance criteria, find the implementing PR and the deployment it runs on, verify every criterion by observing the deployed behaviour, report a verdict per criterion, and — only after the user approves — write the result back to Jira and transition the issue.
 
-The skill is tool-agnostic: wherever it says "ask the user", "get the issue", or "open the page in a browser", use whatever your environment provides (MCP server, CLI, REST, built-in browser). Every MCP step has a CLI or REST fallback in [`references/verification-recipes.md`](references/verification-recipes.md).
+Jira goes through the Atlassian MCP (`almacareer.atlassian.net`); no API token is needed. For GitHub and the browser the skill is tool-agnostic: wherever it says "ask the user" or "open the page in a browser", use whatever your environment provides (MCP server, CLI, built-in browser). The operations and their fallbacks are in [`references/verification-recipes.md`](references/verification-recipes.md).
 
 ## Principles
 
@@ -30,14 +30,13 @@ Process issues one at a time. With several keys (`DS-2831 DS-2774`), finish Step
 ### Step 0: Preflight
 
 - Parse every argument matching `[A-Z]+-\d+` (bare keys or `https://almacareer.atlassian.net/browse/<KEY>` URLs).
-- Check Jira access by getting the first issue. Use the Jira MCP if available; otherwise REST with `JIRA_PERSONAL_TOKEN` (see recipes).
-  - If every Jira call fails with a generic error, tell the user to connect to the company VPN.
-  - If the user recently changed the Jira token, some MCP clients only pick it up after a restart — say so.
+- Check Jira access by getting the first issue with the Atlassian MCP (`getJiraIssue`).
+  - If the call fails with an authentication error, tell the user to sign in to the Atlassian MCP again.
 - Check GitHub access: a GitHub MCP, or `gh auth status`. If one of them fails (401, 404), switch to the other — see recipes.
 
 ### Step 1: Read the Ticket and Set Expectations
 
-Get the issue with all fields and up to 50 comments. Then:
+Get the issue with all fields (`getJiraIssue`, `view: "evidence"`) and its comments with `listJiraIssueComments`. Then:
 
 1. Extract the bullets under the `Acceptance criteria` heading.
    - No acceptance criteria → stop and ask the user what to verify against.
@@ -152,9 +151,9 @@ Report to the user in two parts, separated by a `─` divider line.
 
 1. Draft the comment from [`references/jira-comment-template.md`](references/jira-comment-template.md) — the pass template for ACCEPT / CLARIFY, the decline template for DECLINE.
 2. Show the exact comment text, the screenshots to attach, the transition to apply, and — for ACCEPT on a Spirit issue with a PR — the PR label to add. Ask the user to choose: **post comment + transition** (+ label for ACCEPT), **post comment only**, or **skip**. CLARIFY offers only **post comment only** or **skip**.
-3. Attach screenshots first with [`scripts/jira-attach.sh`](scripts/jira-attach.sh). It needs `JIRA_PERSONAL_TOKEN` in the environment. If it isn't set, ask the user to provide it the way they normally store secrets. If the token is missing or an upload fails, drop the "Screenshots attached" line from the draft, show the revised comment, and get approval again before posting — comments cannot be edited.
-4. Post the comment. Then **re-fetch the issue comments** and read the stored body — the write response is not reliable. If formatting is garbled, tell the user; comments cannot be edited, only re-posted.
-5. Transition: list the issue's available transitions, pick the one **named** `Accept` (ACCEPT) or `Deny` (DECLINE) — never by a hard-coded id — apply it, then re-fetch the status and report it.
+3. Attach screenshots first with `uploadAttachmentToJiraIssue` (not a primary tool — `discover` it and run it via `executeWrite`): call it with `filePath` to get an `uploadCommand`, run that command from your shell to obtain a `fileId`, then call it again with the `fileId` to attach the file. If an upload fails, drop the "Screenshots attached" line from the draft, show the revised comment, and get approval again before posting.
+4. Post the comment with `addOrEditJiraIssueComment` and `contentFormat: "html"` (Jira Cloud stores ADF; see the template). Then **re-fetch the comments** with `listJiraIssueComments` (`responseContentFormat: "html"`) and read the stored body — the write response is not a reliable check. If the formatting is garbled, tell the user and correct it in place by calling `addOrEditJiraIssueComment` with the `commentId` and the full corrected body.
+5. Transition: list the issue's transitions with `listJiraIssueTransitions` (not a primary tool — run it via `executeRead`), pick the one **named** `Accept` (ACCEPT) or `Deny` (DECLINE) — never by a hard-coded id — apply it with `transitionJiraIssue`, then re-fetch the status and report it.
 6. Label the PR (ACCEPT only, after the transition succeeded and the user approved it): add the `jira-accepted` label to the implementing PR, then re-read the PR labels and report them. The label already exists in the repository ("Issue is accepted in Jira"); if it does not, tell the user instead of creating it. Skip this step when no PR was found or the issue is not a Spirit one. Do not add the label for CLARIFY or DECLINE. The commands are in [`references/verification-recipes.md`](references/verification-recipes.md#github).
 
 ---
