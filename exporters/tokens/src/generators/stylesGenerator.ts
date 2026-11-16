@@ -25,7 +25,8 @@ import {
   sortTokens,
   tokenVariableName,
 } from '../helpers/tokenHelper';
-import { type FontSizeBaseMap, createDefaultFontSizeBaseMap } from '../helpers/unitHelper';
+import { createDefaultFontSizeBaseMap } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 import {
   processNumericToken,
   processBorderToken,

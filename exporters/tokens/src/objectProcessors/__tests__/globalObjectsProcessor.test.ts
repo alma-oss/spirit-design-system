@@ -1,4 +1,4 @@
-import type { StylesObjectType } from '../../generators/stylesObjectGenerator';
+import type { StylesObjectType } from '../../core/types';
 import {
   addGlobalColorsToStylesObject,
   addGlobalTypographyToStylesObject,

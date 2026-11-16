@@ -1,5 +1,5 @@
 import { COLOR_JS_SUFFIX, COLOR_KEY, COLOR_SCSS_SUFFIX, TYPOGRAPHY_KEY } from '../constants';
-import type { StylesObjectType } from '../generators/stylesObjectGenerator';
+import type { StylesObjectType } from '../core/types';
 
 export const parseGroupName = (colorVariable: string, hasJsOutput: boolean) => {
   const suffix = hasJsOutput ? COLOR_JS_SUFFIX : COLOR_SCSS_SUFFIX;

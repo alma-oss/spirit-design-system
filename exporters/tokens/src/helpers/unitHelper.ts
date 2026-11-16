@@ -1,29 +1,26 @@
-// TODO: `Unit` is used as a runtime value (e.g. `Unit.pixels`), so it cannot be imported as `type Unit` (TS1361).
-//  Replace it with our own unit type/constants in a follow-up, so that the import can become type-only.
-import { DimensionToken, FontSizeToken, Token, TokenType, Unit } from '@supernovaio/sdk-exporters';
+import { DimensionToken, FontSizeToken, Token, TokenType } from '@supernovaio/sdk-exporters';
 import { FONT_SIZE_BASE, FONT_SIZE_BASE_DEFAULT, PX_UNIT } from '../constants';
 import { getDeviceAlias } from './deviceHelpers';
 import { pxToRem } from '../converters/pxToRem';
-import type { NumberValue } from '../core/types';
+import { type NumberValue, SOURCE_UNIT } from '../core/types';
+import type { FontSizeBaseMap } from './types';
 
-export type FontSizeBaseMap = Map<string, number>;
-
-const UNIT_TO_CSS: Partial<Record<Unit, string>> = {
-  [Unit.percent]: '%',
-  [Unit.pixels]: PX_UNIT,
-  [Unit.rem]: 'rem',
-  [Unit.raw]: '',
-  [Unit.ms]: 'ms',
+const UNIT_TO_CSS: Record<string, string> = {
+  [SOURCE_UNIT.percent]: '%',
+  [SOURCE_UNIT.pixels]: PX_UNIT,
+  [SOURCE_UNIT.rem]: 'rem',
+  [SOURCE_UNIT.raw]: '',
+  [SOURCE_UNIT.ms]: 'ms',
 };
 
 /**
- * Converts a Supernova unit enum value (e.g. `Unit.pixels`) to the CSS unit string (e.g. "px").
+ * Converts a source unit name (e.g. Supernova's `Unit.pixels`, "Pixels") to the CSS unit string (e.g. "px").
  * An unknown unit falls back to `px`, the same way Supernova's own `CSSHelper.unitToCSS` did.
  *
- * @param unit - Supernova unit
+ * @param unit - Source unit name, see `SOURCE_UNIT`
  * @returns {string} CSS unit, an empty string for a raw (unit-less) value
  */
-export const unitToCss = (unit: Unit): string => UNIT_TO_CSS[unit] ?? PX_UNIT;
+export const unitToCss = (unit: string): string => UNIT_TO_CSS[unit] ?? PX_UNIT;
 
 /**
  * Creates a default FontSizeBaseMap with the same value for all breakpoints.

@@ -1,5 +1,5 @@
 import { TokenType } from '@supernovaio/sdk-exporters';
-import type { UnitFormatRule } from '../formatters/unitFormatter';
+import type { UnitFormatRule } from '../formatters/types';
 
 /**
  * Unit formatting / conversion rules.

@@ -1,5 +1,6 @@
 import { TokenType } from '@supernovaio/sdk-exporters';
-import { formatUnitValue, replacePxWithRem, type UnitFormatContext, type UnitFormatRule } from '../unitFormatter';
+import { formatUnitValue, replacePxWithRem } from '../unitFormatter';
+import type { UnitFormatRule, UnitFormatContext } from '../types';
 import { FONT_SIZE_BASE_DEFAULT } from '../../constants';
 
 const tokenStub = {} as unknown as UnitFormatContext['token'];

@@ -4,7 +4,8 @@ import type { TokenValue } from '../../core/types';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens, expectedTypographyValue } from '../../../tests/fixtures/exampleTypographyTokens';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
-import { typographyValue } from '../typographyHelper';
+import { formatTypographyStyle } from '../../formatters/typographyFormatter';
+import { formatTypographyName, getBreakpoint, typographyStyle } from '../typographyHelper';
 
 jest.mock('../../../config', () => ({
   exportConfiguration: sampleConfigurationDefault,
@@ -31,10 +32,13 @@ const typographyModel = ({
 });
 
 describe('typographyHelper', () => {
-  describe('typographyValue', () => {
+  describe('typographyStyle', () => {
     it('should return the expected typography value', () => {
       const mockedToken: TypographyToken = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
-      const tokenValue = typographyValue(mapToken(mockedToken, exampleGroups)!.value, true, false);
+      const tokenValue = formatTypographyStyle(
+        typographyStyle(mapToken(mockedToken, exampleGroups)!.value, true),
+        false,
+      );
 
       expect(tokenValue).toBe(expectedTypographyValue);
     });
@@ -61,9 +65,11 @@ describe('typographyHelper', () => {
         expectedLineHeight: '1',
       },
     ])('should format line-height as $expectedLineHeight', ({ fontSize, lineHeight, expectedLineHeight }) => {
-      const tokenValue = typographyValue(
-        typographyModel({ fontSize: pixels(fontSize), lineHeight: pixels(lineHeight), fontWeight: 'Regular' }),
-        false,
+      const tokenValue = formatTypographyStyle(
+        typographyStyle(
+          typographyModel({ fontSize: pixels(fontSize), lineHeight: pixels(lineHeight), fontWeight: 'Regular' }),
+          false,
+        ),
         false,
       );
 
@@ -78,9 +84,36 @@ describe('typographyHelper', () => {
       { fontWeight: 'Extra Light', expectedFontWeight: 200 },
       { fontWeight: '500', expectedFontWeight: 500 },
     ])('should format font-weight "$fontWeight" as $expectedFontWeight', ({ fontWeight, expectedFontWeight }) => {
-      const tokenValue = typographyValue(typographyModel({ fontSize: pixels(16), fontWeight }), false, false);
+      const tokenValue = formatTypographyStyle(
+        typographyStyle(typographyModel({ fontSize: pixels(16), fontWeight }), false),
+        false,
+      );
 
       expect(tokenValue).toContain(`font-weight: ${expectedFontWeight}`);
+    });
+  });
+
+  describe('getBreakpoint', () => {
+    it('should return correct breakpoint if tokenNameParts has 4 items', () => {
+      expect(getBreakpoint(['heading', 'desktop', 'xLarge', 'bold'])).toBe('desktop');
+    });
+
+    it('should return correct breakpoint if tokenNameParts has less than 4 items', () => {
+      expect(getBreakpoint(['Heading', 'Desktop', 'XLarge'])).toBe('mobile');
+    });
+  });
+
+  describe('formatTypographyName', () => {
+    it('should return correct typography name', () => {
+      const tokenNameParts = ['heading', 'desktop', 'xLarge', 'bold'];
+
+      expect(formatTypographyName(tokenNameParts)).toBe('heading-xLarge-bold');
+    });
+
+    it('should return correct typography name if tokenNameParts has less than 4 items', () => {
+      const tokenNameParts = ['heading', 'desktop', 'xLarge'];
+
+      expect(formatTypographyName(tokenNameParts)).toBe('heading-desktop-xLarge');
     });
   });
 });

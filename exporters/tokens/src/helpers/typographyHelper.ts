@@ -1,24 +1,16 @@
 import { exportConfiguration } from '../../config';
 import { readTypography } from '../core/typography';
 import type { NumberValue, TokenIndex, TokenValue } from '../core/types';
-import { DEFAULT_DECIMALS, FONT_SIZE_BASE_DEFAULT, TYPOGRAPHY_SUBSTITUTE_FONT } from '../constants';
+import type { TypographyStyle } from '../formatters/types';
 import {
-  passObjectKeyValueToCallback,
-  jsKeyValueTemplate,
-  jsObjectTemplate,
-  scssKeyValueTemplate,
-  scssObjectTemplate,
-} from './objectHelper';
+  DEFAULT_DECIMALS,
+  FONT_SIZE_BASE_DEFAULT,
+  FONT_WEIGHT_NAME_TO_NUMBER,
+  TYPOGRAPHY_SUBSTITUTE_FONT,
+} from '../constants';
+import { roundToDecimals } from './numberHelper';
 import { replaceByConfiguration } from './stringHelper';
 import { isPxValue, makeRelativeUnit } from './unitHelper';
-
-type TypographyShape = {
-  fontFamily: string;
-  fontSize: string;
-  fontStyle: string;
-  fontWeight: string | number;
-  lineHeight?: string | number;
-};
 
 /**
  * Replaces the font family name with a modified version including a substitute font.
@@ -34,23 +26,10 @@ const replaceFontName = (fontFamily: string): string => {
   return replaceByConfiguration(exportConfiguration, `'${fontFamily}', ${TYPOGRAPHY_SUBSTITUTE_FONT}`, 'Font');
 };
 
-const FONT_WEIGHT_MAP: Record<string, number> = {
-  thin: 100,
-  extralight: 200,
-  light: 300,
-  normal: 400,
-  regular: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700,
-  extrabold: 800,
-  black: 900,
-};
-
 const normalizeFontWeight = (fontWeightText: string): number | string => {
   const normalizedText = fontWeightText.trim().toLowerCase();
   const normalizedWithoutItalic = normalizedText.replace(/\s*italic$/i, '');
-  const mappedValue = FONT_WEIGHT_MAP[normalizedWithoutItalic.replace(/[\s_-]+/g, '')];
+  const mappedValue = FONT_WEIGHT_NAME_TO_NUMBER[normalizedWithoutItalic.replace(/[\s_-]+/g, '')];
 
   if (mappedValue) {
     return mappedValue;
@@ -84,35 +63,34 @@ const fontSizeValue = (fontSize: NumberValue | undefined, baseFontSize: number):
  */
 const unitlessLineHeight = (fontSize?: NumberValue, lineHeight?: NumberValue): string | undefined =>
   isPxValue(fontSize) && isPxValue(lineHeight) && fontSize.value > 0 && lineHeight.value
-    ? parseFloat((lineHeight.value / fontSize.value).toFixed(DEFAULT_DECIMALS)).toString()
+    ? roundToDecimals(lineHeight.value / fontSize.value, DEFAULT_DECIMALS).toString()
     : undefined;
 
 /**
- * Renders a typography value of the internal token model as an SCSS map or a JS object.
+ * Builds a format-agnostic typography style from a typography value of the internal token model.
  *
  * Works on the model only (see `core/typography.ts`), so it does not depend on a source's own typography token.
  * The font family replacement comes from the exporter configuration, whatever the source.
+ * Rendering to SCSS or JS is up to the formatter (see `formatters/typographyFormatter.ts`).
  *
  * @param value - A typography composite value
  * @param isItalic - Whether the style is italic by its name
- * @param hasJsOutput - JS object instead of SCSS map
  * @param baseFontSize - Font size base to convert `px` to `rem` with, 0 keeps `px`
  * @param index - View of the tokens references point into, only needed for references the source did not resolve
  */
-export const typographyValue = (
+export const typographyStyle = (
   value: TokenValue,
   isItalic: boolean,
-  hasJsOutput: boolean,
   baseFontSize: number = FONT_SIZE_BASE_DEFAULT,
   index?: TokenIndex,
-): string => {
+): TypographyStyle => {
   const { fontFamily, fontSize, fontWeight, lineHeight } = readTypography(value, index);
   const fontName = replaceFontName(fontFamily);
   const italicFromWeight = fontWeight.toLowerCase().includes('italic');
   const fontWeightValue = normalizeFontWeight(fontWeight);
   const lineHeightValue = unitlessLineHeight(fontSize, lineHeight);
 
-  const typographyObject: TypographyShape = {
+  const style: TypographyStyle = {
     fontFamily: `${fontName}`,
     fontSize: fontSizeValue(fontSize, baseFontSize),
     fontStyle: `'${isItalic || italicFromWeight ? 'italic' : 'normal'}'`,
@@ -120,11 +98,28 @@ export const typographyValue = (
   };
 
   if (lineHeightValue !== undefined) {
-    typographyObject.lineHeight = lineHeightValue;
+    style.lineHeight = lineHeightValue;
   }
 
-  const baseStyles = passObjectKeyValueToCallback<TypographyShape>(typographyObject, scssKeyValueTemplate);
-  const baseJsStyles = passObjectKeyValueToCallback<TypographyShape>(typographyObject, jsKeyValueTemplate);
+  return style;
+};
 
-  return hasJsOutput ? jsObjectTemplate(baseJsStyles) : scssObjectTemplate(baseStyles);
+/**
+ * Name of a typography style made of the token name parts, without the breakpoint part (if present).
+ *
+ * @param tokenNameParts
+ */
+export const formatTypographyName = (tokenNameParts: string[]): string => {
+  return tokenNameParts.length === 4
+    ? tokenNameParts.filter((_, index) => index !== 1).join('-')
+    : tokenNameParts.join('-');
+};
+
+/**
+ * Breakpoint of a typography style from the token name parts, `mobile` when the name has none.
+ *
+ * @param tokenNameParts
+ */
+export const getBreakpoint = (tokenNameParts: string[]): string => {
+  return tokenNameParts.length === 4 ? tokenNameParts[1] : 'mobile';
 };

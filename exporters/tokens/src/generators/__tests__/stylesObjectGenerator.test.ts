@@ -14,8 +14,8 @@ import { filterExcludedTokens } from '../../filters/excludedTokens';
 import {
   createStylesObjectStructureFromTokenNameParts,
   generateStylesObjectFromTokens,
-  StylesObjectType,
 } from '../stylesObjectGenerator';
+import type { StylesObjectType } from '../../core/types';
 import {
   colorGroupsReducer,
   createGlobalColorsObject,

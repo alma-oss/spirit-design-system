@@ -1,7 +1,8 @@
 import { Token, TokenType } from '@supernovaio/sdk-exporters';
-import { StylesObjectType } from '../generators/stylesObjectGenerator';
+import type { StylesObjectType } from '../core/types';
 import { handleInvariantTokenAlias } from './specialCaseHelper';
-import { removePairQuotes, toCamelCase, toKebabCase, toPlural } from './stringHelper';
+import type { KeyValueTemplateCallback } from './types';
+import { toCamelCase, toPlural } from './stringHelper';
 import { COLOR_SCSS_SUFFIX } from '../constants';
 
 export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType): StylesObjectType => {
@@ -78,16 +79,6 @@ export const convertToJs = (obj: StylesObjectType): string => {
     .slice(0, -1);
 };
 
-export const formatTypographyName = (tokenNameParts: string[]): string => {
-  return tokenNameParts.length === 4
-    ? tokenNameParts.filter((_, index) => index !== 1).join('-')
-    : tokenNameParts.join('-');
-};
-
-export const getBreakpoint = (tokenNameParts: string[]): string => {
-  return tokenNameParts.length === 4 ? tokenNameParts[1] : 'mobile';
-};
-
 export const getTokenAlias = (token: Token, hasJsOutput: boolean): string => {
   let alias;
   const numericPart = token.name.match(/\d+/)?.[0];
@@ -112,35 +103,13 @@ export const normalizeFirstNamePart = (part: string, tokenType: TokenType, hasJs
   return hasJsOutput ? toPlural(part.toLowerCase()) : `$${toPlural(part.toLowerCase())}`;
 };
 
-export const jsObjectTemplate = (strings: string[]) => `{
-${strings.join(',\n')},
-}`;
-
-export const scssObjectTemplate = (strings: string[]) => `(
-${strings.join(',\n')},
-)`;
-
-export type KeyValueTemplateCallback = (key: string, value: string | number) => string;
-
-export const jsKeyValueTemplate: KeyValueTemplateCallback = (key, value) => {
-  return `${key}: ${/\s/.test(value as string) ? `"${value}"` : value}`;
-};
-
-export const scssKeyValueTemplate: KeyValueTemplateCallback = (key, value) => {
-  const formattedKey = toKebabCase(key);
-  let formattedValue;
-
-  if (typeof value === 'string' && value.includes(', ')) {
-    formattedValue = `"${value}"`;
-  } else if (typeof value === 'number') {
-    formattedValue = value;
-  } else {
-    formattedValue = removePairQuotes(value as string);
-  }
-
-  return `${formattedKey}: ${formattedValue}`;
-};
-
+/**
+ * Passes every defined entry of an object to the callback and collects the results. Entries with an `undefined`
+ * value are skipped.
+ *
+ * @param object
+ * @param callback
+ */
 export const passObjectKeyValueToCallback = <Shape extends Record<string, string | number | undefined>>(
   object: Shape,
   callback: KeyValueTemplateCallback,

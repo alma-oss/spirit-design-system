@@ -1,14 +1,14 @@
-import { Token, TokenTheme } from '@supernovaio/sdk-exporters';
 import { toCamelCase } from './stringHelper';
+import type { DeviceTheme, DeviceToken } from './types';
 
 /**
  * Updates the property values of each token to include the device theme.
  *
- * @param {Token[]} tokens - The array of tokens to be updated.
+ * @param {Array<object>} tokens - The array of tokens to be updated.
  * @param {string} theme - The device theme code name to be added to the token's property values.
- * @returns {Token[]} - An array of tokens with updated property values including the device theme.
+ * @returns {Array<object>} - An array of tokens with updated property values including the device theme.
  */
-const updateTokenWithDeviceTheme = (tokens: Token[], theme: string): Token[] => {
+const updateTokenWithDeviceTheme = <T extends DeviceToken>(tokens: T[], theme: string): T[] => {
   return tokens.map((token) => {
     return {
       ...token,
@@ -16,7 +16,7 @@ const updateTokenWithDeviceTheme = (tokens: Token[], theme: string): Token[] => 
         ...token.propertyValues,
         device: theme,
       },
-    } as unknown as Token;
+    } as unknown as T;
   });
 };
 
@@ -24,23 +24,25 @@ const updateTokenWithDeviceTheme = (tokens: Token[], theme: string): Token[] => 
  * Merges device-specific tokens with their corresponding themes.
  *
  * @param {Array} allDevices - An array of objects, each containing a theme and an array of device tokens.
- * @returns {Token[]} - An array of tokens with updated property values that include the device theme.
+ * @returns {Array<object>} - An array of tokens with updated property values that include the device theme.
  */
-export const getDeviceThemes = (allDevices: { theme: TokenTheme; deviceTokens: Token[] }[]): Token[] => {
+export const getDeviceThemes = <T extends DeviceToken>(
+  allDevices: { theme: DeviceTheme; deviceTokens: T[] }[],
+): T[] => {
   return allDevices.reduce((overriddenTokens, { theme, deviceTokens }) => {
     const updatedTokens = updateTokenWithDeviceTheme(deviceTokens, theme.codeName);
 
     return overriddenTokens.concat(updatedTokens);
-  }, [] as Token[]);
+  }, [] as T[]);
 };
 
 /**
  * Retrieves the device alias from a token.
  *
- * @param {Token | undefined} token - The token from which to extract the device alias.
+ * @param token - The token from which to extract the device alias.
  * @returns {string} - The device alias if present, otherwise an empty string.
  */
-export const getDeviceAlias = (token: Token | undefined): string => {
+export const getDeviceAlias = (token: DeviceToken | undefined): string => {
   return String(token?.propertyValues?.device || '');
 };
 

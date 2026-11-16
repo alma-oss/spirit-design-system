@@ -1,13 +1,21 @@
 import type { Token, TokenGroup } from '@supernovaio/sdk-exporters';
 import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 import { readTypography, readTypographyReferences, withTypographyDimensions } from '../core/typography';
-import { type NumberValue, type TokenIndex, TokenTypeEnum, type TokenValue } from '../core/types';
-import { formatTypographyName, getBreakpoint } from '../helpers/objectHelper';
+import {
+  type NumberValue,
+  type TokenIndex,
+  TokenTypeEnum,
+  type TokenValue,
+  DeviceDimensionMap,
+  DeviceDimensionEntries,
+  StylesObjectType,
+} from '../core/types';
 import { tokenVariableName } from '../helpers/tokenHelper';
-import { typographyValue } from '../helpers/typographyHelper';
-import { getFontSizeBaseForBreakpoint, isPxValue, unitToCss, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { formatTypographyStyle } from '../formatters/typographyFormatter';
+import { formatTypographyName, getBreakpoint, typographyStyle } from '../helpers/typographyHelper';
+import { getFontSizeBaseForBreakpoint, isPxValue, unitToCss } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 import { toCamelCase } from '../helpers/stringHelper';
-import type { DeviceDimensionEntries, DeviceDimensionMap, StylesObjectType } from '../generators/stylesObjectGenerator';
 
 const toNumberValue = ({ measure, unit }: DeviceDimensionEntries[string]): NumberValue => ({
   type: 'number',
@@ -223,7 +231,10 @@ export const handleTypographyTokens = (
     tokenIndex,
   );
   const renderTypography = (value: TokenValue, device: string): string | object =>
-    typographyValue(value, isItalic, hasJsOutput, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex);
+    formatTypographyStyle(
+      typographyStyle(value, isItalic, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex),
+      hasJsOutput,
+    );
 
   if (tokenNameParts.length === 0) {
     return;

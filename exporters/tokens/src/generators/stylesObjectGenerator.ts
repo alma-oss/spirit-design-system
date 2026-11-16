@@ -1,28 +1,15 @@
-import { Token, TokenGroup, TokenType, Unit } from '@supernovaio/sdk-exporters';
-import type { TokenIndex } from '../core/types';
+import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+import type { DeviceDimensionMap, StylesObjectType, TokenIndex } from '../core/types';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { deepMergeObjects } from '../helpers/objectHelper';
 import { sortTokens } from '../helpers/tokenHelper';
-import type { FontSizeBaseMap } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 import {
   handleNonTypographyTokens,
   handleTypographyTokens,
   addGlobalColorsToStylesObject,
   addGlobalTypographyToStylesObject,
 } from '../objectProcessors';
-
-export type StylesObjectType = { [key: string]: (string | object) & { moveToTheEnd?: string } };
-
-export type DeviceTypographyUnit = Unit.pixels | Unit.percent | Unit.rem;
-
-export type DeviceDimensionValue = {
-  measure: number;
-  unit: DeviceTypographyUnit;
-};
-
-export type DeviceDimensionEntries = Record<string, DeviceDimensionValue>;
-
-export type DeviceDimensionMap = Map<string, DeviceDimensionEntries>;
 
 export const createStylesObjectStructureFromTokenNameParts = (
   token: Token,

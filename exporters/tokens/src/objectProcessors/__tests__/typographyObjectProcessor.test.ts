@@ -2,7 +2,7 @@ import { Token, TokenGroup, TypographyToken, Unit } from '@supernovaio/sdk-expor
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
-import type { DeviceDimensionMap, StylesObjectType } from '../../generators/stylesObjectGenerator';
+import type { DeviceDimensionMap, StylesObjectType } from '../../core/types';
 import { handleTypographyTokens } from '../typographyObjectProcessor';
 
 const tokenGroups: Array<TokenGroup> = exampleGroups;

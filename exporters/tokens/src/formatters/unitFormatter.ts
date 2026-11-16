@@ -1,20 +1,7 @@
-import { Token, TokenType } from '@supernovaio/sdk-exporters';
 import { PX_UNIT } from '../constants';
 import { pxToRem } from '../converters/pxToRem';
 import { UNIT_FORMAT_RULES } from '../config/unitFormatConfig';
-
-export type UnitFormatContext = {
-  token: Token;
-  tokenType: TokenType;
-  baseFontSize: number;
-  isFontSizeBaseToken: boolean;
-};
-
-export type UnitFormatRule = {
-  tokenTypes: TokenType[];
-  shouldConvert: (ctx: UnitFormatContext) => boolean;
-  converterNames: Array<'pxToRem'>;
-};
+import type { UnitFormatContext, UnitFormatRule } from './types';
 
 export const DEFAULT_UNIT_RULES: UnitFormatRule[] = UNIT_FORMAT_RULES;
 

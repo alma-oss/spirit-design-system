@@ -6,17 +6,18 @@ import {
   exampleTypographyTokens,
   expectedTypographyWithFontReplacement,
 } from '../../../tests/fixtures/exampleTypographyTokens';
-import { typographyValue } from '../typographyHelper';
+import { formatTypographyStyle } from '../../formatters/typographyFormatter';
+import { typographyStyle } from '../typographyHelper';
 
 // Mocks the Supernova sample configuration with populated data
 jest.mock('../../../config', () => ({
   exportConfiguration: sampleConfiguration,
 }));
 
-describe('typographyValue with override config', () => {
+describe('typographyStyle with override config', () => {
   it('should return the renamed font and substitute font', () => {
     const mockedToken: TypographyToken = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
-    const tokenValue = typographyValue(mapToken(mockedToken, exampleGroups)!.value, true, false);
+    const tokenValue = formatTypographyStyle(typographyStyle(mapToken(mockedToken, exampleGroups)!.value, true), false);
 
     expect(tokenValue).toBe(expectedTypographyWithFontReplacement);
   });

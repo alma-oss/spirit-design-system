@@ -8,8 +8,8 @@ import {
   makeRelativeUnit,
   replacePxWithRemUnits,
   unitToCss,
-  type FontSizeBaseMap,
 } from '../unitHelper';
+import type { FontSizeBaseMap } from '../types';
 
 describe('unitHelper', () => {
   describe('createDefaultFontSizeBaseMap', () => {

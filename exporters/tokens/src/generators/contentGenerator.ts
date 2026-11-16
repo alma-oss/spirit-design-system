@@ -1,16 +1,17 @@
 import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
 // TODO: Remove together with the Supernova imports above, `createTokenIndex(collection.tokens)` replaces it.
 import { createSupernovaTokenIndex } from '../adapters/supernova/tokenIndex';
-import type { TokenIndex } from '../core/types';
+import type { TokenIndex, DeviceDimensionMap, StylesObjectType } from '../core/types';
 import { FileData } from '../config/fileConfig';
 import { indentAndFormat } from '../formatters/stylesFormatter';
 import { convertToJs, convertToScss, deepMergeObjects } from '../helpers/objectHelper';
 import { generateCssVariableReferencesFromTokens, generateStylesFromTokens } from './stylesGenerator';
-import { DeviceDimensionMap, type StylesObjectType, generateStylesObjectFromTokens } from './stylesObjectGenerator';
+import { generateStylesObjectFromTokens } from './stylesObjectGenerator';
 import { findTokenPrefix } from '../helpers/findTokenPrefix';
 import { filterExcludedTokens } from '../filters/excludedTokens';
 import { generateMixinFromTokens } from './mixinGenerator';
-import { getFontSizeBaseMap, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { getFontSizeBaseMap } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 import { getTokenGroup } from '../helpers/tokenHelper';
 import { filterCollections } from '../helpers/collectionsHelper';
 

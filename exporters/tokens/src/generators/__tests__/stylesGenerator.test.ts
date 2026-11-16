@@ -22,7 +22,7 @@ import {
   generateStylesFromTokens,
   tokenToStyleByType,
 } from '../stylesGenerator';
-import { type FontSizeBaseMap } from '../../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../../helpers/types';
 
 const tokenIndex = createTokenIndex([]);
 const tokenGroups: Array<TokenGroup> = exampleGroups;

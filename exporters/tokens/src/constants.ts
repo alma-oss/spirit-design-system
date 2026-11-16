@@ -6,6 +6,22 @@ export const DEFAULT_DECIMALS = 4;
 export const DEVICES_DIRECTORY = 'devices';
 export const FONT_SIZE_BASE = 'font-size-base';
 export const FONT_SIZE_BASE_DEFAULT = 16;
+/**
+ * Standard CSS / OpenType names of the font weights and the numbers they stand for. Not exporter defaults, just the
+ * lookup that turns a weight name used by a source (e.g. `Semi Bold`) into the numeric `font-weight`.
+ */
+export const FONT_WEIGHT_NAME_TO_NUMBER: Record<string, number> = {
+  thin: 100,
+  extralight: 200,
+  light: 300,
+  normal: 400,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
+};
 export const GLOBAL_DIRECTORY = 'global-tokens';
 export const JS_DIRECTORY = 'js';
 export const JS_INDENTATION = '  ';
