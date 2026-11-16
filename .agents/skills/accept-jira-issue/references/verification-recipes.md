@@ -4,31 +4,22 @@ Concrete commands for each step, with fallbacks for environments without a given
 
 ## Jira
 
-Base URL: `https://jira.almacareer.tech` (on-prem, requires company VPN).
+Site: `almacareer.atlassian.net` (Atlassian Cloud), reached through the Atlassian MCP. No API token is needed. Operations that are not primary tools run through `executeRead` / `executeWrite` with `cloudId: almacareer.atlassian.net`.
 
-If there is no Jira MCP, use REST with a personal access token from the environment. How the token gets into `JIRA_PERSONAL_TOKEN` is up to each user — shell profile, `.env.local`, or a secret manager that injects environment variables.
-
-| Operation        | MCP operation      | REST equivalent                                                                 |
-| ---------------- | ------------------ | ------------------------------------------------------------------------------- |
-| Get issue        | `get_issue`        | `GET /rest/api/2/issue/<KEY>?fields=*all&expand=renderedFields`                 |
-| Get comments     | `get_issue`        | `GET /rest/api/2/issue/<KEY>/comment?maxResults=50`                             |
-| Add comment      | `add_comment`      | `POST /rest/api/2/issue/<KEY>/comment` with `{"body": "..."}`                   |
-| List transitions | `get_transitions`  | `GET /rest/api/2/issue/<KEY>/transitions`                                       |
-| Apply transition | `transition_issue` | `POST /rest/api/2/issue/<KEY>/transitions` with `{"transition": {"id": "..."}}` |
-| Attach file      | —                  | `scripts/jira-attach.sh <KEY> <file>…`                                          |
-
-```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/issue/DS-2831?fields=summary,status,description,comment"
-```
+| Operation        | Atlassian MCP operation       | Tool           | Notes                                                              |
+| ---------------- | ----------------------------- | -------------- | ------------------------------------------------------------------ |
+| Get issue        | `getJiraIssue`                | primary        | `view: "evidence"` adds custom fields                              |
+| Get comments     | `listJiraIssueComments`       | primary        | Pages with `startAt`; `getJiraIssue` embeds at most 20             |
+| Add comment      | `addOrEditJiraIssueComment`   | primary        | `contentFormat: "html"`; pass `commentId` to edit in place         |
+| List transitions | `listJiraIssueTransitions`    | `executeRead`  | Returns the target status of each transition                       |
+| Apply transition | `transitionJiraIssue`         | primary        | Use the id resolved from the list                                  |
+| Attach file      | `uploadAttachmentToJiraIssue` | `executeWrite` | Two phases: run the returned `uploadCommand`, then attach `fileId` |
 
 Pitfalls:
 
-- Every call failing with a generic error (and listing projects returning an empty list) means no VPN.
-- Some MCP clients pick up a changed token only after restarting the session.
-- The `comment` field embedded in the issue response is paginated on its own and can hold fewer comments than exist — fetch the dedicated `/comment?maxResults=50` endpoint when reading the ticket.
+- An authentication error on every call means the Atlassian MCP needs to be signed in again.
 - The comment returned by the write call is not the stored body — re-fetch.
-- Transition IDs differ between workflows; always pick by name (`Accept`, `Deny`).
+- Transition IDs differ between workflows and issue states; always pick by name (`Accept`, `Deny`).
 
 ## GitHub
 
