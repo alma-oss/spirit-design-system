@@ -2,8 +2,8 @@
 name: spirit:ready-to-accept
 description: >-
   Mark a finished DS Jira issue ready for acceptance — assemble a comment (product manager mention,
-  branch README, component preview links, PR), post it as exact wiki markup, then transition the
-  issue to Done past its quality-gate validator. Use when the user says an issue is finished,
+  branch README, component preview links, PR), post it through the Atlassian MCP, then transition
+  the issue to Done past its quality-gate validator. Use when the user says an issue is finished,
   "ready to accept", "ready for acceptance", or asks to hand it to the product manager, post the
   preview links, or move it to Done.
 ---
@@ -39,7 +39,9 @@ gh pr list --head "$(git branch --show-current)" --state all \
 
 Take the `DS-XXXX` key from the branch name, the commit subjects, or the PR title. No PR means
 nothing to accept — stop and say so. Read the issue with
-`jira_get_issue(issue_key="DS-XXXX", fields="summary,status,labels,components")`.
+`getJiraIssue` (Atlassian MCP) for `DS-XXXX`. Jira Cloud's `cloudId` is `almacareer.atlassian.net`.
+The responsible person moves the issue to `Done` — if that is not the user, say so before going on
+(see [`references/quality-gates.md`](references/quality-gates.md)).
 
 ### Step 2: Resolve the Product Manager
 
@@ -47,17 +49,18 @@ Never carry a name in this skill — a stale username mentions the wrong person 
 order: whoever the user named in the conversation → the DS project lead, the closest API-resolvable
 proxy → ask with `AskUserQuestion`, offering the lead as the first option and **No mention** as the
 last. When there is no product manager to accept the work, the user picks **No mention** and the
-comment opens with the component line, without the `[~<pm-username>] ` prefix.
+comment opens with the component line, without the mention.
 
-```bash
-curl -s -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" \
-  "https://jira.almacareer.tech/rest/api/2/project/DS" \
-  | jq -r '.lead | "\(.displayName) \(.name)"'
+Read the project lead with the MCP operation `listJiraProjects` (via `executeRead`, inputs
+`{"query": "DS", "expand": "lead"}`) and take `lead.accountId` and `lead.displayName`. Look up anyone else
+with `lookupJiraAccountId`.
+
+The mention is an HTML node that needs a real `accountId` — never an email address, a display name,
+or a guessed ID:
+
+```html
+<span data-type="mention" data-user-id="<accountId>">@<displayName></span>
 ```
-
-The mention token is `[~<name>]` from `jira_get_user_profile`'s `name` field — **not** the address you
-searched with; the two often differ by mail domain. This is Jira Server/DC, so `[~accountid:...]`
-does not work.
 
 ### Step 3: Collect the Links
 
@@ -91,20 +94,13 @@ to use the derived URL, take one you paste, or drop that bullet.
 
 ### Step 4: Draft, Confirm, Post
 
-Show the comment rendered and as the exact wiki markup, and wait for approval — this instance has no
-comment-edit or comment-delete tool, so a bad comment can only be superseded. Then POST it over REST,
-which stores the body byte-for-byte; `jira_add_comment` runs a Markdown-to-wiki converter that
-corrupts `[text|url]` links and bold at line start. Write the body to a file so no shell quoting
-touches it:
+Show the comment as it will render and as the exact HTML body, and wait for approval. Then post it with
+`addOrEditJiraIssueComment` and `contentFormat: "html"` — Jira Cloud stores comments as ADF, so links
+and mentions survive only as HTML nodes; the Markdown default drops mentions.
 
-```bash
-jq -n --rawfile body /tmp/acceptance.txt '{body: ($body | sub("\n+$"; ""))}' > /tmp/acceptance.json
-curl -s -w '\nHTTP %{http_code}\n' -X POST \
-  -H "Authorization: Bearer $JIRA_PERSONAL_TOKEN" -H "Content-Type: application/json" \
-  --data-binary @/tmp/acceptance.json "https://jira.almacareer.tech/rest/api/2/issue/DS-XXXX/comment"
-```
-
-Expect `HTTP 201`, then read the response's `body` and confirm it matches what was approved.
+Read the comment back with `listJiraIssueComments` (`responseContentFormat: "html"`) and confirm the
+stored body matches what was approved. A wrong comment can be corrected in place by calling
+`addOrEditJiraIssueComment` again with its `commentId` and the full corrected body.
 
 ### Step 5: Transition to Done
 
@@ -123,19 +119,19 @@ party is about to walk into: unanswered reviewer questions, failing checks, an u
 
 ## Comment Template
 
-```text
-[~<pm-username>] {{<Component>}} (<vanilla CSS|React|vanilla CSS and React>) is ready for acceptance.
-
-* Documentation: [<Component> README on the branch|<README html_url>]
-* Demo: [<Component> on the deploy preview|<preview url>]
-* Pull request: [#<PR>|<PR url>]
+```html
+<p><span data-type="mention" data-user-id="<pm-account-id>">@<pm-name></span> <code><Component></code> (<vanilla CSS|React|vanilla CSS and React>) is ready for acceptance.</p>
+<ul>
+  <li>Documentation: <a href="<README html_url>"><Component> README on the branch</a></li>
+  <li>Demo: <a href="<preview url>"><Component> on the deploy preview</a></li>
+  <li>Pull request: <a href="<PR url>">#<PR></a></li>
+</ul>
 ```
 
 With both implementations in scope, label the bullets so each says what it opens — `Documentation`,
 `Documentation (React)`, `Demo (vanilla CSS)`, `Demo (React)`, `Storybook`, `Pull request` — rather
-than several bullets all reading "Demo". With **No mention**, drop the `[~<pm-username>] ` prefix and
-keep the rest. Markup rules and this instance's corruption bugs:
-[`../create-jira-issue/references/wiki-markup-cheatsheet.md`](../create-jira-issue/references/wiki-markup-cheatsheet.md).
+than several bullets all reading "Demo". With **No mention**, drop the mention span and keep the rest.
+Use plain `<a href>` links, not smart-link cards, so the anchor text stays readable in the sentence.
 
 ---
 
@@ -146,5 +142,6 @@ keep the rest. Markup rules and this instance's corruption bugs:
 | ❌ **README in the PR**        | A `pull/<PR>/files#diff-…` link — a diff view, not the rendered documentation that gets reviewed.                                  |
 | ❌ **Unverified preview link** | Pasting a derived URL after every fetch returned `000`, without saying it is unverified. No network proves nothing about the path. |
 | ❌ **Storybook by scope**      | A Storybook link because the issue involves React, on a PR that touched no story.                                                  |
-| ❌ **Comment via MCP**         | `jira_add_comment` — the converter rewrites wiki markup, and the comment cannot be edited afterwards.                              |
+| ❌ **Markdown comment**        | A comment posted with the default Markdown format — a `@name` stays literal text and notifies nobody.                              |
+| ❌ **Guessed account ID**      | A mention built from an email or a remembered ID. Resolve it with `listJiraProjects` or `lookupJiraAccountId`.                     |
 | ❌ **Asserting a gate**        | Setting `Manual tests status = Passed` because the transition refused to go through otherwise. Ask instead.                        |
