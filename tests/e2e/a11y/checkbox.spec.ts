@@ -1,7 +1,7 @@
 import { normalizeUrl } from '@alma-oss/spirit-common/utilities/url';
 import {
   assertNoA11yViolations,
-  getWCAG2AAConfig,
+  getWcagConfig,
   retryPageGoto,
   waitForPageLoad,
   WEB_REACT_COMPONENTS_URI,
@@ -13,7 +13,7 @@ test.describe('Checkbox Accessibility', () => {
   const testUrl = normalizeUrl(WEB_REACT_SERVER_URL, WEB_REACT_COMPONENTS_URI, 'Checkbox');
   // TODO by @dlouhak: Re-enable 'color-contrast' rule once the tokens are updated to meet contrast requirements
   // https://almacareer.atlassian.net/browse/DS-2939
-  const a11yConfig = { ...getWCAG2AAConfig(), disableRules: ['color-contrast'] };
+  const a11yConfig = { ...getWcagConfig(), disableRules: ['color-contrast'] };
 
   test('Checkbox component has no a11y violations', async ({ page, pageRetries }) => {
     await retryPageGoto(page, testUrl, { retries: pageRetries });

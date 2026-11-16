@@ -58,6 +58,6 @@ This helper conditionally displays content based on the `aria-checked` attribute
 
 ℹ️ The checked and unchecked helpers use `inline-flex` display to properly align icon containers within buttons.
 
-[wcag-hiding-content]: https://www.w3.org/WAI/WCAG21/Techniques/css/C7
+[wcag-hiding-content]: https://www.w3.org/WAI/WCAG22/Techniques/css/C7
 [wcag-tap-target-aa]: https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
-[wcag-tap-target-aaa]: https://www.w3.org/WAI/WCAG21/Understanding/target-size.html
+[wcag-tap-target-aaa]: https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html
