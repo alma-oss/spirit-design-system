@@ -1,16 +1,13 @@
-import { TokenType } from '@supernovaio/sdk-exporters';
+import { TokenTypeEnum } from '../../core/types';
 import { formatUnitValue, replacePxWithRem } from '../unitFormatter';
 import type { UnitFormatRule, UnitFormatContext } from '../types';
 import { FONT_SIZE_BASE_DEFAULT } from '../../constants';
-
-const tokenStub = {} as unknown as UnitFormatContext['token'];
 
 describe('unitFormatter', () => {
   describe('formatUnitValue', () => {
     it('should return undefined for undefined value and 0 for zero', () => {
       const ctx: UnitFormatContext = {
-        token: tokenStub,
-        tokenType: TokenType.dimension,
+        tokenType: TokenTypeEnum.Dimension,
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
@@ -21,8 +18,7 @@ describe('unitFormatter', () => {
 
     it('should return raw number when unit is missing', () => {
       const ctx: UnitFormatContext = {
-        token: tokenStub,
-        tokenType: TokenType.dimension,
+        tokenType: TokenTypeEnum.Dimension,
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
@@ -32,8 +28,7 @@ describe('unitFormatter', () => {
 
     it('should do not convert non-px units', () => {
       const ctx: UnitFormatContext = {
-        token: tokenStub,
-        tokenType: TokenType.dimension,
+        tokenType: TokenTypeEnum.Dimension,
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
@@ -44,13 +39,12 @@ describe('unitFormatter', () => {
 
     it('should convert px -> rem when rule matches', () => {
       const ctx: UnitFormatContext = {
-        token: tokenStub,
-        tokenType: TokenType.fontSize,
+        tokenType: TokenTypeEnum.FontSize,
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
       const rules: UnitFormatRule[] = [
-        { tokenTypes: [TokenType.fontSize], shouldConvert: () => true, converterNames: ['pxToRem'] },
+        { tokenTypes: [TokenTypeEnum.FontSize], shouldConvert: () => true, converterNames: ['pxToRem'] },
       ];
 
       expect(formatUnitValue(40, 'px', ctx, rules)).toBe('2.5rem');
@@ -58,13 +52,12 @@ describe('unitFormatter', () => {
 
     it('should keep px when rule does not match or shouldConvert is false', () => {
       const ctx: UnitFormatContext = {
-        token: tokenStub,
-        tokenType: TokenType.fontSize,
+        tokenType: TokenTypeEnum.FontSize,
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: false,
       };
       const rules: UnitFormatRule[] = [
-        { tokenTypes: [TokenType.dimension], shouldConvert: () => true, converterNames: ['pxToRem'] },
+        { tokenTypes: [TokenTypeEnum.Dimension], shouldConvert: () => true, converterNames: ['pxToRem'] },
       ];
 
       expect(formatUnitValue(40, 'px', ctx, rules)).toBe('40px');
@@ -72,13 +65,16 @@ describe('unitFormatter', () => {
 
     it('should keep px for font-size-base tokens (rule-based)', () => {
       const ctx: UnitFormatContext = {
-        token: tokenStub,
-        tokenType: TokenType.fontSize,
+        tokenType: TokenTypeEnum.FontSize,
         baseFontSize: FONT_SIZE_BASE_DEFAULT,
         isFontSizeBaseToken: true,
       };
       const rules: UnitFormatRule[] = [
-        { tokenTypes: [TokenType.fontSize], shouldConvert: (c) => !c.isFontSizeBaseToken, converterNames: ['pxToRem'] },
+        {
+          tokenTypes: [TokenTypeEnum.FontSize],
+          shouldConvert: (c) => !c.isFontSizeBaseToken,
+          converterNames: ['pxToRem'],
+        },
       ];
 
       expect(formatUnitValue(18, 'px', ctx, rules)).toBe('18px');

@@ -1,12 +1,5 @@
 import { Token, TokenType } from '@supernovaio/sdk-exporters';
-import {
-  convertToScss,
-  convertToJs,
-  deepMergeObjects,
-  passObjectKeyValueToCallback,
-  getTokenAlias,
-  normalizeFirstNamePart,
-} from '../objectHelper';
+import { deepMergeObjects, passObjectKeyValueToCallback, getTokenAlias, normalizeFirstNamePart } from '../objectHelper';
 import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
 
 const mergedObject = {
@@ -33,37 +26,6 @@ const mergedTypographyObject = {
     'heading-1': '$heading-1-example',
     'body-1': '$body-1-example',
   },
-};
-
-const mergedJsObject = {
-  grids: {
-    spacing: {
-      desktop: 'gridSpacingDesktop',
-      mobile: 'gridSpacingMobile',
-      tablet: 'gridSpacingTablet',
-    },
-    _01: {
-      background: 'backgroundSubtle',
-    },
-    columns: 'gridColumns',
-    focus: 'focus',
-  },
-};
-
-const mergedTypographyJsObject = {
-  heading: {
-    fontFamily: 'fontFamilyExample',
-    fontSize: 'fontSizeExample',
-  },
-  body1: {
-    fontFamily: 'fontFamilyExample',
-    fontSize: 'fontSizeExample',
-  },
-  styles: {
-    heading1: 'heading1Example',
-    body1: 'body1Example',
-  },
-  focus: 'focus',
 };
 
 describe('objectHelper', () => {
@@ -113,82 +75,6 @@ describe('objectHelper', () => {
       const result = deepMergeObjects(typographyObject1, typographyObject2);
 
       expect(result).toStrictEqual(mergedTypographyObject);
-    });
-  });
-
-  describe('convertToScss', () => {
-    it('should convert object to SCSS', () => {
-      const expectedScssObject = `$grids: (
-spacing: (
-desktop: $grid-spacing-desktop,
-mobile: $grid-spacing-mobile,
-tablet: $grid-spacing-tablet,
-),
-columns: $grid-columns,
-),`;
-
-      const result = convertToScss(mergedObject);
-
-      expect(result).toBe(expectedScssObject);
-    });
-
-    it('should convert typography object to SCSS', () => {
-      const expectedScssTypographyObject = `$heading1: (
-font-family: $font-family-example,
-font-size: $font-size-example,
-),
-$body1: (
-font-family: $font-family-example,
-font-size: $font-size-example,
-),
-$styles: (
-heading-1: $heading-1-example,
-body-1: $body-1-example,
-),`;
-
-      const result = convertToScss(mergedTypographyObject);
-
-      expect(result).toBe(expectedScssTypographyObject);
-    });
-  });
-
-  describe('convertToJs', () => {
-    it('should convert object to JS', () => {
-      const expectedJsObject = `grids: {
-spacing: {
-desktop: gridSpacingDesktop,
-mobile: gridSpacingMobile,
-tablet: gridSpacingTablet,
-},
-'01': {
-background: backgroundSubtle,
-},
-columns: gridColumns,
-focus,
-},`;
-      const result = convertToJs(mergedJsObject);
-
-      expect(result).toBe(expectedJsObject);
-    });
-
-    it('should convert typography object to JS', () => {
-      const expectedJsTypographyObject = `heading: {
-fontFamily: fontFamilyExample,
-fontSize: fontSizeExample,
-},
-body1: {
-fontFamily: fontFamilyExample,
-fontSize: fontSizeExample,
-},
-styles: {
-heading1: heading1Example,
-body1: body1Example,
-},
-focus,`;
-
-      const result = convertToJs(mergedTypographyJsObject);
-
-      expect(result).toBe(expectedJsTypographyObject);
     });
   });
 

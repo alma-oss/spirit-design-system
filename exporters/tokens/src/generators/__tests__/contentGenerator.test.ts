@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+import type { Token, TokenGroup } from '@supernovaio/sdk-exporters';
+import { SOURCE_TOKEN_TYPE } from '../../core/types';
 import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { commonThemedFilesData, FileData, themedFilesData } from '../../config/fileConfig';
@@ -34,7 +35,7 @@ describe('contentGenerator', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
       const fileData: FileData = {
         fileName: 'testFile',
-        tokenTypes: [TokenType.dimension, TokenType.string],
+        tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.string],
         groupNames: ['Grid', 'String'],
         hasStylesObject: true,
         hasParentPrefix: true,
@@ -75,7 +76,7 @@ describe('contentGenerator', () => {
           tokenGroups: groupsWithFontWeight,
           fileData: {
             fileName: 'testFile',
-            tokenTypes: [TokenType.string],
+            tokenTypes: [SOURCE_TOKEN_TYPE.string],
             groupNames,
             hasStylesObject: false,
             hasParentPrefix: true,
@@ -183,13 +184,13 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
   describe('filterTokensByTypeAndGroup', () => {
     const dataProviderItems = [
       {
-        type: TokenType.dimension,
+        type: SOURCE_TOKEN_TYPE.dimension,
         group: 'Grid',
         tokenIdentifier: 'dimensionRef',
         description: 'dimension token type and Grid group',
       },
       {
-        type: TokenType.string,
+        type: SOURCE_TOKEN_TYPE.string,
         group: 'Grid',
         tokenIdentifier: 'stringRef',
         description: 'string token type and Grid group',
@@ -197,7 +198,7 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
     ];
 
     const dataTypographyProviderItems = {
-      type: TokenType.typography,
+      type: SOURCE_TOKEN_TYPE.typography,
       group: 'Heading',
       tokenIdentifier: 'typographyRef1',
     };
@@ -226,7 +227,7 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
       const expectedTokens = [exampleDimensionAndStringTokens.get('dimensionRef') as Token];
 
-      const filteredTokens = filterTokensByTypeAndGroup(tokens, TokenType.dimension, 'Grid');
+      const filteredTokens = filterTokensByTypeAndGroup(tokens, SOURCE_TOKEN_TYPE.dimension, 'Grid');
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });
@@ -240,10 +241,10 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
         origin: { name: 'Typography/Font Weight/Bold' },
       } as unknown as Token;
 
-      expect(filterTokensByTypeAndGroup([fontWeightToken], TokenType.string, 'Typography', null, groups)).toStrictEqual(
-        [],
-      );
-      expect(filterTokensByType([fontWeightToken], TokenType.string, null, groups)).toStrictEqual([]);
+      expect(
+        filterTokensByTypeAndGroup([fontWeightToken], SOURCE_TOKEN_TYPE.string, 'Typography', null, groups),
+      ).toStrictEqual([]);
+      expect(filterTokensByType([fontWeightToken], SOURCE_TOKEN_TYPE.string, null, groups)).toStrictEqual([]);
     });
   });
 

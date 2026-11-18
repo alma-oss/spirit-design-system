@@ -1,4 +1,5 @@
 import { Token, TokenGroup, TokenType, TypographyToken } from '@supernovaio/sdk-exporters';
+import { renderTypographyLeaves } from '../../../tests/fixtures/renderTypographyLeaves';
 import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
 import {
   exampleDeviceUpdatedTokens,
@@ -213,7 +214,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual(expectedStyles);
+      expect(renderTypographyLeaves(styles, hasJsOutput)).toStrictEqual(expectedStyles);
     });
 
     it('should generate flat typography tokens and include them in styles', () => {
@@ -228,7 +229,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual({
+      expect(renderTypographyLeaves(styles, false)).toStrictEqual({
         $caption: {
           mobile:
             '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 14px,\nfont-style: normal,\nfont-weight: 400,\nline-height: 1.4286,\n)',
@@ -252,7 +253,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual({
+      expect(renderTypographyLeaves(styles, true)).toStrictEqual({
         caption: {
           mobile:
             "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 400,\nlineHeight: 1.4286,\n}",
@@ -276,7 +277,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(styles).toStrictEqual({
+      expect(renderTypographyLeaves(styles, false)).toStrictEqual({
         $eyebrow: {
           mobile:
             '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 12px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.3333,\n)',
@@ -367,7 +368,7 @@ describe('stylesObjectGenerator', () => {
         undefined,
       );
 
-      expect(cssObject).toStrictEqual(expectedObject);
+      expect(renderTypographyLeaves(cssObject, hasJsOutput)).toStrictEqual(expectedObject);
     });
   });
 
@@ -438,7 +439,7 @@ describe('stylesObjectGenerator', () => {
           fontSizeBaseMap,
         );
 
-        expect(stylesObjectRef).toStrictEqual(expectedStyles);
+        expect(renderTypographyLeaves(stylesObjectRef, hasJsOutput)).toStrictEqual(expectedStyles);
       },
     );
   });

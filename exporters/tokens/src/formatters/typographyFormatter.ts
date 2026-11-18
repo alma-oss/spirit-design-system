@@ -1,6 +1,6 @@
 import { passObjectKeyValueToCallback } from '../helpers/objectHelper';
 import type { KeyValueTemplateCallback } from '../helpers/types';
-import type { TypographyStyle } from './types';
+import type { TypographyStyle } from '../core/types';
 import { removePairQuotes, toKebabCase } from '../helpers/stringHelper';
 
 export const jsObjectTemplate = (strings: string[]) => `{

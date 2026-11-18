@@ -1,4 +1,4 @@
-import { TokenType } from '@supernovaio/sdk-exporters';
+import { TokenTypeEnum } from '../core/types';
 import type { UnitFormatRule } from '../formatters/types';
 
 /**
@@ -9,13 +9,13 @@ import type { UnitFormatRule } from '../formatters/types';
 export const UNIT_FORMAT_RULES: UnitFormatRule[] = [
   {
     tokenTypes: [
-      TokenType.dimension,
-      TokenType.radius,
-      TokenType.space,
-      TokenType.size,
-      TokenType.fontSize,
-      TokenType.lineHeight,
-      TokenType.letterSpacing,
+      TokenTypeEnum.Dimension,
+      TokenTypeEnum.Radius,
+      TokenTypeEnum.Space,
+      TokenTypeEnum.Size,
+      TokenTypeEnum.FontSize,
+      TokenTypeEnum.LineHeight,
+      TokenTypeEnum.LetterSpacing,
     ],
     shouldConvert: (ctx) => !ctx.isFontSizeBaseToken && ctx.baseFontSize > 0,
     converterNames: ['pxToRem'],

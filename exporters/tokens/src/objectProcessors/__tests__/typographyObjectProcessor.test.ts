@@ -1,6 +1,7 @@
 import { Token, TokenGroup, TypographyToken, Unit } from '@supernovaio/sdk-exporters';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
+import { renderTypographyLeaves } from '../../../tests/fixtures/renderTypographyLeaves';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import type { DeviceDimensionMap, StylesObjectType } from '../../core/types';
 import { handleTypographyTokens } from '../typographyObjectProcessor';
@@ -61,7 +62,7 @@ describe('typographyObjectProcessor', () => {
         tokenById,
       );
 
-      expect(stylesObject).toStrictEqual({
+      expect(renderTypographyLeaves(stylesObject, false)).toStrictEqual({
         '$heading-xlarge-bold': {
           mobile:
             '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 32px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.5,\n)',
@@ -88,7 +89,7 @@ describe('typographyObjectProcessor', () => {
         deviceDimensions,
       );
 
-      expect(stylesObject).toStrictEqual({
+      expect(renderTypographyLeaves(stylesObject, false)).toStrictEqual({
         '$heading-xlarge-bold': {
           mobile:
             '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 36px,\nfont-style: normal,\nfont-weight: 700,\nline-height: 1.4444,\n)',
@@ -111,7 +112,7 @@ describe('typographyObjectProcessor', () => {
 
       handleTypographyTokens(['Caption'], token, tokenGroups, true, stylesObject, true, new Map());
 
-      expect(stylesObject).toStrictEqual({
+      expect(renderTypographyLeaves(stylesObject, true)).toStrictEqual({
         caption: {
           mobile:
             "{\nfontFamily: \"'Inter', sans-serif\",\nfontSize: '14px',\nfontStyle: 'normal',\nfontWeight: 700,\nlineHeight: 1.4286,\n}",
@@ -131,7 +132,7 @@ describe('typographyObjectProcessor', () => {
         false,
       );
 
-      expect(stylesObject).toStrictEqual({});
+      expect(renderTypographyLeaves(stylesObject, false)).toStrictEqual({});
     });
 
     it('should handle typography token with fontSizeBaseMap', () => {
@@ -180,7 +181,7 @@ describe('typographyObjectProcessor', () => {
       expect(stylesObject).toHaveProperty('$heading-xlarge-bold-italic');
 
       const typographyObj = stylesObject['$heading-xlarge-bold-italic'] as { [key: string]: unknown };
-      const mobileValue = typographyObj.mobile as string;
+      const mobileValue = renderTypographyLeaves(typographyObj.mobile, false) as string;
 
       expect(mobileValue).toContain('italic');
     });

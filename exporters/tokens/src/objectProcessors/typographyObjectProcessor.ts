@@ -6,12 +6,13 @@ import {
   type TokenIndex,
   TokenTypeEnum,
   type TokenValue,
+  type TypographyStyleLeaf,
+  typographyStyleLeaf,
   DeviceDimensionMap,
   DeviceDimensionEntries,
   StylesObjectType,
 } from '../core/types';
 import { tokenVariableName } from '../helpers/tokenHelper';
-import { formatTypographyStyle } from '../formatters/typographyFormatter';
 import { formatTypographyName, getBreakpoint, typographyStyle } from '../helpers/typographyHelper';
 import { getFontSizeBaseForBreakpoint, isPxValue, unitToCss } from '../helpers/unitHelper';
 import type { FontSizeBaseMap } from '../helpers/types';
@@ -230,11 +231,8 @@ export const handleTypographyTokens = (
     lineHeight?.value,
     tokenIndex,
   );
-  const renderTypography = (value: TokenValue, device: string): string | object =>
-    formatTypographyStyle(
-      typographyStyle(value, isItalic, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex),
-      hasJsOutput,
-    );
+  const toStyleLeaf = (value: TokenValue, device: string): TypographyStyleLeaf =>
+    typographyStyleLeaf(typographyStyle(value, isItalic, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex));
 
   if (tokenNameParts.length === 0) {
     return;
@@ -244,7 +242,7 @@ export const handleTypographyTokens = (
   const targetObject = (stylesObjectRef[objectKey] = stylesObjectRef[objectKey] || {}) as StylesObjectType;
 
   if (!shouldCreateVariations) {
-    targetObject[breakpoint] = renderTypography(typography, breakpoint);
+    targetObject[breakpoint] = toStyleLeaf(typography, breakpoint);
 
     return;
   }
@@ -258,6 +256,6 @@ export const handleTypographyTokens = (
       break;
     }
 
-    targetObject[device] = renderTypography(deviceValue, device);
+    targetObject[device] = toStyleLeaf(deviceValue, device);
   }
 };

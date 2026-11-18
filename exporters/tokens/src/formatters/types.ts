@@ -1,26 +1,14 @@
-import type { Token, TokenType } from '@supernovaio/sdk-exporters';
-
-/**
- * Format-agnostic typography style. Values are already prepared for the output (quoted strings, rem sizes, ...),
- * but the style knows nothing about SCSS or JS: the output is decided by the formatter.
- */
-export type TypographyStyle = {
-  fontFamily: string;
-  fontSize: string;
-  fontStyle: string;
-  fontWeight: string | number;
-  lineHeight?: string | number;
-};
+import type { TokenTypeEnum } from '../core/types';
 
 export type UnitFormatContext = {
-  token: Token;
-  tokenType: TokenType;
+  /** Source-agnostic type of the token, `undefined` for a type the model does not know (no rule applies to it). */
+  tokenType: TokenTypeEnum | undefined;
   baseFontSize: number;
   isFontSizeBaseToken: boolean;
 };
 
 export type UnitFormatRule = {
-  tokenTypes: TokenType[];
+  tokenTypes: TokenTypeEnum[];
   shouldConvert: (ctx: UnitFormatContext) => boolean;
   converterNames: Array<'pxToRem'>;
 };

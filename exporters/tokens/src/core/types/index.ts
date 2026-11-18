@@ -4,3 +4,5 @@ export * from './TokenCollection';
 export * from './TokenIndex';
 export * from './Unit';
 export * from './StylesObject';
+export * from './TypographyStyle';
+export * from './SourceTokenType';

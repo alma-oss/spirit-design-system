@@ -1,7 +1,6 @@
 import { exportConfiguration } from '../../config';
 import { readTypography } from '../core/typography';
-import type { NumberValue, TokenIndex, TokenValue } from '../core/types';
-import type { TypographyStyle } from '../formatters/types';
+import type { NumberValue, TokenIndex, TokenValue, TypographyStyle } from '../core/types';
 import {
   DEFAULT_DECIMALS,
   FONT_SIZE_BASE_DEFAULT,

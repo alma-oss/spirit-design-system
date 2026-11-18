@@ -1,4 +1,4 @@
-import type { StylesObjectType } from '../../core/types';
+import { type StylesObjectType, typographyStyleLeaf } from '../../core/types';
 import {
   addGlobalColorsToStylesObject,
   addGlobalTypographyToStylesObject,
@@ -172,13 +172,17 @@ describe('globalObjectsProcessor', () => {
   });
 
   describe('addGlobalTypographyToStylesObject', () => {
-    const scssTypographyValue = '(\nfont-family: "\'Inter\', sans-serif",\nfont-size: 16px,\n)';
-    const jsTypographyValue = '{\nfontFamily: "\'Inter\', sans-serif",\nfontSize: 16,\n}';
+    const typographyValue = typographyStyleLeaf({
+      fontFamily: "'Inter', sans-serif",
+      fontSize: '16px',
+      fontStyle: 'normal',
+      fontWeight: 400,
+    });
 
     it('should add global typography object when typography keys exist (SCSS)', () => {
       const stylesObject: StylesObjectType = {
-        '$heading-xlarge-bold': { mobile: scssTypographyValue } as StylesObjectType,
-        '$body-large': { mobile: scssTypographyValue } as StylesObjectType,
+        '$heading-xlarge-bold': { mobile: typographyValue } as StylesObjectType,
+        '$body-large': { mobile: typographyValue } as StylesObjectType,
         '$other-token': 'value',
       };
 
@@ -199,8 +203,8 @@ describe('globalObjectsProcessor', () => {
 
     it('should add global typography object when typography keys exist (JS)', () => {
       const stylesObject: StylesObjectType = {
-        headingXlargeBold: { mobile: jsTypographyValue } as StylesObjectType,
-        bodyLarge: { mobile: jsTypographyValue } as StylesObjectType,
+        headingXlargeBold: { mobile: typographyValue } as StylesObjectType,
+        bodyLarge: { mobile: typographyValue } as StylesObjectType,
         otherToken: 'value',
       };
 
@@ -241,8 +245,8 @@ describe('globalObjectsProcessor', () => {
 
     it('should match keys by typography declaration regardless of group name', () => {
       const stylesObject: StylesObjectType = {
-        '$heading-xlarge-bold': { mobile: scssTypographyValue } as StylesObjectType,
-        $caption: { mobile: scssTypographyValue } as StylesObjectType,
+        '$heading-xlarge-bold': { mobile: typographyValue } as StylesObjectType,
+        $caption: { mobile: typographyValue } as StylesObjectType,
         '$other-token': 'value',
         '$not-typography': 'value',
       };

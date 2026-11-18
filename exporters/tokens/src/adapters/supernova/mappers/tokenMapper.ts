@@ -59,6 +59,14 @@ const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
   [TokenType.borderWidth]: TokenTypeEnum.BorderWidth,
 };
 
+/**
+ * Source-agnostic type of a Supernova numeric token, `undefined` for a type that is not mapped to a plain numeric
+ * value (yet).
+ *
+ * @param tokenType
+ */
+export const toNumericTokenType = (tokenType: TokenType): TokenTypeEnum | undefined => NUMERIC_TOKEN_TYPES[tokenType];
+
 const buildMetadata = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): TokenMetadata => ({
   brandId: token.brandId,
   device: getDeviceAlias(token) || undefined,
