@@ -35,6 +35,43 @@ describe('cssLengthToPixels', () => {
     expect(convertRemToPixels(2)).toBe(36);
   });
 
+  it.each([
+    // [cssValue, expectedPixels]
+    ['1.5px', 1.5],
+    ['.55px', 0.55],
+    ['+2px', 2],
+    ['120px', 120],
+    ['13PX', 13],
+    ['  13px  ', 13],
+    ['13 px', 13],
+  ])('should parse px length "%s"', (cssValue, expectedPixels) => {
+    expect(cssLengthToPixels(cssValue)).toBe(expectedPixels);
+  });
+
+  it.each([
+    // [cssValue, expectedPixels]
+    ['.5rem', 8],
+    ['1REM', 16],
+    ['2 rem', 32],
+  ])('should parse rem length "%s" with the base font size', (cssValue, expectedPixels) => {
+    setBrowserEnvironment('16px');
+
+    expect(cssLengthToPixels(cssValue)).toBe(expectedPixels);
+  });
+
+  it.each(['13em', '2vh', '50%', 'abc px', '13', 'px', 'rem'])('should return undefined for "%s"', (cssValue) => {
+    expect(cssLengthToPixels(cssValue)).toBeUndefined();
+  });
+
+  it.each(['0px', '-1px', 'invalid'])(
+    'should use fallback root size when runtime root size is "%s"',
+    (rootFontSize) => {
+      setBrowserEnvironment(rootFontSize);
+
+      expect(getRootFontSizePx()).toBe(BASE_FONT_SIZE_PX);
+    },
+  );
+
   it('should return px values directly', () => {
     expect(cssLengthToPixels('13px')).toBe(13);
     expect(cssLengthToPixels('0px')).toBe(0);

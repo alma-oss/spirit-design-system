@@ -35,4 +35,33 @@ describe('warning', () => {
     // @ts-expect-error - mocking console.warn
     console.warn.mockClear();
   });
+
+  describe('when the environment does not allow logging', () => {
+    const originalNodeEnv = process.env.NODE_ENV;
+
+    afterEach(() => {
+      process.env.NODE_ENV = originalNodeEnv;
+    });
+
+    it('should not log in production', () => {
+      process.env.NODE_ENV = 'production';
+
+      warning(false, 'message');
+
+      expect(console.warn).not.toHaveBeenCalled();
+    });
+
+    it('should not throw when console is not available', () => {
+      const originalConsole = globalThis.console;
+
+      // @ts-expect-error - simulating an environment without console
+      globalThis.console = undefined;
+
+      try {
+        expect(() => warning(false, 'message')).not.toThrow();
+      } finally {
+        globalThis.console = originalConsole;
+      }
+    });
+  });
 });

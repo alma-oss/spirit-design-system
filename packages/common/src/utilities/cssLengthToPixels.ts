@@ -5,6 +5,7 @@ import { isSSR } from './ssr';
  */
 export const BASE_FONT_SIZE_PX = 16;
 
+// Stryker disable next-line StringLiteral: equivalent mutants, any value not matching a px/rem length yields `undefined` anyway
 const UNRESOLVABLE = new Set(['none', 'auto', 'initial', 'unset', '']);
 const CSS_NUMERIC_LENGTH_PATTERN = /([+-]?(?:\d+\.?\d*|\.\d+))/;
 

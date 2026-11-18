@@ -21,6 +21,7 @@ const warning = (condition: unknown, message: string): void => {
     // to improve debugging
     // A consumer can use 'pause on caught exceptions'
     // https://github.com/facebook/react/issues/4216
+    // Stryker disable next-line BlockStatement: equivalent mutant, the thrown error is swallowed on purpose and has no observable effect
     try {
       throw Error(text);
     } catch (x) {
