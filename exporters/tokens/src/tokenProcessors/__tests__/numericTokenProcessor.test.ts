@@ -13,7 +13,7 @@ import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/example
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processNumericToken } from '../numericTokenProcessor';
-import { type FontSizeBaseMap } from '../../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../../helpers/types';
 
 jest.mock('../../../config', () => ({
   exportConfiguration: sampleConfigurationDefault,

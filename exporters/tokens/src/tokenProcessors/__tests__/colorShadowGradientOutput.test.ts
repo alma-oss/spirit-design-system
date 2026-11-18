@@ -13,7 +13,7 @@ import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfig
 import { mapToken } from '../../adapters/supernova/mappers/tokenMapper';
 import { createTokenIndex } from '../../core/tokenIndex';
 import { type DesignToken } from '../../core/types';
-import { type FontSizeBaseMap } from '../../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../../helpers/types';
 import { processColorToken } from '../colorTokenProcessor';
 import { processGradientToken } from '../gradientTokenProcessor';
 import { processShadowToken } from '../shadowTokenProcessor';

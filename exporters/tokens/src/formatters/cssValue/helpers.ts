@@ -2,12 +2,6 @@ import type { CompositeValue, TokenValue } from '../../core/types';
 
 const LAYER_SEPARATOR = ', ';
 
-export const roundToDecimals = (value: number, decimals: number): number => {
-  const factor = 10 ** decimals;
-
-  return parseFloat((Math.round(value * factor) / factor).toFixed(decimals));
-};
-
 // Checks the type of a value. A reference is never of the expected type, the formatters read values that the
 // `resolve-references` transformation rule already resolved.
 export const expectType = <T extends TokenValue['type']>(

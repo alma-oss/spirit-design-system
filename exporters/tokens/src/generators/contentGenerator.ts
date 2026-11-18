@@ -1,13 +1,24 @@
-import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+import type { Token, TokenGroup } from '@supernovaio/sdk-exporters';
+// TODO: Remove together with the Supernova imports above, `createTokenIndex(collection.tokens)` replaces it.
+import { createSupernovaTokenIndex } from '../adapters/supernova/tokenIndex';
+import {
+  SOURCE_TOKEN_TYPE,
+  type DeviceDimensionMap,
+  type SourceTokenType,
+  type StylesObjectType,
+  type TokenIndex,
+} from '../core/types';
 import { FileData } from '../config/fileConfig';
 import { indentAndFormat } from '../formatters/stylesFormatter';
-import { convertToJs, convertToScss, deepMergeObjects } from '../helpers/objectHelper';
+import { convertToJs, convertToScss } from '../formatters/stylesObjectFormatter';
+import { deepMergeObjects } from '../helpers/objectHelper';
 import { generateCssVariableReferencesFromTokens, generateStylesFromTokens } from './stylesGenerator';
-import { DeviceDimensionMap, type StylesObjectType, generateStylesObjectFromTokens } from './stylesObjectGenerator';
+import { generateStylesObjectFromTokens } from './stylesObjectGenerator';
 import { findTokenPrefix } from '../helpers/findTokenPrefix';
 import { filterExcludedTokens } from '../filters/excludedTokens';
 import { generateMixinFromTokens } from './mixinGenerator';
-import { getFontSizeBaseMap, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { getFontSizeBaseMap } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 import { getTokenGroup } from '../helpers/tokenHelper';
 import { filterCollections } from '../helpers/collectionsHelper';
 
@@ -18,14 +29,15 @@ export const addDisclaimer = (content: string): string => {
 
 export const filterTokensByTypeAndGroup = (
   tokens: Token[],
-  type: TokenType,
+  type: SourceTokenType,
   group: string,
-  excludeGroupNames?: string[] | null,
+  excludeGroupNames: string[] | null | undefined,
+  tokenGroups: TokenGroup[],
 ) => {
-  const filteredTokens = filterExcludedTokens(tokens);
+  const filteredTokens = filterExcludedTokens(tokens, tokenGroups);
 
   return filteredTokens.filter((token) => {
-    const hasMatchingType = token.tokenType === type;
+    const hasMatchingType = (token.tokenType as string) === type;
     // Check if the group matches the first part of the token path (the actual group, not a subgroup)
     const tokenGroup = getTokenGroup(token);
     const isInGroup = tokenGroup === group.toLowerCase();
@@ -37,11 +49,16 @@ export const filterTokensByTypeAndGroup = (
   });
 };
 
-export const filterTokensByType = (tokens: Token[], type: TokenType, excludeGroupNames?: string[] | null) => {
-  const filteredTokens = filterExcludedTokens(tokens);
+export const filterTokensByType = (
+  tokens: Token[],
+  type: SourceTokenType,
+  excludeGroupNames: string[] | null | undefined,
+  tokenGroups: TokenGroup[],
+) => {
+  const filteredTokens = filterExcludedTokens(tokens, tokenGroups);
 
   return filteredTokens.filter((token) => {
-    const hasMatchingType = token.tokenType === type;
+    const hasMatchingType = (token.tokenType as string) === type;
 
     // Also check if this token's group should be excluded
     if (excludeGroupNames && excludeGroupNames.length > 0) {
@@ -70,8 +87,9 @@ export const omitTopLevelGroupFromPaths = (tokenGroups: Array<TokenGroup>): Arra
 
 const processTokensForType = (
   filteredTokens: Token[],
-  tokenType: TokenType,
+  tokenType: SourceTokenType,
   mappedTokens: Map<string, Token>,
+  tokenIndex: TokenIndex,
   tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
   hasParentPrefix: boolean,
@@ -85,7 +103,7 @@ const processTokensForType = (
   let styles = '';
 
   // Generate css tokens
-  if (tokenType !== TokenType.typography) {
+  if (tokenType !== SOURCE_TOKEN_TYPE.typography) {
     const generatedStyles = hasCssVariableReferences
       ? generateCssVariableReferencesFromTokens(
           filteredTokens,
@@ -98,7 +116,7 @@ const processTokensForType = (
         )
       : generateStylesFromTokens(
           filteredTokens,
-          mappedTokens,
+          tokenIndex,
           tokenGroups,
           tokenPrefix,
           hasParentPrefix,
@@ -122,6 +140,7 @@ const processTokensForType = (
     deviceDimensions,
     fontSizeBaseMap,
     mappedTokens,
+    tokenIndex,
   );
 
   return {
@@ -230,6 +249,8 @@ export const generateFileContent = ({
     tokenTypes,
   } = fileData;
   const namingTokenGroups = hasTopLevelGroupPrefix ? tokenGroups : omitTopLevelGroupFromPaths(tokenGroups);
+  // Temporary: replace with `createTokenIndex(collection.tokens)` once the generators read a `TokenCollection`
+  const tokenIndex = createSupernovaTokenIndex(mappedTokens, namingTokenGroups);
 
   // Check if group filtering should be applied
   // Apply group filtering if:
@@ -245,9 +266,9 @@ export const generateFileContent = ({
   const fileTokens = collectionName ? filterCollections(preparedTokens, collectionName) : preparedTokens;
 
   // Iterate over token types and groups to filter tokens
-  const getTokenListsForType = (tokenType: TokenType): Token[][] => {
+  const getTokenListsForType = (tokenType: SourceTokenType): Token[][] => {
     if (!shouldFilterByGroup) {
-      return [filterTokensByType(fileTokens, tokenType, excludeGroupNames)];
+      return [filterTokensByType(fileTokens, tokenType, excludeGroupNames, tokenGroups)];
     }
 
     // When excludeGroupNames is provided but no groupNames, we need to filter by type first
@@ -255,10 +276,10 @@ export const generateFileContent = ({
     const tokensToConsider =
       groupNames && groupNames.length > 0 && groupNames[0] !== ''
         ? fileTokens
-        : filterTokensByType(fileTokens, tokenType, excludeGroupNames);
+        : filterTokensByType(fileTokens, tokenType, excludeGroupNames, tokenGroups);
 
     return getGroups(tokensToConsider, excludeGroupNames, groupNames).map((group) =>
-      filterTokensByTypeAndGroup(fileTokens, tokenType, group, excludeGroupNames),
+      filterTokensByTypeAndGroup(fileTokens, tokenType, group, excludeGroupNames, tokenGroups),
     );
   };
 
@@ -268,6 +289,7 @@ export const generateFileContent = ({
         filteredTokens,
         tokenType,
         mappedTokens,
+        tokenIndex,
         namingTokenGroups,
         tokenPrefix,
         hasParentPrefix,

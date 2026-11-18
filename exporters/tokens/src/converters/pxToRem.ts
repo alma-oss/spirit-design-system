@@ -1,4 +1,5 @@
 import { DEFAULT_DECIMALS, MAX_TO_FIXED_DIGITS, PX_UNIT, REM_UNIT } from '../constants';
+import { roundToDecimals } from '../helpers/numberHelper';
 
 export type PxToRemOptions = {
   baseFontSize: number;
@@ -14,13 +15,6 @@ const resolveDecimals = (decimals: number | undefined): number =>
   Number.isInteger(decimals) && (decimals as number) >= 0 && (decimals as number) <= MAX_TO_FIXED_DIGITS
     ? (decimals as number)
     : DEFAULT_DECIMALS;
-
-const roundToDecimals = (value: number, decimals: number): number => {
-  const roundingFactor = 10 ** decimals;
-  const rounded = Math.round((value + Number.EPSILON) * roundingFactor) / roundingFactor;
-
-  return Math.abs(rounded) === 0 ? 0 : rounded;
-};
 
 /**
  * Converts a px measure to a structured rem value, assuming a valid,
