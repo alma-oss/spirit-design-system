@@ -64,7 +64,8 @@ async function main() {
   console.log(`Canvas ${canvasId} created`);
   await callSlack('canvases.access.set', token, {
     canvas_id: canvasId,
-    access_level: 'read',
+    // Channel members need to edit the Canvas (e.g. fix typos after the merge), the bot-owned Canvas is read-only otherwise
+    access_level: 'write',
     channel_ids: [channelId],
   });
 

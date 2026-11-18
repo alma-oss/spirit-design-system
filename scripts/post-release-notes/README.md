@@ -19,6 +19,9 @@ The [Publish Release Notes workflow][publish-release-notes-workflow] runs on a p
 and reads the final file from `main`. The announcement links the merged PR.
 Edits made in the PR therefore never need to be repeated in Slack.
 Notes changed after the merge are not synced, edit the Canvas by hand or post a new one.
+The Canvas is shared to the channel with edit access (`canvases.access.set` with `access_level: 'write'`),
+so every member of the channel can edit it. Canvases created before this change stay read-only
+until their access is changed by hand in Slack (Share → channel → Can edit).
 
 ## Failures
 
