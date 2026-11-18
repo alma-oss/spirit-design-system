@@ -1,6 +1,6 @@
 # Create Jira Issue
 
-Draft, preview, and file a DS-project Jira Story with the team's required structure, avoiding this Jira instance's known wiki-markup corruption bugs.
+Draft, preview, and file a DS-project Jira Story with the team's required structure through the Atlassian MCP, and verify what Jira Cloud stored.
 
 ## Usage
 
@@ -12,32 +12,31 @@ Use when you need to:
 
 - File a new Jira Story in the DS project for a piece of work you've been discussing or analyzing
 - Turn an architectural analysis or design discussion into a properly structured ticket
-- Avoid re-learning this Jira instance's Markdown-to-wiki-markup corruption bugs from scratch
 
 ## What It Does
 
 1. Looks up similar recent DS Story tickets to confirm the template hasn't drifted
-2. Determines the right epic to link to from a sibling ticket's Epic Link field
-3. Drafts the description: a WHO/WHAT/WHY opening, max-5-bullet outcome-based acceptance criteria, and detailed implementation notes
+2. Determines the epic from a sibling ticket's `parent` (many DS tickets have none)
+3. Drafts the description in Markdown: a WHO/WHAT/WHY opening, max-5-bullet outcome-based acceptance criteria, and detailed implementation notes
 4. Shows the full draft for review before writing anything
-5. Creates the issue and links the epic, verifying the epic link actually took
-6. Writes in real Jira wiki markup and works around known corruption bugs (numbered lists, bold-leading bullets, angle brackets, double underscores in code blocks)
-7. Re-fetches the stored content after every write to confirm it rendered correctly — the tool's own response is not reliable for this
+5. Creates the issue with `createJiraIssue`, sets the epic as `parent` and adds issue links with `createJiraIssueLink`
+6. Re-reads the stored issue to confirm the description, parent and links — the write response is not proof
 
 ## Description Format
 
 | Section                  | Content                                                                                              |
 | ------------------------ | ---------------------------------------------------------------------------------------------------- |
-| **Opening**              | `*WHO:*`/`*WHAT:*`/`*WHY:*` three labeled lines — no heading                                         |
+| **Opening**              | `**WHO:**`/`**WHAT:**`/`**WHY:**` three labeled lines — no heading                                   |
 | **Acceptance criteria**  | Max 5 bullets, measurable outcomes only — never CI/lint/test (that's a merge gate, not a criterion)  |
 | **Implementation notes** | What exists today (evidence), model to draw from (prose, no invented API), references, scope bullets |
 
 ## Key Principles
 
-- **WHO/WHAT/WHY is mandatory.** Every ticket opens with three labeled lines: `*WHO:*`, `*WHAT:*`, `*WHY:*`.
+- **WHO/WHAT/WHY is mandatory.** Every ticket opens with three labeled lines.
 - **Each ticket is an isolated problem.** Dependencies go through Jira issue links, not prose.
 - **Acceptance criteria measure success, not process.** No CI-obvious items.
 - **Don't invent an API you haven't designed yet.** Cite prior art in prose instead.
+- **Write Markdown, not Jira wiki markup.** Jira Cloud converts Markdown and stores wiki markup as literal text.
 
 ## Good vs Bad Examples
 
@@ -45,11 +44,11 @@ Use when you need to:
 | ----------------------- | ---------------------------------------------------------------------------------- |
 | ❌ CI as criterion      | "yarn lint and yarn test pass."                                                    |
 | ✅ Outcome as criterion | "Combobox's inline filtering hides non-matching options without scanning the DOM." |
-| ❌ Breaks in Jira       | `* *Bold text.* rest...` — corrupts on save.                                       |
-| ✅ Survives in Jira     | `* Plain text first, *bold* later if needed.`                                      |
+| ❌ Old wiki markup      | `h2. Acceptance criteria` — stored as literal text on Cloud.                       |
+| ✅ Markdown             | `## Acceptance criteria` — stored as a real heading.                               |
 
 ## See Also
 
-- **SKILL.md** — Complete workflow with all steps, the wiki-markup gotcha list, and template reference
-- **references/wiki-markup-cheatsheet.md** — Full Jira wiki markup syntax reference plus the known corruption-bug table
+- **SKILL.md** — Complete workflow with all steps, formatting notes, and template reference
+- Related skill: `/spirit:accept-jira-issue` — Validating a finished ticket against its acceptance criteria
 - Related skill: `/spirit:create-pr` — For opening the PR once the implementation is done
