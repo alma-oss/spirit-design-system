@@ -10,5 +10,10 @@ import type { GroupedToken, PathGroup } from './types';
 export const getTokenGroupPath = (token: GroupedToken, tokenGroups: Array<PathGroup>): string[] => {
   const group = tokenGroups.find((candidate) => candidate.id === token.parentGroupId);
 
-  return group ? [...group.path, group.name] : [];
+  if (!group) {
+    return [];
+  }
+
+  // A root group is the container of a token type, not a part of the name.
+  return group.isRoot ? [...group.path] : [...group.path, group.name];
 };

@@ -4,6 +4,8 @@ export type TokenGroup = {
   id: string;
   name: string;
   path: string[];
+  /** A root group is the container of a token type, not a part of a token's name. */
+  isRoot?: boolean;
   parentId?: string;
 };
 

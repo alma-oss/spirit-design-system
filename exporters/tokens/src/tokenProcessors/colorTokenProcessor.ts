@@ -17,8 +17,9 @@ type ColorTokenProcessorContext = {
 /**
  * Processes color tokens into their normalized color values.
  *
- * Naming stays on the native token (it needs the SDK's `NamingHelper`). The value is read through the internal
- * `DesignToken` model via the Supernova adapter's mapper, and references to other color tokens are resolved by the
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874).
+ * The value is read through the internal `DesignToken` model via the Supernova adapter's mapper, and references to
+ * other color tokens are resolved by the
  * `resolve-references` transformation rule through the model's token index (see #DS-2872).
  *
  * @param colorToken - The color token to process

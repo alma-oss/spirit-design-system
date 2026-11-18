@@ -178,8 +178,9 @@ const shouldCreateDeviceVariations = (
 /**
  * Adds a typography token to the styles object, one entry per breakpoint (or device).
  *
- * Naming stays on the native token (it needs the SDK's `NamingHelper`). The value is read through the internal
- * `DesignToken` model via the Supernova adapter's mapper, so rendering it does not depend on Supernova's typography
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874).
+ * The value is read through the internal `DesignToken` model via the Supernova adapter's mapper, so rendering it
+ * does not depend on Supernova's typography
  * token class (see #DS-2873).
  *
  * @param tokenNameParts

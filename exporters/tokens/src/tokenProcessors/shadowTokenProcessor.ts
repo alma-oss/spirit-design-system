@@ -86,8 +86,9 @@ export const transformShadowLengthsToVariables = (name: string, shadow: string, 
 /**
  * Processes shadow tokens (with length and color variable transformation and px->rem conversion).
  *
- * Naming stays on the native token (it needs the SDK's `NamingHelper`). The value is read through the internal
- * `DesignToken` model via the Supernova adapter's mapper; references between tokens are resolved by the
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874).
+ * The value is read through the internal `DesignToken` model via the Supernova adapter's mapper; references
+ * between tokens are resolved by the
  * `resolve-references` transformation rule through the model's token index (see #DS-2872).
  *
  * @param shadowToken - The shadow token to process

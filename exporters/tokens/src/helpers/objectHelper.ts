@@ -1,6 +1,6 @@
 import { Token, TokenType } from '@supernovaio/sdk-exporters';
+import { getAliasName } from './namingHelper';
 import { isTypographyStyleLeaf, type StylesObjectType } from '../core/types';
-import { handleInvariantTokenAlias } from './specialCaseHelper';
 import type { KeyValueTemplateCallback } from './types';
 import { toCamelCase, toPlural } from './stringHelper';
 import { COLOR_SCSS_SUFFIX } from '../constants';
@@ -49,19 +49,8 @@ export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType)
   return { ...finalObject, ...endObject };
 };
 
-export const getTokenAlias = (token: Token, hasJsOutput: boolean): string => {
-  let alias;
-  const numericPart = token.name.match(/\d+/)?.[0];
-  const nonNumericPart = handleInvariantTokenAlias(token.name.toLowerCase());
-
-  if (token.tokenType !== TokenType.color && numericPart) {
-    alias = numericPart;
-  } else {
-    alias = hasJsOutput ? toCamelCase(nonNumericPart) : nonNumericPart;
-  }
-
-  return alias;
-};
+export const getTokenAlias = (token: Token, hasJsOutput: boolean): string =>
+  getAliasName(token.name, token.tokenType === TokenType.color, hasJsOutput);
 
 export const normalizeFirstNamePart = (part: string, tokenType: TokenType, hasJsOutput: boolean): string => {
   if (tokenType === TokenType.color) {
