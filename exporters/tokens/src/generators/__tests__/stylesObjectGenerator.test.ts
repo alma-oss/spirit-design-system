@@ -202,7 +202,7 @@ describe('stylesObjectGenerator', () => {
     ];
 
     it.each(dataProvider)('$description', ({ tokens, expectedStyles, hasJsOutput }) => {
-      const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
+      const filteredTokens = filterExcludedTokens(Array.from(tokens.values()), tokenGroups);
       const styles = generateStylesObjectFromTokens(
         filteredTokens,
         tokenGroups,

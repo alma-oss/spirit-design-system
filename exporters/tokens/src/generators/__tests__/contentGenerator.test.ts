@@ -207,7 +207,7 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
       const expectedTokens = [exampleDimensionAndStringTokens.get(tokenIdentifier) as Token];
 
-      expect(filterTokensByTypeAndGroup(tokens, type, group)).toStrictEqual(expectedTokens);
+      expect(filterTokensByTypeAndGroup(tokens, type, group, null, tokenGroups)).toStrictEqual(expectedTokens);
     });
 
     it(`should filter ${dataTypographyProviderItems.type} token type and ${dataTypographyProviderItems.group} group and exclude tokens with "Link" in name`, () => {
@@ -218,6 +218,8 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
         tokens,
         dataTypographyProviderItems.type,
         dataTypographyProviderItems.group,
+        null,
+        tokenGroups,
       );
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
@@ -227,7 +229,7 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
       const expectedTokens = [exampleDimensionAndStringTokens.get('dimensionRef') as Token];
 
-      const filteredTokens = filterTokensByTypeAndGroup(tokens, SOURCE_TOKEN_TYPE.dimension, 'Grid');
+      const filteredTokens = filterTokensByTypeAndGroup(tokens, SOURCE_TOKEN_TYPE.dimension, 'Grid', null, tokenGroups);
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });

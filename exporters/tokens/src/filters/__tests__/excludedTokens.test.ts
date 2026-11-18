@@ -11,7 +11,7 @@ describe('filterExcludedTokens', () => {
       exampleDimensionAndStringTokens.get('stringRef'),
     ].filter(Boolean) as Token[];
 
-    const filteredTokens = filterExcludedTokens(tokens);
+    const filteredTokens = filterExcludedTokens(tokens, []);
 
     expect(filteredTokens).toStrictEqual(expectedTokens);
   });
@@ -20,7 +20,7 @@ describe('filterExcludedTokens', () => {
     const tokens = Array.from(exampleTypographyTokens.values());
     const expectedTokens = [exampleTypographyTokens.get('typographyRef1')] as Token[];
 
-    const filteredTokens = filterExcludedTokens(tokens);
+    const filteredTokens = filterExcludedTokens(tokens, []);
 
     expect(filteredTokens).toStrictEqual(expectedTokens);
   });
@@ -29,7 +29,7 @@ describe('filterExcludedTokens', () => {
     const italicToken = { ...exampleTypographyTokens.get('typographyRef1'), name: 'Bold-Italic' } as Token;
     const tokens = [exampleTypographyTokens.get('typographyRef1'), italicToken].filter(Boolean) as Token[];
 
-    const filteredTokens = filterExcludedTokens(tokens);
+    const filteredTokens = filterExcludedTokens(tokens, []);
 
     expect(filteredTokens).toStrictEqual([exampleTypographyTokens.get('typographyRef1')]);
   });
@@ -41,7 +41,7 @@ describe('filterExcludedTokens', () => {
       exampleTypographyTokens.get('typographyRef1'),
     ].filter(Boolean) as Token[];
 
-    const filteredTokens = filterExcludedTokens(tokens);
+    const filteredTokens = filterExcludedTokens(tokens, []);
 
     expect(filteredTokens).toStrictEqual(tokens);
   });
@@ -54,7 +54,7 @@ describe('filterExcludedTokens', () => {
       exampleTypographyTokens.get('typographyRef2'),
     ].filter(Boolean) as Token[];
 
-    const filteredTokens = filterExcludedTokens(tokens);
+    const filteredTokens = filterExcludedTokens(tokens, []);
     const expectedTokens = [
       exampleDimensionAndStringTokens.get('dimensionRef'),
       exampleTypographyTokens.get('typographyRef1'),

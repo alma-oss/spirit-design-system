@@ -257,7 +257,7 @@ describe('stylesGenerator', () => {
       ({ tokens, hasJsOutput, hasParentPrefix, hasTokenPrefix, expectedStyles }) => {
         const prefixTokens = Array.from(examplePrefixToken.values());
         const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
-        const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
+        const filteredTokens = filterExcludedTokens(Array.from(tokens.values()), tokenGroups);
         const styles = generateStylesFromTokens(
           filteredTokens,
           tokenIndex,
@@ -294,7 +294,7 @@ describe('stylesGenerator', () => {
     it.each(dataProvider)('$description', ({ hasJsOutput, hasTokenPrefix, expectedStyles }) => {
       const prefixTokens = Array.from(examplePrefixToken.values());
       const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
-      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()));
+      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()), tokenGroups);
       const styles = generateCssVariableReferencesFromTokens(
         filteredTokens,
         tokenGroups,

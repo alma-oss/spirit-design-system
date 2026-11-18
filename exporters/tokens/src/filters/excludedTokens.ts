@@ -48,6 +48,6 @@ const excludePredicates = [isFigmaToken, isTypographyLink, isTypographyItalic, i
  * @param tokenGroups - Groups of the tokens, to recognize tokens by their group path.
  * @returns {Token[]} - Array of filtered tokens.
  */
-export const filterExcludedTokens = (tokens: Token[], tokenGroups: TokenGroup[] = []): Token[] => {
+export const filterExcludedTokens = (tokens: Token[], tokenGroups: TokenGroup[]): Token[] => {
   return tokens.filter((token) => !excludePredicates.some((shouldExclude) => shouldExclude(token, tokenGroups)));
 };

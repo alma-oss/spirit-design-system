@@ -31,8 +31,8 @@ export const filterTokensByTypeAndGroup = (
   tokens: Token[],
   type: SourceTokenType,
   group: string,
-  excludeGroupNames?: string[] | null,
-  tokenGroups?: TokenGroup[],
+  excludeGroupNames: string[] | null | undefined,
+  tokenGroups: TokenGroup[],
 ) => {
   const filteredTokens = filterExcludedTokens(tokens, tokenGroups);
 
@@ -52,8 +52,8 @@ export const filterTokensByTypeAndGroup = (
 export const filterTokensByType = (
   tokens: Token[],
   type: SourceTokenType,
-  excludeGroupNames?: string[] | null,
-  tokenGroups?: TokenGroup[],
+  excludeGroupNames: string[] | null | undefined,
+  tokenGroups: TokenGroup[],
 ) => {
   const filteredTokens = filterExcludedTokens(tokens, tokenGroups);
 

@@ -17,7 +17,7 @@ import type { CompositeValue, NumberValue, TokenIndex, TokenValue } from './type
  */
 
 /** Concrete (reference-free) typography members, as the exporter reads them. */
-export type TypographyStyle = {
+export type TypographyMembers = {
   fontFamily: string;
   fontWeight: string;
   fontSize?: NumberValue;
@@ -72,7 +72,7 @@ const requiredString = (composite: CompositeValue, key: string): string => {
  * @param value - A typography composite value
  * @param index - View of the tokens references point into; only needed for a reference the source did not resolve
  */
-export const readTypography = (value: TokenValue, index: TokenIndex = NO_TOKENS): TypographyStyle => {
+export const readTypography = (value: TokenValue, index: TokenIndex = NO_TOKENS): TypographyMembers => {
   const composite = resolveValueDeep(value, index, { trustResolved: true });
 
   if (composite.type !== 'composite') {

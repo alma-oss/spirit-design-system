@@ -264,7 +264,7 @@ describe('tokenHelper', () => {
         exampleDimensionAndStringTokens.get('stringRef'),
       ].filter(Boolean) as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });
@@ -273,7 +273,7 @@ describe('tokenHelper', () => {
       const tokens = Array.from(exampleTypographyTokens.values());
       const expectedTokens = [exampleTypographyTokens.get('typographyRef1')] as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });
@@ -285,7 +285,7 @@ describe('tokenHelper', () => {
         exampleTypographyTokens.get('typographyRef1'),
       ].filter(Boolean) as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
 
       expect(filteredTokens).toStrictEqual(tokens);
     });
@@ -298,7 +298,7 @@ describe('tokenHelper', () => {
         exampleTypographyTokens.get('typographyRef2'),
       ].filter(Boolean) as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
       const expectedTokens = [
         exampleDimensionAndStringTokens.get('dimensionRef'),
         exampleTypographyTokens.get('typographyRef1'),

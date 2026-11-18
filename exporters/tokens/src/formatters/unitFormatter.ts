@@ -52,7 +52,8 @@ export const formatUnitValue = (
   }
 
   const rule = rules.find(
-    (r) => ctx.tokenType !== undefined && r.tokenTypes.includes(ctx.tokenType) && r.shouldConvert(ctx),
+    (candidate) =>
+      ctx.tokenType !== undefined && candidate.tokenTypes.includes(ctx.tokenType) && candidate.shouldConvert(ctx),
   );
   if (!rule) {
     return `${value}${unit}`;

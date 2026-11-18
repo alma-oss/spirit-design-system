@@ -42,6 +42,9 @@ const normalizeFontWeight = (fontWeightText: string): number | string => {
 /**
  * Renders a font size as a quoted string, converted to `rem` when it is in `px` and a base is given.
  *
+ * A missing font size renders as `'0'` (no unit) on purpose: the previous Supernova-based pipeline did the same
+ * (`measure ?? 0`), and the output is kept unchanged.
+ *
  * @param fontSize
  * @param baseFontSize - Font size base to convert `px` to `rem` with, 0 keeps `px`
  */

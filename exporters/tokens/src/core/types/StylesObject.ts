@@ -16,12 +16,14 @@ export type DeviceDimensionMap = Map<string, DeviceDimensionEntries>;
  * A typography style placed in the styles object. The object processors only say what the style is, the writer
  * (see `formatters/stylesObjectFormatter.ts`) renders it as an SCSS map or a JS object.
  */
-export type TypographyStyleLeaf = { kind: 'typography-style'; style: TypographyStyle };
+const TYPOGRAPHY_STYLE_KIND = 'typography-style';
+
+export type TypographyStyleLeaf = { kind: typeof TYPOGRAPHY_STYLE_KIND; style: TypographyStyle };
 
 export const typographyStyleLeaf = (style: TypographyStyle): TypographyStyleLeaf => ({
-  kind: 'typography-style',
+  kind: TYPOGRAPHY_STYLE_KIND,
   style,
 });
 
 export const isTypographyStyleLeaf = (value: unknown): value is TypographyStyleLeaf =>
-  typeof value === 'object' && value !== null && (value as { kind?: unknown }).kind === 'typography-style';
+  typeof value === 'object' && value !== null && (value as { kind?: unknown }).kind === TYPOGRAPHY_STYLE_KIND;
