@@ -1,4 +1,11 @@
-import { removePairQuotes, replaceByConfiguration, toKebabCase, toPlural } from '../stringHelper';
+import {
+  removePairQuotes,
+  replaceByConfiguration,
+  toCamelCase,
+  toKebabCase,
+  toParamCase,
+  toPlural,
+} from '../stringHelper';
 
 const dataProviderItems = [
   ['radius', 'radii'],
@@ -18,6 +25,29 @@ describe('stringHelper', () => {
       const result = toPlural(name);
 
       expect(result).toBe(expected);
+    });
+  });
+
+  describe('toCamelCase', () => {
+    it.each([
+      ['some-name', 'someName'],
+      ['font size', 'fontSize'],
+      ['1a', '_1a'],
+      ['a_b', 'aB'],
+    ])('should convert %s to %s', (name, expected) => {
+      expect(toCamelCase(name)).toBe(expected);
+    });
+  });
+
+  describe('toParamCase', () => {
+    it.each([
+      ['Primary 100', 'primary-100'],
+      ['a b/c', 'a-b-c'],
+      ['fooBar', 'foo-bar'],
+      [['Grid', 'spacing', 'desktop'], 'grid-spacing-desktop'],
+      [['1', '2'], '_1-2'],
+    ])('should convert %s to %s', (name, expected) => {
+      expect(toParamCase(name)).toBe(expected);
     });
   });
 

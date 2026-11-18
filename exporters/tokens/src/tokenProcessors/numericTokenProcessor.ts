@@ -121,7 +121,7 @@ const formatNumberValue = (value: NumberValue, isZeroSource: boolean): string | 
  * Processes numeric tokens (dimension, radius, space, size, fontSize, lineHeight, letterSpacing)
  * that support rem conversion based on font-size-base.
  *
- * Naming stays on the native token (it needs the SDK's `NamingHelper`). The
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874). The
  * value is read through the internal `DesignToken` model via the Supernova
  * adapter's mapper, and the px-to-rem decision runs through the
  * `TransformationEngine`'s `pxToRemRule` (see #DS-2335). The native fallback
