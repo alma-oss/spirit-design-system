@@ -62,6 +62,9 @@
   "devDependencies": {
     "@eslint/compat": "catalog:lint",
     "@eslint/eslintrc": "catalog:lint",
+    "@stryker-mutator/core": "catalog:test",
+    "@stryker-mutator/jest-runner": "catalog:test",
+    "@stryker-mutator/typescript-checker": "catalog:test",
     "@types/jest": "catalog:types",
     "@types/node": "catalog:types",
     "eslint": "catalog:lint",
