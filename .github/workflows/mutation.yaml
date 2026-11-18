@@ -1,0 +1,90 @@
+name: 🧬 Mutation Testing
+
+# Advisory only: the job reports the mutation score but never fails on it (`thresholds.break` is `null`).
+# It is intentionally not called from the main CI workflow, so it cannot block merges.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1' # every Monday at 3:00
+  pull_request:
+    paths:
+      - 'packages/common/**'
+      - '.github/workflows/mutation.yaml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  mutation:
+    name: 🧬 Mutation Testing (common)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      HUSKY: 0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/actions/setup-install
+
+      # Incremental mode reuses results of unchanged mutants, so only changed code is mutated again
+      - name: Restore Stryker incremental cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: packages/common/reports/mutation/incremental.json
+          key: stryker-common-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            stryker-common-${{ github.ref_name }}-
+            stryker-common-main-
+
+      # Incremental mode can keep stale results for mutants in top-level (static) code, so the scheduled run
+      # ignores the cache and re-tests everything. Pull requests and manual runs reuse it for speed.
+      - name: Mutation Tests
+        env:
+          STRYKER_FORCE: ${{ github.event_name == 'schedule' && '--force' || '' }}
+        run: yarn workspace @alma-oss/spirit-common test:mutation $STRYKER_FORCE
+
+      - name: Save Stryker incremental cache
+        if: always()
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: packages/common/reports/mutation/incremental.json
+          key: stryker-common-${{ github.ref_name }}-${{ github.sha }}
+
+      - name: Summarize mutation score
+        if: always()
+        run: |
+          report=packages/common/reports/mutation/mutation.json
+          if [ -f "$report" ]; then
+            node --input-type=module -e "
+              import { readFileSync } from 'node:fs';
+              const { files } = JSON.parse(readFileSync('$report', 'utf8'));
+              const counts = {};
+              for (const file of Object.values(files)) {
+                for (const { status } of file.mutants) counts[status] = (counts[status] ?? 0) + 1;
+              }
+              const detected = (counts.Killed ?? 0) + (counts.Timeout ?? 0);
+              const total = detected + (counts.Survived ?? 0) + (counts.NoCoverage ?? 0);
+              const score = total ? ((detected / total) * 100).toFixed(2) : 'n/a';
+              console.log('### 🧬 Mutation score (common): ' + score + '%\n');
+              console.log('| Status | Mutants |\n| --- | --- |');
+              for (const [status, count] of Object.entries(counts)) console.log('| ' + status + ' | ' + count + ' |');
+            " >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload mutation report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: mutation-report-common
+          path: |
+            packages/common/reports/mutation/index.html
+            packages/common/reports/mutation/mutation.json
+          if-no-files-found: ignore
+          retention-days: 14

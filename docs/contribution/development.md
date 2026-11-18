@@ -63,19 +63,20 @@ Afterwards, you should be good to go!
 
 While working on Spirit, here are tasks that you might want to run:
 
-| Command         | Level        | Usage                                                                             |
-| --------------- | ------------ | --------------------------------------------------------------------------------- |
-| `build`         | top, package | Compiles package for the production                                               |
-| `start`         | top, package | Start development server if available                                             |
-| `format`        | top          | Check if files have been formatted using Prettier                                 |
-| `format:fix`    | top          | Check if files have been formatted using Prettier, fix formatting issues in files |
-| `test`          | top, package | Executes all package(s) tests (linting, types checking, and unit testing)         |
-| `test:unit`     | top, package | Executes units tests only (top level: only for projects affected against `main`)  |
-| `test:unit:all` | top          | Executes units tests of all projects                                              |
-| `test:e2e`      | top          | Executes end-to-end tests only                                                    |
-| `lint`          | top, package | Executes linting using ESLint                                                     |
-| `lint:fix`      | top, package | Executes linting using ESLint , fix linting issues in files                       |
-| `types`         | top, package | Executes type checking using TypeScript Compiler                                  |
+| Command         | Level        | Usage                                                                                     |
+| --------------- | ------------ | ----------------------------------------------------------------------------------------- |
+| `build`         | top, package | Compiles package for the production                                                       |
+| `start`         | top, package | Start development server if available                                                     |
+| `format`        | top          | Check if files have been formatted using Prettier                                         |
+| `format:fix`    | top          | Check if files have been formatted using Prettier, fix formatting issues in files         |
+| `test`          | top, package | Executes all package(s) tests (linting, types checking, and unit testing)                 |
+| `test:unit`     | top, package | Executes units tests only (top level: only for projects affected against `main`)          |
+| `test:unit:all` | top          | Executes units tests of all projects                                                      |
+| `test:e2e`      | top          | Executes end-to-end tests only                                                            |
+| `test:mutation` | package      | Executes mutation tests (pilot, `packages/common` only, see [Mutation Testing][mutation]) |
+| `lint`          | top, package | Executes linting using ESLint                                                             |
+| `lint:fix`      | top, package | Executes linting using ESLint , fix linting issues in files                               |
+| `types`         | top, package | Executes type checking using TypeScript Compiler                                          |
 
 In addition, you can use `yarn` to run `bin` files using the `yarn <bin>` syntax.
 For example, if you wanted to use `lerna` to run a script in every package you could do the following:
@@ -92,5 +93,6 @@ yarn lerna run build
 [lerna]: https://lerna.js.org/
 [make]: https://www.gnu.org/software/make/manual/make.html
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
+[mutation]: ./mutation-testing.md
 [nx]: https://nx.dev/
 [yarn-workspaces]: https://yarnpkg.com/lang/en/docs/workspaces/
