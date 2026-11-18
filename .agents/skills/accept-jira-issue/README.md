@@ -52,13 +52,13 @@ The skill works in any agent that reads `.agents/skills`. It needs:
 
 | Capability  | Preferred              | Fallback                                                             |
 | ----------- | ---------------------- | -------------------------------------------------------------------- |
-| Jira        | Atlassian MCP server   | —                                                                    |
+| Jira        | Jira MCP server        | REST with `JIRA_PERSONAL_TOKEN`                                      |
 | GitHub      | GitHub MCP server      | `gh` CLI, authenticated                                              |
 | Browser     | Any browser automation | `scripts/verify.mjs` (Playwright from the repository + local Chrome) |
-| Attachments | Atlassian MCP server   | —                                                                    |
+| Attachments | —                      | `scripts/jira-attach.sh` with `JIRA_PERSONAL_TOKEN`                  |
 
-- Jira is Atlassian Cloud (`almacareer.atlassian.net`); no VPN is needed.
-- The Atlassian MCP server must be signed in. No API token or environment variable is required.
+- Jira is on-prem and requires the company VPN.
+- `JIRA_PERSONAL_TOKEN` is a Jira personal access token (Jira → Profile → Personal Access Tokens). Store it however you prefer — export it in your shell profile, keep it in a git-ignored `.env.local`, or inject it from a secret manager (for example `op run`, `doppler run`, or your OS keychain).
 - Run `yarn install` so `@playwright/test` is available. The script uses your installed Google Chrome and falls back to the Playwright browser (`yarn playwright install chromium`).
 
 ## Key Principles
@@ -71,6 +71,6 @@ The skill works in any agent that reads `.agents/skills`. It needs:
 ## See Also
 
 - **SKILL.md** — Full workflow, verdict rules, example report
-- **references/verification-recipes.md** — Jira/GitHub/Netlify/browser operations and the fallbacks for each
-- **references/jira-comment-template.md** — Accept, clarify, and decline comment templates as HTML for Jira Cloud
+- **references/verification-recipes.md** — Jira/GitHub/Netlify/browser commands and the fallbacks for each
+- **references/jira-comment-template.md** — Accept, clarify, and decline comment templates that survive Jira's markup conversion
 - Related skill: `/spirit:create-jira-issue` — Writing tickets with measurable acceptance criteria
