@@ -420,6 +420,7 @@ __metadata:
     "@supernovaio/sdk-exporters": "catalog:design-tools"
     "@swc/core": "catalog:build"
     "@swc/jest": "catalog:test"
+    change-case: "catalog:design-tools"
     eslint: "catalog:lint"
     eslint-config-spirit: "workspace:^"
     jest: "catalog:test"

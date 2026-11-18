@@ -12,7 +12,7 @@ type StringTokenProcessorContext = {
 /**
  * Processes string tokens (simple text values).
  *
- * Naming stays on the native token (it needs the SDK's `NamingHelper`), but
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874), but
  * the value is read through the internal `DesignToken` model via the
  * Supernova adapter's mapper - the first processor migrated per the
  * source-agnostic token exporter refactor (#DS-2335).

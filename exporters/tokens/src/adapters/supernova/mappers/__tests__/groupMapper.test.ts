@@ -12,6 +12,7 @@ describe('groupMapper', () => {
         id: '2',
         name: 'Grid',
         path: [],
+        isRoot: false,
         parentId: 'parent2',
       });
     });
