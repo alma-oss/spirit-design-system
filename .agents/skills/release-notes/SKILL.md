@@ -165,11 +165,11 @@ Do not restate every entry. Write for a developer who reads Slack and wants to k
 
 ### Step 6 — Fetch "What's Next" From Jira
 
-Use the Jira MCP to find upcoming work:
+Use the Atlassian MCP (`cloudId: almacareer.atlassian.net`) to find upcoming work. The operations below run via `executeRead`:
 
-1. `jira_get_agile_boards` — find the board for project key `DS`
-2. `jira_get_sprints_from_board` — get the active sprint and the next sprint(s) (look for state `active` and `future`)
-3. `jira_get_sprint_issues` — for each relevant sprint, fetch issues
+1. `listJiraBoards` with `projectKeyOrId: "DS"` — find the Scrum board (`Design System (SCRUM)`; the other board is Kanban)
+2. `listJiraBoardSprints` with the board id and `state: "active"`, then again with `state: "future"` — get the active sprint and the next sprint(s)
+3. `getJiraBoardSprintData` with the board id and `sprintId` — for each relevant sprint, fetch its issues (key, summary and issue type are enough to pick user-visible features)
 
 From the issues, select only items that represent **user-visible new features or components** (new components, new props/variants, stabilization of UNSTABLE components). Skip infrastructure, testing, documentation, and tooling work.
 
