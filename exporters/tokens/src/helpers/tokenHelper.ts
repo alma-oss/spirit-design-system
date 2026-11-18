@@ -1,4 +1,3 @@
-import { NamingHelper, StringCase } from '@supernovaio/export-helpers';
 import {
   ColorToken,
   DimensionToken,
@@ -11,7 +10,9 @@ import {
   TokenType,
 } from '@supernovaio/sdk-exporters';
 import { FONT_SIZE_BASE_DEFAULT } from '../constants';
-import { getDeviceAlias, getDeviceTokenValue } from './deviceHelpers';
+import { getVariableName } from './namingHelper';
+import { getDeviceAlias } from './deviceHelpers';
+import { getTokenNamePath } from './groupHelper';
 import { toCamelCase } from './stringHelper';
 import { makeRelativeUnit } from './unitHelper';
 
@@ -31,17 +32,15 @@ export const getParentOriginName = (token: Token): string | undefined =>
   getOriginName(token)?.split('/').slice(0, -1).join('/');
 
 export const tokenVariableName = (token: Token, tokenGroups: Array<TokenGroup>, hasParentPrefix: boolean): string => {
-  let parent;
-  if (hasParentPrefix) {
-    parent = tokenGroups.find((group) => group.id === token.parentGroupId)!;
-  } else {
-    parent = null;
-  }
-
-  const devicePart = getDeviceAlias(token);
-  const variableName = NamingHelper.codeSafeVariableNameForToken(token, StringCase.paramCase, parent, '');
-
-  return devicePart !== '' ? getDeviceTokenValue(variableName, devicePart) : variableName;
+  // Naming itself is source-independent (see `namingHelper`); this only reads the native token into its inputs.
+  return getVariableName(
+    {
+      name: token.name,
+      groupPath: getTokenNamePath(token, tokenGroups),
+      device: getDeviceAlias(token) || undefined,
+    },
+    hasParentPrefix,
+  );
 };
 
 export const normalizeZeroValueWithUnit = (

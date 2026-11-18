@@ -5,5 +5,6 @@ export const mapGroup = (group: SupernovaTokenGroup): TokenGroup => ({
   id: group.id,
   name: group.name,
   path: group.path,
+  isRoot: group.isRoot,
   parentId: group.parentGroupId ?? undefined,
 });

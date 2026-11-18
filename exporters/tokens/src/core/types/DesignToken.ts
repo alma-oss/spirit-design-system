@@ -30,6 +30,11 @@ export type TokenMetadata = {
   device?: string;
   /** Group/collection hierarchy the token belongs to, root first. */
   groupPath: string[];
+  /**
+   * The part of `groupPath` that goes into the token's variable name. Only needed by a source whose root groups are
+   * containers of a token type and not a part of a name (e.g. Supernova); `groupPath` is used when it is missing.
+   */
+  namePath?: string[];
 };
 
 export type SourceMetadata = {

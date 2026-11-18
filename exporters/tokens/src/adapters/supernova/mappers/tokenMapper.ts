@@ -16,7 +16,7 @@ import {
 } from '@supernovaio/sdk-exporters';
 import { PX_UNIT } from '../../../constants';
 import { getDeviceAlias } from '../../../helpers/deviceHelpers';
-import { getTokenGroupPath } from '../../../helpers/groupHelper';
+import { getTokenGroupPath, getTokenNamePath } from '../../../helpers/groupHelper';
 import { unitToCss } from '../../../helpers/unitHelper';
 import {
   type ColorValue,
@@ -71,6 +71,7 @@ const buildMetadata = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): T
   brandId: token.brandId,
   device: getDeviceAlias(token) || undefined,
   groupPath: getTokenGroupPath(token, tokenGroups),
+  namePath: getTokenNamePath(token, tokenGroups),
 });
 
 const buildSource = (token: Token): SourceMetadata => ({

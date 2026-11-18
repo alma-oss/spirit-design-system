@@ -1,4 +1,4 @@
-import { NamingHelper, StringCase } from '@supernovaio/export-helpers';
+import { camelCase, paramCase } from 'change-case';
 
 export const toPlural = (name: string): string => {
   const specialCases: Record<string, string> = {
@@ -9,7 +9,25 @@ export const toPlural = (name: string): string => {
   return specialCases[name] || (name.endsWith('s') ? name : `${name}s`);
 };
 
-export const toCamelCase = (name: string): string => NamingHelper.codeSafeVariableName(name, StringCase.camelCase);
+/**
+ * Makes a name safe to be used as a code identifier: unsafe characters become `_`, the case is applied, the remaining
+ * `_` are dropped and a name that does not start with a letter gets a `_` prefix.
+ *
+ * Source-independent replacement of Supernova's `NamingHelper.codeSafeVariableName` (same result).
+ *
+ * @param parts
+ * @param convertCase
+ */
+const toCodeSafeName = (parts: string | string[], convertCase: (value: string) => string): string => {
+  const name = convertCase((typeof parts === 'string' ? parts : parts.join(' ')).replace(/[^a-zA-Z0-9_-]/g, '_'));
+  const withoutUnderscores = name.replace(/_/g, '');
+
+  return /^[^a-zA-Z]/.test(withoutUnderscores) ? `_${withoutUnderscores}` : withoutUnderscores;
+};
+
+export const toCamelCase = (name: string): string => toCodeSafeName(name, camelCase);
+
+export const toParamCase = (parts: string | string[]): string => toCodeSafeName(parts, paramCase);
 
 export const formatLayerSuffix = (layer: number): string => `-${layer.toString().padStart(2, '0')}`;
 

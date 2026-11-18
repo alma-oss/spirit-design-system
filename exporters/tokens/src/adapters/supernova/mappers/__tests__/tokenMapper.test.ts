@@ -23,7 +23,7 @@ import { exampleDimensionAndStringTokens } from '../../../../../tests/fixtures/e
 import { exampleColorsTokens } from '../../../../../tests/fixtures/exampleColorTokens';
 import { exampleGradientTokens } from '../../../../../tests/fixtures/exampleGradientTokens';
 import { exampleShadowTokens } from '../../../../../tests/fixtures/exampleShadowTokens';
-import { exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
+import { createGroup, exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens } from '../../../../../tests/fixtures/exampleTypographyTokens';
 import { TokenTypeEnum } from '../../../../core/types';
 import { mapToken } from '../tokenMapper';
@@ -45,6 +45,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid'],
+          namePath: ['Grid'],
         },
         source: {
           adapter: 'supernova',
@@ -69,6 +70,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -110,6 +112,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -140,6 +143,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -170,6 +174,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -200,6 +205,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -230,6 +236,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -260,6 +267,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -290,6 +298,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -326,6 +335,7 @@ describe('tokenMapper', () => {
           brandId: undefined,
           device: undefined,
           groupPath: ['Grid', 'spacing'],
+          namePath: ['Grid', 'spacing'],
         },
         source: {
           adapter: 'supernova',
@@ -594,6 +604,20 @@ describe('tokenMapper', () => {
       const result = mapToken(token, exampleGroups);
 
       expect(result?.metadata.groupPath).toEqual([]);
+      expect(result?.metadata.namePath).toEqual([]);
+    });
+
+    it('should keep the name of a root group in the group path but not in the name path', () => {
+      const token = {
+        ...(exampleDimensionAndStringTokens.get('stringRef') as StringToken),
+        parentGroupId: 'root-group',
+      };
+      const rootGroup = { ...createGroup('root-group', 'Color', []), isRoot: true };
+
+      const result = mapToken(token, [rootGroup]);
+
+      expect(result?.metadata.groupPath).toEqual(['Color']);
+      expect(result?.metadata.namePath).toEqual([]);
     });
   });
 });
