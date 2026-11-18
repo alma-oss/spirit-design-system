@@ -57,6 +57,7 @@
     "test:unit": "jest",
     "test:unit:watch": "yarn test:unit --watchAll",
     "test:unit:coverage": "yarn test:unit --coverage",
+    "test:mutation": "stryker run",
     "types": "tsc"
   },
   "devDependencies": {

@@ -43,6 +43,10 @@
     "build": {
       "cache": true
     },
+    "test:mutation": {
+      "cache": false,
+      "inputs": ["default", "^default"]
+    },
     "test:unit": {
       "inputs": ["default", "^default"]
     },
