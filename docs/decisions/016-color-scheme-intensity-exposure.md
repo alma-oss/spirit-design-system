@@ -6,6 +6,8 @@ Status: accepted
 
 Amends: [012](012-color-schemes.md)
 
+Amended by: [017](017-color-scheme-palette-and-local-color-context.md)
+
 👉 This is the decision record. For a practical guide to using color schemes, see
 [Color Schemes](https://github.com/alma-oss/spirit-design-system/blob/main/docs/content/color-schemes.md).
 

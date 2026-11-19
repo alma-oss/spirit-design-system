@@ -11,6 +11,7 @@ $border-radius: var(
 );
 $breakpoints: tokens.$breakpoints;
 $column-gap: tokens.$space-400;
+$plain-background-color: tokens.$component-button-plain-state-default;
 
 $color-component-button-dictionary: (
     component-button: map.keys(map.get(tokens.$component-colors, button)),

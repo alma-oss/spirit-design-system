@@ -1,0 +1,116 @@
+// Getters (`get-*`) and setters (`set`, `set-*`) for local color context CSS custom properties (`--{prefix}local-*`).
+
+@use '@tokens' as tokens;
+
+@mixin set($name, $value, $important: false) {
+    @if $important {
+        // stylelint-disable-next-line declaration-no-important -- Important is requested by caller (e.g. utilities).
+        --#{tokens.$css-variable-prefix}local-#{$name}: #{$value} !important;
+    } @else {
+        --#{tokens.$css-variable-prefix}local-#{$name}: #{$value};
+    }
+}
+
+@function get($name, $fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-#{$name});
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-#{$name}, $fallback);
+}
+
+@function get-color($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-color);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-color, $fallback);
+}
+
+@mixin set-color($value, $important: false) {
+    @include set('color', $value, $important);
+}
+
+@function get-color-basic($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-color-basic);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-color-basic, $fallback);
+}
+
+@mixin set-color-basic($value, $important: false) {
+    @include set('color-basic', $value, $important);
+}
+
+@function get-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-color-subtle, $fallback);
+}
+
+@mixin set-color-subtle($value, $important: false) {
+    @include set('color-subtle', $value, $important);
+}
+
+@function get-border-color($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-border-color);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-border-color, $fallback);
+}
+
+@mixin set-border-color($value, $important: false) {
+    @include set('border-color', $value, $important);
+}
+
+@function get-border-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-border-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-border-color-subtle, $fallback);
+}
+
+@mixin set-border-color-subtle($value, $important: false) {
+    @include set('border-color-subtle', $value, $important);
+}
+
+@function get-background-color($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-background-color);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-background-color, $fallback);
+}
+
+@mixin set-background-color($value, $important: false) {
+    @include set('background-color', $value, $important);
+}
+
+@function get-background-color-basic($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-background-color-basic);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-background-color-basic, $fallback);
+}
+
+@mixin set-background-color-basic($value, $important: false) {
+    @include set('background-color-basic', $value, $important);
+}
+
+@function get-background-color-subtle($fallback: null) {
+    @if not $fallback {
+        @return var(--#{tokens.$css-variable-prefix}local-background-color-subtle);
+    }
+
+    @return var(--#{tokens.$css-variable-prefix}local-background-color-subtle, $fallback);
+}
+
+@mixin set-background-color-subtle($value, $important: false) {
+    @include set('background-color-subtle', $value, $important);
+}

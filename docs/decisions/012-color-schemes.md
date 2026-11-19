@@ -4,7 +4,7 @@ Date: 2026-07-03
 
 Status: accepted
 
-Amended by: [016](016-color-scheme-intensity-exposure.md)
+Amended by: [016](016-color-scheme-intensity-exposure.md), [017](017-color-scheme-palette-and-local-color-context.md)
 
 👉 This is the decision record. For a practical guide to using color schemes, see [Color Schemes][color-schemes-guide].
 
