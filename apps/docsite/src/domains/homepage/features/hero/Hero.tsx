@@ -47,7 +47,7 @@ const personas = [
   },
   {
     title: 'For QA & A11y',
-    description: 'Discover WCAG 2.1 guidelines, keyboard navigation patterns, and screen reader setup.',
+    description: 'Discover WCAG 2.2 guidelines, keyboard navigation patterns, and screen reader setup.',
     animation: '/lottie/analysis.json',
   },
 ];

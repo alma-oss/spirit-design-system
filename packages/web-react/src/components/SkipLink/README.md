@@ -35,7 +35,7 @@ If you need to provide multiple skip links, wrap them in a `<nav>` element:
 ### 👍 When to Use
 
 - Provide a way for sighted keyboard or screen reader users to bypass repetitive (e.g. main navigation links) or any other structurally complex content (e.g. tables) and access the main content directly.
-- To satisfy the accessibility standard [WCAG2.0 Guideline 2.4.1 Bypass Blocks][wcag-bypass-blocks].
+- To satisfy the accessibility standard [WCAG 2.2 Guideline 2.4.1 Bypass Blocks][wcag-bypass-blocks].
 
 ### 👎 When Not to Use
 
@@ -49,4 +49,4 @@ If you need to provide multiple skip links, wrap them in a `<nav>` element:
 | `href`        | `string`                                      | —       | ✕        | SkipLink's href attribute   |
 | `target`      | \[`_blank` \| `_self` \| `_parent` \| `_top`] | —       | ✕        | SkipLink's target attribute |
 
-[wcag-bypass-blocks]: https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-skip.html
+[wcag-bypass-blocks]: https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html

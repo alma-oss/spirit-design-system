@@ -145,14 +145,14 @@ import { test } from '@playwright/test';
 import {
   assertNoA11yViolations,
   getServerUrl,
-  getWCAG2AAConfig,
+  getWcagConfig,
   waitForPageLoad,
   WEB_REACT_COMPONENTS_URI,
   WEB_REACT_SERVER_URL,
 } from '../../helpers';
 
 test.describe('Component Accessibility', () => {
-  const a11yConfig = getWCAG2AAConfig();
+  const a11yConfig = getWcagConfig();
 
   test('Component has no a11y violations', async ({ page }) => {
     await page.goto(`${WEB_REACT_SERVER_URL}${WEB_REACT_COMPONENTS_URI}/ComponentName/`);
@@ -188,25 +188,36 @@ await assertNoA11yViolations(page, {
 
 #### Testing Specific WCAG Levels
 
+Axe tags are not cumulative: each rule carries only the tag of the WCAG version that introduced it. Covering WCAG 2.2 AA
+therefore means combining all of them. `wcag22aa` alone would run only the `target-size` rule.
+
+| Tag        | Rules introduced in |
+| ---------- | ------------------- |
+| `wcag2a`   | WCAG 2.0 A          |
+| `wcag2aa`  | WCAG 2.0 AA         |
+| `wcag21a`  | WCAG 2.1 A          |
+| `wcag21aa` | WCAG 2.1 AA         |
+| `wcag22aa` | WCAG 2.2 AA         |
+
 ```typescript
-// WCAG 2.1 A only
+// WCAG 2.2 A only (axe has no wcag22a rules, 2.2 adds only AA rules)
 await assertNoA11yViolations(page, {
-  withTags: ['wcag2a'],
+  withTags: ['wcag2a', 'wcag21a'],
 });
 
-// WCAG 2.1 AAA
+// WCAG 2.2 AA plus the AAA rules axe provides (it has none for 2.1 and 2.2)
 await assertNoA11yViolations(page, {
-  withTags: ['wcag2a', 'wcag2aa', 'wcag2aaa'],
+  withTags: ['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag22aa'],
 });
 ```
 
-#### Using Default WCAG 2.1 AA Configuration
+#### Using Default WCAG 2.2 AA Configuration
 
 ```typescript
-import { getWCAG2AAConfig } from '../../helpers';
+import { getWcagConfig } from '../../helpers';
 
-// Includes WCAG 2.1 AA tags and common exclusions
-const a11yConfig = getWCAG2AAConfig();
+// Includes WCAG 2.2 AA tags and common exclusions
+const a11yConfig = getWcagConfig();
 await assertNoA11yViolations(page, a11yConfig);
 ```
 
@@ -217,7 +228,7 @@ For components with multiple states (modals, dropdowns, accordions, tooltips), t
 ```typescript
 test.describe('Modal Accessibility', () => {
   const serverUrl = WEB_REACT_SERVER_URL;
-  const a11yConfig = getWCAG2AAConfig();
+  const a11yConfig = getWcagConfig();
 
   test('Modal closed state has no violations', async ({ page }) => {
     await page.goto(`${WEB_REACT_SERVER_URL}${WEB_REACT_COMPONENTS_URI}/Modal/`);
@@ -308,7 +319,7 @@ Located in `tests/helpers/a11y/`:
 
 - **`runA11yScan(page, options)`**: Runs an accessibility scan and returns formatted results without throwing errors
 - **`assertNoA11yViolations(page, options)`**: Asserts no violations; throws detailed error if any are found
-- **`getWCAG2AAConfig()`**: Returns default [WCAG 2.1 AA][wcag-guidelines] configuration with common exclusions
+- **`getWcagConfig()`**: Returns default [WCAG 2.2 AA][wcag-guidelines] configuration with common exclusions
 - **`getCommonExclusions()`**: Returns array of commonly excluded selectors
 - **`formatViolations(violations)`**: Formats raw axe violations into a more readable structure
 - **`formatViolationError(results)`**: Creates a detailed error message from scan results
@@ -321,4 +332,4 @@ All functions are exported from `tests/helpers/a11y/index.ts` for convenient imp
 [e2e-guideline-run-tests]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/e2e-testing.md#running-tests
 [jest-axe]: https://github.com/nickcolley/jest-axe
 [playwright-docs]: https://playwright.dev/docs/intro
-[wcag-guidelines]: https://www.w3.org/WAI/WCAG21/quickref/
+[wcag-guidelines]: https://www.w3.org/WAI/WCAG22/quickref/

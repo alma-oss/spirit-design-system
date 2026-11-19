@@ -125,4 +125,4 @@ All three converters default to **4 decimal places** and strip trailing zeros:
 The token exporter uses the same precision, so the values in `packages/design-tokens/src` match
 what these utilities produce.
 
-[wcag-resize-text]: https://www.w3.org/WAI/WCAG21/Understanding/resize-text
+[wcag-resize-text]: https://www.w3.org/WAI/WCAG22/Understanding/resize-text

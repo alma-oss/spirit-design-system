@@ -34,7 +34,7 @@ The majority of accessibility issues are already guaranteed by implementation. I
 
 ### **Color and Contrast**
 
-- Marker colors, connector lines, and text must meet WCAG 2.1 contrast guidelines.
+- Marker colors, connector lines, and text must meet WCAG 2.2 contrast guidelines.
 
 - Don’t use color as the only way of distinguishing between steps (e.g. completed vs. active). Use text, icons, or additional indicators.
 

@@ -137,4 +137,4 @@ When reviewing AI-generated changes, additionally check for:
 - **Use design tokens** instead of hardcoded values
 - **Include comprehensive error boundaries** where needed
 - **Optimize for tree-shaking** and bundle size
-- **Follow accessibility best practices** (WCAG 2.1 AA)
+- **Follow accessibility best practices** (WCAG 2.2 AA)
