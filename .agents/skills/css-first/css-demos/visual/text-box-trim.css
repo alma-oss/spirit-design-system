@@ -1,0 +1,162 @@
+/**
+ * text-box-trim & text-box-edge — Optical Text Alignment
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/text-box-trim
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/text-box-edge
+ * Reference: https://developer.chrome.com/blog/css-text-box-trim
+ * WebStatus: text-box
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Remove extra whitespace above/below text for pixel-perfect vertical centering
+ * Why: Fonts include invisible leading (half-leading) above and below glyphs —
+ *      this makes padding-based centering look off. text-box-trim removes it.
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   THE PROBLEM — invisible space around text
+
+   Font metrics include:
+   ┌─── ascender line ────────────────┐  ↑ invisible space
+   │   ┌─── cap height ──────────┐    │
+   │   │  Hello World             │    │
+   │   └─── baseline ────────────┘    │
+   └─── descender line ──────────────┘  ↓ invisible space
+
+   Even with padding: 0, text has this built-in space.
+   With equal padding, text looks vertically off-center.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BASIC TRIM — cap to alphabetic baseline
+   The most common use case. Trims to capital letter height.
+
+   text-box-trim:  WHICH edges to trim (trim-start, trim-end, trim-both)
+   text-box-edge:  HOW MUCH to trim (cap, ex, alphabetic, text, ideographic)
+   ========================================================================== */
+
+.optically-centered {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+/* Shorthand — text-box combines both properties */
+.optically-centered-short {
+  text-box: trim-both cap alphabetic;
+}
+
+/* ==========================================================================
+   2. BUTTON — pixel-perfect vertical centering
+   Buttons with equal block padding now look truly centered.
+   ========================================================================== */
+
+.button {
+  padding-block: 0.75rem;
+  padding-inline: 1.5rem;
+  text-box: trim-both cap alphabetic;
+  /* Text now sits exactly in the middle */
+}
+
+/* ==========================================================================
+   3. HEADING FLUSH WITH EDGE
+   Remove top space so heading aligns flush with container top.
+   ========================================================================== */
+
+.card__heading {
+  text-box: trim-start cap alphabetic;
+  /* Only trims the top (start) edge */
+}
+
+/* ==========================================================================
+   4. BADGE / PILL — small text, tight fit
+   ========================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding-block: 0.25rem;
+  padding-inline: 0.5rem;
+  border-radius: 100vmax;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-box: trim-both cap alphabetic;
+}
+
+/* ==========================================================================
+   5. ICON + TEXT ALIGNMENT
+   Trim text to match icon height for perfect inline alignment.
+   ========================================================================== */
+
+.icon-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.icon-label span {
+  text-box: trim-both cap alphabetic;
+}
+
+/* ==========================================================================
+   6. TEXT-BOX-EDGE VALUES REFERENCE
+
+   Keyword        Trims to
+   ──────────     ────────────────────────────────────────
+   cap            Top of capital letters (most common)
+   ex             Top of lowercase x-height
+   text           Font's text-over/text-under metrics
+   ideographic    Ideographic ink bounds (CJK)
+   alphabetic     Baseline for Latin scripts (most common)
+
+   First value  → over (start) edge metric
+   Second value → under (end) edge metric
+
+   Common combos:
+   text-box-edge: cap alphabetic     → most Latin text
+   text-box-edge: ex alphabetic      → lowercase-only text
+   text-box-edge: text text          → full font metrics
+   ========================================================================== */
+
+/* ==========================================================================
+   7. TRIM VARIANTS
+
+   text-box-trim: none        → no trimming (default)
+   text-box-trim: trim-start  → trim over (top in LTR horizontal)
+   text-box-trim: trim-end    → trim under (bottom in LTR horizontal)
+   text-box-trim: trim-both   → trim both edges
+   ========================================================================== */
+
+/* ==========================================================================
+   8. FULL PATTERN — card with optically centered content
+   ========================================================================== */
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: oklch(0.97 0 0);
+}
+
+.feature-card h3 {
+  margin: 0;
+  text-box: trim-start cap alphabetic;
+  font-size: 1.25rem;
+}
+
+.feature-card p {
+  margin-block: 0.75rem 0;
+  text-box: trim-end cap alphabetic;
+  color: oklch(0.5 0 0);
+}
+
+/* ==========================================================================
+   9. @supports FALLBACK
+   ========================================================================== */
+
+@supports not (text-box-trim: trim-both) {
+  .optically-centered,
+  .button,
+  .badge {
+    /* Slightly reduce padding to approximate optical centering */
+    line-height: 1;
+  }
+}

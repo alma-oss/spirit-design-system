@@ -1,0 +1,219 @@
+/**
+ * :target & :focus-within Pseudo-Selectors
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:target
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within
+ * WebStatus: focus-within
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 60+, Firefox 52+, Safari 10.1+
+ *
+ * Task: Highlight anchor-linked sections, animate on navigation,
+ *       and style containers when any child has focus
+ * Why: Pure CSS interactivity without JavaScript — respond to URL hash
+ *      changes and focus state propagation
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. :target — HIGHLIGHT ANCHOR-LINKED SECTION
+   Matches the element whose id matches the URL fragment (#hash).
+   ========================================================================== */
+
+/* Subtle highlight when section is navigated to */
+section:target {
+  outline: 2px solid oklch(0.6 0.15 250);
+  outline-offset: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* ==========================================================================
+   2. :target — ANIMATE ON NAVIGATION
+   Run an entry animation when a section becomes the target.
+   ========================================================================== */
+
+section:target {
+  animation: target-highlight 0.6s ease;
+}
+
+@keyframes target-highlight {
+  from {
+    background-color: oklch(0.9 0.08 80);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+/* ==========================================================================
+   3. :target — TABLE OF CONTENTS ACTIVE STATE
+   Highlight the current section in a sidebar nav using :has() + :target.
+   ========================================================================== */
+
+/* When #about is targeted, highlight its nav link */
+.toc a[href='#about'] {
+  /* static approach — each link styled individually */
+}
+
+/* Dynamic approach with :has() — works for any section */
+nav:has(~ main :target) a {
+  color: oklch(0.5 0 0); /* dim all links */
+}
+
+/* Link pointing to the current :target stays highlighted */
+/* Use :target-current from CSS Carousel for scroll-marker based nav */
+
+/* ==========================================================================
+   4. :target — CSS-ONLY MODAL (no JavaScript)
+
+   HTML:
+     <a href="#modal">Open</a>
+     <div id="modal" class="modal">
+       <a href="#">Close</a>
+       <p>Modal content</p>
+     </div>
+
+   Note: Prefer <dialog> + Popover API for production.
+   This pattern is useful for zero-JS environments.
+   ========================================================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: oklch(0 0 0 / 0.5);
+  place-items: center;
+}
+
+.modal:target {
+  display: grid; /* show when #modal is in URL */
+}
+
+/* ==========================================================================
+   5. :target — ACCORDION / TAB SWITCHING (no JS)
+
+   HTML:
+     <a href="#tab1">Tab 1</a>
+     <a href="#tab2">Tab 2</a>
+     <div id="tab1" class="tab-panel">Content 1</div>
+     <div id="tab2" class="tab-panel">Content 2</div>
+   ========================================================================== */
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel:target {
+  display: block;
+}
+
+/* ==========================================================================
+   6. :focus-within — HIGHLIGHT FORM ON INTERACTION
+   Matches when the element OR any descendant has focus.
+   ========================================================================== */
+
+.form-card {
+  padding: 1.5rem;
+  border: 2px solid oklch(0.85 0 0);
+  border-radius: 0.5rem;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.form-card:focus-within {
+  border-color: oklch(0.6 0.15 260);
+  box-shadow: 0 0 0 4px oklch(0.6 0.15 260 / 0.15);
+}
+
+/* ==========================================================================
+   7. :focus-within — FLOATING LABEL PATTERN
+   Move label up when input inside is focused.
+   ========================================================================== */
+
+.input-group {
+  position: relative;
+}
+
+.input-group label {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0.75rem;
+  translate: 0 -50%;
+  transition:
+    translate 0.2s,
+    font-size 0.2s;
+  pointer-events: none;
+  color: oklch(0.6 0 0);
+}
+
+.input-group:focus-within label {
+  translate: 0 -150%;
+  font-size: 0.75rem;
+  color: oklch(0.5 0.15 260);
+}
+
+/* ==========================================================================
+   8. :focus-within — SEARCH BAR EXPAND
+   Expand search when user focuses the input inside.
+   ========================================================================== */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  inline-size: 12rem;
+  transition: inline-size 0.3s ease;
+}
+
+.search-bar:focus-within {
+  inline-size: 20rem;
+}
+
+/* ==========================================================================
+   9. :focus-within — NAV DROPDOWN KEEP-OPEN
+   Dropdown stays visible while any item inside has focus.
+   Great for keyboard accessibility.
+   ========================================================================== */
+
+.nav-item .dropdown {
+  display: none;
+}
+
+.nav-item:focus-within .dropdown {
+  display: block; /* stays open during tab navigation */
+}
+
+/* ==========================================================================
+   10. :focus-within — TABLE ROW HIGHLIGHT
+   Highlight entire row when any cell/input is focused.
+   ========================================================================== */
+
+.data-table tr:focus-within {
+  background: oklch(0.95 0.03 260);
+}
+
+/* ==========================================================================
+   11. COMBINING :target + :focus-within + scroll-margin
+   Full pattern for accessible section navigation.
+   ========================================================================== */
+
+:root {
+  --nav-block-size: 4rem;
+}
+
+section[id] {
+  scroll-margin-block-start: var(--nav-block-size);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+/* Highlight when navigated to via anchor */
+section[id]:target {
+  animation: target-highlight 0.6s ease;
+}
+
+/* Highlight when user interacts inside */
+section[id]:focus-within {
+  background-color: oklch(0.97 0.02 260);
+}

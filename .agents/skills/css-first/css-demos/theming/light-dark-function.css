@@ -1,0 +1,44 @@
+/**
+ * Dark Mode with light-dark() Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+ *
+ * WebStatus: light-dark
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 123+, Firefox 120+, Safari 17.5+
+ *
+ * Task: Implement dark mode support
+ * Why: Native CSS dark mode with light-dark() function and color-scheme property.
+ *      No JavaScript or media queries needed for basic theming.
+ * Last verified: 2026-08-11
+ */
+
+:root {
+  color-scheme: light dark; /* Tell browser about supported color schemes */
+}
+
+.card {
+  background: light-dark(white, #1a1a1a);
+  color: light-dark(#333, #f0f0f0);
+  border: 1px solid light-dark(#ddd, #444);
+}
+
+.button {
+  background: light-dark(#0066cc, #4d94ff);
+  color: light-dark(white, #000);
+}
+
+.button:hover {
+  background: light-dark(#0052a3, #66a3ff);
+}
+
+/* Accent colors also adapt */
+.link {
+  color: light-dark(#0066cc, #66a3ff);
+}
+
+/* Shadows adapt to theme */
+.card-elevated {
+  box-shadow: light-dark(0 2px 8px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.5));
+}

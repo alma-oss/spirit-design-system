@@ -1,0 +1,28 @@
+/**
+ * SVG path-length CSS property
+ *
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Spec: https://svgwg.org/svg2-draft/geometry.html
+ * Baseline: 🟣 Experimental / unknown
+ * Support: Chrome 150+ per release notes; verify the target Chrome build
+ * Last verified: 2026-08-10
+ *
+ * Task: Normalize SVG geometry length for predictable dash animations.
+ */
+
+/* Keep pathLength="100" on the SVG geometry as the interoperable fallback. */
+
+.progress-ring circle,
+.signature path {
+  path-length: 100;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--progress, 0));
+  transition: stroke-dashoffset 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-ring circle,
+  .signature path {
+    transition: none;
+  }
+}

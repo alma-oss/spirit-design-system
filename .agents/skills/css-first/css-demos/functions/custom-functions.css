@@ -1,0 +1,141 @@
+/**
+ * CSS Custom Functions (@function) and Mixins (@mixin)
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Custom_functions_and_mixins
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@function
+ * Spec: https://drafts.csswg.org/css-mixins-1/
+ * WebStatus: function
+ * Baseline: 🟡 Limited Availability
+ *
+ * Task: Create reusable CSS functions that accept arguments and return values
+ * Why: @function brings DRY logic to CSS — define calculations, theme tokens,
+ *      and responsive values once, reuse everywhere with type safety
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC @function — define and call a custom function
+   ========================================================================== */
+
+/* Define: --spacing(multiplier) returns a rem value */
+@function --spacing(--n: 1) {
+  result: calc(var(--n) * 0.25rem);
+}
+
+.card {
+  padding: --spacing(6); /* 1.5rem */
+  margin-block-end: --spacing(4); /* 1rem */
+  gap: --spacing(2); /* 0.5rem */
+}
+
+/* ==========================================================================
+   2. TYPED PARAMETERS — restrict argument and return types
+   ========================================================================== */
+
+@function --fluid-size(--min: 1rem, --max: 2rem, --min-vw: 320, --max-vw: 1200) {
+  result: clamp(
+    var(--min),
+    var(--min) + (var(--max) - var(--min)) * (100vw - var(--min-vw) * 1px) / (var(--max-vw) - var(--min-vw)) * 1px,
+    var(--max)
+  );
+}
+
+h1 {
+  font-size: --fluid-size(1.5rem, 3rem);
+}
+
+h2 {
+  font-size: --fluid-size(1.25rem, 2rem);
+}
+
+/* ==========================================================================
+   3. CONDITIONAL LOGIC — if() inside functions
+   ========================================================================== */
+
+@function --surface-color(--variant: default) {
+  result: if(
+    style(--variant: primary): light-dark(#0066cc, #3399ff) ; style(--variant: muted): light-dark(#f5f5f5, #222) ;
+      style(--variant: danger): light-dark(#cc0000, #ff4444) ; else: light-dark(#fff, #111) ;
+  );
+}
+
+.alert {
+  background-color: --surface-color(danger);
+}
+
+/* ==========================================================================
+   4. COMPOSING FUNCTIONS — functions calling functions
+   ========================================================================== */
+
+@function --icon-size(--scale: 1) {
+  result: calc(var(--scale) * 1.5rem);
+}
+
+@function --icon-spacing(--scale: 1) {
+  result: --spacing(calc(var(--scale) * 2));
+}
+
+.icon-btn {
+  inline-size: --icon-size(2);
+  block-size: --icon-size(2);
+  padding: --icon-spacing(1);
+}
+
+/* ==========================================================================
+   5. DESIGN TOKEN FUNCTIONS — systematic values
+   ========================================================================== */
+
+@function --radius(--size: md) {
+  result: if(
+    style(--size: sm): 0.25rem; style(--size: md): 0.5rem; style(--size: lg): 1rem; style(--size: xl): 1.5rem;
+      style(--size: full): 100vmax; else: 0.5rem;
+  );
+}
+
+.badge {
+  border-radius: --radius(full);
+}
+
+.card {
+  border-radius: --radius(lg);
+}
+
+.input {
+  border-radius: --radius(sm);
+}
+
+/* ==========================================================================
+   6. @mixin AND @apply — reusable rule sets (NOT YET IMPLEMENTED)
+   ========================================================================== */
+
+/*
+ * @mixin is defined in the spec but has NO browser support yet.
+ * Shown here for reference only.
+ *
+ * @mixin --visually-hidden {
+ *   position: absolute;
+ *   inline-size: 1px;
+ *   block-size: 1px;
+ *   padding: 0;
+ *   margin: -1px;
+ *   overflow: hidden;
+ *   clip-path: inset(50%);
+ *   white-space: nowrap;
+ *   border: 0;
+ * }
+ *
+ * .sr-only {
+ *   @apply --visually-hidden;
+ * }
+ *
+ * @mixin --flex-center(--gap: 0) {
+ *   display: flex;
+ *   align-items: center;
+ *   justify-content: center;
+ *   gap: var(--gap);
+ * }
+ *
+ * .centered {
+ *   @apply --flex-center(1rem);
+ * }
+ */

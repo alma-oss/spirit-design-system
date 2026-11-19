@@ -1,0 +1,358 @@
+/**
+ * Prefers Reduced Motion — Accessibility Media Query
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-transparency
+ * WebStatus: prefers-reduced-transparency
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 119+, Firefox —, Safari —
+ *
+ * Task: Respect user motion preferences — disable or reduce animations,
+ *       transitions, scroll effects, and auto-playing media
+ * Why: Users with vestibular disorders, motion sensitivity, or cognitive
+ *      disabilities can be physically harmed by excessive motion.
+ *      This is not optional — it is a WCAG 2.1 AA requirement (2.3.3).
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   BEST PRACTICE — EVERY project should include this
+
+   Rule: ALL animations and transitions MUST have a reduced-motion
+   override. No exceptions. Add this at the global level.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. GLOBAL RESET — disable all animations and transitions at once
+
+   This is the nuclear option. Place it at the end of your stylesheet.
+   It catches everything — even third-party CSS and inline styles.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   2. TARGETED APPROACH — per-component motion control (recommended)
+
+   Better than the global reset for production apps. Lets you keep
+   essential motion (e.g., spinners, progress bars) while removing
+   decorative motion.
+   ========================================================================== */
+
+/* Decorative animations — remove completely */
+@media (prefers-reduced-motion: reduce) {
+  .hero-parallax,
+  .floating-badge,
+  .bg-gradient-shift,
+  .marquee {
+    animation: none;
+  }
+}
+
+/* Transitions — make instant but keep the state change */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .button,
+  .nav-link,
+  .accordion {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* Scroll-driven animations — disable timeline */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-progress {
+    animation-timeline: none;
+    animation: none;
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ==========================================================================
+   3. ESSENTIAL VS DECORATIVE MOTION
+
+   Not all motion should be removed. Essential motion that communicates
+   state changes or provides necessary feedback should remain.
+
+   ✅ KEEP (essential):
+   - Loading spinners (reduced speed OK)
+   - Progress bars
+   - Focus indicators
+   - State change feedback (checked → unchecked)
+   - Error shake (use opacity flash instead)
+
+   ❌ REMOVE (decorative):
+   - Parallax scrolling
+   - Background animations
+   - Hover transitions (beyond color)
+   - Auto-playing carousels
+   - Page transition effects
+   - Floating / bouncing elements
+   ========================================================================== */
+
+/* Loading spinner — keep but simplify */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    /* Replace rotation with a pulsing opacity — less triggering */
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.4;
+    }
+  }
+}
+
+/* ==========================================================================
+   4. MOTION-SAFE PATTERN — opt-in instead of opt-out
+
+   Instead of adding animations and then removing them,
+   only ADD animations when the user has no preference.
+   This is the safest approach — no motion by default.
+   ========================================================================== */
+
+/* Base: no animation */
+.card {
+  opacity: 1;
+}
+
+/* Only animate when user is OK with motion */
+@media (prefers-reduced-motion: no-preference) {
+  .card {
+    animation: fade-in 0.5s ease;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+}
+
+/* ==========================================================================
+   5. SCROLL BEHAVIOR — auto vs smooth
+
+   scroll-behavior: smooth triggers motion on every anchor link
+   and scrollIntoView call. Always gate it behind motion preference.
+   ========================================================================== */
+
+/* ❌ WRONG — forced smooth scroll for everyone */
+/* html { scroll-behavior: smooth; } */
+
+/* ✅ CORRECT — smooth only when user allows motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ==========================================================================
+   6. VIEW TRANSITIONS — disable for motion-sensitive users
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   7. @STARTING-STYLE — disable entry animations
+   ========================================================================== */
+
+/*
+  @starting-style entry animations should also be disabled.
+  Set transition-duration to near-zero so the element appears
+  in its final state instantly.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+  dialog,
+  [popover] {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* ==========================================================================
+   8. HOVER / FOCUS TRANSITIONS — keep color, remove movement
+   ========================================================================== */
+
+.button {
+  background: oklch(0.55 0.2 260);
+  color: oklch(1 0 0);
+  transition:
+    background 0.2s ease,
+    translate 0.2s ease;
+}
+
+.button:hover {
+  background: oklch(0.45 0.2 260);
+  translate: 0 -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    /* Keep color transition, remove movement */
+    transition: background 0.2s ease;
+  }
+
+  .button:hover {
+    translate: none;
+  }
+}
+
+/* ==========================================================================
+   9. AUTO-PLAYING MEDIA — pause when reduced motion is preferred
+
+   CSS can't pause <video>, but it can hide auto-playing decorative
+   backgrounds and replace with a static image.
+   ========================================================================== */
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+
+  .hero {
+    /* Show static fallback image instead */
+    background-image: var(--hero-fallback-image);
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* ==========================================================================
+   10. PREFERS-CONTRAST — high/low contrast accessibility
+
+   MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast
+   Baseline: 🟢 Widely Available
+   ========================================================================== */
+
+@media (prefers-contrast: more) {
+  :root {
+    --text: oklch(0 0 0);
+    --bg: oklch(1 0 0);
+    --border: oklch(0 0 0);
+    --focus-ring: 3px solid oklch(0 0 0);
+  }
+
+  /* Increase border visibility */
+  .card,
+  .button,
+  .input {
+    border: 2px solid var(--border);
+  }
+
+  /* Remove subtle opacity effects */
+  .muted {
+    opacity: 1;
+  }
+}
+
+@media (prefers-contrast: less) {
+  :root {
+    --text: oklch(0.3 0 0);
+    --bg: oklch(0.95 0 0);
+    --border: oklch(0.85 0 0);
+  }
+}
+
+/* ==========================================================================
+   11. PREFERS-REDUCED-TRANSPARENCY — reduce transparency effects
+
+   MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-transparency
+   Baseline: 🟡 Limited Availability
+   ========================================================================== */
+
+.glass-card {
+  background: oklch(1 0 0 / 0.15);
+  backdrop-filter: blur(12px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-card {
+    /* Replace translucent with solid background */
+    background: oklch(0.97 0 0);
+    backdrop-filter: none;
+  }
+}
+
+/* ==========================================================================
+   12. FORCED-COLORS — Windows High Contrast Mode
+
+   MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors
+   Baseline: 🟢 Widely Available
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .button {
+    /* Use system colors in forced-colors mode */
+    border: 1px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .button:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  /* Ensure custom focus rings are visible */
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   13. ACCESSIBILITY MEDIA QUERIES REFERENCE
+
+   Query                           Detects                          Status
+   ─────────────────────────       ──────────────────────────       ──────
+   prefers-reduced-motion          Motion sensitivity               🟢
+   prefers-contrast                High/low contrast need           🟢
+   prefers-color-scheme            Light/dark mode                  🟢
+   prefers-reduced-transparency    Transparency sensitivity         🔵
+   forced-colors                   Windows High Contrast            🟢
+   inverted-colors                 Inverted display                 🟢
+
+   Values:
+   ─────────────────────────       ──────────────────────────
+   prefers-reduced-motion          no-preference | reduce
+   prefers-contrast                no-preference | more | less | custom
+   prefers-color-scheme            light | dark
+   prefers-reduced-transparency    no-preference | reduce
+   forced-colors                   none | active
+   inverted-colors                 none | inverted
+   ========================================================================== */

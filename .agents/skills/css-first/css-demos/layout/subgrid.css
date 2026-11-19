@@ -1,0 +1,99 @@
+/**
+ * CSS Subgrid
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid
+ * WebStatus: subgrid
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 117+, Firefox 71+, Safari 16+
+ *
+ * Task: Align nested grid items to the parent grid tracks
+ * Why: Subgrid lets child grids inherit parent track sizing,
+ *      so content in sibling cards aligns across rows
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. CARD GRID — align card contents across siblings
+   Core: child grid uses grid-template-rows: subgrid to inherit parent rows
+   ========================================================================== */
+
+/* Parent grid defines row tracks for all cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+
+/* Each card spans 3 parent row tracks and inherits them */
+.card-grid > .card {
+  display: grid;
+  grid-row: span 3; /* header, body, footer */
+  grid-template-rows: subgrid; /* inherit parent row sizing */
+  gap: 0.75rem;
+}
+
+/* Card contents auto-align across siblings */
+/* .card > header  — row 1 (all cards same height) */
+/* .card > .body   — row 2 (stretches to fill) */
+/* .card > footer  — row 3 (all cards aligned) */
+
+/* ==========================================================================
+   2. SUBGRID IN BOTH DIRECTIONS
+   Core: subgrid can be applied to columns, rows, or both
+   ========================================================================== */
+
+.table-layout {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1px;
+}
+
+.table-layout > .row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid; /* inherit column tracks */
+}
+
+/* ==========================================================================
+   3. FORM LAYOUT — labels and inputs aligned
+   ========================================================================== */
+
+.form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid; /* label + input aligned */
+  align-items: center;
+}
+
+/* ==========================================================================
+   4. NAMED LINES — subgrid inherits parent named lines
+   ========================================================================== */
+
+.page {
+  display: grid;
+  grid-template-columns:
+    [full-start] 1fr
+    [content-start] minmax(0, 60ch)
+    [content-end] 1fr
+    [full-end];
+}
+
+.page > section {
+  display: grid;
+  grid-column: full;
+  grid-template-columns: subgrid; /* inherits full/content named lines */
+
+  & > * {
+    grid-column: content; /* content stays centered */
+  }
+
+  & > .full-bleed {
+    grid-column: full; /* breaks out to full width */
+  }
+}

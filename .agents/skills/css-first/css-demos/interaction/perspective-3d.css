@@ -1,0 +1,399 @@
+/**
+ * CSS 3D Transforms & Perspective
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+ * Baseline: 🟢 Widely Available
+ * Support: 97%
+ *
+ * Task: Build 3D scenes — cubes, carousels, rotating forms, tilt effects
+ * Why: Pure CSS 3D with perspective + preserve-3d enables immersive UI
+ *      without WebGL or JavaScript animation libraries
+ */
+
+/* ==========================================================================
+   3D PROPERTY CHAIN — how 3D works in CSS
+
+   1. perspective        → on PARENT: sets viewer distance (depth)
+   2. transform-style    → preserve-3d: children live in 3D space
+   3. backface-visibility→ hidden: hide reversed faces
+   4. rotate / transform → rotateX(), rotateY(), rotateZ(), translateZ()
+
+   The chain MUST NOT be broken — any element in between that
+   has overflow: hidden, opacity < 1, or filter will flatten 3D.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. CSS CUBE — the fundamental 3D building block
+
+   HTML:
+     <div class="scene">
+       <div class="cube">
+         <div class="cube__face cube__face--front">Front</div>
+         <div class="cube__face cube__face--back">Back</div>
+         <div class="cube__face cube__face--right">Right</div>
+         <div class="cube__face cube__face--left">Left</div>
+         <div class="cube__face cube__face--top">Top</div>
+         <div class="cube__face cube__face--bottom">Bottom</div>
+       </div>
+     </div>
+   ========================================================================== */
+
+.scene {
+  perspective: 800px;
+  inline-size: 12rem;
+  block-size: 12rem;
+}
+
+.cube {
+  --size: 12rem;
+  --half: calc(var(--size) / 2);
+  position: relative;
+  inline-size: var(--size);
+  block-size: var(--size);
+  transform-style: preserve-3d;
+}
+
+.cube__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.cube__face--front {
+  translate: 0 0 var(--half);
+}
+.cube__face--back {
+  rotate: y 180deg;
+  translate: 0 0 var(--half);
+}
+.cube__face--right {
+  rotate: y 90deg;
+  translate: 0 0 var(--half);
+}
+.cube__face--left {
+  rotate: y -90deg;
+  translate: 0 0 var(--half);
+}
+.cube__face--top {
+  rotate: x 90deg;
+  translate: 0 0 var(--half);
+}
+.cube__face--bottom {
+  rotate: x -90deg;
+  translate: 0 0 var(--half);
+}
+
+/* ==========================================================================
+   2. ROTATING CUBE — continuous spin animation
+   ========================================================================== */
+
+@property --cube-rx {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --cube-ry {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.cube--spin {
+  animation: cube-spin 8s infinite linear;
+}
+
+@keyframes cube-spin {
+  to {
+    --cube-rx: 360deg;
+    --cube-ry: 360deg;
+  }
+}
+
+.cube--spin {
+  rotate: x var(--cube-rx);
+  /* Second rotation via transform since rotate is taken */
+  transform: rotateY(var(--cube-ry));
+}
+
+/* ==========================================================================
+   3. CUBE NAVIGATION — show specific face via class toggle
+
+   JS toggles a class: cube--show-front, cube--show-right, etc.
+   Or use scroll-snap / :target to drive it purely in CSS.
+   ========================================================================== */
+
+.cube--nav {
+  transition:
+    rotate 0.6s ease,
+    transform 0.6s ease;
+}
+
+.cube--show-front {
+  /* default — no rotation */
+}
+.cube--show-back {
+  rotate: y 180deg;
+}
+.cube--show-right {
+  rotate: y -90deg;
+}
+.cube--show-left {
+  rotate: y 90deg;
+}
+.cube--show-top {
+  rotate: x -90deg;
+}
+.cube--show-bottom {
+  rotate: x 90deg;
+}
+
+/* ==========================================================================
+   4. FORM ON A CUBE — multi-step form where each step is a face
+
+   HTML:
+     <div class="scene">
+       <div class="form-cube" id="form-cube">
+         <form class="cube__face cube__face--front" id="step1">
+           Step 1: Name
+         </form>
+         <form class="cube__face cube__face--right" id="step2">
+           Step 2: Email
+         </form>
+         <form class="cube__face cube__face--back" id="step3">
+           Step 3: Password
+         </form>
+         <form class="cube__face cube__face--left" id="step4">
+           Step 4: Confirm
+         </form>
+       </div>
+     </div>
+     <a href="#step1">Step 1</a>
+     <a href="#step2">Step 2</a>
+   ========================================================================== */
+
+.form-cube {
+  --size: 20rem;
+  --half: calc(var(--size) / 2);
+  position: relative;
+  inline-size: var(--size);
+  block-size: var(--size);
+  transform-style: preserve-3d;
+  transition: rotate 0.5s ease;
+}
+
+/* Drive rotation via :target — pure CSS, no JS */
+.form-cube:has(#step1:target) {
+  rotate: y 0deg;
+}
+.form-cube:has(#step2:target) {
+  rotate: y -90deg;
+}
+.form-cube:has(#step3:target) {
+  rotate: y -180deg;
+}
+.form-cube:has(#step4:target) {
+  rotate: y -270deg;
+}
+
+/* ==========================================================================
+   5. 3D CAROUSEL — items arranged in a circle
+   ========================================================================== */
+
+.carousel-3d {
+  --items: 6;
+  --item-size: 14rem;
+  /* radius = half-item-width / tan(π / items) */
+  --radius: calc(var(--item-size) / 2 / tan(180deg / var(--items)));
+  perspective: 1000px;
+  display: grid;
+  place-items: center;
+  inline-size: var(--item-size);
+  block-size: var(--item-size);
+}
+
+.carousel-3d__ring {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-style: preserve-3d;
+  animation: carousel-rotate 20s infinite linear;
+}
+
+.carousel-3d__item {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  --angle: calc(360deg / var(--items) * var(--i));
+  rotate: y var(--angle);
+  translate: 0 0 var(--radius);
+}
+
+@keyframes carousel-rotate {
+  to {
+    rotate: y 360deg;
+  }
+}
+
+/* ==========================================================================
+   6. TILT ON HOVER — subtle 3D tilt effect on cards
+   Uses CSS custom properties for mouse position (set via JS or
+   scroll-driven timeline for pure CSS).
+   ========================================================================== */
+
+.tilt-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  perspective: 600px;
+}
+
+.tilt-card__inner {
+  transition: rotate 0.3s ease;
+  transform-style: preserve-3d;
+  /* JS sets --tilt-x / --tilt-y based on mouse position */
+  rotate: x var(--tilt-x) y var(--tilt-y);
+}
+
+/* Pure CSS hover tilt — simpler, no JS needed */
+.tilt-card:hover .tilt-card__inner {
+  rotate: x 5deg y -5deg;
+}
+
+/* ==========================================================================
+   7. 3D SCENE WITH FLOOR — isometric-style layout
+   ========================================================================== */
+
+.scene-3d {
+  perspective: 800px;
+  display: grid;
+  place-items: center;
+}
+
+.scene-3d__world {
+  transform-style: preserve-3d;
+  rotate: x 60deg;
+}
+
+.scene-3d__floor {
+  inline-size: 30rem;
+  block-size: 30rem;
+  background-image:
+    repeating-linear-gradient(oklch(1 0 0 / 0.1) 0 1px, transparent 0 2rem),
+    repeating-linear-gradient(90deg, oklch(1 0 0 / 0.1) 0 1px, transparent 0 2rem);
+  rotate: x 90deg;
+  translate: 0 0 -10rem;
+}
+
+.scene-3d__object {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+/* ==========================================================================
+   8. 3D TEXT RING — text arranged in a cylinder
+
+   HTML:
+     <div class="text-ring">
+       <span style="--i: 0">H</span>
+       <span style="--i: 1">E</span>
+       <span style="--i: 2">L</span>
+       ...
+     </div>
+
+   With sibling-index() (when available):
+     No inline --i needed.
+   ========================================================================== */
+
+.text-ring {
+  --chars: 20;
+  --radius: 6rem;
+  perspective: 600px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+}
+
+.text-ring__inner {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: carousel-rotate 10s infinite linear;
+}
+
+.text-ring span {
+  position: absolute;
+  --angle: calc(360deg / var(--chars) * var(--i));
+  rotate: y var(--angle);
+  translate: 0 0 var(--radius);
+  backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   9. PERSPECTIVE VALUES GUIDE
+
+   Value        Effect                  Use case
+   ──────       ──────────────────      ──────────────────────
+   200-400px    Dramatic / fisheye      Artistic, immersive scenes
+   500-800px    Moderate 3D             Cards, cubes, carousels
+   1000-1500px  Subtle depth            Tilt effects, UI elements
+   2000px+      Nearly flat             Minimal parallax
+
+   Lower value = more dramatic perspective.
+   ========================================================================== */
+
+/* ==========================================================================
+   10. 3D FLATTENING GOTCHAS
+
+   These properties BREAK preserve-3d on a parent:
+   - overflow: hidden / auto / scroll (use overflow: clip instead!)
+   - opacity: < 1 (on the preserve-3d element itself)
+   - filter / backdrop-filter (on the preserve-3d element)
+   - contain: paint / layout / strict
+   - mix-blend-mode (other than normal)
+   - clip-path
+   - mask
+
+   ✅ Apply these to CHILD elements, not the preserve-3d container.
+   ========================================================================== */
+
+/* ==========================================================================
+   11. SCROLL-DRIVEN 3D ROTATION
+   Rotate a cube based on scroll position.
+   ========================================================================== */
+
+@property --scroll-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.cube--scroll-driven {
+  animation: scroll-rotate linear forwards;
+  animation-timeline: scroll();
+}
+
+@keyframes scroll-rotate {
+  to {
+    --scroll-angle: 1080deg;
+  }
+}
+
+.cube--scroll-driven {
+  rotate: y var(--scroll-angle);
+}
+
+/* ==========================================================================
+   12. PREFERS-REDUCED-MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .cube--spin,
+  .carousel-3d__ring,
+  .text-ring__inner,
+  .cube--scroll-driven {
+    animation: none;
+  }
+}

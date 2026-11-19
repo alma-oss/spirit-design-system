@@ -1,0 +1,158 @@
+/**
+ * mix-blend-mode — Adaptive Content & Visual Blending
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+ * WebStatus: mix-blend-mode
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 41+, Firefox 32+, Safari 8+
+ *
+ * Task: Make text/content adapt color based on background, create visual effects
+ * Why: Pure CSS color adaptation — no JavaScript needed to detect background
+ *      lightness and swap text color
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. ADAPTIVE TEXT — difference
+   Text automatically contrasts against any background.
+   White text on dark bg stays white; on light bg it inverts to dark.
+   ========================================================================== */
+
+.adaptive-text {
+  color: white;
+  mix-blend-mode: difference;
+}
+
+/* Hero text that stays readable over any image/gradient */
+.hero-heading {
+  color: white;
+  mix-blend-mode: difference;
+  font-size: clamp(2rem, 5dvi, 4rem);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   2. ADAPTIVE LOGO / ICON
+   Logo stays visible regardless of section background color.
+   ========================================================================== */
+
+.sticky-logo {
+  position: sticky;
+  inset-block-start: 1rem;
+  z-index: 1;
+}
+
+.sticky-logo img,
+.sticky-logo svg {
+  mix-blend-mode: difference;
+  filter: invert(1); /* start white, difference adapts it */
+}
+
+/* ==========================================================================
+   3. SCROLL INDICATOR / PROGRESS BAR
+   A progress bar that stays visible over varied content sections.
+   ========================================================================== */
+
+.scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: 3px;
+  background: white;
+  mix-blend-mode: difference;
+}
+
+/* ==========================================================================
+   4. CURSOR / POINTER FOLLOWER
+   Custom cursor that inverts against any background.
+   ========================================================================== */
+
+.custom-cursor {
+  position: fixed;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 100vmax;
+  background: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   5. IMAGE OVERLAY — multiply for darkened tint
+   ========================================================================== */
+
+.image-card {
+  isolation: isolate; /* contain blending */
+  position: relative;
+}
+
+.image-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: oklch(0.45 0.15 270);
+  mix-blend-mode: multiply;
+}
+
+/* ==========================================================================
+   6. EXCLUSION — subtle text adaptation
+   Similar to difference but lower contrast — softer effect.
+   ========================================================================== */
+
+.subtle-adaptive-text {
+  color: white;
+  mix-blend-mode: exclusion;
+}
+
+/* ==========================================================================
+   7. SCREEN — lighten / glow effect
+   ========================================================================== */
+
+.glow-overlay {
+  background: oklch(0.7 0.2 60);
+  mix-blend-mode: screen;
+}
+
+/* ==========================================================================
+   8. CONTAINING BLEND WITH isolation: isolate
+   Always wrap blended content to prevent leaking.
+   MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
+   ========================================================================== */
+
+/* ❌ WRONG — blend leaks to page background */
+.leaky {
+  mix-blend-mode: difference;
+}
+
+/* ✅ CORRECT — blend contained within parent */
+.blend-section {
+  isolation: isolate; /* blend stops at this boundary */
+}
+
+.blend-section .adaptive-heading {
+  color: white;
+  mix-blend-mode: difference; /* only blends within .blend-section */
+}
+
+/* ==========================================================================
+   9. ALL BLEND MODES REFERENCE
+
+   Mode          Effect
+   ──────────    ──────────────────────────────────────
+   normal        no blending (default)
+   multiply      darken — good for image tints
+   screen        lighten — good for glow effects
+   overlay       contrast boost (multiply + screen)
+   darken        picks darker pixel
+   lighten       picks lighter pixel
+   color-dodge   brightens, reduces contrast
+   color-burn    darkens, increases contrast
+   hard-light    intense overlay
+   soft-light    subtle overlay
+   difference    inverts colors — adaptive text ✨
+   exclusion     softer difference
+   hue           blend hue only
+   saturation    blend saturation only
+   color         blend hue + saturation
+   luminosity    blend lightness only
+   plus-lighter  additive blending (cross-fade)
+   ========================================================================== */

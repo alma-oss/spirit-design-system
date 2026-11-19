@@ -1,0 +1,28 @@
+/**
+ * background-clip: border-area
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
+ * Reference: https://developer.chrome.com/release-notes/150
+ * WebStatus: background-clip-border-area
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome 150+, Firefox —, Safari 18.2+
+ * Last verified: 2026-08-11
+ *
+ * Task: Paint gradient borders without border-image or wrapper elements.
+ */
+
+.gradient-border {
+  border: 0.2rem solid transparent;
+  border-radius: 1rem;
+  background:
+    linear-gradient(Canvas, Canvas) padding-box,
+    linear-gradient(135deg, oklch(0.72 0.2 320), oklch(0.75 0.16 200)) border-box;
+}
+
+@supports (background-clip: border-area) {
+  .gradient-border {
+    border-color: transparent;
+    background: linear-gradient(135deg, hotpink, dodgerblue);
+    background-clip: border-area;
+  }
+}

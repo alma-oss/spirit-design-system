@@ -1,0 +1,86 @@
+/**
+ * color-mix() Function
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix
+ * WebStatus: color-mix
+ * Baseline: 🟢 Widely Available
+ * Support: Chrome 111+, Firefox 113+, Safari 16.2+
+ *
+ * Task: Create color variations, tints, shades, and transparency from a single base
+ * Why: color-mix() generates color variants without manual hex/rgb calculations —
+ *      works in any color space (oklch, srgb, hsl, lab)
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. TINTS AND SHADES — mix with white/black
+   ========================================================================== */
+
+:root {
+  --brand: oklch(0.55 0.2 250);
+
+  /* Tints (lighter) */
+  --brand-100: color-mix(in oklch, var(--brand) 10%, white);
+  --brand-200: color-mix(in oklch, var(--brand) 25%, white);
+  --brand-300: color-mix(in oklch, var(--brand) 50%, white);
+
+  /* Shades (darker) */
+  --brand-700: color-mix(in oklch, var(--brand) 75%, black);
+  --brand-800: color-mix(in oklch, var(--brand) 50%, black);
+  --brand-900: color-mix(in oklch, var(--brand) 25%, black);
+}
+
+/* ==========================================================================
+   2. TRANSPARENCY — mix with transparent
+   ========================================================================== */
+
+.overlay {
+  background: color-mix(in srgb, var(--brand) 50%, transparent);
+}
+
+.hover-bg {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+/* ==========================================================================
+   3. COLOR SPACE MATTERS — oklch for perceptual uniformity
+   ========================================================================== */
+
+/* oklch: perceptually uniform, best for UI palettes */
+.badge {
+  background: color-mix(in oklch, var(--brand) 80%, white);
+}
+
+/* srgb: standard mixing, familiar results */
+.border {
+  border-color: color-mix(in srgb, var(--brand) 60%, gray);
+}
+
+/* ==========================================================================
+   4. INTERACTIVE STATES — derive hover/active from base
+   ========================================================================== */
+
+.btn {
+  --btn-bg: var(--brand);
+  background: var(--btn-bg);
+
+  &:hover {
+    background: color-mix(in oklch, var(--btn-bg) 85%, white);
+  }
+
+  &:active {
+    background: color-mix(in oklch, var(--btn-bg) 85%, black);
+  }
+
+  &:disabled {
+    background: color-mix(in srgb, var(--btn-bg) 40%, gray);
+  }
+}
+
+/* ==========================================================================
+   5. THEME-AWARE COLORS — combine with light-dark()
+   ========================================================================== */
+
+.surface {
+  background: light-dark(color-mix(in oklch, var(--brand) 5%, white), color-mix(in oklch, var(--brand) 15%, black));
+}
