@@ -1,10 +1,11 @@
-import { Token, TokenType } from '@supernovaio/sdk-exporters';
+import type { Token } from '@supernovaio/sdk-exporters';
+import { SOURCE_TOKEN_TYPE, type SourceTokenType } from '../core/types';
 import { COLOR_CSS_VARIABLE_PREFIX, TOKEN_COLLECTION_THEMES_NAME } from '../constants';
 import { getShadowLengthTokens } from '../filters/shadowLengthTokens';
 
 export type FileData = {
   fileName: string;
-  tokenTypes: TokenType[];
+  tokenTypes: SourceTokenType[];
   collectionName?: string;
   prepareTokens?: (tokens: Token[]) => Token[];
   groupNames?: string[];
@@ -21,7 +22,7 @@ export type FileData = {
 export const nonThemedFilesData: FileData[] = [
   {
     fileName: 'borders',
-    tokenTypes: [TokenType.dimension, TokenType.borderWidth],
+    tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.borderWidth],
     groupNames: ['Border'],
     hasStylesObject: false,
     sortByNumValue: true,
@@ -29,49 +30,49 @@ export const nonThemedFilesData: FileData[] = [
   {
     fileName: 'other',
     tokenTypes: [
-      TokenType.dimension,
-      TokenType.string,
-      TokenType.space,
-      TokenType.radius,
-      TokenType.border,
-      TokenType.borderWidth,
-      TokenType.size,
+      SOURCE_TOKEN_TYPE.dimension,
+      SOURCE_TOKEN_TYPE.string,
+      SOURCE_TOKEN_TYPE.space,
+      SOURCE_TOKEN_TYPE.radius,
+      SOURCE_TOKEN_TYPE.border,
+      SOURCE_TOKEN_TYPE.borderWidth,
+      SOURCE_TOKEN_TYPE.size,
     ],
     excludeGroupNames: ['Border', 'Radius', 'Spacing'],
     sortByNumValue: true,
   },
   {
     fileName: 'radii',
-    tokenTypes: [TokenType.dimension, TokenType.radius],
+    tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.radius],
     groupNames: ['Radius'],
     hasParentPrefix: false,
     sortByNumValue: true,
   },
   {
     fileName: 'spacing',
-    tokenTypes: [TokenType.dimension, TokenType.space],
+    tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.space],
     groupNames: ['Spacing'],
     hasParentPrefix: false,
     sortByNumValue: true,
   },
   {
     fileName: 'shadows',
-    tokenTypes: [TokenType.shadow],
+    tokenTypes: [SOURCE_TOKEN_TYPE.shadow],
     hasParentPrefix: false,
   },
   {
     fileName: 'gradients',
-    tokenTypes: [TokenType.gradient],
+    tokenTypes: [SOURCE_TOKEN_TYPE.gradient],
     hasParentPrefix: true,
   },
   {
     fileName: 'typography',
-    tokenTypes: [TokenType.typography],
+    tokenTypes: [SOURCE_TOKEN_TYPE.typography],
   },
 ];
 
 const shadowLengthFileData = {
-  tokenTypes: [TokenType.dimension],
+  tokenTypes: [SOURCE_TOKEN_TYPE.dimension],
   collectionName: TOKEN_COLLECTION_THEMES_NAME,
   prepareTokens: getShadowLengthTokens,
   hasStylesObject: false,
@@ -81,7 +82,7 @@ const shadowLengthFileData = {
 export const themedFilesData: FileData[] = [
   {
     fileName: 'colors',
-    tokenTypes: [TokenType.color],
+    tokenTypes: [SOURCE_TOKEN_TYPE.color],
     mixinName: 'color-css-variables',
     cssVariablePrefix: COLOR_CSS_VARIABLE_PREFIX,
     hasStylesObject: false,
@@ -93,13 +94,13 @@ export const devicesFilesData: FileData[] = [
   {
     fileName: 'devices',
     tokenTypes: [
-      TokenType.dimension,
-      TokenType.fontSize,
-      TokenType.letterSpacing,
-      TokenType.lineHeight,
-      TokenType.radius,
-      TokenType.size,
-      TokenType.string,
+      SOURCE_TOKEN_TYPE.dimension,
+      SOURCE_TOKEN_TYPE.fontSize,
+      SOURCE_TOKEN_TYPE.letterSpacing,
+      SOURCE_TOKEN_TYPE.lineHeight,
+      SOURCE_TOKEN_TYPE.radius,
+      SOURCE_TOKEN_TYPE.size,
+      SOURCE_TOKEN_TYPE.string,
     ],
     sortByNumValue: true,
   },
@@ -108,7 +109,7 @@ export const devicesFilesData: FileData[] = [
 export const commonThemedFilesData: FileData[] = [
   {
     fileName: 'color-tokens',
-    tokenTypes: [TokenType.color],
+    tokenTypes: [SOURCE_TOKEN_TYPE.color],
     hasCssVariableReferences: true,
     cssVariablePrefix: COLOR_CSS_VARIABLE_PREFIX,
   },

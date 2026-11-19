@@ -104,6 +104,7 @@ The exporter handles specific exceptions to the general logic of token processin
 - Typography tokens with Link – Typography tokens that include `Link` in their name are intentionally excluded from processing. This ensures that these tokens do not interfere with standard typography styling
   and are not mistakenly included in style mappings.
 - Typography tokens with Italic – Typography tokens that include `Italic` in their name are intentionally excluded from processing. Italics are applied with the `.text-italic` helper instead of dedicated token variants.
+- Typography font weight tokens – String tokens under `Typography/Font Weight` (e.g. `Bold`, `Semibold Italic`) are intentionally excluded from processing. Typography styles export their weight as a number, so the names are not needed as separate tokens.
 - Tokens with `figma-` – Tokens that contain `figma-` in their name are intentionally excluded from processing. This ensures that internal Figma tokens are not included in the exported output.
 - `breakpoint-mobile` token: This token is assigned a fixed value of `0`, deviating from standard processing rules. This ensures compatibility with predefined requirements and reflects its role in responsive design settings.
 

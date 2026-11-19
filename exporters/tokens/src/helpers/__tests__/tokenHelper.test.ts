@@ -8,7 +8,6 @@ import {
   Token,
   TokenGroup,
   TokenType,
-  TypographyToken,
 } from '@supernovaio/sdk-exporters';
 import {
   exampleDeviceTokenDimension,
@@ -22,7 +21,7 @@ import {
 } from '../../../tests/fixtures/exampleDeviceTokens';
 import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens, expectedTypographyValue } from '../../../tests/fixtures/exampleTypographyTokens';
+import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import {
   addAngleVarToGradient,
@@ -31,7 +30,6 @@ import {
   getTokenGroup,
   sortTokens,
   tokenVariableName,
-  typographyValue,
 } from '../tokenHelper';
 import { filterExcludedTokens } from '../../filters/excludedTokens';
 
@@ -258,74 +256,6 @@ describe('tokenHelper', () => {
     });
   });
 
-  describe('typographyValue', () => {
-    it('should return the expected typography value', () => {
-      const mockedToken: TypographyToken = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
-      const tokenValue = typographyValue(mockedToken.value, true, false);
-
-      expect(tokenValue).toBe(expectedTypographyValue);
-    });
-
-    it.each([
-      {
-        fontSize: 10,
-        lineHeight: 14,
-        expectedLineHeight: '1.4',
-      },
-      {
-        fontSize: 10_000,
-        lineHeight: 14_454,
-        expectedLineHeight: '1.4454',
-      },
-      {
-        fontSize: 14,
-        lineHeight: 20,
-        expectedLineHeight: '1.4286',
-      },
-      {
-        fontSize: 12,
-        lineHeight: 12,
-        expectedLineHeight: '1',
-      },
-    ])('should format line-height as $expectedLineHeight', ({ fontSize, lineHeight, expectedLineHeight }) => {
-      const tokenValue = typographyValue(
-        {
-          fontFamily: { text: 'Inter' },
-          fontSize: { unit: 'Pixels', measure: fontSize, referencedTokenId: null },
-          lineHeight: { unit: 'Pixels', measure: lineHeight, referencedTokenId: null },
-          fontWeight: { text: 'Regular' },
-          referencedTokenId: null,
-        } as unknown as TypographyToken['value'],
-        false,
-        false,
-      );
-
-      expect(tokenValue).toContain(`line-height: ${expectedLineHeight}`);
-    });
-
-    it.each([
-      { fontWeight: 'SemiBold', expectedFontWeight: 600 },
-      { fontWeight: 'Semi Bold', expectedFontWeight: 600 },
-      { fontWeight: 'Semi-Bold', expectedFontWeight: 600 },
-      { fontWeight: 'Semi Bold Italic', expectedFontWeight: 600 },
-      { fontWeight: 'Extra Light', expectedFontWeight: 200 },
-      { fontWeight: '500', expectedFontWeight: 500 },
-    ])('should format font-weight "$fontWeight" as $expectedFontWeight', ({ fontWeight, expectedFontWeight }) => {
-      const tokenValue = typographyValue(
-        {
-          fontFamily: { text: 'Inter' },
-          fontSize: { unit: 'Pixels', measure: 16, referencedTokenId: null },
-          fontWeight: { text: fontWeight },
-          referencedTokenId: null,
-        } as unknown as TypographyToken['value'],
-        false,
-        false,
-      );
-
-      expect(tokenValue).toContain(`font-weight: ${expectedFontWeight}`);
-    });
-  });
-
   describe('filterExcludedTokens', () => {
     it('should filter out tokens with "figma-" in their name', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
@@ -334,7 +264,7 @@ describe('tokenHelper', () => {
         exampleDimensionAndStringTokens.get('stringRef'),
       ].filter(Boolean) as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });
@@ -343,7 +273,7 @@ describe('tokenHelper', () => {
       const tokens = Array.from(exampleTypographyTokens.values());
       const expectedTokens = [exampleTypographyTokens.get('typographyRef1')] as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });
@@ -355,7 +285,7 @@ describe('tokenHelper', () => {
         exampleTypographyTokens.get('typographyRef1'),
       ].filter(Boolean) as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
 
       expect(filteredTokens).toStrictEqual(tokens);
     });
@@ -368,7 +298,7 @@ describe('tokenHelper', () => {
         exampleTypographyTokens.get('typographyRef2'),
       ].filter(Boolean) as Token[];
 
-      const filteredTokens = filterExcludedTokens(tokens);
+      const filteredTokens = filterExcludedTokens(tokens, []);
       const expectedTokens = [
         exampleDimensionAndStringTokens.get('dimensionRef'),
         exampleTypographyTokens.get('typographyRef1'),

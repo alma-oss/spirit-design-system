@@ -8,7 +8,8 @@ import { formatShadowValue } from '../formatters/cssValue';
 import { resolveTokenReferences } from '../transformations';
 import { replacePxWithRem } from '../formatters/unitFormatter';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
-import { getFontSizeBaseForBreakpoint, type FontSizeBaseMap } from '../helpers/unitHelper';
+import { getFontSizeBaseForBreakpoint } from '../helpers/unitHelper';
+import type { FontSizeBaseMap } from '../helpers/types';
 
 type ShadowTokenProcessorContext = {
   tokenGroups: Array<TokenGroup>;
