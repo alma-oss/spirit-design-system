@@ -13,9 +13,9 @@ export const gridSpacingMobile = '1rem';
 export const gridSpacingDesktop = '2rem';
 export const gridSpacingTablet = '2rem';
 
-export const cssVariablePrefix = 'spirit-';
-
 export const gridColumns = '12';
+
+export const cssVariablePrefix = 'spirit-';
 
 export const containerPaddingDesktop = '2rem';
 export const containerPaddingMobile = '1rem';

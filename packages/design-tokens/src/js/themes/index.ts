@@ -12,3 +12,4 @@ export const themes = {
 };
 
 export * from './colorTokens';
+export * from './shadowTokens';
