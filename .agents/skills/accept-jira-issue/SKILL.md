@@ -40,11 +40,13 @@ Process issues one at a time. With several keys (`DS-2831 DS-2774`), finish Step
 Get the issue with all fields and up to 50 comments. Then:
 
 1. Extract the bullets under the `Acceptance criteria` heading.
-   - No acceptance criteria → stop and ask the user what to verify against.
+   - No acceptance criteria on a **Bug** → do not stop. The criterion is "the bug no longer reproduces". Derive criteria from the reproduction steps and the Expected / Actual lines, say in the report that they are derived, and verify by reproducing the bug (see Step 4). Example: DS-2884 had no `Acceptance criteria` heading, only steps and "Expected: content scrolls with the wheel" → AC1 wheel scroll, AC2 touch scroll, AC3 no regression.
+   - No acceptance criteria and no reproduction steps or Expected line (any type) → stop and ask the user what to verify against.
 2. Number them `AC1`, `AC2`, … Split compound criteria into sub-criteria (`AC2a`, `AC2b`). Split `X OR Y` criteria into branches.
 3. For each (sub-)criterion write the **expected observation** — what you will see on the deployment if it is met. Example: "AC2 — a Box with `topStart: '0'` renders `border-start-start-radius: 0px` while other corners keep the uniform radius."
 4. Note status, labels, and components. Labels `spirit-web` / `spirit-web-react` mean both packages must be checked.
 5. Collect any deployment URLs already in the description or comments (e.g. "released on beta.jobs.cz").
+6. Check comments for blockers ("waiting on PR #3029") and look up their current state. Report a blocker that has since merged as resolved, not as open. A status of Done before acceptance is normal here — the `Accept` transition can still be available (DS-2848: Done → Accepted worked); list the transitions instead of assuming it will be rejected.
 
 ### Step 2: Find the Implementation
 
@@ -55,11 +57,13 @@ For `alma-oss/spirit-design-system`, try in order and stop at the first hit:
 3. Branch name matching `*/<KEY>-*`
 4. Commits on `main` whose message contains `#<KEY>`
 
-For other repos (e.g. `almacareer/platform-frontends`), use `gh` first — the GitHub MCP may return 404 for them.
+For other repos (e.g. `almacareer/platform-frontends`), use `gh` first — the GitHub MCP may return 404 for them. When the repo is unknown, search the owner: `gh search prs "<KEY>" --owner almacareer` (and `--owner alma-oss`).
+
+For tickets that install or copy something into a product repo (e.g. a skill into Cyborg) there is no deployment. Verify by fetching the files at the PR head SHA and comparing them against the upstream source (normalise whitespace before diffing, since formatters change tabs and wrapping), and say in Flags that no preview exists.
 
 Then:
 
-- Several matches → pick the PR whose body has `Issue reference` pointing to this ticket; say which one you picked and why.
+- Several matches → pick the PR whose body has `Issue reference` pointing to this ticket and whose base is the branch the work lands on (a PR based on a feature branch is a related PR, not the implementation); say which one you picked, which you discarded, and why.
 - Record PR number, state (open / merged / closed), head commit SHA, and changed files.
 - **Closed and unmerged** → red flag. The work may have landed elsewhere; search commits for `#<KEY>` and report what you find.
 - No implementation found → mark every criterion Not verifiable, which rolls up to CLARIFY; ask the user for the PR or the deployment.
@@ -75,6 +79,7 @@ Then:
 | Docsite   | `https://deploy-preview-<PR>--spirit-design-system-docsite.netlify.app`   |
 
 - **Freshness check:** the "Latest commit" in the bot comment must equal the PR head SHA. If it doesn't, the preview is stale — report it and mark every browser-based criterion Not verifiable until it rebuilds.
+- **Stale or "canceled" bot comment is not proof the preview is stale.** The bot comment can lag while the live URL serves the PR build. Before marking criteria Not verifiable, check the deployed content itself: fetch the compiled CSS/JS the page links to and compare it with production, e.g. DS-2884 — the PR preview's `.ModalBody` rule had no `overscroll-behavior:contain`, production still had it. Report "freshness confirmed by content, bot comment stale". Only if the content cannot confirm the change, offer to re-trigger the build or run the branch locally; do not let browser verification silently shrink to "the preview returns 200".
 - **Missing preview:** Netlify skips a site when the PR doesn't touch its paths (`[context.deploy-preview] ignore` in each `apps/*/netlify.toml`). Warn when a criterion needs a site that has no preview.
 - Page URLs (component directory name **lowercased**, trailing slash required):
   - web: `<demo>/packages/web/src/scss/components/<name>/`
@@ -96,6 +101,11 @@ node .agents/skills/accept-jira-issue/scripts/verify.mjs \
 For each criterion:
 
 - Compare the observation to the expected observation from Step 1.
+- **Before marking a UI element Not met because it is missing, rule out automation.** Cookie banners and similar widgets (e.g. vanilla-cookieconsent) hide themselves from headless or webdriver browsers. On DS-2458 two automated browsers showed no cookie bar, a wrong "Not met" that the user's own browser contradicted. Re-run with `navigator.webdriver` masked and a normal user agent (recipe in verification-recipes.md) before concluding, and report how it was observed. When the user says it works for them, re-test the environment instead of defending the first result.
+- **Bugs: reproduce first, then verify the fix.** Run the reproduction steps on the baseline (production demo / `main`) and confirm the bug appears; a fix cannot be accepted if the bug never reproduced on the baseline. Then run the identical steps on the PR preview. Record both observations side by side, e.g. "main: `scrollTop` 0 after wheel 200; PR: 200". Use the same browser, viewport, and input method for both. For scroll/input bugs use real input events (mouse wheel, CDP touch gesture) rather than setting `scrollTop` in script — see recipes.
+- **Always open the deployment when a deploy URL exists — also for review, process, and docs tickets.** "The criteria are about process" is not a reason to skip the browser. Turn the PR's claimed fixes into observable checks and verify them on the preview. Example: DS-2848 ("Review: homepage redesign") — thread replies said "Fixed", so the checks were: the title is an `h1` (`document.querySelectorAll('h1')`), the removed section is gone (0 matching elements), "Component status" has `href="/components"`, and the still-open placeholder is a dead `href="#"` link. Reading only PR threads would have left every "Fixed" as the implementer's claim, not evidence.
+- **Review tickets ("all findings addressed or tracked"):** list every review thread with its resolution. For each thread left as-is, look for tracking at the PR head (a Jira link, a follow-up issue, or a `TODO` comment in the code — fetch the file with `gh api repos/<owner>/<repo>/contents/<path>?ref=<head-sha>` and grep). In this team a `TODO` comment on a work-in-progress PR counts as tracked. A left-as-is thread with none of these is Partially met; name it in the report. DS-2848: two of three open items had a `TODO` (`FaqSection.tsx`, `Hero.tsx`), the third (a `global.scss` question) had none.
+- **Guardrail criteria:** agent rules, skills, and docs (e.g. `AGENTS.md`, `.agents/skills/*`) count as guardrails here. Still list in "Not verified" that they are not enforced by lint or CI, so the reader knows.
 - Check every breakpoint and both packages (web, web-react) when the criterion or the ticket labels call for it.
 - For an `X OR Y` criterion, record which branch was implemented and verify that branch fully; do not mark the other branch as missing.
 - Capture screenshots only for the 1–2 most visual criteria, into a temporary `<KEY>-acceptance/` folder **outside the repository**.
@@ -140,7 +150,7 @@ Report to the user in two parts, separated by a `─` divider line.
 **Details** — under a `Details` heading, in this order:
 
 1. Counts (met, partial, not met, not verifiable).
-2. Flags: issue status vs PR state mismatch, stale or missing preview, PR picked from several candidates.
+2. Flags: issue status vs PR state mismatch, stale or missing preview, PR picked from several candidates. Re-read the head SHA's check runs and `mergeable` state right before the verdict, not from an earlier snapshot. A merge conflict (`mergeable: dirty`) or a failing required check does not change a criterion's verdict, but it must appear in the top block's caveat sentence, not only here — e.g. "PR has merge conflicts and a failing 'Blocked Merge by Fixup' check". Pending CI is reported as pending with an offer to re-check, not counted as Not verifiable.
 3. Criteria table: AC, expected observation, where checked, evidence, verdict.
 4. Deployment links.
 5. Docs/Storybook note.
@@ -151,9 +161,9 @@ Report to the user in two parts, separated by a `─` divider line.
 ### Step 7: Write Back to Jira (After Approval)
 
 1. Draft the comment from [`references/jira-comment-template.md`](references/jira-comment-template.md) — the pass template for ACCEPT / CLARIFY, the decline template for DECLINE.
-2. Show the exact comment text, the screenshots to attach, the transition to apply, and — for ACCEPT on a Spirit issue with a PR — the PR label to add. Ask the user to choose: **post comment + transition** (+ label for ACCEPT), **post comment only**, or **skip**. CLARIFY offers only **post comment only** or **skip**.
+2. **Always show the exact comment text and wait, even when the user already said "post and accept".** Comments cannot be edited, and a combined command is approval of the action, not of text the user has not seen. A reply that only corrects part of the draft ("correct channel is X") does not answer "OK to post?": apply the fix, show the final text and ask again (DS-2834: a channel-name correction was treated as a yes and the comment plus Accept were applied). Before showing it, scan for `*`, `_`, `{` and `<` inside prose or identifiers (`color-scheme-on-*`, `ariaLabel*`) — wrap them in backticks or reword, because the converter turns them into bullets or italics. If the user accepts against the verdict (e.g. CLARIFY overridden), write "ACCEPTED by reviewer decision" and list what was not verified; never write "criteria met". Show the exact comment text, the screenshots to attach, the transition to apply, and — for ACCEPT on a Spirit issue with a PR — the PR label to add. Ask the user to choose: **post comment + transition** (+ label for ACCEPT), **post comment only**, or **skip**. CLARIFY offers only **post comment only** or **skip**.
 3. Attach screenshots first with [`scripts/jira-attach.sh`](scripts/jira-attach.sh). It needs `JIRA_PERSONAL_TOKEN` in the environment. If it isn't set, ask the user to provide it the way they normally store secrets. If the token is missing or an upload fails, drop the "Screenshots attached" line from the draft, show the revised comment, and get approval again before posting — comments cannot be edited.
-4. Post the comment. Then **re-fetch the issue comments** and read the stored body — the write response is not reliable. If formatting is garbled, tell the user; comments cannot be edited, only re-posted.
+4. Post the comment. If the Jira MCP write fails with a generic error while reads work, do not retry the same call: after one retry, switch to REST with `JIRA_PERSONAL_TOKEN` (see recipes), and first confirm nothing was posted (re-read `/comment`) so the comment is not duplicated. Then **re-fetch the issue comments** and read the stored body — the write response is not reliable. If formatting is garbled, tell the user; comments cannot be edited, only re-posted.
 5. Transition: list the issue's available transitions, pick the one **named** `Accept` (ACCEPT) or `Deny` (DECLINE) — never by a hard-coded id — apply it, then re-fetch the status and report it.
 6. Label the PR (ACCEPT only, after the transition succeeded and the user approved it): add the `jira-accepted` label to the implementing PR, then re-read the PR labels and report them. The label already exists in the repository ("Issue is accepted in Jira"); if it does not, tell the user instead of creating it. Skip this step when no PR was found or the issue is not a Spirit one. Do not add the label for CLARIFY or DECLINE. The commands are in [`references/verification-recipes.md`](references/verification-recipes.md#github).
 
