@@ -494,4 +494,52 @@
             }
         }
     }
+
+    @include test.it('should generate typography custom properties with weight suffixes') {
+        @include test.assert() {
+            @include test.output() {
+                @include dictionaries.generate-sizes(
+                    $class-name: 'TestSize',
+                    $dictionary-values: ('large'),
+                    $config: (
+                        large: (
+                            width: 10px,
+                            typography: (
+                                mobile: (
+                                    font-weight: 600,
+                                ),
+                            ),
+                            typography-bolder: (
+                                mobile: (
+                                    font-weight: 700,
+                                ),
+                            ),
+                            typography-lighter: (
+                                mobile: (
+                                    font-weight: 400,
+                                ),
+                            ),
+                        ),
+                    )
+                );
+            }
+
+            @include test.expect() {
+                // stylelint-disable no-duplicate-selectors -- Weight tokens are emitted as separate rules for the same size class.
+                .TestSize--large {
+                    --spirit-test-size-width: 10px;
+                    --spirit-test-size-font-weight: 600;
+                }
+
+                .TestSize--large {
+                    --spirit-test-size-bolder-font-weight: 700;
+                }
+
+                .TestSize--large {
+                    --spirit-test-size-lighter-font-weight: 400;
+                }
+                // stylelint-enable no-duplicate-selectors
+            }
+        }
+    }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ForwardedRef, forwardRef } from 'react';
-import { Sizes } from '../../constants';
+import { FontWeight, Sizes } from '../../constants';
 import { ContextPropsProvider, useContextProps } from '../../context';
 import { useAriaDescribedBy, useStyleProps } from '../../hooks';
 import { type ForwardRefComponent, type SpiritRadioProps } from '../../types';
@@ -74,7 +74,7 @@ const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): J
       value={{
         isDisabled,
         validationState,
-        label: { isStretched: isItem, isLabelHidden, size },
+        label: { fontWeight: FontWeight.LIGHTER, isStretched: isItem, isLabelHidden, size },
       }}
     >
       {isItem ? (

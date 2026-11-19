@@ -12,7 +12,7 @@ Radio buttons should be wrapped in a [FieldGroup][field-group] when used as a gr
     <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
       <input type="radio" id="radio-default" class="Radio" name="default" />
       <div>
-        <label class="Label Label--medium cursor-pointer" for="radio-default">Radio Label</label>
+        <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-default">Radio Label</label>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ For a single Radio button example:
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="radio" id="radio-default" class="Radio" name="default" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="radio-default">Radio Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-default">Radio Label</label>
   </div>
 </div>
 ```
@@ -35,7 +35,7 @@ For a single Radio button example:
 Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **The radio control stays the same.** Medium is the default.
 
 ```html
-<label class="Label Label--small cursor-pointer" for="radio-size-small">Small</label>
+<label class="Label Label--lighter Label--small cursor-pointer" for="radio-size-small">Small</label>
 ```
 
 ## Selected State
@@ -44,7 +44,7 @@ Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **Th
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="radio" id="radio-default-checked" class="Radio" name="default" checked />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="radio-default-checked">Radio Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-default-checked">Radio Label</label>
   </div>
 </div>
 ```
@@ -55,7 +55,7 @@ Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **Th
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="radio" id="radio-disabled" class="Radio" name="default" disabled />
   <div>
-    <label class="Label Label--medium Label--disabled" for="radio-disabled">Radio Label</label>
+    <label class="Label Label--lighter Label--medium Label--disabled" for="radio-disabled">Radio Label</label>
   </div>
 </div>
 ```
@@ -66,7 +66,7 @@ Set the label size with `Label--small`, `Label--medium`, or `Label--large`. **Th
 <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-0);">
   <input type="radio" id="radio-hidden-label" class="Radio" name="default" />
   <div>
-    <label class="Label Label--medium accessibility-hidden" for="radio-hidden-label">Radio Label</label>
+    <label class="Label Label--lighter Label--medium accessibility-hidden" for="radio-hidden-label">Radio Label</label>
   </div>
 </div>
 ```
@@ -80,21 +80,21 @@ See Validation state [dictionary][dictionary-validation].
   <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
     <input type="radio" id="radio-success" class="Radio Radio--success" name="validation" />
     <div>
-      <label class="Label Label--medium cursor-pointer" for="radio-success">Radio Label</label>
+      <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-success">Radio Label</label>
     </div>
   </div>
 
   <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
     <input type="radio" id="radio-warning" class="Radio Radio--warning" name="validation" />
     <div>
-      <label class="Label Label--medium cursor-pointer" for="radio-warning">Radio Label</label>
+      <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-warning">Radio Label</label>
     </div>
   </div>
 
   <div class="Flex Flex--horizontal Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
     <input type="radio" id="radio-danger" class="Radio Radio--danger" name="validation" />
     <div>
-      <label class="Label Label--medium cursor-pointer" for="radio-danger">Radio Label</label>
+      <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-danger">Radio Label</label>
     </div>
   </div>
 </div>
@@ -114,7 +114,7 @@ To add helper text, use the [HelperText][readme-helper-text] component:
     aria-describedby="radio-helper-text-helper-text"
   />
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium cursor-pointer" for="radio-helper-text">Radio Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-helper-text">Radio Label</label>
     <div class="HelperText" id="radio-helper-text-helper-text">Helper text</div>
   </div>
 </div>
@@ -130,7 +130,9 @@ Use the [Item][readme-item] component to render Radio in item mode:
     <input type="radio" id="radio-item-default" class="Radio Radio--item" name="item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--medium element-stretched cursor-pointer" for="radio-item-default">Radio Label</label>
+    <label class="Label Label--lighter Label--medium element-stretched cursor-pointer" for="radio-item-default"
+      >Radio Label</label
+    >
   </div>
 </div>
 ```
@@ -150,7 +152,7 @@ Use the [Item][readme-item] component to render Radio in item mode:
   </div>
   <div class="Item__content" role="presentation">
     <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-      <label class="Label Label--medium element-stretched cursor-pointer" for="radio-item-helper-text"
+      <label class="Label Label--lighter Label--medium element-stretched cursor-pointer" for="radio-item-helper-text"
         >Radio Label</label
       >
       <div class="HelperText" id="radio-item-helper-text-helper-text">Helper text</div>
@@ -169,7 +171,7 @@ The input position can be set using [Flex][readme-flex] component with direction
 <div class="Flex Flex--horizontalReversed Flex--inline py-500" style="--flex-spacing-x: var(--spirit-space-500);">
   <input type="radio" id="radio-position-end" class="Radio" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="radio-position-end">Radio Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-position-end">Radio Label</label>
   </div>
 </div>
 ```
@@ -185,7 +187,7 @@ Use responsive breakpoint modifiers to change input position at different screen
 >
   <input type="radio" id="radio-position-responsive" class="Radio" name="position" />
   <div>
-    <label class="Label Label--medium cursor-pointer" for="radio-position-responsive">Radio Label</label>
+    <label class="Label Label--lighter Label--medium cursor-pointer" for="radio-position-responsive">Radio Label</label>
   </div>
 </div>
 ```

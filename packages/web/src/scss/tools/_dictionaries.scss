@@ -194,11 +194,18 @@
                 @each $key, $variables in $config {
                     .#{spirit-list.to-string(($class-name, $class-name-infix, $breakpoint-infix, $key), '--')} {
                         @each $property-name, $property-value in $variables {
-                            @if $property-name == 'typography' {
+                            @if string.index($property-name, 'typography') {
+                                $suffix: string.slice($property-name, string.index($property-name, 'typography') + 10);
+                                $variable-infix: $custom-property-base-name;
+
+                                @if $suffix != '' {
+                                    $variable-infix: $variable-infix + $suffix;
+                                }
+
                                 @include typography.generate(
                                     $property-value,
                                     $as-css-variables: true,
-                                    $css-variable-infix: $custom-property-base-name
+                                    $css-variable-infix: $variable-infix
                                 );
                             } @else {
                                 --#{tokens.$css-variable-prefix}#{$custom-property-base-name}-#{$property-name}: #{$property-value};

@@ -12,7 +12,7 @@ accessibility tree. Learn more about it in the [Accessibility](#accessibility) s
 ```html
 <div class="Item Item--medium">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
 </div>
 ```
@@ -25,19 +25,25 @@ The Item size modifier also sets the composition size of `Icon` components rende
 
 ```html
 <div class="Item Item--xsmall">
-  <span class="Item__content" role="presentation"><span class="Label Label--xsmall">XSmall item</span></span>
+  <span class="Item__content" role="presentation"
+    ><span class="Label Label--base Label--xsmall">XSmall item</span></span
+  >
 </div>
 <div class="Item Item--small">
-  <span class="Item__content" role="presentation"><span class="Label Label--small">Small item</span></span>
+  <span class="Item__content" role="presentation"><span class="Label Label--base Label--small">Small item</span></span>
 </div>
 <div class="Item Item--medium">
-  <span class="Item__content" role="presentation"><span class="Label Label--medium">Medium item</span></span>
+  <span class="Item__content" role="presentation"
+    ><span class="Label Label--base Label--medium">Medium item</span></span
+  >
 </div>
 <div class="Item Item--large">
-  <span class="Item__content" role="presentation"><span class="Label Label--large">Large item</span></span>
+  <span class="Item__content" role="presentation"><span class="Label Label--base Label--large">Large item</span></span>
 </div>
 <div class="Item Item--xlarge">
-  <span class="Item__content" role="presentation"><span class="Label Label--xlarge">XLarge item</span></span>
+  <span class="Item__content" role="presentation"
+    ><span class="Label Label--base Label--xlarge">XLarge item</span></span
+  >
 </div>
 ```
 
@@ -51,7 +57,7 @@ Button:
 ```html
 <button type="button" class="Item Item--medium">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
 </button>
 ```
@@ -61,7 +67,7 @@ Link:
 ```html
 <a href="#" class="Item Item--medium">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
 </a>
 ```
@@ -80,7 +86,7 @@ Selected with background only:
 ```html
 <button type="button" class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
 </button>
 ```
@@ -90,7 +96,7 @@ Selected with icon only:
 ```html
 <button type="button" class="Item Item--medium">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
@@ -105,7 +111,7 @@ Selected with background and icon:
 ```html
 <button type="button" class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
@@ -130,7 +136,7 @@ Leading icon:
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
 </button>
 ```
@@ -145,7 +151,7 @@ Leading icon, trailing selected icon, and selected background:
     </svg>
   </span>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <svg class="Icon Icon--selected" width="24" height="24" aria-hidden="true">
@@ -169,7 +175,7 @@ or other inline content.
   </span>
   <span class="Item__content" role="presentation">
     <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-      <span class="Label Label--medium element-stretched">Project Alpha</span>
+      <span class="Label Label--base Label--medium element-stretched">Project Alpha</span>
       <span class="HelperText">Team workspace</span>
       <span class="typography-body-small-regular text-emotion-success-basic">3 updates</span>
     </div>
@@ -183,7 +189,7 @@ Item with helper text:
 <button type="button" class="Item Item--medium">
   <span class="Item__content" role="presentation">
     <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-      <span class="Label Label--medium element-stretched">Item</span>
+      <span class="Label Label--base Label--medium element-stretched">Item</span>
       <span class="HelperText">Helper text</span>
     </div>
   </span>
@@ -221,7 +227,7 @@ keep the Item root non-interactive or structure markup to avoid nested interacti
 ```html
 <div class="Item Item--medium">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Dismissible item</span>
+    <span class="Label Label--base Label--medium element-stretched">Dismissible item</span>
   </span>
   <span class="Item__slot" role="presentation">
     <button
@@ -281,7 +287,7 @@ and `Item__content` should align differently on the cross axis.
   </span>
   <span class="Item__content" role="presentation">
     <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-      <span class="Label Label--medium element-stretched">Item</span>
+      <span class="Label Label--base Label--medium element-stretched">Item</span>
       <span class="HelperText">Additional helper text makes the content taller than the icon.</span>
     </div>
   </span>
@@ -300,7 +306,7 @@ Button:
 ```html
 <button type="button" class="Item Item--medium disabled text-color-scheme" disabled>
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched Label--disabled">Item</span>
+    <span class="Label Label--base Label--medium element-stretched Label--disabled">Item</span>
   </span>
 </button>
 ```
@@ -310,7 +316,7 @@ Link:
 ```html
 <a href="#" class="Item Item--medium disabled text-color-scheme" aria-disabled="true">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched Label--disabled">Item</span>
+    <span class="Label Label--base Label--medium element-stretched Label--disabled">Item</span>
   </span>
 </a>
 ```
@@ -322,7 +328,7 @@ Non-interactive root:
 ```html
 <div class="Item Item--medium disabled text-color-scheme" aria-disabled="true">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched Label--disabled">Item</span>
+    <span class="Label Label--base Label--medium element-stretched Label--disabled">Item</span>
   </span>
 </div>
 ```
@@ -337,7 +343,7 @@ Radio as a Item:
     <input type="radio" id="radio-item" name="example" class="Radio Radio--item" checked />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--medium element-stretched" for="radio-item">Item</label>
+    <label class="Label Label--lighter Label--medium element-stretched" for="radio-item">Item</label>
   </div>
 </div>
 ```
@@ -350,7 +356,7 @@ Checkbox as a Item:
     <input type="checkbox" id="checkbox-item" class="Checkbox Checkbox--item" />
   </div>
   <div class="Item__content" role="presentation">
-    <label class="Label Label--medium element-stretched" for="checkbox-item">Item</label>
+    <label class="Label Label--lighter Label--medium element-stretched" for="checkbox-item">Item</label>
   </div>
 </div>
 ```
@@ -378,7 +384,7 @@ Usage in the [Dropdown][dropdown] component:
         </svg>
       </span>
       <span class="Item__content" role="presentation">
-        <span class="Label Label--medium element-stretched">Information</span>
+        <span class="Label Label--base Label--medium element-stretched">Information</span>
       </span>
     </a>
   </div>
@@ -405,7 +411,7 @@ The parent widget must implement the keyboard interaction contract for the chose
 ```html
 <div class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme" role="option" aria-selected="true">
   <span class="Item__content" role="presentation">
-    <span class="Label Label--medium element-stretched">Item</span>
+    <span class="Label Label--base Label--medium element-stretched">Item</span>
   </span>
 </div>
 ```
