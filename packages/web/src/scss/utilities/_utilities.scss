@@ -1,3 +1,6 @@
+// 1. The disabled colors are only declared, not painted. Components paint from the local color context, so they pick
+//    them up, and their interactive states cannot overwrite them (see tools/local).
+
 @use 'sass:map';
 @use 'sass:meta';
 @use '@tokens' as tokens;
@@ -43,6 +46,7 @@
 }
 
 .disabled {
+    // 1.
     @include local.set-color(tokens.$disabled-content, $important: true);
     @include local.set-border-color(tokens.$disabled-border, $important: true);
     @include local.set-border-color-subtle(tokens.$disabled-border, $important: true);
