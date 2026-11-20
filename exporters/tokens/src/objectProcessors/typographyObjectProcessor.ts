@@ -12,7 +12,7 @@ import {
   DeviceDimensionEntries,
   StylesObjectType,
 } from '../core/types';
-import { tokenVariableName } from '../helpers/tokenHelper';
+import { getOriginName, tokenVariableName } from '../helpers/tokenHelper';
 import { formatTypographyName, getBreakpoint, typographyStyle } from '../helpers/typographyHelper';
 import { getFontSizeBaseForBreakpoint, isPxValue, unitToCss } from '../helpers/unitHelper';
 import type { FontSizeBaseMap } from '../helpers/types';
@@ -43,7 +43,7 @@ const resolveDeviceEntries = (
       return byVariableName;
     }
 
-    const originKey = referencedToken.origin?.name?.toLowerCase();
+    const originKey = getOriginName(referencedToken);
 
     return originKey ? deviceDimensions.get(originKey) : undefined;
   }
