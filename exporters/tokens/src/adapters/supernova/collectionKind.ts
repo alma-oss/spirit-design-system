@@ -20,7 +20,7 @@ export const getDeviceCollectionId = (tokens: Token[]): string | boolean | numbe
 /**
  * Supernova tells the collections apart by the `Collection` property of a token. Returns a function that maps a
  * token to the source-neutral kind of its collection, leaving lookup-only collections (e.g. primitives) unset.
- *
+ * *
  * @param tokens - All tokens of the design system
  */
 export const createCollectionKindResolver = (tokens: Token[]): ((token: Token) => CollectionKind | undefined) => {
