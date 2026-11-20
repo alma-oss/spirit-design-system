@@ -4,6 +4,7 @@ import { exampleGroups } from '../../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens } from '../../../../tests/fixtures/exampleTypographyTokens';
 import { CollectionKind, TokenTypeEnum } from '../../../core/types';
 import { splitTokens } from '../../../core/splitTokens';
+import { filterExcludedTokens } from '../../../filters/excludedTokens';
 import { SupernovaAdapter } from '../SupernovaAdapter';
 
 const exampleThemes = [
@@ -29,17 +30,17 @@ describe('SupernovaAdapter', () => {
 
       const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
 
-      // string and dimension tokens are mapped so far (see #DS-2335); the internal `figma-` token is excluded.
+      // string and dimension tokens are mapped so far (see #DS-2335); the internal `figma-` token stays, the pipeline excludes it.
       // one token per id, the tokens resolved for a theme or a device are separate
-      expect(collection.tokens.map((token) => token.id).sort()).toEqual(['dimensionRef', 'stringRef']);
-      expect(collection.themedTokens.map(({ theme, tokens }) => [theme.name, tokens.length])).toEqual([['Dark', 2]]);
+      expect(collection.tokens.map((token) => token.id).sort()).toEqual(['dimensionRef', 'figmaTokenRef', 'stringRef']);
+      expect(collection.themedTokens.map(({ theme, tokens }) => [theme.name, tokens.length])).toEqual([['Dark', 3]]);
       expect(collection.themedTokens[0].tokens.every((token) => token.metadata.theme === 'Dark')).toBe(true);
       expect(collection.deviceTokens).toEqual([]);
       expect(collection.groups).toHaveLength(exampleGroups.length);
       expect(collection.themes).toEqual([{ id: 'theme-1', name: 'Dark', collection: CollectionKind.Color }]);
       expect(collection.devices).toEqual([]);
       expect(collection.tokens.every((token) => token.metadata.collection === CollectionKind.Global)).toBe(true);
-      expect(splitTokens(collection).globalTokens).toHaveLength(2);
+      expect(splitTokens(collection).globalTokens).toHaveLength(3);
       expect(collection.metadata.source).toBe('supernova');
     });
 
@@ -104,40 +105,25 @@ describe('SupernovaAdapter', () => {
       expect(collection.themedTokens.map(({ theme }) => theme.id)).toEqual(['theme-1']);
     });
 
-    it('should fetch the native tokens and groups with the themes resolved by the SDK', async () => {
+    it('should resolve the themes with the SDK once', async () => {
       const sdk = createSdk();
       const adapter = new SupernovaAdapter(sdk);
 
-      const { tokens, tokenGroups, resolved } = await adapter.fetchResolvedTokens({
-        source: { designSystemId: 'ds1', versionId: 'v1' },
-      });
+      const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
 
-      expect(tokens).toHaveLength(exampleDimensionAndStringTokens.size);
-      expect(tokenGroups).toBe(exampleGroups);
-      expect(resolved.themes.map(({ theme }) => theme.name)).toEqual(['Dark']);
+      expect(collection.groups).toHaveLength(exampleGroups.length);
+      expect(collection.themedTokens.map(({ theme }) => theme.name)).toEqual(['Dark']);
       expect(sdk.tokens.computeTokensByApplyingThemes).toHaveBeenCalledTimes(1);
     });
 
-    it('should filter the native tokens by brandId when provided', async () => {
-      const adapter = new SupernovaAdapter(createSdk());
-
-      const { tokens, tokenGroups } = await adapter.fetchResolvedTokens({
-        source: { designSystemId: 'ds1', versionId: 'v1' },
-        filters: { brandId: 'brand-that-does-not-exist' },
-      });
-
-      expect(tokens).toHaveLength(0);
-      expect(tokenGroups).toHaveLength(0);
-    });
-
-    it('should map typography tokens and keep excluding Link and Italic styles', async () => {
+    it('should map typography tokens and leave the exclusion of Link and Italic styles to the pipeline', async () => {
       const italic = { ...exampleTypographyTokens.get('typographyRef1'), id: 'typographyItalic', name: 'Bold-Italic' };
       const sdk = createSdk([...Array.from(exampleTypographyTokens.values()), italic] as Token[]);
       const adapter = new SupernovaAdapter(sdk);
 
       const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
 
-      expect(collection.tokens.map((token) => [token.id, token.type])).toEqual([
+      expect(filterExcludedTokens(collection.tokens).map((token) => [token.id, token.type])).toEqual([
         ['typographyRef1', TokenTypeEnum.Typography],
       ]);
     });

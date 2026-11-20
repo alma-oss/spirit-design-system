@@ -1,9 +1,14 @@
-import { Token, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
-import type { DeviceDimensionMap, StylesObjectType, TokenIndex } from '../core/types';
-import { getDeviceAlias } from '../helpers/deviceHelpers';
+import {
+  type DesignToken,
+  type DeviceDimensionMap,
+  type FontReplacement,
+  type StylesObjectType,
+  type TokenIndex,
+  TokenTypeEnum,
+  type FontSizeBaseMap,
+} from '../core/types';
 import { deepMergeObjects } from '../helpers/objectHelper';
-import { sortTokens } from '../helpers/tokenHelper';
-import type { FontSizeBaseMap } from '../helpers/types';
+import { getOriginPathParts, sortTokens } from '../helpers/tokenHelper';
 import {
   handleNonTypographyTokens,
   handleTypographyTokens,
@@ -12,71 +17,69 @@ import {
 } from '../objectProcessors';
 
 export const createStylesObjectStructureFromTokenNameParts = (
-  token: Token,
-  tokenGroups: Array<TokenGroup>,
+  token: DesignToken,
   hasParentPrefix: boolean,
   stylesObjectRef: StylesObjectType,
   hasJsOutput: boolean,
   deviceDimensions?: DeviceDimensionMap,
   fontSizeBaseMap?: FontSizeBaseMap,
-  tokenById?: Map<string, Token>,
   tokenIndex?: TokenIndex,
+  fontReplacements: FontReplacement[] = [],
 ): StylesObjectType => {
-  const { tokenType, name: tokenName } = token;
-  const devicePart = getDeviceAlias(token);
-  let tokenNameParts: string[] = token.origin?.name?.split('/') || [];
+  const { type: tokenType, name: tokenName } = token;
+  const devicePart = token.metadata.device;
+  let tokenNameParts: string[] = token.metadata.originName
+    ? getOriginPathParts(token)
+    : [...(token.metadata.namePath ?? token.metadata.groupPath), tokenName];
 
   if (tokenNameParts.length <= 1) {
-    if (devicePart || tokenType === TokenType.typography) {
+    if (devicePart || tokenType === TokenTypeEnum.Typography) {
       tokenNameParts = [tokenName];
     } else {
       return stylesObjectRef;
     }
   }
 
-  if (tokenType === TokenType.typography) {
+  if (tokenType === TokenTypeEnum.Typography) {
     handleTypographyTokens(
       tokenNameParts,
       token,
-      tokenGroups,
       hasParentPrefix,
       stylesObjectRef,
       hasJsOutput,
       deviceDimensions,
       fontSizeBaseMap,
-      tokenById,
       tokenIndex,
+      fontReplacements,
     );
   } else {
-    handleNonTypographyTokens(tokenNameParts, token, tokenGroups, hasParentPrefix, stylesObjectRef, hasJsOutput);
+    handleNonTypographyTokens(tokenNameParts, token, hasParentPrefix, stylesObjectRef, hasJsOutput);
   }
 
   return stylesObjectRef;
 };
 
 export const generateStylesObjectFromTokens = (
-  tokens: Array<Token>,
-  tokenGroups: Array<TokenGroup>,
+  tokens: Array<DesignToken>,
   hasParentPrefix: boolean,
   hasJsOutput: boolean,
   sortByNumValue: boolean,
   deviceDimensions?: DeviceDimensionMap,
   fontSizeBaseMap?: FontSizeBaseMap,
-  tokenById?: Map<string, Token>,
   tokenIndex?: TokenIndex,
+  fontReplacements: FontReplacement[] = [],
 ): StylesObjectType => {
-  const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+  const sortedTokens = sortTokens(tokens, hasParentPrefix, sortByNumValue);
   const stylesObject = sortedTokens.reduce((stylesObjectAccumulator, token) => {
     const currentObject = createStylesObjectStructureFromTokenNameParts(
       token,
-      tokenGroups,
       hasParentPrefix,
       {},
       hasJsOutput,
       deviceDimensions,
       fontSizeBaseMap,
-      tokenById,
       tokenIndex,
+      fontReplacements,
     );
 
     // Merge the current object into the accumulator

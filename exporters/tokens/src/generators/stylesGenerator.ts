@@ -1,32 +1,14 @@
-// TODO: Remove the Supernova imports (here and the adapter below) once the generators read a full `TokenCollection`.
-import {
-  BorderToken,
-  BorderWidthToken,
-  ColorToken,
-  DimensionToken,
-  FontSizeToken,
-  GradientToken,
-  LetterSpacingToken,
-  LineHeightToken,
-  RadiusToken,
-  ShadowToken,
-  SizeToken,
-  SpaceToken,
-  StringToken,
-  Token,
-  TokenGroup,
-  TokenType,
-} from '@supernovaio/sdk-exporters';
-import type { TokenIndex } from '../core/types';
+import { withResolvedValue } from '../core/resolveToken';
+import { type DesignToken, type TokenIndex, TokenTypeEnum, type FontSizeBaseMap } from '../core/types';
 import {
   addEmptyLineBetweenTokenGroups,
   cssVariableReference,
   formatCssVariableReference,
+  getGroupKey,
   sortTokens,
   tokenVariableName,
 } from '../helpers/tokenHelper';
 import { createDefaultFontSizeBaseMap } from '../helpers/unitHelper';
-import type { FontSizeBaseMap } from '../helpers/types';
 import {
   processNumericToken,
   processBorderToken,
@@ -37,16 +19,14 @@ import {
 } from '../tokenProcessors';
 
 export const tokenToStyleByType = (
-  token: Token,
+  token: DesignToken,
   tokenIndex: TokenIndex,
-  tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
   hasParentPrefix: boolean,
   hasJsOutput: boolean,
   fontSizeBaseMap: FontSizeBaseMap,
 ): string | null => {
   const processorContext = {
-    tokenGroups,
     hasParentPrefix,
     hasJsOutput,
     fontSizeBaseMap,
@@ -54,55 +34,47 @@ export const tokenToStyleByType = (
     tokenIndex,
   };
 
-  switch (token.tokenType) {
-    case TokenType.dimension:
-      return processNumericToken(token as DimensionToken, TokenType.dimension, processorContext);
-    case TokenType.radius:
-      return processNumericToken(token as RadiusToken, TokenType.radius, processorContext);
-    case TokenType.space:
-      return processNumericToken(token as SpaceToken, TokenType.space, processorContext);
-    case TokenType.size:
-      return processNumericToken(token as SizeToken, TokenType.size, processorContext);
-    case TokenType.fontSize:
-      return processNumericToken(token as FontSizeToken, TokenType.fontSize, processorContext);
-    case TokenType.lineHeight:
-      return processNumericToken(token as LineHeightToken, TokenType.lineHeight, processorContext);
-    case TokenType.letterSpacing:
-      return processNumericToken(token as LetterSpacingToken, TokenType.letterSpacing, processorContext);
-    case TokenType.border:
-      return processBorderToken(token as BorderToken, processorContext);
-    case TokenType.borderWidth:
-      return processBorderToken(token as BorderWidthToken, processorContext);
-    case TokenType.string:
-      return processStringToken(token as StringToken, processorContext);
-    case TokenType.color:
-      return processColorToken(token as ColorToken, processorContext);
-    case TokenType.shadow:
-      return processShadowToken(token as ShadowToken, processorContext);
-    case TokenType.gradient:
-      return processGradientToken(token as GradientToken, processorContext);
+  switch (token.type) {
+    case TokenTypeEnum.Dimension:
+    case TokenTypeEnum.Radius:
+    case TokenTypeEnum.Space:
+    case TokenTypeEnum.Size:
+    case TokenTypeEnum.FontSize:
+    case TokenTypeEnum.LineHeight:
+    case TokenTypeEnum.LetterSpacing:
+      return processNumericToken(withResolvedValue(token), processorContext);
+    case TokenTypeEnum.Border:
+    case TokenTypeEnum.BorderWidth:
+      return processBorderToken(withResolvedValue(token), processorContext);
+    case TokenTypeEnum.String:
+      return processStringToken(withResolvedValue(token), processorContext);
+    case TokenTypeEnum.Color:
+      return processColorToken(token, processorContext);
+    case TokenTypeEnum.Shadow:
+      return processShadowToken(token, processorContext);
+    case TokenTypeEnum.Gradient:
+      return processGradientToken(token, processorContext);
     default:
       return null;
   }
 };
 
 export const generateCssVariableReferencesFromTokens = (
-  tokens: Token[],
-  tokenGroups: Array<TokenGroup>,
+  tokens: DesignToken[],
   tokenPrefix: string,
   cssVariablePrefix: string,
   hasParentPrefix: boolean,
   sortByNumValue: boolean,
   hasJsOutput: boolean,
 ): string => {
-  const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+  const sortedTokens = sortTokens(tokens, hasParentPrefix, sortByNumValue);
 
   const cssTokens = sortedTokens.map((token) => {
-    const name = tokenVariableName(token, tokenGroups, hasParentPrefix);
+    const name = tokenVariableName(token, hasParentPrefix);
 
     return {
       css: formatCssVariableReference(name, cssVariableReference(tokenPrefix, cssVariablePrefix, name), hasJsOutput),
-      parentGroupId: token.parentGroupId,
+      parentGroupId: getGroupKey(token),
     };
   });
 
@@ -110,20 +82,19 @@ export const generateCssVariableReferencesFromTokens = (
 };
 
 export const generateStylesFromTokens = (
-  tokens: Token[],
+  tokens: DesignToken[],
   tokenIndex: TokenIndex,
-  tokenGroups: Array<TokenGroup>,
   tokenPrefix: string,
   hasParentPrefix: boolean,
   sortByNumValue: boolean,
   hasJsOutput: boolean,
   fontSizeBaseMap: FontSizeBaseMap = createDefaultFontSizeBaseMap(),
 ): string => {
-  const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+  const sortedTokens = sortTokens(tokens, hasParentPrefix, sortByNumValue);
 
   const cssTokens = sortedTokens.map((token) => ({
-    css: tokenToStyleByType(token, tokenIndex, tokenGroups, tokenPrefix, hasParentPrefix, hasJsOutput, fontSizeBaseMap),
-    parentGroupId: token.parentGroupId,
+    css: tokenToStyleByType(token, tokenIndex, tokenPrefix, hasParentPrefix, hasJsOutput, fontSizeBaseMap),
+    parentGroupId: getGroupKey(token),
   }));
 
   return addEmptyLineBetweenTokenGroups(cssTokens);

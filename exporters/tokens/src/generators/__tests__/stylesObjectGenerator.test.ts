@@ -1,22 +1,20 @@
-import { Token, TokenGroup, TokenType, TypographyToken } from '@supernovaio/sdk-exporters';
 import { renderTypographyLeaves } from '../../../tests/fixtures/renderTypographyLeaves';
-import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
+import { exampleColorsTokens } from '../../../tests/fixtures/internal-model/exampleColorTokens';
 import {
   exampleDeviceUpdatedTokens,
   exampleDeviceTokenBreakpoint,
   exampleDeviceTokenMultiWord,
   exampleDeviceTokenBreakpointCustom,
-} from '../../../tests/fixtures/exampleDeviceTokens';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+} from '../../../tests/fixtures/internal-model/exampleDeviceTokens';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+import { exampleTypographyTokens } from '../../../tests/fixtures/internal-model/exampleTypographyTokens';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
 import { filterExcludedTokens } from '../../filters/excludedTokens';
 import {
   createStylesObjectStructureFromTokenNameParts,
   generateStylesObjectFromTokens,
 } from '../stylesObjectGenerator';
-import type { StylesObjectType } from '../../core/types';
+
 import {
   colorGroupsReducer,
   createGlobalColorsObject,
@@ -25,55 +23,43 @@ import {
   parseGroupName,
   typographyGroupReducer,
 } from '../../objectProcessors';
+import { type DesignToken, TokenTypeEnum, type StylesObjectType } from '../../core/types';
 
-const tokenGroups: Array<TokenGroup> = exampleGroups;
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
-
-const flatCaptionTypographyToken = {
-  id: 'typographyFlatCaption',
-  name: 'Caption',
-  tokenType: TokenType.typography,
-  parentGroupId: '3',
-  origin: {
+const flatCaptionTypographyToken = createDesignToken(
+  TokenTypeEnum.Typography,
+  {
+    type: 'composite',
+    value: {
+      fontFamily: { type: 'string', value: 'Inter' },
+      fontWeight: { type: 'string', value: 'Regular' },
+      fontSize: { type: 'number', value: 14, unit: 'px' },
+      lineHeight: { type: 'number', value: 20, unit: 'px' },
+    },
+  },
+  {
+    id: 'typographyFlatCaption',
     name: 'Caption',
+    metadata: { groupPath: ['Typography'], groupId: '3', originName: 'Caption' },
   },
-  value: {
-    fontSize: { unit: 'Pixels', measure: 14, referencedTokenId: null },
-    lineHeight: { unit: 'Pixels', measure: 20, referencedTokenId: null },
-    fontFamily: { text: 'Inter' },
-    fontWeight: { text: 'Regular' },
-    textDecoration: { value: 'None' },
-    textCase: { value: 'Original' },
-    letterSpacing: { unit: 'Pixels', measure: 0 },
-    paragraphIndent: { unit: 'Pixels', measure: 0 },
-    paragraphSpacing: { unit: 'Pixels', measure: 0 },
-    referencedTokenId: null,
-  },
-} as TypographyToken;
+);
 
-const flatEyebrowTypographyToken = {
-  id: 'typographyFlatEyebrow',
-  name: 'Eyebrow',
-  tokenType: TokenType.typography,
-  parentGroupId: '3',
-  origin: {
+const flatEyebrowTypographyToken = createDesignToken(
+  TokenTypeEnum.Typography,
+  {
+    type: 'composite',
+    value: {
+      fontFamily: { type: 'string', value: 'Inter' },
+      fontWeight: { type: 'string', value: 'Bold' },
+      fontSize: { type: 'number', value: 12, unit: 'px' },
+      lineHeight: { type: 'number', value: 16, unit: 'px' },
+    },
+  },
+  {
+    id: 'typographyFlatEyebrow',
     name: 'Eyebrow',
+    metadata: { groupPath: ['Typography'], groupId: '3', originName: 'Eyebrow' },
   },
-  value: {
-    fontSize: { unit: 'Pixels', measure: 12, referencedTokenId: null },
-    lineHeight: { unit: 'Pixels', measure: 16, referencedTokenId: null },
-    fontFamily: { text: 'Inter' },
-    fontWeight: { text: 'Bold' },
-    textDecoration: { value: 'None' },
-    textCase: { value: 'Uppercase' },
-    letterSpacing: { unit: 'Pixels', measure: 0 },
-    paragraphIndent: { unit: 'Pixels', measure: 0 },
-    paragraphSpacing: { unit: 'Pixels', measure: 0 },
-    referencedTokenId: null,
-  },
-} as TypographyToken;
+);
 
 describe('stylesObjectGenerator', () => {
   describe('generateStylesObjectFromTokens', () => {
@@ -202,10 +188,9 @@ describe('stylesObjectGenerator', () => {
     ];
 
     it.each(dataProvider)('$description', ({ tokens, expectedStyles, hasJsOutput }) => {
-      const filteredTokens = filterExcludedTokens(Array.from(tokens.values()), tokenGroups);
+      const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
       const styles = generateStylesObjectFromTokens(
         filteredTokens,
-        tokenGroups,
         true,
         hasJsOutput,
         false,
@@ -220,7 +205,6 @@ describe('stylesObjectGenerator', () => {
     it('should generate flat typography tokens and include them in styles', () => {
       const styles = generateStylesObjectFromTokens(
         [flatCaptionTypographyToken],
-        tokenGroups,
         true,
         false,
         false,
@@ -244,7 +228,6 @@ describe('stylesObjectGenerator', () => {
     it('should generate flat typography tokens and include them in styles (JS output)', () => {
       const styles = generateStylesObjectFromTokens(
         [flatCaptionTypographyToken],
-        tokenGroups,
         true,
         true,
         false,
@@ -268,7 +251,6 @@ describe('stylesObjectGenerator', () => {
     it('should generate flat eyebrow typography token and include it in styles', () => {
       const styles = generateStylesObjectFromTokens(
         [flatEyebrowTypographyToken],
-        tokenGroups,
         true,
         false,
         false,
@@ -290,24 +272,60 @@ describe('stylesObjectGenerator', () => {
     });
   });
 
+  describe('createStylesObjectStructureFromTokenNameParts without an origin name', () => {
+    it('should build the path from the group path and the token name', () => {
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 16, unit: 'px' },
+        { name: 'small', metadata: { groupPath: ['Spacing'], namePath: ['Spacing'] } },
+      );
+
+      const styles = createStylesObjectStructureFromTokenNameParts(token, true, {}, false);
+
+      expect(styles).toStrictEqual({ $spaces: { small: '$spacing-small' } });
+    });
+
+    it('should build the path from the name path, which leaves out a root group', () => {
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 16, unit: 'px' },
+        { name: 'small', metadata: { groupPath: ['Spacing'], namePath: [], device: 'Mobile' } },
+      );
+
+      const styles = createStylesObjectStructureFromTokenNameParts(token, true, {}, false);
+
+      expect(styles).toStrictEqual({ $smalls: { mobile: '$small-mobile' } });
+    });
+
+    it('should leave the object untouched for a token with a single name part and no device', () => {
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 16, unit: 'px' },
+        { name: 'small', metadata: { originName: 'small', groupPath: [] } },
+      );
+
+      expect(createStylesObjectStructureFromTokenNameParts(token, true, {}, false)).toStrictEqual({});
+    });
+  });
+
   describe('createStylesObjectStructureFromTokenNameParts', () => {
     const dataProvider = [
       {
-        token: exampleDimensionAndStringTokens.get('dimensionRef') as Token,
+        token: exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken,
         expectedObject: { $grids: { columns: '$grid-columns', spacing: { desktop: '$grid-spacing-desktop' } } },
         description: 'should create object structure from dimension token name parts',
         stylesObjectRef: { $grids: { columns: '$grid-columns' } } as StylesObjectType,
         hasJsOutput: false,
       },
       {
-        token: exampleDimensionAndStringTokens.get('dimensionRef') as Token,
+        token: exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken,
         expectedObject: { grids: { columns: 'gridColumns', spacing: { desktop: 'gridSpacingDesktop' } } },
         description: 'should create object structure from dimension token name parts with js output',
         stylesObjectRef: { grids: { columns: 'gridColumns' } } as StylesObjectType,
         hasJsOutput: true,
       },
       {
-        token: exampleColorsTokens.get('backgroundColorRef') as Token,
+        token: exampleColorsTokens.get('backgroundColorRef') as DesignToken,
         expectedObject: {
           actionColors: { button: { primary: { active: 'actionButtonPrimaryActive' } } },
           backgroundColors: {
@@ -321,7 +339,7 @@ describe('stylesObjectGenerator', () => {
         hasJsOutput: true,
       },
       {
-        token: exampleTypographyTokens.get('typographyRef1') as Token,
+        token: exampleTypographyTokens.get('typographyRef1') as DesignToken,
         expectedObject: {
           '$heading-xlarge-bold': {
             mobile:
@@ -338,7 +356,7 @@ describe('stylesObjectGenerator', () => {
         hasJsOutput: false,
       },
       {
-        token: exampleTypographyTokens.get('typographyRef1') as Token,
+        token: exampleTypographyTokens.get('typographyRef1') as DesignToken,
         expectedObject: {
           headingXlargeBold: {
             mobile:
@@ -359,7 +377,6 @@ describe('stylesObjectGenerator', () => {
     it.each(dataProvider)('$description', ({ token, expectedObject, stylesObjectRef, hasJsOutput }) => {
       const cssObject = createStylesObjectStructureFromTokenNameParts(
         token,
-        tokenGroups,
         true,
         stylesObjectRef,
         hasJsOutput,
@@ -375,7 +392,7 @@ describe('stylesObjectGenerator', () => {
   describe('handleTypographyTokens', () => {
     const dataProvider = [
       {
-        tokens: exampleTypographyTokens.get('typographyRef1') as TypographyToken,
+        tokens: exampleTypographyTokens.get('typographyRef1') as DesignToken,
         tokenNameParts: ['Heading', 'XLarge', 'Bold'],
         expectedStyles: {
           '$heading-xlarge-bold': {
@@ -388,7 +405,7 @@ describe('stylesObjectGenerator', () => {
         hasJsOutput: false,
       },
       {
-        tokens: exampleTypographyTokens.get('typographyRef1') as TypographyToken,
+        tokens: exampleTypographyTokens.get('typographyRef1') as DesignToken,
         tokenNameParts: ['Heading', 'XLarge', 'Bold'],
         expectedStyles: {
           exampleRef: 'exampleRef',
@@ -401,7 +418,7 @@ describe('stylesObjectGenerator', () => {
         hasJsOutput: true,
       },
       {
-        tokens: exampleTypographyTokens.get('typographyRef1') as TypographyToken,
+        tokens: exampleTypographyTokens.get('typographyRef1') as DesignToken,
         tokenNameParts: ['Heading', 'XLarge', 'Bold'],
         expectedStyles: {
           exampleRef: 'exampleRef',
@@ -428,16 +445,7 @@ describe('stylesObjectGenerator', () => {
       '$description',
       ({ tokens, tokenNameParts, expectedStyles, hasJsOutput, fontSizeBaseMap }) => {
         const stylesObjectRef = { exampleRef: 'exampleRef' };
-        handleTypographyTokens(
-          tokenNameParts,
-          tokens,
-          tokenGroups,
-          true,
-          stylesObjectRef,
-          hasJsOutput,
-          undefined,
-          fontSizeBaseMap,
-        );
+        handleTypographyTokens(tokenNameParts, tokens, true, stylesObjectRef, hasJsOutput, undefined, fontSizeBaseMap);
 
         expect(renderTypographyLeaves(stylesObjectRef, hasJsOutput)).toStrictEqual(expectedStyles);
       },

@@ -1,6 +1,4 @@
-import type { ReferenceValue, TokenIndex, TokenValue } from './types';
-
-export type ConcreteTokenValue = Exclude<TokenValue, ReferenceValue>;
+import type { ConcreteTokenValue, TokenIndex, TokenValue } from './types';
 
 // Follows a chain of references, recording every followed token id in `visited` (ids already in it are circular).
 const followReferences = (

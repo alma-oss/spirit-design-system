@@ -1,4 +1,3 @@
-import { Token, TokenGroup, TokenTheme } from '@supernovaio/sdk-exporters';
 import {
   commonThemedFilesData,
   devicesFilesData,
@@ -18,46 +17,58 @@ import {
   TOKENS_SCSS_FILE,
 } from '../constants';
 import { indentAndFormat } from '../formatters/stylesFormatter';
-import type { ResolvedTokens } from '../adapters/supernova/themeResolution';
 import { buildDeviceDimensionMap } from '../helpers/deviceDimensionHelper';
 import { toCamelCase, toOutputName } from '../helpers/stringHelper';
 import { getFontSizeBaseMap } from '../helpers/unitHelper';
-import type { FontSizeBaseMap } from '../helpers/types';
+import type {
+  FontReplacement,
+  FontSizeBaseMap,
+  DesignToken,
+  DeviceDimensionMap,
+  OutputFile,
+  Theme,
+  ThemedDesignTokens,
+  TokenCollection,
+  TokenIndex,
+} from '../core/types';
 import { generateFileContent } from './contentGenerator';
-import { type DeviceDimensionMap } from '../core/types';
-import { type OutputFile } from '../writers/fileWriter';
+import { splitTokens } from '../core/splitTokens';
+import { createTokenIndex } from '../core/tokenIndex';
 
 /** The syntax a file is generated in: SCSS by default, JS (TypeScript) with `hasJsOutput`. */
 type OutputSyntaxOptions = { hasJsOutput?: boolean };
 
+/** The part of a theme the generated files need. */
+type ThemeName = Pick<Theme, 'name'>;
+
 type GenerateFilesOptions = {
-  tokens: Array<Token>;
-  mappedTokens: Map<string, Token>;
-  tokenGroups: Array<TokenGroup>;
+  tokens: Array<DesignToken>;
+  tokenIndex: TokenIndex;
   filesData: FileData[];
   deviceDimensions?: DeviceDimensionMap;
   hasJsOutput?: boolean;
   fontSizeBaseMap?: FontSizeBaseMap;
+  fontReplacements?: FontReplacement[];
 };
 
 export const generateFiles = ({
   tokens,
-  mappedTokens,
-  tokenGroups,
+  tokenIndex,
   filesData,
   deviceDimensions,
   hasJsOutput = false,
   fontSizeBaseMap,
+  fontReplacements,
 }: GenerateFilesOptions) => {
   return filesData.map((fileData) => {
     const fileContent = generateFileContent({
       tokens,
-      mappedTokens,
-      tokenGroups,
+      tokenIndex,
       fileData,
       hasJsOutput,
       deviceDimensions,
       fontSizeBaseMapOverride: fontSizeBaseMap,
+      fontReplacements,
     });
     const fileName = toOutputName(fileData.fileName, hasJsOutput);
 
@@ -90,18 +101,18 @@ export const jsImportStatement = (name: string) => {
 export const scssImportStatement = (name: string) => `@use '${THEMES_DIRECTORY}/${name}';`;
 
 export const prepareImportStatementCallback = ({ hasJsOutput = false }: OutputSyntaxOptions = {}) => {
-  return (theme: TokenTheme) => (hasJsOutput ? jsImportStatement(theme.name) : scssImportStatement(theme.name));
+  return (theme: ThemeName) => (hasJsOutput ? jsImportStatement(theme.name) : scssImportStatement(theme.name));
 };
 
 export const generateRootThemesFileImports = (
-  themes: TokenTheme[],
+  themes: ThemeName[],
   { hasJsOutput = false }: OutputSyntaxOptions = {},
 ): string => {
   return themes.map(prepareImportStatementCallback({ hasJsOutput })).join('\n');
 };
 
 export const generateRootThemesFileContent = (
-  themes: TokenTheme[],
+  themes: ThemeName[],
   { hasJsOutput = false }: OutputSyntaxOptions = {},
 ): string => {
   return themes
@@ -117,7 +128,7 @@ export const generateRootThemesFileContent = (
 };
 
 export const generateThemesRootFile = (
-  themes: TokenTheme[],
+  themes: ThemeName[],
   { hasJsOutput = false }: OutputSyntaxOptions = {},
 ): string => {
   const imports = generateRootThemesFileImports(themes, { hasJsOutput });
@@ -131,10 +142,10 @@ export const generateThemesRootFile = (
 };
 
 type GenerationContext = {
-  mappedTokens: Map<string, Token>;
-  tokenGroups: TokenGroup[];
+  tokenIndex: TokenIndex;
   deviceDimensions: DeviceDimensionMap;
   fontSizeBaseMap: FontSizeBaseMap;
+  fontReplacements: FontReplacement[];
 };
 
 /**
@@ -154,7 +165,7 @@ const jsPath = (...segments: string[]): string => outputPath(JS_DIRECTORY, ...se
  * @param filesData
  * @param context
  */
-const generateFilesInBothSyntaxes = (tokens: Token[], filesData: FileData[], context: GenerationContext) => {
+const generateFilesInBothSyntaxes = (tokens: DesignToken[], filesData: FileData[], context: GenerationContext) => {
   const options = { tokens, filesData, ...context };
 
   return {
@@ -203,7 +214,7 @@ const toOutputFilesWithBarrels = (
   },
 ];
 
-const generateGlobalFiles = (globalTokens: Token[], context: GenerationContext): OutputFile[] =>
+const generateGlobalFiles = (globalTokens: DesignToken[], context: GenerationContext): OutputFile[] =>
   toOutputFilesWithBarrels(
     generateFilesInBothSyntaxes(globalTokens, nonThemedFilesData, context),
     scssPath(GLOBAL_DIRECTORY),
@@ -230,7 +241,7 @@ const generateRootBarrelFiles = (hasDevices: boolean): OutputFile[] => {
   ];
 };
 
-const generateThemeFiles = (themes: ResolvedTokens['themes'], context: GenerationContext): OutputFile[] =>
+const generateThemeFiles = (themes: ThemedDesignTokens[], context: GenerationContext): OutputFile[] =>
   themes.flatMap(({ theme, tokens }) =>
     toOutputFilesWithBarrels(
       generateFilesInBothSyntaxes(tokens, themedFilesData, context),
@@ -247,8 +258,8 @@ const generateThemeFiles = (themes: ResolvedTokens['themes'], context: Generatio
  * @param context
  */
 const generateCommonThemeFiles = (
-  themes: ResolvedTokens['themes'],
-  colorTokens: Token[],
+  themes: ThemedDesignTokens[],
+  colorTokens: DesignToken[],
   context: GenerationContext,
 ): OutputFile[] => {
   const themeList = themes.map(({ theme }) => theme);
@@ -269,23 +280,31 @@ const generateCommonThemeFiles = (
   ];
 };
 
-const generateDeviceFiles = (deviceTokens: Token[], context: GenerationContext): OutputFile[] =>
+const generateDeviceFiles = (deviceTokens: DesignToken[], context: GenerationContext): OutputFile[] =>
   toOutputFilesWithBarrels(
     generateFilesInBothSyntaxes(deviceTokens, devicesFilesData, context),
     scssPath(DEVICES_DIRECTORY),
     jsPath(DEVICES_DIRECTORY),
   );
 
+/**
+ * Generates all output files, in both syntaxes, of the tokens of a collection.
+ *
+ * @param collection - Tokens in the internal model, as a source adapter fetched them
+ * @param options
+ * @param options.fontReplacements - Replacements of the font family of the typography styles, as the entry got them
+ */
 export const generateOutputFilesByThemes = (
-  mappedTokens: Map<string, Token>,
-  tokenGroups: TokenGroup[],
-  { globalTokens, colorTokens, themes, deviceTokens }: ResolvedTokens,
+  collection: TokenCollection,
+  { fontReplacements = [] }: { fontReplacements?: FontReplacement[] } = {},
 ): Array<OutputFile> => {
+  const { globalTokens, colorTokens, themes, deviceTokens } = splitTokens(collection);
+  const tokenIndex = createTokenIndex(collection.tokens);
   const context: GenerationContext = {
-    mappedTokens,
-    tokenGroups,
-    deviceDimensions: buildDeviceDimensionMap(deviceTokens, tokenGroups),
+    tokenIndex,
+    deviceDimensions: buildDeviceDimensionMap(deviceTokens),
     fontSizeBaseMap: getFontSizeBaseMap(deviceTokens),
+    fontReplacements,
   };
   const hasDevices = deviceTokens.length > 0;
 

@@ -1,7 +1,7 @@
-import type { Token, TokenGroup } from '@supernovaio/sdk-exporters';
-import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 import { readTypography, readTypographyReferences, withTypographyDimensions } from '../core/typography';
 import {
+  type DesignToken,
+  type FontReplacement,
   type NumberValue,
   type TokenIndex,
   TokenTypeEnum,
@@ -11,33 +11,32 @@ import {
   DeviceDimensionMap,
   DeviceDimensionEntries,
   StylesObjectType,
+  type FontSizeBaseMap,
 } from '../core/types';
 import { getOriginName, tokenVariableName } from '../helpers/tokenHelper';
 import { formatTypographyName, getBreakpoint, typographyStyle } from '../helpers/typographyHelper';
-import { getFontSizeBaseForBreakpoint, isPxValue, unitToCss } from '../helpers/unitHelper';
-import type { FontSizeBaseMap } from '../helpers/types';
+import { getFontSizeBaseForBreakpoint, isPxValue } from '../helpers/unitHelper';
 import { toCamelCase } from '../helpers/stringHelper';
 
 const toNumberValue = ({ measure, unit }: DeviceDimensionEntries[string]): NumberValue => ({
   type: 'number',
   value: measure,
-  unit: unitToCss(unit),
+  unit,
 });
 
 const resolveDeviceEntries = (
   referenceId: string | null | undefined,
   deviceDimensions: DeviceDimensionMap,
-  tokenGroups: Array<TokenGroup>,
   hasParentPrefix: boolean,
-  tokenById?: Map<string, Token>,
+  tokenIndex?: TokenIndex,
 ): DeviceDimensionEntries | undefined => {
   if (!referenceId) {
     return undefined;
   }
 
-  const referencedToken = tokenById?.get(referenceId);
+  const referencedToken = tokenIndex?.get(referenceId);
   if (referencedToken) {
-    const baseVariableName = tokenVariableName(referencedToken, tokenGroups, hasParentPrefix);
+    const baseVariableName = tokenVariableName(referencedToken, hasParentPrefix);
     const byVariableName = deviceDimensions.get(baseVariableName);
     if (byVariableName) {
       return byVariableName;
@@ -56,30 +55,17 @@ const collectDeviceNames = (...deviceEntries: Array<DeviceDimensionEntries | und
 
 const getDeviceTypographyValues = (
   typography: TokenValue,
-  tokenGroups: Array<TokenGroup>,
   hasParentPrefix: boolean,
   deviceDimensions?: DeviceDimensionMap,
-  tokenById?: Map<string, Token>,
+  tokenIndex?: TokenIndex,
 ): Map<string, TokenValue> | null => {
   if (!deviceDimensions) {
     return null;
   }
 
   const { fontSize: fontSizeReferenceId, lineHeight: lineHeightReferenceId } = readTypographyReferences(typography);
-  const fontSizeDevices = resolveDeviceEntries(
-    fontSizeReferenceId,
-    deviceDimensions,
-    tokenGroups,
-    hasParentPrefix,
-    tokenById,
-  );
-  const lineHeightDevices = resolveDeviceEntries(
-    lineHeightReferenceId,
-    deviceDimensions,
-    tokenGroups,
-    hasParentPrefix,
-    tokenById,
-  );
+  const fontSizeDevices = resolveDeviceEntries(fontSizeReferenceId, deviceDimensions, hasParentPrefix, tokenIndex);
+  const lineHeightDevices = resolveDeviceEntries(lineHeightReferenceId, deviceDimensions, hasParentPrefix, tokenIndex);
   const devices = collectDeviceNames(fontSizeDevices, lineHeightDevices);
 
   if (devices.size === 0) {
@@ -178,52 +164,40 @@ const shouldCreateDeviceVariations = (
 /**
  * Adds a typography token to the styles object, one entry per breakpoint (or device).
  *
- * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874).
- * The value is read through the internal `DesignToken` model via the Supernova adapter's mapper, so rendering it
- * does not depend on Supernova's typography
- * token class (see #DS-2873).
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874). The value is
+ * read from the internal `DesignToken` model.
  *
  * @param tokenNameParts
  * @param token
- * @param tokenGroups
  * @param hasParentPrefix
  * @param stylesObjectRef
  * @param hasJsOutput
  * @param deviceDimensions
  * @param fontSizeBaseMap
- * @param tokenById
  * @param tokenIndex Index used to resolve references in the typography value (e.g. to font size or line height tokens)
+ * @param fontReplacements Replacements of the font family
  */
 export const handleTypographyTokens = (
   tokenNameParts: string[],
-  token: Token,
-  tokenGroups: Array<TokenGroup>,
+  token: DesignToken,
   hasParentPrefix: boolean,
   stylesObjectRef: StylesObjectType,
   hasJsOutput: boolean,
   deviceDimensions?: DeviceDimensionMap,
   fontSizeBaseMap?: FontSizeBaseMap,
-  tokenById?: Map<string, Token>,
   tokenIndex?: TokenIndex,
+  fontReplacements: FontReplacement[] = [],
 ): void => {
-  const designToken = mapToken(token, tokenGroups);
-
-  if (designToken?.type !== TokenTypeEnum.Typography) {
+  if (token.type !== TokenTypeEnum.Typography) {
     return;
   }
 
-  const typography = designToken.value;
+  const typography = token.value;
   const { fontSize, lineHeight } = readTypography(typography, tokenIndex);
   const name = formatTypographyName(tokenNameParts).toLowerCase();
   const breakpoint = getBreakpoint(tokenNameParts).toLowerCase();
   const isItalic = name.includes('italic');
-  const deviceTypographyValues = getDeviceTypographyValues(
-    typography,
-    tokenGroups,
-    hasParentPrefix,
-    deviceDimensions,
-    tokenById,
-  );
+  const deviceTypographyValues = getDeviceTypographyValues(typography, hasParentPrefix, deviceDimensions, tokenIndex);
   const hasResponsiveBase = hasResponsiveFontSizeBase(fontSizeBaseMap, fontSize);
   const shouldCreateVariations = shouldCreateDeviceVariations(
     deviceTypographyValues,
@@ -233,7 +207,9 @@ export const handleTypographyTokens = (
     tokenIndex,
   );
   const toStyleLeaf = (value: TokenValue, device: string): TypographyStyleLeaf =>
-    typographyStyleLeaf(typographyStyle(value, isItalic, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex));
+    typographyStyleLeaf(
+      typographyStyle(value, isItalic, getDeviceFontSizeBase(fontSizeBaseMap, device), tokenIndex, fontReplacements),
+    );
 
   if (tokenNameParts.length === 0) {
     return;

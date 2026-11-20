@@ -9,8 +9,7 @@ export type PxToRemRuleParams = {
 };
 
 /**
- * Converts a px `NumberValue` to rem, mirroring `UNIT_FORMAT_RULES`'s
- * existing single rule in `config/unitFormatConfig.ts`: applies to the 7
+ * Converts a px `NumberValue` to rem. Applies to the 7
  * dimension-family token types, skipped for the font-size-base token itself
  * or when no valid base font size is available.
  */

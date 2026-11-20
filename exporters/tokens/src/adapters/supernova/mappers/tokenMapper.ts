@@ -15,9 +15,10 @@ import {
   type Unit,
 } from '@supernovaio/sdk-exporters';
 import { PX_UNIT } from '../../../constants';
-import { getDeviceAlias } from '../../../helpers/deviceHelpers';
-import { getTokenGroupPath, getTokenNamePath } from '../../../helpers/groupHelper';
-import { unitToCss } from '../../../helpers/unitHelper';
+import { TOKEN_COLLECTION_CONTAINER_GROUP_NAMES } from '../constants';
+import { getDeviceAlias } from '../deviceThemes';
+import { unitToCss } from '../units';
+import { getTokenGroupPath, getTokenNamePath } from '../groupHelper';
 import {
   type ColorValue,
   type CompositeValue,
@@ -60,17 +61,27 @@ const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
 };
 
 /**
- * Source-agnostic type of a Supernova numeric token, `undefined` for a type that is not mapped to a plain numeric
- * value (yet).
+ * Supernova keeps tokens without an origin (aliases of the original tokens) in the root groups of the collections.
+ * Such a group is a container of a collection and not a group of a token type, so the token gets no group path:
+ * otherwise the pipeline would export it with a group of its own (e.g. `$device-*`) next to the original tokens.
  *
- * @param tokenType
+ * @param token
+ * @param tokenGroups
  */
-export const toNumericTokenType = (tokenType: TokenType): TokenTypeEnum | undefined => NUMERIC_TOKEN_TYPES[tokenType];
+const getGroupPath = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): string[] => {
+  const groupPath = getTokenGroupPath(token, tokenGroups);
+
+  return !token.origin?.name && TOKEN_COLLECTION_CONTAINER_GROUP_NAMES.includes(groupPath[0]?.toLowerCase())
+    ? []
+    : groupPath;
+};
 
 const buildMetadata = (token: Token, tokenGroups: Array<SupernovaTokenGroup>): TokenMetadata => ({
   brandId: token.brandId,
   device: getDeviceAlias(token) || undefined,
-  groupPath: getTokenGroupPath(token, tokenGroups),
+  groupPath: getGroupPath(token, tokenGroups),
+  groupId: token.parentGroupId,
+  originName: token.origin?.name ?? undefined,
   namePath: getTokenNamePath(token, tokenGroups),
 });
 
@@ -108,9 +119,7 @@ const mapStringToken = (token: StringToken, tokenGroups: Array<SupernovaTokenGro
 
 /**
  * Maps a numeric-value token. Returns `null` when the measure is missing,
- * matching `formatUnitValue`'s existing `value === undefined` handling -
- * callers should treat that the same as an unsupported type and read the
- * native value themselves, which resolves to the same `undefined`.
+ * callers should treat that the same as an unsupported type.
  *
  * @param token
  * @param type

@@ -64,6 +64,19 @@ The exporter processes these tokens to ensure they are updated with the device t
 - \_devices.scss - Contains dimension and string values and mapping to CSS variables
 - index.scss
 
+## Architecture
+
+The exporter pipeline is split into a source adapter and a source-agnostic core:
+
+1. The entry (`src/index.ts`) calls a source adapter, currently `SupernovaAdapter` (`src/adapters/supernova`).
+   The adapter is the only place that uses the Supernova SDK types: it fetches tokens, groups and themes,
+   resolves the themes and devices, and maps everything to the internal model (`src/core/types`).
+2. Everything after the adapter (token processors, object processors, generators, filters and helpers)
+   works only with the internal model (`TokenCollection`, `DesignToken`) and never imports the SDK types.
+3. The adapter also turns the generated files into the files of its tool (`src/adapters/supernova/fileWriter.ts`).
+
+To support another source, implement the `SourceAdapter` interface (`src/adapters/SourceAdapter.ts`).
+
 ## Sorting
 
 Tokens are sorted alphabetically by their origin name (Figma) or their Supernova name.
@@ -71,7 +84,7 @@ Exceptions include Borders, Radii, Spacing, Other tokens, and all tokens from th
 
 ## Development
 
-To generate the original unformatted data from Supernova, enable the `generateOriginalDataFiles` option in the `config.local.json` file.
+To generate the data as the adapter hands it to the pipeline (the internal model, not the native Supernova tokens), enable the `generateOriginalDataFiles` option in the `config.local.json` file.
 Once activated, the original data will be generated alongside other outputs and stored in the `original-data` folder.
 
 - \_original-tokens.json

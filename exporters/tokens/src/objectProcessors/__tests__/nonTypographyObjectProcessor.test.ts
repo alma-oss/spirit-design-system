@@ -1,22 +1,15 @@
-import { Token, TokenGroup, TokenType, Unit } from '@supernovaio/sdk-exporters';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
-import type { StylesObjectType } from '../../core/types';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
+import { type StylesObjectType, TokenTypeEnum } from '../../core/types';
 import { handleNonTypographyTokens } from '../nonTypographyObjectProcessor';
-
-const tokenGroups: Array<TokenGroup> = exampleGroups;
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
 
 describe('nonTypographyObjectProcessor', () => {
   describe('handleNonTypographyTokens', () => {
     it('should handle dimension token without device alias', () => {
-      const token = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+      const token = exampleDimensionAndStringTokens.get('dimensionRef')!;
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['Grid', 'spacing', 'desktop'], token, tokenGroups, true, stylesObject, false);
+      handleNonTypographyTokens(['Grid', 'spacing', 'desktop'], token, true, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$grids');
 
@@ -32,24 +25,24 @@ describe('nonTypographyObjectProcessor', () => {
     });
 
     it('should handle dimension token with device alias', () => {
-      const token: Token = {
-        id: 'test-id',
-        name: 'spacing',
-        tokenType: TokenType.dimension,
-        parentGroupId: '1',
-        origin: { name: 'Grid/spacing' },
-        value: {
-          measure: 32,
-          unit: Unit.pixels,
-          referencedTokenId: null,
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 32, unit: 'px' },
+        {
+          id: 'test-id',
+          name: 'spacing',
+          metadata: {
+            originName: 'Grid/spacing',
+            device: 'mobile',
+            groupPath: ['Grid', 'spacing'],
+            namePath: ['Grid', 'spacing'],
+          },
         },
-        properties: [],
-        propertyValues: { device: 'mobile' },
-      } as unknown as Token;
+      );
 
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['Grid', 'spacing'], token, tokenGroups, true, stylesObject, false);
+      handleNonTypographyTokens(['Grid', 'spacing'], token, true, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$grids');
 
@@ -65,10 +58,10 @@ describe('nonTypographyObjectProcessor', () => {
     });
 
     it('should handle string token', () => {
-      const token = exampleDimensionAndStringTokens.get('stringRef') as Token;
+      const token = exampleDimensionAndStringTokens.get('stringRef')!;
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['Grid', 'Columns'], token, tokenGroups, true, stylesObject, false);
+      handleNonTypographyTokens(['Grid', 'Columns'], token, true, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$grids');
 
@@ -80,10 +73,10 @@ describe('nonTypographyObjectProcessor', () => {
     });
 
     it('should handle token with JS output', () => {
-      const token = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+      const token = exampleDimensionAndStringTokens.get('dimensionRef')!;
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['Grid', 'spacing', 'desktop'], token, tokenGroups, true, stylesObject, true);
+      handleNonTypographyTokens(['Grid', 'spacing', 'desktop'], token, true, stylesObject, true);
 
       expect(stylesObject).toHaveProperty('grids');
       expect(stylesObject).not.toHaveProperty('$grids');
@@ -98,49 +91,29 @@ describe('nonTypographyObjectProcessor', () => {
     });
 
     it('should handle token with single part name', () => {
-      const token: Token = {
-        id: 'test-id',
-        name: 'spacing',
-        tokenType: TokenType.dimension,
-        parentGroupId: '1',
-        origin: { name: 'spacing' },
-        value: {
-          measure: 32,
-          unit: Unit.pixels,
-          referencedTokenId: null,
-        },
-        properties: [],
-        propertyValues: {},
-      } as unknown as Token;
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 32, unit: 'px' },
+        { id: 'test-id', name: 'spacing', metadata: { originName: 'spacing' } },
+      );
 
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['spacing'], token, tokenGroups, true, stylesObject, false);
+      handleNonTypographyTokens(['spacing'], token, true, stylesObject, false);
 
       expect(Object.keys(stylesObject).length).toBeGreaterThan(0);
     });
 
     it('should handle token with nested structure', () => {
-      const token: Token = {
-        id: 'test-id',
-        name: 'primary',
-        tokenType: TokenType.color,
-        parentGroupId: '1',
-        origin: { name: 'Colors/Background/primary' },
-        value: {
-          r: 255,
-          g: 255,
-          b: 255,
-          a: 1,
-          referencedTokenId: null,
-        },
-        properties: [],
-        propertyValues: {},
-      } as unknown as Token;
+      const token = createDesignToken(
+        TokenTypeEnum.Color,
+        { type: 'color', format: 'hex', value: '#ffffffff' },
+        { id: 'test-id', name: 'primary', metadata: { originName: 'Colors/Background/primary' } },
+      );
 
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['Colors', 'Background', 'primary'], token, tokenGroups, true, stylesObject, false);
+      handleNonTypographyTokens(['Colors', 'Background', 'primary'], token, true, stylesObject, false);
 
       expect(Object.keys(stylesObject).length).toBeGreaterThan(0);
 
@@ -150,10 +123,10 @@ describe('nonTypographyObjectProcessor', () => {
     });
 
     it('should handle token without parent prefix', () => {
-      const token = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+      const token = exampleDimensionAndStringTokens.get('dimensionRef')!;
       const stylesObject: StylesObjectType = {};
 
-      handleNonTypographyTokens(['Grid', 'spacing', 'desktop'], token, tokenGroups, false, stylesObject, false);
+      handleNonTypographyTokens(['Grid', 'spacing', 'desktop'], token, false, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$grids');
 

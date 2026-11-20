@@ -1,18 +1,14 @@
-import { ShadowToken, TokenGroup } from '@supernovaio/sdk-exporters';
-import type { TokenIndex } from '../core/types';
+import { CSS_LAYER_SEPARATOR } from '../constants';
+import type { DesignToken, TokenIndex, FontSizeBaseMap } from '../core/types';
 import { formatTokenStyleByOutput, getOriginName, getTokenGroup, tokenVariableName } from '../helpers/tokenHelper';
 import { transformColorsToVariables, findAllHexColorsInStringAndNormalize } from '../helpers/colorHelper';
 import { formatLayerSuffix } from '../helpers/stringHelper';
-import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 import { formatShadowValue } from '../formatters/cssValue';
 import { resolveTokenReferences } from '../transformations';
 import { replacePxWithRem } from '../formatters/unitFormatter';
-import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { getFontSizeBaseForBreakpoint } from '../helpers/unitHelper';
-import type { FontSizeBaseMap } from '../helpers/types';
 
 type ShadowTokenProcessorContext = {
-  tokenGroups: Array<TokenGroup>;
   hasParentPrefix: boolean;
   hasJsOutput: boolean;
   tokenPrefix: string;
@@ -20,8 +16,8 @@ type ShadowTokenProcessorContext = {
   fontSizeBaseMap: FontSizeBaseMap;
 };
 
-const getDeviceKey = (token: ShadowToken): string => {
-  const alias = getDeviceAlias(token as never).toLowerCase();
+const getDeviceKey = (token: DesignToken): string => {
+  const alias = (token.metadata.device ?? '').toLowerCase();
   if (alias) {
     return alias;
   }
@@ -46,11 +42,10 @@ const getDeviceKey = (token: ShadowToken): string => {
   return 'mobile';
 };
 
-const getBaseFontSize = (fontSizeBaseMap: FontSizeBaseMap, token: ShadowToken): number => {
+const getBaseFontSize = (fontSizeBaseMap: FontSizeBaseMap, token: DesignToken): number => {
   return getFontSizeBaseForBreakpoint(fontSizeBaseMap, getDeviceKey(token));
 };
 
-const SHADOW_LAYER_SEPARATOR = ', ';
 const SHADOW_LENGTH_NAMES = ['offset-x', 'offset-y', 'blur-radius', 'spread-radius'];
 const SHADOW_LAYER_LENGTHS_REGEX = /^(inset )?(\S+) (\S+) (\S+) (\S+)(?= )/;
 
@@ -65,7 +60,7 @@ const SHADOW_LAYER_LENGTHS_REGEX = /^(inset )?(\S+) (\S+) (\S+) (\S+)(?= )/;
  */
 export const transformShadowLengthsToVariables = (name: string, shadow: string, tokenPrefix: string): string => {
   // Splitting on `, ` is safe only because `processShadowToken` renders colors as hex, never as `rgba(…, …)`
-  const layers = shadow.split(SHADOW_LAYER_SEPARATOR);
+  const layers = shadow.split(CSS_LAYER_SEPARATOR);
 
   return layers
     .map((layer, index) => {
@@ -80,31 +75,25 @@ export const transformShadowLengthsToVariables = (name: string, shadow: string, 
         return `${inset ?? ''}${variables.join(' ')}`;
       });
     })
-    .join(SHADOW_LAYER_SEPARATOR);
+    .join(CSS_LAYER_SEPARATOR);
 };
 
 /**
  * Processes shadow tokens (with length and color variable transformation and px->rem conversion).
  *
  * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874).
- * The value is read through the internal `DesignToken` model via the Supernova adapter's mapper; references
- * between tokens are resolved by the
+ * The value is read from the internal `DesignToken` model; references between tokens are resolved by the
  * `resolve-references` transformation rule through the model's token index (see #DS-2872).
  *
  * @param shadowToken - The shadow token to process
- * @param ctx - Processing context with token groups, token index, prefix, fontSizeBaseMap, and output options
+ * @param ctx - Processing context with token index, prefix, fontSizeBaseMap, and output options
  * @returns {string|null} Formatted token style string or null
  */
-export const processShadowToken = (shadowToken: ShadowToken, ctx: ShadowTokenProcessorContext): string | null => {
-  const { tokenGroups, hasParentPrefix, hasJsOutput, tokenPrefix, tokenIndex, fontSizeBaseMap } = ctx;
-  const name = tokenVariableName(shadowToken, tokenGroups, hasParentPrefix);
+export const processShadowToken = (shadowToken: DesignToken, ctx: ShadowTokenProcessorContext): string | null => {
+  const { hasParentPrefix, hasJsOutput, tokenPrefix, tokenIndex, fontSizeBaseMap } = ctx;
+  const name = tokenVariableName(shadowToken, hasParentPrefix);
 
-  const mappedToken = mapToken(shadowToken, tokenGroups);
-  if (!mappedToken) {
-    return null;
-  }
-
-  const designToken = resolveTokenReferences(mappedToken, tokenIndex);
+  const designToken = resolveTokenReferences(shadowToken, tokenIndex);
 
   let shadow = formatShadowValue(designToken.value);
 
