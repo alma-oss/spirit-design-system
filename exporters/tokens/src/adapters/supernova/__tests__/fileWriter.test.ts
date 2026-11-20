@@ -1,6 +1,7 @@
 import { type OutputTextFile } from '@supernovaio/sdk-exporters';
 import { FileHelper } from '@supernovaio/export-helpers';
-import { textFileWriter, type OutputFile } from '../fileWriter';
+import { type OutputFile } from '../../../core/types';
+import { textFileWriter } from '../fileWriter';
 
 // Mock the FileHelper from @supernovaio/export-helpers
 jest.mock('@supernovaio/export-helpers', () => ({

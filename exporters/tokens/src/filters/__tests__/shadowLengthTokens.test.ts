@@ -1,23 +1,19 @@
-import { type Token, TokenType, Unit } from '@supernovaio/sdk-exporters';
-import { createToken } from '../../../tests/fixtures/exampleThemeShadowTokens';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { CollectionKind, type DesignToken, TokenTypeEnum } from '../../core/types';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
 import { getShadowLengthTokens } from '../shadowLengthTokens';
 
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
-
-const tokenOptions = { parentGroupId: 'groupId', collection: 'theme-tokens-id' };
-const shadow = (originName: string) =>
-  createToken(TokenType.shadow, originName, originName, { ...tokenOptions, value: [] });
-const dimension = (originName: string) =>
-  createToken(TokenType.dimension, originName, originName, {
-    ...tokenOptions,
-    value: { measure: 2, unit: Unit.pixels, referencedTokenId: null },
+const createToken = (type: TokenTypeEnum, originName: string, value: Parameters<typeof createDesignToken>[1]) =>
+  createDesignToken(type, value, {
+    id: originName,
+    name: originName.split('/').pop(),
+    metadata: { groupPath: [], groupId: 'groupId', originName, collection: CollectionKind.Color },
   });
+const shadow = (originName: string) => createToken(TokenTypeEnum.Shadow, originName, { type: 'composite', value: {} });
+const dimension = (originName: string) =>
+  createToken(TokenTypeEnum.Dimension, originName, { type: 'number', value: 2, unit: 'px' });
 
 describe('getShadowLengthTokens', () => {
-  const dataProvider: Array<{ description: string; tokens: Token[]; expectedNames: string[] }> = [
+  const dataProvider: Array<{ description: string; tokens: DesignToken[]; expectedNames: string[] }> = [
     {
       description: 'should add the first layer suffix to a length without a layer number',
       tokens: [shadow('Shadow/shadow-100'), dimension('Shadow/shadow-100/offset-x')],

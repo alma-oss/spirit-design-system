@@ -1,4 +1,4 @@
-import { exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
+import { exampleGroups } from '../../__fixtures__/exampleGroups';
 import { mapGroup } from '../groupMapper';
 
 describe('groupMapper', () => {

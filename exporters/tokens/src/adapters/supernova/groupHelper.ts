@@ -1,4 +1,8 @@
-import type { GroupedToken, PathGroup } from './types';
+/** The part of a token needed to find its group. Any source's token with a parent group id fits. */
+export type GroupedToken = { parentGroupId: string };
+
+/** The part of a token group needed to build a path. Any source's group with an id, a name and a path fits. */
+export type PathGroup = { id: string; name: string; path: string[]; isRoot?: boolean };
 
 const findGroup = (token: GroupedToken, tokenGroups: Array<PathGroup>): PathGroup | undefined =>
   tokenGroups.find((candidate) => candidate.id === token.parentGroupId);

@@ -1,6 +1,6 @@
-import { Token, TokenType } from '@supernovaio/sdk-exporters';
+import { TokenTypeEnum } from '../../core/types';
 import { deepMergeObjects, passObjectKeyValueToCallback, getTokenAlias, normalizeFirstNamePart } from '../objectHelper';
-import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
+import { exampleTypographyTokens } from '../../../tests/fixtures/internal-model/exampleTypographyTokens';
 
 const mergedObject = {
   $grids: {
@@ -80,13 +80,13 @@ describe('objectHelper', () => {
 
   describe('getTokenAlias', () => {
     it('should return token alias for non-numeric', () => {
-      const token = exampleTypographyTokens.get('typographyRef2') as Token;
+      const token = exampleTypographyTokens.get('typographyRef2')!;
 
       expect(getTokenAlias(token, false)).toBe('bold-link');
     });
 
     it('should return token alias for non-numeric with js output', () => {
-      const token = exampleTypographyTokens.get('typographyRef2') as Token;
+      const token = exampleTypographyTokens.get('typographyRef2')!;
 
       expect(getTokenAlias(token, true)).toBe('boldLink');
     });
@@ -94,11 +94,11 @@ describe('objectHelper', () => {
 
   describe('normalizeFirstNamePart', () => {
     it('should return correct first part name for token type dimension', () => {
-      expect(normalizeFirstNamePart('grid', TokenType.dimension, false)).toBe('$grids');
+      expect(normalizeFirstNamePart('grid', TokenTypeEnum.Dimension, false)).toBe('$grids');
     });
 
     it('should return correct first part name for token type color', () => {
-      expect(normalizeFirstNamePart('action', TokenType.color, false)).toBe('$action-colors');
+      expect(normalizeFirstNamePart('action', TokenTypeEnum.Color, false)).toBe('$action-colors');
     });
   });
 

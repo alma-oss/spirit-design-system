@@ -8,7 +8,6 @@ import {
 import { findSingleBrandId } from '../../core/findSingleBrandId';
 import { type DesignToken, type Device, type TokenCollection } from '../../core/types';
 import { filterByBrandId } from '../../filters/brandIdFilter';
-import { filterExcludedTokens } from '../../filters/excludedTokens';
 import { type AdapterConfig, type SourceAdapter } from '../SourceAdapter';
 import { createCollectionKindResolver, getDeviceCollectionId } from './collectionKind';
 import { mapGroup } from './mappers/groupMapper';
@@ -21,8 +20,6 @@ export type NativeTokens = {
   tokenGroups: TokenGroup[];
   themes: TokenTheme[];
 };
-
-export type NativeResolvedTokens = Omit<NativeTokens, 'themes'> & { resolved: ResolvedTokens };
 
 export class SupernovaAdapter implements SourceAdapter {
   readonly name = 'supernova';
@@ -60,22 +57,8 @@ export class SupernovaAdapter implements SourceAdapter {
   }
 
   /**
-   * Fetches the native tokens and groups and applies the themes to the tokens with the SDK. The SDK is used by the
-   * adapter only, the pipeline gets the resolved result.
-   *
-   * @param config
-   */
-  async fetchResolvedTokens(config: AdapterConfig): Promise<NativeResolvedTokens> {
-    const { tokens, tokenGroups, themes } = await this.fetchNative(config);
-
-    return { tokens, tokenGroups, resolved: this.resolve(tokens, themes) };
-  }
-
-  /**
-   * The tokens in the internal model, the source-neutral counterpart of `fetchResolvedTokens`.
-   *
-   * TODO: Use it in the pipeline instead of `fetchResolvedTokens` once the generators read a `TokenCollection`
-   * (DS-2335), then delete `fetchResolvedTokens` and `resolved`.
+   * Fetches the tokens, groups and themes of the design system, applies the themes and devices to the tokens with the
+   * SDK and maps everything to the internal model. The SDK is used by the adapter only, the pipeline gets the model.
    *
    * @param config
    */
@@ -84,10 +67,10 @@ export class SupernovaAdapter implements SourceAdapter {
 
     const getCollectionKind = createCollectionKindResolver(tokens);
 
-    // Same exclusion rules as the native pipeline (e.g. internal `figma-` tokens), applied while mapping, so the
-    // collections and themes are still resolved from all native tokens.
+    // A token the model has no type for (yet) is left out. Tokens that are not exported (e.g. internal `figma-` ones)
+    // stay: the pipeline excludes them (see `filterExcludedTokens`), but a reference can still point at them.
     const mapTokens = (nativeTokens: Token[], theme?: string): DesignToken[] =>
-      filterExcludedTokens(nativeTokens, tokenGroups)
+      nativeTokens
         .map((token): DesignToken | null => {
           const mapped = mapToken(token, tokenGroups);
 

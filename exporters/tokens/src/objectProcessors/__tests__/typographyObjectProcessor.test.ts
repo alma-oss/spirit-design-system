@@ -1,65 +1,63 @@
-import { Token, TokenGroup, TypographyToken, Unit } from '@supernovaio/sdk-exporters';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
+import { exampleTypographyTokens } from '../../../tests/fixtures/internal-model/exampleTypographyTokens';
 import { renderTypographyLeaves } from '../../../tests/fixtures/renderTypographyLeaves';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
-import type { DeviceDimensionMap, StylesObjectType } from '../../core/types';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
+import { createTokenIndex } from '../../core/tokenIndex';
+import {
+  type CompositeValue,
+  type DesignToken,
+  type DeviceDimensionMap,
+  type StylesObjectType,
+  TokenTypeEnum,
+} from '../../core/types';
 import { handleTypographyTokens } from '../typographyObjectProcessor';
-
-const tokenGroups: Array<TokenGroup> = exampleGroups;
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
 
 describe('typographyObjectProcessor', () => {
   describe('handleTypographyTokens', () => {
     it('should handle typography token without device dimensions', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
 
-      handleTypographyTokens(['Heading', 'XLarge', 'Bold'], token, tokenGroups, true, stylesObject, false);
+      handleTypographyTokens(['Heading', 'XLarge', 'Bold'], token, true, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$heading-xlarge-bold');
       expect(stylesObject['$heading-xlarge-bold']).toHaveProperty('mobile');
     });
 
     it('should handle typography token with device dimensions', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
       const deviceDimensions: DeviceDimensionMap = new Map();
       deviceDimensions.set('font-size', {
-        mobile: { measure: 32, unit: Unit.pixels },
-        desktop: { measure: 40, unit: Unit.pixels },
+        mobile: { measure: 32, unit: 'px' },
+        desktop: { measure: 40, unit: 'px' },
       });
       deviceDimensions.set('line-height', {
-        mobile: { measure: 48, unit: Unit.pixels },
-        desktop: { measure: 52, unit: Unit.pixels },
+        mobile: { measure: 48, unit: 'px' },
+        desktop: { measure: 52, unit: 'px' },
       });
 
-      const tokenById = new Map<string, Token>();
-      tokenById.set('font-size-id', {
-        id: 'font-size-id',
-        name: 'font-size',
-        tokenType: 'dimension' as Token['tokenType'],
-        origin: { name: 'font-size' },
-      } as unknown as Token);
-      tokenById.set('line-height-id', {
-        id: 'line-height-id',
-        name: 'line-height',
-        tokenType: 'dimension' as Token['tokenType'],
-        origin: { name: 'line-height' },
-      } as unknown as Token);
+      const dimensionToken = (id: string, name: string): DesignToken => ({
+        id,
+        name,
+        type: TokenTypeEnum.Dimension,
+        value: { type: 'number', value: 0, unit: 'px' },
+        metadata: { groupPath: [], originName: name },
+        source: { adapter: 'test', originalId: id },
+      });
+      const tokenIndex = createTokenIndex([
+        dimensionToken('font-size-id', 'font-size'),
+        dimensionToken('line-height-id', 'line-height'),
+      ]);
 
       handleTypographyTokens(
         ['Heading', 'XLarge', 'Bold'],
         token,
-        tokenGroups,
         true,
         stylesObject,
         false,
         deviceDimensions,
         undefined,
-        tokenById,
+        tokenIndex,
       );
 
       expect(renderTypographyLeaves(stylesObject, false)).toStrictEqual({
@@ -73,21 +71,13 @@ describe('typographyObjectProcessor', () => {
     });
 
     it('should override only the dimension a device collection provides', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
       const deviceDimensions: DeviceDimensionMap = new Map([
-        ['font-size-id', { mobile: { measure: 36, unit: Unit.pixels }, desktop: { measure: 40, unit: Unit.pixels } }],
+        ['font-size-id', { mobile: { measure: 36, unit: 'px' }, desktop: { measure: 40, unit: 'px' } }],
       ]);
 
-      handleTypographyTokens(
-        ['Heading', 'XLarge', 'Bold'],
-        token,
-        tokenGroups,
-        true,
-        stylesObject,
-        false,
-        deviceDimensions,
-      );
+      handleTypographyTokens(['Heading', 'XLarge', 'Bold'], token, true, stylesObject, false, deviceDimensions);
 
       expect(renderTypographyLeaves(stylesObject, false)).toStrictEqual({
         '$heading-xlarge-bold': {
@@ -100,17 +90,21 @@ describe('typographyObjectProcessor', () => {
     });
 
     it('should keep a single-sized style on one breakpoint', () => {
-      const token = {
-        ...exampleTypographyTokens.get('typographyRef1'),
+      const base = exampleTypographyTokens.get('typographyRef1')!;
+      const token: DesignToken = {
+        ...base,
         value: {
-          ...(exampleTypographyTokens.get('typographyRef1') as TypographyToken).value,
-          fontSize: { unit: Unit.pixels, measure: 14, referencedTokenId: null },
-          lineHeight: { unit: Unit.pixels, measure: 20, referencedTokenId: null },
+          type: 'composite',
+          value: {
+            ...(base.value as CompositeValue).value,
+            fontSize: { type: 'number', value: 14, unit: 'px' },
+            lineHeight: { type: 'number', value: 20, unit: 'px' },
+          },
         },
-      } as TypographyToken;
+      };
       const stylesObject: StylesObjectType = {};
 
-      handleTypographyTokens(['Caption'], token, tokenGroups, true, stylesObject, true, new Map());
+      handleTypographyTokens(['Caption'], token, true, stylesObject, true, new Map());
 
       expect(renderTypographyLeaves(stylesObject, true)).toStrictEqual({
         caption: {
@@ -120,13 +114,12 @@ describe('typographyObjectProcessor', () => {
       });
     });
 
-    it('should skip a token the model does not map to a typography', () => {
+    it('should skip a token that is not a typography', () => {
       const stylesObject: StylesObjectType = {};
 
       handleTypographyTokens(
         ['Grid', 'spacing'],
-        { id: 'x', name: 'x', tokenType: 'string', value: { text: 'x' } } as unknown as Token,
-        tokenGroups,
+        createDesignToken(TokenTypeEnum.String, { type: 'string', value: 'x' }, { id: 'x' }),
         true,
         stylesObject,
         false,
@@ -136,7 +129,7 @@ describe('typographyObjectProcessor', () => {
     });
 
     it('should handle typography token with fontSizeBaseMap', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
       const fontSizeBaseMap = new Map([
         ['mobile', 14],
@@ -147,7 +140,6 @@ describe('typographyObjectProcessor', () => {
       handleTypographyTokens(
         ['Heading', 'XLarge', 'Bold'],
         token,
-        tokenGroups,
         true,
         stylesObject,
         false,
@@ -163,20 +155,20 @@ describe('typographyObjectProcessor', () => {
     });
 
     it('should handle typography token with JS output', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
 
-      handleTypographyTokens(['Heading', 'XLarge', 'Bold'], token, tokenGroups, true, stylesObject, true);
+      handleTypographyTokens(['Heading', 'XLarge', 'Bold'], token, true, stylesObject, true);
 
       expect(stylesObject).toHaveProperty('headingXlargeBold');
       expect(stylesObject).not.toHaveProperty('$heading-xlarge-bold');
     });
 
     it('should handle typography token with italic in name', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
 
-      handleTypographyTokens(['Heading', 'XLarge', 'Bold-Italic'], token, tokenGroups, true, stylesObject, false);
+      handleTypographyTokens(['Heading', 'XLarge', 'Bold-Italic'], token, true, stylesObject, false);
 
       expect(stylesObject).toHaveProperty('$heading-xlarge-bold-italic');
 
@@ -187,17 +179,10 @@ describe('typographyObjectProcessor', () => {
     });
 
     it('should handle typography token with nested structure', () => {
-      const token = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
+      const token = exampleTypographyTokens.get('typographyRef1')!;
       const stylesObject: StylesObjectType = {};
 
-      handleTypographyTokens(
-        ['Typography', 'Heading', 'XLarge', 'Bold'],
-        token,
-        tokenGroups,
-        true,
-        stylesObject,
-        false,
-      );
+      handleTypographyTokens(['Typography', 'Heading', 'XLarge', 'Bold'], token, true, stylesObject, false);
 
       expect(Object.keys(stylesObject).length).toBeGreaterThan(0);
 

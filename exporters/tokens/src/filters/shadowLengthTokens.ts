@@ -1,17 +1,15 @@
-import { type Token, TokenType } from '@supernovaio/sdk-exporters';
+import { type DesignToken, TokenTypeEnum } from '../core/types';
 import { formatLayerSuffix } from '../helpers/stringHelper';
 import { getOriginName, getParentOriginName } from '../helpers/tokenHelper';
 
 const LAYER_SUFFIX_REGEX = /-\d+$/;
 
-const withLayerSuffix = (token: Token): Token => {
+const withLayerSuffix = (token: DesignToken): DesignToken => {
   if (LAYER_SUFFIX_REGEX.test(token.name)) {
     return token;
   }
 
-  return Object.assign(Object.create(Object.getPrototypeOf(token)), token, {
-    name: `${token.name}${formatLayerSuffix(1)}`,
-  });
+  return { ...token, name: `${token.name}${formatLayerSuffix(1)}` };
 };
 
 /**
@@ -20,13 +18,13 @@ const withLayerSuffix = (token: Token): Token => {
  * Names without a layer number belong to the first layer and get the `-01` suffix,
  * so they match the shadow length CSS variables, e.g. `offset-x` -> `offset-x-01`.
  *
- * @param {Token[]} tokens - Array of tokens to select from, including the shadow tokens.
- * @returns {Token[]} - Array of shadow length dimension tokens.
+ * @param tokens - Array of tokens to select from, including the shadow tokens.
+ * @returns - Array of shadow length dimension tokens.
  */
-export const getShadowLengthTokens = (tokens: Token[]): Token[] => {
-  const shadowOriginNames = new Set(tokens.filter((token) => token.tokenType === TokenType.shadow).map(getOriginName));
+export const getShadowLengthTokens = (tokens: DesignToken[]): DesignToken[] => {
+  const shadowOriginNames = new Set(tokens.filter((token) => token.type === TokenTypeEnum.Shadow).map(getOriginName));
 
   return tokens
-    .filter((token) => token.tokenType === TokenType.dimension && shadowOriginNames.has(getParentOriginName(token)))
+    .filter((token) => token.type === TokenTypeEnum.Dimension && shadowOriginNames.has(getParentOriginName(token)))
     .map(withLayerSuffix);
 };

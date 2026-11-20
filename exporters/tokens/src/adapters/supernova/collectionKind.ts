@@ -1,12 +1,12 @@
 import { type Token } from '@supernovaio/sdk-exporters';
-import { TOKEN_COLLECTION_THEMES_NAME } from '../../constants';
+import { TOKEN_COLLECTION_THEMES_NAME } from './constants';
 import { CollectionKind } from '../../core/types';
 import {
   filterCollections,
   filterDeviceCollections,
   filterGlobalCollections,
   getCollectionId,
-} from '../../helpers/collectionsHelper';
+} from './collectionsHelper';
 
 /**
  * Id of the devices collection (the value of the `Collection` property of its tokens), `undefined` when no token

@@ -1,47 +1,39 @@
-import {
-  ColorToken,
-  DimensionToken,
-  GradientToken,
-  ShadowToken,
-  SizeToken,
-  StringToken,
-  Token,
-  TokenGroup,
-  TokenType,
-} from '@supernovaio/sdk-exporters';
 import { FONT_SIZE_BASE_DEFAULT } from '../constants';
-import { getVariableName } from './namingHelper';
-import { getDeviceAlias } from './deviceHelpers';
-import { getTokenNamePath } from './groupHelper';
+import { type DesignToken, TokenTypeEnum } from '../core/types';
+import { getDesignTokenVariableName } from './namingHelper';
 import { toCamelCase } from './stringHelper';
 import { makeRelativeUnit } from './unitHelper';
 
 /**
- * Extracts the group name from a token's origin path (the first part before '/')
- * Returns the lowercase group name, or undefined if not available
+ * Path parts of a token's origin (`originName` split by '/'), or its group path when the source has no origin name.
  *
  * @param token
  */
-export const getTokenGroup = (token: Token): string | undefined => {
-  return token.origin?.name?.split('/')[0].toLowerCase();
-};
+export const getOriginPathParts = (token: DesignToken): string[] =>
+  token.metadata.originName?.split('/') ?? token.metadata.groupPath;
 
-export const getOriginName = (token: Token): string | undefined => token.origin?.name?.toLowerCase();
+/**
+ * Extracts the group name from the first part of a token's origin path, or of its group path when the source has no
+ * origin name. Returns the lowercase group name, or undefined if not available
+ *
+ * @param token
+ */
+export const getTokenGroup = (token: DesignToken): string | undefined => getOriginPathParts(token)[0]?.toLowerCase();
 
-export const getParentOriginName = (token: Token): string | undefined =>
+export const getOriginName = (token: DesignToken): string | undefined => token.metadata.originName?.toLowerCase();
+
+export const getParentOriginName = (token: DesignToken): string | undefined =>
   getOriginName(token)?.split('/').slice(0, -1).join('/');
 
-export const tokenVariableName = (token: Token, tokenGroups: Array<TokenGroup>, hasParentPrefix: boolean): string => {
-  // Naming itself is source-independent (see `namingHelper`); this only reads the native token into its inputs.
-  return getVariableName(
-    {
-      name: token.name,
-      groupPath: getTokenNamePath(token, tokenGroups),
-      device: getDeviceAlias(token) || undefined,
-    },
-    hasParentPrefix,
-  );
-};
+export const tokenVariableName = (token: DesignToken, hasParentPrefix: boolean): string =>
+  getDesignTokenVariableName(token, hasParentPrefix);
+
+/**
+ * Key of the group a token lives in, to tell the groups of neighbouring tokens apart.
+ *
+ * @param token
+ */
+export const getGroupKey = (token: DesignToken): string => token.metadata.groupId ?? token.metadata.groupPath.join('/');
 
 export const normalizeZeroValueWithUnit = (
   value: string | number,
@@ -83,36 +75,39 @@ export const cssVariableReference = (tokenPrefix: string, cssVariablePrefix: str
 export const formatCssVariableReference = (name: string, reference: string, hasJsOutput: boolean): string =>
   hasJsOutput ? formatTokenStyleByOutput(name, reference, true) : `$${name}: ${reference};`;
 
-export const sortTokens = (
-  tokens: Token[],
-  tokenGroups: Array<TokenGroup>,
-  hasParentPrefix: boolean,
-  sortByNumValue: boolean,
-) => {
+const NUMERIC_SORT_TOKEN_TYPES = [
+  TokenTypeEnum.Dimension,
+  TokenTypeEnum.Size,
+  TokenTypeEnum.FontSize,
+  TokenTypeEnum.LineHeight,
+  TokenTypeEnum.LetterSpacing,
+];
+
+/**
+ * The value a token is sorted by: the measure of a numeric token and the text of a string token. Any other token has
+ * no number to sort by.
+ *
+ * @param token
+ * @param token.type
+ * @param token.value
+ */
+const getSortValue = ({ type, value }: DesignToken): number | string => {
+  if (NUMERIC_SORT_TOKEN_TYPES.includes(type) && value.type === 'number') {
+    return value.value;
+  }
+
+  if (type === TokenTypeEnum.String && value.type === 'string') {
+    return value.value;
+  }
+
+  return Number.NaN;
+};
+
+export const sortTokens = (tokens: DesignToken[], hasParentPrefix: boolean, sortByNumValue: boolean) => {
   const sortedTokens = tokens.sort((a, b) => {
     if (sortByNumValue) {
-      const value = (token: Token) => {
-        const numericTokenTypes = [
-          TokenType.dimension,
-          TokenType.size,
-          TokenType.fontSize,
-          TokenType.lineHeight,
-          TokenType.letterSpacing,
-        ];
-
-        if (numericTokenTypes.includes(token.tokenType)) {
-          return (token as DimensionToken | SizeToken).value.measure;
-        }
-
-        if (token.tokenType === TokenType.string) {
-          return (token as StringToken).value.text;
-        }
-
-        return (token as ColorToken | ShadowToken | GradientToken).value;
-      };
-
-      const aNumMatch = value(a);
-      const bNumMatch = value(b);
+      const aNumMatch = getSortValue(a);
+      const bNumMatch = getSortValue(b);
 
       // Convert values to numbers for comparison
       const aNumeric = Number(aNumMatch);
@@ -128,8 +123,8 @@ export const sortTokens = (
     }
 
     // Fall back to alphabetical sorting when numeric comparison didn't determine order (equal or non-numeric values)
-    const aCompare = tokenVariableName(a, tokenGroups, hasParentPrefix);
-    const bCompare = tokenVariableName(b, tokenGroups, hasParentPrefix);
+    const aCompare = tokenVariableName(a, hasParentPrefix);
+    const bCompare = tokenVariableName(b, hasParentPrefix);
 
     return aCompare.localeCompare(bCompare);
   });

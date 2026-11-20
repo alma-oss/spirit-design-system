@@ -1,0 +1,185 @@
+import { CollectionKind, type DesignToken, TokenTypeEnum } from '../../../src/core/types';
+
+export const exampleThemeShadowTokens = new Map<string, DesignToken>([
+  [
+    'shadow100OffsetY',
+    {
+      id: 'shadow100OffsetY',
+      name: 'offset-y',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 2, unit: 'px' },
+      metadata: {
+        groupPath: ['Shadow', 'shadow-100'],
+        groupId: 'shadow100Group',
+        originName: 'Shadow/shadow-100/offset-y',
+        namePath: ['Shadow', 'shadow-100'],
+        collection: CollectionKind.Color,
+      },
+      source: { adapter: 'test', originalId: 'shadow100OffsetY', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'shadow100OffsetY02',
+    {
+      id: 'shadow100OffsetY02',
+      name: 'offset-y-02',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 4, unit: 'px' },
+      metadata: {
+        groupPath: ['Shadow', 'shadow-100'],
+        groupId: 'shadow100Group',
+        originName: 'Shadow/shadow-100/offset-y-02',
+        namePath: ['Shadow', 'shadow-100'],
+        collection: CollectionKind.Color,
+      },
+      source: { adapter: 'test', originalId: 'shadow100OffsetY02', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'shadow100BlurRadius01',
+    {
+      id: 'shadow100BlurRadius01',
+      name: 'blur-radius-01',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 8, unit: 'px' },
+      metadata: {
+        groupPath: ['Shadow', 'shadow-100'],
+        groupId: 'shadow100Group',
+        originName: 'Shadow/shadow-100/blur-radius-01',
+        namePath: ['Shadow', 'shadow-100'],
+        collection: CollectionKind.Color,
+      },
+      source: { adapter: 'test', originalId: 'shadow100BlurRadius01', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'focusRingSpreadRadius01',
+    {
+      id: 'focusRingSpreadRadius01',
+      name: 'spread-radius-01',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 2, unit: 'px' },
+      metadata: {
+        groupPath: ['Focus', 'focus-ring'],
+        groupId: 'focusRingGroup',
+        originName: 'Focus/focus-ring/spread-radius-01',
+        namePath: ['Focus', 'focus-ring'],
+        collection: CollectionKind.Color,
+      },
+      source: { adapter: 'test', originalId: 'focusRingSpreadRadius01', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'elevation100OffsetY01',
+    {
+      id: 'elevation100OffsetY01',
+      name: 'offset-y-01',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 4, unit: 'px' },
+      metadata: {
+        groupPath: ['Elevation', 'elevation-100'],
+        groupId: 'elevation100Group',
+        originName: 'Elevation/elevation-100/offset-y-01',
+        namePath: ['Elevation', 'elevation-100'],
+        collection: CollectionKind.Color,
+      },
+      source: { adapter: 'test', originalId: 'elevation100OffsetY01', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'globalShadowLength',
+    {
+      id: 'globalShadowLength',
+      name: 'global',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 4, unit: 'px' },
+      metadata: {
+        groupPath: ['Shadow', 'shadow-100'],
+        groupId: 'shadow100Group',
+        originName: 'Shadow/shadow-100/global',
+        namePath: ['Shadow', 'shadow-100'],
+        collection: CollectionKind.Global,
+      },
+      source: { adapter: 'test', originalId: 'globalShadowLength', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'themeSpacing',
+    {
+      id: 'themeSpacing',
+      name: 'space-100',
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value: 4, unit: 'px' },
+      metadata: {
+        groupPath: ['Spacing'],
+        groupId: 'spacingGroup',
+        originName: 'Spacing/space-100',
+        namePath: ['Spacing'],
+        collection: CollectionKind.Color,
+      },
+      source: { adapter: 'test', originalId: 'themeSpacing', originalType: 'Dimension' },
+    },
+  ],
+  [
+    'shadow100',
+    {
+      id: 'shadow100',
+      name: 'shadow-100',
+      type: TokenTypeEnum.Shadow,
+      value: { type: 'composite', value: {} },
+      metadata: {
+        groupPath: [],
+        groupId: 'shadowTokensGroup',
+        originName: 'Shadow/shadow-100',
+        namePath: [],
+        collection: CollectionKind.Global,
+      },
+      source: { adapter: 'test', originalId: 'shadow100', originalType: 'Shadow' },
+    },
+  ],
+  [
+    'focusRing',
+    {
+      id: 'focusRing',
+      name: 'focus-ring',
+      type: TokenTypeEnum.Shadow,
+      value: { type: 'composite', value: {} },
+      metadata: {
+        groupPath: [],
+        groupId: 'shadowTokensGroup',
+        originName: 'Focus/focus-ring',
+        namePath: [],
+        collection: CollectionKind.Global,
+      },
+      source: { adapter: 'test', originalId: 'focusRing', originalType: 'Shadow' },
+    },
+  ],
+  [
+    'elevation100',
+    {
+      id: 'elevation100',
+      name: 'elevation-100',
+      type: TokenTypeEnum.Shadow,
+      value: { type: 'composite', value: {} },
+      metadata: {
+        groupPath: [],
+        groupId: 'shadowTokensGroup',
+        originName: 'Elevation/elevation-100',
+        namePath: [],
+        collection: CollectionKind.Global,
+      },
+      source: { adapter: 'test', originalId: 'elevation100', originalType: 'Shadow' },
+    },
+  ],
+  [
+    'prefixRef',
+    {
+      id: 'prefixRef',
+      name: 'css-variable-prefix',
+      type: TokenTypeEnum.String,
+      value: { type: 'string', value: 'spirit-' },
+      metadata: { groupPath: [], groupId: 'prefixGroup', namePath: [], collection: CollectionKind.Global },
+      source: { adapter: 'test', originalId: 'prefixRef', originalType: 'String' },
+    },
+  ],
+] satisfies Array<[string, DesignToken]>);
