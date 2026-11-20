@@ -1,2 +1,5 @@
 /.yarn/releases/** binary
 /.yarn/plugins/** binary
+
+# Generated bundles: collapsed by default in GitHub diffs and excluded from language stats
+exporters/tokens/generated/exporter.cjs linguist-generated=true
