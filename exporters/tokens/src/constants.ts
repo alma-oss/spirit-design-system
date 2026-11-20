@@ -23,6 +23,8 @@ export const FONT_WEIGHT_NAME_TO_NUMBER: Record<string, number> = {
   black: 900,
 };
 export const GLOBAL_DIRECTORY = 'global-tokens';
+export const INDEX_SCSS_FILE = 'index.scss';
+export const INDEX_TS_FILE = 'index.ts';
 export const JS_DIRECTORY = 'js';
 export const JS_INDENTATION = '  ';
 // `Number.prototype.toFixed` requires the digits argument to be an integer in [0, 100]
@@ -33,9 +35,11 @@ export const PX_UNIT = 'px';
 export const SCSS_DIRECTORY = 'scss';
 export const SCSS_INDENTATION = '    ';
 export const THEMES_DIRECTORY = 'themes';
+export const THEMES_SCSS_FILE = '@themes.scss';
 export const TOKEN_COLLECTION_DEVICES_NAME = 'Device';
 export const TOKEN_COLLECTION_GLOBAL_NAME = 'Global tokens';
 export const TOKEN_COLLECTION_PROPERTY_NAME = 'Collection';
 export const TOKEN_COLLECTION_THEMES_NAME = 'Theme tokens';
+export const TOKENS_SCSS_FILE = '@tokens.scss';
 export const TYPOGRAPHY_KEY = 'styles';
 export const TYPOGRAPHY_SUBSTITUTE_FONT = 'sans-serif';
