@@ -1,14 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import type { Token, TokenGroup } from '@supernovaio/sdk-exporters';
-import { SOURCE_TOKEN_TYPE } from '../../core/types';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { type DesignToken, TokenTypeEnum } from '../../core/types';
+import { createTokenIndex } from '../../core/tokenIndex';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
 import { commonThemedFilesData, FileData, themedFilesData } from '../../config/fileConfig';
 import { createDefaultFontSizeBaseMap } from '../../helpers/unitHelper';
-import { exampleThemeShadowGroups, exampleThemeShadowTokens } from '../../../tests/fixtures/exampleThemeShadowTokens';
-import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
-import { createGroup, exampleGroups } from '../../../tests/fixtures/exampleGroups';
+import { exampleThemeShadowTokens } from '../../../tests/fixtures/internal-model/exampleThemeShadowTokens';
+import { exampleTypographyTokens } from '../../../tests/fixtures/internal-model/exampleTypographyTokens';
 import {
   generateFileContent,
   addDisclaimer,
@@ -23,11 +22,7 @@ const mockedExpectedResult = fs.readFileSync(
   path.join(__dirname, '../../../tests/fixtures/exampleFileContent.scss'),
   'utf-8',
 );
-const mappedTokens: Map<string, Token> = new Map([]);
-const tokenGroups: Array<TokenGroup> = exampleGroups;
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
+const tokenIndex = createTokenIndex([]);
 
 describe('contentGenerator', () => {
   describe('generateFileContent', () => {
@@ -35,7 +30,7 @@ describe('contentGenerator', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
       const fileData: FileData = {
         fileName: 'testFile',
-        tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.string],
+        tokenTypes: [TokenTypeEnum.Dimension, TokenTypeEnum.String],
         groupNames: ['Grid', 'String'],
         hasStylesObject: true,
         hasParentPrefix: true,
@@ -44,8 +39,7 @@ describe('contentGenerator', () => {
 
       const fileContent = generateFileContent({
         tokens,
-        mappedTokens,
-        tokenGroups,
+        tokenIndex,
         fileData,
         hasJsOutput: false,
         deviceDimensions: undefined,
@@ -56,14 +50,20 @@ describe('contentGenerator', () => {
     });
 
     describe('typography font weight tokens', () => {
-      const groupsWithFontWeight = [...exampleGroups, createGroup('fontWeight', 'Font Weight', ['Typography'])];
-      const fontWeightToken = {
-        ...exampleDimensionAndStringTokens.get('stringRef'),
-        id: 'fontWeightBold',
-        name: 'Bold',
-        parentGroupId: 'fontWeight',
-        origin: { name: 'Typography/Font Weight/Bold' },
-      } as unknown as Token;
+      const fontWeightToken = createDesignToken(
+        TokenTypeEnum.String,
+        { type: 'string', value: '12' },
+        {
+          id: 'fontWeightBold',
+          name: 'Bold',
+          metadata: {
+            groupPath: ['Typography', 'Font Weight'],
+            namePath: ['Typography', 'Font Weight'],
+            groupId: 'fontWeight',
+            originName: 'Typography/Font Weight/Bold',
+          },
+        },
+      );
       const tokens = [...Array.from(exampleDimensionAndStringTokens.values()), fontWeightToken];
 
       it.each([
@@ -72,11 +72,10 @@ describe('contentGenerator', () => {
       ])('should leave them out when filtering $description', ({ groupNames }) => {
         const { content } = generateFileContent({
           tokens,
-          mappedTokens,
-          tokenGroups: groupsWithFontWeight,
+          tokenIndex,
           fileData: {
             fileName: 'testFile',
-            tokenTypes: [SOURCE_TOKEN_TYPE.string],
+            tokenTypes: [TokenTypeEnum.String],
             groupNames,
             hasStylesObject: false,
             hasParentPrefix: true,
@@ -160,9 +159,8 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
 
     it.each(dataProvider)('should generate $description', ({ fileData, hasJsOutput, expectedContent }) => {
       const { content } = generateFileContent({
-        tokens: exampleThemeShadowTokens,
-        mappedTokens,
-        tokenGroups: exampleThemeShadowGroups,
+        tokens: Array.from(exampleThemeShadowTokens.values()),
+        tokenIndex,
         fileData,
         fontSizeBaseMapOverride: createDefaultFontSizeBaseMap(),
         hasJsOutput,
@@ -184,13 +182,13 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
   describe('filterTokensByTypeAndGroup', () => {
     const dataProviderItems = [
       {
-        type: SOURCE_TOKEN_TYPE.dimension,
+        type: TokenTypeEnum.Dimension,
         group: 'Grid',
         tokenIdentifier: 'dimensionRef',
         description: 'dimension token type and Grid group',
       },
       {
-        type: SOURCE_TOKEN_TYPE.string,
+        type: TokenTypeEnum.String,
         group: 'Grid',
         tokenIdentifier: 'stringRef',
         description: 'string token type and Grid group',
@@ -198,28 +196,27 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
     ];
 
     const dataTypographyProviderItems = {
-      type: SOURCE_TOKEN_TYPE.typography,
+      type: TokenTypeEnum.Typography,
       group: 'Heading',
       tokenIdentifier: 'typographyRef1',
     };
 
     it.each(dataProviderItems)('should filter $description', ({ type, group, tokenIdentifier }) => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
-      const expectedTokens = [exampleDimensionAndStringTokens.get(tokenIdentifier) as Token];
+      const expectedTokens = [exampleDimensionAndStringTokens.get(tokenIdentifier) as DesignToken];
 
-      expect(filterTokensByTypeAndGroup(tokens, type, group, null, tokenGroups)).toStrictEqual(expectedTokens);
+      expect(filterTokensByTypeAndGroup(tokens, type, group, null)).toStrictEqual(expectedTokens);
     });
 
     it(`should filter ${dataTypographyProviderItems.type} token type and ${dataTypographyProviderItems.group} group and exclude tokens with "Link" in name`, () => {
       const tokens = Array.from(exampleTypographyTokens.values());
-      const expectedTokens = [exampleTypographyTokens.get(dataTypographyProviderItems.tokenIdentifier) as Token];
+      const expectedTokens = [exampleTypographyTokens.get(dataTypographyProviderItems.tokenIdentifier) as DesignToken];
 
       const filteredTokens = filterTokensByTypeAndGroup(
         tokens,
         dataTypographyProviderItems.type,
         dataTypographyProviderItems.group,
         null,
-        tokenGroups,
       );
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
@@ -227,26 +224,27 @@ export const shadow100OffsetY02 = 'var(--spirit-shadow-100-offset-y-02)';
 
     it('should filter tokens with "figma-" prefix', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
-      const expectedTokens = [exampleDimensionAndStringTokens.get('dimensionRef') as Token];
+      const expectedTokens = [exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken];
 
-      const filteredTokens = filterTokensByTypeAndGroup(tokens, SOURCE_TOKEN_TYPE.dimension, 'Grid', null, tokenGroups);
+      const filteredTokens = filterTokensByTypeAndGroup(tokens, TokenTypeEnum.Dimension, 'Grid', null);
 
       expect(filteredTokens).toStrictEqual(expectedTokens);
     });
 
-    it('should filter font weight tokens when the token groups are given', () => {
-      const groups = [createGroup('fontWeight', 'Font Weight', ['Typography'])];
-      const fontWeightToken = {
-        ...exampleDimensionAndStringTokens.get('stringRef'),
+    it('should filter font weight tokens', () => {
+      const fontWeightToken: DesignToken = {
+        ...(exampleDimensionAndStringTokens.get('stringRef') as DesignToken),
         name: 'Bold',
-        parentGroupId: 'fontWeight',
-        origin: { name: 'Typography/Font Weight/Bold' },
-      } as unknown as Token;
+        metadata: {
+          groupPath: ['Typography', 'Font Weight'],
+          namePath: ['Typography', 'Font Weight'],
+          groupId: 'fontWeight',
+          originName: 'Typography/Font Weight/Bold',
+        },
+      };
 
-      expect(
-        filterTokensByTypeAndGroup([fontWeightToken], SOURCE_TOKEN_TYPE.string, 'Typography', null, groups),
-      ).toStrictEqual([]);
-      expect(filterTokensByType([fontWeightToken], SOURCE_TOKEN_TYPE.string, null, groups)).toStrictEqual([]);
+      expect(filterTokensByTypeAndGroup([fontWeightToken], TokenTypeEnum.String, 'Typography', null)).toStrictEqual([]);
+      expect(filterTokensByType([fontWeightToken], TokenTypeEnum.String, null)).toStrictEqual([]);
     });
   });
 

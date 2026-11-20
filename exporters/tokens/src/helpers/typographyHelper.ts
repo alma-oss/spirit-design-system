@@ -1,6 +1,5 @@
-import { exportConfiguration } from '../../config';
 import { readTypography } from '../core/typography';
-import type { NumberValue, TokenIndex, TokenValue, TypographyStyle } from '../core/types';
+import type { FontReplacement, NumberValue, TokenIndex, TokenValue, TypographyStyle } from '../core/types';
 import {
   DEFAULT_DECIMALS,
   FONT_SIZE_BASE_DEFAULT,
@@ -8,21 +7,21 @@ import {
   TYPOGRAPHY_SUBSTITUTE_FONT,
 } from '../constants';
 import { roundToDecimals } from './numberHelper';
-import { replaceByConfiguration } from './stringHelper';
+import { applyReplacements } from './stringHelper';
 import { isPxValue, makeRelativeUnit } from './unitHelper';
 
 /**
  * Replaces the font family name with a modified version including a substitute font.
  *
- * This function takes a font family name as input and uses the `replaceByConfiguration` function
- * to replace it with a string that includes the original font family and a substitute font.
- * The replacement rules are defined in the `exportConfiguration` object.
+ * The font family is turned into a string that includes the original font family and a substitute font, then the
+ * replacements are applied to it.
  *
  * @param {string} fontFamily - The name of the font family to be replaced.
+ * @param fontReplacements - The replacements to apply, none keeps the font family.
  * @returns {string} - The modified font family string with the substitute font included.
  */
-const replaceFontName = (fontFamily: string): string => {
-  return replaceByConfiguration(exportConfiguration, `'${fontFamily}', ${TYPOGRAPHY_SUBSTITUTE_FONT}`, 'Font');
+const replaceFontName = (fontFamily: string, fontReplacements: FontReplacement[]): string => {
+  return applyReplacements(`'${fontFamily}', ${TYPOGRAPHY_SUBSTITUTE_FONT}`, fontReplacements);
 };
 
 const normalizeFontWeight = (fontWeightText: string): number | string => {
@@ -72,22 +71,23 @@ const unitlessLineHeight = (fontSize?: NumberValue, lineHeight?: NumberValue): s
  * Builds a format-agnostic typography style from a typography value of the internal token model.
  *
  * Works on the model only (see `core/typography.ts`), so it does not depend on a source's own typography token.
- * The font family replacement comes from the exporter configuration, whatever the source.
  * Rendering to SCSS or JS is up to the formatter (see `formatters/typographyFormatter.ts`).
  *
  * @param value - A typography composite value
  * @param isItalic - Whether the style is italic by its name
  * @param baseFontSize - Font size base to convert `px` to `rem` with, 0 keeps `px`
  * @param index - View of the tokens references point into, only needed for references the source did not resolve
+ * @param fontReplacements - Replacements of the font family, as the entry got them from its source
  */
 export const typographyStyle = (
   value: TokenValue,
   isItalic: boolean,
   baseFontSize: number = FONT_SIZE_BASE_DEFAULT,
   index?: TokenIndex,
+  fontReplacements: FontReplacement[] = [],
 ): TypographyStyle => {
   const { fontFamily, fontSize, fontWeight, lineHeight } = readTypography(value, index);
-  const fontName = replaceFontName(fontFamily);
+  const fontName = replaceFontName(fontFamily, fontReplacements);
   const italicFromWeight = fontWeight.toLowerCase().includes('italic');
   const fontWeightValue = normalizeFontWeight(fontWeight);
   const lineHeightValue = unitlessLineHeight(fontSize, lineHeight);

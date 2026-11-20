@@ -1,20 +1,19 @@
-import { Token, TokenGroup } from '@supernovaio/sdk-exporters';
+import type { DesignToken } from '../core/types';
 import { sortTokens, tokenVariableName } from '../helpers/tokenHelper';
 import { SCSS_INDENTATION } from '../constants';
 
 export const generateMixinFromTokens = (
-  tokens: Token[],
-  tokenGroups: Array<TokenGroup>,
+  tokens: DesignToken[],
   tokenPrefix: string,
   hasParentPrefix: boolean,
   sortByNumValue: boolean,
   mixinName: string,
   variablePrefix: string,
 ): string => {
-  const sortedTokens = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+  const sortedTokens = sortTokens(tokens, hasParentPrefix, sortByNumValue);
   const variables = sortedTokens
     .map((token) => {
-      const name = tokenVariableName(token, tokenGroups, hasParentPrefix);
+      const name = tokenVariableName(token, hasParentPrefix);
 
       return `${SCSS_INDENTATION}--${tokenPrefix}${variablePrefix}${name}: #{$${name}};`;
     })

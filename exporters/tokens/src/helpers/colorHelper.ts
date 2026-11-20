@@ -1,6 +1,4 @@
-import { Token, TokenType } from '@supernovaio/sdk-exporters';
-import { COLOR_CSS_VARIABLE_PREFIX, TOKEN_COLLECTION_THEMES_NAME } from '../constants';
-import { filterCollections } from './collectionsHelper';
+import { COLOR_CSS_VARIABLE_PREFIX } from '../constants';
 import { formatLayerSuffix } from './stringHelper';
 
 const HEX_COLOR_REGEX = /#([A-Fa-f0-9]{6,8})\b/g;
@@ -76,16 +74,4 @@ export const transformColorsToVariables = (
     .join(',');
 
   return transformedValue;
-};
-
-/**
- * Keeps all non-color tokens and only those color tokens that belong to the themes collection.
- *
- * @param {Token[]} tokens - Array of tokens to filter.
- * @returns {Token[]} - Array of filtered tokens.
- */
-export const filterColorCollections = (tokens: Token[]) => {
-  const themeTokens = new Set(filterCollections(tokens, TOKEN_COLLECTION_THEMES_NAME));
-
-  return tokens.filter((item) => item.tokenType !== TokenType.color || themeTokens.has(item));
 };

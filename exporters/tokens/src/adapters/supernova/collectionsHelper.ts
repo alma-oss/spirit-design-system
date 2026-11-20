@@ -3,7 +3,7 @@ import {
   TOKEN_COLLECTION_DEVICES_NAME,
   TOKEN_COLLECTION_GLOBAL_NAME,
   TOKEN_COLLECTION_PROPERTY_NAME,
-} from '../constants';
+} from './constants';
 
 const collectionOptionIdCache = new Map<string, string>();
 
@@ -87,16 +87,6 @@ export const filterGlobalCollections = (tokens: Token[]) => {
  */
 export const filterDeviceCollections = (tokens: Token[]) => {
   return filterCollections(tokens, TOKEN_COLLECTION_DEVICES_NAME);
-};
-
-/**
- * Filters all tokens except device collections.
- *
- * @param {Token[]} tokens - Array of tokens to filter.
- * @returns {Token[]} - Array of tokens.
- */
-export const filterAllCollections = (tokens: Token[]) => {
-  return filterCollections(tokens, TOKEN_COLLECTION_DEVICES_NAME, true);
 };
 
 /**

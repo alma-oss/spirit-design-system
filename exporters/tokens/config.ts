@@ -45,6 +45,3 @@ export type ExporterConfiguration = {
   /* For dynamic generation of array in replaceFontName() */
   [key: `searchFont${number}` | `replaceFont${number}`]: string;
 };
-
-/** Exporter configuration from the resolved default configuration and user overrides */
-export const exportConfiguration: ExporterConfiguration = Pulsar.exportConfig<ExporterConfiguration>();

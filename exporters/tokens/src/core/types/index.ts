@@ -5,4 +5,5 @@ export * from './TokenIndex';
 export * from './Unit';
 export * from './StylesObject';
 export * from './TypographyStyle';
-export * from './SourceTokenType';
+export * from './OutputFile';
+export * from './FontReplacement';

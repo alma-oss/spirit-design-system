@@ -1,6 +1,7 @@
 import {
+  applyReplacements,
+  getReplacements,
   removePairQuotes,
-  replaceByConfiguration,
   toCamelCase,
   toOutputName,
   toKebabCase,
@@ -80,26 +81,26 @@ describe('stringHelper', () => {
     });
   });
 
-  describe('replaceByConfiguration', () => {
+  describe('getReplacements and applyReplacements', () => {
     it('should apply the configured replacements', () => {
       const configuration = {
-        searchFont0: 'Inter',
-        replaceFont0: '"Roboto"',
-        searchFont1: 'serif',
-        replaceFont1: 'mono',
+        searchFont1: 'Inter',
+        replaceFont1: '"Roboto"',
+        searchFont2: 'serif',
+        replaceFont2: 'mono',
       };
 
-      expect(replaceByConfiguration(configuration, "'Inter', serif", 'Font')).toBe("'Roboto', mono");
+      expect(applyReplacements("'Inter', serif", getReplacements(configuration, 'Font'))).toBe("'Roboto', mono");
     });
 
     it('should ignore incomplete replacements and other names', () => {
-      const configuration = { searchFont0: 'Inter', searchOther0: 'Inter', replaceOther0: 'Roboto' };
+      const configuration = { searchFont1: 'Inter', searchOther1: 'Inter', replaceOther1: 'Roboto' };
 
-      expect(replaceByConfiguration(configuration, 'Inter', 'Font')).toBe('Inter');
+      expect(applyReplacements('Inter', getReplacements(configuration, 'Font'))).toBe('Inter');
     });
 
     it('should return the value untouched without configuration', () => {
-      expect(replaceByConfiguration({}, 'Inter', 'Font')).toBe('Inter');
+      expect(applyReplacements('Inter', getReplacements({}, 'Font'))).toBe('Inter');
     });
   });
 });

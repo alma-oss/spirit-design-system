@@ -1,112 +1,84 @@
-import { type Token, type TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+import { type DesignToken, TokenTypeEnum } from '../../core/types';
 import { filterExcludedTokens } from '../excludedTokens';
-import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
+import { exampleTypographyTokens } from '../../../tests/fixtures/internal-model/exampleTypographyTokens';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+
+const fixture = (tokens: Map<string, DesignToken>, id: string): DesignToken => tokens.get(id) as DesignToken;
+
+const dimension = fixture(exampleDimensionAndStringTokens, 'dimensionRef');
+const string = fixture(exampleDimensionAndStringTokens, 'stringRef');
+const figma = fixture(exampleDimensionAndStringTokens, 'figmaTokenRef');
+const typography = fixture(exampleTypographyTokens, 'typographyRef1');
+const typographyLink = fixture(exampleTypographyTokens, 'typographyRef2');
 
 describe('filterExcludedTokens', () => {
   it('should filter out tokens with "figma-" in their name', () => {
-    const tokens = Array.from(exampleDimensionAndStringTokens.values());
-    const expectedTokens = [
-      exampleDimensionAndStringTokens.get('dimensionRef'),
-      exampleDimensionAndStringTokens.get('stringRef'),
-    ].filter(Boolean) as Token[];
-
-    const filteredTokens = filterExcludedTokens(tokens, []);
-
-    expect(filteredTokens).toStrictEqual(expectedTokens);
+    expect(filterExcludedTokens([dimension, string, figma])).toStrictEqual([dimension, string]);
   });
 
   it('should filter out typography tokens with "Link" in their name', () => {
-    const tokens = Array.from(exampleTypographyTokens.values());
-    const expectedTokens = [exampleTypographyTokens.get('typographyRef1')] as Token[];
-
-    const filteredTokens = filterExcludedTokens(tokens, []);
-
-    expect(filteredTokens).toStrictEqual(expectedTokens);
+    expect(filterExcludedTokens([typography, typographyLink])).toStrictEqual([typography]);
   });
 
   it('should filter out typography tokens with "Italic" in their name', () => {
-    const italicToken = { ...exampleTypographyTokens.get('typographyRef1'), name: 'Bold-Italic' } as Token;
-    const tokens = [exampleTypographyTokens.get('typographyRef1'), italicToken].filter(Boolean) as Token[];
+    const italicToken = { ...typography, name: 'Bold-Italic' };
 
-    const filteredTokens = filterExcludedTokens(tokens, []);
-
-    expect(filteredTokens).toStrictEqual([exampleTypographyTokens.get('typographyRef1')]);
+    expect(filterExcludedTokens([typography, italicToken])).toStrictEqual([typography]);
   });
 
   it('should keep tokens that do not match exclusion criteria', () => {
-    const tokens = [
-      exampleDimensionAndStringTokens.get('dimensionRef'),
-      exampleDimensionAndStringTokens.get('stringRef'),
-      exampleTypographyTokens.get('typographyRef1'),
-    ].filter(Boolean) as Token[];
+    const tokens = [dimension, string, typography];
 
-    const filteredTokens = filterExcludedTokens(tokens, []);
-
-    expect(filteredTokens).toStrictEqual(tokens);
+    expect(filterExcludedTokens(tokens)).toStrictEqual(tokens);
   });
 
   it('should filter out both figma tokens and Link typography tokens', () => {
-    const tokens = [
-      exampleDimensionAndStringTokens.get('dimensionRef'),
-      exampleDimensionAndStringTokens.get('figmaTokenRef'),
-      exampleTypographyTokens.get('typographyRef1'),
-      exampleTypographyTokens.get('typographyRef2'),
-    ].filter(Boolean) as Token[];
-
-    const filteredTokens = filterExcludedTokens(tokens, []);
-    const expectedTokens = [
-      exampleDimensionAndStringTokens.get('dimensionRef'),
-      exampleTypographyTokens.get('typographyRef1'),
-    ].filter(Boolean) as Token[];
-
-    expect(filteredTokens).toStrictEqual(expectedTokens);
+    expect(filterExcludedTokens([dimension, figma, typography, typographyLink])).toStrictEqual([dimension, typography]);
   });
 
   describe('typography font weights', () => {
-    const groups = [
-      { id: 'weights', name: 'Font Weight', path: ['Typography'] },
-      { id: 'sizes', name: 'Action', path: ['Typography'] },
-      { id: 'grid', name: 'Grid', path: [] },
-    ] as unknown as TokenGroup[];
-    const stringToken = (id: string, name: string, parentGroupId: string) =>
-      ({ id, name, tokenType: TokenType.string, parentGroupId }) as unknown as Token;
+    const stringToken = (id: string, name: string, groupPath: string[]): DesignToken => ({
+      ...string,
+      id,
+      name,
+      metadata: { ...string.metadata, groupPath },
+    });
 
     it.each(['Bold', 'Bold Italic', 'Semibold'])('should filter out the string token "%s"', (name) => {
-      expect(filterExcludedTokens([stringToken('weight', name, 'weights')], groups)).toStrictEqual([]);
+      expect(filterExcludedTokens([stringToken('weight', name, ['Typography', 'Font Weight'])])).toStrictEqual([]);
     });
 
     it('should keep other string tokens', () => {
-      const tokens = [stringToken('size', 'Large', 'sizes'), stringToken('columns', 'Columns', 'grid')];
+      const tokens = [
+        stringToken('size', 'Large', ['Typography', 'Action']),
+        stringToken('columns', 'Columns', ['Grid']),
+      ];
 
-      expect(filterExcludedTokens(tokens, groups)).toStrictEqual(tokens);
+      expect(filterExcludedTokens(tokens)).toStrictEqual(tokens);
     });
 
     it('should keep string tokens of a sibling group named like the font weight group', () => {
-      const siblingGroups = [{ id: 'sibling', name: 'Font Weights', path: ['Typography'] }] as unknown as TokenGroup[];
-      const tokens = [stringToken('sibling', 'Bold', 'sibling')];
+      const tokens = [stringToken('sibling', 'Bold', ['Typography', 'Font Weights'])];
 
-      expect(filterExcludedTokens(tokens, siblingGroups)).toStrictEqual(tokens);
+      expect(filterExcludedTokens(tokens)).toStrictEqual(tokens);
     });
 
     it('should keep a token that merely has the font weight path in its name', () => {
-      const token = stringToken('named', 'Typography Font Weight Bold', 'grid');
+      const tokens = [stringToken('named', 'Typography Font Weight Bold', ['Grid'])];
 
-      expect(filterExcludedTokens([token], groups)).toStrictEqual([token]);
+      expect(filterExcludedTokens(tokens)).toStrictEqual(tokens);
     });
 
     it('should filter out tokens of nested groups of the font weight group', () => {
-      const nestedGroups = [
-        { id: 'nested', name: 'Italic', path: ['Typography', 'Font Weight'] },
-      ] as unknown as TokenGroup[];
+      const tokens = [stringToken('nested-weight', 'Bold', ['Typography', 'Font Weight', 'Italic'])];
 
-      expect(filterExcludedTokens([stringToken('nested-weight', 'Bold', 'nested')], nestedGroups)).toStrictEqual([]);
+      expect(filterExcludedTokens(tokens)).toStrictEqual([]);
     });
 
     it('should keep font weight tokens of other types', () => {
-      const token = { ...stringToken('weight', 'Bold', 'weights'), tokenType: TokenType.dimension } as Token;
+      const token = { ...stringToken('weight', 'Bold', ['Typography', 'Font Weight']), type: TokenTypeEnum.Dimension };
 
-      expect(filterExcludedTokens([token], groups)).toStrictEqual([token]);
+      expect(filterExcludedTokens([token])).toStrictEqual([token]);
     });
   });
 });

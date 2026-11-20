@@ -9,7 +9,7 @@ import {
   exampleCollectionTokens,
   expectedCollectionFilteredExcludedValue,
   expectedCollectionFilteredValue,
-} from '../../../tests/fixtures/exampleCollectionTokens';
+} from '../__fixtures__/exampleCollectionTokens';
 
 describe('collectionsHelper', () => {
   describe('filterCollections', () => {

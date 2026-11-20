@@ -1,4 +1,5 @@
 import { camelCase, kebabCase } from 'change-case';
+import type { FontReplacement } from '../core/types';
 
 export const toPlural = (name: string): string => {
   const specialCases: Record<string, string> = {
@@ -81,30 +82,19 @@ const prepareReplacements = (configuration: Record<string, unknown>, name: strin
  * @param {string} name - The base name used to construct dynamic keys for replacements.
  * @returns {Array<{ search: string; replace: string }>} - An array of objects with `search` and `replace` keys.
  */
-const getReplacements = (configuration: Record<string, unknown>, name: string) => {
-  const replacements: Array<{ search: string; replace: string }> = [...Array(5)].map(
-    (_, i) => prepareReplacements(configuration, name, i) as { search: string; replace: string },
-  );
-
-  return replacements;
+export const getReplacements = (configuration: Record<string, unknown>, name: string): FontReplacement[] => {
+  // The configuration keys are 1-based: searchFont1..5 and replaceFont1..5
+  return [...Array(5)].map((_, i) => prepareReplacements(configuration, name, i + 1) as FontReplacement);
 };
 
 /**
- * Replaces occurrences of specific patterns in a string with their corresponding replacements.
+ * Applies search-and-replace pairs to a string, in order. A pair with an empty search or replace is skipped.
  *
- * This function takes a configuration object, a string value, and a name. It retrieves
- * an array of search-and-replace pairs using the `getReplacements` function. Then, it iterates
- * through the replacements and applies them to the input string using regular expressions.
- *
- * @param {Record<string, unknown>} configuration - The configuration object containing replacement rules.
- * @param {string} value - The input string to be processed.
- * @param {string} name - The base name used to retrieve replacement rules.
+ * @param value - The input string to be processed.
+ * @param replacements - The pairs to apply, `search` is a regular expression.
  * @returns {string} - The processed string with replacements applied.
  */
-export const replaceByConfiguration = (configuration: Record<string, unknown>, value: string, name: string): string => {
-  // Data defined in exporter pipeline
-  const replacements = getReplacements(configuration, name);
-
+export const applyReplacements = (value: string, replacements: FontReplacement[]): string => {
   let replaceable = value;
 
   for (const { search, replace } of replacements) {

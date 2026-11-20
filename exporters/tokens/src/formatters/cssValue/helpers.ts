@@ -1,6 +1,5 @@
+import { CSS_LAYER_SEPARATOR } from '../../constants';
 import type { CompositeValue, TokenValue } from '../../core/types';
-
-const LAYER_SEPARATOR = ', ';
 
 // Checks the type of a value. A reference is never of the expected type, the formatters read values that the
 // `resolve-references` transformation rule already resolved.
@@ -35,4 +34,4 @@ export const memberOfType = <T extends TokenValue['type']>(
 // Renders every entry of a composite value keyed by index (shadow layers, gradient layers, gradient stops) and joins
 // them the CSS way.
 export const formatLayers = (value: TokenValue, formatLayer: (layer: TokenValue) => string): string =>
-  Object.values(expectType(value, 'composite').value).map(formatLayer).join(LAYER_SEPARATOR);
+  Object.values(expectType(value, 'composite').value).map(formatLayer).join(CSS_LAYER_SEPARATOR);

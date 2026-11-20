@@ -1,12 +1,8 @@
-import { type Token, type TokenTheme } from '@supernovaio/sdk-exporters';
-import {
-  filterDeviceCollections,
-  filterGlobalCollections,
-  filterThemesByCollection,
-} from '../../helpers/collectionsHelper';
-import { filterColorCollections } from '../../helpers/colorHelper';
-import { getDeviceThemes } from '../../helpers/deviceHelpers';
+import { type Token, type TokenTheme, TokenType } from '@supernovaio/sdk-exporters';
+import { TOKEN_COLLECTION_THEMES_NAME } from './constants';
 import { getDeviceCollectionId } from './collectionKind';
+import { filterCollections, filterDeviceCollections, filterThemesByCollection } from './collectionsHelper';
+import { getDeviceThemes } from './deviceThemes';
 
 export type ThemedTokens = {
   theme: TokenTheme;
@@ -15,20 +11,25 @@ export type ThemedTokens = {
 };
 
 /**
- * Everything the pipeline needs to generate files, already resolved: Supernova's theme resolution and the split into
- * collections stay inside the adapter, so a pipeline reading it does not depend on the SDK.
- *
- * TODO: Express the tokens as `DesignToken` once the generators read the internal model (see `TokenCollection`).
+ * The native tokens with the themes applied and split by collection. Stays inside the adapter, which maps it to the
+ * internal model (see `SupernovaAdapter.fetchTokens`), so the pipeline does not depend on the SDK.
  */
 export type ResolvedTokens = {
-  /** Tokens of the global collection, shared by every theme and device. */
-  globalTokens: Token[];
-  /** Tokens of the color collection, not resolved for a theme (a source of the files common to all themes). */
-  colorTokens: Token[];
   /** Color themes, each with its resolved tokens. The first one is the default theme. */
   themes: ThemedTokens[];
   /** Tokens of all devices, resolved and marked with the device they belong to. */
   deviceTokens: Token[];
+};
+
+/**
+ * Keeps all non-color tokens and only those color tokens that belong to the themes collection.
+ *
+ * @param tokens - Array of tokens to filter.
+ */
+export const filterColorCollections = (tokens: Token[]): Token[] => {
+  const themeTokens = new Set(filterCollections(tokens, TOKEN_COLLECTION_THEMES_NAME));
+
+  return tokens.filter((item) => item.tokenType !== TokenType.color || themeTokens.has(item));
 };
 
 /** Applies a theme to the tokens of the given collections, `sdk.tokens.computeTokensByApplyingThemes` in practice. */
@@ -53,8 +54,6 @@ export const resolveTokens = (tokens: Token[], themes: TokenTheme[], applyTheme:
   const deviceThemes = filterThemesByCollection(themes, deviceCollectionId, false);
 
   return {
-    globalTokens: filterGlobalCollections(tokens),
-    colorTokens: colorCollections,
     themes: colorThemes.map((theme) => ({ theme, tokens: applyTheme(tokens, colorCollections, theme) })),
     deviceTokens: getDeviceThemes(
       deviceThemes.map((theme) => ({ theme, deviceTokens: applyTheme(tokens, deviceCollections, theme) })),

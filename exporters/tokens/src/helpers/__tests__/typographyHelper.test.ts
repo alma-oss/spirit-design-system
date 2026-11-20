@@ -1,15 +1,10 @@
-import { TypographyToken } from '@supernovaio/sdk-exporters';
-import { mapToken } from '../../adapters/supernova/mappers/tokenMapper';
 import type { TokenValue } from '../../core/types';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens, expectedTypographyValue } from '../../../tests/fixtures/exampleTypographyTokens';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import {
+  exampleTypographyTokens,
+  expectedTypographyValue,
+} from '../../../tests/fixtures/internal-model/exampleTypographyTokens';
 import { formatTypographyStyle } from '../../formatters/typographyFormatter';
 import { formatTypographyName, getBreakpoint, typographyStyle } from '../typographyHelper';
-
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
 
 const pixels = (value: number): TokenValue => ({ type: 'number', value, unit: 'px' });
 
@@ -34,11 +29,8 @@ const typographyModel = ({
 describe('typographyHelper', () => {
   describe('typographyStyle', () => {
     it('should return the expected typography value', () => {
-      const mockedToken: TypographyToken = exampleTypographyTokens.get('typographyRef1') as TypographyToken;
-      const tokenValue = formatTypographyStyle(
-        typographyStyle(mapToken(mockedToken, exampleGroups)!.value, true),
-        false,
-      );
+      const mockedToken = exampleTypographyTokens.get('typographyRef1')!;
+      const tokenValue = formatTypographyStyle(typographyStyle(mockedToken.value, true), false);
 
       expect(tokenValue).toBe(expectedTypographyValue);
     });
