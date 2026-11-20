@@ -11,7 +11,7 @@ import {
   TokenType,
   type Unit,
 } from '@supernovaio/sdk-exporters';
-import { formatTokenStyleByOutput, tokenVariableName } from '../helpers/tokenHelper';
+import { formatTokenStyleByOutput, getOriginName, tokenVariableName } from '../helpers/tokenHelper';
 import { handleSpecialCase } from '../helpers/specialCaseHelper';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { getFontSizeBaseForBreakpoint, unitToCss } from '../helpers/unitHelper';
@@ -40,7 +40,7 @@ const getDeviceKey = (token: Token): string => {
   }
 
   const tokenName = token.name?.toLowerCase() || '';
-  const originName = token.origin?.name?.toLowerCase() || '';
+  const originName = getOriginName(token) || '';
   const combinedName = `${tokenName} ${originName}`;
 
   if (combinedName.includes('desktop')) {
@@ -65,7 +65,7 @@ const getBaseFontSize = (fontSizeBaseMap: FontSizeBaseMap, token: Token): number
 
 const isFontSizeBaseToken = (token: Token, resolvedName: string): boolean => {
   const tokenName = token.name?.toLowerCase() || '';
-  const originName = token.origin?.name?.toLowerCase() || '';
+  const originName = getOriginName(token) || '';
   const resolved = resolvedName.toLowerCase();
 
   return resolved.includes(FONT_SIZE_BASE) || tokenName.includes(FONT_SIZE_BASE) || originName.includes(FONT_SIZE_BASE);

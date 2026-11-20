@@ -5,6 +5,7 @@ import { exampleDeviceTokens } from '../../../tests/fixtures/exampleDeviceTokens
 import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
 import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { resolveTokens } from '../../adapters/supernova/themeResolution';
 import { nonThemedFilesData } from '../../config/fileConfig';
 import {
   generateBarrelFile,
@@ -113,6 +114,23 @@ jest.mock('../../../config', () => ({
 
 describe('fileGenerator', () => {
   describe('generateOutputFilesByThemes', () => {
+    it('should not generate the devices when there are no device tokens', () => {
+      const outputFiles = generateOutputFilesByThemes(mappedTokens, tokenGroups, {
+        globalTokens: [],
+        colorTokens: [],
+        themes: [],
+        deviceTokens: [],
+      });
+
+      expect(outputFiles.find((file) => file.fileName === '@tokens.scss')?.content).toBe(
+        "@forward 'global-tokens';\n@forward 'themes';\n",
+      );
+      expect(outputFiles.find((file) => file.path === './js/' && file.fileName === 'index.ts')?.content).toBe(
+        "export * from './global-tokens';\nexport * from './themes';\n",
+      );
+      expect(outputFiles.some((file) => file.path.includes('devices'))).toBe(false);
+    });
+
     it('should generate output files by themes', async () => {
       const tokens = [
         ...Array.from(exampleDimensionAndStringTokens.values()),
@@ -146,23 +164,23 @@ describe('fileGenerator', () => {
         },
       ];
 
-      const outputFiles = await generateOutputFilesByThemes(
-        tokens,
+      const outputFiles = generateOutputFilesByThemes(
         mappedTokens,
         tokenGroups,
-        themes as unknown as TokenTheme[],
-        sdk as unknown as Supernova,
+        resolveTokens(tokens, themes as unknown as TokenTheme[], (allTokens, collections, theme) =>
+          (sdk as unknown as Supernova).tokens.computeTokensByApplyingThemes(allTokens, collections, [theme]),
+        ),
       );
 
       expect(outputFiles).toStrictEqual([
         // Global files
-        { path: './scss/global-tokens', fileName: '_borders.scss', content: emptyFile },
-        { path: './scss/global-tokens', fileName: '_other.scss', content: mockedExpectedResult },
-        { path: './scss/global-tokens', fileName: '_radii.scss', content: emptyFile },
-        { path: './scss/global-tokens', fileName: '_spacing.scss', content: emptyFile },
-        { path: './scss/global-tokens', fileName: '_shadows.scss', content: emptyFile },
-        { path: './scss/global-tokens', fileName: '_gradients.scss', content: emptyFile },
-        { path: './scss/global-tokens', fileName: '_typography.scss', content: emptyFile },
+        { path: './scss/global-tokens/', fileName: '_borders.scss', content: emptyFile },
+        { path: './scss/global-tokens/', fileName: '_other.scss', content: mockedExpectedResult },
+        { path: './scss/global-tokens/', fileName: '_radii.scss', content: emptyFile },
+        { path: './scss/global-tokens/', fileName: '_spacing.scss', content: emptyFile },
+        { path: './scss/global-tokens/', fileName: '_shadows.scss', content: emptyFile },
+        { path: './scss/global-tokens/', fileName: '_gradients.scss', content: emptyFile },
+        { path: './scss/global-tokens/', fileName: '_typography.scss', content: emptyFile },
         { path: './js/global-tokens/', fileName: 'borders.ts', content: emptyFile },
         { path: './js/global-tokens/', fileName: 'other.ts', content: mockedTsFile },
         { path: './js/global-tokens/', fileName: 'radii.ts', content: emptyFile },
@@ -199,12 +217,12 @@ describe('fileGenerator', () => {
         { path: './js/themes/theme-light-inverted/', fileName: 'index.ts', content: barrelJsThemeFile },
         // Themes root barrel files
         { path: './scss/', fileName: '@themes.scss', content: mockedRootThemeFile },
-        { path: './js/themes', fileName: 'index.ts', content: mockedRootThemeJsFile },
-        { path: './scss/themes', fileName: 'index.scss', content: barrelColorTokensFile },
-        { path: './scss/themes', fileName: '_color-tokens.scss', content: emptyFile },
-        { path: './scss/themes', fileName: '_shadow-tokens.scss', content: emptyFile },
-        { path: './js/themes', fileName: 'colorTokens.ts', content: emptyFile },
-        { path: './js/themes', fileName: 'shadowTokens.ts', content: emptyFile },
+        { path: './js/themes/', fileName: 'index.ts', content: mockedRootThemeJsFile },
+        { path: './scss/themes/', fileName: 'index.scss', content: barrelColorTokensFile },
+        { path: './scss/themes/', fileName: '_color-tokens.scss', content: emptyFile },
+        { path: './scss/themes/', fileName: '_shadow-tokens.scss', content: emptyFile },
+        { path: './js/themes/', fileName: 'colorTokens.ts', content: emptyFile },
+        { path: './js/themes/', fileName: 'shadowTokens.ts', content: emptyFile },
         // Devices root barrel files
         { path: './scss/devices/', fileName: '_devices.scss', content: mockedExpectedDeviceResult },
         { path: './js/devices/', fileName: 'devices.ts', content: mockedDeviceTsFile },
@@ -217,7 +235,12 @@ describe('fileGenerator', () => {
   describe('generateFiles', () => {
     it('should generate files', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
-      const files = generateFiles(tokens, mappedTokens, tokenGroups, nonThemedFilesData, undefined, false, undefined);
+      const files = generateFiles({
+        tokens,
+        mappedTokens,
+        tokenGroups,
+        filesData: nonThemedFilesData,
+      });
 
       expect(files).toStrictEqual([
         {
@@ -261,7 +284,7 @@ describe('fileGenerator', () => {
     ];
 
     it.each(dataProvider)('$description', ({ files, expectedBarrelFile, hasJsOutput }) => {
-      const mockedBarrelFile = generateBarrelFile(files, hasJsOutput);
+      const mockedBarrelFile = generateBarrelFile(files, { hasJsOutput });
 
       expect(mockedBarrelFile).toBe(expectedBarrelFile);
     });
@@ -270,14 +293,14 @@ describe('fileGenerator', () => {
   describe('generateThemesRootFile', () => {
     it('should generate themes root file content', () => {
       const themes = [{ name: 'theme-light' }, { name: 'theme-light-inverted' }];
-      const content = generateThemesRootFile(themes as TokenTheme[], false);
+      const content = generateThemesRootFile(themes as TokenTheme[], { hasJsOutput: false });
 
       expect(content).toBe(mockedRootThemeFile);
     });
 
     it('should generate themes root file content with js output', () => {
       const themes = [{ name: 'theme-light' }, { name: 'theme-light-inverted' }];
-      const content = generateThemesRootFile(themes as TokenTheme[], true);
+      const content = generateThemesRootFile(themes as TokenTheme[], { hasJsOutput: true });
 
       expect(content).toBe(mockedRootOnlyThemeJsFile);
     });
@@ -286,14 +309,14 @@ describe('fileGenerator', () => {
   describe('generateRootThemesFileContent', () => {
     it('should generate root themes file content', () => {
       const themes = [{ name: 'theme-light' }, { name: 'theme-light-inverted' }];
-      const content = generateRootThemesFileContent(themes as TokenTheme[], false);
+      const content = generateRootThemesFileContent(themes as TokenTheme[], { hasJsOutput: false });
 
       expect(content).toBe(mockedThemeRootFileContent);
     });
 
     it('should generate root themes file content with js output', () => {
       const themes = [{ name: 'theme-light' }, { name: 'theme-light-inverted' }];
-      const content = generateRootThemesFileContent(themes as TokenTheme[], true);
+      const content = generateRootThemesFileContent(themes as TokenTheme[], { hasJsOutput: true });
 
       expect(content).toBe(
         'themeLight: {\ntokens: themeLight,\n},\nthemeLightInverted: {\ntokens: themeLightInverted,\n},',
@@ -304,14 +327,14 @@ describe('fileGenerator', () => {
   describe('generateRootThemesFileImports', () => {
     it('should generate root themes file imports', () => {
       const themes = [{ name: 'theme-light' }, { name: 'theme-light-inverted' }];
-      const content = generateRootThemesFileImports(themes as TokenTheme[], false);
+      const content = generateRootThemesFileImports(themes as TokenTheme[], { hasJsOutput: false });
 
       expect(content).toBe("@use 'themes/theme-light';\n@use 'themes/theme-light-inverted';");
     });
 
     it('should generate root themes file imports with js output', () => {
       const themes = [{ name: 'theme-light' }, { name: 'theme-light-inverted' }];
-      const content = generateRootThemesFileImports(themes as TokenTheme[], true);
+      const content = generateRootThemesFileImports(themes as TokenTheme[], { hasJsOutput: true });
 
       expect(content).toBe(
         "import * as themeLight from './theme-light';\nimport * as themeLightInverted from './theme-light-inverted';",

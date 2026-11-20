@@ -2,6 +2,7 @@ import {
   removePairQuotes,
   replaceByConfiguration,
   toCamelCase,
+  toOutputName,
   toKebabCase,
   toParamCase,
   toPlural,
@@ -25,6 +26,13 @@ describe('stringHelper', () => {
       const result = toPlural(name);
 
       expect(result).toBe(expected);
+    });
+  });
+
+  describe('toOutputName', () => {
+    it('should camel-case the name in the JS output and keep it in the SCSS output', () => {
+      expect(toOutputName('theme-light', true)).toBe('themeLight');
+      expect(toOutputName('theme-light', false)).toBe('theme-light');
     });
   });
 

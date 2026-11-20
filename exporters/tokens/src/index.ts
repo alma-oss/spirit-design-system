@@ -1,8 +1,8 @@
-import { AnyOutputFile, PulsarContext, RemoteVersionIdentifier, Supernova } from '@supernovaio/sdk-exporters';
+import { AnyOutputFile, PulsarContext, Supernova } from '@supernovaio/sdk-exporters';
+import { SupernovaAdapter } from './adapters/supernova/SupernovaAdapter';
 import { exportConfiguration } from '../config';
 import { generateOutputFilesByThemes } from './generators/fileGenerator';
 import { safeStringify } from './helpers/safeStringify';
-import { filterByBrandId } from './filters/brandIdFilter';
 import { transformToMap } from './transformers/tokensTransformer';
 import { textFileWriter } from './writers/fileWriter';
 
@@ -11,27 +11,17 @@ import { textFileWriter } from './writers/fileWriter';
 Pulsar.export(async (sdk: Supernova, context: PulsarContext): Promise<Array<AnyOutputFile>> => {
   const { dsId, versionId, brandId } = context;
 
-  // Fetch data from design system that is currently being exported (context)
-  const remoteVersionIdentifier: RemoteVersionIdentifier = {
-    designSystemId: dsId,
-    versionId,
-  };
-
-  // Fetch the necessary data
-  let tokens = await sdk.tokens.getTokens(remoteVersionIdentifier);
-  let tokenGroups = await sdk.tokens.getTokenGroups(remoteVersionIdentifier);
-  const themes = await sdk.tokens.getTokenThemes(remoteVersionIdentifier);
-
-  // Filter by brand, if specified by the VSCode extension or pipeline configuration
-  if (brandId) {
-    tokens = filterByBrandId(tokens, brandId);
-    tokenGroups = filterByBrandId(tokenGroups, brandId);
-  }
+  // Fetch the necessary data, filtered by brand if specified by the VSCode extension or pipeline configuration.
+  // The SDK is used by the adapter only, the generators get the resolved tokens.
+  const { tokens, tokenGroups, resolved } = await new SupernovaAdapter(sdk).fetchResolvedTokens({
+    source: { designSystemId: dsId, versionId },
+    filters: { brandId: brandId ?? undefined },
+  });
 
   // Convert all color tokens to CSS variables
   const mappedTokens = transformToMap(tokens);
 
-  const outputFiles = await generateOutputFilesByThemes(tokens, mappedTokens, tokenGroups, themes, sdk);
+  const outputFiles = generateOutputFilesByThemes(mappedTokens, tokenGroups, resolved);
 
   // Export the original data only if 'generateOriginalDataFiles' is set to true in config.local.json
   if (exportConfiguration.generateOriginalDataFiles) {

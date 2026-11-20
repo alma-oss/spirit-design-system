@@ -2,7 +2,7 @@ import { Token, TokenGroup } from '@supernovaio/sdk-exporters';
 import { getTokenAlias, normalizeFirstNamePart } from '../helpers/objectHelper';
 import { getDeviceAlias } from '../helpers/deviceHelpers';
 import { tokenVariableName } from '../helpers/tokenHelper';
-import { toCamelCase, toPlural } from '../helpers/stringHelper';
+import { toCamelCase, toOutputName, toPlural } from '../helpers/stringHelper';
 import type { StylesObjectType } from '../core/types';
 
 export const handleNonTypographyTokens = (
@@ -32,8 +32,9 @@ export const handleNonTypographyTokens = (
         currentObject[tokenAlias] = tokenValue;
       }
     } else {
-      currentObject[hasJsOutput ? toCamelCase(modifiedPart) : modifiedPart] = currentObject[modifiedPart] || {};
-      currentObject = currentObject[hasJsOutput ? toCamelCase(modifiedPart) : modifiedPart] as StylesObjectType;
+      const key = toOutputName(modifiedPart, hasJsOutput);
+      currentObject[key] = currentObject[modifiedPart] || {};
+      currentObject = currentObject[key] as StylesObjectType;
     }
   });
 };

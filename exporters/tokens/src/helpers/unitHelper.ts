@@ -1,6 +1,7 @@
-import { DimensionToken, FontSizeToken, Token, TokenType } from '@supernovaio/sdk-exporters';
+import { Token, TokenType } from '@supernovaio/sdk-exporters';
 import { FONT_SIZE_BASE, FONT_SIZE_BASE_DEFAULT, PX_UNIT } from '../constants';
 import { getDeviceAlias } from './deviceHelpers';
+import { readNumericValue } from './numericValueHelper';
 import { pxToRem } from '../converters/pxToRem';
 import { type NumberValue, SOURCE_UNIT } from '../core/types';
 import type { FontSizeBaseMap } from './types';
@@ -53,14 +54,7 @@ export const getFontSizeBaseMap = (tokens: Token[]): FontSizeBaseMap => {
   );
 
   if (exactFontSizeBase) {
-    let measure: number | undefined;
-    if (exactFontSizeBase.tokenType === TokenType.fontSize) {
-      const fontSizeToken = exactFontSizeBase as FontSizeToken;
-      measure = fontSizeToken.value?.measure;
-    } else if (exactFontSizeBase.tokenType === TokenType.dimension) {
-      const dimensionToken = exactFontSizeBase as DimensionToken;
-      measure = dimensionToken.value?.measure;
-    }
+    const { measure } = readNumericValue(exactFontSizeBase);
 
     if (typeof measure === 'number' && measure > 0) {
       fontSizeBaseMap.set('mobile', measure);
@@ -86,15 +80,7 @@ export const getFontSizeBaseMap = (tokens: Token[]): FontSizeBaseMap => {
 
   fontSizeBaseTokens.forEach((token) => {
     const device = getDeviceAlias(token).toLowerCase() || 'mobile';
-    let measure: number | undefined;
-
-    if (token.tokenType === TokenType.fontSize) {
-      const fontSizeToken = token as FontSizeToken;
-      measure = fontSizeToken.value?.measure;
-    } else if (token.tokenType === TokenType.dimension) {
-      const dimensionToken = token as DimensionToken;
-      measure = dimensionToken.value?.measure;
-    }
+    const { measure } = readNumericValue(token);
 
     if (typeof measure === 'number' && measure > 0) {
       fontSizeBaseMap.set(device, measure);
