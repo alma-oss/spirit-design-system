@@ -1,10 +1,8 @@
-import { StringToken, TokenGroup } from '@supernovaio/sdk-exporters';
+import type { DesignToken } from '../core/types';
 import { formatTokenStyleByOutput, tokenVariableName } from '../helpers/tokenHelper';
 import { handleSpecialCase } from '../helpers/specialCaseHelper';
-import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
 
 type StringTokenProcessorContext = {
-  tokenGroups: Array<TokenGroup>;
   hasParentPrefix: boolean;
   hasJsOutput: boolean;
 };
@@ -12,25 +10,22 @@ type StringTokenProcessorContext = {
 /**
  * Processes string tokens (simple text values).
  *
- * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874), but
- * the value is read through the internal `DesignToken` model via the
- * Supernova adapter's mapper - the first processor migrated per the
- * source-agnostic token exporter refactor (#DS-2335).
+ * Naming is derived by `namingHelper` from the token's name, group path and device (see #DS-2874), the value is read
+ * from the internal `DesignToken` model.
  *
  * @param stringToken - The string token to process
- * @param ctx - Processing context with token groups and output options
+ * @param ctx - Processing context with output options
  * @returns {string|null} Formatted token style string or null
  */
-export const processStringToken = (stringToken: StringToken, ctx: StringTokenProcessorContext): string | null => {
-  const { tokenGroups, hasParentPrefix, hasJsOutput } = ctx;
-  const name = tokenVariableName(stringToken, tokenGroups, hasParentPrefix);
+export const processStringToken = (stringToken: DesignToken, ctx: StringTokenProcessorContext): string | null => {
+  const { hasParentPrefix, hasJsOutput } = ctx;
+  const name = tokenVariableName(stringToken, hasParentPrefix);
 
-  const designToken = mapToken(stringToken, tokenGroups);
-  if (!designToken || designToken.value.type !== 'string') {
+  if (stringToken.value.type !== 'string') {
     return null;
   }
 
-  const value = handleSpecialCase(name, designToken.value.value);
+  const value = handleSpecialCase(name, stringToken.value.value);
 
   return formatTokenStyleByOutput(name, value, hasJsOutput);
 };

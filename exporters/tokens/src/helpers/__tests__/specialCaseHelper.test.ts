@@ -1,9 +1,8 @@
-import { Token } from '@supernovaio/sdk-exporters';
 import { handleSpecialCase } from '../specialCaseHelper';
 import {
   exampleInvariantTokens,
   exampleDimensionAndStringTokens,
-} from '../../../tests/fixtures/exampleDimensionAndStringTokens';
+} from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
 import { getTokenAlias } from '../objectHelper';
 
 describe('specialCaseHelper', () => {
@@ -22,13 +21,13 @@ describe('specialCaseHelper', () => {
 
 describe('handleInvariantTokens', () => {
   it('should return token alias for invariant case', () => {
-    const token = exampleInvariantTokens.get('radiiRef') as Token;
+    const token = exampleInvariantTokens.get('radiiRef')!;
 
     expect(getTokenAlias(token, false)).toBe('full');
   });
 
   it('should return token alias for non-invariant case', () => {
-    const token = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+    const token = exampleDimensionAndStringTokens.get('dimensionRef')!;
 
     expect(getTokenAlias(token, false)).toBe('desktop');
   });

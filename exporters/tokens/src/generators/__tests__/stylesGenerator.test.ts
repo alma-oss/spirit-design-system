@@ -1,20 +1,11 @@
-import {
-  DimensionToken,
-  GradientToken,
-  ShadowToken,
-  StringToken,
-  Token,
-  TokenGroup,
-  TokenType,
-} from '@supernovaio/sdk-exporters';
 import { createTokenIndex } from '../../core/tokenIndex';
-import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleGradientTokens } from '../../../tests/fixtures/exampleGradientTokens';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { examplePrefixToken } from '../../../tests/fixtures/examplePrefixToken';
-import { exampleShadowTokens } from '../../../tests/fixtures/exampleShadowTokens';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
+import { type DesignToken, TokenTypeEnum, FontSizeBaseMap } from '../../core/types';
+import { exampleColorsTokens } from '../../../tests/fixtures/internal-model/exampleColorTokens';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+import { exampleGradientTokens } from '../../../tests/fixtures/internal-model/exampleGradientTokens';
+import { examplePrefixToken } from '../../../tests/fixtures/internal-model/examplePrefixToken';
+import { exampleShadowTokens } from '../../../tests/fixtures/internal-model/exampleShadowTokens';
 import { findTokenPrefix } from '../../helpers/findTokenPrefix';
 import { filterExcludedTokens } from '../../filters/excludedTokens';
 import {
@@ -22,24 +13,19 @@ import {
   generateStylesFromTokens,
   tokenToStyleByType,
 } from '../stylesGenerator';
-import type { FontSizeBaseMap } from '../../helpers/types';
 
 const tokenIndex = createTokenIndex([]);
-const tokenGroups: Array<TokenGroup> = exampleGroups;
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
   ['mobile', 14],
   ['tablet', 16],
   ['desktop', 18],
 ]);
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
 
 describe('stylesGenerator', () => {
   describe('tokenToStyleByType', () => {
     const dataProvider = [
       {
-        token: exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken,
+        token: exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken,
         description: 'dimension type token with parent prefix',
         hasParentPrefix: true,
         hasJsOutput: false,
@@ -47,7 +33,7 @@ describe('stylesGenerator', () => {
         expectedStyles: '$grid-spacing-desktop: 1.7778rem !default;',
       },
       {
-        token: exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken,
+        token: exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken,
         description: 'dimension type token without parent prefix',
         hasParentPrefix: false,
         hasJsOutput: false,
@@ -55,7 +41,7 @@ describe('stylesGenerator', () => {
         expectedStyles: '$desktop: 1.7778rem !default;',
       },
       {
-        token: exampleDimensionAndStringTokens.get('stringRef') as StringToken,
+        token: exampleDimensionAndStringTokens.get('stringRef') as DesignToken,
         description: 'string type token with parent prefix',
         hasParentPrefix: true,
         hasJsOutput: false,
@@ -63,7 +49,7 @@ describe('stylesGenerator', () => {
         expectedStyles: '$grid-columns: 12 !default;',
       },
       {
-        token: exampleDimensionAndStringTokens.get('stringRef') as StringToken,
+        token: exampleDimensionAndStringTokens.get('stringRef') as DesignToken,
         description: 'string type token without parent prefix',
         hasParentPrefix: false,
         hasJsOutput: false,
@@ -72,10 +58,9 @@ describe('stylesGenerator', () => {
       },
       {
         token: {
-          id: '3',
-          name: 'unsupportedToken',
-          tokenType: TokenType.duration,
-        } as Token,
+          ...(exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken),
+          type: TokenTypeEnum.Typography,
+        },
         description: 'unsupported token type',
         hasParentPrefix: true,
         hasJsOutput: false,
@@ -83,7 +68,7 @@ describe('stylesGenerator', () => {
         expectedStyles: null,
       },
       {
-        token: exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken,
+        token: exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken,
         description: 'dimension type token with parent prefix and js output',
         hasParentPrefix: true,
         hasJsOutput: true,
@@ -91,7 +76,7 @@ describe('stylesGenerator', () => {
         expectedStyles: "export const gridSpacingDesktop = '1.7778rem';",
       },
       {
-        token: exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken,
+        token: exampleDimensionAndStringTokens.get('dimensionRef') as DesignToken,
         description: 'dimension type token without parent prefix and js output',
         hasParentPrefix: false,
         hasJsOutput: true,
@@ -99,7 +84,7 @@ describe('stylesGenerator', () => {
         expectedStyles: "export const desktop = '1.7778rem';",
       },
       {
-        token: exampleDimensionAndStringTokens.get('stringRef') as StringToken,
+        token: exampleDimensionAndStringTokens.get('stringRef') as DesignToken,
         description: 'string type token with parent prefix and js output',
         hasParentPrefix: true,
         hasJsOutput: true,
@@ -107,7 +92,7 @@ describe('stylesGenerator', () => {
         expectedStyles: "export const gridColumns = '12';",
       },
       {
-        token: exampleDimensionAndStringTokens.get('stringRef') as StringToken,
+        token: exampleDimensionAndStringTokens.get('stringRef') as DesignToken,
         description: 'string type token without parent prefix and js output',
         hasParentPrefix: false,
         hasJsOutput: true,
@@ -115,7 +100,7 @@ describe('stylesGenerator', () => {
         expectedStyles: "export const columns = '12';",
       },
       {
-        token: exampleShadowTokens.get('shadowRef') as ShadowToken,
+        token: exampleShadowTokens.get('shadowRef') as DesignToken,
         description: 'shadow type token without parent prefix',
         hasParentPrefix: false,
         hasJsOutput: false,
@@ -126,7 +111,7 @@ describe('stylesGenerator', () => {
           'var(--spirit-color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
-        token: exampleShadowTokens.get('shadowRef') as ShadowToken,
+        token: exampleShadowTokens.get('shadowRef') as DesignToken,
         description: 'shadow type token without parent prefix',
         hasParentPrefix: false,
         hasJsOutput: false,
@@ -137,7 +122,7 @@ describe('stylesGenerator', () => {
           'var(--color-shadows-shadow-100-color-01, #00000026) !default;',
       },
       {
-        token: exampleGradientTokens.get('gradientRef') as GradientToken,
+        token: exampleGradientTokens.get('gradientRef') as DesignToken,
         description: 'gradient type token without parent prefix',
         hasParentPrefix: false,
         hasJsOutput: false,
@@ -146,7 +131,7 @@ describe('stylesGenerator', () => {
           '$basic-overlay: linear-gradient(var(--gradient-angle, 90deg), var(--spirit-color-gradient-basic-overlay-color-01, #fff) 0%, var(--spirit-color-gradient-basic-overlay-color-02, #fff0) 100%) !default;',
       },
       {
-        token: exampleGradientTokens.get('gradientRef') as GradientToken,
+        token: exampleGradientTokens.get('gradientRef') as DesignToken,
         description: 'gradient type token without parent prefix',
         hasParentPrefix: false,
         hasJsOutput: false,
@@ -164,7 +149,6 @@ describe('stylesGenerator', () => {
         const styles = tokenToStyleByType(
           token,
           tokenIndex,
-          tokenGroups,
           tokenPrefix,
           hasParentPrefix,
           hasJsOutput,
@@ -174,6 +158,24 @@ describe('stylesGenerator', () => {
         expect(styles).toBe(expectedStyles);
       },
     );
+  });
+
+  describe('tokenToStyleByType with scalar aliases', () => {
+    const alias = createDesignToken(
+      TokenTypeEnum.Dimension,
+      { type: 'reference', tokenId: 'base' },
+      { id: 'alias', name: 'alias-space', metadata: { groupPath: ['Spacing'], namePath: ['Spacing'] } },
+    );
+    const aliasWithResolved = {
+      ...alias,
+      value: { type: 'reference', tokenId: 'missing', resolved: { type: 'number', value: 8, unit: 'px' } },
+    } as DesignToken;
+
+    it('should keep the value the adapter already resolved', () => {
+      const styles = tokenToStyleByType(aliasWithResolved, createTokenIndex([]), '', false, false, fontSizeBaseMap);
+
+      expect(styles).toContain('0.5714rem');
+    });
   });
 
   describe('generateStylesFromTokens', () => {
@@ -257,11 +259,10 @@ describe('stylesGenerator', () => {
       ({ tokens, hasJsOutput, hasParentPrefix, hasTokenPrefix, expectedStyles }) => {
         const prefixTokens = Array.from(examplePrefixToken.values());
         const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
-        const filteredTokens = filterExcludedTokens(Array.from(tokens.values()), tokenGroups);
+        const filteredTokens = filterExcludedTokens(Array.from(tokens.values()));
         const styles = generateStylesFromTokens(
           filteredTokens,
           tokenIndex,
-          tokenGroups,
           tokenPrefix,
           hasParentPrefix,
           false,
@@ -294,10 +295,9 @@ describe('stylesGenerator', () => {
     it.each(dataProvider)('$description', ({ hasJsOutput, hasTokenPrefix, expectedStyles }) => {
       const prefixTokens = Array.from(examplePrefixToken.values());
       const tokenPrefix = hasTokenPrefix ? findTokenPrefix(prefixTokens) : '';
-      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()), tokenGroups);
+      const filteredTokens = filterExcludedTokens(Array.from(exampleColorsTokens.values()));
       const styles = generateCssVariableReferencesFromTokens(
         filteredTokens,
-        tokenGroups,
         tokenPrefix,
         'color-',
         false,

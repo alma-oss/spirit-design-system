@@ -1,12 +1,11 @@
-import { StringToken, Token, TokenType } from '@supernovaio/sdk-exporters';
+import { withResolvedValue } from '../core/resolveToken';
+import { type DesignToken, TokenTypeEnum } from '../core/types';
 
 const TOKEN_PREFIX_NAME = 'css-variable-prefix';
 
-export const findTokenPrefix = (tokens: Token[]): string => {
-  const prefixToken = tokens.find(
-    (token) => token.tokenType === TokenType.string && token.name === TOKEN_PREFIX_NAME,
-  ) as StringToken | undefined;
-  const prefixTokenValue = prefixToken?.value?.text ?? '';
+export const findTokenPrefix = (tokens: DesignToken[]): string => {
+  const prefixToken = tokens.find((token) => token.type === TokenTypeEnum.String && token.name === TOKEN_PREFIX_NAME);
+  const value = prefixToken && withResolvedValue(prefixToken).value;
 
-  return prefixTokenValue;
+  return value?.type === 'string' ? value.value : '';
 };

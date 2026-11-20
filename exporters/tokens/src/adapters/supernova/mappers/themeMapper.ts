@@ -1,6 +1,6 @@
 import type { TokenTheme as SupernovaTokenTheme } from '@supernovaio/sdk-exporters';
 import { CollectionKind, type Device, type Theme } from '../../../core/types';
-import { getThemeCollectionId } from '../../../helpers/collectionsHelper';
+import { getThemeCollectionId } from '../collectionsHelper';
 
 /** The value of the `Collection` property of a token, see `getCollectionId`. */
 type CollectionId = string | boolean | number | undefined;

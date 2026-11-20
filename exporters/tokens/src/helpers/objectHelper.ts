@@ -1,6 +1,5 @@
-import { Token, TokenType } from '@supernovaio/sdk-exporters';
 import { getAliasName } from './namingHelper';
-import { isTypographyStyleLeaf, type StylesObjectType } from '../core/types';
+import { type DesignToken, isTypographyStyleLeaf, type StylesObjectType, TokenTypeEnum } from '../core/types';
 import type { KeyValueTemplateCallback } from './types';
 import { toCamelCase, toPlural } from './stringHelper';
 import { COLOR_SCSS_SUFFIX } from '../constants';
@@ -49,11 +48,11 @@ export const deepMergeObjects = (obj1: StylesObjectType, obj2: StylesObjectType)
   return { ...finalObject, ...endObject };
 };
 
-export const getTokenAlias = (token: Token, hasJsOutput: boolean): string =>
-  getAliasName(token.name, token.tokenType === TokenType.color, hasJsOutput);
+export const getTokenAlias = (token: DesignToken, hasJsOutput: boolean): string =>
+  getAliasName(token.name, token.type === TokenTypeEnum.Color, hasJsOutput);
 
-export const normalizeFirstNamePart = (part: string, tokenType: TokenType, hasJsOutput: boolean): string => {
-  if (tokenType === TokenType.color) {
+export const normalizeFirstNamePart = (part: string, tokenType: TokenTypeEnum, hasJsOutput: boolean): string => {
+  if (tokenType === TokenTypeEnum.Color) {
     const partNameWithColorSuffix = `${part.toLowerCase()}${COLOR_SCSS_SUFFIX}`;
 
     return hasJsOutput ? toCamelCase(partNameWithColorSuffix) : `$${partNameWithColorSuffix}`;

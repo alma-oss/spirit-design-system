@@ -1,12 +1,12 @@
 import { type Token } from '@supernovaio/sdk-exporters';
-import { TOKEN_COLLECTION_THEMES_NAME } from '../../constants';
+import { TOKEN_COLLECTION_THEMES_NAME } from './constants';
 import { CollectionKind } from '../../core/types';
 import {
   filterCollections,
   filterDeviceCollections,
   filterGlobalCollections,
   getCollectionId,
-} from '../../helpers/collectionsHelper';
+} from './collectionsHelper';
 
 /**
  * Id of the devices collection (the value of the `Collection` property of its tokens), `undefined` when no token
@@ -20,7 +20,7 @@ export const getDeviceCollectionId = (tokens: Token[]): string | boolean | numbe
 /**
  * Supernova tells the collections apart by the `Collection` property of a token. Returns a function that maps a
  * token to the source-neutral kind of its collection, leaving lookup-only collections (e.g. primitives) unset.
- *
+ * *
  * @param tokens - All tokens of the design system
  */
 export const createCollectionKindResolver = (tokens: Token[]): ((token: Token) => CollectionKind | undefined) => {

@@ -5,6 +5,9 @@
  */
 export type TokenValue = NumberValue | StringValue | ColorValue | BooleanValue | ReferenceValue | CompositeValue;
 
+/** A value that is not an alias, i.e. one that needs no lookup of another token. */
+export type ConcreteTokenValue = Exclude<TokenValue, ReferenceValue>;
+
 export type NumberValue = {
   type: 'number';
   value: number;

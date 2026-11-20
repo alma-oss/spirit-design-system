@@ -1,26 +1,9 @@
-import {
-  type ColorToken,
-  type GradientToken,
-  GradientType,
-  type ShadowToken,
-  ShadowType,
-  type TokenGroup,
-  TokenType,
-  Unit,
-} from '@supernovaio/sdk-exporters';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
-import { mapToken } from '../../adapters/supernova/mappers/tokenMapper';
 import { createTokenIndex } from '../../core/tokenIndex';
-import { type DesignToken } from '../../core/types';
-import type { FontSizeBaseMap } from '../../helpers/types';
+import { type DesignToken, type FontSizeBaseMap, TokenTypeEnum, type TokenValue } from '../../core/types';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
 import { processColorToken } from '../colorTokenProcessor';
 import { processGradientToken } from '../gradientTokenProcessor';
 import { processShadowToken } from '../shadowTokenProcessor';
-
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
 
 /**
  * Exact-output safety net for the color, shadow and gradient processors (#DS-2872). These expectations were captured
@@ -30,28 +13,42 @@ jest.mock('../../../config', () => ({
 
 type ColorInput = { r: number; g: number; b: number; opacity?: number; referencedTokenId?: string | null };
 
-const tokenGroups: Array<TokenGroup> = exampleGroups;
+type GradientKind = 'linear' | 'radial' | 'angular';
+
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
   ['mobile', 14],
   ['tablet', 16],
   ['desktop', 18],
 ]);
 
-const colorValue = ({ r, g, b, opacity = 1, referencedTokenId = null }: ColorInput) => ({
-  color: { r, g, b, referencedTokenId: null },
-  opacity: { unit: Unit.raw, measure: opacity, referencedTokenId: null },
-  referencedTokenId,
+const HEX_RADIX = 16;
+const MAX_CHANNEL = 255;
+
+const hexChannel = (channel: number): string => Math.round(channel).toString(HEX_RADIX).padStart(2, '0');
+
+const reference = (tokenId: string | null | undefined, resolved: TokenValue): TokenValue =>
+  tokenId ? { type: 'reference', tokenId, resolved } : resolved;
+
+const number = (value: number, unit?: string): TokenValue => ({ type: 'number', value, unit });
+
+const colorValue = ({ r, g, b, opacity = 1, referencedTokenId = null }: ColorInput, alpha = opacity): TokenValue =>
+  reference(referencedTokenId, {
+    type: 'color',
+    format: 'hex',
+    value: `#${hexChannel(r)}${hexChannel(g)}${hexChannel(b)}${hexChannel(MAX_CHANNEL * alpha)}`,
+  });
+
+const layers = (values: TokenValue[]): TokenValue => ({
+  type: 'composite',
+  value: Object.fromEntries(values.map((value, index) => [String(index), value])),
 });
 
-const colorToken = (id: string, name: string, input: ColorInput): ColorToken =>
-  ({
+const colorToken = (id: string, name: string, input: ColorInput): DesignToken =>
+  createDesignToken(TokenTypeEnum.Color, colorValue(input), {
     id,
     name,
-    tokenType: TokenType.color,
-    parentGroupId: '5',
-    origin: { name: `background/${name}` },
-    value: colorValue(input),
-  }) as unknown as ColorToken;
+    metadata: { groupPath: ['background'], groupId: '5', originName: `background/${name}`, namePath: ['background'] },
+  });
 
 const shadowLayer = (
   input: ColorInput,
@@ -61,65 +58,89 @@ const shadowLayer = (
     radius: number;
     spread: number;
     opacity: number | null;
-    type: ShadowType;
+    inset: boolean;
     referencedTokenId: string | null;
   }> = {},
-) => {
-  const { opacity, ...rest } = { x: 0, y: 2, radius: 8, spread: 0, opacity: 1, type: ShadowType.drop, ...overrides };
-
-  return {
-    color: colorValue(input),
-    ...rest,
-    ...(opacity === null ? {} : { opacity: { unit: Unit.raw, measure: opacity, referencedTokenId: null } }),
+): TokenValue => {
+  const { x, y, radius, spread, opacity, inset, referencedTokenId } = {
+    x: 0,
+    y: 2,
+    radius: 8,
+    spread: 0,
+    opacity: 1,
+    inset: false,
     referencedTokenId: null,
-    ...(overrides.referencedTokenId ? { referencedTokenId: overrides.referencedTokenId } : {}),
+    ...overrides,
   };
+
+  return reference(referencedTokenId, {
+    type: 'composite',
+    value: {
+      inset: { type: 'boolean', value: inset },
+      x: number(x, 'px'),
+      y: number(y, 'px'),
+      blur: number(radius, 'px'),
+      spread: number(spread, 'px'),
+      color: colorValue(input, opacity ?? undefined),
+    },
+  });
 };
 
-const shadowToken = (id: string, name: string, layers: unknown[]): ShadowToken =>
-  ({
+const shadowToken = (id: string, name: string, values: TokenValue[]): DesignToken =>
+  createDesignToken(TokenTypeEnum.Shadow, layers(values), {
     id,
     name,
-    tokenType: TokenType.shadow,
-    parentGroupId: '8',
-    origin: { name: `Shadows/${name}` },
-    value: layers,
-  }) as unknown as ShadowToken;
+    metadata: {
+      groupPath: ['shadow', 'shadow-100'],
+      groupId: '8',
+      originName: `Shadows/${name}`,
+      namePath: ['shadow', 'shadow-100'],
+    },
+  });
+
+const point = ({ x, y }: { x: number; y: number }): TokenValue => ({
+  type: 'composite',
+  value: { x: number(x), y: number(y) },
+});
 
 const gradientLayer = (
-  type: GradientType,
+  type: GradientKind,
   from: { x: number; y: number },
   to: { x: number; y: number },
   stops: Array<{ position: number; color: ColorInput }>,
-) => ({
-  type,
-  aspectRatio: 0,
-  from,
-  to,
-  stops: stops.map(({ position, color }) => ({ position, color: colorValue(color) })),
-  referencedTokenId: null,
+): TokenValue => ({
+  type: 'composite',
+  value: {
+    type: { type: 'string', value: type },
+    from: point(from),
+    to: point(to),
+    stops: layers(
+      stops.map(({ position, color }) => ({
+        type: 'composite',
+        value: { position: number(position), color: colorValue(color) },
+      })),
+    ),
+  },
 });
 
-const gradientToken = (id: string, name: string, layers: unknown[]): GradientToken =>
-  ({
+const gradientToken = (id: string, name: string, values: TokenValue[]): DesignToken =>
+  createDesignToken(TokenTypeEnum.Gradient, layers(values), {
     id,
     name,
-    tokenType: TokenType.gradient,
-    parentGroupId: '9',
-    origin: { name: `Gradient/${name}` },
-    value: layers,
-  }) as unknown as GradientToken;
+    metadata: {
+      groupPath: ['basic-overlay'],
+      groupId: '9',
+      originName: `Gradient/${name}`,
+      namePath: ['basic-overlay'],
+    },
+  });
 
-const referencedToken = mapToken(
-  colorToken('primary-ref', 'primary', { r: 0, g: 0, b: 0 }),
-  tokenGroups,
-) as DesignToken;
+const referencedToken = colorToken('primary-ref', 'primary', { r: 0, g: 0, b: 0 });
 const tokenIndex = createTokenIndex([referencedToken]);
 
 describe('color, shadow and gradient output', () => {
   describe('processColorToken', () => {
     const ctx = (hasJsOutput = false) => ({
-      tokenGroups,
       hasParentPrefix: true,
       hasJsOutput,
       tokenIndex,
@@ -175,7 +196,6 @@ describe('color, shadow and gradient output', () => {
 
   describe('processShadowToken', () => {
     const ctx = (hasJsOutput = false, tokenPrefix = 'spirit-') => ({
-      tokenGroups,
       hasParentPrefix: false,
       hasJsOutput,
       tokenPrefix,
@@ -186,10 +206,7 @@ describe('color, shadow and gradient output', () => {
     it('should process multiple layers with inset and per-layer opacity', () => {
       const token = shadowToken('s', 'shadow-200', [
         shadowLayer({ r: 0, g: 0, b: 0 }, { y: 4, radius: 12, opacity: 0.1 }),
-        shadowLayer(
-          { r: 255, g: 255, b: 255, opacity: 0.5 },
-          { x: 1, y: 1, radius: 0, type: ShadowType.inner, opacity: null },
-        ),
+        shadowLayer({ r: 255, g: 255, b: 255, opacity: 0.5 }, { x: 1, y: 1, radius: 0, inset: true, opacity: null }),
       ]);
 
       expect(processShadowToken(token, ctx())).toBe(
@@ -209,8 +226,7 @@ describe('color, shadow and gradient output', () => {
     });
 
     it('should process a layer color aliasing another color token', () => {
-      const layer = shadowLayer({ r: 5, g: 6, b: 7 });
-      layer.color.referencedTokenId = 'primary-ref';
+      const layer = shadowLayer({ r: 5, g: 6, b: 7, referencedTokenId: 'primary-ref' });
 
       expect(processShadowToken(shadowToken('s', 'shadow-400', [layer]), ctx())).toBe(
         '$shadow-400: var(--spirit-shadow-400-offset-x-01, 0) var(--spirit-shadow-400-offset-y-01, 0.1429rem) var(--spirit-shadow-400-blur-radius-01, 0.5714rem) var(--spirit-shadow-400-spread-radius-01, 0) var(--spirit-color-shadows-shadow-400-color-01, #050607) !default;',
@@ -220,7 +236,6 @@ describe('color, shadow and gradient output', () => {
 
   describe('processGradientToken', () => {
     const ctx = (hasJsOutput = false) => ({
-      tokenGroups,
       hasParentPrefix: false,
       hasJsOutput,
       tokenPrefix: 'spirit-',
@@ -236,7 +251,7 @@ describe('color, shadow and gradient output', () => {
       { angle: 49, description: 'diagonal up', from: { x: 0.9, y: 0.7 }, to: { x: 0.2, y: 0.1 } },
     ])('should process linear gradient $description', ({ angle, from, to }) => {
       const token = gradientToken('g', 'basic-overlay', [
-        gradientLayer(GradientType.linear, from, to, [
+        gradientLayer('linear', from, to, [
           { position: 0, color: { r: 255, g: 255, b: 255 } },
           { position: 0.3333333, color: { r: 0, g: 0, b: 0, opacity: 0.4 } },
           { position: 1, color: { r: 17, g: 34, b: 51, opacity: 0 } },
@@ -256,8 +271,8 @@ describe('color, shadow and gradient output', () => {
         { position: 1, color: { r: 0, g: 0, b: 255, opacity: 0.5 } },
       ];
       const token = gradientToken('g', 'basic-overlay', [
-        gradientLayer(GradientType.radial, { x: 0, y: 0 }, { x: 1, y: 1 }, stops),
-        gradientLayer(GradientType.angular, { x: 0, y: 0 }, { x: 1, y: 1 }, stops),
+        gradientLayer('radial', { x: 0, y: 0 }, { x: 1, y: 1 }, stops),
+        gradientLayer('angular', { x: 0, y: 0 }, { x: 1, y: 1 }, stops),
       ]);
 
       expect(processGradientToken(token, ctx())).toBe(
@@ -267,11 +282,10 @@ describe('color, shadow and gradient output', () => {
     });
 
     it('should process a stop color aliasing another color token with js output', () => {
-      const layer = gradientLayer(GradientType.linear, { x: 0, y: 0.5 }, { x: 1, y: 0.5 }, [
-        { position: 0, color: { r: 9, g: 8, b: 7 } },
+      const layer = gradientLayer('linear', { x: 0, y: 0.5 }, { x: 1, y: 0.5 }, [
+        { position: 0, color: { r: 9, g: 8, b: 7, referencedTokenId: 'primary-ref' } },
         { position: 1, color: { r: 1, g: 2, b: 3 } },
       ]);
-      layer.stops[0].color.referencedTokenId = 'primary-ref';
 
       expect(processGradientToken(gradientToken('g', 'basic-overlay', [layer]), ctx(true))).toBe(
         "export const basicOverlay = 'linear-gradient(var(--gradient-angle, 90deg), var(--spirit-color-gradient-basic-overlay-color-01, #090807) 0%, var(--spirit-color-gradient-basic-overlay-color-02, #010203) 100%)';",

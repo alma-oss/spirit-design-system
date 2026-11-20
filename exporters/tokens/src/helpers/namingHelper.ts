@@ -43,8 +43,7 @@ export const getVariableName = (token: NameableToken, hasParentPrefix: boolean):
 /**
  * Variable name of a model token.
  *
- * Has no production caller yet: the processors still read Supernova tokens (through `getVariableName`). It is the
- * entry point for the first processor that reads a `DesignToken`, so a token of any source can be named.
+ * Names a token of any source, the processors read the model only.
  *
  * @param token
  * @param hasParentPrefix

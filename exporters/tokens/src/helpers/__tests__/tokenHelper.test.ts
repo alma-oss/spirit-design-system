@@ -1,14 +1,4 @@
-import {
-  DimensionToken,
-  FontSizeToken,
-  LetterSpacingToken,
-  LineHeightToken,
-  SizeToken,
-  StringToken,
-  Token,
-  TokenGroup,
-  TokenType,
-} from '@supernovaio/sdk-exporters';
+import { type DesignToken, TokenTypeEnum } from '../../core/types';
 import {
   exampleDeviceTokenDimension,
   exampleDeviceTokenEqualValue,
@@ -18,11 +8,9 @@ import {
   exampleDeviceTokenSize,
   exampleDeviceTokenString,
   exampleDeviceUpdatedTokens,
-} from '../../../tests/fixtures/exampleDeviceTokens';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens } from '../../../tests/fixtures/exampleTypographyTokens';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+} from '../../../tests/fixtures/internal-model/exampleDeviceTokens';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
 import {
   addAngleVarToGradient,
   addEmptyLineBetweenTokenGroups,
@@ -31,11 +19,6 @@ import {
   sortTokens,
   tokenVariableName,
 } from '../tokenHelper';
-import { filterExcludedTokens } from '../../filters/excludedTokens';
-
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
 
 const dataProvider = [
   {
@@ -63,10 +46,7 @@ describe('tokenHelper', () => {
     'tokenVariableName',
     ({ hasParentPrefix, description, expectedVariableName, tokenRef }) => {
       it(`should return the expected variable name for exampleToken ${description} parent prefix`, () => {
-        const mockedToken: Token = tokenRef as Token;
-        const mockedTokenGroups: Array<TokenGroup> = exampleGroups;
-
-        const result = tokenVariableName(mockedToken, mockedTokenGroups, hasParentPrefix);
+        const result = tokenVariableName(tokenRef!, hasParentPrefix);
 
         expect(result).toBe(expectedVariableName);
       });
@@ -136,60 +116,58 @@ describe('tokenHelper', () => {
   describe('sortTokens', () => {
     it('should sort tokens by variable name', () => {
       const tokens = Array.from(exampleDimensionAndStringTokens.values());
-      const tokenGroups = exampleGroups;
       const hasParentPrefix = true;
       const sortByNumValue = false;
 
-      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+      const result = sortTokens(tokens, hasParentPrefix, sortByNumValue);
 
-      expect(result[0]?.origin?.name).toBe('Grid/Columns');
-      expect(result[1]?.origin?.name).toBe('Grid/spacing/desktop');
+      expect(result[0]?.metadata.originName).toBe('Grid/Columns');
+      expect(result[1]?.metadata.originName).toBe('Grid/spacing/desktop');
     });
 
     it('should sort tokens by variable name if they have the same value', () => {
       const tokens = Array.from(exampleDeviceTokenEqualValue.values());
-      const tokenGroups = exampleGroups;
       const hasParentPrefix = true;
       const sortByNumValue = true;
 
-      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue);
+      const result = sortTokens(tokens, hasParentPrefix, sortByNumValue);
 
-      expect(result[0]?.origin?.name).toBe('breakpoint-mobile');
-      expect(result[1]?.origin?.name).toBe('breakpoint-tablet');
+      expect(result[0]?.metadata.originName).toBe('breakpoint-mobile');
+      expect(result[1]?.metadata.originName).toBe('breakpoint-tablet');
     });
 
     const sortByNumValueCases: Array<{
-      tokenType: string;
-      tokenSource: Map<string, Token>;
+      tokenType: TokenTypeEnum;
+      tokenSource: Map<string, DesignToken>;
       expectedFirst: number;
       expectedSecond: number;
     }> = [
       {
-        tokenType: TokenType.dimension,
+        tokenType: TokenTypeEnum.Dimension,
         tokenSource: exampleDeviceTokenDimension,
         expectedFirst: 768,
         expectedSecond: 1200,
       },
       {
-        tokenType: TokenType.size,
+        tokenType: TokenTypeEnum.Size,
         tokenSource: exampleDeviceTokenSize,
         expectedFirst: 0,
         expectedSecond: 768,
       },
       {
-        tokenType: TokenType.fontSize,
+        tokenType: TokenTypeEnum.FontSize,
         tokenSource: exampleDeviceTokenFontSize,
         expectedFirst: 15,
         expectedSecond: 30,
       },
       {
-        tokenType: TokenType.lineHeight,
+        tokenType: TokenTypeEnum.LineHeight,
         tokenSource: exampleDeviceTokenLineHeight,
         expectedFirst: 30,
         expectedSecond: 45,
       },
       {
-        tokenType: TokenType.letterSpacing,
+        tokenType: TokenTypeEnum.LetterSpacing,
         tokenSource: exampleDeviceTokenLetterSpacing,
         expectedFirst: -0.02,
         expectedSecond: -0.01,
@@ -200,27 +178,24 @@ describe('tokenHelper', () => {
       'should sort $tokenType Tokens by number value',
       ({ tokenSource, expectedFirst, expectedSecond }) => {
         const tokens = Array.from(tokenSource.values());
-        const tokenGroups = exampleGroups;
         const hasParentPrefix = true;
         const sortByNumValue = true;
-        type NumericSortableToken = DimensionToken | SizeToken | FontSizeToken | LineHeightToken | LetterSpacingToken;
-        const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue) as NumericSortableToken[];
+        const result = sortTokens(tokens, hasParentPrefix, sortByNumValue);
 
-        expect(result[0]?.value?.measure).toBe(expectedFirst);
-        expect(result[1]?.value?.measure).toBe(expectedSecond);
+        expect(result[0]?.value).toMatchObject({ type: 'number', value: expectedFirst });
+        expect(result[1]?.value).toMatchObject({ type: 'number', value: expectedSecond });
       },
     );
 
     it('should sort TokenString by number value', () => {
       const tokens = Array.from(exampleDeviceTokenString.values());
-      const tokenGroups = exampleGroups;
       const hasParentPrefix = true;
       const sortByNumValue = true;
 
-      const result = sortTokens(tokens, tokenGroups, hasParentPrefix, sortByNumValue) as StringToken[];
+      const result = sortTokens(tokens, hasParentPrefix, sortByNumValue);
 
-      expect(result[0].value?.text).toBe('10');
-      expect(result[1].value?.text).toBe('30');
+      expect(result[0].value).toEqual({ type: 'string', value: '10' });
+      expect(result[1].value).toEqual({ type: 'string', value: '30' });
     });
   });
 
@@ -256,84 +231,44 @@ describe('tokenHelper', () => {
     });
   });
 
-  describe('filterExcludedTokens', () => {
-    it('should filter out tokens with "figma-" in their name', () => {
-      const tokens = Array.from(exampleDimensionAndStringTokens.values());
-      const expectedTokens = [
-        exampleDimensionAndStringTokens.get('dimensionRef'),
-        exampleDimensionAndStringTokens.get('stringRef'),
-      ].filter(Boolean) as Token[];
-
-      const filteredTokens = filterExcludedTokens(tokens, []);
-
-      expect(filteredTokens).toStrictEqual(expectedTokens);
-    });
-
-    it('should filter out typography tokens with "Link" in their name', () => {
-      const tokens = Array.from(exampleTypographyTokens.values());
-      const expectedTokens = [exampleTypographyTokens.get('typographyRef1')] as Token[];
-
-      const filteredTokens = filterExcludedTokens(tokens, []);
-
-      expect(filteredTokens).toStrictEqual(expectedTokens);
-    });
-
-    it('should keep tokens that do not match exclusion criteria', () => {
-      const tokens = [
-        exampleDimensionAndStringTokens.get('dimensionRef'),
-        exampleDimensionAndStringTokens.get('stringRef'),
-        exampleTypographyTokens.get('typographyRef1'),
-      ].filter(Boolean) as Token[];
-
-      const filteredTokens = filterExcludedTokens(tokens, []);
-
-      expect(filteredTokens).toStrictEqual(tokens);
-    });
-
-    it('should filter out both figma tokens and Link typography tokens', () => {
-      const tokens = [
-        exampleDimensionAndStringTokens.get('dimensionRef'),
-        exampleDimensionAndStringTokens.get('figmaTokenRef'),
-        exampleTypographyTokens.get('typographyRef1'),
-        exampleTypographyTokens.get('typographyRef2'),
-      ].filter(Boolean) as Token[];
-
-      const filteredTokens = filterExcludedTokens(tokens, []);
-      const expectedTokens = [
-        exampleDimensionAndStringTokens.get('dimensionRef'),
-        exampleTypographyTokens.get('typographyRef1'),
-      ].filter(Boolean) as Token[];
-
-      expect(filteredTokens).toStrictEqual(expectedTokens);
-    });
-  });
-
   describe('getTokenGroup', () => {
     it('should extract the group name from token origin path', () => {
-      const token = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+      const token = exampleDimensionAndStringTokens.get('dimensionRef')!;
       const group = getTokenGroup(token);
 
       expect(group).toBe('grid');
     });
 
     it('should return lowercase group name', () => {
-      const token = {
-        ...exampleDimensionAndStringTokens.get('dimensionRef'),
-        origin: { name: 'Spacing/Large' },
-      } as Token;
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 32, unit: 'px' },
+        { metadata: { originName: 'Spacing/Large' } },
+      );
       const group = getTokenGroup(token);
 
       expect(group).toBe('spacing');
     });
 
     it('should extract first part of path before slash', () => {
-      const token = {
-        ...exampleDimensionAndStringTokens.get('dimensionRef'),
-        origin: { name: 'Group/Subgroup/Token' },
-      } as Token;
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 32, unit: 'px' },
+        { metadata: { originName: 'Group/Subgroup/Token' } },
+      );
       const group = getTokenGroup(token);
 
       expect(group).toBe('group');
+    });
+
+    it('should fall back to the group path when the source has no origin name', () => {
+      const token = createDesignToken(
+        TokenTypeEnum.Dimension,
+        { type: 'number', value: 1, unit: 'px' },
+        { metadata: { groupPath: ['Spacing', 'inner'] } },
+      );
+
+      expect(getTokenGroup(token)).toBe('spacing');
     });
   });
 });

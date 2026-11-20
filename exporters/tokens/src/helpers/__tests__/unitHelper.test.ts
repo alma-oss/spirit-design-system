@@ -1,4 +1,4 @@
-import { Token, TokenType, Unit } from '@supernovaio/sdk-exporters';
+import { type DesignToken, TokenTypeEnum, FontSizeBaseMap } from '../../core/types';
 import { FONT_SIZE_BASE_DEFAULT } from '../../constants';
 import {
   createDefaultFontSizeBaseMap,
@@ -7,9 +7,7 @@ import {
   isPxValue,
   makeRelativeUnit,
   replacePxWithRemUnits,
-  unitToCss,
 } from '../unitHelper';
-import type { FontSizeBaseMap } from '../types';
 
 describe('unitHelper', () => {
   describe('createDefaultFontSizeBaseMap', () => {
@@ -85,60 +83,62 @@ describe('unitHelper', () => {
   });
 
   describe('getFontSizeBaseMap', () => {
-    it('should return empty map when no font-size-base tokens found', () => {
-      const tokens = [
-        {
-          id: '1',
-          name: 'spacing-small',
-          tokenType: TokenType.dimension,
-          value: { measure: 8, unit: Unit.pixels },
-        },
-      ] as unknown as Token[];
+    const dimension = (id: string, name: string, value: number, device?: string): DesignToken => ({
+      id,
+      name,
+      type: TokenTypeEnum.Dimension,
+      value: { type: 'number', value, unit: 'px' },
+      metadata: { groupPath: [], device },
+      source: { adapter: 'test', originalId: id },
+    });
 
-      const result = getFontSizeBaseMap(tokens);
+    it('should read the measure of a font-size-base token that is an alias', () => {
+      const alias: DesignToken = {
+        ...dimension('alias', 'font-size-base', 0),
+        value: { type: 'reference', tokenId: 'base', resolved: { type: 'number', value: 20, unit: 'px' } },
+      };
+
+      expect(getFontSizeBaseMap([alias]).get('mobile')).toBe(20);
+    });
+
+    it('should return empty map when no font-size-base tokens found', () => {
+      const result = getFontSizeBaseMap([dimension('1', 'spacing-small', 8)]);
 
       expect(result.size).toBe(0);
     });
 
     it('should find font-size-base token by name', () => {
-      const tokens = [
-        {
-          id: '1',
-          name: 'font-size-base',
-          tokenType: TokenType.dimension,
-          value: { measure: 16, unit: Unit.pixels },
-        },
-      ] as unknown as Token[];
-
-      const result = getFontSizeBaseMap(tokens);
+      const result = getFontSizeBaseMap([dimension('1', 'font-size-base', 16)]);
 
       expect(result.get('mobile')).toBe(16);
       expect(result.get('tablet')).toBe(16);
       expect(result.get('desktop')).toBe(16);
     });
 
-    it('should find device-specific font-size-base tokens', () => {
-      const tokens = [
-        {
-          id: '1',
-          name: 'font-size-base-mobile',
-          tokenType: TokenType.dimension,
-          propertyValues: { device: 'mobile' },
-          value: { measure: 14, unit: Unit.pixels, referencedTokenId: null },
-        },
-        {
-          id: '2',
-          name: 'font-size-base-desktop',
-          tokenType: TokenType.dimension,
-          propertyValues: { device: 'desktop' },
-          value: { measure: 18, unit: Unit.pixels, referencedTokenId: null },
-        },
-      ] as unknown as Token[];
+    it('should find font-size-base token by origin name', () => {
+      const token = dimension('1', 'base', 16);
+      const result = getFontSizeBaseMap([{ ...token, metadata: { ...token.metadata, originName: 'Font-Size-Base' } }]);
 
-      const result = getFontSizeBaseMap(tokens);
+      expect(result.get('mobile')).toBe(16);
+    });
+
+    it('should find device-specific font-size-base tokens', () => {
+      const result = getFontSizeBaseMap([
+        dimension('1', 'font-size-base-mobile', 14, 'mobile'),
+        dimension('2', 'font-size-base-desktop', 18, 'desktop'),
+      ]);
 
       expect(result.get('mobile')).toBe(14);
       expect(result.get('desktop')).toBe(18);
+    });
+
+    it('should ignore a font-size-base token without a positive number', () => {
+      const result = getFontSizeBaseMap([
+        dimension('1', 'font-size-base', 0),
+        { ...dimension('2', 'font-size-base', 0, 'mobile'), value: { type: 'string', value: '14px' } },
+      ]);
+
+      expect(result.size).toBe(0);
     });
   });
 
@@ -166,22 +166,6 @@ describe('unitHelper', () => {
     it('should handle string values', () => {
       expect(makeRelativeUnit('32', 16)).toBe('2rem');
       expect(makeRelativeUnit('40', 16)).toBe('2.5rem');
-    });
-  });
-
-  describe('unitToCss', () => {
-    it.each([
-      [Unit.percent, '%'],
-      [Unit.pixels, 'px'],
-      [Unit.rem, 'rem'],
-      [Unit.raw, ''],
-      [Unit.ms, 'ms'],
-    ])('should convert %s to "%s"', (unit, expected) => {
-      expect(unitToCss(unit)).toBe(expected);
-    });
-
-    it('should fall back to px for an unknown unit', () => {
-      expect(unitToCss('Unknown' as unknown as Unit)).toBe('px');
     });
   });
 

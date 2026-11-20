@@ -1,5 +1,6 @@
 import { FileHelper } from '@supernovaio/export-helpers';
 import { type OutputTextFile } from '@supernovaio/sdk-exporters';
+import { type OutputFile } from '../../core/types';
 
 export const writeToTextFile = (relativePath: string, fileName: string, content: string): OutputTextFile => {
   return FileHelper.createTextFile({
@@ -8,8 +9,6 @@ export const writeToTextFile = (relativePath: string, fileName: string, content:
     content,
   });
 };
-
-export type OutputFile = { path: string; fileName: string; content: string };
 
 export const textFileWriter = (files: Array<OutputFile>) => {
   return files.map((file) => {

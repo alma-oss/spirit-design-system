@@ -1,23 +1,14 @@
-import { ColorToken, TokenGroup } from '@supernovaio/sdk-exporters';
-import { exampleColorsTokens } from '../../../tests/fixtures/exampleColorTokens';
+import { exampleColorsTokens } from '../../../tests/fixtures/internal-model/exampleColorTokens';
 import { createTokenIndex } from '../../core/tokenIndex';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processColorToken } from '../colorTokenProcessor';
 
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
-
-const tokenGroups: Array<TokenGroup> = exampleGroups;
 const tokenIndex = createTokenIndex([]);
 
 describe('colorTokenProcessor', () => {
   describe('processColorToken', () => {
     it('should process color token', () => {
-      const token = exampleColorsTokens.get('backgroundColorRef') as ColorToken;
+      const token = exampleColorsTokens.get('backgroundColorRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: false,
         tokenIndex,
@@ -30,9 +21,8 @@ describe('colorTokenProcessor', () => {
     });
 
     it('should process color token with js output', () => {
-      const token = exampleColorsTokens.get('backgroundColorRef') as ColorToken;
+      const token = exampleColorsTokens.get('backgroundColorRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: true,
         tokenIndex,

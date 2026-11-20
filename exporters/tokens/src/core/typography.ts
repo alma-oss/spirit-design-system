@@ -1,5 +1,5 @@
-import { type ConcreteTokenValue, resolveValueDeep } from './resolveValue';
-import type { CompositeValue, NumberValue, TokenIndex, TokenValue } from './types';
+import { resolveValueDeep } from './resolveValue';
+import type { CompositeValue, ConcreteTokenValue, NumberValue, TokenIndex, TokenValue } from './types';
 
 /**
  * Reading and rewriting typography values of the internal token model.

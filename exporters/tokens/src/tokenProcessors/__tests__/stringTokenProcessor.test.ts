@@ -1,21 +1,13 @@
-import { StringToken, TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
-import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { exampleDimensionAndStringTokens } from '../../../tests/fixtures/internal-model/exampleDimensionAndStringTokens';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
+import { TokenTypeEnum } from '../../core/types';
 import { processStringToken } from '../stringTokenProcessor';
-
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
-
-const tokenGroups: Array<TokenGroup> = exampleGroups;
 
 describe('stringTokenProcessor', () => {
   describe('processStringToken', () => {
     it('should process string token', () => {
-      const token = exampleDimensionAndStringTokens.get('stringRef') as StringToken;
+      const token = exampleDimensionAndStringTokens.get('stringRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: false,
       };
@@ -26,9 +18,8 @@ describe('stringTokenProcessor', () => {
     });
 
     it('should process string token without parent prefix', () => {
-      const token = exampleDimensionAndStringTokens.get('stringRef') as StringToken;
+      const token = exampleDimensionAndStringTokens.get('stringRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: false,
       };
@@ -39,9 +30,8 @@ describe('stringTokenProcessor', () => {
     });
 
     it('should process string token with js output', () => {
-      const token = exampleDimensionAndStringTokens.get('stringRef') as StringToken;
+      const token = exampleDimensionAndStringTokens.get('stringRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: true,
       };
@@ -52,14 +42,12 @@ describe('stringTokenProcessor', () => {
     });
 
     it('should handle special case values', () => {
-      const token = {
-        id: '1',
-        name: 'grid-columns',
-        tokenType: TokenType.string,
-        value: { text: '12' },
-      } as StringToken;
+      const token = createDesignToken(
+        TokenTypeEnum.String,
+        { type: 'string', value: '12' },
+        { id: '1', name: 'grid-columns' },
+      );
       const ctx = {
-        tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: false,
       };
@@ -67,6 +55,12 @@ describe('stringTokenProcessor', () => {
       const result = processStringToken(token, ctx);
 
       expect(result).toBe('$grid-columns: 12 !default;');
+    });
+
+    it('should return null for a value that is not a string', () => {
+      const token = createDesignToken(TokenTypeEnum.String, { type: 'number', value: 12, unit: '' }, { id: '1' });
+
+      expect(processStringToken(token, { hasParentPrefix: true, hasJsOutput: false })).toBeNull();
     });
   });
 });

@@ -1,8 +1,6 @@
-import { exampleCollectionTokens, expectedCollectionValue } from '../../../tests/fixtures/exampleCollectionTokens';
-import { examplePrefixToken } from '../../../tests/fixtures/examplePrefixToken';
+import { examplePrefixToken } from '../../../tests/fixtures/internal-model/examplePrefixToken';
 import {
   canHexBeShortened,
-  filterColorCollections,
   findAllHexColorsInStringAndNormalize,
   normalizeColor,
   removeAlphaChannel,
@@ -114,12 +112,4 @@ describe('colorHelper', () => {
       });
     },
   );
-
-  describe('filterColorCollections', () => {
-    it('should filter color collections', () => {
-      const tokens = Array.from(exampleCollectionTokens.values());
-
-      expect(filterColorCollections(tokens)).toStrictEqual(expectedCollectionValue);
-    });
-  });
 });

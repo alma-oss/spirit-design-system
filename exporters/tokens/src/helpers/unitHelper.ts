@@ -1,27 +1,7 @@
-import { Token, TokenType } from '@supernovaio/sdk-exporters';
 import { FONT_SIZE_BASE, FONT_SIZE_BASE_DEFAULT, PX_UNIT } from '../constants';
-import { getDeviceAlias } from './deviceHelpers';
-import { readNumericValue } from './numericValueHelper';
 import { pxToRem } from '../converters/pxToRem';
-import { type NumberValue, SOURCE_UNIT } from '../core/types';
-import type { FontSizeBaseMap } from './types';
-
-const UNIT_TO_CSS: Record<string, string> = {
-  [SOURCE_UNIT.percent]: '%',
-  [SOURCE_UNIT.pixels]: PX_UNIT,
-  [SOURCE_UNIT.rem]: 'rem',
-  [SOURCE_UNIT.raw]: '',
-  [SOURCE_UNIT.ms]: 'ms',
-};
-
-/**
- * Converts a source unit name (e.g. Supernova's `Unit.pixels`, "Pixels") to the CSS unit string (e.g. "px").
- * An unknown unit falls back to `px`, the same way Supernova's own `CSSHelper.unitToCSS` did.
- *
- * @param unit - Source unit name, see `SOURCE_UNIT`
- * @returns {string} CSS unit, an empty string for a raw (unit-less) value
- */
-export const unitToCss = (unit: string): string => UNIT_TO_CSS[unit] ?? PX_UNIT;
+import { withResolvedValue } from '../core/resolveToken';
+import { type DesignToken, type NumberValue, TokenTypeEnum, type FontSizeBaseMap } from '../core/types';
 
 /**
  * Creates a default FontSizeBaseMap with the same value for all breakpoints.
@@ -37,24 +17,32 @@ export const createDefaultFontSizeBaseMap = (fontSizeBase: number = FONT_SIZE_BA
   ]);
 };
 
+const FONT_SIZE_BASE_TOKEN_TYPES = [TokenTypeEnum.FontSize, TokenTypeEnum.Dimension];
+
+const readMeasure = (token: DesignToken): number | undefined => {
+  const { value } = withResolvedValue(token);
+
+  return value.type === 'number' ? value.value : undefined;
+};
+
 /**
  * Finds font-size-base token from tokens array
  *
  * @param tokens - Array of tokens to search in
  * @returns {Map<string, number>} FontSizeBaseMap with breakpoint as key and font-size-base value in px as value
  */
-export const getFontSizeBaseMap = (tokens: Token[]): FontSizeBaseMap => {
+export const getFontSizeBaseMap = (tokens: DesignToken[]): FontSizeBaseMap => {
   const fontSizeBaseMap = new Map<string, number>();
 
   const exactFontSizeBase = tokens.find(
     (token) =>
-      (token.tokenType === TokenType.fontSize || token.tokenType === TokenType.dimension) &&
-      (token.name.toLowerCase() === FONT_SIZE_BASE || token.origin?.name?.toLowerCase() === FONT_SIZE_BASE) &&
-      !getDeviceAlias(token),
+      FONT_SIZE_BASE_TOKEN_TYPES.includes(token.type) &&
+      (token.name.toLowerCase() === FONT_SIZE_BASE || token.metadata.originName?.toLowerCase() === FONT_SIZE_BASE) &&
+      !token.metadata.device,
   );
 
   if (exactFontSizeBase) {
-    const { measure } = readNumericValue(exactFontSizeBase);
+    const measure = readMeasure(exactFontSizeBase);
 
     if (typeof measure === 'number' && measure > 0) {
       fontSizeBaseMap.set('mobile', measure);
@@ -67,20 +55,15 @@ export const getFontSizeBaseMap = (tokens: Token[]): FontSizeBaseMap => {
 
   const fontSizeBaseTokens = tokens.filter((token) => {
     const hasFontSizeBaseName =
-      token.name.toLowerCase().includes('font-size-base') ||
-      token.origin?.name?.toLowerCase().includes('font-size-base');
-    const hasDeviceAlias = !!getDeviceAlias(token);
+      token.name.toLowerCase().includes(FONT_SIZE_BASE) ||
+      token.metadata.originName?.toLowerCase().includes(FONT_SIZE_BASE);
 
-    return (
-      (token.tokenType === TokenType.fontSize || token.tokenType === TokenType.dimension) &&
-      hasFontSizeBaseName &&
-      hasDeviceAlias
-    );
+    return FONT_SIZE_BASE_TOKEN_TYPES.includes(token.type) && hasFontSizeBaseName && !!token.metadata.device;
   });
 
   fontSizeBaseTokens.forEach((token) => {
-    const device = getDeviceAlias(token).toLowerCase() || 'mobile';
-    const { measure } = readNumericValue(token);
+    const device = token.metadata.device?.toLowerCase() || 'mobile';
+    const measure = readMeasure(token);
 
     if (typeof measure === 'number' && measure > 0) {
       fontSizeBaseMap.set(device, measure);
