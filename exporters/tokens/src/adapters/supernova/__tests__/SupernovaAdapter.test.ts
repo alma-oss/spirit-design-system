@@ -1,11 +1,14 @@
-import { type Supernova, type Token, type TokenTheme } from '@supernovaio/sdk-exporters';
+import { type DimensionToken, type Supernova, type Token, type TokenTheme } from '@supernovaio/sdk-exporters';
 import { exampleDimensionAndStringTokens } from '../../../../tests/fixtures/exampleDimensionAndStringTokens';
 import { exampleGroups } from '../../../../tests/fixtures/exampleGroups';
 import { exampleTypographyTokens } from '../../../../tests/fixtures/exampleTypographyTokens';
-import { TokenTypeEnum } from '../../../core/types';
+import { CollectionKind, TokenTypeEnum } from '../../../core/types';
+import { splitTokens } from '../../../core/splitTokens';
 import { SupernovaAdapter } from '../SupernovaAdapter';
 
-const exampleThemes = [{ id: 'theme-1', name: 'Dark' } as unknown as TokenTheme];
+const exampleThemes = [
+  { id: 'theme-1', name: 'Dark', overriddenTokens: [{ propertyValues: { collection: 'theme-tokens-id' } }] },
+] as unknown as TokenTheme[];
 
 const createSdk = (tokens = Array.from(exampleDimensionAndStringTokens.values())) => {
   return {
@@ -13,6 +16,7 @@ const createSdk = (tokens = Array.from(exampleDimensionAndStringTokens.values())
       getTokens: jest.fn().mockResolvedValue(tokens),
       getTokenGroups: jest.fn().mockResolvedValue(exampleGroups),
       getTokenThemes: jest.fn().mockResolvedValue(exampleThemes),
+      computeTokensByApplyingThemes: jest.fn((allTokens: Token[]) => allTokens),
     },
   } as unknown as Supernova;
 };
@@ -26,10 +30,104 @@ describe('SupernovaAdapter', () => {
       const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
 
       // string and dimension tokens are mapped so far (see #DS-2335); the internal `figma-` token is excluded.
+      // one token per id, the tokens resolved for a theme or a device are separate
       expect(collection.tokens.map((token) => token.id).sort()).toEqual(['dimensionRef', 'stringRef']);
+      expect(collection.themedTokens.map(({ theme, tokens }) => [theme.name, tokens.length])).toEqual([['Dark', 2]]);
+      expect(collection.themedTokens[0].tokens.every((token) => token.metadata.theme === 'Dark')).toBe(true);
+      expect(collection.deviceTokens).toEqual([]);
       expect(collection.groups).toHaveLength(exampleGroups.length);
-      expect(collection.themes).toEqual([{ id: 'theme-1', name: 'Dark' }]);
+      expect(collection.themes).toEqual([{ id: 'theme-1', name: 'Dark', collection: CollectionKind.Color }]);
+      expect(collection.devices).toEqual([]);
+      expect(collection.tokens.every((token) => token.metadata.collection === CollectionKind.Global)).toBe(true);
+      expect(splitTokens(collection).globalTokens).toHaveLength(2);
       expect(collection.metadata.source).toBe('supernova');
+    });
+
+    it('should keep the resolved device variants with their device, the devices and the unthemed tokens', async () => {
+      const deviceToken = {
+        ...exampleDimensionAndStringTokens.get('dimensionRef'),
+        id: 'spacingDevice',
+        name: 'spacing',
+        propertyValues: { collection: 'device-tokens-id' },
+      } as unknown as Token;
+      const globalToken = exampleDimensionAndStringTokens.get('dimensionRef') as Token;
+      const deviceThemes = [
+        { id: 'device-mobile', name: 'Mobile', codeName: 'mobile', measure: 16 },
+        { id: 'device-desktop', name: 'Desktop', codeName: 'desktop', measure: 32 },
+      ].map(({ measure, ...theme }) => ({
+        ...theme,
+        measure,
+        overriddenTokens: [{ propertyValues: { collection: 'device-tokens-id' } }],
+      }));
+      const sdk = {
+        tokens: {
+          getTokens: jest.fn().mockResolvedValue([globalToken, deviceToken]),
+          getTokenGroups: jest.fn().mockResolvedValue(exampleGroups),
+          getTokenThemes: jest.fn().mockResolvedValue([...exampleThemes, ...deviceThemes]),
+          // a device theme gives the tokens of the devices collection its own value
+          computeTokensByApplyingThemes: jest.fn(
+            (_tokens: Token[], collections: Token[], [theme]: Array<TokenTheme & { measure?: number }>) =>
+              theme.measure === undefined
+                ? collections
+                : collections.map((token) => ({
+                    ...token,
+                    value: { ...(token as DimensionToken).value, measure: theme.measure },
+                  })),
+          ),
+        },
+      } as unknown as Supernova;
+
+      const collection = await new SupernovaAdapter(sdk).fetchTokens({
+        source: { designSystemId: 'ds1', versionId: 'v1' },
+      });
+
+      expect(
+        collection.deviceTokens.map(({ id, metadata, value }) => [id, metadata.device, metadata.collection, value]),
+      ).toEqual([
+        ['spacingDevice', 'mobile', CollectionKind.Devices, { type: 'number', value: 16, unit: 'px' }],
+        ['spacingDevice', 'desktop', CollectionKind.Devices, { type: 'number', value: 32, unit: 'px' }],
+      ]);
+      expect(collection.devices).toEqual([
+        { name: 'mobile', themeId: 'device-mobile' },
+        { name: 'desktop', themeId: 'device-desktop' },
+      ]);
+      expect(collection.themes.map(({ id, collection: kind }) => [id, kind])).toEqual([
+        ['theme-1', CollectionKind.Color],
+        ['device-mobile', CollectionKind.Devices],
+        ['device-desktop', CollectionKind.Devices],
+      ]);
+      // the original tokens are not resolved for a device
+      expect(collection.tokens.map(({ id, metadata }) => [id, metadata.device, metadata.theme])).toEqual([
+        ['dimensionRef', undefined, undefined],
+        ['spacingDevice', undefined, undefined],
+      ]);
+      expect(collection.themedTokens.map(({ theme }) => theme.id)).toEqual(['theme-1']);
+    });
+
+    it('should fetch the native tokens and groups with the themes resolved by the SDK', async () => {
+      const sdk = createSdk();
+      const adapter = new SupernovaAdapter(sdk);
+
+      const { tokens, tokenGroups, resolved } = await adapter.fetchResolvedTokens({
+        source: { designSystemId: 'ds1', versionId: 'v1' },
+      });
+
+      expect(tokens).toHaveLength(exampleDimensionAndStringTokens.size);
+      expect(tokenGroups).toBe(exampleGroups);
+      expect(resolved.themes.map(({ theme }) => theme.name)).toEqual(['Dark']);
+      expect(sdk.tokens.computeTokensByApplyingThemes).toHaveBeenCalledTimes(1);
+    });
+
+    it('should filter the native tokens by brandId when provided', async () => {
+      const adapter = new SupernovaAdapter(createSdk());
+
+      const { tokens, tokenGroups } = await adapter.fetchResolvedTokens({
+        source: { designSystemId: 'ds1', versionId: 'v1' },
+        filters: { brandId: 'brand-that-does-not-exist' },
+      });
+
+      expect(tokens).toHaveLength(0);
+      expect(tokenGroups).toHaveLength(0);
     });
 
     it('should map typography tokens and keep excluding Link and Italic styles', async () => {
