@@ -1,6 +1,6 @@
 import { ShadowToken, TokenGroup } from '@supernovaio/sdk-exporters';
 import type { TokenIndex } from '../core/types';
-import { formatTokenStyleByOutput, getTokenGroup, tokenVariableName } from '../helpers/tokenHelper';
+import { formatTokenStyleByOutput, getOriginName, getTokenGroup, tokenVariableName } from '../helpers/tokenHelper';
 import { transformColorsToVariables, findAllHexColorsInStringAndNormalize } from '../helpers/colorHelper';
 import { formatLayerSuffix } from '../helpers/stringHelper';
 import { mapToken } from '../adapters/supernova/mappers/tokenMapper';
@@ -27,7 +27,7 @@ const getDeviceKey = (token: ShadowToken): string => {
   }
 
   const tokenName = token.name?.toLowerCase() || '';
-  const originName = token.origin?.name?.toLowerCase() || '';
+  const originName = getOriginName(token) || '';
   const combinedName = `${tokenName} ${originName}`;
 
   if (combinedName.includes('desktop')) {

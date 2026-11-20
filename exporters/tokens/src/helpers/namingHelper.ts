@@ -1,7 +1,7 @@
 import type { DesignToken } from '../core/types';
 import { getDeviceTokenValue } from './deviceHelpers';
 import { handleInvariantTokenAlias } from './specialCaseHelper';
-import { toCamelCase, toParamCase } from './stringHelper';
+import { toOutputName, toParamCase } from './stringHelper';
 import type { NameableToken } from './types';
 
 export class TokenNamingError extends Error {
@@ -76,5 +76,5 @@ export const getAliasName = (name: string, isColor: boolean, hasJsOutput: boolea
 
   const nonNumericPart = handleInvariantTokenAlias(name.toLowerCase());
 
-  return hasJsOutput ? toCamelCase(nonNumericPart) : nonNumericPart;
+  return toOutputName(nonNumericPart, hasJsOutput);
 };
