@@ -1,3 +1,4 @@
+import { type CollectionKind } from './TokenCollection';
 import type { TokenValue } from './TokenValue';
 
 /**
@@ -25,6 +26,8 @@ export enum TokenTypeEnum {
 
 export type TokenMetadata = {
   brandId?: string;
+  /** Kind of the collection the token belongs to. */
+  collection?: CollectionKind;
   theme?: string;
   /** e.g. 'mobile', 'tablet', 'desktop'. Adapter-resolved, source-specific detection. */
   device?: string;

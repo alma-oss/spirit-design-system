@@ -14,6 +14,9 @@ type NumericValueToken = { value?: { measure?: number; unit?: unknown } };
  * @param token
  */
 export const readNumericValue = (token: object): NumericValue => {
+  // TODO: Accept a `DesignToken` and drop the cast once the pipeline reads the source-neutral model (DS-2335).
+  // Typed as `object` to keep this helper free of any source SDK type: a source's token union (e.g. Supernova's
+  // `Token`) is not assignable to `NumericValueToken`, so the token is narrowed here instead of at every call site.
   const { value } = token as NumericValueToken;
 
   return { measure: value?.measure, unit: value?.unit };

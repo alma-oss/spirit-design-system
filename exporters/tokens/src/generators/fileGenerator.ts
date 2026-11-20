@@ -1,13 +1,4 @@
-import {
-  DimensionToken,
-  FontSizeToken,
-  LineHeightToken,
-  Supernova,
-  Token,
-  TokenGroup,
-  TokenTheme,
-  TokenType,
-} from '@supernovaio/sdk-exporters';
+import { Token, TokenGroup, TokenTheme } from '@supernovaio/sdk-exporters';
 import {
   commonThemedFilesData,
   devicesFilesData,
@@ -15,111 +6,49 @@ import {
   nonThemedFilesData,
   themedFilesData,
 } from '../config/fileConfig';
-import { DEVICES_DIRECTORY, GLOBAL_DIRECTORY, JS_DIRECTORY, SCSS_DIRECTORY, THEMES_DIRECTORY } from '../constants';
-import { indentAndFormat } from '../formatters/stylesFormatter';
 import {
-  filterDeviceCollections,
-  filterGlobalCollections,
-  filterThemesByCollection,
-  getCollectionId,
-} from '../helpers/collectionsHelper';
-import { filterColorCollections } from '../helpers/colorHelper';
-import { getDeviceAlias, getDeviceThemes } from '../helpers/deviceHelpers';
-import { toCamelCase } from '../helpers/stringHelper';
+  DEVICES_DIRECTORY,
+  GLOBAL_DIRECTORY,
+  INDEX_SCSS_FILE,
+  INDEX_TS_FILE,
+  JS_DIRECTORY,
+  SCSS_DIRECTORY,
+  THEMES_DIRECTORY,
+  THEMES_SCSS_FILE,
+  TOKENS_SCSS_FILE,
+} from '../constants';
+import { indentAndFormat } from '../formatters/stylesFormatter';
+import type { ResolvedTokens } from '../adapters/supernova/themeResolution';
+import { buildDeviceDimensionMap } from '../helpers/deviceDimensionHelper';
+import { toCamelCase, toOutputName } from '../helpers/stringHelper';
 import { getFontSizeBaseMap } from '../helpers/unitHelper';
 import type { FontSizeBaseMap } from '../helpers/types';
-import { tokenVariableName } from '../helpers/tokenHelper';
 import { generateFileContent } from './contentGenerator';
-import {
-  type DeviceDimensionEntries,
-  type DeviceDimensionMap,
-  type DeviceDimensionValue,
-  SOURCE_UNIT,
-} from '../core/types';
+import { type DeviceDimensionMap } from '../core/types';
 import { type OutputFile } from '../writers/fileWriter';
 
-const isDeviceTypographyUnit = (unit: unknown): unit is DeviceDimensionValue['unit'] => {
-  return unit === SOURCE_UNIT.pixels || unit === SOURCE_UNIT.percent || unit === SOURCE_UNIT.rem;
+/** The syntax a file is generated in: SCSS by default, JS (TypeScript) with `hasJsOutput`. */
+type OutputSyntaxOptions = { hasJsOutput?: boolean };
+
+type GenerateFilesOptions = {
+  tokens: Array<Token>;
+  mappedTokens: Map<string, Token>;
+  tokenGroups: Array<TokenGroup>;
+  filesData: FileData[];
+  deviceDimensions?: DeviceDimensionMap;
+  hasJsOutput?: boolean;
+  fontSizeBaseMap?: FontSizeBaseMap;
 };
 
-const toTypographyUnit = (unit: unknown): DeviceDimensionValue['unit'] | null => {
-  return isDeviceTypographyUnit(unit) ? unit : null;
-};
-
-const buildDeviceDimensionMap = (tokens: Token[], tokenGroups: Array<TokenGroup>): DeviceDimensionMap => {
-  return tokens.reduce<DeviceDimensionMap>((accumulator, token) => {
-    const device = getDeviceAlias(token).toLowerCase();
-    let measure: number | undefined;
-    let unit: DeviceDimensionValue['unit'] | null = null;
-
-    if (![TokenType.dimension, TokenType.fontSize, TokenType.lineHeight].includes(token.tokenType)) {
-      return accumulator;
-    }
-
-    if (!device) {
-      return accumulator;
-    }
-
-    switch (token.tokenType) {
-      case TokenType.dimension: {
-        const t = token as DimensionToken;
-        measure = t.value?.measure;
-        unit = toTypographyUnit(t.value?.unit);
-        break;
-      }
-
-      case TokenType.fontSize: {
-        const t = token as FontSizeToken;
-        measure = t.value?.measure;
-        unit = toTypographyUnit(t.value?.unit);
-        break;
-      }
-
-      case TokenType.lineHeight: {
-        const t = token as LineHeightToken;
-        measure = t.value?.measure;
-        unit = toTypographyUnit(t.value?.unit);
-        break;
-      }
-
-      default:
-        return accumulator;
-    }
-
-    if (measure === undefined || !unit) {
-      return accumulator;
-    }
-
-    const variableNameWithDeviceSuffix = tokenVariableName(token, tokenGroups, true);
-    const baseVariableName = variableNameWithDeviceSuffix.endsWith(`-${device}`)
-      ? variableNameWithDeviceSuffix.slice(0, -(device.length + 1))
-      : variableNameWithDeviceSuffix;
-    const originKey = token.origin?.name?.toLowerCase();
-
-    const deviceValues: DeviceDimensionEntries = accumulator.get(baseVariableName) || {};
-    deviceValues[device] = {
-      measure,
-      unit,
-    };
-
-    accumulator.set(baseVariableName, deviceValues);
-    if (originKey) {
-      accumulator.set(originKey, deviceValues);
-    }
-
-    return accumulator;
-  }, new Map<string, DeviceDimensionEntries>());
-};
-
-export const generateFiles = (
-  tokens: Array<Token>,
-  mappedTokens: Map<string, Token>,
-  tokenGroups: Array<TokenGroup>,
-  filesData: FileData[],
-  deviceDimensions?: DeviceDimensionMap,
-  hasJsOutput: boolean = false,
-  fontSizeBaseMap?: FontSizeBaseMap,
-) => {
+export const generateFiles = ({
+  tokens,
+  mappedTokens,
+  tokenGroups,
+  filesData,
+  deviceDimensions,
+  hasJsOutput = false,
+  fontSizeBaseMap,
+}: GenerateFilesOptions) => {
   return filesData.map((fileData) => {
     const fileContent = generateFileContent({
       tokens,
@@ -130,7 +59,7 @@ export const generateFiles = (
       deviceDimensions,
       fontSizeBaseMapOverride: fontSizeBaseMap,
     });
-    const fileName = hasJsOutput ? toCamelCase(fileData.fileName) : fileData.fileName;
+    const fileName = toOutputName(fileData.fileName, hasJsOutput);
 
     return {
       fileName,
@@ -139,7 +68,10 @@ export const generateFiles = (
   });
 };
 
-export const generateBarrelFile = (files: { fileName: string; content: string }[], hasJsOutput: boolean = false) => {
+export const generateBarrelFile = (
+  files: { fileName: string; content: string }[],
+  { hasJsOutput = false }: OutputSyntaxOptions = {},
+) => {
   return `${files
     .map((file) => {
       const fileExtension = hasJsOutput ? 'ts' : 'scss';
@@ -150,21 +82,28 @@ export const generateBarrelFile = (files: { fileName: string; content: string }[
     .sort()
     .join('\n')}\n`;
 };
+
 export const jsImportStatement = (name: string) => {
   return `import * as ${toCamelCase(name)} from './${name}';`;
 };
 
 export const scssImportStatement = (name: string) => `@use '${THEMES_DIRECTORY}/${name}';`;
 
-export const prepareImportStatementCallback = (hasJsOutput: boolean) => {
+export const prepareImportStatementCallback = ({ hasJsOutput = false }: OutputSyntaxOptions = {}) => {
   return (theme: TokenTheme) => (hasJsOutput ? jsImportStatement(theme.name) : scssImportStatement(theme.name));
 };
 
-export const generateRootThemesFileImports = (themes: TokenTheme[], hasJsOutput: boolean): string => {
-  return themes.map(prepareImportStatementCallback(hasJsOutput)).join('\n');
+export const generateRootThemesFileImports = (
+  themes: TokenTheme[],
+  { hasJsOutput = false }: OutputSyntaxOptions = {},
+): string => {
+  return themes.map(prepareImportStatementCallback({ hasJsOutput })).join('\n');
 };
 
-export const generateRootThemesFileContent = (themes: TokenTheme[], hasJsOutput: boolean): string => {
+export const generateRootThemesFileContent = (
+  themes: TokenTheme[],
+  { hasJsOutput = false }: OutputSyntaxOptions = {},
+): string => {
   return themes
     .map((theme) => {
       const variables = `variables: meta.module-variables(${theme.name}),\n`;
@@ -177,9 +116,12 @@ export const generateRootThemesFileContent = (themes: TokenTheme[], hasJsOutput:
     .join('\n');
 };
 
-export const generateThemesRootFile = (themes: TokenTheme[], hasJsOutput: boolean = false): string => {
-  const imports = generateRootThemesFileImports(themes, hasJsOutput);
-  const themesContent = generateRootThemesFileContent(themes, hasJsOutput);
+export const generateThemesRootFile = (
+  themes: TokenTheme[],
+  { hasJsOutput = false }: OutputSyntaxOptions = {},
+): string => {
+  const imports = generateRootThemesFileImports(themes, { hasJsOutput });
+  const themesContent = generateRootThemesFileContent(themes, { hasJsOutput });
   const defaultThemeNote = '// The first theme is the default theme, as the left column in the Figma table.';
   const stylesObjectWrapper = hasJsOutput ? 'export const themes = {\n' : '$themes: (\n';
   const sassMetaImport = hasJsOutput ? '' : "@use 'sass:meta';\n";
@@ -188,246 +130,170 @@ export const generateThemesRootFile = (themes: TokenTheme[], hasJsOutput: boolea
   return indentAndFormat(content, hasJsOutput);
 };
 
-export const generateOutputFilesByThemes = async (
-  tokens: Token[],
+type GenerationContext = {
+  mappedTokens: Map<string, Token>;
+  tokenGroups: TokenGroup[];
+  deviceDimensions: DeviceDimensionMap;
+  fontSizeBaseMap: FontSizeBaseMap;
+};
+
+/**
+ * Relative path of a directory in the output, always with a trailing slash.
+ *
+ * @param root - `SCSS_DIRECTORY` or `JS_DIRECTORY`
+ * @param segments - Directories inside of the root
+ */
+const outputPath = (root: string, ...segments: string[]): string => `./${[root, ...segments].join('/')}/`;
+const scssPath = (...segments: string[]): string => outputPath(SCSS_DIRECTORY, ...segments);
+const jsPath = (...segments: string[]): string => outputPath(JS_DIRECTORY, ...segments);
+
+/**
+ * Generates the files of one set of tokens in both syntaxes, SCSS and TypeScript.
+ *
+ * @param tokens
+ * @param filesData
+ * @param context
+ */
+const generateFilesInBothSyntaxes = (tokens: Token[], filesData: FileData[], context: GenerationContext) => {
+  const options = { tokens, filesData, ...context };
+
+  return {
+    scssFiles: generateFiles(options),
+    tsFiles: generateFiles({ ...options, hasJsOutput: true }),
+  };
+};
+
+type GeneratedFile = { fileName: string; content: string };
+
+/**
+ * Output files of generated files: SCSS partials with the `_` prefix, TypeScript files without it.
+ *
+ * @param files
+ * @param path
+ * @param syntax
+ */
+const toOutputFiles = (files: GeneratedFile[], path: string, syntax: 'scss' | 'ts'): OutputFile[] =>
+  files.map(({ fileName, content }) => ({
+    path,
+    fileName: syntax === 'scss' ? `_${fileName}.scss` : `${fileName}.ts`,
+    content,
+  }));
+
+/**
+ * Output files of one set of tokens: the files themselves and a barrel file of each syntax.
+ *
+ * @param files
+ * @param files.scssFiles
+ * @param files.tsFiles
+ * @param scssDirectory
+ * @param jsDirectory
+ */
+const toOutputFilesWithBarrels = (
+  { scssFiles, tsFiles }: ReturnType<typeof generateFilesInBothSyntaxes>,
+  scssDirectory: string,
+  jsDirectory: string,
+): OutputFile[] => [
+  ...toOutputFiles(scssFiles, scssDirectory, 'scss'),
+  ...toOutputFiles(tsFiles, jsDirectory, 'ts'),
+  { path: scssDirectory, fileName: INDEX_SCSS_FILE, content: generateBarrelFile(scssFiles) },
+  {
+    path: jsDirectory,
+    fileName: INDEX_TS_FILE,
+    content: generateBarrelFile(tsFiles, { hasJsOutput: true }),
+  },
+];
+
+const generateGlobalFiles = (globalTokens: Token[], context: GenerationContext): OutputFile[] =>
+  toOutputFilesWithBarrels(
+    generateFilesInBothSyntaxes(globalTokens, nonThemedFilesData, context),
+    scssPath(GLOBAL_DIRECTORY),
+    jsPath(GLOBAL_DIRECTORY),
+  );
+
+/**
+ * Root barrel files that re-export the directories, the devices only when there are any.
+ *
+ * @param hasDevices
+ */
+const generateRootBarrelFiles = (hasDevices: boolean): OutputFile[] => {
+  const directories = [...(hasDevices ? [DEVICES_DIRECTORY] : []), GLOBAL_DIRECTORY, THEMES_DIRECTORY].map(
+    (directory) => ({ fileName: directory, content: '' }),
+  );
+
+  return [
+    { path: scssPath(), fileName: TOKENS_SCSS_FILE, content: generateBarrelFile(directories) },
+    {
+      path: jsPath(),
+      fileName: INDEX_TS_FILE,
+      content: generateBarrelFile(directories, { hasJsOutput: true }),
+    },
+  ];
+};
+
+const generateThemeFiles = (themes: ResolvedTokens['themes'], context: GenerationContext): OutputFile[] =>
+  themes.flatMap(({ theme, tokens }) =>
+    toOutputFilesWithBarrels(
+      generateFilesInBothSyntaxes(tokens, themedFilesData, context),
+      scssPath(THEMES_DIRECTORY, theme.name),
+      jsPath(THEMES_DIRECTORY, theme.name),
+    ),
+  );
+
+/**
+ * The root themes file and the files common to all themes.
+ *
+ * @param themes
+ * @param colorTokens
+ * @param context
+ */
+const generateCommonThemeFiles = (
+  themes: ResolvedTokens['themes'],
+  colorTokens: Token[],
+  context: GenerationContext,
+): OutputFile[] => {
+  const themeList = themes.map(({ theme }) => theme);
+  const { scssFiles, tsFiles } = generateFilesInBothSyntaxes(colorTokens, commonThemedFilesData, context);
+  const scssThemesPath = scssPath(THEMES_DIRECTORY);
+  const jsThemesPath = jsPath(THEMES_DIRECTORY);
+  const jsThemesFileContent = [
+    generateThemesRootFile(themeList, { hasJsOutput: true }),
+    generateBarrelFile(tsFiles, { hasJsOutput: true }),
+  ].join('\n');
+
+  return [
+    { path: scssPath(), fileName: THEMES_SCSS_FILE, content: generateThemesRootFile(themeList) },
+    { path: jsThemesPath, fileName: INDEX_TS_FILE, content: jsThemesFileContent },
+    { path: scssThemesPath, fileName: INDEX_SCSS_FILE, content: generateBarrelFile(scssFiles) },
+    ...toOutputFiles(scssFiles, scssThemesPath, 'scss'),
+    ...toOutputFiles(tsFiles, jsThemesPath, 'ts'),
+  ];
+};
+
+const generateDeviceFiles = (deviceTokens: Token[], context: GenerationContext): OutputFile[] =>
+  toOutputFilesWithBarrels(
+    generateFilesInBothSyntaxes(deviceTokens, devicesFilesData, context),
+    scssPath(DEVICES_DIRECTORY),
+    jsPath(DEVICES_DIRECTORY),
+  );
+
+export const generateOutputFilesByThemes = (
   mappedTokens: Map<string, Token>,
   tokenGroups: TokenGroup[],
-  themes: TokenTheme[],
-  sdk: Supernova,
-): Promise<Array<OutputFile>> => {
-  const outputFiles: Array<OutputFile> = [];
-  const filteredColorCollections = filterColorCollections(tokens);
-  const filteredDeviceCollections = filterDeviceCollections(tokens);
-  const filteredGlobalCollections = filterGlobalCollections(tokens);
-  const deviceCollectionId = getCollectionId(filteredDeviceCollections);
-
-  // themes from color collections and omits device themes
-  const filteredThemes = filterThemesByCollection(themes, deviceCollectionId, true);
-
-  // themes from device collections
-  const filteredDevices = filterThemesByCollection(themes, deviceCollectionId, false);
-
-  // Compute themed tokens for all themes in parallel
-  const allThemes = await Promise.all(
-    filteredThemes.map(async (theme) => {
-      const themedTokens = sdk.tokens.computeTokensByApplyingThemes(tokens, filteredColorCollections, [theme]);
-
-      return { themedTokens, theme };
-    }),
-  );
-
-  // Compute themed tokens for all devices in parallel
-  const allDevices = await Promise.all(
-    filteredDevices.map(async (theme) => {
-      const deviceTokens = sdk.tokens.computeTokensByApplyingThemes(tokens, filteredDeviceCollections, [theme]);
-
-      return { deviceTokens, theme };
-    }),
-  );
-
-  const deviceTokens: Token[] = getDeviceThemes(allDevices);
-  const deviceDimensions = buildDeviceDimensionMap(deviceTokens, tokenGroups);
-  const fontSizeBaseMap = getFontSizeBaseMap(deviceTokens);
-
-  // Generate global files for non-themed tokens
-  const globalFiles = generateFiles(
-    filteredGlobalCollections,
+  { globalTokens, colorTokens, themes, deviceTokens }: ResolvedTokens,
+): Array<OutputFile> => {
+  const context: GenerationContext = {
     mappedTokens,
     tokenGroups,
-    nonThemedFilesData,
-    deviceDimensions,
-    false,
-    fontSizeBaseMap,
-  );
-  const globalJsFiles = generateFiles(
-    filteredGlobalCollections,
-    mappedTokens,
-    tokenGroups,
-    nonThemedFilesData,
-    deviceDimensions,
-    true,
-    fontSizeBaseMap,
-  );
-  const globalBarrelFile = generateBarrelFile(globalFiles);
-  const globalJsBarrelFile = generateBarrelFile(globalJsFiles, true);
-  const forwardDevices = deviceTokens.length > 0 ? `@forward '${DEVICES_DIRECTORY}';\n` : '';
-  const exportDevices = deviceTokens.length > 0 ? `export * from './${DEVICES_DIRECTORY}';\n` : '';
+    deviceDimensions: buildDeviceDimensionMap(deviceTokens, tokenGroups),
+    fontSizeBaseMap: getFontSizeBaseMap(deviceTokens),
+  };
+  const hasDevices = deviceTokens.length > 0;
 
-  outputFiles.push(
-    ...globalFiles.map((file) => ({
-      path: `./${SCSS_DIRECTORY}/${GLOBAL_DIRECTORY}`,
-      fileName: `_${file.fileName}.scss`,
-      content: file.content,
-    })),
-    ...globalJsFiles.map((file) => ({
-      path: `./${JS_DIRECTORY}/${GLOBAL_DIRECTORY}/`,
-      fileName: `${file.fileName}.ts`,
-      content: file.content,
-    })),
-  );
-  outputFiles.push({
-    path: `./${SCSS_DIRECTORY}/${GLOBAL_DIRECTORY}/`,
-    fileName: 'index.scss',
-    content: globalBarrelFile,
-  });
-  outputFiles.push({
-    path: `./${JS_DIRECTORY}/${GLOBAL_DIRECTORY}/`,
-    fileName: 'index.ts',
-    content: globalJsBarrelFile,
-  });
-  outputFiles.push({
-    path: `./${SCSS_DIRECTORY}/`,
-    fileName: '@tokens.scss',
-    content: `${forwardDevices}@forward '${GLOBAL_DIRECTORY}';\n@forward '${THEMES_DIRECTORY}';\n`,
-  });
-  outputFiles.push({
-    path: `./${JS_DIRECTORY}/`,
-    fileName: 'index.ts',
-    content: `${exportDevices}export * from './${GLOBAL_DIRECTORY}';\nexport * from './${THEMES_DIRECTORY}';\n`,
-  });
-
-  // Generate files for each theme
-  for (const { themedTokens, theme } of allThemes) {
-    const themeFiles = generateFiles(
-      themedTokens,
-      mappedTokens,
-      tokenGroups,
-      themedFilesData,
-      deviceDimensions,
-      false,
-      fontSizeBaseMap,
-    );
-    const themeTsFiles = generateFiles(
-      themedTokens,
-      mappedTokens,
-      tokenGroups,
-      themedFilesData,
-      deviceDimensions,
-      true,
-      fontSizeBaseMap,
-    );
-    const themeBarrelFile = generateBarrelFile(themeFiles);
-    const themeTsBarrelFile = generateBarrelFile(themeTsFiles, true);
-    outputFiles.push(
-      ...themeFiles.map((file) => ({
-        path: `./${SCSS_DIRECTORY}/${THEMES_DIRECTORY}/${theme.name}/`,
-        fileName: `_${file.fileName}.scss`,
-        content: file.content,
-      })),
-      ...themeTsFiles.map((file) => ({
-        path: `./${JS_DIRECTORY}/${THEMES_DIRECTORY}/${theme.name}/`,
-        fileName: `${file.fileName}.ts`,
-        content: file.content,
-      })),
-    );
-    outputFiles.push({
-      path: `./${SCSS_DIRECTORY}/${THEMES_DIRECTORY}/${theme.name}/`,
-      fileName: 'index.scss',
-      content: themeBarrelFile,
-    });
-    outputFiles.push({
-      path: `./${JS_DIRECTORY}/${THEMES_DIRECTORY}/${theme.name}/`,
-      fileName: 'index.ts',
-      content: themeTsBarrelFile,
-    });
-  }
-
-  // Generate root themes file
-  const rootThemesFileContent = generateThemesRootFile(filteredThemes);
-  const rootTsThemesFileContent = generateThemesRootFile(filteredThemes, true);
-  const commonThemedScssFiles = generateFiles(
-    filteredColorCollections,
-    mappedTokens,
-    tokenGroups,
-    commonThemedFilesData,
-    deviceDimensions,
-    false,
-    fontSizeBaseMap,
-  );
-  const commonThemedTsFiles = generateFiles(
-    filteredColorCollections,
-    mappedTokens,
-    tokenGroups,
-    commonThemedFilesData,
-    deviceDimensions,
-    true,
-    fontSizeBaseMap,
-  );
-  const rootScssThemesFile = generateBarrelFile(commonThemedScssFiles);
-  const rootJsThemesFile = generateBarrelFile(commonThemedTsFiles, true);
-
-  outputFiles.push({ path: `./${SCSS_DIRECTORY}/`, fileName: '@themes.scss', content: rootThemesFileContent });
-  outputFiles.push({
-    path: `./${JS_DIRECTORY}/${THEMES_DIRECTORY}`,
-    fileName: 'index.ts',
-    content: `${rootTsThemesFileContent}\n${rootJsThemesFile}`,
-  });
-  outputFiles.push({
-    path: `./${SCSS_DIRECTORY}/${THEMES_DIRECTORY}`,
-    fileName: 'index.scss',
-    content: rootScssThemesFile,
-  });
-  outputFiles.push(
-    ...commonThemedScssFiles.map((file) => ({
-      path: `./${SCSS_DIRECTORY}/${THEMES_DIRECTORY}`,
-      fileName: `_${file.fileName}.scss`,
-      content: file.content,
-    })),
-  );
-  outputFiles.push(
-    ...commonThemedTsFiles.map((file) => ({
-      path: `./${JS_DIRECTORY}/${THEMES_DIRECTORY}`,
-      fileName: `${file.fileName}.ts`,
-      content: file.content,
-    })),
-  );
-
-  // Generate a file for device collection
-  if (deviceTokens.length > 0) {
-    const deviceFile = generateFiles(
-      deviceTokens,
-      mappedTokens,
-      tokenGroups,
-      devicesFilesData,
-      deviceDimensions,
-      false,
-      fontSizeBaseMap,
-    );
-    const deviceTsFile = generateFiles(
-      deviceTokens,
-      mappedTokens,
-      tokenGroups,
-      devicesFilesData,
-      deviceDimensions,
-      true,
-      fontSizeBaseMap,
-    );
-    const deviceBarrelFile = generateBarrelFile(deviceFile);
-    const deviceTsBarrelFile = generateBarrelFile(deviceTsFile, true);
-
-    outputFiles.push(
-      ...deviceFile.map((file) => ({
-        path: `./${SCSS_DIRECTORY}/${DEVICES_DIRECTORY}/`,
-        fileName: `_${file.fileName}.scss`,
-        content: file.content,
-      })),
-      ...deviceTsFile.map((file) => ({
-        path: `./${JS_DIRECTORY}/${DEVICES_DIRECTORY}/`,
-        fileName: `${file.fileName}.ts`,
-        content: file.content,
-      })),
-    );
-    outputFiles.push({
-      path: `./${SCSS_DIRECTORY}/${DEVICES_DIRECTORY}/`,
-      fileName: 'index.scss',
-      content: deviceBarrelFile,
-    });
-    outputFiles.push({
-      path: `./${JS_DIRECTORY}/${DEVICES_DIRECTORY}/`,
-      fileName: 'index.ts',
-      content: deviceTsBarrelFile,
-    });
-  }
-
-  return outputFiles;
+  return [
+    ...generateGlobalFiles(globalTokens, context),
+    ...generateRootBarrelFiles(hasDevices),
+    ...generateThemeFiles(themes, context),
+    ...generateCommonThemeFiles(themes, colorTokens, context),
+    ...(hasDevices ? generateDeviceFiles(deviceTokens, context) : []),
+  ];
 };
