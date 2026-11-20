@@ -27,6 +27,14 @@ const toCodeSafeName = (parts: string | string[], convertCase: (value: string) =
 
 export const toCamelCase = (name: string): string => toCodeSafeName(name, camelCase);
 
+/**
+ * Name of a file, a key or a variable in the output: camel case in the JS output, as it is in the SCSS output.
+ *
+ * @param name
+ * @param hasJsOutput
+ */
+export const toOutputName = (name: string, hasJsOutput: boolean): string => (hasJsOutput ? toCamelCase(name) : name);
+
 export const toParamCase = (parts: string | string[]): string => toCodeSafeName(parts, kebabCase);
 
 export const formatLayerSuffix = (layer: number): string => `-${layer.toString().padStart(2, '0')}`;
