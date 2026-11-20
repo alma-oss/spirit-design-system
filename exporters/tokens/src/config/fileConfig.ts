@@ -1,13 +1,13 @@
-import type { Token } from '@supernovaio/sdk-exporters';
-import { SOURCE_TOKEN_TYPE, type SourceTokenType } from '../core/types';
-import { COLOR_CSS_VARIABLE_PREFIX, TOKEN_COLLECTION_THEMES_NAME } from '../constants';
+import { COLOR_CSS_VARIABLE_PREFIX } from '../constants';
+import { CollectionKind, type DesignToken, TokenTypeEnum } from '../core/types';
 import { getShadowLengthTokens } from '../filters/shadowLengthTokens';
 
 export type FileData = {
   fileName: string;
-  tokenTypes: SourceTokenType[];
-  collectionName?: string;
-  prepareTokens?: (tokens: Token[]) => Token[];
+  tokenTypes: TokenTypeEnum[];
+  /** Keeps the tokens of this collection only. */
+  collection?: CollectionKind;
+  prepareTokens?: (tokens: DesignToken[]) => DesignToken[];
   groupNames?: string[];
   excludeGroupNames?: string[] | null;
   mixinName?: string | null;
@@ -22,7 +22,7 @@ export type FileData = {
 export const nonThemedFilesData: FileData[] = [
   {
     fileName: 'borders',
-    tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.borderWidth],
+    tokenTypes: [TokenTypeEnum.Dimension, TokenTypeEnum.BorderWidth],
     groupNames: ['Border'],
     hasStylesObject: false,
     sortByNumValue: true,
@@ -30,50 +30,50 @@ export const nonThemedFilesData: FileData[] = [
   {
     fileName: 'other',
     tokenTypes: [
-      SOURCE_TOKEN_TYPE.dimension,
-      SOURCE_TOKEN_TYPE.string,
-      SOURCE_TOKEN_TYPE.space,
-      SOURCE_TOKEN_TYPE.radius,
-      SOURCE_TOKEN_TYPE.border,
-      SOURCE_TOKEN_TYPE.borderWidth,
-      SOURCE_TOKEN_TYPE.size,
+      TokenTypeEnum.Dimension,
+      TokenTypeEnum.String,
+      TokenTypeEnum.Space,
+      TokenTypeEnum.Radius,
+      TokenTypeEnum.Border,
+      TokenTypeEnum.BorderWidth,
+      TokenTypeEnum.Size,
     ],
     excludeGroupNames: ['Border', 'Radius', 'Spacing'],
     sortByNumValue: true,
   },
   {
     fileName: 'radii',
-    tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.radius],
+    tokenTypes: [TokenTypeEnum.Dimension, TokenTypeEnum.Radius],
     groupNames: ['Radius'],
     hasParentPrefix: false,
     sortByNumValue: true,
   },
   {
     fileName: 'spacing',
-    tokenTypes: [SOURCE_TOKEN_TYPE.dimension, SOURCE_TOKEN_TYPE.space],
+    tokenTypes: [TokenTypeEnum.Dimension, TokenTypeEnum.Space],
     groupNames: ['Spacing'],
     hasParentPrefix: false,
     sortByNumValue: true,
   },
   {
     fileName: 'shadows',
-    tokenTypes: [SOURCE_TOKEN_TYPE.shadow],
+    tokenTypes: [TokenTypeEnum.Shadow],
     hasParentPrefix: false,
   },
   {
     fileName: 'gradients',
-    tokenTypes: [SOURCE_TOKEN_TYPE.gradient],
+    tokenTypes: [TokenTypeEnum.Gradient],
     hasParentPrefix: true,
   },
   {
     fileName: 'typography',
-    tokenTypes: [SOURCE_TOKEN_TYPE.typography],
+    tokenTypes: [TokenTypeEnum.Typography],
   },
 ];
 
 const shadowLengthFileData = {
-  tokenTypes: [SOURCE_TOKEN_TYPE.dimension],
-  collectionName: TOKEN_COLLECTION_THEMES_NAME,
+  tokenTypes: [TokenTypeEnum.Dimension],
+  collection: CollectionKind.Color,
   prepareTokens: getShadowLengthTokens,
   hasStylesObject: false,
   hasTopLevelGroupPrefix: false,
@@ -82,7 +82,7 @@ const shadowLengthFileData = {
 export const themedFilesData: FileData[] = [
   {
     fileName: 'colors',
-    tokenTypes: [SOURCE_TOKEN_TYPE.color],
+    tokenTypes: [TokenTypeEnum.Color],
     mixinName: 'color-css-variables',
     cssVariablePrefix: COLOR_CSS_VARIABLE_PREFIX,
     hasStylesObject: false,
@@ -94,14 +94,14 @@ export const devicesFilesData: FileData[] = [
   {
     fileName: 'devices',
     tokenTypes: [
-      SOURCE_TOKEN_TYPE.dimension,
-      SOURCE_TOKEN_TYPE.fontSize,
-      SOURCE_TOKEN_TYPE.letterSpacing,
-      SOURCE_TOKEN_TYPE.lineHeight,
-      SOURCE_TOKEN_TYPE.radius,
-      SOURCE_TOKEN_TYPE.size,
-      SOURCE_TOKEN_TYPE.string,
-      SOURCE_TOKEN_TYPE.space,
+      TokenTypeEnum.Dimension,
+      TokenTypeEnum.FontSize,
+      TokenTypeEnum.LetterSpacing,
+      TokenTypeEnum.LineHeight,
+      TokenTypeEnum.Radius,
+      TokenTypeEnum.Size,
+      TokenTypeEnum.String,
+      TokenTypeEnum.Space,
     ],
     sortByNumValue: true,
   },
@@ -110,7 +110,7 @@ export const devicesFilesData: FileData[] = [
 export const commonThemedFilesData: FileData[] = [
   {
     fileName: 'color-tokens',
-    tokenTypes: [SOURCE_TOKEN_TYPE.color],
+    tokenTypes: [TokenTypeEnum.Color],
     hasCssVariableReferences: true,
     cssVariablePrefix: COLOR_CSS_VARIABLE_PREFIX,
   },

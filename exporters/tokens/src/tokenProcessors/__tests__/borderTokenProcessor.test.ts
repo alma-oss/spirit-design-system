@@ -1,28 +1,16 @@
-import { BorderToken, BorderWidthToken, TokenGroup, TokenType, Unit } from '@supernovaio/sdk-exporters';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
+import { createDesignToken } from '../../../tests/helpers/createDesignToken';
+import { TokenTypeEnum } from '../../core/types';
 import { processBorderToken } from '../borderTokenProcessor';
-
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
-
-const tokenGroups: Array<TokenGroup> = exampleGroups;
 
 describe('borderTokenProcessor', () => {
   describe('processBorderToken', () => {
     it('should process border token with width', () => {
-      const token = {
-        id: '1',
-        name: 'border-default',
-        tokenType: TokenType.border,
-        value: {
-          width: { measure: 1, unit: Unit.pixels },
-          color: { r: 0, g: 0, b: 0, a: 1 },
-        },
-      } as unknown as BorderToken;
+      const token = createDesignToken(
+        TokenTypeEnum.Border,
+        { type: 'number', value: 1, unit: 'px' },
+        { id: '1', name: 'border-default' },
+      );
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: false,
       };
@@ -34,14 +22,12 @@ describe('borderTokenProcessor', () => {
     });
 
     it('should process borderWidth token', () => {
-      const token = {
-        id: '1',
-        name: 'border-width-thin',
-        tokenType: TokenType.borderWidth,
-        value: { measure: 2, unit: Unit.pixels },
-      } as unknown as BorderWidthToken;
+      const token = createDesignToken(
+        TokenTypeEnum.BorderWidth,
+        { type: 'number', value: 2, unit: 'px' },
+        { id: '1', name: 'border-width-thin' },
+      );
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: false,
       };
@@ -53,17 +39,12 @@ describe('borderTokenProcessor', () => {
     });
 
     it('should process border token with js output', () => {
-      const token = {
-        id: '1',
-        name: 'border-default',
-        tokenType: TokenType.border,
-        value: {
-          width: { measure: 1, unit: Unit.pixels },
-          color: { r: 0, g: 0, b: 0, a: 1 },
-        },
-      } as unknown as BorderToken;
+      const token = createDesignToken(
+        TokenTypeEnum.Border,
+        { type: 'number', value: 1, unit: 'px' },
+        { id: '1', name: 'border-default' },
+      );
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: true,
       };
@@ -74,18 +55,13 @@ describe('borderTokenProcessor', () => {
       expect(result).toContain('borderDefault');
     });
 
-    it('should return null for undefined value', () => {
-      const token = {
-        id: '1',
-        name: 'border-undefined',
-        tokenType: TokenType.border,
-        value: {
-          width: undefined,
-          color: { r: 0, g: 0, b: 0, a: 1 },
-        },
-      } as unknown as BorderToken;
+    it('should return null for a value that is not a number', () => {
+      const token = createDesignToken(
+        TokenTypeEnum.Border,
+        { type: 'composite', value: {} },
+        { id: '1', name: 'border-undefined' },
+      );
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: false,
       };

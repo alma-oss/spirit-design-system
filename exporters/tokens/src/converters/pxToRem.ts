@@ -31,7 +31,7 @@ export const pxToRemValue = (measurePx: number, options: PxToRemOptions): PxToRe
   const { baseFontSize, decimals } = options;
   const remValue = (Number.isFinite(measurePx) ? measurePx : 0) / baseFontSize;
 
-  return { value: roundToDecimals(remValue, resolveDecimals(decimals)), unit: 'rem' };
+  return { value: roundToDecimals(remValue, resolveDecimals(decimals)), unit: REM_UNIT };
 };
 
 /**

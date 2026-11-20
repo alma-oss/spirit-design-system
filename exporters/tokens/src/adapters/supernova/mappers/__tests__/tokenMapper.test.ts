@@ -44,6 +44,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '2',
+          originName: 'Grid/Columns',
           groupPath: ['Grid'],
           namePath: ['Grid'],
         },
@@ -69,6 +71,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: 'Grid/spacing/desktop',
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -111,6 +115,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -120,6 +126,22 @@ describe('tokenMapper', () => {
           originalType: 'BorderRadius',
         },
       });
+    });
+
+    it('should leave a collection container out of the group path of a token without an origin', () => {
+      const token = {
+        id: 'aliasRef',
+        name: 'alias',
+        tokenType: TokenType.dimension,
+        parentGroupId: 'container',
+        value: { measure: 4, unit: 'Pixels', referencedTokenId: null },
+      } as unknown as DimensionToken;
+      const groups = [createGroup('container', 'device', [])];
+
+      expect(mapToken(token, groups)?.metadata).toMatchObject({ groupId: 'container', groupPath: [] });
+      expect(
+        mapToken({ ...token, origin: { name: 'Grid/alias' } } as unknown as DimensionToken, groups)?.metadata,
+      ).toMatchObject({ groupPath: ['device'], originName: 'Grid/alias' });
     });
 
     it('should map a space token to the internal model', () => {
@@ -142,6 +164,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -173,6 +197,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -204,6 +230,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -235,6 +263,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -266,6 +296,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -297,6 +329,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },
@@ -334,6 +368,8 @@ describe('tokenMapper', () => {
         metadata: {
           brandId: undefined,
           device: undefined,
+          groupId: '1',
+          originName: undefined,
           groupPath: ['Grid', 'spacing'],
           namePath: ['Grid', 'spacing'],
         },

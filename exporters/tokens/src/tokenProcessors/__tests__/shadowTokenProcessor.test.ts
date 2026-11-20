@@ -1,16 +1,8 @@
-import { ShadowToken, TokenGroup } from '@supernovaio/sdk-exporters';
-import { exampleShadowTokens } from '../../../tests/fixtures/exampleShadowTokens';
+import { exampleShadowTokens } from '../../../tests/fixtures/internal-model/exampleShadowTokens';
 import { createTokenIndex } from '../../core/tokenIndex';
-import { exampleGroups } from '../../../tests/fixtures/exampleGroups';
-import { sampleConfigurationDefault } from '../../../tests/fixtures/sampleConfiguration';
 import { processShadowToken, transformShadowLengthsToVariables } from '../shadowTokenProcessor';
-import type { FontSizeBaseMap } from '../../helpers/types';
+import type { FontSizeBaseMap } from '../../core/types';
 
-jest.mock('../../../config', () => ({
-  exportConfiguration: sampleConfigurationDefault,
-}));
-
-const tokenGroups: Array<TokenGroup> = exampleGroups;
 const tokenIndex = createTokenIndex([]);
 const fontSizeBaseMap: FontSizeBaseMap = new Map([
   ['mobile', 14],
@@ -44,9 +36,8 @@ describe('shadowTokenProcessor', () => {
 
   describe('processShadowToken', () => {
     it('should process shadow token and convert px to rem', () => {
-      const token = exampleShadowTokens.get('shadowRef') as ShadowToken;
+      const token = exampleShadowTokens.get('shadowRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
@@ -62,9 +53,8 @@ describe('shadowTokenProcessor', () => {
     });
 
     it('should process shadow token with js output', () => {
-      const token = exampleShadowTokens.get('shadowRef') as ShadowToken;
+      const token = exampleShadowTokens.get('shadowRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: true,
         tokenPrefix: 'spirit-',
@@ -80,9 +70,8 @@ describe('shadowTokenProcessor', () => {
     });
 
     it('should transform colors to variables', () => {
-      const token = exampleShadowTokens.get('shadowRef') as ShadowToken;
+      const token = exampleShadowTokens.get('shadowRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: false,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',
@@ -96,9 +85,8 @@ describe('shadowTokenProcessor', () => {
     });
 
     it('should handle shadow with parent prefix', () => {
-      const token = exampleShadowTokens.get('shadowRef') as ShadowToken;
+      const token = exampleShadowTokens.get('shadowRef')!;
       const ctx = {
-        tokenGroups,
         hasParentPrefix: true,
         hasJsOutput: false,
         tokenPrefix: 'spirit-',

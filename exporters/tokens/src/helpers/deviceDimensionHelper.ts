@@ -1,48 +1,49 @@
-import { type Token, type TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+import { PX_UNIT, REM_UNIT } from '../constants';
+import { withResolvedValue } from '../core/resolveToken';
 import {
+  type DesignToken,
   type DeviceDimensionEntries,
   type DeviceDimensionMap,
   type DeviceDimensionValue,
-  SOURCE_UNIT,
+  TokenTypeEnum,
 } from '../core/types';
-import { getDeviceAlias } from './deviceHelpers';
-import { readNumericValue } from './numericValueHelper';
 import { getOriginName, tokenVariableName } from './tokenHelper';
 
 /** Token types a device can set a dimension for (the values typography is responsive by). */
-const DEVICE_DIMENSION_TOKEN_TYPES = [TokenType.dimension, TokenType.fontSize, TokenType.lineHeight];
+const DEVICE_DIMENSION_TOKEN_TYPES = [TokenTypeEnum.Dimension, TokenTypeEnum.FontSize, TokenTypeEnum.LineHeight];
 
-const isDeviceTypographyUnit = (unit: unknown): unit is DeviceDimensionValue['unit'] => {
-  return unit === SOURCE_UNIT.pixels || unit === SOURCE_UNIT.percent || unit === SOURCE_UNIT.rem;
-};
+const DEVICE_TYPOGRAPHY_UNITS: Array<string | undefined> = [PX_UNIT, '%', REM_UNIT];
 
-const toTypographyUnit = (unit: unknown): DeviceDimensionValue['unit'] | null => {
-  return isDeviceTypographyUnit(unit) ? unit : null;
-};
+const isDeviceTypographyUnit = (unit: string | undefined): unit is DeviceDimensionValue['unit'] =>
+  DEVICE_TYPOGRAPHY_UNITS.includes(unit);
 
 /**
  * Collects the dimensions of device tokens by variable name (and by the name of their origin), so a typography
  * can find the value of each device.
  *
  * @param tokens - Device tokens, each with the device it is resolved for
- * @param tokenGroups
  */
-export const buildDeviceDimensionMap = (tokens: Token[], tokenGroups: Array<TokenGroup>): DeviceDimensionMap => {
+export const buildDeviceDimensionMap = (tokens: DesignToken[]): DeviceDimensionMap => {
   return tokens.reduce<DeviceDimensionMap>((accumulator, token) => {
-    const device = getDeviceAlias(token).toLowerCase();
+    const device = token.metadata.device?.toLowerCase();
 
-    if (!DEVICE_DIMENSION_TOKEN_TYPES.includes(token.tokenType) || !device) {
+    if (!DEVICE_DIMENSION_TOKEN_TYPES.includes(token.type) || !device) {
       return accumulator;
     }
 
-    const { measure, unit: sourceUnit } = readNumericValue(token);
-    const unit = toTypographyUnit(sourceUnit);
+    const { value } = withResolvedValue(token);
 
-    if (measure === undefined || !unit) {
+    if (value.type !== 'number') {
       return accumulator;
     }
 
-    const variableNameWithDeviceSuffix = tokenVariableName(token, tokenGroups, true);
+    const { value: measure, unit } = value;
+
+    if (!isDeviceTypographyUnit(unit)) {
+      return accumulator;
+    }
+
+    const variableNameWithDeviceSuffix = tokenVariableName(token, true);
     const baseVariableName = variableNameWithDeviceSuffix.endsWith(`-${device}`)
       ? variableNameWithDeviceSuffix.slice(0, -(device.length + 1))
       : variableNameWithDeviceSuffix;

@@ -1,6 +1,7 @@
 import {
+  applyReplacements,
+  getReplacements,
   removePairQuotes,
-  replaceByConfiguration,
   toCamelCase,
   toOutputName,
   toKebabCase,
@@ -80,7 +81,7 @@ describe('stringHelper', () => {
     });
   });
 
-  describe('replaceByConfiguration', () => {
+  describe('getReplacements and applyReplacements', () => {
     it('should apply the configured replacements', () => {
       const configuration = {
         searchFont0: 'Inter',
@@ -89,17 +90,17 @@ describe('stringHelper', () => {
         replaceFont1: 'mono',
       };
 
-      expect(replaceByConfiguration(configuration, "'Inter', serif", 'Font')).toBe("'Roboto', mono");
+      expect(applyReplacements("'Inter', serif", getReplacements(configuration, 'Font'))).toBe("'Roboto', mono");
     });
 
     it('should ignore incomplete replacements and other names', () => {
       const configuration = { searchFont0: 'Inter', searchOther0: 'Inter', replaceOther0: 'Roboto' };
 
-      expect(replaceByConfiguration(configuration, 'Inter', 'Font')).toBe('Inter');
+      expect(applyReplacements('Inter', getReplacements(configuration, 'Font'))).toBe('Inter');
     });
 
     it('should return the value untouched without configuration', () => {
-      expect(replaceByConfiguration({}, 'Inter', 'Font')).toBe('Inter');
+      expect(applyReplacements('Inter', getReplacements({}, 'Font'))).toBe('Inter');
     });
   });
 });
