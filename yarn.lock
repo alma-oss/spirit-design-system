@@ -11469,22 +11469,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernova-studio/client@npm:1.96.10":
-  version: 1.96.10
-  resolution: "@supernova-studio/client@npm:1.96.10"
+"@supernova-studio/client@npm:1.98.0":
+  version: 1.98.0
+  resolution: "@supernova-studio/client@npm:1.98.0"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.2"
-    "@supernova-studio/model": "npm:1.96.10"
+    "@supernova-studio/model": "npm:1.98.0"
     ip-cidr: "npm:3.1.0"
     p-queue: "npm:8.1.1"
-    prosemirror-model: "npm:1.25.7"
+    prosemirror-model: "npm:1.25.12"
     queue-promise: "npm:2.2.1"
+    safe-regex: "npm:2.1.1"
+    uuid: "npm:14.0.0"
     y-prosemirror: "npm:1.3.7"
     y-protocols: "npm:1.0.7"
     y-utility: "npm:0.1.4"
     yjs: "npm:13.6.29"
-    zod: "npm:3.25.76"
-  checksum: 10/21a2ec06cfce57bb2573da82a5089e8692d300c6689e3ce1ee43946764c2504c767d41e515c4a352022e0b65d229e9c8d4bb67dfce7638e8a110e867e1a66fb2
+    zod: "npm:4.6.6"
+  checksum: 10/c7f86e0d19690a76d551ee15c7009641dd101c258b45cb0e7c2db115206129a3f1ce3cfd36a0f3130f21a24c6c5833c2fc9ef31b0f2584ef163e7ae22bb9ab7b
   languageName: node
   linkType: hard
 
@@ -11500,14 +11502,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernova-studio/model@npm:1.96.10":
-  version: 1.96.10
-  resolution: "@supernova-studio/model@npm:1.96.10"
+"@supernova-studio/model@npm:1.98.0":
+  version: 1.98.0
+  resolution: "@supernova-studio/model@npm:1.98.0"
   dependencies:
     "@sindresorhus/slugify": "npm:1.1.2"
     ip-cidr: "npm:3.1.0"
-    zod: "npm:3.25.76"
-  checksum: 10/1bd1989bb23a531b6b3b37b6cb4e9b5e29a5699cd8fe78fc40c3e441c5f4af4b70ae9a472bd2703eed61b654457698611396be9f62274634f324e325f59bd5fe
+    safe-regex: "npm:2.1.1"
+    zod: "npm:4.6.6"
+  checksum: 10/81a0bea0f54a298e253c52f3d66db04a4ebac3bcb0832e74c6b85b4fa00081bdde9c9ad281c6b096c2e96f0e164a883aba2396cc4d00bdcb9551f6ab028958cf
   languageName: node
   linkType: hard
 
@@ -11535,17 +11538,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supernovaio/sdk-exporters@npm:2.5.1":
-  version: 2.5.1
-  resolution: "@supernovaio/sdk-exporters@npm:2.5.1"
+"@supernovaio/sdk-exporters@npm:2.6.1":
+  version: 2.6.1
+  resolution: "@supernovaio/sdk-exporters@npm:2.6.1"
   dependencies:
     "@rollup/rollup-darwin-x64": "npm:4.59.0"
-    "@supernova-studio/client": "npm:1.96.10"
-    "@supernova-studio/model": "npm:1.96.10"
+    "@supernova-studio/client": "npm:1.98.0"
+    "@supernova-studio/model": "npm:1.98.0"
+    fuse.js: "npm:6.6.2"
   dependenciesMeta:
     "@rollup/rollup-darwin-x64":
       optional: true
-  checksum: 10/43237dc6d17f34dd558663b923352d420d5562c37973108fd542678ac13d6aa501941252615e10c0246069c2e49f9abdddb9b1c4ef550d84b796b170ab0e2ddb
+  checksum: 10/a9a19ad0eecf57c7fe863685c74b547eef21eb06abd431aa7e26831b47ac11d31eaa5c35d7150cede56455f3ea63b23dd78472877f0482eb2ffd57dcbfa18d85
   languageName: node
   linkType: hard
 
@@ -21450,6 +21454,13 @@ __metadata:
   version: 1.2.3
   resolution: "functions-have-names@npm:1.2.3"
   checksum: 10/0ddfd3ed1066a55984aaecebf5419fbd9344a5c38dd120ffb0739fac4496758dcf371297440528b115e4367fc46e3abc86a2cc0ff44612181b175ae967a11a05
+  languageName: node
+  linkType: hard
+
+"fuse.js@npm:6.6.2":
+  version: 6.6.2
+  resolution: "fuse.js@npm:6.6.2"
+  checksum: 10/4768725963ee07dacfcb4abb001a12ea5e6e44c95d4e0918fcbfe0469107c5ad3ece2f1930396eb6c210383edf4c14ca083b91a2fc54950c5d021935a63d89de
   languageName: node
   linkType: hard
 
@@ -31543,12 +31554,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prosemirror-model@npm:1.25.7":
-  version: 1.25.7
-  resolution: "prosemirror-model@npm:1.25.7"
+"prosemirror-model@npm:1.25.12":
+  version: 1.25.12
+  resolution: "prosemirror-model@npm:1.25.12"
   dependencies:
     orderedmap: "npm:^2.0.0"
-  checksum: 10/516e3609a350bccc2dcb9215eccf7db1567c4f57914467a15884f017f00fc2b110e91332a708e935cb8da179897680ca6d9a64f7cceb0e3a6c543845d7eab2b2
+  checksum: 10/7b8ffb5e0267ddb657d4d5ad2a61179800f913a4bd37dfb9d6ec8eb3449e6852aea64fad139286efad22a6aefd939186432dc3d4852bc82329dcff99272fd5b5
   languageName: node
   linkType: hard
 
@@ -32350,6 +32361,15 @@ __metadata:
   dependencies:
     regex-utilities: "npm:^2.3.0"
   checksum: 10/553bac92b7ddcea99187aea1bd5cd50f31a923b45ff0bb2ae3876387df01957eb074931613c8a1f6471bb8fea1e0ba1e52f12b8257a5602900e52dd1abb5e436
+  languageName: node
+  linkType: hard
+
+"regexp-tree@npm:~0.1.1":
+  version: 0.1.27
+  resolution: "regexp-tree@npm:0.1.27"
+  bin:
+    regexp-tree: bin/regexp-tree
+  checksum: 10/08c70c8adb5a0d4af1061bf9eb05d3b6e1d948c433d6b7008e4b5eb12a49429c2d6ca8e9106339a432aa0d07bd6e1bccc638d8f4ab0d045f3adad22182b300a2
   languageName: node
   linkType: hard
 
@@ -34181,6 +34201,15 @@ __metadata:
   bin:
     safe-regex2: bin/safe-regex2.js
   checksum: 10/dfaa0b57f1e883487e5ba2bb507c260e654ee2ab4f22e549f7c5acaf341885cbfe4bcc950de7576b61fe98ebd8cdbee5687f506ffa355bccd6e33e70181d74c6
+  languageName: node
+  linkType: hard
+
+"safe-regex@npm:2.1.1":
+  version: 2.1.1
+  resolution: "safe-regex@npm:2.1.1"
+  dependencies:
+    regexp-tree: "npm:~0.1.1"
+  checksum: 10/180d264110cdac9935877e5c37d17b89bd7e3a9bac982439e61517e4e0dfb0821e89ed49cb84c2d9690d18b33a0edf46d4decc6989e295ba2c866c08ed8b441a
   languageName: node
   linkType: hard
 
@@ -38374,6 +38403,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:14.0.0":
+  version: 14.0.0
+  resolution: "uuid@npm:14.0.0"
+  bin:
+    uuid: dist-node/bin/uuid
+  checksum: 10/8ee9b98f9650e25555515f7a28d3c3ae9364e72f7bb19b9e08b681bc135338beba5509b2830f6ae1cfaba4d45401da0d16d4d109b977097bc3d6ba0c5583341b
+  languageName: node
+  linkType: hard
+
 "uuid@npm:^3.3.2":
   version: 3.4.0
   resolution: "uuid@npm:3.4.0"
@@ -39598,6 +39636,13 @@ __metadata:
   version: 3.25.76
   resolution: "zod@npm:3.25.76"
   checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
+  languageName: node
+  linkType: hard
+
+"zod@npm:4.6.6":
+  version: 4.6.6
+  resolution: "zod@npm:4.6.6"
+  checksum: 10/ce628fb33400b531f48b63ad1bd9b5ab95ec3ac60d4e8025892d90af9ca5d03b168aaaf74071928345ad1b1bcd735a7d5cf33230ece7de885240bb0f2b7bb492
   languageName: node
   linkType: hard
 
