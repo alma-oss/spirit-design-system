@@ -24,13 +24,11 @@
 
     @each $key, $values in $tokens {
         @each $subkey, $value in $values {
-            @if meta.type-of($keys-to-generate) ==
-                'list' and
-                $subkey !=
-                null and
-                list.index($keys-to-generate, $subkey) !=
-                null
-            {
+            $is-subkey-selected: meta.type-of($keys-to-generate) == 'list' and
+                $subkey != null and
+                list.index($keys-to-generate, $subkey) != null;
+
+            @if $is-subkey-selected {
                 // 1.
                 $key-part: $key;
 
@@ -66,8 +64,7 @@
 @mixin generate($utility, $infix) {
     $values: map.get($utility, values);
 
-    @if meta.type-of($values) ==
-        'string' or
+    @if meta.type-of($values) == 'string' or
         (meta.type-of($values) == 'list' and list.length($values) > 0 and meta.type-of(list.nth($values, 1)) != 'list')
     {
         $values: list.zip($values, $values);
