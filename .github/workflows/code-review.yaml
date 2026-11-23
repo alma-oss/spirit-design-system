@@ -1,0 +1,301 @@
+name: 🕵 Code Review
+
+# Reviews every new pull request, draft or not, once with the spirit:code-review skill.
+# A developer retriggers the review from the PR itself by ticking the checkbox in the status comment
+# (the way Renovate does it), or from the Actions tab with a PR number.
+
+on:
+  # Runs the workflow definition from the default branch, so a pull request cannot change the prompt,
+  # the helper or the permissions before it receives the secrets. The pull request code is never checked out
+  pull_request_target:
+    types: [opened]
+  # Runs from the default branch. Fires when the status comment is edited, that is, when the checkbox is ticked
+  issue_comment:
+    types: [edited]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull request number to review'
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: read
+
+env:
+  STATUS_MARKER: '<!-- spirit-code-review -->'
+  RERUN_UNCHECKED: '- [ ] Re-run code review'
+  RERUN_CHECKED: '- [x] Re-run code review'
+
+jobs:
+  code-review:
+    name: 🔍 Review Pull Request
+    # An unrelated comment edit must not start a job. The job-level group is only taken by jobs that run,
+    # so such an edit cannot cancel a pending review either.
+    if: >-
+      github.event_name != 'issue_comment' || (
+        github.event.issue.pull_request
+        && github.event.comment.user.type == 'Bot'
+        && contains(github.event.comment.body, '<!-- spirit-code-review -->')
+        && contains(github.event.comment.body, '- [x] Re-run code review')
+        && contains(github.event.changes.body.from, '- [ ] Re-run code review')
+      )
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: code-review-${{ github.event.pull_request.number || github.event.issue.number || inputs.pr }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Decide whether to review
+        id: decide
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || inputs.pr }}
+          SENDER: ${{ github.event.sender.login }}
+        # An explicit bash enables pipefail, so a failing gh in a pipe stops the step
+        shell: bash
+        run: |
+          skip() {
+            echo "::notice::$1"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          }
+
+          case "$PR_NUMBER" in '' | *[!0-9]*) echo "::error::Invalid pull request number"; exit 1 ;; esac
+
+          # Assigned first: the exit status of a command substitution inside <<< is ignored
+          PR_INFO=$(gh pr view "$PR_NUMBER" --repo "$REPO" \
+            --json state,isCrossRepository,headRefOid \
+            --jq '[.state, .isCrossRepository, .headRefOid] | @tsv')
+          read -r STATE CROSS SHA <<< "$PR_INFO"
+
+          [ "$STATE" = "OPEN" ] || skip "PR #$PR_NUMBER is not open."
+          # Pull requests from forks have no access to the secrets
+          [ "$CROSS" = "false" ] || skip "PR #$PR_NUMBER comes from a fork."
+
+          if [ "$EVENT_NAME" = "pull_request_target" ]; then
+            # The automatic review runs once, so an existing status comment means it already happened
+            EXISTING=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+              --jq ".[] | select(.user.type == \"Bot\" and (.body | contains(\"$STATUS_MARKER\"))) | .id" | tail -n 1)
+            [ -z "$EXISTING" ] || skip "PR #$PR_NUMBER has already been reviewed."
+          fi
+
+          if [ "$EVENT_NAME" = "issue_comment" ]; then
+            PERMISSION=$(gh api "repos/$REPO/collaborators/$SENDER/permission" --jq .permission)
+            case "$PERMISSION" in
+              admin | maintain | write) ;;
+              *) skip "$SENDER has no write access, the review is not re-run." ;;
+            esac
+          fi
+
+          {
+            echo "run=true"
+            echo "pr=$PR_NUMBER"
+            echo "sha=$SHA"
+          } >> "$GITHUB_OUTPUT"
+
+      # Posts the status comment and the review. The model never gets this token
+      - name: Generate token
+        if: steps.decide.outputs.run == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-pull-requests: write
+
+      # The model reads untrusted diffs, so its token can only read
+      - name: Generate read-only token
+        if: steps.decide.outputs.run == 'true'
+        id: read-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-pull-requests: read
+
+      # Written by the workflow itself, before the checkout, so the pull request cannot change it. Its checksum
+      # is kept in a step output, which the model cannot reach, and checked before the helper runs with the write token
+      - name: Prepare status comment helper
+        id: helper
+        if: steps.decide.outputs.run == 'true'
+        run: |
+          cat > "$RUNNER_TEMP/code-review-status.sh" << 'SCRIPT'
+          #!/usr/bin/env bash
+          # Creates or updates the status comment of the pull request. The checkbox is always left unticked.
+          set -euo pipefail
+          BODY=$(printf '%s\n## 🔍 Spirit Code Review\n\n%s\n\n%s\n' "$STATUS_MARKER" "$1" "$RERUN_UNCHECKED")
+          ID=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+            --jq ".[] | select(.user.type == \"Bot\" and (.body | contains(\"$STATUS_MARKER\"))) | .id" | tail -n 1)
+          if [ -n "$ID" ]; then
+            gh api --method PATCH "repos/$REPO/issues/comments/$ID" -f body="$BODY" > /dev/null
+          else
+            gh api --method POST "repos/$REPO/issues/$PR/comments" -f body="$BODY" > /dev/null
+          fi
+          SCRIPT
+          chmod +x "$RUNNER_TEMP/code-review-status.sh"
+          echo "sha256=$(sha256sum "$RUNNER_TEMP/code-review-status.sh" | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+
+      - name: Mark review as in progress
+        if: steps.decide.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.decide.outputs.pr }}
+          SHA: ${{ steps.decide.outputs.sha }}
+        run: |
+          "$RUNNER_TEMP/code-review-status.sh" "⏳ Reviewing commit \`${SHA:0:7}\`."
+
+      # The default branch carries the trusted skill. The skill reads the pull request itself
+      # through git refs fetched from origin, so the pull request cannot change its own reviewer instructions.
+      # No dependencies are installed: nothing from the pull request runs while the secrets are present.
+      - name: Clone repository
+        if: steps.decide.outputs.run == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      # The credential scrub below needs the CLI sandbox, which needs bubblewrap and socat. Without them the CLI
+      # either refuses to start or fails every Bash call. Ubuntu 24.04 also restricts the user namespaces
+      # bubblewrap uses, so the runner is told to allow them. The checks fail loudly if a tool is still unusable
+      - name: Install sandbox dependencies
+        if: steps.decide.outputs.run == 'true'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq bubblewrap socat
+          bwrap --ro-bind / / --unshare-pid true 2>/dev/null || sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          bwrap --ro-bind / / --unshare-pid true
+          command -v socat > /dev/null
+
+      # The model reads untrusted diffs, so the API key must not reach its output. Bash children of the CLI get no
+      # credentials in their environment (and, on Linux, cannot read the CLI's /proc entry), and the Read tool,
+      # which runs inside the CLI process, is denied /proc below. Grep and Glob follow the Read deny rule
+      - name: Review pull request
+        id: review
+        if: steps.decide.outputs.run == 'true'
+        uses: anthropics/claude-code-action@5eb090f3c3afd701a0672cd32981197ca27688f6 # v1.0.253
+        env:
+          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: '1'
+        with:
+          anthropic_api_key: ${{ secrets.CODE_REVIEW_ANTHROPIC_API_KEY }}
+          # The read-only Spirit GitHub App token, so the action does not need an OIDC token for the Claude GitHub App
+          github_token: ${{ steps.read-token.outputs.token }}
+          # Renovate and the automated sync pull requests are reviewed too. Only same-repository pull requests get here
+          allowed_bots: '*'
+          prompt: |
+            Run the spirit:code-review skill for pull request #${{ steps.decide.outputs.pr }} with the arguments
+            `${{ steps.decide.outputs.pr }} --ci --conventional-comments`.
+            Review the head commit ${{ steps.decide.outputs.sha }}. Do not edit, commit, push or post anything:
+            the workflow posts the review. Return the review as the structured output. `body` is the review body
+            as the skill's CI rendering defines it: it starts with `## Spirit Code Review 🤖` and holds the verdict,
+            the severity table, the findings without an inline anchor, and the warnings. `comments` has one entry
+            for each finding that anchors to a changed line: `path`, `line` on the new side of the diff,
+            an optional `start_line` for a range, and the rendered finding as `body`.
+          claude_args: >-
+            --model claude-sonnet-5-5
+            --effort high
+            --max-turns 60
+            --json-schema '{"type":"object","properties":{"body":{"type":"string"},"comments":{"type":"array","items":{"type":"object","properties":{"path":{"type":"string"},"line":{"type":"integer"},"start_line":{"type":"integer"},"body":{"type":"string"}},"required":["path","line","body"]}}},"required":["body","comments"]}'
+            --allowedTools "Read,Grep,Glob,Bash(git log:*),Bash(git diff:*),Bash(git show:*),Bash(git grep:*),Bash(git fetch:*),Bash(git merge-base:*),Bash(git rev-parse:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh api:*)"
+            --disallowedTools "Read(//proc/**)"
+
+      # The model only returns the review. The first run posts it as a COMMENT review of the Spirit app and every
+      # later run edits the body of the latest summary review in place, so the main feed keeps one current summary.
+      # GitHub cannot edit inline comments, so the inline findings of a later run are posted as a new review
+      # that only carries them. Those stay on the code and are resolved there
+      - name: Post review
+        id: post
+        if: steps.decide.outputs.run == 'true' && steps.review.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.decide.outputs.pr }}
+          SHA: ${{ steps.decide.outputs.sha }}
+          REVIEW: ${{ steps.review.outputs.structured_output }}
+          # Tells the summary review from the reviews of other bots, and from the ones that only carry inline findings
+          SUMMARY_MARKER: '<!-- spirit-code-review-summary -->'
+        # An explicit bash enables pipefail, so a failing gh in a pipe stops the step instead of posting a duplicate
+        shell: bash
+        run: |
+          [ -n "$REVIEW" ] || { echo "::error::The model returned no structured review"; exit 1; }
+          HEADING='## Spirit Code Review 🤖'
+          FOOTER="_Updated for commit \`${SHA:0:7}\`._"
+          jq --arg sha "$SHA" --arg heading "$HEADING" --arg footer "$FOOTER" --arg marker "$SUMMARY_MARKER" '{
+            commit_id: $sha,
+            event: "COMMENT",
+            body: ($marker + "\n" + (if (.body | contains("Spirit Code Review")) then .body else $heading + "\n\n" + .body end) + "\n\n" + $footer),
+            comments: [.comments[] | {path, line, side: "RIGHT", body}
+              + (if .start_line then {start_line, start_side: "RIGHT"} else {} end)]
+          }' <<< "$REVIEW" > "$RUNNER_TEMP/review.json"
+
+          # A comment on a line outside the diff is rejected, so the findings can be kept in the body instead
+          fold_comments() {
+            jq '.body += "\n\n" + ([.comments[] | "**`\(.path):\(.line)`**\n\n\(.body)"] | join("\n\n---\n\n")) | .comments = []' "$1"
+          }
+
+          # The review that is edited is the latest summary one. The reviews that only carry inline findings are skipped.
+          # A summary posted before the marker existed is recognised by its heading
+          SUMMARY_ID=$(gh api "repos/$REPO/pulls/$PR/reviews" --paginate \
+            --jq "[.[] | select(.user.type == \"Bot\" and ((.body | contains(\"$SUMMARY_MARKER\")) or (.body | startswith(\"## Spirit Code Review\"))) and (.body | contains(\"Inline findings for commit\") | not))] | max_by(.id) | .id // empty" \
+            | sort -n | tail -n 1)
+
+          if [ -z "$SUMMARY_ID" ]; then
+            if ! URL=$(gh api --method POST "repos/$REPO/pulls/$PR/reviews" --input "$RUNNER_TEMP/review.json" --jq .html_url); then
+              echo "::warning::Inline comments were rejected, posting them in the review body instead"
+              fold_comments "$RUNNER_TEMP/review.json" > "$RUNNER_TEMP/review-body-only.json"
+              URL=$(gh api --method POST "repos/$REPO/pulls/$PR/reviews" --input "$RUNNER_TEMP/review-body-only.json" --jq .html_url)
+            fi
+          else
+            jq '{body}' "$RUNNER_TEMP/review.json" > "$RUNNER_TEMP/review-edit.json"
+            if [ "$(jq '.comments | length' "$RUNNER_TEMP/review.json")" -gt 0 ]; then
+              jq --arg heading "$HEADING" --arg sha7 "${SHA:0:7}" \
+                '.body = $heading + "\n\nInline findings for commit `" + $sha7 + "`."' \
+                "$RUNNER_TEMP/review.json" > "$RUNNER_TEMP/review-inline.json"
+              if ! gh api --method POST "repos/$REPO/pulls/$PR/reviews" --input "$RUNNER_TEMP/review-inline.json" > /dev/null; then
+                echo "::warning::Inline comments were rejected, putting them in the review body instead"
+                fold_comments "$RUNNER_TEMP/review.json" | jq '{body}' > "$RUNNER_TEMP/review-edit.json"
+              fi
+            fi
+            URL=$(gh api --method PUT "repos/$REPO/pulls/$PR/reviews/$SUMMARY_ID" --input "$RUNNER_TEMP/review-edit.json" --jq .html_url)
+          fi
+          echo "review-url=$URL" >> "$GITHUB_OUTPUT"
+
+      # The action hides tool output, so print only which tools the allowlist denied
+      - name: Report denied tools
+        if: always() && steps.review.outputs.execution_file != ''
+        env:
+          EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: |
+          jq -r '.[] | select(.type == "result") | .permission_denials[]? | "::warning title=Denied tool::\(.tool_name): \(.tool_input | tostring | .[0:300])"' "$EXECUTION_FILE" || true
+
+      # Always runs, so the checkbox is back and the status is final whatever happened
+      - name: Update status comment
+        if: always() && steps.decide.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.decide.outputs.pr }}
+          SHA: ${{ steps.decide.outputs.sha }}
+          REVIEW_OUTCOME: ${{ steps.review.outcome == 'success' && steps.post.outcome == 'success' && 'success' || 'failure' }}
+          # The link comes from the API response of this run, so an earlier review is never reported as its result
+          REVIEW_URL: ${{ steps.post.outputs.review-url }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          HELPER_SHA256: ${{ steps.helper.outputs.sha256 }}
+        run: |
+          # The model had Bash access since the helper was written, so make sure it is still the one the workflow wrote
+          echo "$HELPER_SHA256  $RUNNER_TEMP/code-review-status.sh" | sha256sum --check --status \
+            || { echo "::error::The status comment helper was changed while the review ran"; exit 1; }
+          if [ "$REVIEW_OUTCOME" = "success" ]; then
+            STATUS="✅ Reviewed commit \`${SHA:0:7}\`: [see the review]($REVIEW_URL)."
+          else
+            STATUS="❌ The review of commit \`${SHA:0:7}\` failed. See the [run]($RUN_URL)."
+          fi
+          "$RUNNER_TEMP/code-review-status.sh" "$STATUS Tick the box to review again."
