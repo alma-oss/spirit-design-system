@@ -56,8 +56,7 @@
             @each $property in map.get($axis-properties, $axis) {
                 @if not(
                     map.has-key($invalid-property-value-map, $property) and
-                        map.get($invalid-property-value-map, $property) ==
-                        $alignment
+                        map.get($invalid-property-value-map, $property) == $alignment
                 )
                 {
                     #{$property}: string.unquote(alignment.translate-physical-to-logical($alignment));
