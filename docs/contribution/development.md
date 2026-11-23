@@ -26,9 +26,14 @@ These include:
 For you to install all the dependencies in this project and successfully develop it, you'll need to:
 
 - [install Node.js][install-nodejs]
+- [install Corepack][install-corepack]
 - [install Yarn][install-yarn]
 - [install Docker][install-docker]
 - [install Make][install-make]
+
+> Node.js 25+ no longer bundles Corepack, so install it first with `npm install --global --force corepack`.
+> `--force` lets Corepack replace an existing `yarn` binary (for example Yarn 1), where npm would otherwise fail with `EEXIST`.
+> `make install` installs it when it is missing and then runs `corepack enable`.
 
 ### Starting Up
 
@@ -85,6 +90,7 @@ For example, if you wanted to use `lerna` to run a script in every package you c
 yarn lerna run build
 ```
 
+[install-corepack]: https://yarnpkg.com/corepack#installation
 [install-docker]: https://docs.docker.com/get-docker/
 [install-make]: https://www.gnu.org/software/make/#download
 [install-nodejs]: https://nodejs.org/en/download

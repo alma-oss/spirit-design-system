@@ -69,12 +69,14 @@ Using Make (recommended):
 
 or using Yarn:
 
+- `npm install --global --force corepack # Node.js >= 25`
 - `corepack enable`
 - `corepack install`
 - `yarn install`
 - `yarn start`
 
 See [`package.json`][package.json] for all available tasks.
+See [development guide][development] for more details about project setup.
 
 ## 🙌 Contributing
 
@@ -93,6 +95,7 @@ See the [LICENSE][license] file for information.
 [coverage-status]: https://coveralls.io/github/alma-oss/spirit-design-system?branch=main
 [coverage-status-svg]: https://coveralls.io/repos/github/alma-oss/spirit-design-system/badge.svg?branch=main
 [corepack]: https://yarnpkg.com/corepack#installation
+[development]: https://github.com/alma-oss/spirit-design-system/blob/main/docs/contribution/development.md
 [docker]: https://www.docker.com
 [docker-compose]: https://docs.docker.com/compose/
 [lerna]: https://lerna.js.org
