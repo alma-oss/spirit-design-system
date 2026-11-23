@@ -49,6 +49,8 @@ jobs:
 
       # The CLI is synchronous, returns the exact deploy URL (no SHA lookup race) and exits non-zero
       # on a deploy failure, so infra problems fail here and not in the test job.
+      # `--no-build` is required since Netlify CLI v27, which builds before deploying by default, and the
+      # sparse checkout has neither the sources nor a `netlify.toml`. The demo app is already built.
       # `catalog:script` pins the version (see .yarnrc.yml), there is a single place to bump it.
       - name: Deploy to Netlify
         id: netlify-deploy
@@ -62,6 +64,7 @@ jobs:
           fi
           OUTPUT=$(yarn dlx --quiet --package netlify-cli@catalog:script netlify deploy \
             --dir build \
+            --no-build \
             "${DEPLOY_ARGS[@]}" \
             --message "E2E ${GITHUB_SHA}" \
             --json)
