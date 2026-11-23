@@ -12349,10 +12349,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/matter-js@npm:0.19.8":
-  version: 0.19.8
-  resolution: "@types/matter-js@npm:0.19.8"
-  checksum: 10/a853868e97ff70fc771174528d3d545431b204708e30af7f89d302f357d9237aa8891d9b58ef951f3aca246ff72661cd0318b02f3a7cc939aeb8e1538a025e12
+"@types/matter-js@npm:0.20.2":
+  version: 0.20.2
+  resolution: "@types/matter-js@npm:0.20.2"
+  checksum: 10/aca95dab43e71106ff00c741a90b60752f2d5b17d48e0b2ea111b5f9f554f609d9cbac672a360b6b856cd9b2adb4a69f6fc1b66a18ad5fad359ea9d3f78ba80d
   languageName: node
   linkType: hard
 
