@@ -90,6 +90,10 @@ jobs:
           PW_VERSION=$(yq '.catalogs.test["@playwright/test"]' .yarnrc.yml)
           echo "version=$PW_VERSION" >> $GITHUB_OUTPUT
 
+      # Node.js 25+ no longer bundles Corepack, so do not rely on the one preinstalled on the runner.
+      - name: Install Corepack
+        run: npm install --global --force corepack
+
       - name: Enable Corepack
         run: corepack enable
 

@@ -30,7 +30,10 @@ help: ## Outputs this help screen
 
 ## —— Dependencies 📦 ——————————————————————————————————————————————————————————————
 
+# Node.js 25+ no longer bundles Corepack, so install it when it is missing. Node.js 24 and older keep the bundled one.
+# `--force` lets Corepack replace an existing `yarn` binary (for example Yarn 1), which npm would refuse to overwrite.
 install: ## Install dependencies
+	command -v corepack >/dev/null || npm install --global --force corepack
 	corepack enable
 	$(PKG_MANAGER) $(PKG_MANAGER_INSTALL) $(PKG_MANAGER_FLAGS) && touch node_modules
 

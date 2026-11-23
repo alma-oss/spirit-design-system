@@ -7,13 +7,20 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Enable Corepack
-      shell: bash
-      run: corepack enable
-
     - name: Set up Node
       uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
       with:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version == '' && '.nvmrc' || '' }}
         registry-url: 'https://registry.npmjs.org'
+
+    # Node.js 25+ no longer bundles Corepack, so install it explicitly for the Node.js we have just set up.
+    # The step is unconditional, so every job gets the same Corepack. `--force` lets Corepack replace an existing
+    # `yarn` binary (for example Yarn 1 preinstalled on the runner), otherwise npm fails with `EEXIST`.
+    - name: Install Corepack
+      shell: bash
+      run: npm install --global --force corepack
+
+    - name: Enable Corepack
+      shell: bash
+      run: corepack enable
