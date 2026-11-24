@@ -5,6 +5,8 @@ $radius-200: 0.25rem !default;
 $radius-300: 0.5rem !default;
 $radius-400: 0.75rem !default;
 $radius-500: 1rem !default;
+$radius-600: 1.5rem !default;
+$radius-700: 2rem !default;
 $radius-full: 624.9375rem !default;
 
 $radii: (
@@ -14,5 +16,7 @@ $radii: (
     300: $radius-300,
     400: $radius-400,
     500: $radius-500,
+    600: $radius-600,
+    700: $radius-700,
     full: $radius-full,
 ) !default;

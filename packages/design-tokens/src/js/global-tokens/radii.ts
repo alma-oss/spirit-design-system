@@ -5,6 +5,8 @@ export const radius200 = '0.25rem';
 export const radius300 = '0.5rem';
 export const radius400 = '0.75rem';
 export const radius500 = '1rem';
+export const radius600 = '1.5rem';
+export const radius700 = '2rem';
 export const radiusFull = '624.9375rem';
 
 export const radii = {
@@ -14,5 +16,7 @@ export const radii = {
   300: radius300,
   400: radius400,
   500: radius500,
+  600: radius600,
+  700: radius700,
   full: radiusFull,
 };
