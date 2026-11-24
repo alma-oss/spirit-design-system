@@ -1,5 +1,5 @@
 import { API, FileInfo, JSXOpeningElement } from 'jscodeshift';
-import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses, getIdentifierName } from '../../../helpers';
 
 const hasColorAttribute = (openingElement: JSXOpeningElement): boolean =>
   (openingElement.attributes ?? []).some(
@@ -25,7 +25,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
       path.node.specifiers?.forEach((specifier) => {
         if (specifier.type !== 'ImportSpecifier' || specifier.imported.type !== 'Identifier') return;
         const importedName = specifier.imported.name;
-        const localName = specifier.local?.name ?? importedName;
+        const localName = getIdentifierName(specifier.local?.name ?? importedName);
         if (importedName === 'Alert') alertLocalNames.add(localName);
         if (importedName === 'Link') linkLocalNames.add(localName);
       });

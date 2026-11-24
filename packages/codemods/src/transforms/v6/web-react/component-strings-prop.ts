@@ -1,5 +1,5 @@
 import { API, ASTPath, FileInfo, JSXAttribute, JSXOpeningElement, ObjectExpression, ObjectProperty } from 'jscodeshift';
-import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources, getIdentifierName } from '../../../helpers';
 
 type PropertyMigration = { from: string; to: string };
 type ObjectFoldMigration = { from: string; keys: PropertyMigration[] };
@@ -392,10 +392,10 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     .forEach((importPath) => {
       importPath.node.specifiers?.forEach((specifier) => {
         if (specifier.type === 'ImportDefaultSpecifier') {
-          const migration = MIGRATIONS[specifier.local?.name ?? ''];
+          const migration = MIGRATIONS[getIdentifierName(specifier.local?.name ?? '')];
 
           if (migration && specifier.local) {
-            localComponents.set(specifier.local.name, migration);
+            localComponents.set(getIdentifierName(specifier.local.name), migration);
           }
 
           return;
@@ -405,10 +405,10 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           return;
         }
 
-        const migration = MIGRATIONS[specifier.imported.name];
+        const migration = MIGRATIONS[getIdentifierName(specifier.imported.name)];
 
         if (migration) {
-          localComponents.set(specifier.local?.name ?? specifier.imported.name, migration);
+          localComponents.set(getIdentifierName(specifier.local?.name ?? specifier.imported.name), migration);
         }
       });
     });

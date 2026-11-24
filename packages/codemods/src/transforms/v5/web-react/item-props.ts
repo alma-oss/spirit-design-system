@@ -10,7 +10,7 @@ import {
   JSXOpeningElement,
   JSXSpreadAttribute,
 } from 'jscodeshift';
-import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources, getIdentifierName } from '../../../helpers';
 
 const ITEM_COMPONENT = 'Item';
 const CHECK_ICON_NAME = 'check-plain';
@@ -88,15 +88,15 @@ const getItemImports = (
           specifier.imported.type === 'Identifier' &&
           specifier.imported.name === ITEM_COMPONENT
         ) {
-          namedImports.add(specifier.local?.name ?? specifier.imported.name);
+          namedImports.add(getIdentifierName(specifier.local?.name ?? specifier.imported.name));
         }
 
         if (specifier.type === 'ImportDefaultSpecifier' && importsItemByDefault && specifier.local?.name) {
-          namedImports.add(specifier.local.name);
+          namedImports.add(getIdentifierName(specifier.local.name));
         }
 
         if (specifier.type === 'ImportNamespaceSpecifier' && specifier.local?.name) {
-          namespaceImports.add(specifier.local.name);
+          namespaceImports.add(getIdentifierName(specifier.local.name));
         }
       });
     });
@@ -132,7 +132,7 @@ const addNamedImport = (
         specifier.imported.type === 'Identifier' &&
         specifier.imported.name === importedName
       ) {
-        localName = specifier.local?.name ?? importedName;
+        localName = getIdentifierName(specifier.local?.name ?? importedName);
       }
     });
 

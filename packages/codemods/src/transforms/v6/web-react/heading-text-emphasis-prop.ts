@@ -1,5 +1,5 @@
 import { API, ASTPath, FileInfo, JSXAttribute, JSXOpeningElement } from 'jscodeshift';
-import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources, getIdentifierName } from '../../../helpers';
 
 const COMPONENTS = ['Heading', 'Text'] as const;
 const FONT_WEIGHTS = new Set(['regular', 'semibold', 'bold']);
@@ -91,7 +91,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           COMPONENTS.includes(specifier.imported.name as ComponentName)
         ) {
           localComponents.set(
-            specifier.local?.name ?? specifier.imported.name,
+            getIdentifierName(specifier.local?.name ?? specifier.imported.name),
             specifier.imported.name as ComponentName,
           );
         }

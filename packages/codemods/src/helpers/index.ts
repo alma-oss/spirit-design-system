@@ -9,5 +9,6 @@ export {
   isSpiritWebReactImport,
 } from './spiritWebReactImport';
 export { finishTransform } from './finishTransform';
+export { getIdentifierName } from './identifierName';
 export { getOwnRecordValue, hasOwnRecordKey } from './recordUtils';
 export { _dirname, errorMessage, infoMessage, logMessage, removeParentheses };
