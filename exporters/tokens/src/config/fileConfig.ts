@@ -101,6 +101,7 @@ export const devicesFilesData: FileData[] = [
       SOURCE_TOKEN_TYPE.radius,
       SOURCE_TOKEN_TYPE.size,
       SOURCE_TOKEN_TYPE.string,
+      SOURCE_TOKEN_TYPE.space,
     ],
     sortByNumValue: true,
   },
