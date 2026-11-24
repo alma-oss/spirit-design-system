@@ -1,5 +1,5 @@
 import { API, FileInfo, JSXAttribute, JSXMemberExpression, JSXOpeningElement, JSXSpreadAttribute } from 'jscodeshift';
-import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses, getIdentifierName } from '../../../helpers';
 
 const TARGET_COMPONENTS = new Set([
   'TextField',
@@ -63,13 +63,13 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
       path.node.specifiers?.forEach((specifier) => {
         if (specifier.type === 'ImportSpecifier' && specifier.imported.type === 'Identifier') {
           if (TARGET_COMPONENTS.has(specifier.imported.name)) {
-            namedImports.add(specifier.local?.name ?? specifier.imported.name);
+            namedImports.add(getIdentifierName(specifier.local?.name ?? specifier.imported.name));
           }
         }
 
         if (specifier.type === 'ImportNamespaceSpecifier') {
           if (specifier.local?.name) {
-            namespaceImports.add(specifier.local.name);
+            namespaceImports.add(getIdentifierName(specifier.local.name));
           }
         }
       });

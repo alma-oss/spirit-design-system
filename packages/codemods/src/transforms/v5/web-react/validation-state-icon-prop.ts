@@ -1,5 +1,5 @@
 import { API, FileInfo } from 'jscodeshift';
-import { createImportSourceMatcher, finishTransform, getImportSources } from '../../../helpers';
+import { createImportSourceMatcher, finishTransform, getImportSources, getIdentifierName } from '../../../helpers';
 
 const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown> = {}) => {
   const j = api.jscodeshift;
@@ -21,7 +21,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
         specifier.imported.type === 'Identifier' &&
         specifier.imported.name === 'ValidationText'
       ) {
-        validationTextLocalNames.add(specifier.local?.name ?? specifier.imported.name);
+        validationTextLocalNames.add(getIdentifierName(specifier.local?.name ?? specifier.imported.name));
       }
     });
   });

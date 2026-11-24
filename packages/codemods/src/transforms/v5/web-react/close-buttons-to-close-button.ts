@@ -1,5 +1,5 @@
 import { API, FileInfo, JSXAttribute, JSXIdentifier, JSXSpreadAttribute } from 'jscodeshift';
-import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses, getIdentifierName } from '../../../helpers';
 
 // ModalCloseButton received the close handling through dedicated props; CloseButton uses the
 // underlying ControlButton/ARIA contract instead.
@@ -40,7 +40,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     path.node.specifiers?.forEach((specifier) => {
       if (specifier.type === 'ImportSpecifier' && specifier.imported.type === 'Identifier') {
         const importedName = specifier.imported.name;
-        const localName = specifier.local?.name ?? importedName;
+        const localName = getIdentifierName(specifier.local?.name ?? importedName);
 
         if (importedName === 'ModalCloseButton') {
           modalLocalNames.add(localName);

@@ -1,5 +1,5 @@
 import { API, ASTPath, FileInfo, JSXAttribute, JSXMemberExpression, JSXOpeningElement } from 'jscodeshift';
-import { createImportSourceMatcher, getImportSources, removeParentheses } from '../../../helpers';
+import { createImportSourceMatcher, getImportSources, removeParentheses, getIdentifierName } from '../../../helpers';
 
 const DIRECTION_MAP: Record<string, string> = {
   row: 'horizontal',
@@ -89,11 +89,11 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
           specifier.imported.type === 'Identifier' &&
           specifier.imported.name === 'Flex'
         ) {
-          flexNamedImports.add(specifier.local?.name ?? specifier.imported.name);
+          flexNamedImports.add(getIdentifierName(specifier.local?.name ?? specifier.imported.name));
         }
 
         if (specifier.type === 'ImportNamespaceSpecifier' && specifier.local?.name) {
-          namespaceImports.add(specifier.local.name);
+          namespaceImports.add(getIdentifierName(specifier.local.name));
         }
       });
     });

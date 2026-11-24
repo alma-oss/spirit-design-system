@@ -7,7 +7,13 @@ import {
   JSXOpeningElement,
   JSXSpreadAttribute,
 } from 'jscodeshift';
-import { finishTransform, createImportSourceMatcher, getImportSources, getOwnRecordValue } from '../../../helpers';
+import {
+  finishTransform,
+  createImportSourceMatcher,
+  getImportSources,
+  getOwnRecordValue,
+  getIdentifierName,
+} from '../../../helpers';
 import { renameComponent } from '../../../helpers/renameComponent';
 
 const IDENTIFIER_RENAMES: Record<string, string> = {
@@ -95,7 +101,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
     path.node.specifiers?.forEach((specifier) => {
       if (specifier.type === 'ImportSpecifier' && specifier.imported.type === 'Identifier') {
         const importedName = specifier.imported.name;
-        const localName = specifier.local?.name ?? importedName;
+        const localName = getIdentifierName(specifier.local?.name ?? importedName);
         const renamedImportedName = getOwnRecordValue(IDENTIFIER_RENAMES, importedName);
 
         if (renamedImportedName) {
@@ -116,7 +122,7 @@ const transform = (fileInfo: FileInfo, api: API, options: Record<string, unknown
       }
 
       if (specifier.type === 'ImportNamespaceSpecifier' && specifier.local?.name) {
-        namespaceImports.add(specifier.local.name);
+        namespaceImports.add(getIdentifierName(specifier.local.name));
       }
     });
   });
