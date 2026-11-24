@@ -319,6 +319,30 @@ subcomponent.
 </CardLogo>
 ```
 
+### Feature Flag: Logo Position on Mobile
+
+By default, CardLogo in a vertical Card overlaps the bottom edge of CardMedia. Enable the new mobile position
+by wrapping Card in an element with the `spirit-feature-enable-v6-card-logo-mobile-position` CSS class.
+When enabled, the logo sits in the bottom-right corner of CardMedia on mobile, without a border and with only the
+top-left corner rounded. From the tablet breakpoint up,
+nothing changes.
+
+```tsx
+<div className="spirit-feature-enable-v6-card-logo-mobile-position">
+  <Card>
+    <CardMedia>
+      <img src="…" alt="" />
+    </CardMedia>
+    <CardLogo>
+      <PartnerLogo size="small">
+        <img src="…" alt="Product Name" />
+      </PartnerLogo>
+    </CardLogo>
+    <CardBody>…</CardBody>
+  </Card>
+</div>
+```
+
 ## CardBody
 
 CardBody is required for any card that has text or other main content. It is the main content area of the Card.

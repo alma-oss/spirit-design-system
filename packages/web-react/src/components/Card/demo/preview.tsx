@@ -14,6 +14,7 @@ import CardFooterDivider from './CardFooterDivider';
 import CardGeneralOptions from './CardGeneralOptions';
 import CardHorizontalLayout from './CardHorizontalLayout';
 import CardLogoDemo from './CardLogo';
+import CardLogoMobilePosition from './CardLogoMobilePosition';
 import { CardMediaOptions } from './CardMediaOptions';
 import CardMediaSizes from './CardMediaSizes';
 import CardResponsiveCard from './CardResponsiveCard';
@@ -33,6 +34,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Logo">
         <CardLogoDemo />
+      </DocsSection>
+      <DocsSection title="Feature Flag: Logo Position on Mobile">
+        <CardLogoMobilePosition />
       </DocsSection>
       <DocsSection title="Horizontal Card Layout">
         <CardHorizontalLayout />

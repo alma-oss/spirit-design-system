@@ -23,6 +23,10 @@ We just do not want to break your application or design without your consent.
 
 Flags prefixed with `enable-v#-*` will be removed in the next major version and their behavior will be made the default.
 
+| Flag                                  | Description                                                         | Default | Sass flag                              |
+| ------------------------------------- | ------------------------------------------------------------------- | ------- | -------------------------------------- |
+| `enable-v6-card-logo-mobile-position` | Position CardLogo in the bottom-right corner of CardMedia on mobile | `false` | `$enable-v6-card-logo-mobile-position` |
+
 For more details on this approach, see the
 [feature flag documentation][feature-flag-documentation]
 in the Spirit Design System monorepo.

@@ -4,9 +4,11 @@
 // 3. Do not let the media push the body content out of the horizontal card.
 
 @use '@tokens' as tokens;
+@use '../../settings/feature-flags';
 @use '../../tools/breakpoint';
 @use '../../tools/dictionaries';
 @use 'theme';
+@use 'tools';
 
 .CardMedia {
     grid-area: media;
@@ -97,4 +99,18 @@
                 #{theme.$border-radius} 0;
         }
     }
+}
+
+// @deprecated The feature flag will be removed in the next major version.
+// Migration: delete this feature flag and apply the mobile position of `CardLogo` by default.
+// @see https://almacareer.atlassian.net/browse/DS-2957
+@if feature-flags.$enable-v6-card-logo-mobile-position {
+    @include tools.media-mobile-logo-position();
+}
+
+// @deprecated The feature flag will be removed in the next major version.
+// Migration: delete this feature flag and apply the mobile position of `CardLogo` by default.
+// @see https://almacareer.atlassian.net/browse/DS-2957
+.spirit-feature-enable-v6-card-logo-mobile-position {
+    @include tools.media-mobile-logo-position();
 }

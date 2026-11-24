@@ -93,3 +93,26 @@ export const Playground: Story = {
     </Container>
   ),
 };
+
+export const LogoPositionOnMobile: Story = {
+  name: 'Feature Flag: Logo Position on Mobile',
+  globals: {
+    viewport: { value: 'mobile1', isRotated: false },
+  },
+  render: (args) => (
+    <Container>
+      <div className="spirit-feature-enable-v6-card-logo-mobile-position">
+        <Card {...args} isBoxed>
+          <CardMedia>{MEDIA_IMAGE}</CardMedia>
+          <CardLogo>
+            <PartnerLogo size="small">{LOGO}</PartnerLogo>
+          </CardLogo>
+          <CardBody>
+            <CardEyebrow>Card eyebrow</CardEyebrow>
+            <CardTitle>Card Title</CardTitle>
+          </CardBody>
+        </Card>
+      </div>
+    </Container>
+  ),
+};

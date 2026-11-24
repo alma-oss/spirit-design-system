@@ -299,7 +299,11 @@ export const CardEmployerGallery = (args: CardEmployerGalleryProps) => {
   const maxWidth = `calc(${columns} * ${cardWidth}px + ${columns - 1} * var(--spirit-${gridSpacing}) + 2 * var(--container-padding-inline))`;
 
   return (
-    <Container size="large" UNSAFE_style={{ maxWidth }}>
+    <Container
+      size="large"
+      UNSAFE_className="spirit-feature-enable-v6-card-logo-mobile-position"
+      UNSAFE_style={{ maxWidth }}
+    >
       <Grid cols={{ mobile: 1, tablet: gridCols }} spacing={GRID_SPACING}>
         {EMPLOYERS.slice(0, numCards).map((employer, index) => {
           const isCustomized = customizeCard === index + 1;

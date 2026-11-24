@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '@tokens' as tokens;
+@use '../../tools/breakpoint';
+@use 'theme';
+
+@mixin logo-mobile-position() {
+    @include breakpoint.down(map.get(theme.$breakpoints, tablet)) {
+        .Card--vertical > .CardLogo {
+            --#{tokens.$css-variable-prefix}card-logo-margin-right: 0;
+            --#{tokens.$css-variable-prefix}card-logo-margin-bottom: #{theme.$gap};
+            --#{tokens.$css-variable-prefix}partner-logo-border-radius: #{theme.$logo-mobile-border-radius};
+
+            border: 0;
+            border-radius: theme.$logo-mobile-border-radius;
+        }
+    }
+}
+
+@mixin media-mobile-logo-position() {
+    @include breakpoint.down(map.get(theme.$breakpoints, tablet)) {
+        .Card--vertical:has(.CardLogo) > .CardMedia {
+            --#{tokens.$css-variable-prefix}card-media-margin-bottom: #{theme.$gap};
+        }
+    }
+}
