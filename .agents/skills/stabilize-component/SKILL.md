@@ -171,8 +171,8 @@ identifier. Do not wait for a later cleanup PR.
 3. **Unit tests** for the stabilized component, its hooks, and a11y; run codemod tests against the new
    fixtures.
 4. **Lint** changed packages and run any docs/README link checks.
-5. **e2e visual snapshots**: regenerate with the project's e2e update target. After stabilization the demo is
-   no longer `unstable_*`, so it loses the `allowUnstable` leniency—ensure its snapshot exists and passes.
+5. **e2e visual snapshots**: regenerate with the project's e2e update target. Ensure the stabilized demo
+   snapshot exists and passes.
    If `web` and `web-react` demos share a snapshot name, give each a package-scoped name to avoid collisions.
    Remove obsolete `unstable-x`/removed-component snapshots and commit the new ones.
 6. Smoke-check Storybook/docsite: the component appears under **Components** in the Storybook sidebar (not

@@ -10,7 +10,6 @@ const testConfigs = [
     packageName: 'web',
     entityLabel: 'component',
     ignoredTests: IGNORED_TESTS,
-    allowUnstable: true,
   },
   {
     targetDir: '/src/components',
@@ -18,7 +17,6 @@ const testConfigs = [
     packageName: 'web-react',
     entityLabel: 'component',
     ignoredTests: IGNORED_TESTS,
-    allowUnstable: true,
   },
 ];
 
