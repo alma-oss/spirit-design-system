@@ -11,7 +11,7 @@ guide entries in both packages, and a codemod (web-react only).
 
 Use when introducing a breaking change that isn't already covered by a more specific skill:
 
-- Removing a feature flag
+- Removing a feature flag (combine with `spirit:feature-flag` for the removal steps)
 - Removing/renaming a prop or changing a default
 - Any other stable-API breaking change
 

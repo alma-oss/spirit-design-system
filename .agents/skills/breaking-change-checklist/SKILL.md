@@ -18,6 +18,9 @@ If the change is a **component stabilization** (`UNSTABLE_X` → `X`) or a **dep
 `spirit:stabilize-component` or `spirit:component-deprecation` instead — both already include this checklist
 plus their own specific steps (renames, exports, deprecation-notice wording).
 
+For the mechanical steps of removing a feature flag (SCSS variable, `.spirit-feature-*` blocks, docs, demos,
+stories, snapshots), use `spirit:feature-flag` alongside this checklist.
+
 ## Required for Every Breaking Change
 
 1. A migration guide entry (TOC + section) in **both**:
