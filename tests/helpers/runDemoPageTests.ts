@@ -17,12 +17,10 @@ export interface DemoPageTestConfig {
   packageName: string;
   entityLabel: string;
   ignoredTests?: string[];
-  allowUnstable?: boolean;
 }
 
 export const runDemoPageTests = (testConfig: DemoPageTestConfig) => {
-  const { packageDir, targetDir, srcDir = '', packageName, entityLabel, ignoredTests = [], allowUnstable = false }
-    = testConfig;
+  const { packageDir, targetDir, srcDir = '', packageName, entityLabel, ignoredTests = [] } = testConfig;
 
   if (packageName) {
     const formattedPackageName = formatPackageName(packageName);
@@ -53,13 +51,8 @@ export const runDemoPageTests = (testConfig: DemoPageTestConfig) => {
               return;
             }
 
-            if (allowUnstable && item.startsWith('unstable_')) {
-              console.warn(`Test for unstable demo ${formattedPackageName} ${entityLabel} ${item} failed, but it's marked as acceptable. ${error}`);
-            } else {
-              // beware of the case insensitive systems; keep the prefix in the small case
-              console.error(`Test for demo ${formattedPackageName} ${entityLabel} ${item} failed. ${error}`);
-              throw error;
-            }
+            console.error(`Test for demo ${formattedPackageName} ${entityLabel} ${item} failed. ${error}`);
+            throw error;
           }
         });
       }

@@ -78,7 +78,6 @@ Most component visual regression tests run automatically. This test file:
 
 4. **Filters components**:
    - Components listed in `IGNORED_TESTS` array are skipped (this should always be a temporary exception, use this option only if you absolutely need to)
-   - Unstable components (prefixed with `unstable_`) are tested but failures only log warnings
 
 **This means most components require no test code**—simply adding an `index.html` demo page is sufficient for automatic visual regression coverage.
 
@@ -194,15 +193,6 @@ const IGNORED_TESTS: string[] = ['BrokenComponent', 'WorkInProgress'];
 ```
 
 **⚠️ Important**: Remove components from this list once they're fixed. The array should remain empty in production.
-
-### Unstable Components
-
-Components prefixed with `unstable_` receive special handling:
-
-- Tests still run but failures log warnings instead of errors.
-- This allows continued development while maintaining test coverage.
-
-Remove the `unstable_` prefix once the component reaches stable status.
 
 ### E2E Accessibility Testing
 
