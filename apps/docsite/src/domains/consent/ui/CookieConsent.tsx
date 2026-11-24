@@ -5,7 +5,7 @@ import { setCookieConsentApi } from '@local/domains/consent/cookieConsentApi';
 import { createDocsiteConsentConfig, limitConsentToTechnicalAndAnalytics } from '@local/domains/consent/docsiteConsent';
 import { useEffect } from 'react';
 
-const SERVICE_NAME = 'spiritdesignsystem.com';
+const SERVICE_NAME = 'spirit.design';
 
 let isInitialized = false;
 

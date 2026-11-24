@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { composePageMarkdown, listDocumentedPages, type DocumentedPageOptions } from '../documentedPages';
 import { renderLlmsFull, renderLlmsTxt } from '../llmsText';
+import { getSiteOrigin } from '../siteOrigin';
 
 const writeFile = async (filePath: string, contents: string) => {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -168,7 +169,7 @@ describe('llms.txt and llms-full.txt', () => {
     const llms = renderLlmsTxt(pages);
     const full = renderLlmsFull(pages);
     const urls = urlsIn(llms);
-    const origin = 'https://spiritdesignsystem.com';
+    const origin = getSiteOrigin();
     const pageUrl = (pagePath: string) => `${origin}${pagePath}?format=md`;
 
     expect(urls.every((url) => url.startsWith(`${origin}/`) && url.endsWith('?format=md'))).toBe(true);

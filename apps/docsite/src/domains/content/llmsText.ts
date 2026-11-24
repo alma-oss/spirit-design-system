@@ -1,12 +1,11 @@
 import { DOCUMENTATION_MENU } from './documentationMenu';
 import { type DocumentedPage } from './documentedPages';
-
-export const SITE_ORIGIN = 'https://spiritdesignsystem.com';
+import { getSiteOrigin } from './siteOrigin';
 
 const SITE_TITLE = 'Spirit Design System';
 const SITE_SUMMARY = 'Documentation for the Spirit Design System';
 
-export const markdownPageUrl = (path: string): string => `${SITE_ORIGIN}${path}?format=md`;
+export const markdownPageUrl = (path: string): string => `${getSiteOrigin()}${path}?format=md`;
 
 const pagesInSection = (pages: DocumentedPage[], section: (typeof DOCUMENTATION_MENU)[number]['id']) =>
   pages.filter((page) => page.section === section);

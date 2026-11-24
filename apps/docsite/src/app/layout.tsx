@@ -1,6 +1,7 @@
 import { Stack } from '@alma-oss/spirit-web-react';
 import { GoogleTagManager } from '@local/domains/analytics/ui/GoogleTagManager';
 import { CookieConsent } from '@local/domains/consent/ui/CookieConsent';
+import { getSiteOrigin } from '@local/domains/content/siteOrigin';
 import Footer from '@local/domains/footer/ui/Footer';
 import { type ChildrenProps } from '@local/types';
 import { AppProvider } from '@local/ui/AppProvider';
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     default: 'Spirit Design System',
   },
   description: 'Documentation for the Spirit Design System',
-  metadataBase: new URL('https://spiritdesignsystem.com'),
+  metadataBase: new URL(getSiteOrigin()),
 };
 
 const RootLayout = ({ children }: RootLayoutProps) => (
