@@ -1,6 +1,8 @@
 @use '@tokens' as tokens;
+@use '../../settings/feature-flags';
 @use '../../tools/breakpoint';
 @use 'theme';
+@use 'tools';
 
 .CardLogo {
     display: inline-flex;
@@ -36,4 +38,18 @@
             --#{tokens.$css-variable-prefix}card-logo-margin-bottom: #{theme.$gap};
         }
     }
+}
+
+// @deprecated The feature flag will be removed in the next major version.
+// Migration: delete this feature flag and apply the mobile position of `CardLogo` by default.
+// @see https://almacareer.atlassian.net/browse/DS-2957
+@if feature-flags.$enable-v6-card-logo-mobile-position {
+    @include tools.logo-mobile-position();
+}
+
+// @deprecated The feature flag will be removed in the next major version.
+// Migration: delete this feature flag and apply the mobile position of `CardLogo` by default.
+// @see https://almacareer.atlassian.net/browse/DS-2957
+.spirit-feature-enable-v6-card-logo-mobile-position {
+    @include tools.logo-mobile-position();
 }
