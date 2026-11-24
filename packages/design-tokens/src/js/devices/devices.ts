@@ -410,32 +410,38 @@ export const breakpointMobile = 0;
 export const breakpointTablet = '48rem';
 export const breakpointDesktop = '80rem';
 
-export const heros = {
-  gradientAngle: {
-    desktop: heroGradientAngleDesktop,
-    mobile: heroGradientAngleMobile,
-    tablet: heroGradientAngleTablet,
-  },
-  radiusBottomLeft: {
-    desktop: heroRadiusBottomLeftDesktop,
-    mobile: heroRadiusBottomLeftMobile,
-    tablet: heroRadiusBottomLeftTablet,
-  },
-  radiusBottomRight: {
-    desktop: heroRadiusBottomRightDesktop,
-    mobile: heroRadiusBottomRightMobile,
-    tablet: heroRadiusBottomRightTablet,
-  },
-  radiusTopLeft: {
-    desktop: heroRadiusTopLeftDesktop,
-    mobile: heroRadiusTopLeftMobile,
-    tablet: heroRadiusTopLeftTablet,
-  },
-  radiusTopRight: {
-    desktop: heroRadiusTopRightDesktop,
-    mobile: heroRadiusTopRightMobile,
-    tablet: heroRadiusTopRightTablet,
-  },
+export const heroGradientAngleDesktop = '90deg';
+export const heroGradientAngleMobile = '90deg';
+export const heroGradientAngleTablet = '90deg';
+
+export const heroMarginTopDesktop = '2rem';
+export const heroMarginTopMobile = '1.25rem';
+export const heroMarginTopTablet = '2rem';
+
+export const sectionLargePaddingYDesktop = '4rem';
+export const sectionLargePaddingYMobile = '3rem';
+export const sectionLargePaddingYTablet = '4rem';
+
+export const sectionMediumPaddingYDesktop = '3.5rem';
+export const sectionMediumPaddingYMobile = '2.5rem';
+export const sectionMediumPaddingYTablet = '3.5rem';
+
+export const sectionSmallPaddingYDesktop = '2.5rem';
+export const sectionSmallPaddingYMobile = '2rem';
+export const sectionSmallPaddingYTablet = '2.5rem';
+
+export const sectionXlargePaddingYDesktop = '5rem';
+export const sectionXlargePaddingYMobile = '4rem';
+export const sectionXlargePaddingYTablet = '5rem';
+
+export const sectionXsmallPaddingYDesktop = '2rem';
+export const sectionXsmallPaddingYMobile = '1.5rem';
+export const sectionXsmallPaddingYTablet = '2rem';
+
+export const gradientAngles = {
+  desktop: heroGradientAngleDesktop,
+  mobile: heroGradientAngleMobile,
+  tablet: heroGradientAngleTablet,
 };
 
 export const typographys = {
@@ -1002,6 +1008,39 @@ export const formFields = {
   },
 };
 
+export const heros = {
+  radiusBottomLeft: {
+    desktop: heroRadiusBottomLeftDesktop,
+    mobile: heroRadiusBottomLeftMobile,
+    tablet: heroRadiusBottomLeftTablet,
+  },
+  radiusBottomRight: {
+    desktop: heroRadiusBottomRightDesktop,
+    mobile: heroRadiusBottomRightMobile,
+    tablet: heroRadiusBottomRightTablet,
+  },
+  radiusTopLeft: {
+    desktop: heroRadiusTopLeftDesktop,
+    mobile: heroRadiusTopLeftMobile,
+    tablet: heroRadiusTopLeftTablet,
+  },
+  radiusTopRight: {
+    desktop: heroRadiusTopRightDesktop,
+    mobile: heroRadiusTopRightMobile,
+    tablet: heroRadiusTopRightTablet,
+  },
+  gradientAngle: {
+    desktop: heroGradientAngleDesktop,
+    mobile: heroGradientAngleMobile,
+    tablet: heroGradientAngleTablet,
+  },
+  marginTop: {
+    desktop: heroMarginTopDesktop,
+    mobile: heroMarginTopMobile,
+    tablet: heroMarginTopTablet,
+  },
+};
+
 export const paginations = {
   radius: {
     desktop: paginationRadiusDesktop,
@@ -1014,4 +1053,42 @@ export const breakpoints = {
   mobile: breakpointMobile,
   tablet: breakpointTablet,
   desktop: breakpointDesktop,
+};
+
+export const sections = {
+  large: {
+    paddingY: {
+      desktop: sectionLargePaddingYDesktop,
+      mobile: sectionLargePaddingYMobile,
+      tablet: sectionLargePaddingYTablet,
+    },
+  },
+  medium: {
+    paddingY: {
+      desktop: sectionMediumPaddingYDesktop,
+      mobile: sectionMediumPaddingYMobile,
+      tablet: sectionMediumPaddingYTablet,
+    },
+  },
+  small: {
+    paddingY: {
+      desktop: sectionSmallPaddingYDesktop,
+      mobile: sectionSmallPaddingYMobile,
+      tablet: sectionSmallPaddingYTablet,
+    },
+  },
+  xlarge: {
+    paddingY: {
+      desktop: sectionXlargePaddingYDesktop,
+      mobile: sectionXlargePaddingYMobile,
+      tablet: sectionXlargePaddingYTablet,
+    },
+  },
+  xsmall: {
+    paddingY: {
+      desktop: sectionXsmallPaddingYDesktop,
+      mobile: sectionXsmallPaddingYMobile,
+      tablet: sectionXsmallPaddingYTablet,
+    },
+  },
 };

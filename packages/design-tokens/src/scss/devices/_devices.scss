@@ -410,32 +410,38 @@ $breakpoint-mobile: 0 !default;
 $breakpoint-tablet: 48rem !default;
 $breakpoint-desktop: 80rem !default;
 
-$heros: (
-    gradient-angle: (
-        desktop: $hero-gradient-angle-desktop,
-        mobile: $hero-gradient-angle-mobile,
-        tablet: $hero-gradient-angle-tablet,
-    ),
-    radius-bottom-left: (
-        desktop: $hero-radius-bottom-left-desktop,
-        mobile: $hero-radius-bottom-left-mobile,
-        tablet: $hero-radius-bottom-left-tablet,
-    ),
-    radius-bottom-right: (
-        desktop: $hero-radius-bottom-right-desktop,
-        mobile: $hero-radius-bottom-right-mobile,
-        tablet: $hero-radius-bottom-right-tablet,
-    ),
-    radius-top-left: (
-        desktop: $hero-radius-top-left-desktop,
-        mobile: $hero-radius-top-left-mobile,
-        tablet: $hero-radius-top-left-tablet,
-    ),
-    radius-top-right: (
-        desktop: $hero-radius-top-right-desktop,
-        mobile: $hero-radius-top-right-mobile,
-        tablet: $hero-radius-top-right-tablet,
-    ),
+$hero-gradient-angle-desktop: 90deg !default;
+$hero-gradient-angle-mobile: 90deg !default;
+$hero-gradient-angle-tablet: 90deg !default;
+
+$hero-margin-top-desktop: 2rem !default;
+$hero-margin-top-mobile: 1.25rem !default;
+$hero-margin-top-tablet: 2rem !default;
+
+$section-large-padding-y-desktop: 4rem !default;
+$section-large-padding-y-mobile: 3rem !default;
+$section-large-padding-y-tablet: 4rem !default;
+
+$section-medium-padding-y-desktop: 3.5rem !default;
+$section-medium-padding-y-mobile: 2.5rem !default;
+$section-medium-padding-y-tablet: 3.5rem !default;
+
+$section-small-padding-y-desktop: 2.5rem !default;
+$section-small-padding-y-mobile: 2rem !default;
+$section-small-padding-y-tablet: 2.5rem !default;
+
+$section-xlarge-padding-y-desktop: 5rem !default;
+$section-xlarge-padding-y-mobile: 4rem !default;
+$section-xlarge-padding-y-tablet: 5rem !default;
+
+$section-xsmall-padding-y-desktop: 2rem !default;
+$section-xsmall-padding-y-mobile: 1.5rem !default;
+$section-xsmall-padding-y-tablet: 2rem !default;
+
+$gradient-angles: (
+    desktop: $hero-gradient-angle-desktop,
+    mobile: $hero-gradient-angle-mobile,
+    tablet: $hero-gradient-angle-tablet,
 ) !default;
 
 $typographys: (
@@ -1002,6 +1008,39 @@ $form-fields: (
     ),
 ) !default;
 
+$heros: (
+    radius-bottom-left: (
+        desktop: $hero-radius-bottom-left-desktop,
+        mobile: $hero-radius-bottom-left-mobile,
+        tablet: $hero-radius-bottom-left-tablet,
+    ),
+    radius-bottom-right: (
+        desktop: $hero-radius-bottom-right-desktop,
+        mobile: $hero-radius-bottom-right-mobile,
+        tablet: $hero-radius-bottom-right-tablet,
+    ),
+    radius-top-left: (
+        desktop: $hero-radius-top-left-desktop,
+        mobile: $hero-radius-top-left-mobile,
+        tablet: $hero-radius-top-left-tablet,
+    ),
+    radius-top-right: (
+        desktop: $hero-radius-top-right-desktop,
+        mobile: $hero-radius-top-right-mobile,
+        tablet: $hero-radius-top-right-tablet,
+    ),
+    gradient-angle: (
+        desktop: $hero-gradient-angle-desktop,
+        mobile: $hero-gradient-angle-mobile,
+        tablet: $hero-gradient-angle-tablet,
+    ),
+    margin-top: (
+        desktop: $hero-margin-top-desktop,
+        mobile: $hero-margin-top-mobile,
+        tablet: $hero-margin-top-tablet,
+    ),
+) !default;
+
 $paginations: (
     radius: (
         desktop: $pagination-radius-desktop,
@@ -1014,4 +1053,42 @@ $breakpoints: (
     mobile: $breakpoint-mobile,
     tablet: $breakpoint-tablet,
     desktop: $breakpoint-desktop,
+) !default;
+
+$sections: (
+    large: (
+        padding-y: (
+            desktop: $section-large-padding-y-desktop,
+            mobile: $section-large-padding-y-mobile,
+            tablet: $section-large-padding-y-tablet,
+        ),
+    ),
+    medium: (
+        padding-y: (
+            desktop: $section-medium-padding-y-desktop,
+            mobile: $section-medium-padding-y-mobile,
+            tablet: $section-medium-padding-y-tablet,
+        ),
+    ),
+    small: (
+        padding-y: (
+            desktop: $section-small-padding-y-desktop,
+            mobile: $section-small-padding-y-mobile,
+            tablet: $section-small-padding-y-tablet,
+        ),
+    ),
+    xlarge: (
+        padding-y: (
+            desktop: $section-xlarge-padding-y-desktop,
+            mobile: $section-xlarge-padding-y-mobile,
+            tablet: $section-xlarge-padding-y-tablet,
+        ),
+    ),
+    xsmall: (
+        padding-y: (
+            desktop: $section-xsmall-padding-y-desktop,
+            mobile: $section-xsmall-padding-y-mobile,
+            tablet: $section-xsmall-padding-y-tablet,
+        ),
+    ),
 ) !default;
