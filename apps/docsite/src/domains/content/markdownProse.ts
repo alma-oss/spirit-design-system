@@ -1,11 +1,33 @@
 import { parseCanonicalFrontmatter } from './parseFrontmatter';
 
-const FENCE = /^\s*(```|~~~)/;
 const LIST_ITEM = /^([-*]|\d+\.)\s/;
 const HEADING = /^#{1,6}\s+\S/;
 const HORIZONTAL_RULE = /^(-{3,}|\*{3,}|_{3,})$/;
 const LINK = /!\[[^\]]*\]\([^)]*\)|\[(?:[^\]]*)\](?:\([^)]*\)|\[[^\]]*\])|<https?:\/\/[^>\s]+>/g;
-const H1 = /^#\s+\S/m;
+const H1 = /^#\s+\S/;
+
+interface Fence {
+  marker: string;
+  length: number;
+}
+
+const openingFence = (line: string): Fence | null => {
+  const match = line.match(/^\s*(`{3,}|~{3,})/);
+  const run = match?.[1];
+
+  if (!run) {
+    return null;
+  }
+
+  return { marker: run[0] ?? '', length: run.length };
+};
+
+const closesFence = (line: string, fence: Fence): boolean => {
+  const match = line.match(/^\s*(`{3,}|~{3,})\s*$/);
+  const run = match?.[1];
+
+  return Boolean(run && run[0] === fence.marker && run.length >= fence.length);
+};
 
 const stripMarkdown = (text: string) =>
   text
@@ -13,21 +35,38 @@ const stripMarkdown = (text: string) =>
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
     .replace(/\[([^\]]*)\]\[[^\]]*\]/g, '$1')
     .replace(/\[([^\]]*)\]/g, '$1')
-    .replace(/[`*_]/g, '')
+    .replace(/(\*\*|__)(.+?)\1/g, '$2')
+    .replace(/(^|\s)([*_])(\S(?:.*?\S)?)\2(?=\s|$)/g, '$1$3')
+    .replace(/`([^`]+)`/g, '$1')
     .trim();
 
 const isSkippedLine = (text: string) =>
   LIST_ITEM.test(text) ||
   text.startsWith('|') ||
   text.startsWith('>') ||
+  text.startsWith('<') ||
   HEADING.test(text) ||
   HORIZONTAL_RULE.test(text);
 
 const isLinkOnly = (paragraph: string) => paragraph.replace(LINK, '').trim() === '';
 
+const firstSentence = (text: string): string => {
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const rest = text.slice(index + 1);
+    const isBoundary = (char === '.' || char === '!' || char === '?') && (rest === '' || /^\s+[A-Z]/.test(rest));
+
+    if (isBoundary) {
+      return text.slice(0, index + 1);
+    }
+  }
+
+  return text;
+};
+
 const proseParagraphs = (source: string): string[] => {
   const paragraphs: string[] = [];
-  let fence: string | null = null;
+  let fence: Fence | null = null;
   let current: string[] = [];
 
   const flush = () => {
@@ -41,18 +80,20 @@ const proseParagraphs = (source: string): string[] => {
   };
 
   source.split(/\r?\n/).forEach((line) => {
-    const fenceMatch = line.match(FENCE);
-
-    if (fenceMatch) {
-      const marker = fenceMatch[1] ?? '';
-
-      fence = fence === marker ? null : (fence ?? marker);
-      flush();
+    if (fence) {
+      if (closesFence(line, fence)) {
+        fence = null;
+      }
 
       return;
     }
 
-    if (fence) {
+    const opened = openingFence(line);
+
+    if (opened) {
+      fence = opened;
+      flush();
+
       return;
     }
 
@@ -72,9 +113,38 @@ const proseParagraphs = (source: string): string[] => {
   return paragraphs;
 };
 
+const hasProseH1 = (body: string): boolean => {
+  let fence: Fence | null = null;
+  let found = false;
+
+  body.split(/\r?\n/).forEach((line) => {
+    if (fence) {
+      if (closesFence(line, fence)) {
+        fence = null;
+      }
+
+      return;
+    }
+
+    const opened = openingFence(line);
+
+    if (opened) {
+      fence = opened;
+
+      return;
+    }
+
+    if (H1.test(line)) {
+      found = true;
+    }
+  });
+
+  return found;
+};
+
 /**
  * First prose sentence in a markdown file.
- * Link-only paragraphs, lists, tables, quotes, headings, and fenced examples are skipped.
+ * Link-only paragraphs, lists, tables, quotes, headings, raw HTML, and fenced examples are skipped.
  *
  * @param raw Markdown source, with or without front matter
  */
@@ -87,6 +157,8 @@ export const firstProseSentence = (raw: string): string => {
     body = raw;
   }
 
+  // The unstable warning is component status, not a description. The component
+  // header already shows it, and getComponentDescription drops the same paragraphs.
   const sentence = proseParagraphs(body)
     .filter((paragraph) => !isLinkOnly(paragraph))
     .map(stripMarkdown)
@@ -96,13 +168,13 @@ export const firstProseSentence = (raw: string): string => {
     return '';
   }
 
-  return sentence.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? sentence;
+  return firstSentence(sentence);
 };
 
 /**
  * Documentation markdown with front matter removed.
  * A missing H1 is filled from the front-matter title, then `fallbackTitle`.
- * Fenced code is left unchanged.
+ * An H1 inside a fence does not count. Fenced code is left unchanged.
  *
  * @param raw Markdown source
  * @param fallbackTitle Used when the file has no H1 and no front-matter title
@@ -124,7 +196,7 @@ export const renderMarkdownDocument = (raw: string, fallbackTitle: string): stri
 
   if (!trimmed) {
     content = title ? `# ${title}` : '';
-  } else if (!H1.test(trimmed) && title) {
+  } else if (!hasProseH1(trimmed) && title) {
     content = `# ${title}\n\n${trimmed}`;
   }
 

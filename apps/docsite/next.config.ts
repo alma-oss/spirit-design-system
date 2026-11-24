@@ -2,6 +2,7 @@ import { dirname, resolve, join } from 'path';
 import { fileURLToPath } from 'url';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
+import { DOCUMENTATION_MENU } from './src/domains/content/documentationMenu';
 
 const pathDir = dirname(fileURLToPath(import.meta.url));
 
@@ -140,22 +141,23 @@ const nextConfig: NextConfig = {
   },
   // Existing pages are static, so a query param cannot change their body.
   // beforeFiles runs before those pages and only when format=md is present.
+  // Only documented sections are rewritten, so /md, /llms.txt, /_next, and /api stay untouched.
   async rewrites() {
     const markdownQuery = [{ type: 'query' as const, key: 'format', value: 'md' }];
 
     return {
-      beforeFiles: [
+      beforeFiles: DOCUMENTATION_MENU.flatMap(({ id }) => [
         {
-          source: '/',
+          source: `/${id}`,
           has: markdownQuery,
-          destination: '/md',
+          destination: `/md/${id}`,
         },
         {
-          source: '/:path*',
+          source: `/${id}/:path*`,
           has: markdownQuery,
-          destination: '/md/:path*',
+          destination: `/md/${id}/:path*`,
         },
-      ],
+      ]),
     };
   },
 };

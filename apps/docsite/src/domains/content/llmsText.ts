@@ -1,3 +1,4 @@
+import { DOCUMENTATION_MENU } from './documentationMenu';
 import { type DocumentedPage } from './documentedPages';
 
 export const SITE_ORIGIN = 'https://spiritdesignsystem.com';
@@ -5,20 +6,9 @@ export const SITE_ORIGIN = 'https://spiritdesignsystem.com';
 const SITE_TITLE = 'Spirit Design System';
 const SITE_SUMMARY = 'Documentation for the Spirit Design System';
 
-const MENU_SECTIONS = [
-  { id: 'introduction', label: 'Introduction' },
-  { id: 'design', label: 'Design' },
-  { id: 'components', label: 'Components' },
-  { id: 'icons', label: 'Icons' },
-  { id: 'helpers', label: 'Helpers' },
-  { id: 'development', label: 'Development' },
-  { id: 'migrations', label: 'Migrations' },
-  { id: 'releases', label: 'Releases' },
-] as const;
-
 export const markdownPageUrl = (path: string): string => `${SITE_ORIGIN}${path}?format=md`;
 
-const pagesInSection = (pages: DocumentedPage[], section: (typeof MENU_SECTIONS)[number]['id']) =>
+const pagesInSection = (pages: DocumentedPage[], section: (typeof DOCUMENTATION_MENU)[number]['id']) =>
   pages.filter((page) => page.section === section);
 
 const siteHeader = (): string[] => [`# ${SITE_TITLE}`, '', `> ${SITE_SUMMARY}`, ''];
@@ -31,7 +21,7 @@ const siteHeader = (): string[] => [`# ${SITE_TITLE}`, '', `> ${SITE_SUMMARY}`, 
 export const renderLlmsTxt = (pages: DocumentedPage[]): string => {
   const lines = siteHeader();
 
-  MENU_SECTIONS.forEach((section) => {
+  DOCUMENTATION_MENU.forEach((section) => {
     const sectionPages = pagesInSection(pages, section.id);
 
     if (sectionPages.length === 0) {
@@ -61,7 +51,7 @@ export const renderLlmsTxt = (pages: DocumentedPage[]): string => {
 export const renderLlmsFull = (pages: DocumentedPage[]): string => {
   const lines = siteHeader();
 
-  MENU_SECTIONS.forEach((section) => {
+  DOCUMENTATION_MENU.forEach((section) => {
     const sectionPages = pagesInSection(pages, section.id);
 
     if (sectionPages.length === 0) {

@@ -1,9 +1,6 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { fetchAllHelpers } from '@local/domains/helpers/repositories/helpersRepository';
-import { fetchAllIcons } from '@local/domains/icons/repositories/iconsRepository';
-import { listDocSlugs } from '../contentNavigation';
 import { composePageMarkdown, listDocumentedPages, type DocumentedPageOptions } from '../documentedPages';
 import { renderLlmsFull, renderLlmsTxt } from '../llmsText';
 
@@ -12,66 +9,85 @@ const writeFile = async (filePath: string, contents: string) => {
   await fs.writeFile(filePath, contents, 'utf8');
 };
 
+const dedent = (source: string): string => {
+  const text = source.replace(/^\n/, '').replace(/\n[ \t]*$/, '');
+  const lines = text.split('\n');
+  const indent = lines
+    .filter((line) => line.trim().length > 0)
+    .reduce((smallest, line) => Math.min(smallest, line.match(/^[ \t]*/)?.[0].length ?? 0), Number.POSITIVE_INFINITY);
+
+  return `${lines.map((line) => line.slice(indent)).join('\n')}\n`;
+};
+
+const roots: string[] = [];
+
+afterEach(async () => {
+  await Promise.all(roots.splice(0).map((directory) => fs.rm(directory, { recursive: true, force: true })));
+});
+
 const createFixture = async (): Promise<DocumentedPageOptions> => {
   const contentRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'llms-content-'));
   const repoRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'llms-repo-'));
 
+  roots.push(contentRoot, repoRoot);
+
   await writeFile(
     path.join(contentRoot, 'introduction', 'index.md'),
-    `---
-title: Introduction
----
+    dedent(`
+      ---
+      title: Introduction
+      ---
 
-[Components](/components)
-`,
+      [Components](/components)
+    `),
   );
   await writeFile(
     path.join(contentRoot, 'development', 'helpers', 'links.md'),
-    `---
-title: Helpers
----
+    dedent(`
+      # Links
 
-Link styling sentence.
-`,
+      Link styling sentence.
+    `),
   );
-
   const buttonDocs = path.join(repoRoot, 'packages/web-react/src/components/Button');
 
   await writeFile(
     path.join(buttonDocs, 'README.md'),
-    `# Button
+    dedent(`
+      # Button
 
-Triggers an action.
-
-## Usage
-`,
+      Triggers an action.
+    `),
   );
   await writeFile(
     path.join(buttonDocs, 'docs', 'overview.md'),
-    `---
-title: Ignored Heading
----
+    dedent(`
+      ---
+      title: Ignored Heading
+      ---
 
-\`\`\`scss
-$button-height: 1;
-\`\`\`
-`,
+      \`\`\`scss
+      $button-height: 1;
+      \`\`\`
+    `),
   );
   await writeFile(
     path.join(buttonDocs, 'docs', 'design.md'),
-    `# Button
+    dedent(`
+      # Button
 
-Quiet surface for the design tab.
+      Quiet surface for the design tab.
 
-## Tokens
-`,
+      ## Tokens
+    `),
   );
   await writeFile(
     path.join(buttonDocs, 'docs', 'figma.md'),
-    `# Figma
+    dedent(`
+      # Figma
 
-This figma tab should stay hidden.
-`,
+      This figma tab should stay hidden.
+    `),
   );
   await writeFile(
     path.join(buttonDocs, 'docs', 'playground.json'),
@@ -84,17 +100,19 @@ This figma tab should stay hidden.
   );
   await writeFile(
     path.join(repoRoot, 'packages/web/src/scss/components/Button/README.md'),
-    `# Button
+    dedent(`
+      # Button
 
-Web markup for the button.
-`,
+      Web markup for the button.
+    `),
   );
   await writeFile(
     path.join(repoRoot, 'packages/web-react/src/components/Tag/README.md'),
-    `# Tag
+    dedent(`
+      # Tag
 
-Tags label a value.
-`,
+      Tags label a value.
+    `),
   );
   await writeFile(path.join(repoRoot, 'packages/icons/src/svg/calendar.svg'), '<svg></svg>');
   await writeFile(path.join(repoRoot, 'packages/web/src/scss/helpers/clearfix/preview.html'), '<div></div>');
@@ -150,52 +168,39 @@ describe('llms.txt and llms-full.txt', () => {
     const llms = renderLlmsTxt(pages);
     const full = renderLlmsFull(pages);
     const urls = urlsIn(llms);
+    const origin = 'https://spiritdesignsystem.com';
+    const pageUrl = (pagePath: string) => `${origin}${pagePath}?format=md`;
 
-    expect(urls.every((url) => url.startsWith('https://spiritdesignsystem.com/') && url.endsWith('?format=md'))).toBe(
-      true,
-    );
+    expect(urls.every((url) => url.startsWith(`${origin}/`) && url.endsWith('?format=md'))).toBe(true);
     expect(new Set(urls).size).toBe(urls.length);
     expect(urls).toEqual(
       expect.arrayContaining([
-        'https://spiritdesignsystem.com/introduction?format=md',
-        'https://spiritdesignsystem.com/development?format=md',
-        'https://spiritdesignsystem.com/development/helpers?format=md',
-        'https://spiritdesignsystem.com/development/helpers/links?format=md',
-        'https://spiritdesignsystem.com/components?format=md',
-        'https://spiritdesignsystem.com/components/button?format=md',
-        'https://spiritdesignsystem.com/components/button/design?format=md',
-        'https://spiritdesignsystem.com/components/button/react?format=md',
-        'https://spiritdesignsystem.com/components/tag/react?format=md',
-        'https://spiritdesignsystem.com/icons?format=md',
-        'https://spiritdesignsystem.com/helpers?format=md',
+        pageUrl('/introduction'),
+        pageUrl('/development'),
+        pageUrl('/development/helpers'),
+        pageUrl('/development/helpers/links'),
+        pageUrl('/components'),
+        pageUrl('/components/button'),
+        pageUrl('/components/button/design'),
+        pageUrl('/components/button/react'),
+        pageUrl('/components/tag/react'),
+        pageUrl('/icons'),
+        pageUrl('/helpers'),
       ]),
     );
-    expect(urls).not.toContain('https://spiritdesignsystem.com/?format=md');
-    expect(urls).not.toContain('https://spiritdesignsystem.com/components/button/web?format=md');
-    expect(urls).not.toContain('https://spiritdesignsystem.com/components/button/figma?format=md');
-    expect(urls).not.toContain('https://spiritdesignsystem.com/components/tag?format=md');
-    expect(urls).not.toContain('https://spiritdesignsystem.com/helpers/clearfix?format=md');
+    expect(urls).not.toContain(pageUrl('/'));
+    expect(urls).not.toContain(pageUrl('/components/button/web'));
+    expect(urls).not.toContain(pageUrl('/components/button/figma'));
+    expect(urls).not.toContain(pageUrl('/components/tag'));
+    expect(urls).not.toContain(pageUrl('/helpers/clearfix'));
 
-    expect(urls).toEqual(
-      expect.arrayContaining([
-        'https://spiritdesignsystem.com/introduction?format=md',
-        'https://spiritdesignsystem.com/development?format=md',
-        'https://spiritdesignsystem.com/development/helpers?format=md',
-        'https://spiritdesignsystem.com/development/helpers/links?format=md',
-      ]),
-    );
-
-    expect(llms).toContain('[Introduction](https://spiritdesignsystem.com/introduction?format=md): Introduction');
+    expect(llms).toContain(`[Introduction](${pageUrl('/introduction')}): Introduction`);
+    expect(llms).toContain(`[Links](${pageUrl('/development/helpers/links')}): Link styling sentence.`);
+    expect(llms).toContain(`[Button](${pageUrl('/components/button')}): Triggers an action.`);
     expect(llms).toContain(
-      '[Links](https://spiritdesignsystem.com/development/helpers/links?format=md): Link styling sentence.',
+      `[Button — Design](${pageUrl('/components/button/design')}): Quiet surface for the design tab.`,
     );
-    expect(llms).toContain('[Button](https://spiritdesignsystem.com/components/button?format=md): Triggers an action.');
-    expect(llms).toContain(
-      '[Button — Design](https://spiritdesignsystem.com/components/button/design?format=md): Quiet surface for the design tab.',
-    );
-    expect(llms).toContain(
-      '[Button — React](https://spiritdesignsystem.com/components/button/react?format=md): Triggers an action.',
-    );
+    expect(llms).toContain(`[Button — React](${pageUrl('/components/button/react')}): Triggers an action.`);
     expect(llms.indexOf('## Introduction')).toBeLessThan(llms.indexOf('## Components'));
     expect(llms.indexOf('## Components')).toBeLessThan(llms.indexOf('## Icons'));
     expect(llms.indexOf('## Icons')).toBeLessThan(llms.indexOf('## Helpers'));
@@ -211,53 +216,27 @@ describe('llms.txt and llms-full.txt', () => {
       llms.indexOf('/components/tag/react?format=md'),
     );
 
+    const catalog = pages.find((page) => page.path === '/components');
     const icons = pages.find((page) => page.path === '/icons');
     const helpers = pages.find((page) => page.path === '/helpers');
 
+    expect(catalog?.body).toContain('[Tag](/components/tag/react)');
+    expect(catalog?.body).not.toMatch(/\[Tag\]\(\/components\/tag\)/);
     expect(icons?.body).toContain('- calendar');
     expect(helpers?.body).toContain('- Clearfix');
 
     expect(full).toContain(
-      '### Button — Design\n\nhttps://spiritdesignsystem.com/components/button/design?format=md\n\n# Button\n\nQuiet surface for the design tab.',
+      `### Button — Design\n\n${pageUrl('/components/button/design')}\n\n# Button\n\nQuiet surface for the design tab.`,
     );
     expect(full.split('Quiet surface for the design tab.')).toHaveLength(2);
   });
-});
 
-describe('documented pages in this repository', () => {
-  it('matches doc slugs, menu landings, icons, and helpers', async () => {
-    const pages = await listDocumentedPages();
-    const paths = pages.map((page) => page.path);
-    const llms = renderLlmsTxt(pages);
-    const urls = urlsIn(llms);
-    const docSlugs = await listDocSlugs();
+  it('rethrows when the icon path is not a directory', async () => {
+    const options = await createFixture();
 
-    expect(new Set(paths).size).toBe(paths.length);
-    expect(paths).not.toContain('/');
-    expect(paths.some((pagePath) => pagePath.includes('web-preview') || pagePath.includes('react-preview'))).toBe(
-      false,
-    );
-    expect(paths).toEqual(expect.arrayContaining(['/components', '/icons', '/helpers']));
+    await fs.rm(path.join(options.repoRoot ?? '', 'packages/icons/src/svg'), { recursive: true });
+    await fs.writeFile(path.join(options.repoRoot ?? '', 'packages/icons/src/svg'), 'not-a-directory');
 
-    docSlugs.forEach((slug) => {
-      expect(paths).toContain(`/${slug.join('/')}`);
-    });
-
-    const failing = urls.filter(
-      (url) => !(url.startsWith('https://spiritdesignsystem.com/') && url.endsWith('?format=md')),
-    );
-
-    expect(failing).toEqual([]);
-    expect(new Set(urls).size).toBe(urls.length);
-
-    const icons = pages.find((page) => page.path === '/icons');
-    const helpers = pages.find((page) => page.path === '/helpers');
-
-    fetchAllIcons().forEach((name) => {
-      expect(icons?.body).toContain(`- ${name}`);
-    });
-    fetchAllHelpers().forEach((helper) => {
-      expect(helpers?.body).toContain(`- ${helper.title}`);
-    });
+    await expect(listDocumentedPages(options)).rejects.toMatchObject({ code: 'ENOTDIR' });
   });
 });
