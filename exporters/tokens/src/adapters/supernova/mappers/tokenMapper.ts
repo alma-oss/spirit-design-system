@@ -46,8 +46,7 @@ const normalizeUnit = (unit: unknown): string | undefined => (unit === undefined
 type NumericValueToken = Token & { value?: { measure: number; unit: unknown } };
 
 /**
- * `TokenType`s mapped to a plain numeric value so far. Grows one type at a
- * time as each numeric processor is migrated; see #DS-2335.
+ * `TokenType`s mapped to a plain numeric value.
  */
 const NUMERIC_TOKEN_TYPES: Partial<Record<TokenType, TokenTypeEnum>> = {
   [TokenType.dimension]: TokenTypeEnum.Dimension,

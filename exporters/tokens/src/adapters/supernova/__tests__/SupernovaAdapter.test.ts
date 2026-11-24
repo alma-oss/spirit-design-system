@@ -30,7 +30,7 @@ describe('SupernovaAdapter', () => {
 
       const collection = await adapter.fetchTokens({ source: { designSystemId: 'ds1', versionId: 'v1' } });
 
-      // string and dimension tokens are mapped so far (see #DS-2335); the internal `figma-` token stays, the pipeline excludes it.
+      // the internal `figma-` token stays, the pipeline excludes it.
       // one token per id, the tokens resolved for a theme or a device are separate
       expect(collection.tokens.map((token) => token.id).sort()).toEqual(['dimensionRef', 'figmaTokenRef', 'stringRef']);
       expect(collection.themedTokens.map(({ theme, tokens }) => [theme.name, tokens.length])).toEqual([['Dark', 3]]);
