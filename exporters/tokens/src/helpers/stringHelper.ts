@@ -1,4 +1,4 @@
-import { camelCase, paramCase } from 'change-case';
+import { camelCase, kebabCase } from 'change-case';
 
 export const toPlural = (name: string): string => {
   const specialCases: Record<string, string> = {
@@ -27,7 +27,7 @@ const toCodeSafeName = (parts: string | string[], convertCase: (value: string) =
 
 export const toCamelCase = (name: string): string => toCodeSafeName(name, camelCase);
 
-export const toParamCase = (parts: string | string[]): string => toCodeSafeName(parts, paramCase);
+export const toParamCase = (parts: string | string[]): string => toCodeSafeName(parts, kebabCase);
 
 export const formatLayerSuffix = (layer: number): string => `-${layer.toString().padStart(2, '0')}`;
 
