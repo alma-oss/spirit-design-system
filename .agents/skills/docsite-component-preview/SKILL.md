@@ -30,9 +30,12 @@ name matches the component slug.
 
 ## Category and Description
 
-Add a new component to its category in `component-catalog/constants/componentCategories.ts` by the placement rule
-at the top of the file. Do not move existing components or change category descriptions or
-`componentDescriptions.ts` unless someone asks for new categories or public copy.
+Add a new component to its category in `docs/component-categories.yaml` by the placement rule at the top of the
+file. Every component in `packages/web-react/src/components` must be in exactly one category, and categories and
+their components stay sorted alphabetically. A missing, duplicated, or misspelled component fails the docsite build.
+
+Do not move existing components or change category descriptions or
+`component-catalog/constants/componentDescriptions.ts` unless someone asks for new categories or public copy.
 
 ## A Component with No Illustration
 
@@ -51,4 +54,6 @@ to the component-detail Web Preview.
 
 Open `/components` and find the card. Then run `yarn workspace @alma-oss/spirit-docsite test`. The catalog test
 in `component-catalog/repositories/__tests__/componentsCatalogRepository.test.ts` fails when an
-illustration file is not named after an existing component slug.
+illustration file is not named after an existing component slug, and
+`components/repositories/__tests__/componentCategoriesRepository.test.ts` fails when a component has no category
+or the categories are out of order.
