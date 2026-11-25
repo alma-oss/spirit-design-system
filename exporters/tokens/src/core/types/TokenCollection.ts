@@ -13,12 +13,14 @@ export type TokenGroup = {
  * Source-neutral kind of a collection (a Figma variable collection, a Supernova `Collection` option):
  * - `global`: values shared by every theme and device,
  * - `color`: values a theme overrides,
- * - `devices`: values a device (e.g. mobile, tablet, desktop) overrides.
+ * - `devices`: values a device (e.g. mobile, tablet, desktop) overrides,
+ * - `lookup`: values other tokens reference (e.g. primitives), never generated on their own.
  */
 export enum CollectionKind {
   Global = 'global',
   Color = 'color',
   Devices = 'devices',
+  Lookup = 'lookup',
 }
 
 export type Theme = {

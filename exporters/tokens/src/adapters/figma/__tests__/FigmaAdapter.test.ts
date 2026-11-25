@@ -1,7 +1,8 @@
 import { createTokenIndex } from '../../../core/tokenIndex';
 import { resolveValueDeep } from '../../../core/resolveValue';
 import { readTypography } from '../../../core/typography';
-import { TokenTypeEnum, type DesignToken } from '../../../core/types';
+import { CollectionKind, TokenTypeEnum, type DesignToken } from '../../../core/types';
+import { filterExcludedTokens } from '../../../filters/excludedTokens';
 import { FigmaAdapter } from '../FigmaAdapter';
 import { FigmaApiError } from '../FigmaApiError';
 import { FigmaExportError } from '../FigmaExportError';
@@ -45,10 +46,21 @@ describe('FigmaAdapter', () => {
       const { tokens, themes, metadata } = await fetchTokens(createFigmaFetch());
 
       expect(metadata.source).toBe('figma');
-      expect(themes).toEqual([
-        { id: 't1', name: 'light', isDefault: true },
-        { id: 't2', name: 'dark', isDefault: false },
-      ]);
+      expect(themes).toEqual(
+        [
+          { id: 't1', name: 'Light', codeName: 'light', collection: 'color', isDefault: true },
+          { id: 't2', name: 'Dark', codeName: 'dark', collection: 'color', isDefault: false },
+          { id: 'd1', name: 'Mobile', codeName: 'mobile', collection: 'devices', device: 'mobile', isDefault: true },
+          {
+            id: 'd2',
+            name: 'Desktop',
+            codeName: 'desktop',
+            collection: 'devices',
+            device: 'desktop',
+            isDefault: false,
+          },
+        ].map((theme) => expect.objectContaining(theme)),
+      );
       expect(byId(tokens, 'v-prefix')).toMatchObject({
         name: CSS_VARIABLE_PREFIX,
         type: TokenTypeEnum.String,
@@ -62,37 +74,70 @@ describe('FigmaAdapter', () => {
       });
     });
 
-    it('should emit a token per theme and per device mode', async () => {
+    it('should keep one token per variable in the default modes and tag it with its collection', async () => {
       const { tokens } = await fetchTokens(createFigmaFetch());
 
-      expect(byId(tokens, 'v-color:t1')).toMatchObject({
+      expect(new Set(tokens.map((token) => token.id)).size).toBe(tokens.length);
+      expect(byId(tokens, 'v-space').metadata.collection).toBe(CollectionKind.Global);
+      expect(byId(tokens, 'v-color')).toMatchObject({
+        value: { value: '#ffffffff' },
+        metadata: { collection: CollectionKind.Color, theme: undefined },
+      });
+      expect(byId(tokens, 'v-font-size')).toMatchObject({
+        value: { value: 14 },
+        metadata: { collection: CollectionKind.Devices, device: undefined },
+      });
+    });
+
+    it('should apply each theme to the tokens in themedTokens, the default theme first', async () => {
+      const { themedTokens } = await fetchTokens(createFigmaFetch());
+
+      expect(themedTokens.map(({ theme }) => theme.id)).toEqual(['t1', 't2']);
+      expect(byId(themedTokens[0].tokens, 'v-color')).toMatchObject({
         type: TokenTypeEnum.Color,
         value: { type: 'color', format: 'hex', value: '#ffffffff' },
-        metadata: { theme: 'light' },
+        metadata: { theme: 'Light' },
       });
-      expect(byId(tokens, 'v-color:t2').value).toMatchObject({ value: '#000000ff' });
-      expect(byId(tokens, 'v-font-size:d1')).toMatchObject({
-        type: TokenTypeEnum.FontSize,
-        value: { type: 'number', value: 14, unit: 'px' },
-        metadata: { device: 'mobile' },
-      });
-      expect(byId(tokens, 'v-font-size:d2').metadata.device).toBe('desktop');
+      expect(byId(themedTokens[1].tokens, 'v-color').value).toMatchObject({ value: '#000000ff' });
+      // Colors of other collections than the theme one are not themed, other tokens are
+      expect(themedTokens[0].tokens.some((token) => token.id === 'v-space')).toBe(true);
+    });
+
+    it('should resolve the tokens of the device collection for each device in deviceTokens', async () => {
+      const { deviceTokens, devices } = await fetchTokens(createFigmaFetch());
+
+      expect(devices).toEqual([
+        { name: 'mobile', themeId: 'd1' },
+        { name: 'desktop', themeId: 'd2' },
+      ]);
+      expect(deviceTokens.map((token) => [token.id, token.metadata.device])).toEqual(
+        expect.arrayContaining([
+          ['v-font-size', 'mobile'],
+          ['v-font-size', 'desktop'],
+        ]),
+      );
+      expect(deviceTokens.find((token) => token.metadata.device === 'mobile')?.value).toMatchObject({ value: 14 });
+      expect(deviceTokens.find((token) => token.metadata.device === 'desktop')?.value).toMatchObject({ value: 16 });
     });
 
     it('should keep a color alias to an exported token as a reference carrying the resolved value', async () => {
-      const { tokens } = await fetchTokens(createFigmaFetch());
+      const { themedTokens } = await fetchTokens(createFigmaFetch());
 
-      expect(byId(tokens, 'v-accent:t2').value).toEqual({
+      expect(byId(themedTokens[1].tokens, 'v-accent').value).toEqual({
         type: 'reference',
-        tokenId: 'v-color:t2',
+        tokenId: 'v-color',
         resolved: { type: 'color', format: 'hex', value: '#000000ff' },
       });
     });
 
     it('should resolve an alias to an unexported token to its value', async () => {
-      const { tokens } = await fetchTokens(createFigmaFetch());
+      const { tokens, themedTokens } = await fetchTokens(createFigmaFetch());
 
-      expect(byId(tokens, 'v-accent:t1').value).toEqual({ type: 'color', format: 'hex', value: '#ff0000ff' });
+      expect(byId(themedTokens[0].tokens, 'v-accent').value).toEqual({
+        type: 'color',
+        format: 'hex',
+        value: '#ff0000ff',
+      });
       expect(byId(tokens, 'v-radius')).toMatchObject({
         type: TokenTypeEnum.Radius,
         value: { type: 'number', value: 4, unit: 'px' },
@@ -124,7 +169,7 @@ describe('FigmaAdapter', () => {
         lineHeight: { type: 'number', value: 20, unit: 'px' },
       });
       expect(typography.value).toMatchObject({
-        value: { fontSize: { type: 'reference', tokenId: 'v-font-size:d1' } },
+        value: { fontSize: { type: 'reference', tokenId: 'v-font-size' } },
       });
     });
 
@@ -166,15 +211,53 @@ describe('FigmaAdapter', () => {
       });
     });
 
+    it('should preserve variable bindings of shadow dimensions', async () => {
+      const [{ document }] = [NODES.n3];
+      const [effect] = document.effects;
+      const nodes = {
+        ...NODES,
+        n3: {
+          document: {
+            ...document,
+            effects: [
+              {
+                ...effect,
+                boundVariables: {
+                  offsetX: { type: 'VARIABLE_ALIAS', id: 'v-space' },
+                  offsetY: { type: 'VARIABLE_ALIAS', id: 'v-space' },
+                  radius: { type: 'VARIABLE_ALIAS', id: 'v-space' },
+                  spread: { type: 'VARIABLE_ALIAS', id: 'v-space' },
+                },
+              },
+            ],
+          },
+        },
+      };
+      const { tokens } = await fetchTokens(createFigmaFetch({ nodes }));
+
+      expect(byId(tokens, 'n3').value).toMatchObject({
+        value: {
+          '0': {
+            value: {
+              x: { type: 'reference', tokenId: 'v-space', resolved: { value: 0, unit: 'px' } },
+              y: { type: 'reference', tokenId: 'v-space', resolved: { value: 2, unit: 'px' } },
+              blur: { type: 'reference', tokenId: 'v-space', resolved: { value: 4, unit: 'px' } },
+              spread: { type: 'reference', tokenId: 'v-space', resolved: { value: 1, unit: 'px' } },
+            },
+          },
+        },
+      });
+    });
+
     it('should mark the default mode of the theme collection as the default theme', async () => {
       const collections = createCollections().map((item) =>
         item.id === 'c-theme' ? { ...item, defaultModeId: 't2' } : item,
       );
       const { themes } = await fetchTokens(createFigmaFetch({ collections }));
 
-      expect(themes).toEqual([
-        { id: 't1', name: 'light', isDefault: false },
-        { id: 't2', name: 'dark', isDefault: true },
+      expect(themes.slice(0, 2).map(({ id, isDefault }) => [id, isDefault])).toEqual([
+        ['t2', true],
+        ['t1', false],
       ]);
     });
 
@@ -200,10 +283,14 @@ describe('FigmaAdapter', () => {
       });
     });
 
-    it('should exclude figma- tokens and Link typography', async () => {
-      const { tokens } = await fetchTokens(createFigmaFetch());
+    it('should leave the exclusion of tokens to the pipeline', async () => {
+      const ids = (await fetchTokens(createFigmaFetch())).tokens.map((token) => token.id);
 
-      expect(tokens.map((token) => token.id)).not.toEqual(expect.arrayContaining(['v-internal', 'n2']));
+      // `figma-` variables and `Link` / `Italic` typography are filtered by `filterExcludedTokens`, as for Supernova
+      expect(ids).toEqual(expect.arrayContaining(['v-internal', 'n2', 'n6', 'n7']));
+      expect(filterExcludedTokens((await fetchTokens(createFigmaFetch())).tokens).map((token) => token.id)).not.toEqual(
+        expect.arrayContaining(['v-internal', 'n2', 'n6']),
+      );
     });
 
     it('should derive the groups of the token paths', async () => {
@@ -253,6 +340,7 @@ describe('FigmaAdapter', () => {
       const { tokens } = await fetchTokens(createFigmaFetch({ variables }), onWarning);
 
       expect(tokens.map((token) => token.id)).not.toEqual(expect.arrayContaining(['v-remote', 'v-deleted']));
+      expect(onWarning).toHaveBeenCalledWith('Skipping remote variable "Spacing/900".');
       expect(onWarning).toHaveBeenCalledWith('Skipping deleted variable "Spacing/950".');
     });
 
@@ -293,9 +381,10 @@ describe('FigmaAdapter', () => {
         }),
       );
 
-      const result = fetchTokens(createFigmaFetch({ variables }));
+      const result = fetchTokens(createFigmaFetch({ variables, nodes: { ...NODES, n4: null } }));
 
       await expect(result).rejects.toThrow(FigmaExportError);
+      await expect(result).rejects.toThrow(/Style Gradient\/Brand \(n4\) was not returned by the Figma nodes API/);
       await expect(result).rejects.toThrow(/aliases missing variable nope/);
       await expect(result).rejects.toThrow(/ambiguous scopes: GAP, CORNER_RADIUS/);
       await expect(result).rejects.toThrow(/Alias cycle detected/);

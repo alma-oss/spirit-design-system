@@ -29,9 +29,10 @@ const dropUnknownReferences = (value: TokenValue, hasToken: (id: string) => bool
 
 /**
  * @param tokens
+ * @param known - Tokens a reference may point at, the `tokens` themselves by default
  */
-export const keepKnownReferences = (tokens: DesignToken[]): DesignToken[] => {
-  const ids = new Set(tokens.map((token) => token.id));
+export const keepKnownReferences = (tokens: DesignToken[], known: DesignToken[] = tokens): DesignToken[] => {
+  const ids = new Set(known.map((token) => token.id));
 
   return tokens.map((token) => ({ ...token, value: dropUnknownReferences(token.value, (id) => ids.has(id)) }));
 };

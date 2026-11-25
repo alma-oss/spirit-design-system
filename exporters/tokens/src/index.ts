@@ -12,10 +12,8 @@ Pulsar.export(async (sdk: Supernova, context: PulsarContext): Promise<Array<AnyO
   const { dsId, versionId, brandId } = context;
 
   // The settings of the Supernova pipeline (see `config.json`), read here only: the pipeline gets what it needs.
-  // TODO: The font replacements (`searchFont1..5`, `replaceFont1..5`) are only supplied by Supernova, the replacement
-  // itself is done by the pipeline and nothing is replaced while they are empty. A source without such settings
-  // (Figma) will most likely read them from a Spirit config file in the repository the tokens are downloaded into,
-  // the way the assets exporter loads its config (`exporters/assets/src/config`).
+  // Font replacements (`searchFont1..5`, `replaceFont1..5`) are only supplied by Pulsar today. A Figma entry without
+  // Pulsar will need another source for them when Pulsar is removed.
   const configuration = Pulsar.exportConfig<ExporterConfiguration>();
 
   // Fetch the tokens in the internal model, filtered by brand if specified by the VSCode extension or pipeline

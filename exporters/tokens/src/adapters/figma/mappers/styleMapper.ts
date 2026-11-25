@@ -1,17 +1,9 @@
 import { PX_UNIT } from '../../../constants';
-import { type DesignToken, type TokenValue, TokenTypeEnum } from '../../../core/types';
-import { isExcludedToken } from '../conventions';
+import { mapComposite, mapLayers, mapNumber, mapPoint } from './valueBuilders';
+import { CollectionKind, type DesignToken, type TokenValue, TokenTypeEnum } from '../../../core/types';
 import { splitPath } from '../naming';
 import type { FigmaEffect, FigmaPaint, FigmaStyle, FigmaTextStyle } from '../types';
-import {
-  buildDesignToken,
-  mapColor,
-  mapComposite,
-  mapLayers,
-  mapNumber,
-  withReference,
-  type MapContext,
-} from './context';
+import { buildDesignToken, mapColor, withReference, type MapContext } from './context';
 
 const PERCENT_UNIT = '%';
 const DEFAULT_FROM = { x: 0.5, y: 0 };
@@ -24,8 +16,6 @@ const GRADIENT_TYPES: Record<string, string> = {
   GRADIENT_ANGULAR: 'angular',
 };
 
-const mapPoint = ({ x, y }: { x: number; y: number }) => mapComposite({ x: mapNumber(x), y: mapNumber(y) });
-
 /**
  * A font size or line height of a text style. One bound to a variable (the dimension a device collection overrides)
  * becomes a reference; the style's own number stays as the resolved value.
@@ -33,23 +23,17 @@ const mapPoint = ({ x, y }: { x: number; y: number }) => mapComposite({ x: mapNu
  * @param value
  * @param unit
  * @param alias
- * @param context
  */
-const mapDimension = (value: number, unit: string, alias: string | undefined, context: MapContext): TokenValue => {
-  const number = mapNumber(value, unit);
+const mapDimension = (value: number, unit: string, alias: string | undefined): TokenValue =>
+  withReference(mapNumber(value, unit), alias);
 
-  return alias === undefined
-    ? number
-    : withReference(number, alias, context, context.variablesById.get(alias)?.defaultModeId);
-};
-
-const mapTextStyle = (style: FigmaTextStyle, context: MapContext): TokenValue => {
+const mapTextStyle = (style: FigmaTextStyle): TokenValue => {
   const { lineHeight } = style;
   const fontWeight = style.fontName.style || (style.fontWeight === undefined ? 'Regular' : String(style.fontWeight));
   const members: Record<string, TokenValue | undefined> = {
     fontFamily: { type: 'string', value: style.fontName.family },
     fontWeight: { type: 'string', value: fontWeight },
-    fontSize: mapDimension(style.fontSize, PX_UNIT, style.boundVariables?.fontSize?.id, context),
+    fontSize: mapDimension(style.fontSize, PX_UNIT, style.boundVariables?.fontSize?.id),
     // `AUTO` has no value to export
     lineHeight:
       lineHeight.unit === 'AUTO' || lineHeight.value === undefined
@@ -58,7 +42,6 @@ const mapTextStyle = (style: FigmaTextStyle, context: MapContext): TokenValue =>
             lineHeight.value,
             lineHeight.unit === 'PIXELS' ? PX_UNIT : PERCENT_UNIT,
             style.boundVariables?.lineHeight?.id,
-            context,
           ),
   };
 
@@ -72,20 +55,20 @@ const mapTextStyle = (style: FigmaTextStyle, context: MapContext): TokenValue =>
 const isShadowEffect = (effect: FigmaEffect): boolean =>
   (effect.type === 'DROP_SHADOW' || effect.type === 'INNER_SHADOW') && effect.visible !== false;
 
-const mapColorWithBinding = (color: FigmaEffect['color'], alias: string | undefined, context: MapContext): TokenValue =>
-  withReference(mapColor(color ?? BLACK), alias, context);
+const mapColorWithBinding = (color: FigmaEffect['color'], alias: string | undefined): TokenValue =>
+  withReference(mapColor(color ?? BLACK), alias);
 
-const mapShadowLayer = (effect: FigmaEffect, context: MapContext): TokenValue =>
+const mapShadowLayer = (effect: FigmaEffect): TokenValue =>
   mapComposite({
     inset: { type: 'boolean', value: effect.type === 'INNER_SHADOW' },
-    x: mapNumber(effect.offset?.x ?? 0, PX_UNIT),
-    y: mapNumber(effect.offset?.y ?? 0, PX_UNIT),
-    blur: mapNumber(effect.radius ?? 0, PX_UNIT),
-    spread: mapNumber(effect.spread ?? 0, PX_UNIT),
-    color: mapColorWithBinding(effect.color, effect.boundVariables?.color?.id, context),
+    x: mapDimension(effect.offset?.x ?? 0, PX_UNIT, effect.boundVariables?.offsetX?.id),
+    y: mapDimension(effect.offset?.y ?? 0, PX_UNIT, effect.boundVariables?.offsetY?.id),
+    blur: mapDimension(effect.radius ?? 0, PX_UNIT, effect.boundVariables?.radius?.id),
+    spread: mapDimension(effect.spread ?? 0, PX_UNIT, effect.boundVariables?.spread?.id),
+    color: mapColorWithBinding(effect.color, effect.boundVariables?.color?.id),
   });
 
-const mapGradientLayer = (paint: FigmaPaint, context: MapContext): TokenValue => {
+const mapGradientLayer = (paint: FigmaPaint): TokenValue => {
   const [from = DEFAULT_FROM, to = DEFAULT_TO] = paint.gradientHandlePositions ?? [];
 
   return mapComposite({
@@ -101,7 +84,6 @@ const mapGradientLayer = (paint: FigmaPaint, context: MapContext): TokenValue =>
           color: mapColorWithBinding(
             stop.color && { ...stop.color, a: stop.color.a * (paint.opacity ?? 1) },
             stop.boundVariables?.color?.id,
-            context,
           ),
         }),
       ),
@@ -118,21 +100,14 @@ const mapGradientLayer = (paint: FigmaPaint, context: MapContext): TokenValue =>
  */
 export const mapStyle = (style: FigmaStyle, context: MapContext): DesignToken | undefined => {
   const path = splitPath(style.name);
-  const base = { id: style.id, path, originalId: style.id };
+  // Styles belong to no variable collection, the pipeline exports them with the global tokens
+  const base = { id: style.id, path, originalId: style.id, collection: CollectionKind.Global };
 
   if (style.type === 'TEXT') {
-    if (isExcludedToken(path, TokenTypeEnum.Typography)) {
-      return undefined;
-    }
-
     return buildDesignToken(
-      { ...base, type: TokenTypeEnum.Typography, value: mapTextStyle(style, context), originalType: 'TEXT' },
+      { ...base, type: TokenTypeEnum.Typography, value: mapTextStyle(style), originalType: 'TEXT' },
       context,
     );
-  }
-
-  if (isExcludedToken(path, TokenTypeEnum.Shadow)) {
-    return undefined;
   }
 
   if (style.type === 'EFFECT') {
@@ -148,7 +123,7 @@ export const mapStyle = (style: FigmaStyle, context: MapContext): DesignToken | 
       {
         ...base,
         type: TokenTypeEnum.Shadow,
-        value: mapLayers(layers.map((effect) => mapShadowLayer(effect, context))),
+        value: mapLayers(layers.map((effect) => mapShadowLayer(effect))),
         originalType: 'EFFECT',
       },
       context,
@@ -169,7 +144,7 @@ export const mapStyle = (style: FigmaStyle, context: MapContext): DesignToken | 
     {
       ...base,
       type: TokenTypeEnum.Gradient,
-      value: mapLayers(gradients.map((paint) => mapGradientLayer(paint, context))),
+      value: mapLayers(gradients.map((paint) => mapGradientLayer(paint))),
       originalType: 'PAINT',
     },
     context,

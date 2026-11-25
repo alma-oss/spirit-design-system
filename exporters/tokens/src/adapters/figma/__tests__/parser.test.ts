@@ -1,4 +1,3 @@
-import { FigmaExportError } from '../FigmaExportError';
 import { FILE, NO_VARIABLES, textMeta, textNode } from '../__fixtures__/figma';
 import { toFigmaSource } from '../parser';
 import type { FigmaTextStyle } from '../types';
@@ -33,17 +32,24 @@ describe('toFigmaSource', () => {
     expect(textStyle({}, { boundVariables: { fontSize: [alias] } }).boundVariables).toEqual({ fontSize: alias });
   });
 
-  it('should report every style the nodes response does not cover in one error', () => {
+  it('should report every style the nodes response does not cover and keep the others', () => {
     const styles = [textMeta('n1'), textMeta('n2'), textMeta('n3')];
     const nodes = { n1: { document: textNode('n1') }, n2: null };
 
-    expect(() => toFigmaSource(FILE, NO_VARIABLES, styles, nodes)).toThrow(FigmaExportError);
-    expect(() => toFigmaSource(FILE, NO_VARIABLES, styles, nodes)).toThrow(/n2.*\n.*n3/);
+    const source = toFigmaSource(FILE, NO_VARIABLES, styles, nodes);
+
+    expect(source.styles.map(({ id }) => id)).toEqual(['n1']);
+    expect(source.problems).toEqual([
+      'Style Typography/n2 (n2) was not returned by the Figma nodes API.',
+      'Style Typography/n3 (n3) was not returned by the Figma nodes API.',
+    ]);
   });
 
   it('should report a text style without font properties', () => {
     const nodes = { n1: { document: { id: 'n1', name: 'Typography/n1', type: 'TEXT', style: {} } } };
 
-    expect(() => toFigmaSource(FILE, NO_VARIABLES, [textMeta('n1')], nodes)).toThrow(/did not include text properties/);
+    expect(toFigmaSource(FILE, NO_VARIABLES, [textMeta('n1')], nodes).problems).toEqual([
+      'Style Typography/n1 (n1) did not include text properties.',
+    ]);
   });
 });

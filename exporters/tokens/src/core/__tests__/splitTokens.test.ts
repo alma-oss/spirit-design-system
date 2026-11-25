@@ -72,9 +72,38 @@ describe('splitTokens', () => {
     expect(result.colorTokens.map((t) => t.id)).toEqual(['theme-color', 'global-string', 'device-string']);
   });
 
+  it('should leave the lookup tokens out of the global tokens and their colors out of the color tokens', () => {
+    const result = splitTokens(
+      collection({
+        tokens: [
+          token('primitive-color', CollectionKind.Lookup, undefined, undefined, TokenTypeEnum.Color),
+          token('global-string', CollectionKind.Global),
+        ],
+      }),
+    );
+
+    expect(result.globalTokens.map((t) => t.id)).toEqual(['global-string']);
+    expect(result.colorTokens.map((t) => t.id)).toEqual(['global-string']);
+  });
+
   it('should return empty groups for no tokens', () => {
     const result = splitTokens(collection());
 
     expect(result).toEqual({ globalTokens: [], colorTokens: [], themes: [], deviceTokens: [] });
+  });
+
+  it('should throw when a token is missing metadata.collection', () => {
+    const orphan: DesignToken = {
+      id: 'orphan-prefix',
+      name: 'css-variable-prefix',
+      type: TokenTypeEnum.String,
+      value: { type: 'string', value: 'spirit-' },
+      metadata: { groupPath: [] },
+      source: { adapter: 'test', originalId: 'orphan-prefix' },
+    };
+
+    expect(() => splitTokens(collection({ tokens: [orphan] }))).toThrow(
+      /Every token must set metadata.collection \(missing on: orphan-prefix\)/,
+    );
   });
 });

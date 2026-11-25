@@ -2,7 +2,8 @@ import { TokenTypeEnum } from '../../core/types';
 import { PX_UNIT } from '../../constants';
 import { COLLECTION_DEVICE, COLLECTION_GLOBAL, COLLECTION_THEME, CSS_VARIABLE_PREFIX } from './constants';
 import type { DiagnosticCollector } from './diagnostics';
-import { splitPath, toParamCase } from './naming';
+import { toParamCase } from '../../helpers/stringHelper';
+import { splitPath } from './naming';
 import type { FigmaVariable, FigmaVariableScope } from './types';
 
 /**
@@ -39,7 +40,7 @@ const FILL_SCOPES: FigmaVariableScope[] = [
 // Strings that only feed text styles; they are not tokens of their own.
 const STYLE_BINDING_STRING_SCOPES: FigmaVariableScope[] = ['FONT_FAMILY', 'FONT_STYLE', 'FONT_WEIGHT', 'TEXT_CONTENT'];
 
-const PX_NAME_PATTERN = /(width|height|size|padding|spacing|radius|breakpoint|gap|border)/i;
+const PX_NAME_PATTERN = /(width|height|size|padding|spacing|radius|breakpoint|gap|border|offset|blur|spread)/i;
 
 const SCOPE_TYPES: Partial<Record<FigmaVariableScope, TokenTypeEnum>> = {
   FONT_SIZE: TokenTypeEnum.FontSize,
@@ -145,19 +146,4 @@ export const classifyVariable = (
     type !== TokenTypeEnum.Dimension || PX_NAME_PATTERN.test(variable.name) || variable.scopes.includes('WIDTH_HEIGHT');
 
   return { type, unit: isPixel ? PX_UNIT : undefined };
-};
-
-/**
- * Internal `figma-*` tokens, and typography styles marked `Link` or `Italic` (italics are applied in products with
- * the `.text-italic` helper) never reach the output.
- *
- * @param path
- * @param type
- */
-export const isExcludedToken = (path: string[], type: TokenTypeEnum): boolean => {
-  if (path.join('/').toLowerCase().includes('figma-')) {
-    return true;
-  }
-
-  return type === TokenTypeEnum.Typography && path.some((part) => part.includes('Link') || part.includes('Italic'));
 };

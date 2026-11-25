@@ -110,18 +110,33 @@ The token needs the `file_content:read`, `file_variables:read` and `library_cont
 secret.
 
 - Only the `Global tokens`, `Theme tokens` and `Device` collections are exported. `Primitives` and remote variables
-  are alias sources; other collections are skipped with a warning.
+  are alias sources; remote variables, deleted variables and other collections are skipped with a warning.
 - Figma has four generic variable types, so the token type is inferred from the variable's scopes and the group it
   lives in. Ambiguous or conflicting definitions are errors.
-- A global variable becomes one token (`<variable id>`), a theme or device variable one token per mode
-  (`<variable id>:<mode id>`), tagged with `metadata.theme` or `metadata.device`.
+- `tokens` has one token per variable (its id is the id of the variable) in the default mode of every collection.
+  `themedTokens` has the tokens for each mode of the theme collection (the default one first, tagged with
+  `metadata.theme`), and `deviceTokens` the device variables for each mode of the device collection (tagged with
+  `metadata.device`, listed in `devices`). Every token carries the kind of its collection in `metadata.collection`.
 - A color alias to another exported token becomes a `reference` carrying the value resolved in that mode. An alias to a
   token that is not exported (Primitives) and any numeric or string alias is a plain value, so every reference left can
   be followed through a `TokenIndex` built from the collection.
 - Dimensions are emitted in `px`; the px-to-rem rule converts them.
-- `figma-*` variables and typography styles containing `Link` or `Italic` are excluded.
-- Malformed names, ambiguous scopes, missing aliases and alias cycles are reported together in one error, so a run
-  shows every problem of the file. Unused effect and paint styles only produce warnings.
+- Malformed names, ambiguous scopes, missing aliases, alias cycles and styles without their node are reported together
+  in one error, so a run shows every problem of the file. Unused effect and paint styles only produce warnings.
+
+#### Running Locally
+
+The `figma:export` script runs the adapter from Node.js and writes the generated files to `.build-figma/`, the way the
+Supernova run fills `.build/`. Font replacements are not applied yet.
+
+The `fileKey` is the part of the Figma file URL after `/design/`. The token is read from `FIGMA_ACCESS_TOKEN`, either
+set in the shell or in an `exporters/tokens/.env` file (`FIGMA_ACCESS_TOKEN=...`, ignored by Git).
+
+```shell
+yarn workspace @alma-oss/spirit-tokens-exporter figma:export <fileKey> [brandId]
+
+yarn workspace @alma-oss/spirit-tokens-exporter figma:export BXRF3VABXQm2TGkL0nwS4i # Spirit Config
+```
 
 ## Naming Rules for Themes
 

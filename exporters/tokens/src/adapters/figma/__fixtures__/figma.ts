@@ -126,6 +126,8 @@ const STYLES = [
   { key: 's3', name: 'Shadow/Small', node_id: 'n3', style_type: 'EFFECT' },
   { key: 's4', name: 'Gradient/Brand', node_id: 'n4', style_type: 'FILL' },
   { key: 's5', name: 'Shadow/Unused', node_id: 'n5', style_type: 'EFFECT' },
+  { key: 's6', name: 'Typography/Body Italic', node_id: 'n6', style_type: 'TEXT' },
+  { key: 's7', name: 'Typography/LinkedIn', node_id: 'n7', style_type: 'TEXT' },
 ];
 
 const typographyNode = (id: string, name: string, extra = {}) => ({
@@ -183,6 +185,8 @@ export const NODES = {
     },
   },
   n5: { document: { id: 'n5', name: 'Shadow/Unused', type: 'RECTANGLE', effects: [] } },
+  n6: { document: typographyNode('n6', 'Typography/Body Italic') },
+  n7: { document: typographyNode('n7', 'Typography/LinkedIn') },
 };
 
 const toRecord = <Item extends { id: string }>(items: Item[]) =>

@@ -1,4 +1,3 @@
-import { FigmaExportError } from './FigmaExportError';
 import type {
   FigmaRgba,
   FigmaVariableScope,
@@ -230,7 +229,7 @@ export const toFigmaSource = (
     variableIds: collection.variableIds ?? [],
   }));
   const collectionsById = new Map(collections.map((collection) => [collection.id, collection]));
-  const missingStyles: string[] = [];
+  const problems: string[] = [];
   const mappedStyles = styles.flatMap((meta) => {
     if (!STYLE_TYPES.has(meta.style_type)) {
       return [];
@@ -239,7 +238,7 @@ export const toFigmaSource = (
     const node = nodes[meta.node_id]?.document;
 
     if (!node) {
-      missingStyles.push(`Style ${meta.name} (${meta.node_id}) was not returned by the Figma nodes API.`);
+      problems.push(`Style ${meta.name} (${meta.node_id}) was not returned by the Figma nodes API.`);
 
       return [];
     }
@@ -247,7 +246,7 @@ export const toFigmaSource = (
     const style = styleFromNode(meta, node);
 
     if (!style) {
-      missingStyles.push(
+      problems.push(
         `Style ${meta.name} (${meta.node_id}) did not include ${meta.style_type.toLowerCase()} properties.`,
       );
 
@@ -256,10 +255,6 @@ export const toFigmaSource = (
 
     return [style];
   });
-
-  if (missingStyles.length > 0) {
-    throw new FigmaExportError(`Figma token export failed:\n${missingStyles.map((item) => `- ${item}`).join('\n')}`);
-  }
 
   return {
     file,
@@ -280,5 +275,6 @@ export const toFigmaSource = (
       description: variable.description ?? '',
     })),
     styles: mappedStyles,
+    problems,
   };
 };

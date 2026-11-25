@@ -168,4 +168,6 @@ export interface FigmaSource {
   collections: FigmaCollection[];
   variables: FigmaVariable[];
   styles: FigmaStyle[];
+  /** Problems found while reading the file (e.g. a style without its node), reported with the mapping errors. */
+  problems?: string[];
 }
