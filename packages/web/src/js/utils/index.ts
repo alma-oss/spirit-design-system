@@ -24,4 +24,5 @@ export * from './Elements';
 export * from './Image2Base64Preview';
 export { default as ScrollControl } from './ScrollControl';
 export * from './Transitions';
+export * from './Typeahead';
 export { reflow };
