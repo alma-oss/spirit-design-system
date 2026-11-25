@@ -1,11 +1,9 @@
 'use client';
 
 import { createContext, useContext } from 'react';
+import { type RovingFocusContextType } from '../rovingFocus';
 
-export interface ToolbarContextType {
-  /** Register an item element; returns the unregister callback */
-  register: (item: HTMLElement) => () => void;
-}
+export type ToolbarContextType = RovingFocusContextType;
 
 export const ToolbarContext = createContext<ToolbarContextType | null>(null);
 
