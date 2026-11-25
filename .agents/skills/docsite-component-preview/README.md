@@ -17,9 +17,10 @@ Use when you need to:
 
 1. An SVG in `apps/docsite/public/component-illustrations/<slug>.svg`
 2. No registration: the catalog reads the directory and matches the file name to the component slug
-3. No file for a card that stays a placeholder
-4. Leaving `preview.html` and `compilePreview.ts` for the detail Web Preview
-5. Leaving the illustration `inert`
+3. The category of a new component in `docs/component-categories.yaml`
+4. No file for a card that stays a placeholder
+5. Leaving `preview.html` and `compilePreview.ts` for the detail Web Preview
+6. Leaving the illustration `inert`
 
 ## Output
 
@@ -28,4 +29,5 @@ An SVG named after the component slug, or nothing for a placeholder.
 ## Check
 
 Open `/components` and find the card. Run `yarn workspace @alma-oss/spirit-docsite test`. `componentsCatalogRepository.test.ts`
-fails when an illustration file is not named after an existing component slug.
+fails when an illustration file is not named after an existing component slug, and
+`componentCategoriesRepository.test.ts` fails when a component has no category.
