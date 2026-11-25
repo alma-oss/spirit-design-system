@@ -14,6 +14,7 @@ export * from './inputPositionToFlexAlignmentX';
 export * from './inputPositionToFlexDirection';
 export * from './isPlainObject';
 export * from './mergeProps';
+export * from './mergeRefs';
 export * from './mergeStyleProps';
 export * from './omitNullish';
 export * from './pxToRem';

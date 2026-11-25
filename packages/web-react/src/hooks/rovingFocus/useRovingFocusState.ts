@@ -5,7 +5,8 @@ import { isElementHidden } from '../../utils';
 import { type GridRowMove, getNextEnabledRowIndex } from '../gridKeyboardNavigation';
 
 // `ButtonLink` marks a disabled or loading anchor with the `disabled` attribute, which `:disabled` does not match.
-const DISABLED_CONTROL_SELECTOR = ':disabled, [disabled]';
+// A disabled link `Item` has `aria-disabled` instead.
+const DISABLED_CONTROL_SELECTOR = ':disabled, [disabled], [aria-disabled="true"]';
 
 export interface UseRovingFocusStateProps {
   /**

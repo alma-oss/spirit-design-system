@@ -4,6 +4,7 @@ import icons from '@alma-oss/spirit-icons/icons';
 import React, { StrictMode } from 'react';
 import DocsSection from '../../../../docs/DocsSection';
 import { IconsProvider } from '../../../context';
+import MenuDefault from '../../Menu/demo/MenuDefault';
 import DropdownAlignment from './DropdownAlignment';
 import DropdownDisabledAutoclose from './DropdownDisabledAutoclose';
 import DropdownFullwidthAll from './DropdownFullwidthAll';
@@ -23,6 +24,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Various items">
         <DropdownVariousItems />
+      </DocsSection>
+      <DocsSection title="Menu">
+        <MenuDefault />
       </DocsSection>
       <DocsSection title="Usage with disabled auto close">
         <DropdownDisabledAutoclose />

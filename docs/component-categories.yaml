@@ -36,6 +36,7 @@ Actions:
     - CloseButton
     - ControlButton
     - Link
+    - Menu
     - SplitButton
     - Toolbar
 Data Display:

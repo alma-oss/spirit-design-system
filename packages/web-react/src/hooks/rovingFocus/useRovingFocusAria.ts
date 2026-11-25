@@ -28,7 +28,7 @@ export interface UseRovingFocusAriaReturn<T extends HTMLElement> {
 
 // Attributes that change whether, and which, control of an item can get focus.
 // `class` and `style` cover a control hidden through CSS without a React render.
-const OBSERVED_ATTRIBUTES = ['class', 'disabled', 'hidden', 'href', 'style', 'tabindex'];
+const OBSERVED_ATTRIBUTES = ['aria-disabled', 'class', 'disabled', 'hidden', 'href', 'style', 'tabindex'];
 
 /**
  * Props for the container of a composite widget with a roving `tabindex`: focus tracking and the keys

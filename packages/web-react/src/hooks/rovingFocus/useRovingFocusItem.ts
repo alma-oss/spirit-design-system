@@ -1,11 +1,17 @@
 'use client';
 
-import { type RefObject } from 'react';
+import { type RefObject, useRef } from 'react';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 
 export interface RovingFocusContextType {
   /** Register an item element; returns the unregister callback */
   register: (item: HTMLElement) => () => void;
+}
+
+interface Registration {
+  item: HTMLElement;
+  register: RovingFocusContextType['register'];
+  unregister: () => void;
 }
 
 /**
@@ -19,13 +25,26 @@ export const useRovingFocusItem = <T extends HTMLElement>(
   ref: RefObject<T | null>,
   register: RovingFocusContextType['register'] | undefined,
 ): void => {
+  const registrationRef = useRef<Registration | null>(null);
+
+  // Runs after every render, as a new `elementType` replaces the element without changing the ref.
   useIsomorphicLayoutEffect(() => {
     const item = ref.current;
+    const registration = registrationRef.current;
 
-    if (!register || !item) {
-      return undefined;
+    if (registration?.item === item && registration?.register === register) {
+      return;
     }
 
-    return register(item);
-  }, [ref, register]);
+    registration?.unregister();
+    registrationRef.current = register && item ? { item, register, unregister: register(item) } : null;
+  });
+
+  useIsomorphicLayoutEffect(
+    () => () => {
+      registrationRef.current?.unregister();
+      registrationRef.current = null;
+    },
+    [],
+  );
 };
