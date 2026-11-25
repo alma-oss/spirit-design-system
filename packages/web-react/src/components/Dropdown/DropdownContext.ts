@@ -5,13 +5,23 @@ import { Placements } from '../../constants';
 import { type ClickEvent, type PlacementDictionaryType } from '../../types';
 import { fullWidthModeKeys } from './useDropdownAriaProps';
 
+export type DropdownMenuFocus = 'first' | 'last';
+
 type DropdownContextType = {
   dropdownRef: MutableRefObject<HTMLElement | null>;
   fullWidthMode?: keyof typeof fullWidthModeKeys;
   id: string;
   isOpen: boolean;
+  /** ID of the `Menu` inside the popover, if any */
+  menuId?: string | null;
+  /** Which menu item gets focus when the menu opens */
+  menuFocusRef?: MutableRefObject<DropdownMenuFocus>;
+  /** Close the popover; focus returns to the trigger unless `returnFocus` is `false` */
+  onClose?: (returnFocus?: boolean) => void;
   onToggle: (event?: ClickEvent) => void;
   placement?: PlacementDictionaryType;
+  /** Register the `Menu` inside the popover; returns the unregister callback */
+  registerMenu?: (menuId: string) => () => void;
   triggerRef: MutableRefObject<HTMLElement | null | undefined>;
 };
 

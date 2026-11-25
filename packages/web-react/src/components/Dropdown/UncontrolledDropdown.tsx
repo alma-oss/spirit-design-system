@@ -6,6 +6,7 @@ import { useOverlay, useStyleProps } from '../../hooks';
 import { type UncontrolledDropdownProps } from '../../types';
 import { DropdownProvider } from './DropdownContext';
 import { useDropdown } from './useDropdown';
+import { useDropdownClose } from './useDropdownClose';
 import { useDropdownStyleProps } from './useDropdownStyleProps';
 
 const UncontrolledDropdown = (props: UncontrolledDropdownProps) => {
@@ -33,17 +34,7 @@ const UncontrolledDropdown = (props: UncontrolledDropdownProps) => {
     enableAutoClose,
     onAutoClose,
   });
-  const closeOverlay = useCallback(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    onToggle();
-
-    queueMicrotask(() => {
-      mergedTriggerRef.current?.focus();
-    });
-  }, [isOpen, mergedTriggerRef, onToggle]);
+  const { closeOverlay, ...closeContext } = useDropdownClose({ isOpen, onToggle, triggerRef: mergedTriggerRef });
 
   const { onOverlayKeyDown } = useOverlay({
     isOpen,
@@ -63,7 +54,16 @@ const UncontrolledDropdown = (props: UncontrolledDropdownProps) => {
 
   return (
     <DropdownProvider
-      value={{ id, isOpen, fullWidthMode, placement, onToggle, dropdownRef, triggerRef: mergedTriggerRef }}
+      value={{
+        ...closeContext,
+        id,
+        isOpen,
+        fullWidthMode,
+        placement,
+        onToggle,
+        dropdownRef,
+        triggerRef: mergedTriggerRef,
+      }}
     >
       <div
         ref={dropdownRef}
