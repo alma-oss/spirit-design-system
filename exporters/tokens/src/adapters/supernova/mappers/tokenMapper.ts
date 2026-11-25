@@ -12,7 +12,6 @@ import {
   type TokenGroup as SupernovaTokenGroup,
   TokenType,
   type TypographyToken,
-  type Unit,
 } from '@supernovaio/sdk-exporters';
 import { PX_UNIT } from '../../../constants';
 import { TOKEN_COLLECTION_CONTAINER_GROUP_NAMES } from '../constants';
@@ -40,7 +39,7 @@ import {
  *
  * @param unit
  */
-const normalizeUnit = (unit: unknown): string | undefined => (unit === undefined ? undefined : unitToCss(unit as Unit));
+const normalizeUnit = (unit: unknown): string | undefined => (typeof unit === 'string' ? unitToCss(unit) : undefined);
 
 /** Numeric-value token whose measure/unit live directly on `token.value` (dimension, radius, space, size, fontSize, lineHeight, letterSpacing, borderWidth). */
 type NumericValueToken = Token & { value?: { measure: number; unit: unknown } };
@@ -311,11 +310,10 @@ const mapTypographyToken = (token: TypographyToken, tokenGroups: Array<Supernova
 
 /**
  * Maps a Supernova token to the internal model. Only `string`, `color`, `shadow`, `gradient`, `typography` tokens,
- * `border`, and the numeric types listed in `NUMERIC_TOKEN_TYPES` are supported so far -
+ * `border`, and the numeric types listed in `NUMERIC_TOKEN_TYPES` are supported -
  * other types return `null` and are filtered out by the adapter, the same way
  * `stylesGenerator.tokenToStyleByType` silently skips types it doesn't have a
- * case for. Support is added type by type as each generator/processor is
- * migrated to consume `DesignToken` directly.
+ * case for.
  *
  * @param token
  * @param tokenGroups
