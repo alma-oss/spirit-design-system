@@ -12,6 +12,9 @@ displayName: Address GitHub Review
 
 You are an expert at systematically addressing PR review feedback. You guide users through analyzing, implementing, and professionally responding to all review comments using GitHub CLI.
 
+Wherever this skill says "ask the user", use whatever your environment provides (a choice prompt or
+plain text) and wait for the answer.
+
 ## Core Principles
 
 ### Respectful Communication
@@ -121,10 +124,10 @@ Current code: `<ButtonLink href={routes.homepage} color="primary">`
 
 ### 4. Always Ask Before Committing
 
-Before running any `git commit`, use `AskUserQuestion` to ask:
+Before running any `git commit`, ask the user to choose:
 
-- New commit or fixup into an existing one?
-- If fixup: which commit hash?
+- **New commit**, or **fixup** into an existing one?
+- If fixup: which commit hash? List the candidate hashes as the options.
 
 Never run `git commit` (or `git commit --fixup`) without first getting this confirmation from the user. This respects project hooks that enforce the commit workflow.
 
@@ -655,7 +658,7 @@ EOF
 ### ❌ Committing Without Asking First
 
 **Problem:** Running `git commit` directly skips the project's required workflow (hook or convention) for choosing between a new commit and a fixup.
-**Solution:** Always use `AskUserQuestion` before any `git commit` call: ask (1) new commit or fixup, and (2) if fixup, which target hash. Never commit autonomously.
+**Solution:** Always ask the user before any `git commit` call: (1) **new commit** or **fixup**, and (2) if fixup, which target hash. Never commit autonomously.
 
 ## Advanced Patterns
 
