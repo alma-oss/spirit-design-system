@@ -21,8 +21,9 @@ don't need to type the slash command.
 5. Drafts one Conventional Commit message per group, following the repo's
    `type(scope): description #DS-XXXX` format
 6. Shows the full grouping and messages for review as an interactive confirmation (the agent's
-   native tool for asking questions), including whether each group is a new commit or a
-   `--fixup` of an existing one
+   native tool for asking questions). If the branch already has commits that are not on the base
+   branch, it also asks per group whether to make a new commit or a `--fixup` of one of them; on
+   a branch without commits it skips that question and creates new commits
 7. Stages each group at hunk granularity and commits it through `git` (never `--no-verify`)
 
 ## Setup
