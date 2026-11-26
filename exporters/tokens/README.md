@@ -79,8 +79,16 @@ To support another source, implement the `SourceAdapter` interface (`src/adapter
 
 ## Sorting
 
-Tokens are sorted alphabetically by their origin name (Figma) or their Supernova name.
-Exceptions include Borders, Radii, Spacing, Other tokens, and all tokens from the Device collection which are sorted numerically by their value.
+Tokens are sorted alphabetically by their variable name, with numbers compared by their value (`radius-200` comes before `radius-1000`).
+Exceptions include Borders, Radii, Spacing, Other tokens, and all tokens from the Device collection which are sorted numerically by their value first and by name second.
+
+Sorting the Device collection by value is what the breakpoints need: the `$breakpoints` map (and the `breakpoints` object in JS) lists them from `0` to the widest.
+The breakpoint tools of the web package (`packages/web/src/scss/tools/_breakpoint.scss`) iterate the map in that order and take the next breakpoint as the upper bound of a media query, so a narrower breakpoint must always come first.
+
+Device variants of a token that end up next to each other (the same value and name), and the device keys of a typography style map, follow the fixed order mobile, tablet, desktop (`DEVICE_ORDER` in `src/constants.ts`).
+It is the order of the breakpoints, but it does not change the CSS: it puts the variants in the same order whatever order a source lists its devices in (Figma has desktop first, Supernova mobile first), so switching the source does not reorder them.
+
+A device missing from `DEVICE_ORDER` has no fixed place. Its variants are ordered by their value and otherwise keep the source order, and next to the known devices the fixed order is not guaranteed, so add a new device to `DEVICE_ORDER`.
 
 ## Development
 

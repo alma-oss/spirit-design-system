@@ -136,6 +136,54 @@ describe('tokenHelper', () => {
       expect(result[1]?.metadata.originName).toBe('breakpoint-tablet');
     });
 
+    it('should sort numbers in variable names by their value', () => {
+      const tokens = ['1000', '200', '50'].map((name) =>
+        createDesignToken(
+          TokenTypeEnum.Radius,
+          { type: 'number', value: 0 },
+          { id: name, name, metadata: { originName: `Radius/${name}`, groupPath: ['Radius'] } },
+        ),
+      );
+
+      const result = sortTokens(tokens, true, false);
+
+      expect(result.map(({ metadata }) => metadata.originName)).toEqual(['Radius/50', 'Radius/200', 'Radius/1000']);
+    });
+
+    it('should sort the device variants of a token as mobile, tablet, desktop', () => {
+      const tokens = ['desktop', 'tablet', 'mobile'].map((device) =>
+        createDesignToken(
+          TokenTypeEnum.FontSize,
+          { type: 'number', value: 16, unit: 'px' },
+          { id: device, name: 'font-size', metadata: { device, groupPath: ['Typography'] } },
+        ),
+      );
+
+      const result = sortTokens(tokens, true, true);
+
+      expect(result.map(({ metadata }) => metadata.device)).toEqual(['mobile', 'tablet', 'desktop']);
+    });
+
+    it('should sort the variants of an unknown device by their number value', () => {
+      const variants: Array<[string, number]> = [
+        ['desktop', 24],
+        ['wide', 32],
+        ['mobile', 16],
+        ['compact', 12],
+      ];
+      const tokens = variants.map(([device, value]) =>
+        createDesignToken(
+          TokenTypeEnum.FontSize,
+          { type: 'number', value, unit: 'px' },
+          { id: device, name: 'font-size', metadata: { device, groupPath: ['Typography'] } },
+        ),
+      );
+
+      const result = sortTokens(tokens, true, false);
+
+      expect(result.map(({ metadata }) => metadata.device)).toEqual(['compact', 'mobile', 'desktop', 'wide']);
+    });
+
     const sortByNumValueCases: Array<{
       tokenType: TokenTypeEnum;
       tokenSource: Map<string, DesignToken>;
