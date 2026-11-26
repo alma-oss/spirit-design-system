@@ -31,9 +31,10 @@ granularity, then commit through the normal `git` path so hooks (commitlint, etc
   the agent's native tool for asking questions with selectable options; if the agent has no such
   tool, ask a plain question listing the options (e.g. numbered) and wait for the reply before
   proceeding.
-- **Ask before committing.** Always confirm with the user before creating any commit: whether
-  each group should be a new commit or a `--fixup` of an existing commit (and which hash), per
-  [Fixup Commits][fixup-commits].
+- **Ask before committing.** Always confirm the plan with the user before creating any commit.
+  Ask new-commit-or-`--fixup` (and which hash) per [Fixup Commits][fixup-commits] only when the
+  branch already has commits that could be fixed up — otherwise every group is a new commit and
+  there is nothing to ask.
 
 ## Workflow
 
@@ -106,19 +107,30 @@ Omit the body for trivial commits (e.g. `chore(deps): bump lerna to 8.1.0`).
 
 ### Step 5: Confirm the Plan
 
-First collect, for **each** group, whether it should be a **new commit** or a **fixup** of an
-existing commit — one interactive confirmation per group (options: **New commit** /
-**Fixup into `<hash>`** — list the relevant existing commit hash(es) from `git log` as separate
-options so the user picks the hash directly, rather than typing it as free text).
+First find the commits a fixup could target — only those on the current branch that are not yet
+on the base branch. Identify the base branch (`main`, or the release branch the branch was created
+from) and substitute it for `<base>`:
 
-Then present a second interactive confirmation with the full plan — groups → hunk IDs → messages
-→ the new-commit-or-fixup choice just collected for each group — before touching git. If the
-native tool supports a preview or detail field, put the complete plan there; otherwise print the
-plan in the question text itself:
+```bash
+git log --oneline <base>..HEAD
+```
 
-- **Apply it** (preview: the full grouping + messages + mode/hash per group) — create the
-  commits as proposed.
-- **Edit first** — user adjusts grouping, wording, or mode/hash, then re-confirm.
+- **No commits listed** (a fresh branch, or you are on `main` itself): there is nothing to fix
+  up. Make every group a **new commit**, skip the new-commit-or-fixup question entirely, and go
+  straight to the plan confirmation below.
+- **Commits listed:** collect, for **each** group, whether it should be a **new commit** or a
+  **fixup** of one of them — one interactive confirmation per group (options: **New commit** /
+  **Fixup into `<hash>`** — list the relevant hash(es) from the log above as separate options so
+  the user picks the hash directly, rather than typing it as free text).
+
+Then present an interactive confirmation with the full plan — groups → hunk IDs → messages →
+mode/hash per group (only when there was a choice) — before touching git. If the native tool
+supports a preview or detail field, put the complete plan there; otherwise print the plan in the
+question text itself:
+
+- **Apply it** (preview: the full grouping + messages, plus mode/hash per group when fixups were
+  possible) — create the commits as proposed.
+- **Edit first** — user adjusts grouping, wording, or (when applicable) mode/hash, then re-confirm.
 - **Discard** — make no commits.
 
 ### Step 6: Commit Each Group
