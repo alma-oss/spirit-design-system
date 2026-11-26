@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { getSiteOrigin } from '@local/domains/content/siteOrigin';
+import { getSiteOrigin } from '@local/config/siteOrigin';
 import {
   fetchAllDocumentedPages,
   fetchDocumentedPage,

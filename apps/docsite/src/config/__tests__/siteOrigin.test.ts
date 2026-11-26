@@ -1,4 +1,4 @@
-import { getSiteOrigin, NETLIFY_DOC_SITE_ORIGIN } from '../siteOrigin';
+import { getSiteOrigin, SITE_ORIGIN } from '../siteOrigin';
 
 const ENV_KEYS = ['NEXT_PUBLIC_SITE_URL', 'CONTEXT', 'DEPLOY_PRIME_URL', 'URL'] as const;
 
@@ -49,6 +49,6 @@ describe('getSiteOrigin', () => {
   });
 
   it('falls back to the netlify site until a host is configured', () => {
-    expect(getSiteOrigin()).toBe(NETLIFY_DOC_SITE_ORIGIN);
+    expect(getSiteOrigin()).toBe(SITE_ORIGIN);
   });
 });

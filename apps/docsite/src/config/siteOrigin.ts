@@ -3,7 +3,7 @@
  * https://spirit.design is the production domain once the docsite is finalized and that
  * domain is attached. Until then, links must use the host that actually serves `?format=md`.
  */
-export const NETLIFY_DOC_SITE_ORIGIN = 'https://spirit-design-system-docsite.netlify.app';
+export const SITE_ORIGIN = 'https://spirit-design-system-docsite.netlify.app';
 
 const configuredOrigin = (value: string | undefined): string | undefined => {
   const origin = value?.trim().replace(/\/$/, '');
@@ -33,5 +33,5 @@ export const getSiteOrigin = (): string => {
     return prime;
   }
 
-  return configuredOrigin(process.env.URL) ?? NETLIFY_DOC_SITE_ORIGIN;
+  return configuredOrigin(process.env.URL) ?? SITE_ORIGIN;
 };

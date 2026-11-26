@@ -1,9 +1,7 @@
-import { getSiteOrigin } from '@local/domains/content/siteOrigin';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@local/config/siteConfig';
+import { getSiteOrigin } from '@local/config/siteOrigin';
 import { DOCUMENTATION_MENU } from '../../../routing/documentationMenu';
 import { type DocumentedPage } from './sources/page';
-
-const SITE_TITLE = 'Spirit Design System';
-const SITE_DESCRIPTION = 'Documentation for the Spirit Design System';
 
 export const markdownPageUrl = (path: string): string => `${getSiteOrigin()}${path}?format=md`;
 

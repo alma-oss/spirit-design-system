@@ -31,6 +31,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "src/app/.well-known/**/*.ts",
     ".next/types/**/*.ts",
     "../../packages/web-react/src/global.d.ts"
   ],
