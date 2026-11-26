@@ -11,7 +11,7 @@ const defaultProps = {
   elementType: 'span',
 };
 
-const Truncate = <E extends ElementType = 'span'>(props: SpiritTruncateProps<E>): JSX.Element => {
+const Truncate = <E extends ElementType = 'span'>(props: SpiritTruncateProps<E>): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { children, elementType, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;

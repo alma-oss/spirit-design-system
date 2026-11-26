@@ -13,7 +13,7 @@ import { useCancelEvent, useClickOutside } from '../../hooks';
 import { type DialogProps, type ForwardRefComponent } from '../../types';
 import { useDialog } from './useDialog';
 
-const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>): JSX.Element => {
+const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>): React.JSX.Element => {
   const { children, isOpen, onClose, closeOnBackdropClick = true, closeOnEscapeKeyDown, ...restProps } = props;
   const dialogElementRef: MutableRefObject<ForwardedRef<HTMLDialogElement | null>> = useRef(ref);
   const contentElementRef: MutableRefObject<HTMLElement | null> = useRef(null);
@@ -54,7 +54,7 @@ const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>
    * @see https://reactjs.org/docs/react-api.html#reactchildren
    * @throws Error
    */
-  const child = Children.only(children) as ReactElement;
+  const child = Children.only(children) as ReactElement<{ ref?: React.Ref<HTMLElement> }>;
 
   return (
     <dialog
@@ -63,7 +63,7 @@ const _Dialog = (props: DialogProps, ref: ForwardedRef<HTMLDialogElement | null>
       {...restProps}
     >
       {cloneElement(child, {
-        ref: (clonedElementRef: HTMLElement) => {
+        ref: (clonedElementRef: HTMLElement | null) => {
           contentElementRef.current = clonedElementRef;
         },
       })}

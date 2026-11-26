@@ -67,7 +67,7 @@ please refer to the [Icon component documentation][web-react-icon-documentation]
 Compose your own field using `Label`, `InputContainer`, `InputAddon`, `HelperText`, and `ValidationText`. Wrap with `ContextPropsProvider` so size and validation flow into `InputContainer`, and use `useAriaDescribedBy` for accessible descriptions—same building blocks as `Select` itself.
 
 ```tsx
-const CustomSelect = (props: SpiritSelectProps): JSX.Element => {
+const CustomSelect = (props: SpiritSelectProps): React.JSX.Element => {
   const {
     'aria-describedby': ariaDescribedBy = '',
     children,

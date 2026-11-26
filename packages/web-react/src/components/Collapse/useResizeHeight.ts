@@ -7,7 +7,7 @@ type Size = {
   height: number | undefined;
 };
 
-export const useResizeHeight = (ref: RefObject<HTMLElement>): string | undefined => {
+export const useResizeHeight = (ref: RefObject<HTMLElement | null>): string | undefined => {
   const [height, setHeight] = useState<string | undefined>(undefined);
 
   const onResize = (size: Size) => {

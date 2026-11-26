@@ -40,7 +40,7 @@ const normalizeSelectOptions = (
   options.map((option) => (typeof option === 'string' ? { value: option, label: option } : option));
 
 export interface UseComboboxSplitTagReturn {
-  closeButtonRef: RefObject<HTMLButtonElement>;
+  closeButtonRef: RefObject<HTMLButtonElement | null>;
   dropdownId: string;
   getOptionProps: (value: string) => SplitTagListboxOptionProps;
   handleCloseKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
@@ -51,7 +51,7 @@ export interface UseComboboxSplitTagReturn {
   label: ReactNode;
   labelText: string;
   listboxLabel: string;
-  listboxRef: RefObject<HTMLDivElement>;
+  listboxRef: RefObject<HTMLDivElement | null>;
   onRemove: () => void;
   removeButtonAriaLabel: string;
   rowKeyboardProps: {

@@ -31,7 +31,7 @@ interface ScrollViewControlsBaseProps extends StringsProps<ScrollViewStrings> {
   ariaLabelControls?: ScrollViewControlsAriaLabelType;
   direction: ScrollViewDirectionType;
   scrollStep: ScrollViewControlsScrollStepType;
-  viewportRef: RefObject<HTMLDivElement>;
+  viewportRef: RefObject<HTMLDivElement | null>;
 }
 
 export interface ScrollViewBaseProps extends ChildrenProps, StyleProps, StringsProps<ScrollViewStrings> {

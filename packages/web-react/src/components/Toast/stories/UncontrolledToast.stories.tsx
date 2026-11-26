@@ -114,7 +114,7 @@ const ShowButton = (props: {
   iconName?: string;
   isDismissible: boolean;
   linkProps: ToastLinkProps;
-  content: { message: string | JSX.Element; link?: string | JSX.Element };
+  content: { message: string | React.JSX.Element; link?: string | React.JSX.Element };
 }) => {
   const { content, color, hasIcon, isDismissible, iconName, enableAutoClose, autoCloseInterval, linkProps } = props;
   const { show, clear } = useToast();

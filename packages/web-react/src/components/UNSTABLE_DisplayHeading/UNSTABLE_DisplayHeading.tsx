@@ -13,7 +13,7 @@ const defaultProps: Partial<SpiritDisplayHeadingProps> = {
 
 const UNSTABLE_DisplayHeading = <E extends ElementType = 'h1', C = void>(
   props: SpiritDisplayHeadingProps<E, C>,
-): JSX.Element => {
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;

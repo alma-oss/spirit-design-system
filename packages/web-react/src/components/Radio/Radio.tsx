@@ -17,7 +17,7 @@ const defaultProps: Partial<SpiritRadioProps> = {
   size: Sizes.MEDIUM,
 };
 
-const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+const _Radio = (props: SpiritRadioProps, ref: ForwardedRef<HTMLInputElement>): React.JSX.Element => {
   const { isItem: isItemProp } = props;
   const { size: itemSize } = useContextProps<Partial<SpiritRadioProps>>({}, isItemProp ? 'item' : undefined);
   const propsWithDefaults = mergeProps(

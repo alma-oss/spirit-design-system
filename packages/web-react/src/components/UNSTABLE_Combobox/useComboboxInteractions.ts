@@ -13,7 +13,7 @@ export interface UseComboboxInteractionsProps {
   focusInput: () => void;
   getOptionRowEl: (optionId: string) => HTMLElement | null;
   getVisibleOptionRows: () => HTMLElement[];
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   isDisabled?: boolean;
   isOpen: boolean;
   listboxRef: RefObject<HTMLElement | null>;

@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from 'react';
 import { useDeprecationMessage, useStringsProp } from '../../hooks';
+import { type ForwardRefComponent } from '../../types';
 import { ControlButton } from '../ControlButton';
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -11,7 +12,7 @@ const defaultProps: Partial<CloseButtonProps> = {
   isSymmetrical: true,
 };
 
-const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref) => {
+const _CloseButton = (props: CloseButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { label, strings, ...restProps } = propsWithDefaults;
   const { closeLabel } = useStringsProp({
@@ -32,7 +33,12 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>((props, ref)
       <VisuallyHidden>{closeLabel}</VisuallyHidden>
     </ControlButton>
   );
-});
+};
+
+const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(_CloseButton) as ForwardRefComponent<
+  HTMLButtonElement,
+  CloseButtonProps
+>;
 
 CloseButton.spiritComponent = 'CloseButton';
 CloseButton.displayName = 'CloseButton';

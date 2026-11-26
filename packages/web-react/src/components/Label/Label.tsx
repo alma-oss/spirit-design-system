@@ -17,7 +17,7 @@ const defaultProps: Partial<SpiritLabelProps> = {
   size: SizesExtended.MEDIUM,
 };
 
-const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): JSX.Element => {
+const Label = <E extends ElementType = 'label'>(props: SpiritLabelProps<E>): React.JSX.Element => {
   const inlineElementsProps = useContext(InlineElementsContext) ?? {};
   const formFieldsProps = useContext(FormFieldsContext) ?? {};
   const mergedProps = useContextProps(props, 'label') as WithFormFieldContext<SpiritLabelProps<E>>;

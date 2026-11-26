@@ -15,7 +15,10 @@ const defaultProps = {
   elementType: 'a',
 };
 
-const _CardLink = <E extends ElementType = 'a'>(props: SpiritCardLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _CardLink = <E extends ElementType = 'a'>(
+  props: SpiritCardLinkProps<E>,
+  ref: PolymorphicRef<E>,
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, href, ...restProps } = propsWithDefaults;
 

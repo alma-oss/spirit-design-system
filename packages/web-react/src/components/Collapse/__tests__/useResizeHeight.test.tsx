@@ -6,7 +6,7 @@ import { useResizeHeight } from '../useResizeHeight';
 jest.spyOn(window, 'requestAnimationFrame').mockImplementation(() => 0);
 
 const TestComponent = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const height = useResizeHeight(ref);
 
   return <div ref={ref}>{height}</div>;

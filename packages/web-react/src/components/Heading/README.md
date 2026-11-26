@@ -161,7 +161,7 @@ and [escape hatches][readme-escape-hatches].
 Heading classes are fabricated using `useHeadingStyleProps` hook. You can use it to create your own custom Heading component.
 
 ```tsx
-const CustomText = (props: SpiritHeadingProps): JSX.Element => {
+const CustomText = (props: SpiritHeadingProps): React.JSX.Element => {
   const { classProps, props: modifiedProps, children } = useHeadingStyleProps(props);
 
   return (

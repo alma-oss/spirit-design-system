@@ -20,8 +20,8 @@ export interface ToastItem {
   isOpen: boolean;
   linkProps: ToastLinkProps;
   content: {
-    message: JSX.Element | string;
-    link?: JSX.Element | string;
+    message: React.JSX.Element | string;
+    link?: React.JSX.Element | string;
   };
 }
 
@@ -31,8 +31,8 @@ export interface ToastContextType extends ToastState {
   setQueue: (newQueue: ToastItem[]) => void;
   show: (
     content: {
-      message: JSX.Element | string;
-      link?: JSX.Element | string;
+      message: React.JSX.Element | string;
+      link?: React.JSX.Element | string;
     },
     id: string,
     options?: {
@@ -63,8 +63,8 @@ type ActionType =
       type: 'show';
       payload: {
         content: {
-          message: JSX.Element | string;
-          link?: JSX.Element | string;
+          message: React.JSX.Element | string;
+          link?: React.JSX.Element | string;
         };
         toastId: string;
         options?: {
@@ -145,8 +145,8 @@ export const ToastProvider: FC<ToastProviderProps> = ({ children }) => {
   const show = useCallback(
     (
       content: {
-        message: JSX.Element | string;
-        link?: JSX.Element | string;
+        message: React.JSX.Element | string;
+        link?: React.JSX.Element | string;
       },
       toastId: string,
       options?: {

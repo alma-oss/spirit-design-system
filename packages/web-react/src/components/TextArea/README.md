@@ -138,7 +138,7 @@ and [escape hatches][readme-escape-hatches].
 Text field classes are fabricated using `useTextAreaStyleProps` hook. You can use it to create your own custom TextArea component.
 
 ```tsx
-const CustomTextArea = (props: SpiritTextAreaProps): JSX.Element => {
+const CustomTextArea = (props: SpiritTextAreaProps): React.JSX.Element => {
   const { classProps, props: modifiedProps } = useTextAreaStyleProps(props);
 
   return (

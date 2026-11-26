@@ -10,7 +10,7 @@ import PaginationLinkNext from './PaginationLinkNext';
 import PaginationLinkPrevious from './PaginationLinkPrevious';
 import { usePagination } from './usePagination';
 
-const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): JSX.Element => {
+const UncontrolledPagination = (props: SpiritUncontrolledPaginationProps): React.JSX.Element => {
   const {
     accessibilityLabel,
     accessibilityLabelPrevious,

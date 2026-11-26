@@ -1,4 +1,4 @@
-import { type Context, type ReactNode, createElement } from 'react';
+import { type Context, type ReactElement, type ReactNode, createElement } from 'react';
 
 // Context<T> is invariant, so a heterogeneous tuple list can't be typed soundly per element.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,7 +11,7 @@ type ContextValuePair = readonly [Context<any>, any];
  * @param {object} props - The component props.
  * @param {ReadonlyArray<[Context<unknown>, unknown]>} props.values - Context/value pairs to provide, outermost first.
  * @param {ReactNode} props.children - The nested content.
- * @returns {JSX.Element} The children wrapped in one `Context.Provider` per pair.
+ * @returns {ReactElement} The children wrapped in one `Context.Provider` per pair.
  */
 const UniversalProvider = ({
   values,
@@ -19,10 +19,10 @@ const UniversalProvider = ({
 }: {
   values: readonly ContextValuePair[];
   children: ReactNode;
-}): JSX.Element =>
+}): ReactElement =>
   values.reduceRight<ReactNode>(
     (acc, [Context, value]) => createElement(Context.Provider, { value }, acc),
     children,
-  ) as JSX.Element;
+  ) as ReactElement;
 
 export { UniversalProvider };

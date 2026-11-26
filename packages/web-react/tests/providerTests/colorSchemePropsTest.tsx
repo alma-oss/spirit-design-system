@@ -8,7 +8,7 @@ type ColorSchemeComponentProps<C extends string> = {
   isSubtle?: boolean;
 };
 
-type ColorSchemeTestComponent<C extends string> = (props: ColorSchemeComponentProps<C>) => JSX.Element;
+type ColorSchemeTestComponent<C extends string> = (props: ColorSchemeComponentProps<C>) => React.JSX.Element;
 
 export function colorSchemePropsTest<C extends string>(
   Component: ColorSchemeTestComponent<C>,

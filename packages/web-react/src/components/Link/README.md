@@ -120,7 +120,7 @@ Link classes are fabricated using `useLinkStyleProps` hook. You can use it to cr
 The hook only accepts styling-related props: strip `routerOptions` (and any other non-DOM props your wrapper handles separately) before calling it—the built-in `Link` component does this at its root.
 
 ```tsx
-const CustomLink = (props: SpiritLinkProps): JSX.Element => {
+const CustomLink = (props: SpiritLinkProps): React.JSX.Element => {
   const { children, routerOptions, ...styleProps } = props;
   const { classProps, props: modifiedProps } = useLinkStyleProps(styleProps);
 
@@ -137,7 +137,7 @@ const CustomLink = (props: SpiritLinkProps): JSX.Element => {
 If you are using `forwardRef`, use the `PolymorphicRef` type for the reference.
 
 ```tsx
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { Link } from '@alma-oss/spirit-web-react';
 import { PolymorphicRef } from '@alma-oss/spirit-web-react/types';
 
@@ -146,7 +146,7 @@ type LinkProps<T extends ElementType = 'button'> = SpiritLinkProps<T, 'tertiary'
 const CustomLinkRoot = <T extends ElementType = 'button'>(
   props: LinkProps<T>,
   ref: PolymorphicRef<T>, // <-- Type `ref` prop with the `PolymorphicRef` here
-): JSX.Element => <Link ref={ref} elementType="button" {...props} />;
+): React.JSX.Element => <Link ref={ref} elementType="button" {...props} />;
 
 export const CustomLink = forwardRef(CustomLinkRoot);
 ```

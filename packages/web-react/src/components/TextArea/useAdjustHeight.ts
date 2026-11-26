@@ -1,10 +1,10 @@
 'use client';
 
 /* eslint-disable no-param-reassign -- DOM manipulation is required for dynamic height adjustment */
-import { type FormEvent, type FormEventHandler, type ForwardedRef, type MutableRefObject, useEffect } from 'react';
+import { type FormEvent, type FormEventHandler, type RefObject, useEffect } from 'react';
 
 export interface UseAdjustHeightProps {
-  elementReference?: MutableRefObject<ForwardedRef<HTMLTextAreaElement>>;
+  elementReference?: RefObject<HTMLTextAreaElement | null>;
   maxHeight: number;
   onInput?: FormEventHandler<HTMLTextAreaElement>;
   isAutoResizing?: boolean;
@@ -38,8 +38,7 @@ export const useAdjustHeight = ({
 
   const adjustHeightOnAutoresize = () => {
     if (isAutoResizing) {
-      // Because of mixed props for input and textarea
-      const textArea = elementReference?.current as unknown as HTMLTextAreaElement;
+      const textArea = elementReference?.current;
 
       if (textArea) {
         adjustHeight(textArea);

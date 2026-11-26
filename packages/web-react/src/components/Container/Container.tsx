@@ -12,7 +12,7 @@ const defaultProps: SpiritContainerProps = {
   size: SizesExtended.XLARGE,
 };
 
-const Container = (props: SpiritContainerProps): JSX.Element => {
+const Container = (props: SpiritContainerProps): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { children, ...restProps } = propsWithDefaults;
   const { classProps, props: modifiedProps } = useContainerStyleProps(restProps);

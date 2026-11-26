@@ -19,7 +19,7 @@ const defaultProps = {
 const _StackItem = <E extends ElementType = 'div'>(
   props: SpiritStackItemProps<E>,
   ref: PolymorphicRef<E>,
-): JSX.Element => {
+): React.JSX.Element => {
   const listItemsProps = useContext(ListItemsContext) ?? {};
   const mergedProps = useContextProps<Partial<SpiritStackItemProps<E>>>(props, 'stackItem');
   const propsWithDefaults = mergeProps(defaultProps, listItemsProps, mergedProps);

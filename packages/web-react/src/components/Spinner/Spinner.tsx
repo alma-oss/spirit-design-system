@@ -7,7 +7,7 @@ import { type SpiritSpinnerProps } from '../../types';
 import { Icon } from '../Icon';
 import { useSpinnerStyleProps } from './useSpinnerStyleProps';
 
-const Spinner = <C extends undefined = undefined>(props: SpiritSpinnerProps<C>): JSX.Element => {
+const Spinner = <C extends undefined = undefined>(props: SpiritSpinnerProps<C>): React.JSX.Element => {
   const { classProps, props: modifiedProps } = useSpinnerStyleProps(props);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
 

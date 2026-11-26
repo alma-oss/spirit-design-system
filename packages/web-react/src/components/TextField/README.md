@@ -183,7 +183,7 @@ and [escape hatches][readme-escape-hatches].
 Text field classes are fabricated using `useTextFieldStyleProps` hook. You can use it to create your own custom TextField component.
 
 ```tsx
-const CustomTextField = (props: SpiritTextFieldProps): JSX.Element => {
+const CustomTextField = (props: SpiritTextFieldProps): React.JSX.Element => {
   const { classProps, props: modifiedProps } = useTextFieldStyleProps(props);
 
   return (

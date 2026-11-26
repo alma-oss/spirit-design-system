@@ -18,7 +18,7 @@ const defaultProps = {
 const _Footer = <E extends ElementType = 'footer'>(
   props: SpiritFooterProps<E>,
   ref: PolymorphicRef<E>,
-): JSX.Element => {
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, backgroundColor, ...restProps } = propsWithDefaults;
 

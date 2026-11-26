@@ -3,6 +3,7 @@
  *
  * @see { @link https://github.com/remarkablemark/html-react-parser/blob/master/__tests__/index.test.tsx }
  */
+import type { JSX } from 'react';
 import { htmlReactParser } from '../htmlReactParser';
 
 const html = {
