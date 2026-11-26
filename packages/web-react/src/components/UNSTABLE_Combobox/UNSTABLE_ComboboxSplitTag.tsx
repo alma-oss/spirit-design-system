@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { TextWordBreaks } from '../../constants';
 import { ControlButton } from '../ControlButton';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../Dropdown';
 import { Icon } from '../Icon';
@@ -62,7 +63,7 @@ const UNSTABLE_ComboboxSplitTag = (props: SpiritUnstableComboboxSplitTagProps) =
           color="selected"
           isDisabled={isDisabled}
         >
-          <Tag>
+          <Tag textWordBreak={TextWordBreaks.LONG_WORDS}>
             <span>{label}</span>
           </Tag>
           <Dropdown

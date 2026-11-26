@@ -43,6 +43,29 @@ describe('UNSTABLE_PickerTag', () => {
     expect(screen.getByRole('button', { name: 'Remove Czech' })).toBeInTheDocument();
   });
 
+  it('should break long words in the tag row', () => {
+    render(
+      <PickerContextProvider value={{ size: 'medium' }}>
+        <UNSTABLE_PickerTag label="Czech" onRemove={jest.fn()} removeLabel="Remove Czech" />
+      </PickerContextProvider>,
+    );
+
+    expect(screen.getByRole('row', { name: 'Czech' })).toHaveClass('text-word-break-long-words');
+  });
+
+  it('should allow overriding the word break strategy', () => {
+    render(
+      <PickerContextProvider value={{ size: 'medium' }}>
+        <UNSTABLE_PickerTag label="Czech" onRemove={jest.fn()} removeLabel="Remove Czech" textWordBreak="anywhere" />
+      </PickerContextProvider>,
+    );
+
+    const row = screen.getByRole('row', { name: 'Czech' });
+
+    expect(row).toHaveClass('text-word-break-anywhere');
+    expect(row).not.toHaveClass('text-word-break-long-words');
+  });
+
   it('should support ReactNode label and normalized aria-label', () => {
     render(
       <PickerContextProvider value={{ size: 'medium' }}>

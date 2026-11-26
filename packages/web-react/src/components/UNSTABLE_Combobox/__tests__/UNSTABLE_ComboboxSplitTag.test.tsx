@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import React, { type ComponentProps, useState } from 'react';
 import '@testing-library/jest-dom';
 import { type SelectionGridRowProps, useDisclosureState } from '../../../hooks';
@@ -188,6 +188,15 @@ describe('UNSTABLE_ComboboxSplitTag', () => {
 
     expect(screen.getByRole('row', { name: 'Praha, +5 km' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Select distance, selected +5 km' })).toBeInTheDocument();
+  });
+
+  it('should break long words in the label tag', () => {
+    render(<TestComboboxWithSplitTags />);
+
+    const row = screen.getByRole('row', { name: 'Praha, +5 km' });
+    const labelTag = within(row).getByText('Praha').closest('.Tag');
+
+    expect(labelTag).toHaveClass('text-word-break-long-words');
   });
 
   it('should open the nested select on ArrowDown from the distance trigger', () => {

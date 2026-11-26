@@ -480,14 +480,15 @@ control). Pass `tagKeyboardProps` from `getKeyboardGridRowProps` so the row stay
 
 ### API
 
-| Name               | Type                    | Default                        | Required | Description                                                    |
-| ------------------ | ----------------------- | ------------------------------ | -------- | -------------------------------------------------------------- |
-| `children`         | `ReactNode`             | —                              | ✕        | Tag content (defaults to `label`)                              |
-| `isDisabled`       | `bool`                  | `false`                        | ✕        | Disables the tag                                               |
-| `label`            | `ReactNode`             | —                              | ✓        | Accessible label for the tag                                   |
-| `onRemove`         | `() => void`            | —                              | ✓        | Remove button handler                                          |
-| `removeLabel`      | `string`                | i18n `combobox.tag.removeAria` | ✕        | Accessible name for the remove control; supports `{itemLabel}` |
-| `tagKeyboardProps` | `SelectionGridRowProps` | —                              | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags`       |
+| Name               | Type                                      | Default                        | Required | Description                                                    |
+| ------------------ | ----------------------------------------- | ------------------------------ | -------- | -------------------------------------------------------------- |
+| `children`         | `ReactNode`                               | —                              | ✕        | Tag content (defaults to `label`)                              |
+| `isDisabled`       | `bool`                                    | `false`                        | ✕        | Disables the tag                                               |
+| `label`            | `ReactNode`                               | —                              | ✓        | Accessible label for the tag                                   |
+| `onRemove`         | `() => void`                              | —                              | ✓        | Remove button handler                                          |
+| `removeLabel`      | `string`                                  | i18n `combobox.tag.removeAria` | ✕        | Accessible name for the remove control; supports `{itemLabel}` |
+| `tagKeyboardProps` | `SelectionGridRowProps`                   | —                              | ✕        | Row props from `getKeyboardGridRowProps` in `renderTags`       |
+| `textWordBreak`    | \[`normal` \| `anywhere` \| `long-words`] | `long-words`                   | ✕        | Word break strategy applied to the tag content                 |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -497,7 +498,8 @@ and [escape hatches][readme-escape-hatches].
 
 Selection row for `renderTags` with three segments: label, nested select, and remove. Use it for
 Locations-style tags (city + distance). Wire `tagKeyboardProps` the same way as
-[`UNSTABLE_ComboboxTag`](#unstable_comboboxtag).
+[`UNSTABLE_ComboboxTag`](#unstable_comboboxtag). The label segment applies
+`textWordBreak="long-words"` so long values wrap inside the field.
 
 The nested select is **controlled**: pass `select.isOpen` and `select.onToggle` (for example with
 [`useDisclosureState`][disclosure-hooks]). Because each selected item needs its own open state, keep that

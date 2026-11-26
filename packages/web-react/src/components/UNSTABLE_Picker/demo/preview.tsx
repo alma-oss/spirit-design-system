@@ -11,6 +11,7 @@ import PickerDisabled from './PickerDisabled';
 import PickerGroupedJobFilters from './PickerGroupedJobFilters';
 import PickerHelperText from './PickerHelperText';
 import PickerHiddenLabel from './PickerHiddenLabel';
+import PickerLongText from './PickerLongText';
 import PickerRequired from './PickerRequired';
 import PickerSalary from './PickerSalary';
 import PickerSingle from './PickerSingle';
@@ -24,6 +25,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <PickerDefault />
+      </DocsSection>
+      <DocsSection title="Long Tag Text">
+        <PickerLongText />
       </DocsSection>
       <DocsSection title="Themes">
         <PickerThemes />

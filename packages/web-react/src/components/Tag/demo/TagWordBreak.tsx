@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { TextWordBreaks } from '../../../constants';
 import { Box } from '../../Box';
