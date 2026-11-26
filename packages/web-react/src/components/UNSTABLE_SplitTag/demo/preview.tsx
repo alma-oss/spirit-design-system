@@ -15,11 +15,11 @@ export const Preview = () => (
       <DocsSection title="Default">
         <SplitTagLocationRadius />
       </DocsSection>
-      <DocsSection title="Colors and Sizes">
-        <SplitTagColorsAndSizes />
-      </DocsSection>
       <DocsSection title="Long Text">
         <SplitTagLongText />
+      </DocsSection>
+      <DocsSection title="Colors and Sizes">
+        <SplitTagColorsAndSizes />
       </DocsSection>
       <DocsSection title="Disabled">
         <SplitTagDisabled />
