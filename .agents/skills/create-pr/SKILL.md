@@ -1,6 +1,6 @@
 ---
 name: spirit:create-pr
-description: Create or update a GitHub PR for the current branch. Drafts a short why-first description from branch changes and conversation context, asks for any missing info (issue URL, draft status), then creates or updates the PR via gh CLI.
+description: Create or update a GitHub PR for the current branch. Drafts a short why-first description from branch changes and conversation context, asks for any missing info (issue URL, draft status), then creates or updates the PR via gh CLI. Use whenever the user asks to create, open, make, or update a PR or pull request, before running `gh pr create`.
 ---
 
 # Create PR
