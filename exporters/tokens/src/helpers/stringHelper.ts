@@ -83,7 +83,8 @@ const prepareReplacements = (configuration: Record<string, unknown>, name: strin
  * @returns {Array<{ search: string; replace: string }>} - An array of objects with `search` and `replace` keys.
  */
 export const getReplacements = (configuration: Record<string, unknown>, name: string): FontReplacement[] => {
-  return [...Array(5)].map((_, i) => prepareReplacements(configuration, name, i) as FontReplacement);
+  // config.json declares searchFont1..5 / replaceFont1..5 (1-based), not 0..4
+  return [...Array(5)].map((_, i) => prepareReplacements(configuration, name, i + 1) as FontReplacement);
 };
 
 /**
