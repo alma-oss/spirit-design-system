@@ -7,6 +7,9 @@ description: Create or update a GitHub PR for the current branch. Drafts a short
 
 Create or update a GitHub pull request for the current branch. Gather context, draft a reviewer-focused description, fill gaps interactively, then apply via `gh` CLI.
 
+Wherever this skill says "ask the user", use whatever your environment provides (a choice prompt or
+plain text) and wait for the answer.
+
 ## Principles
 
 - **Lead with why, not what.** The reviewer can read the diff. Explain the problem or context that drove the change.
@@ -56,7 +59,7 @@ Extract the Jira issue ID from:
 
 ### Step 3: Ask for Missing Issue URL
 
-If no Jira issue ID was found (branch, commits, and conversation all lack one), use `AskUserQuestion` to ask:
+If no Jira issue ID was found (branch, commits, and conversation all lack one), ask the user:
 
 > "What is the Jira issue URL for this PR? (e.g. https://almacareer.atlassian.net/browse/DS-XXXX) — or type 'none' to skip."
 
@@ -85,18 +88,17 @@ Fill the PR template sections:
 
 ### Step 5: Present for Review
 
-Use `AskUserQuestion` with the following questions:
+Show the full draft, formatted exactly as it will appear in the PR body: in the preview of the first
+option when your choice prompt supports one, otherwise in the chat before the question. Then ask the user:
 
-1. A single-select for the description. Set the full draft as the `preview` of the first option so it renders side-by-side with the choices:
-   - **Apply it** (preview: full draft text) — create or update the PR with this description
+1. To choose what to do with the description:
+   - **Apply it** — create or update the PR with this description
    - **Edit first** — user will provide changes, then re-apply
    - **Discard** — do not touch the PR
 
-2. _(Only when no PR exists)_ A single-select asking whether to create a draft PR:
+2. _(Only when no PR exists)_ To choose whether to create a draft PR:
    - **No** — publish immediately (default)
    - **Yes** — create as draft
-
-The preview field renders Markdown — format the draft exactly as it will appear in the PR body.
 
 ### Step 6: Create or Update the PR
 
@@ -130,8 +132,8 @@ After the command succeeds, print the PR URL.
 After the PR is created as a ready-for-review PR (not when only updating an existing PR's body, and not when it was created as a draft) and a Jira issue ID is known, offer to move the issue to QA. Never transition it without the user's answer.
 
 1. Call `listJiraIssueTransitions` (Atlassian MCP, via `executeRead`, `cloudId: almacareer.atlassian.net`) for the issue and pick the transition whose target status (`to.name`) is `Testing` (in the DS project it is named `Test`). Resolve its id every time; IDs are workflow-specific.
-2. If no transition leads to QA/testing (e.g. the issue is already in Testing), tell the user the transition is unavailable and stop — never offer an unrelated transition. If several transitions match, ask the user which one to use with `AskUserQuestion`. Never guess.
-3. Ask with `AskUserQuestion` (single-select): **Yes** — move the issue to QA / **No** — leave the status unchanged.
+2. If no transition leads to QA/testing (e.g. the issue is already in Testing), tell the user the transition is unavailable and stop — never offer an unrelated transition. If several transitions match, ask the user which one to use. Never guess.
+3. Ask the user to choose: **Yes** — move the issue to QA, or **No** — leave the status unchanged.
 4. On **Yes**, call `transitionJiraIssue` with the chosen transition ID. Then check the returned issue — the transition may clear the assignee. If it did, tell the user.
 
 Skip this step when the PR is a draft, there is no Jira issue (the user answered "none" in Step 3), or the Jira tools are not available.

@@ -14,6 +14,9 @@ Post a short comment on an implemented DS issue and move it to `Done`. The comme
 mention, the README rendered on the branch, one preview link per implementation the PR touched, and
 the PR itself — entry points, not an essay. The PR body already carries the reasoning.
 
+Wherever this skill says "ask the user", use whatever your environment provides (a choice prompt or
+plain text) and wait for the answer.
+
 ## Principles
 
 - **The mention is always the product manager, or nobody.** Acceptance is their call. The reporter is
@@ -47,7 +50,7 @@ The responsible person usually moves the issue to `Done` — if that is not the 
 
 Never carry a name in this skill — a stale username mentions the wrong person silently. Resolve in
 order: whoever the user named in the conversation → the DS project lead, the closest API-resolvable
-proxy → ask with `AskUserQuestion`, offering the lead as the first option and **No mention** as the
+proxy → ask the user to choose, offering the lead as the first option and **No mention** as the
 last. When there is no product manager to accept the work, the user picks **No mention** and the
 comment opens with the component line, without the mention.
 
