@@ -1,4 +1,9 @@
-import { accentColors, emotionColors, textColors } from '@alma-oss/spirit-design-tokens';
+import {
+  accentColorNames,
+  colorIntensityNames,
+  emotionColorNames,
+  textColorNames,
+} from '@alma-oss/spirit-design-tokens';
 import { ColorPrefixes } from '../constants';
 import {
   type AccentColorNamesType,
@@ -19,12 +24,14 @@ interface CreateScopedColorTokenNameOptions {
   intensity: string;
 }
 
+const includesName = (names: readonly string[], name: string) => names.includes(name);
+
 export const getColorCategory = (color: string) => {
-  if (Object.keys(accentColors).includes(color)) {
+  if (includesName(accentColorNames, color)) {
     return ColorPrefixes.ACCENT;
   }
 
-  if (Object.keys(emotionColors).includes(color)) {
+  if (includesName(emotionColorNames, color)) {
     return ColorPrefixes.EMOTION;
   }
 
@@ -38,28 +45,26 @@ export const createScopedColorTokenName = ({ color, intensity }: CreateScopedCol
   createColorTokenName(color, intensity, getColorCategory(color));
 
 /**
- * Generates a color object by processing a set of colors and filtering their keys based on type.
+ * Generates a color object by combining color names with color intensities.
  *
  * @template T - The type of the keys in the resulting record.
- * @param {Record<string, Record<string, string>>} colors - A record of color categories and their properties.
- * @param {string} type - The type of property to filter (e.g., "content", "border", "background").
+ * @param {ReadonlyArray<string>} colorNames - Color names, e.g. accent or emotion color names from design tokens.
  * @param {string} prefix - A string prefix to prepend to the generated keys.
+ * @param {ReadonlyArray<string>} intensities - Color intensities, defaults to intensities from design tokens.
  * @returns {Record<T, T>} A record where the keys are formatted strings and the values are identical to the keys.
  */
 export const generateColorsObject = <T extends string>(
-  colors: Record<string, Record<string, string>>,
-  type: string,
+  colorNames: readonly string[],
   prefix: string,
+  intensities: readonly string[] = colorIntensityNames,
 ): Record<T, T> => {
   const result: Record<string, string> = {};
 
-  for (const [key, properties] of Object.entries(colors)) {
-    for (const [property] of Object.entries(properties)) {
-      if (property.startsWith(type)) {
-        const formattedValue = createColorTokenName(key, property.replace(type, '').toLowerCase(), prefix);
-        const formattedKey = formattedValue.replace(/-/g, '_').toUpperCase();
-        result[formattedKey] = formattedValue;
-      }
+  for (const colorName of colorNames) {
+    for (const intensity of intensities) {
+      const formattedValue = createColorTokenName(colorName, intensity, prefix);
+      const formattedKey = formattedValue.replace(/-/g, '_').toUpperCase();
+      result[formattedKey] = formattedValue;
     }
   }
 
@@ -72,7 +77,7 @@ export const generateColorsObject = <T extends string>(
  * @returns {Record<string, TextAccentColorsType>} A record of formatted accent color keys.
  */
 export const getAccentTextColors = (): Record<string, TextAccentColorsType> =>
-  generateColorsObject(accentColors, 'content', 'accent');
+  generateColorsObject(accentColorNames, 'accent');
 
 /**
  * Generates an object containing formatted keys for emotion text colors.
@@ -80,7 +85,7 @@ export const getAccentTextColors = (): Record<string, TextAccentColorsType> =>
  * @returns {Record<string, TextEmotionColorsType>} A record of formatted emotion color keys.
  */
 export const getEmotionTextColors = (): Record<string, TextEmotionColorsType> =>
-  generateColorsObject(emotionColors, 'content', 'emotion');
+  generateColorsObject(emotionColorNames, 'emotion');
 
 /**
  * Generates an object containing formatted keys for accent background colors.
@@ -88,7 +93,7 @@ export const getEmotionTextColors = (): Record<string, TextEmotionColorsType> =>
  * @returns {Record<string, BackgroundAccentColorsType>} A record of formatted accent color keys.
  */
 export const getAccentBackgroundColors = (): Record<string, BackgroundAccentColorsType> =>
-  generateColorsObject(accentColors, 'background', 'accent');
+  generateColorsObject(accentColorNames, 'accent');
 
 /**
  * Generates an object containing formatted keys for emotion background colors.
@@ -96,7 +101,7 @@ export const getAccentBackgroundColors = (): Record<string, BackgroundAccentColo
  * @returns {Record<string, BackgroundEmotionColorsType>} A record of formatted accent color keys.
  */
 export const getEmotionBackgroundColors = (): Record<string, BackgroundEmotionColorsType> =>
-  generateColorsObject(emotionColors, 'background', 'emotion');
+  generateColorsObject(emotionColorNames, 'emotion');
 
 /**
  * Generates an object containing formatted keys for accent border colors.
@@ -104,7 +109,7 @@ export const getEmotionBackgroundColors = (): Record<string, BackgroundEmotionCo
  * @returns {Record<string, BorderAccentColorsType>} A record of formatted accent color keys.
  */
 export const getAccentBorderColors = (): Record<string, BorderAccentColorsType> =>
-  generateColorsObject(accentColors, 'border', 'accent');
+  generateColorsObject(accentColorNames, 'accent');
 
 /**
  * Generates an object containing formatted keys for emotion border colors.
@@ -112,7 +117,7 @@ export const getAccentBorderColors = (): Record<string, BorderAccentColorsType> 
  * @returns {Record<string, BackgroundEmotionColorsType>} A record of formatted emotion color keys.
  */
 export const getEmotionBorderColors = (): Record<string, BorderEmotionColorsType> =>
-  generateColorsObject(emotionColors, 'border', 'emotion');
+  generateColorsObject(emotionColorNames, 'emotion');
 
 /**
  * Generates an object containing formatted keys for neutral text colors.
@@ -136,6 +141,6 @@ export const getNeutralBackgroundColors = (): Record<string, BackgroundNeutralCo
     NEUTRAL_SUBTLE: 'neutral-subtle',
   }) as Record<string, BackgroundNeutralColorsType>;
 
-export const getAccentColorNames = () => Object.keys(accentColors) as AccentColorNamesType[];
-export const getEmotionColorNames = () => Object.keys(emotionColors) as EmotionColorNamesType[];
-export const getTextColorNames = () => Object.keys(textColors) as TextColorsDictionaryType[];
+export const getAccentColorNames = () => [...accentColorNames] as AccentColorNamesType[];
+export const getEmotionColorNames = () => [...emotionColorNames] as EmotionColorNamesType[];
+export const getTextColorNames = () => [...textColorNames] as TextColorsDictionaryType[];

@@ -50,27 +50,10 @@ describe('color token utilities', () => {
     ).toBe('selected-basic');
   });
 
-  it('returns a correctly formatted object for text colors', () => {
-    const result = generateColorsObject(
-      {
-        '01': {
-          backgroundBasic: 'accent01BackgroundBasic',
-          backgroundSubtle: 'accent01BackgroundSubtle',
-          contentBasic: 'accent01ContentBasic',
-          contentSubtle: 'accent01ContentSubtle',
-        },
-        '02': {
-          backgroundBasic: 'accent02BackgroundBasic',
-          backgroundSubtle: 'accent02BackgroundSubtle',
-          contentBasic: 'accent02ContentBasic',
-          contentSubtle: 'accent02ContentSubtle',
-        },
-      },
-      'content',
-      'accent',
-    );
+  it('returns a correctly formatted object from color names and default intensities', () => {
+    const result = generateColorsObject(['01', '02'], 'accent');
 
-    expect(result).toMatchObject({
+    expect(result).toStrictEqual({
       ACCENT_01_BASIC: 'accent-01-basic',
       ACCENT_01_SUBTLE: 'accent-01-subtle',
       ACCENT_02_BASIC: 'accent-02-basic',
@@ -78,22 +61,7 @@ describe('color token utilities', () => {
     });
   });
 
-  it('returns an empty object', () => {
-    const result = generateColorsObject(
-      {
-        '01': {
-          backgroundBasic: 'accent01BackgroundBasic',
-          backgroundSubtle: 'accent01BackgroundSubtle',
-        },
-        '02': {
-          backgroundBasic: 'accent02BackgroundBasic',
-          backgroundSubtle: 'accent02BackgroundSubtle',
-        },
-      },
-      'content',
-      'accent',
-    );
-
-    expect(result).toMatchObject({});
+  it('returns an empty object for no color names', () => {
+    expect(generateColorsObject([], 'accent')).toStrictEqual({});
   });
 });

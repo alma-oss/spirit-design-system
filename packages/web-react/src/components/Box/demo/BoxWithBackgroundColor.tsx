@@ -1,4 +1,3 @@
-import { accentColors, emotionColors } from '@alma-oss/spirit-design-tokens';
 import React from 'react';
 import { BackgroundColors, TextColors } from '../../../constants';
 import { getAccentBackgroundColors, getEmotionBackgroundColors, getNeutralBackgroundColors } from '../../../utils';
@@ -13,9 +12,6 @@ const neutralColorsObject = getNeutralBackgroundColors();
 const getComplementaryTextColor = (backgroundColor: string): BoxTextColorsType =>
   getComplementaryColor({
     sourceColor: backgroundColor,
-    groups: [...Object.values(accentColors), ...Object.values(emotionColors)],
-    fromPrefix: 'background',
-    toPrefix: 'content',
     fallback: TextColors.PRIMARY,
   }) as BoxTextColorsType;
 

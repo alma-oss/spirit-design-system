@@ -1,4 +1,3 @@
-import { fontSizeBaseMobile } from '@alma-oss/spirit-design-tokens';
 import { DEFAULT_DECIMALS, FALLBACK_BASE_FONT_SIZE_PX, MAX_TO_FIXED_DIGITS, REM_UNIT } from '../constants';
 
 export type PxToRemOptions = {
@@ -6,12 +5,8 @@ export type PxToRemOptions = {
   decimals?: number;
 };
 
-const parsedDefaultBaseFontSize = Number.parseFloat(fontSizeBaseMobile);
-
-export const DEFAULT_BASE_FONT_SIZE_PX =
-  Number.isFinite(parsedDefaultBaseFontSize) && parsedDefaultBaseFontSize > 0
-    ? parsedDefaultBaseFontSize
-    : FALLBACK_BASE_FONT_SIZE_PX;
+// Must stay static: reading the computed root font size would break SSR hydration and user font scaling.
+export const DEFAULT_BASE_FONT_SIZE_PX = FALLBACK_BASE_FONT_SIZE_PX;
 
 /**
  * Converts a pixel value to rem units, rounded to a maximum number of decimals,

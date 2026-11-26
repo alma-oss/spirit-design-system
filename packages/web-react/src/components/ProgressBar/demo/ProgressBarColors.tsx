@@ -1,6 +1,5 @@
-import { accentColors } from '@alma-oss/spirit-design-tokens';
+import { accentColorNames } from '@alma-oss/spirit-design-tokens';
 import React from 'react';
-import { type AccentColorNamesType } from '../../../types';
 import { CaptionText } from '../../CaptionText';
 import { Flex } from '../../Flex';
 import { Stack } from '../../Stack';
@@ -12,7 +11,7 @@ const colors: Array<{ label: string; color: ProgressBarColor }> = [
   { label: 'emotion-warning', color: 'warning' },
   { label: 'emotion-danger', color: 'danger' },
   { label: 'selected', color: ProgressBarColorsExtended.SELECTED },
-  ...(Object.keys(accentColors) as AccentColorNamesType[]).map((color) => ({
+  ...accentColorNames.map((color) => ({
     label: `accent-${color}`,
     color,
   })),

@@ -1,8 +1,19 @@
-import { componentColors, containers, emotionColors, textColors } from '@alma-oss/spirit-design-tokens';
+import {
+  componentButtonColorNames,
+  containers,
+  emotionColorNames,
+  textColorNames,
+} from '@alma-oss/spirit-design-tokens';
 
 function createUppercaseKeyDictionary<T extends Record<string, unknown>>(obj: T) {
   return Object.fromEntries(Object.keys(obj).map((key) => [key.toUpperCase(), key])) as {
     [K in keyof T as Uppercase<string & K>]: K;
+  };
+}
+
+function createUppercaseNameDictionary<const T extends readonly string[]>(names: T) {
+  return Object.fromEntries(names.map((name) => [name.toUpperCase(), name])) as {
+    [K in T[number] as Uppercase<K>]: K;
   };
 }
 
@@ -71,9 +82,9 @@ export const BackgroundColors = {
   TERTIARY: 'tertiary',
 } as const;
 
-export const ComponentButtonColors = createUppercaseKeyDictionary(componentColors.button);
+export const ComponentButtonColors = createUppercaseNameDictionary(componentButtonColorNames);
 
-export const EmotionColors = createUppercaseKeyDictionary(emotionColors);
+export const EmotionColors = createUppercaseNameDictionary(emotionColorNames);
 
 export const LinkColors = {
   PRIMARY: 'primary',
@@ -81,7 +92,7 @@ export const LinkColors = {
   TERTIARY: 'tertiary',
 } as const;
 
-export const TextColors = createUppercaseKeyDictionary(textColors);
+export const TextColors = createUppercaseNameDictionary(textColorNames);
 
 /* Intensity */
 export const Intensity = {

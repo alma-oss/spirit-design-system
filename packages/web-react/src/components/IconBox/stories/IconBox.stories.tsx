@@ -1,4 +1,4 @@
-import { accentColors } from '@alma-oss/spirit-design-tokens';
+import { accentColorNames } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -18,7 +18,7 @@ const meta: Meta<typeof IconBox> = {
   argTypes: {
     color: {
       control: 'select',
-      options: [...[...Object.keys(accentColors), ...Object.values(EmotionColors)]],
+      options: [...accentColorNames, ...Object.values(EmotionColors)],
       table: {
         type: {
           summary: 'AccentColor | EmotionColorsType',
