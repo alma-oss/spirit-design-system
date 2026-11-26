@@ -102,7 +102,7 @@ export default {
 
 type NavLinkColumnFactoryType = {
   id: string;
-  headline: JSX.Element | string;
+  headline: React.JSX.Element | string;
   numOfLinks: number;
   withNestedLinks?: boolean;
 };

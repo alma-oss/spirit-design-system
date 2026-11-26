@@ -13,7 +13,7 @@ const defaultProps = {
   elementType: 'div',
 };
 
-const _Grid = <E extends ElementType = 'div'>(props: SpiritGridProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _Grid = <E extends ElementType = 'div'>(props: SpiritGridProps<E>, ref: PolymorphicRef<E>): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;

@@ -19,7 +19,7 @@ export interface ComboboxPopoverContentProps {
   isLoading: boolean;
   labelId: string;
   listboxId: string;
-  listboxRef: RefObject<HTMLDivElement>;
+  listboxRef: RefObject<HTMLDivElement | null>;
   loadingClassName: string;
   loadingLabel: ReactNode;
   optionsRole: ComboboxOptionsRole | null;

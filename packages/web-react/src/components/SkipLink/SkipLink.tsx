@@ -10,7 +10,10 @@ const defaultProps: Partial<SpiritSkipLinkProps> = {
   elementType: 'a',
 };
 
-const _SkipLink = <E extends ElementType = 'a'>(props: SpiritSkipLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _SkipLink = <E extends ElementType = 'a'>(
+  props: SpiritSkipLinkProps<E>,
+  ref: PolymorphicRef<E>,
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
 
   const {

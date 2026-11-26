@@ -152,7 +152,7 @@ and [escape hatches][readme-escape-hatches].
 Text classes are fabricated using `useTextStyleProps` hook. You can use it to create your own custom Text component.
 
 ```tsx
-const CustomText = (props: SpiritTextProps): JSX.Element => {
+const CustomText = (props: SpiritTextProps): React.JSX.Element => {
   const { classProps, props: modifiedProps, children } = useTextStyleProps(props);
 
   return (

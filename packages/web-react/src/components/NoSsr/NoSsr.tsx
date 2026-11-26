@@ -1,18 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { type ChildrenProps } from '../../types';
 
 interface NoSsrProps extends ChildrenProps {}
 
-const NoSsr = ({ children }: NoSsrProps): JSX.Element => {
+const NoSsr = ({ children }: NoSsrProps): ReactNode => {
   const [isMounted, setMount] = useState(false);
 
   useEffect(() => {
     setMount(true);
   }, []);
 
-  // @ts-expect-error Type 'ReactNode' is not assignable to type 'Element'.
   return isMounted ? children : null;
 };
 

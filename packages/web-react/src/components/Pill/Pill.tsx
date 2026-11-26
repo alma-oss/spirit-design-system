@@ -13,7 +13,7 @@ const defaultProps: Partial<SpiritPillProps> = {
   isSubtle: false,
 };
 
-const Pill = <E extends ElementType = 'span', C = void>(props: SpiritPillProps<E, C>): JSX.Element => {
+const Pill = <E extends ElementType = 'span', C = void>(props: SpiritPillProps<E, C>): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;

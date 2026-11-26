@@ -7,7 +7,7 @@ import { type ClickEvent, type TabItemProps } from '../../types';
 import { useTabContext } from './TabContext';
 import { useTabsStyleProps } from './useTabsStyleProps';
 
-const TabItem = ({ children, forTabPane, onClick, ...restProps }: TabItemProps): JSX.Element => {
+const TabItem = ({ children, forTabPane, onClick, ...restProps }: TabItemProps): React.JSX.Element => {
   const { selectTab, selectedId, onSelectionChange } = useTabContext();
   const { classProps } = useTabsStyleProps({ forTabPane, selectedId });
   const { styleProps, props: transferProps } = useStyleProps(restProps);

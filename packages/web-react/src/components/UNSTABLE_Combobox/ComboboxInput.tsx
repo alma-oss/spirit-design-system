@@ -25,7 +25,7 @@ export interface ComboboxInputProps {
   inputClassName: string;
   inputId: string;
   inputPlaceholder: string;
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   inputValue: string;
   isDisabled: boolean;
   isOpen: boolean;
@@ -42,7 +42,7 @@ export interface ComboboxInputProps {
   renderTags?: (options: UnstableComboboxRenderTagsOptions) => ReactNode;
   selectedItems: ComboboxSelectedItem[];
   selectionAriaLabel: string;
-  selectionGridRef: RefObject<HTMLDivElement>;
+  selectionGridRef: RefObject<HTMLDivElement | null>;
   selectionId: string;
   shouldRenderOptions: boolean;
   showAddMore: boolean;

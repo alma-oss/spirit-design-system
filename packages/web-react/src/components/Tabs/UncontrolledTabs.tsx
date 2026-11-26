@@ -10,7 +10,7 @@ const UncontrolledTabs = ({
   defaultSelectedTab,
   onSelectionChange,
   spacing,
-}: UncontrolledTabsProps): JSX.Element => {
+}: UncontrolledTabsProps): React.JSX.Element => {
   const { selectedId, selectTab } = useTab(defaultSelectedTab);
 
   return <TabsProvider value={{ selectedId, selectTab, onSelectionChange, spacing }}>{children}</TabsProvider>;

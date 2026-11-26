@@ -21,7 +21,7 @@ const defaultProps = {
   iconName: DEFAULT_FILE_ICON_NAME,
 };
 
-const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): JSX.Element => {
+const File = <E extends ElementType = 'li'>(props: SpiritFileProps<E>): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const {
     children,

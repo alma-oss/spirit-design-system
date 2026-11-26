@@ -46,7 +46,7 @@ import { areAllOptionsSelected, getComboboxOptionDomId } from './utils';
 
 export interface ComboboxBaseProps extends UnstableComboboxBaseProps {
   forwardedRef: ForwardedRef<SpiritUnstableComboboxRef>;
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   state: ComboboxState;
 }
 

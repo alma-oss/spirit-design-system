@@ -13,7 +13,7 @@ const defaultProps: Partial<SpiritHeadingProps<ElementType, void, void>> = {
 
 const Heading = <E extends ElementType = 'h1', S = void, Emph = void>(
   props: SpiritHeadingProps<E, S, Emph>,
-): JSX.Element => {
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;

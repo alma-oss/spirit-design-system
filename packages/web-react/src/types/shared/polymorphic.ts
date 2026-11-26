@@ -2,6 +2,7 @@ import {
   type ComponentPropsWithRef,
   type ElementType,
   type ForwardRefExoticComponent,
+  type ReactElement,
   type RefAttributes,
 } from 'react';
 
@@ -61,7 +62,7 @@ export type ComponentStaticProps = {
  */
 export type PolymorphicComponent<E extends ElementType, Props> = (<T extends ElementType = E>(
   props: PolymorphicComponentProps<T, Props> & { ref?: PolymorphicRef<T> },
-) => JSX.Element) &
+) => ReactElement) &
   ComponentStaticProps;
 
 /**

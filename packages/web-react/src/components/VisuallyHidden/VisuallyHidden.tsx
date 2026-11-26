@@ -10,7 +10,7 @@ const defaultProps: Partial<SpiritVisuallyHiddenProps> = {
   elementType: 'span',
 };
 
-const VisuallyHidden = <E extends ElementType = 'span'>(props: SpiritVisuallyHiddenProps<E>): JSX.Element => {
+const VisuallyHidden = <E extends ElementType = 'span'>(props: SpiritVisuallyHiddenProps<E>): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { children, elementType, ...rest } = propsWithDefaults;
   const Component = elementType as ElementType;

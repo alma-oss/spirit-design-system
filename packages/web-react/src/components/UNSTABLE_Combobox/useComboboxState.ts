@@ -7,7 +7,7 @@ import { useComboboxDisclosureState } from './useComboboxDisclosureState';
 import { createSelectedKeysSet } from './utils';
 
 export interface UseComboboxStateProps {
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   inputValue: string;
   isDisabled?: boolean;
   isOpen: boolean;

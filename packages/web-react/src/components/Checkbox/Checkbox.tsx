@@ -19,7 +19,7 @@ const defaultProps: Partial<SpiritCheckboxProps> = {
   size: Sizes.MEDIUM,
 };
 
-const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+const _Checkbox = (props: SpiritCheckboxProps, ref: ForwardedRef<HTMLInputElement>): React.JSX.Element => {
   const { isItem: isItemProp } = props;
   const { size: itemSize } = useContextProps<Partial<SpiritCheckboxProps>>({}, isItemProp ? 'item' : undefined);
   const propsWithDefaults = mergeProps(

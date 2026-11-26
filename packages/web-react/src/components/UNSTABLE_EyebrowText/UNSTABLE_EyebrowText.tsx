@@ -13,7 +13,7 @@ const defaultProps: Partial<SpiritEyebrowTextProps<ElementType>> = {
 
 const UNSTABLE_EyebrowText = <E extends ElementType = 'p', C = void>(
   props: SpiritEyebrowTextProps<E, C>,
-): JSX.Element => {
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;

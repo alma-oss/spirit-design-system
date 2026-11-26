@@ -4,7 +4,7 @@ import React from 'react';
 import { useStyleProps } from '../../hooks';
 import { type TabContentProps } from '../../types';
 
-const TabContent = ({ children, ...restProps }: TabContentProps): JSX.Element => {
+const TabContent = ({ children, ...restProps }: TabContentProps): React.JSX.Element => {
   const { styleProps, props: transferProps } = useStyleProps(restProps);
 
   return (

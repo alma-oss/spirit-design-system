@@ -20,7 +20,7 @@ const defaultProps = {
 const _Tag = <E extends ElementType = 'span', C = void, S = void>(
   props: SpiritTagProps<E, C, S>,
   ref: PolymorphicRef<E>,
-): JSX.Element => {
+): React.JSX.Element => {
   const mergedProps = useContextProps(props, 'tag') as SpiritTagProps<E, C, S>;
   const propsWithDefaults = mergeProps(defaultProps, mergedProps);
   const { elementType = defaultProps.elementType, children, ...restProps } = propsWithDefaults;

@@ -11,7 +11,7 @@ import { getOptionRowCellControls, getOptionValueFromRow, isOptionRowDisabled } 
 
 export interface UseComboboxOptionGridKeyboardProps {
   listboxRef: RefObject<HTMLElement | null>;
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   isOpen: boolean;
   isDisabled?: boolean;
   activeDescendantId?: string;

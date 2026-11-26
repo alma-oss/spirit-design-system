@@ -14,7 +14,7 @@ const defaultProps: Partial<SpiritTextProps<ElementType, void, void, void>> = {
 
 const Text = <E extends ElementType = 'p', S = void, Emph = void, C = void>(
   props: SpiritTextProps<E, S, Emph, C>,
-): JSX.Element => {
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;

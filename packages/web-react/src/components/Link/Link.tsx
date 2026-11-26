@@ -17,7 +17,7 @@ const defaultProps = {
 const _Link = <E extends ElementType = 'a', C = void>(
   props: SpiritLinkProps<E, C>,
   ref: PolymorphicRef<E>,
-): JSX.Element => {
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = defaultProps.elementType, children, routerOptions, ...restProps } = propsWithDefaults;
 

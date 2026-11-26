@@ -16,7 +16,10 @@ const defaultProps: TabLinkProps = {
   itemProps: {},
 };
 
-const _TabLink = <E extends ElementType = 'a'>(props: SpiritTabLinkProps<E>, ref: PolymorphicRef<E>): JSX.Element => {
+const _TabLink = <E extends ElementType = 'a'>(
+  props: SpiritTabLinkProps<E>,
+  ref: PolymorphicRef<E>,
+): React.JSX.Element => {
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType = 'a', children, itemProps = {}, routerOptions, ...restProps } = propsWithDefaults;
   const { href } = restProps;

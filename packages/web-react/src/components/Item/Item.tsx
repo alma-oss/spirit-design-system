@@ -19,7 +19,7 @@ const defaultProps: Partial<SpiritItemProps> = {
   size: SizesExtended.MEDIUM,
 };
 
-const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Element => {
+const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): React.JSX.Element => {
   const listItemsProps = useContext(ListItemsContext) ?? {};
   const mergedProps = useContextProps<Partial<SpiritItemProps<E>>>(props, 'item');
   const propsWithDefaults = mergeProps(defaultProps, listItemsProps, mergedProps);

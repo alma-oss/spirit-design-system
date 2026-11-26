@@ -7,7 +7,7 @@ import { type TabPaneProps } from '../../types';
 import { useTabContext } from './TabContext';
 import { useTabsStyleProps } from './useTabsStyleProps';
 
-const TabPane = ({ children, id, ...restProps }: TabPaneProps): JSX.Element | null => {
+const TabPane = ({ children, id, ...restProps }: TabPaneProps): React.JSX.Element | null => {
   const { selectedId } = useTabContext();
   const { classProps } = useTabsStyleProps({ id, selectedId });
   const { styleProps, props: transferProps } = useStyleProps(restProps);

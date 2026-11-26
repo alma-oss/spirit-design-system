@@ -4,7 +4,7 @@ import React, { type ForwardedRef, forwardRef } from 'react';
 import { type ForwardRefComponent, type SpiritTextFieldProps } from '../../types';
 import { TextFieldBase } from '../TextFieldBase';
 
-const _TextField = (props: SpiritTextFieldProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => (
+const _TextField = (props: SpiritTextFieldProps, ref: ForwardedRef<HTMLInputElement>): React.JSX.Element => (
   <TextFieldBase type="text" {...props} ref={ref} />
 );
 

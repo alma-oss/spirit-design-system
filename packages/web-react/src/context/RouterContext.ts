@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, createContext, createElement, useContext, useMemo } from 'react';
+import { type ReactElement, type ReactNode, createContext, createElement, useContext, useMemo } from 'react';
 
 /** Return value is ignored by Spirit; typed as `unknown` so framework navigators (e.g. Next.js `push` → `Promise<boolean>`) stay assignable without wrappers. */
 type RouterNavigate = (path: string, routerOptions?: Record<string, unknown>) => unknown;
@@ -30,7 +30,7 @@ const RouterConsumer = RouterContext.Consumer;
  * @param props.navigate Invoked from link components on qualifying internal navigations (after `preventDefault` when intercepting).
  * @param props.children Subtree that should be wrapped; descendants may call {@link useRouter}.
  */
-const RouterProvider = (props: RouterProviderProps): JSX.Element => {
+const RouterProvider = (props: RouterProviderProps): ReactElement => {
   const { navigate, children } = props;
   const value = useMemo(() => ({ navigate }), [navigate]);
 

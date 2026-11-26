@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ForwardedRef, type RefObject, forwardRef, useEffect, useRef } from 'react';
+import React, { type ForwardedRef, forwardRef, useCallback, useEffect, useRef } from 'react';
 import { warning } from '../../common/utilities';
 import { type ForwardRefComponent, type SpiritTextAreaProps } from '../../types';
 import { normalizeStringValue } from '../../utils';
@@ -15,7 +15,7 @@ const isCounterActive = (hasCounter: boolean | undefined, counterThreshold: numb
 const resolveCounterNativeMaxLength = (consumerMaxLength: number | undefined): number =>
   consumerMaxLength === undefined ? TEXTAREA_MAX_SAFE_LENGTH : consumerMaxLength;
 
-const _TextArea = (props: SpiritTextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>): JSX.Element => {
+const _TextArea = (props: SpiritTextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>): React.JSX.Element => {
   const {
     onInput,
     isAutoResizing,
@@ -32,7 +32,20 @@ const _TextArea = (props: SpiritTextAreaProps, ref: ForwardedRef<HTMLTextAreaEle
     ...restProps
   } = props;
 
-  const elementReference = useRef(ref);
+  const elementReference = useRef<HTMLTextAreaElement | null>(null);
+  const setRefs = useCallback(
+    (element: HTMLTextAreaElement | null) => {
+      elementReference.current = element;
+
+      if (typeof ref === 'function') {
+        ref(element);
+      } else if (ref) {
+        // eslint-disable-next-line no-param-reassign -- forwarding the element to the consumer's ref object
+        ref.current = element;
+      }
+    },
+    [ref],
+  );
   const { adjustHeightOnAutoresize, onInput: onInputHandler } = useAdjustHeight({
     elementReference,
     onInput,
@@ -76,7 +89,7 @@ const _TextArea = (props: SpiritTextAreaProps, ref: ForwardedRef<HTMLTextAreaEle
     <TextFieldBase
       id={id}
       isMultiline
-      ref={elementReference as RefObject<HTMLTextAreaElement>}
+      ref={setRefs}
       onInput={onInputHandler}
       onFocus={adjustHeightOnAutoresize}
       onChange={changeHandler}

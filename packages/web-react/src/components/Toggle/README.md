@@ -232,7 +232,7 @@ and [escape hatches][readme-escape-hatches].
 Toggle classes are fabricated using `useToggleStyleProps` hook. You can use it to create your own custom Toggle component. Compose the standalone [HelperText][readme-helper-text], [Label][readme-label], [InputDetails][readme-input-details], and [ValidationText][readme-validation-text] components with `ContextPropsProvider`, `useAriaDescribedBy`, and `useAriaDetails` for correct styling and accessibility.
 
 ```tsx
-const CustomToggle = (props: SpiritToggleProps): JSX.Element => {
+const CustomToggle = (props: SpiritToggleProps): React.JSX.Element => {
   const { classProps, direction, props: modifiedProps } = useToggleStyleProps(props);
   const {
     'aria-describedby': ariaDescribedBy = '',

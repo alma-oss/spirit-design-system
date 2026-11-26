@@ -3,7 +3,7 @@
 import { type RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 export interface UseComboboxDisclosureStateProps {
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   isDisabled?: boolean;
   isOpen: boolean;
   onToggle: () => void;
