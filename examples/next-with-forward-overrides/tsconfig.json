@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "useUnknownInCatchVariables": false,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@alma-oss/spirit-web-react": ["../../node_modules/@alma-oss/spirit-web-react/src"]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "target": "esnext"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "../../node_modules/@alma-oss/spirit-web-react/src/global.d.ts"
+  ],
+  "exclude": ["node_modules"]
+}

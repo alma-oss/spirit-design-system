@@ -1,0 +1,31 @@
+// Spirit's global tokens with the product's values. Only `!default` tokens can be configured,
+// and Sass fails on a name that Spirit doesn't define.
+@forward '@alma-oss/spirit-design-tokens/scss/@tokens' with (
+    $radius-300: 1.25rem,
+    // Device token, `$breakpoints` and every responsive prop follow
+    $breakpoint-tablet: 64rem,
+    // A typography token is a whole map per device that replaces Spirit's
+    $heading-large-bold: (
+        mobile: (
+            font-family: "'Inter', sans-serif",
+            font-size: 1.75rem,
+            font-style: normal,
+            font-weight: 800,
+            line-height: 1.2,
+        ),
+        tablet: (
+            font-family: "'Inter', sans-serif",
+            font-size: 2.75rem,
+            font-style: normal,
+            font-weight: 800,
+            line-height: 1.15,
+        ),
+        desktop: (
+            font-family: "'Inter', sans-serif",
+            font-size: 3.5rem,
+            font-style: normal,
+            font-weight: 800,
+            line-height: 1.1,
+        ),
+    )
+);
