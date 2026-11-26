@@ -7,7 +7,7 @@ import Dropdown from '../../../js/Dropdown';
 // Responsibilities:
 //   - Filter grid rows as the user types
 //   - Toggle aria-selected on rows (click or Enter/Space)
-//   - Render/remove Tag rows in the selection grid
+//   - Render/remove Tag rows in the selection grid (an option with `data-spirit-combobox-split-tag` renders a SplitTag)
 //   - Keyboard navigation: pure aria-activedescendant (DOM focus stays on the input; options are activated visually)
 //   - Clear-all button: deselect all rows, remove all tags
 //   - Popover open/close: pointer click, typing, Arrow Up/Down open; Escape, click-outside, Tab-out close
@@ -47,6 +47,7 @@ const ATTR_TAG_TEMPLATE = 'data-spirit-combobox-tag-template';
 
 const ID_TAG_TEMPLATE = 'combobox-tag-template';
 const ID_SPLIT_TAG_TEMPLATE = 'combobox-split-tag-template';
+const ATTR_SPLIT_TAG = 'data-spirit-combobox-split-tag';
 
 const DEFAULT_DISTANCE = '+5 km';
 const CLASSNAMES_DISTANCE_SELECTED = ['color-scheme-on-selected-subtle', 'bg-color-scheme'];
@@ -815,7 +816,9 @@ function initCombobox(comboboxEl) {
         renderSelection();
       };
 
-      const tag = usesSplitTag
+      // An option can opt into a SplitTag even when the Combobox renders plain tags.
+      const isSplitTag = usesSplitTag || rowEl.hasAttribute(ATTR_SPLIT_TAG);
+      const tag = isSplitTag
         ? createSplitTag(label, selectionEl, onRemove, {
             disabled: isDisabled,
             distance: distanceByOptionId.get(id) || DEFAULT_DISTANCE,
@@ -896,7 +899,7 @@ function initCombobox(comboboxEl) {
       distanceByOptionId.delete(rowEl.id);
     } else if (rowEl.id) {
       selectedIds.push(rowEl.id);
-      if (usesSplitTag && !distanceByOptionId.has(rowEl.id)) {
+      if ((usesSplitTag || rowEl.hasAttribute(ATTR_SPLIT_TAG)) && !distanceByOptionId.has(rowEl.id)) {
         distanceByOptionId.set(rowEl.id, DEFAULT_DISTANCE);
       }
     }

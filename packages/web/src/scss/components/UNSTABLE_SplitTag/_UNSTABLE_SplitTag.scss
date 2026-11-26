@@ -1,3 +1,15 @@
+// 1. Stay within a width-constrained selection row (e.g. Combobox) so the label
+//    segment can wrap instead of overflowing the field.
+// 2. Override Tag's `flex-shrink: 0` on the first segment so long labels wrap
+//    when the shell is capped by `max-width`.
+// 3. Stretch the wrapped button (e.g. inside Dropdown) to the full height of the
+//    split tag, so it matches the label segment when the label wraps.
+// 4. Never shrink the trailing segments (e.g. the distance button), so only the
+//    label wraps and the button always stays fully visible.
+// 5. Raise the open dropdown popover above the following split tags, so it is not
+//    covered by them (e.g. buttons elevated with `z-index: 1` in a Combobox selection).
+//    Keep it higher than that `z-index`.
+
 @use '@tokens' as tokens;
 @use 'theme';
 
@@ -6,11 +18,29 @@
     --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius: #{theme.$inner-border-radius};
 
     display: inline-flex;
+    max-width: 100%; // 1.
 }
 
+// 2.
+.UNSTABLE_SplitTag > :first-child {
+    flex-shrink: 1;
+    max-width: 100%;
+}
+
+// 3.
 .UNSTABLE_SplitTag > :not(:is(a, button, span)) {
     display: inline-flex;
-    align-items: center;
+    align-items: stretch;
+}
+
+// 4.
+.UNSTABLE_SplitTag > :not(:first-child) {
+    flex-shrink: 0;
+}
+
+// 5.
+.UNSTABLE_SplitTag:has([aria-expanded='true']) [role='dialog'] {
+    z-index: 2;
 }
 
 .UNSTABLE_SplitTag > :not(:first-child):is(a, button, span),

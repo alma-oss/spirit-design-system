@@ -68,7 +68,10 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
             aria-atomic="false"
             aria-relevant="additions"
           >
-            <div role="row" class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+            <div
+              role="row"
+              class="Tag text-word-break-long-words Tag--selected Tag--small color-scheme-on-selected-basic"
+            >
               <div role="gridcell" class="d-contents">
                 <span>Spanish</span>
                 <button
@@ -297,7 +300,7 @@ Each size expects a specific Tag and ControlButton size inside the selection are
 <div class="InputContainer InputContainer--fill InputContainer--large" role="group" aria-label="Languages">
   <div class="UNSTABLE_ComboboxSelection">
     <div role="grid" … class="d-contents">
-      <div role="row" class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic">
+      <div role="row" class="Tag text-word-break-long-words Tag--selected Tag--medium color-scheme-on-selected-basic">
         <!-- … -->
       </div>
     </div>

@@ -123,6 +123,16 @@ Disabled link Tag:
 
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
+## Word Break
+
+Use the `text-word-break-*` utility classes to set how words should break when reaching the end of a line.
+
+```html
+<span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic text-word-break-long-words"
+  >longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces</span
+>
+```
+
 [component-color-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-color-overrides
 [component-radius-overrides]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/design-tokens/README.md#component-radius-overrides
 [scott-o-hara-disabling-a-link]: https://www.scottohara.me/blog/2021/05/28/disabled-links.html

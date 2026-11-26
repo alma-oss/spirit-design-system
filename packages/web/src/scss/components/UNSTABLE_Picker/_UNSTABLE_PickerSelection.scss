@@ -1,4 +1,6 @@
 // 1. Elevate interactive elements above the trigger overlay.
+// 2. Keep selection tags within the field; pair with `text-word-break-long-words`
+//    on the tag so long labels wrap.
 
 @use '@tokens' as tokens;
 @use '../../tools/form-fields' as form-fields-tools;
@@ -30,6 +32,11 @@
     );
     padding-inline-start: theme.$padding-x;
     padding-block: theme.$padding-y;
+}
+
+// 2.
+.UNSTABLE_PickerSelection [role='row'] {
+    max-width: 100%;
 }
 
 .UNSTABLE_PickerSelection__empty {

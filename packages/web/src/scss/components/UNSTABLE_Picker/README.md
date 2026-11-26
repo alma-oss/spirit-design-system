@@ -221,7 +221,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
     tabindex="0"
     aria-label="Czech"
     aria-describedby="picker-tag-description"
-    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
+    class="Tag text-word-break-long-words Tag--selected Tag--small color-scheme-on-selected-basic"
   >
     <!-- Tag content start -->
     <div role="gridcell" aria-colindex="1" class="d-contents">
@@ -430,7 +430,7 @@ so anything you add is applied as-is.
   aria-label="Czech"
   aria-describedby="picker-tag-description"
   data-my-attr="value"
-  class="Tag Tag--selected Tag--small color-scheme-on-selected-basic bg-accent-01-subtle"
+  class="Tag text-word-break-long-words Tag--selected Tag--small color-scheme-on-selected-basic bg-accent-01-subtle"
 >
   <!-- Tag content -->
 </div>
@@ -459,7 +459,7 @@ Each size expects a specific Tag and ControlButton size inside the selection are
           role="row"
           tabindex="0"
           aria-label="Czech"
-          class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic"
+          class="Tag text-word-break-long-words Tag--selected Tag--medium color-scheme-on-selected-basic"
         >
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
@@ -558,7 +558,12 @@ inside the selection area (remove buttons) to disable the Picker. Disable the co
       class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
     >
       <div role="grid" aria-label="Selected languages" class="UNSTABLE_PickerSelection">
-        <div role="row" tabindex="0" aria-label="Czech" class="Tag Tag--selected Tag--small disabled">
+        <div
+          role="row"
+          tabindex="0"
+          aria-label="Czech"
+          class="Tag text-word-break-long-words Tag--selected Tag--small disabled"
+        >
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
             <button type="button" class="ControlButton ControlButton--xsmall ControlButton--symmetrical" disabled>
