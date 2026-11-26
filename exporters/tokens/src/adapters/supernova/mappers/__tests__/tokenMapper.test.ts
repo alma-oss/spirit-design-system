@@ -19,12 +19,12 @@ import {
   TokenType,
   type TypographyToken,
 } from '@supernovaio/sdk-exporters';
-import { exampleDimensionAndStringTokens } from '../../../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleColorsTokens } from '../../../../../tests/fixtures/exampleColorTokens';
-import { exampleGradientTokens } from '../../../../../tests/fixtures/exampleGradientTokens';
-import { exampleShadowTokens } from '../../../../../tests/fixtures/exampleShadowTokens';
-import { createGroup, exampleGroups } from '../../../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens } from '../../../../../tests/fixtures/exampleTypographyTokens';
+import { exampleDimensionAndStringTokens } from '../../../../../tests/fixtures/supernova/exampleDimensionAndStringTokens';
+import { exampleColorsTokens } from '../../../../../tests/fixtures/supernova/exampleColorTokens';
+import { exampleGradientTokens } from '../../../../../tests/fixtures/supernova/exampleGradientTokens';
+import { exampleShadowTokens } from '../../../../../tests/fixtures/supernova/exampleShadowTokens';
+import { createGroup, exampleGroups } from '../../../../../tests/fixtures/supernova/exampleGroups';
+import { exampleTypographyTokens } from '../../../../../tests/fixtures/supernova/exampleTypographyTokens';
 import { TokenTypeEnum } from '../../../../core/types';
 import { mapToken } from '../tokenMapper';
 

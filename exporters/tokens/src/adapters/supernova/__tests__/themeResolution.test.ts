@@ -1,4 +1,7 @@
-import { exampleCollectionTokens, expectedCollectionValue } from '../../../../tests/fixtures/exampleCollectionTokens';
+import {
+  exampleCollectionTokens,
+  expectedCollectionValue,
+} from '../../../../tests/fixtures/supernova/exampleCollectionTokens';
 import { filterColorCollections } from '../themeResolution';
 
 describe('themeResolution', () => {

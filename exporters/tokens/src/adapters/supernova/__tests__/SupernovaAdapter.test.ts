@@ -1,7 +1,7 @@
 import { type DimensionToken, type Supernova, type Token, type TokenTheme } from '@supernovaio/sdk-exporters';
-import { exampleDimensionAndStringTokens } from '../../../../tests/fixtures/exampleDimensionAndStringTokens';
-import { exampleGroups } from '../../../../tests/fixtures/exampleGroups';
-import { exampleTypographyTokens } from '../../../../tests/fixtures/exampleTypographyTokens';
+import { exampleDimensionAndStringTokens } from '../../../../tests/fixtures/supernova/exampleDimensionAndStringTokens';
+import { exampleGroups } from '../../../../tests/fixtures/supernova/exampleGroups';
+import { exampleTypographyTokens } from '../../../../tests/fixtures/supernova/exampleTypographyTokens';
 import { CollectionKind, TokenTypeEnum } from '../../../core/types';
 import { splitTokens } from '../../../core/splitTokens';
 import { filterExcludedTokens } from '../../../filters/excludedTokens';

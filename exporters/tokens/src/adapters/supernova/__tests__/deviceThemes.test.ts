@@ -1,6 +1,9 @@
 import { TokenTheme, Token } from '@supernovaio/sdk-exporters';
 import { getDeviceAlias, getDeviceThemes } from '../deviceThemes';
-import { exampleDeviceTokens, exampleDeviceUpdatedTokens } from '../../../../tests/fixtures/exampleDeviceTokens';
+import {
+  exampleDeviceTokens,
+  exampleDeviceUpdatedTokens,
+} from '../../../../tests/fixtures/supernova/exampleDeviceTokens';
 
 describe('deviceThemes', () => {
   describe('getDeviceThemes', () => {
