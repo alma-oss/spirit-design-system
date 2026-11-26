@@ -57,3 +57,11 @@ The description is what the agent uses to decide whether the skill is relevant â
 - **Hardcode project constants.** URLs, package scopes, Jira project keys, Slack channel links â€” put them directly in the skill so agent never has to guess.
 - **Specify output format exactly.** Show a complete example of the expected output, not just a schema. Agents match examples more reliably than abstract specs.
 - **Warn, don't silently drop.** If the skill filters or omits information, instruct agent to print a warning rather than silently discard it.
+- **Stay agent-agnostic.** Never name an agent-specific tool, such as `AskUserQuestion`. Where the skill asks the user:
+  - Write each question as "ask the user to choose: **A** or **B**", with the options in bold.
+  - Put this line (or an equivalent) below the skill's intro:
+
+    ```text
+    Wherever this skill says "ask the user", use whatever your environment provides (a choice prompt or
+    plain text) and wait for the answer.
+    ```

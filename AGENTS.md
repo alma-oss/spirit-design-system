@@ -101,16 +101,6 @@ Use a skill from [`.agents/skills/`][skills] instead of improvising a procedure 
 - `spirit:accessibility`: WCAG 2.2 audit of a component.
 - `spirit:atomic-commits` and `spirit:create-pr`: commits and pull requests.
 
-A skill never names an agent-specific tool, such as `AskUserQuestion`. Where it asks the user:
-
-- Write each question as "ask the user to choose: **A** or **B**", with the options in bold.
-- Put this line (or an equivalent) below the skill's intro:
-
-  ```text
-  Wherever this skill says "ask the user", use whatever your environment provides (a choice prompt or
-  plain text) and wait for the answer.
-  ```
-
 [agents-code-style]: .agents/instructions/code-style.md
 [agents-git-workflow]: .agents/instructions/git-workflow.md
 [codemods-agents]: packages/codemods/AGENTS.md
