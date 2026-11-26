@@ -49,6 +49,7 @@ nav:
       - 015 - Component Radius Overrides: decisions/015-component-radius-overrides.md
       - 016 - Color Scheme Intensity Exposure: decisions/016-color-scheme-intensity-exposure.md
       - 017 - Color Scheme Palette and Local Color Context: decisions/017-color-scheme-palette-and-local-color-context.md
+      - 018 - ARIA Components: decisions/018-aria-components.md
   - Migration Guides:
       - Overview: migrations/README.md
       - web-react:
