@@ -73,6 +73,8 @@ no inline styles, no `UNSAFE_*` props, and no ad-hoc CSS classes.
 ## Git and Pull Requests
 
 - Commit or push only when the user asks.
+- Invoke `spirit:atomic-commits` before any `git commit` and `spirit:create-pr` before any PR is created or
+  updated. Do not run `git commit` or `gh pr create` directly, even for a single small change.
 - Before creating a branch or the first commit, ask for the Jira issue ID (`DS-1234`) if the user has not given it.
   If there is no issue, a branch and commits without the ID are fine.
 - Name a branch `type/DS-XXXX-short-description`, or `type/short-description` without an issue.
