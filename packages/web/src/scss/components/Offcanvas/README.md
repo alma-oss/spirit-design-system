@@ -55,12 +55,12 @@ For data attributes, append the option name to `data-spirit-`, as in `data-spiri
 
 | Name                      | Type      | Default | Description                                                                                |
 | ------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------ |
-| `breakpoint-desktop`      | `string`  | 1280 \* | Desktop [breakpoint][dictionary-breakpoint] on which opened Offcanvas automatically closes |
+| `breakpoint-desktop`      | `number`  | \*      | Desktop [breakpoint][dictionary-breakpoint] on which opened Offcanvas automatically closes |
 | `closableOnBackdropClick` | `boolean` | `true`  | Whether clicking on the backdrop closes the Offcanvas                                      |
 | `closableOnEscapeKey`     | `boolean` | `true`  | Whether pressing the Escape key closes the Offcanvas                                       |
 
-\*: Default value of the design token `other.breakpoint.desktop`. Can be also changed via `--spirit-breakpoint-desktop` CSS custom property.
-This CSS property is pre-defined in our foundation CSS.
+\*: When not set, the value of the `--spirit-breakpoint-desktop` CSS custom property on `:root` is used, converted to pixels.
+This CSS property is pre-defined in our foundation CSS, so your own tokens are picked up from your CSS.
 
 ### Methods
 

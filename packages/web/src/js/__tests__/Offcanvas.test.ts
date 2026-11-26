@@ -435,4 +435,36 @@ describe('Offcanvas', () => {
       expect(Offcanvas.getOrCreateInstance(div)).toBeInstanceOf(Offcanvas);
     });
   });
+
+  describe('breakpoint', () => {
+    afterEach(() => {
+      document.documentElement.style.removeProperty('--spirit-breakpoint-desktop');
+    });
+
+    it('should read the desktop breakpoint from the :root custom property and convert it to pixels', () => {
+      document.documentElement.style.setProperty('--spirit-breakpoint-desktop', '80rem');
+      fixtureEl.innerHTML = '<dialog class="offcanvas"></dialog>';
+
+      const offcanvas = new Offcanvas(fixtureEl.querySelector('.offcanvas') as HTMLElement);
+
+      expect(offcanvas.breakpoint).toBe(1280);
+    });
+
+    it('should prefer the breakpoint from config over the :root custom property', () => {
+      document.documentElement.style.setProperty('--spirit-breakpoint-desktop', '80rem');
+      fixtureEl.innerHTML = '<dialog class="offcanvas" data-spirit-breakpoint-desktop="1024"></dialog>';
+
+      const offcanvas = new Offcanvas(fixtureEl.querySelector('.offcanvas') as HTMLElement);
+
+      expect(offcanvas.breakpoint).toBe(1024);
+    });
+
+    it('should have no breakpoint when neither config nor CSS defines it', () => {
+      fixtureEl.innerHTML = '<dialog class="offcanvas"></dialog>';
+
+      const offcanvas = new Offcanvas(fixtureEl.querySelector('.offcanvas') as HTMLElement);
+
+      expect(offcanvas.breakpoint).toBeUndefined();
+    });
+  });
 });
