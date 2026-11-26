@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { EmotionColors, SizesExtended } from '../../../constants';
+import { EmotionColors, SizesExtended, TextWordBreaks } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { Tag, TagColorsExtended } from '..';
 
@@ -49,6 +49,13 @@ const meta: Meta<typeof Tag> = {
         defaultValue: { summary: SizesExtended.MEDIUM },
       },
     },
+    textWordBreak: {
+      control: 'select',
+      options: [...Object.values(TextWordBreaks), undefined],
+      table: {
+        defaultValue: { summary: undefined },
+      },
+    },
   },
   args: {
     children: 'Tag',
@@ -57,6 +64,7 @@ const meta: Meta<typeof Tag> = {
     isDisabled: false,
     isSubtle: false,
     size: SizesExtended.MEDIUM,
+    textWordBreak: undefined,
   },
 };
 

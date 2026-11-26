@@ -10,6 +10,7 @@ import {
   restPropsTest,
   sizeExtendedPropsTest,
   stylePropsTest,
+  textWordBreakPropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
 import { EmotionColors } from '../../../constants';
@@ -27,6 +28,8 @@ describe('Tag', () => {
   sizeExtendedPropsTest(Tag);
 
   stylePropsTest(Tag);
+
+  textWordBreakPropsTest(Tag);
 
   restPropsTest(Tag, 'span');
 

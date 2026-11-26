@@ -1,7 +1,7 @@
 'use client';
 
 import React, { type ElementType, forwardRef } from 'react';
-import { SizesExtended } from '../../constants';
+import { SizesExtended, TextStyleProps } from '../../constants';
 import { useContextProps } from '../../context';
 import { useStyleProps } from '../../hooks';
 import { type PolymorphicComponent, type PolymorphicRef, type SpiritTagProps } from '../../types';
@@ -29,7 +29,9 @@ const _Tag = <E extends ElementType = 'span', C = void, S = void>(
   const isButtonElement = elementType === 'button';
 
   const { classProps, props: modifiedProps } = useTagStyleProps(restProps);
-  const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
+  const { styleProps, props: otherProps } = useStyleProps(modifiedProps, {
+    textWordBreak: TextStyleProps.textWordBreak,
+  });
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });
 
   return (
