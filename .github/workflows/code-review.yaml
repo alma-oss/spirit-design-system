@@ -2,7 +2,8 @@ name: 🕵 Code Review
 
 # Reviews every new pull request, draft or not, once with the spirit:code-review skill.
 # A developer retriggers the review from the PR itself by ticking the checkbox in the status comment
-# (the way Renovate does it), or from the Actions tab with a PR number.
+# (the way Renovate does it), or from the Actions tab with a PR number. Only the Actions tab
+# lets them choose the model and the effort, the other triggers use the defaults.
 
 on:
   # Runs the workflow definition from the default branch, so a pull request cannot change the prompt,
@@ -18,6 +19,18 @@ on:
         description: 'Pull request number to review'
         required: true
         type: number
+      model:
+        description: 'Model'
+        required: true
+        type: choice
+        default: sonnet
+        options: [sonnet, opus]
+      effort:
+        description: 'Effort'
+        required: true
+        type: choice
+        default: high
+        options: [auto, medium, high]
 
 permissions:
   contents: read
@@ -56,6 +69,9 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || inputs.pr }}
           SENDER: ${{ github.event.sender.login }}
+          # Empty unless the review is started from the Actions tab, then the defaults below apply
+          INPUT_MODEL: ${{ inputs.model }}
+          INPUT_EFFORT: ${{ inputs.effort }}
         # An explicit bash enables pipefail, so a failing gh in a pipe stops the step
         shell: bash
         run: |
@@ -92,10 +108,25 @@ jobs:
             esac
           fi
 
+          # Only values from these lists reach the model arguments
+          case "${INPUT_MODEL:-sonnet}" in
+            sonnet) MODEL=claude-sonnet-5-5 ;;
+            opus) MODEL=claude-opus-5-5 ;;
+            *) echo "::error::Unknown model"; exit 1 ;;
+          esac
+          case "${INPUT_EFFORT:-high}" in
+            auto) EFFORT=auto; EFFORT_ARGS="" ;; # The model's own default, so the flag is left out
+            medium | high) EFFORT="${INPUT_EFFORT:-high}"; EFFORT_ARGS="--effort $EFFORT" ;;
+            *) echo "::error::Unknown effort"; exit 1 ;;
+          esac
+
           {
             echo "run=true"
             echo "pr=$PR_NUMBER"
             echo "sha=$SHA"
+            echo "model=$MODEL"
+            echo "effort=$EFFORT"
+            echo "effort-args=$EFFORT_ARGS"
           } >> "$GITHUB_OUTPUT"
 
       # Posts the status comment and the review. The model never gets this token
@@ -200,8 +231,8 @@ jobs:
             for each finding that anchors to a changed line: `path`, `line` on the new side of the diff,
             an optional `start_line` for a range, and the rendered finding as `body`.
           claude_args: >-
-            --model claude-sonnet-5-5
-            --effort high
+            --model ${{ steps.decide.outputs.model }}
+            ${{ steps.decide.outputs.effort-args }}
             --max-turns 60
             --json-schema '{"type":"object","properties":{"body":{"type":"string"},"comments":{"type":"array","items":{"type":"object","properties":{"path":{"type":"string"},"line":{"type":"integer"},"start_line":{"type":"integer"},"body":{"type":"string"}},"required":["path","line","body"]}}},"required":["body","comments"]}'
             --allowedTools "Read,Grep,Glob,Bash(git log:*),Bash(git diff:*),Bash(git show:*),Bash(git grep:*),Bash(git fetch:*),Bash(git merge-base:*),Bash(git rev-parse:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh api:*)"
@@ -284,6 +315,8 @@ jobs:
           REPO: ${{ github.repository }}
           PR: ${{ steps.decide.outputs.pr }}
           SHA: ${{ steps.decide.outputs.sha }}
+          MODEL: ${{ steps.decide.outputs.model }}
+          EFFORT: ${{ steps.decide.outputs.effort }}
           REVIEW_OUTCOME: ${{ steps.review.outcome == 'success' && steps.post.outcome == 'success' && 'success' || 'failure' }}
           # The link comes from the API response of this run, so an earlier review is never reported as its result
           REVIEW_URL: ${{ steps.post.outputs.review-url }}
@@ -294,7 +327,7 @@ jobs:
           echo "$HELPER_SHA256  $RUNNER_TEMP/code-review-status.sh" | sha256sum --check --status \
             || { echo "::error::The status comment helper was changed while the review ran"; exit 1; }
           if [ "$REVIEW_OUTCOME" = "success" ]; then
-            STATUS="✅ Reviewed commit \`${SHA:0:7}\`: [see the review]($REVIEW_URL)."
+            STATUS="✅ Reviewed commit \`${SHA:0:7}\` with \`${MODEL#claude-}\`, effort \`$EFFORT\`: [see the review]($REVIEW_URL)."
           else
             STATUS="❌ The review of commit \`${SHA:0:7}\` failed. See the [run]($RUN_URL)."
           fi
