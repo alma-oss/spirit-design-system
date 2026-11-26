@@ -1,5 +1,6 @@
 import { ComponentHeader } from '@local/domains/components/features/component-detail';
 import { ComponentPlayground, getComponentPlayground } from '@local/domains/components/features/component-playground';
+import { getComponentDescription } from '@local/domains/components/repositories/componentDocsRepository';
 import {
   fetchAllComponents,
   getComponentViewsAvailability,
@@ -7,7 +8,6 @@ import {
 import { ComponentTabNavigation } from '@local/domains/components/ui/ComponentTabNavigation';
 import { getComponentPageLinks } from '@local/domains/components/ui/PageActions';
 import { componentNameToSlug, isValidComponentSlug } from '@local/domains/components/utils/componentSlug';
-import { getComponentDescription } from '@local/domains/content/componentDocsRepository';
 import { notFound } from 'next/navigation';
 import { type ReactNode } from 'react';
 

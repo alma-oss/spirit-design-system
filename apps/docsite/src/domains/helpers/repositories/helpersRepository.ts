@@ -8,25 +8,37 @@ export type HelperItem = {
   title: string;
 };
 
-const HELPERS_DIR = resolve(process.cwd(), '../../packages/web/src/scss/helpers');
+const helpersDirectory = (repoRoot = resolve(process.cwd(), '../..')) =>
+  join(repoRoot, 'packages/web/src/scss/helpers');
+
+const HELPERS_DIR = helpersDirectory();
 
 let helpersCache: HelperItem[] | undefined;
+
+const readHelpers = (directory: string): HelperItem[] =>
+  readdirSync(directory, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => readdirSync(join(directory, entry.name)).includes('preview.html'))
+    .map((entry) => ({ name: entry.name, title: kebabToTitleCase(entry.name) }));
 
 // The helpers directory is static, checked-in content — it doesn't change while the server is
 // running, so the (relatively expensive) directory walk is memoized here and reused by both
 // fetchAllHelpers and fetchHelper instead of re-reading the filesystem on every call.
 const listHelpers = (): HelperItem[] => {
   if (!helpersCache) {
-    helpersCache = readdirSync(HELPERS_DIR, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
-      .filter((entry) => readdirSync(join(HELPERS_DIR, entry.name)).includes('preview.html'))
-      .map((entry) => ({ name: entry.name, title: kebabToTitleCase(entry.name) }));
+    helpersCache = readHelpers(HELPERS_DIR);
   }
 
   return helpersCache;
 };
 
-export const fetchAllHelpers = (): HelperItem[] => listHelpers();
+export const fetchAllHelpers = (repoRoot?: string): HelperItem[] => {
+  if (repoRoot) {
+    return readHelpers(helpersDirectory(repoRoot));
+  }
+
+  return listHelpers();
+};
 
 export const fetchHelper = (name: string): string | undefined => {
   if (!listHelpers().some((helper) => helper.name === name)) {

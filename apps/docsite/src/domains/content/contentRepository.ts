@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileExists } from '@local/utils/fileExists';
 import { isDocSection, isSafeSlug } from './constants';
 import { parseCanonicalFrontmatter } from './parseFrontmatter';
 import { getContentRoot, getRepoRoot, isPathInside } from './paths';
@@ -18,16 +19,6 @@ export interface ResolvedCanonicalFile {
   isCanonical: boolean;
   title?: string;
 }
-
-export const fileExists = async (filePath: string): Promise<boolean> => {
-  try {
-    const stat = await fs.stat(filePath);
-
-    return stat.isFile();
-  } catch {
-    return false;
-  }
-};
 
 export const dirExists = async (dirPath: string): Promise<boolean> => {
   try {

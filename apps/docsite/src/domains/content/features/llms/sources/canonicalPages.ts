@@ -1,9 +1,9 @@
-import { isDocSection, type DocSection } from './constants';
-import { type NavNode, listSectionNav } from './contentNavigation';
-import { readAllowedMarkdown, resolveCanonicalFile } from './contentRepository';
-import { bulletList, pageFromSource, pagePath, type DocumentedPage, type Roots } from './documentedPage';
-import { slugToDisplayName, titleForSiblingPage } from './pageTitle';
-import { parseCanonicalFrontmatter } from './parseFrontmatter';
+import { isDocSection, type DocSection } from '../../../constants';
+import { type NavNode, listSectionNav } from '../../../contentNavigation';
+import { readAllowedMarkdown, resolveCanonicalFile } from '../../../contentRepository';
+import { slugToDisplayName, titleForSiblingPage } from '../../../pageTitle';
+import { parseCanonicalFrontmatter } from '../../../parseFrontmatter';
+import { bulletList, pageFromSource, pagePath, type DocumentedPage, type Roots } from './page';
 
 const findNavNode = (nodes: NavNode[], href: string): NavNode | undefined => {
   let found: NavNode | undefined;

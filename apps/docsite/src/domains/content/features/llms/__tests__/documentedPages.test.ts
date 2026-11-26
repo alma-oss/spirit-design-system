@@ -1,9 +1,14 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { composePageMarkdown, listDocumentedPages, type DocumentedPageOptions } from '../documentedPages';
-import { renderLlmsFull, renderLlmsTxt } from '../llmsText';
-import { getSiteOrigin } from '../siteOrigin';
+import { getSiteOrigin } from '@local/domains/content/siteOrigin';
+import {
+  fetchAllDocumentedPages,
+  fetchDocumentedPage,
+  renderLlmsFull,
+  renderLlmsTxt,
+  type DocumentedPageOptions,
+} from '..';
 
 const writeFile = async (filePath: string, contents: string) => {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -124,10 +129,10 @@ const createFixture = async (): Promise<DocumentedPageOptions> => {
 const urlsIn = (markdown: string): string[] =>
   [...markdown.matchAll(/\]\((https:[^)]+)\)/g)].map((match) => match[1] ?? '');
 
-describe('composePageMarkdown', () => {
+describe('fetchDocumentedPage', () => {
   it('keeps a code fence and drops front matter', async () => {
     const options = await createFixture();
-    const overview = await composePageMarkdown(['components', 'button'], options);
+    const overview = await fetchDocumentedPage(['components', 'button'], options);
 
     expect(overview).toContain('```scss');
     expect(overview).toContain('$button-height: 1;');
@@ -139,22 +144,22 @@ describe('composePageMarkdown', () => {
   it('returns one tab and nothing for hidden, missing, preview, or helper urls', async () => {
     const options = await createFixture();
 
-    await expect(composePageMarkdown(['components', 'button', 'design'], options)).resolves.toContain(
+    await expect(fetchDocumentedPage(['components', 'button', 'design'], options)).resolves.toContain(
       'Quiet surface for the design tab.',
     );
-    await expect(composePageMarkdown(['components', 'button', 'web'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown(['components', 'button', 'web-preview'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown(['components', 'button', 'figma'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown(['components', 'button', 'accessibility'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown(['components', 'tag'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown(['components', 'missing'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown(['helpers', 'clearfix'], options)).resolves.toBeNull();
-    await expect(composePageMarkdown([], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['components', 'button', 'web'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['components', 'button', 'web-preview'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['components', 'button', 'figma'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['components', 'button', 'accessibility'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['components', 'tag'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['components', 'missing'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage(['helpers', 'clearfix'], options)).resolves.toBeNull();
+    await expect(fetchDocumentedPage([], options)).resolves.toBeNull();
   });
 
   it('uses the front-matter title when the page is only links', async () => {
     const options = await createFixture();
-    const introduction = await composePageMarkdown(['introduction'], options);
+    const introduction = await fetchDocumentedPage(['introduction'], options);
 
     expect(introduction).toContain('# Introduction');
     expect(introduction).toContain('[Components](/components)');
@@ -165,7 +170,7 @@ describe('composePageMarkdown', () => {
 describe('llms.txt and llms-full.txt', () => {
   it('lists every documented fixture page once, with markdown urls', async () => {
     const options = await createFixture();
-    const pages = await listDocumentedPages(options);
+    const pages = await fetchAllDocumentedPages(options);
     const llms = renderLlmsTxt(pages);
     const full = renderLlmsFull(pages);
     const urls = urlsIn(llms);
@@ -238,6 +243,6 @@ describe('llms.txt and llms-full.txt', () => {
     await fs.rm(path.join(options.repoRoot ?? '', 'packages/icons/src/svg'), { recursive: true });
     await fs.writeFile(path.join(options.repoRoot ?? '', 'packages/icons/src/svg'), 'not-a-directory');
 
-    await expect(listDocumentedPages(options)).rejects.toMatchObject({ code: 'ENOTDIR' });
+    await expect(fetchAllDocumentedPages(options)).rejects.toMatchObject({ code: 'ENOTDIR' });
   });
 });

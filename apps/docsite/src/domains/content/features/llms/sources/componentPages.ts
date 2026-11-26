@@ -1,16 +1,19 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { kebabToTitleCase } from '@alma-oss/spirit-common/utilities/kebabToTitleCase';
-import { componentNameToSlug, isValidComponentSlug, slugToComponentName } from '../components/utils/componentSlug';
-import { componentDocsDirectory } from '../routing/routes';
 import {
   getComponentDescription,
   getComponentTabAvailability,
   isComponentTabHidden,
   resolveComponentTabFile,
-} from './componentDocsRepository';
-import { fileExists, readAllowedMarkdown } from './contentRepository';
-import { bulletList, pageFromSource, type DocumentedPage, type Roots } from './documentedPage';
+} from '../../../../components/repositories/componentDocsRepository';
+import {
+  componentNameToSlug,
+  isValidComponentSlug,
+  slugToComponentName,
+} from '../../../../components/utils/componentSlug';
+import { componentDocsDirectory } from '../../../../routing/routes';
+import { readAllowedMarkdown } from '../../../contentRepository';
+import { bulletList, pageFromSource, type DocumentedPage, type Roots } from './page';
 
 const COMPONENT_TAB_ORDER = ['design', 'accessibility', 'figma', 'web', 'react'] as const;
 
@@ -43,55 +46,11 @@ const readDirectoryNames = async (directory: string): Promise<string[]> => {
   }
 };
 
-const listIconNames = async (repoRoot: string): Promise<string[]> => {
-  try {
-    const entries = await fs.readdir(path.join(repoRoot, 'packages/icons/src/svg'));
-
-    return entries
-      .filter((file) => file.endsWith('.svg'))
-      .map((file) => file.slice(0, -'.svg'.length))
-      .sort((left, right) => left.localeCompare(right, 'en'));
-  } catch (error) {
-    if (isEnoent(error)) {
-      return [];
-    }
-
-    throw error;
-  }
-};
-
-const listHelperTitles = async (repoRoot: string): Promise<string[]> => {
-  const directory = path.join(repoRoot, 'packages/web/src/scss/helpers');
-  const names = await readDirectoryNames(directory);
-
-  return names.reduce<Promise<string[]>>(async (previous, name) => {
-    const titles = await previous;
-
-    if (await fileExists(path.join(directory, name, 'preview.html'))) {
-      titles.push(kebabToTitleCase(name));
-    }
-
-    return titles;
-  }, Promise.resolve([]));
-};
-
 const webReadmePath = (slug: string, repoRoot: string): string =>
   path.join(repoRoot, 'packages/web/src/scss/components', slugToComponentName(slug), 'README.md');
 
 const reactReadmePath = (slug: string, repoRoot: string): string =>
   path.join(repoRoot, componentDocsDirectory, slugToComponentName(slug), 'README.md');
-
-const renderInventory = (title: string, items: string[], pathName: string): DocumentedPage => {
-  const body = `# ${title}\n\n${bulletList(items.map((item) => `- ${item}`))}`;
-
-  return {
-    path: pathName,
-    title,
-    section: pathName.slice(1) as DocumentedPage['section'],
-    description: title,
-    body,
-  };
-};
 
 const listComponentSlugs = async (roots: Roots): Promise<string[]> => {
   const directories = await readDirectoryNames(path.join(roots.repoRoot, componentDocsDirectory));
@@ -218,12 +177,6 @@ const renderComponentCatalog = (componentPages: DocumentedPage[]): DocumentedPag
   };
 };
 
-const renderIcons = async (roots: Roots): Promise<DocumentedPage> =>
-  renderInventory('Icons', await listIconNames(roots.repoRoot), '/icons');
-
-const renderHelpers = async (roots: Roots): Promise<DocumentedPage> =>
-  renderInventory('Helpers', await listHelperTitles(roots.repoRoot), '/helpers');
-
 const tabsFor = (slug: string, roots: Roots): Promise<DocumentedPage[]> =>
   COMPONENT_TAB_ORDER.reduce<Promise<DocumentedPage[]>>(async (previous, tab) => {
     const pages = await previous;
@@ -259,6 +212,3 @@ export const collectComponentPages = async (roots: Roots): Promise<DocumentedPag
 
   return [renderComponentCatalog(pages), ...pages];
 };
-
-export const collectInventoryPage = async (section: 'icons' | 'helpers', roots: Roots): Promise<DocumentedPage> =>
-  section === 'icons' ? renderIcons(roots) : renderHelpers(roots);

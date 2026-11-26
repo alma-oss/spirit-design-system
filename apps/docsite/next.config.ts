@@ -2,7 +2,7 @@ import { dirname, resolve, join } from 'path';
 import { fileURLToPath } from 'url';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
-import { DOCUMENTATION_MENU } from './src/domains/content/documentationMenu';
+import { DOCUMENTATION_MENU } from './src/domains/routing/documentationMenu';
 
 const pathDir = dirname(fileURLToPath(import.meta.url));
 

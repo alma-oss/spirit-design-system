@@ -1,11 +1,10 @@
-import { collectCanonicalPages } from './canonicalDocPages';
-import { collectComponentPages, collectInventoryPage } from './componentDocPages';
-import { isDocSection } from './constants';
-import { listDocSlugs } from './contentNavigation';
-import { DOCUMENTATION_MENU } from './documentationMenu';
-import { resolveRoots, type DocumentedPage, type DocumentedPageOptions, type Roots } from './documentedPage';
-
-export type { DocumentedPage, DocumentedPageOptions, DocumentedPageSection } from './documentedPage';
+import { DOCUMENTATION_MENU } from '../../../../routing/documentationMenu';
+import { isDocSection } from '../../../constants';
+import { listDocSlugs } from '../../../contentNavigation';
+import { collectCanonicalPages } from '../sources/canonicalPages';
+import { collectComponentPages } from '../sources/componentPages';
+import { collectInventoryPage } from '../sources/inventoryPages';
+import { resolveRoots, type DocumentedPage, type DocumentedPageOptions, type Roots } from '../sources/page';
 
 const pageListCache = new Map<string, Promise<DocumentedPage[]>>();
 
@@ -34,7 +33,7 @@ const loadDocumentedPages = async (roots: Roots): Promise<DocumentedPage[]> => {
  *
  * @param options Content and repository roots. Defaults to the docsite checkout.
  */
-export const listDocumentedPages = (options?: DocumentedPageOptions): Promise<DocumentedPage[]> => {
+export const fetchAllDocumentedPages = (options?: DocumentedPageOptions): Promise<DocumentedPage[]> => {
   const roots = resolveRoots(options);
 
   if (process.env.NODE_ENV === 'development') {
@@ -66,8 +65,8 @@ export const listDocumentedPages = (options?: DocumentedPageOptions): Promise<Do
  * @param slug Path segments after the origin. An empty list is the homepage.
  * @param options Content and repository roots. Defaults to the docsite checkout.
  */
-export const composePageMarkdown = async (slug: string[], options?: DocumentedPageOptions): Promise<string | null> => {
-  const pages = await listDocumentedPages(options);
+export const fetchDocumentedPage = async (slug: string[], options?: DocumentedPageOptions): Promise<string | null> => {
+  const pages = await fetchAllDocumentedPages(options);
   const page = pages.find((item) => item.path === `/${slug.join('/')}`);
 
   return page?.body ?? null;

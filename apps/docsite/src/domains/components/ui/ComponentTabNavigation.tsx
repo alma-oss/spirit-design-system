@@ -1,8 +1,8 @@
 import { ScrollView } from '@alma-oss/spirit-web-react';
+import { getComponentTabAvailability } from '@local/domains/components/repositories/componentDocsRepository';
 import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components/ui/ComponentsBand';
 import ComponentTabNavigationItems, { type TabItem } from '@local/domains/components/ui/ComponentTabNavigationItems';
-import { getComponentTabAvailability } from '@local/domains/content/componentDocsRepository';
 import { routes, componentSegments } from '@local/domains/routing/routes';
 
 interface ComponentTabNavigationProps {

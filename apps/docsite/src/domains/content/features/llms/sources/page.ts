@@ -1,6 +1,6 @@
-import { type DocumentedPageSection } from './documentationMenu';
-import { firstProseSentence, renderMarkdownDocument } from './markdownProse';
-import { getContentRoot, getRepoRoot } from './paths';
+import { getContentRoot, getRepoRoot } from '@local/config/paths';
+import { type DocumentedPageSection } from '../../../../routing/documentationMenu';
+import { firstProseSentence, renderMarkdownDocument } from '../markdownProse';
 
 export type { DocumentedPageSection };
 

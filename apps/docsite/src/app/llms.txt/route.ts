@@ -1,15 +1,5 @@
-import { listDocumentedPages } from '@local/domains/content/documentedPages';
-import { renderLlmsTxt } from '@local/domains/content/llmsText';
-import { NextResponse } from 'next/server';
+import { fetchAllDocumentedPages, markdownResponse, renderLlmsTxt } from '@local/domains/content/features/llms';
 
 export const dynamic = 'force-static';
 
-const MARKDOWN_HEADERS = {
-  'Content-Type': 'text/markdown; charset=utf-8',
-};
-
-export const GET = async () => {
-  const pages = await listDocumentedPages();
-
-  return new NextResponse(renderLlmsTxt(pages), { headers: MARKDOWN_HEADERS });
-};
+export const GET = async () => markdownResponse(renderLlmsTxt(await fetchAllDocumentedPages()));

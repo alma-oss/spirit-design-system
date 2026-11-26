@@ -1,4 +1,4 @@
-import { parseCanonicalFrontmatter } from './parseFrontmatter';
+import { parseCanonicalFrontmatter } from '../../parseFrontmatter';
 
 const LIST_ITEM = /^([-*]|\d+\.)\s/;
 const HEADING = /^#{1,6}\s+\S/;

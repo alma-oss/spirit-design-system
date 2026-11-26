@@ -119,6 +119,22 @@ export default [
       // allow reassign in properties
       'no-param-reassign': ['warn', { props: false }],
       // support monorepos
+      'import/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            { target: './src/config', from: './src/domains' },
+            { target: './src/config', from: './src/app' },
+            { target: './src/utils', from: './src/domains' },
+            { target: './src/utils', from: './src/app' },
+            {
+              target: './src/app',
+              from: './src/domains/content/features/llms',
+              except: ['./index.ts'],
+            },
+          ],
+        },
+      ],
       'import/no-extraneous-dependencies': [
         'error',
         {

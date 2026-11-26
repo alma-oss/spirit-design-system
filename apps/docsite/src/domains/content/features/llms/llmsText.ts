@@ -1,16 +1,16 @@
-import { DOCUMENTATION_MENU } from './documentationMenu';
-import { type DocumentedPage } from './documentedPages';
-import { getSiteOrigin } from './siteOrigin';
+import { getSiteOrigin } from '@local/domains/content/siteOrigin';
+import { DOCUMENTATION_MENU } from '../../../routing/documentationMenu';
+import { type DocumentedPage } from './sources/page';
 
 const SITE_TITLE = 'Spirit Design System';
-const SITE_SUMMARY = 'Documentation for the Spirit Design System';
+const SITE_DESCRIPTION = 'Documentation for the Spirit Design System';
 
 export const markdownPageUrl = (path: string): string => `${getSiteOrigin()}${path}?format=md`;
 
 const pagesInSection = (pages: DocumentedPage[], section: (typeof DOCUMENTATION_MENU)[number]['id']) =>
   pages.filter((page) => page.section === section);
 
-const siteHeader = (): string[] => [`# ${SITE_TITLE}`, '', `> ${SITE_SUMMARY}`, ''];
+const siteHeader = (): string[] => [`# ${SITE_TITLE}`, '', `> ${SITE_DESCRIPTION}`, ''];
 
 /**
  * llms.txt index. Every link points at the public `?format=md` URL.
