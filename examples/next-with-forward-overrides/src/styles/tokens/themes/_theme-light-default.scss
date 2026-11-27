@@ -1,0 +1,8 @@
+@forward '@alma-oss/spirit-design-tokens/scss/themes/theme-light-default' with (
+    $component-button-primary-border: #0b5f58,
+    $component-button-primary-state-active: #0b5f58,
+    $component-button-primary-state-default: #0f766e,
+    $component-button-primary-state-hover: #0d6b63,
+    $emotion-success-background-subtle: #e6f4f2,
+    $emotion-success-content-basic: #0b5f58
+);

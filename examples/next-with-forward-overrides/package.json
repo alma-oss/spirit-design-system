@@ -1,0 +1,36 @@
+{
+  "name": "@alma-oss/spirit-example-next-with-forward-overrides",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "lint:fix": "yarn lint --fix"
+  },
+  "dependencies": {
+    "@alma-oss/spirit-design-tokens": "workspace:^",
+    "@alma-oss/spirit-web": "workspace:^",
+    "@alma-oss/spirit-web-react": "workspace:^",
+    "next": "catalog:frontend",
+    "react": "catalog:frontend",
+    "react-dom": "catalog:frontend",
+    "sass": "catalog:build",
+    "sass-embedded": "catalog:build"
+  },
+  "devDependencies": {
+    "@eslint/compat": "catalog:lint",
+    "@eslint/eslintrc": "catalog:lint",
+    "@next/eslint-plugin-next": "catalog:lint",
+    "@types/node": "catalog:types",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
+    "eslint": "catalog:lint",
+    "eslint-config-next": "catalog:lint",
+    "eslint-config-spirit": "workspace:^",
+    "eslint-plugin-react-refresh": "catalog:lint",
+    "globals": "catalog:lint",
+    "typescript": "catalog:types"
+  }
+}
