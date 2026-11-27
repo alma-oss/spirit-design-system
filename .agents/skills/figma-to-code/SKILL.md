@@ -124,10 +124,12 @@ Apply `/spirit:accessibility`. This step is a **semantics pass**, not a prop re-
 landmarks, heading outline, list markup, and role/`elementType` from meaning — not from the Figma
 component name.
 
-- Choose `elementType` from document outline, not from visual size. Visual style and semantics
-  are independent.
+- Choose `elementType` from meaning, not from visual size or a Figma layer name. For `Section`,
+  keep the default only for content worth jumping to, and give it an accessible name; set
+  `elementType="div"` for a background stripe, padding wrapper, breadcrumb strip, or the band
+  with the page `h1`. See [Layout](references/layout.md).
 - Prefer not to skip heading ranks; fix the outline rather than forcing a visual size onto the
-  wrong tag. Keep the page `h1` out of an anonymous `<section>`. See [Layout](references/layout.md).
+  wrong tag.
 - Repeating cards or items that are a list in meaning use `ul`/`ol` with `li`, not a bare Flex/Grid
   of `div`s.
 - Preserve DOM source order. If Flex `horizontal-reversed` or similar changes visual order, keep
@@ -172,7 +174,7 @@ If a gate cannot run, say so in the handoff (`verified` vs `unverified`) and lis
 - \[ \] Widths expressed as Grid column spans or Container `size` tokens, not one-off pixel formulas
 - \[ \] Card vs Box decided by composition (artwork/title/footer/link), not Figma name
 - \[ \] Card titles with `themed/link/…` tokens use `CardLink` even if Code Connect omitted it
-- \[ \] Page `h1` not nested in an anonymous Section; repeating cards use list markup
+- \[ \] `Section` `elementType` follows band content; repeating cards use list markup
 - \[ \] Heading `elementType` set; Display/\* → `UNSTABLE_DisplayHeading`; typography mapped by text style, not by size alone
 - \[ \] Form wraps fields and actions; submit first in DOM; personal-data autocomplete per `/spirit:accessibility`
 - \[ \] Responsive values exist only where Figma supports them; breakpoints are Spirit tokens
