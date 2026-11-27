@@ -18,7 +18,7 @@ const PickerLongText = () => (
   <Box UNSAFE_style={{ maxWidth: '16rem' }}>
     <UNSTABLE_UncontrolledPicker
       id="demo-picker-long-text"
-      defaultSelectedKeys={LONG_TEXT_OPTIONS.map((option) => option.value)}      
+      defaultSelectedKeys={LONG_TEXT_OPTIONS.map((option) => option.value)}
       label="Skills"
       popoverProps={{ ...DEFAULT_POPOVER_PROPS, UNSAFE_style: { width: '15rem' } }}
     >
