@@ -31,8 +31,11 @@ Spirit's SCSS reads only the breakpoints, and the button radius device tokens ar
 Typography is overridden with the global typography tokens, such as `$heading-large-bold`. Each is a whole map with
 a style per device, which replaces Spirit's map, so it has to repeat every property and device it keeps.
 
-Only SCSS is overridden. JS tokens imported from `@alma-oss/spirit-design-tokens` keep Spirit's values, so hooks that
-read breakpoints in JS still switch at Spirit's `48rem`.
+Only SCSS is overridden. The JS side uses Spirit's TS tokens as they are, without an alias to product tokens.
+In the types-only tokens POC, the TS tokens hold only types and name arrays, such as `breakpointNames`, with no
+values. The `TokensFromCss` panel takes its names and types from Spirit and reads the values from the CSS custom
+properties on `:root`, which the product's SCSS overrides fill in. Its current breakpoint switches to `tablet` at the
+product's `64rem`, not at Spirit's `48rem`, and the primary button color shows the product's override.
 
 ## Commands
 

@@ -134,6 +134,29 @@ export default [
         },
       ],
 
+      // Design tokens with values only exist as type declarations, read the values from CSS custom properties
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@alma-oss/spirit-design-tokens',
+              importNames: [
+                'breakpoints',
+                'spaces',
+                'fontSizeBases',
+                'accentColors',
+                'emotionColors',
+                'textColors',
+                'componentColors',
+              ],
+              allowTypeImports: true,
+              message: 'This token is type-only. Use the `*Names` arrays or read the value from CSS on `:root`.',
+            },
+          ],
+        },
+      ],
+
       // allow empty interfaces with single extends (e.g. interface Foo extends SpiritBar {})
       // interface which extends some other interface is not considered as meaningful interface
       // we need this for meeting our component API conventions

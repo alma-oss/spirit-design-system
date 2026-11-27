@@ -13,6 +13,7 @@ import {
   Text,
 } from '@alma-oss/spirit-web-react';
 import { NextPage } from 'next';
+import TokensFromCss from './TokensFromCss';
 
 const THEMES = ['theme-light-default', 'theme-light-on-brand'] as const;
 const CARDS = ['First', 'Second', 'Third'];
@@ -22,6 +23,7 @@ const Home: NextPage = () => (
     <Heading elementType="h1" size="large" marginY="space-1000">
       Spirit with <code>@forward with</code> token overrides
     </Heading>
+    <TokensFromCss />
     <Flex direction="vertical" spacing="space-800" marginBottom="space-1000">
       {THEMES.map((theme) => (
         <Box key={theme} theme={theme} backgroundColor="primary" padding="space-800" borderRadius="300">

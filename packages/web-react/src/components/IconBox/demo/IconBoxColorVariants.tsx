@@ -1,4 +1,4 @@
-import { accentColors } from '@alma-oss/spirit-design-tokens';
+import { accentColorNames } from '@alma-oss/spirit-design-tokens';
 import React, { useState } from 'react';
 import { DemoEmotionColors } from '../../../../docs';
 import { type AccentColorNamesType } from '../../../types';
@@ -6,7 +6,7 @@ import Checkbox from '../../Checkbox/Checkbox';
 import { Grid } from '../../Grid';
 import IconBoxColorDemoFactory from './IconBoxColorDemoFactory';
 
-const accentColorsObject = Object.keys(accentColors) as AccentColorNamesType[];
+const accentColorsObject: AccentColorNamesType[] = [...accentColorNames];
 const emotionColorsObject = Object.values(DemoEmotionColors);
 
 const IconBoxColorVariants = () => {

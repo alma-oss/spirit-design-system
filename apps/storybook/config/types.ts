@@ -1,4 +1,4 @@
-import { breakpoints } from '@alma-oss/spirit-design-tokens';
+import { type breakpoints } from '@alma-oss/spirit-design-tokens';
 import { DisplayStyleProps, SpacingStyleProp } from '@alma-oss/spirit-web-react';
 
 export type SelectEntry<T extends string | undefined = string | undefined> = {

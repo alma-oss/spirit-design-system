@@ -1,14 +1,13 @@
-import { breakpoints, spaces } from '@alma-oss/spirit-design-tokens';
+import { breakpointNames, spaceNames } from '@alma-oss/spirit-design-tokens';
 import { DisplayStyleProps, SpacingStyleProp } from '@alma-oss/spirit-web-react';
 import { type BreakpointName, type DisplayArgs, type DisplayPropName, type MarginArgs, type MarginPropName, type SelectEntry } from './types';
 import { makeSelectMap, toTitleCase } from './utils';
 
 // Spacing entries
-const spacingEntries: Array<SelectEntry<string>> = Object.entries(spaces).map(([token, size]) => {
+const spacingEntries: Array<SelectEntry<string>> = spaceNames.map((token) => {
   const value = `space-${token}`;
-  const readable = typeof size === 'number' ? String(size) : size;
 
-  return { label: `${value} (${readable})`, value };
+  return { label: value, value };
 });
 
 const MARGIN_OPTIONS = {
@@ -19,7 +18,7 @@ const MARGIN_OPTIONS = {
 const MARGIN_PROP_NAMES = (Object.keys(SpacingStyleProp) as Array<keyof typeof SpacingStyleProp>).filter((prop): prop is MarginPropName => prop !== 'margin');
 
 // Breakpoint entries
-const BREAKPOINT_ENTRIES = (Object.keys(breakpoints) as BreakpointName[]).map((breakpoint) => ({
+const BREAKPOINT_ENTRIES = breakpointNames.map((breakpoint) => ({
   label: toTitleCase(breakpoint),
   value: breakpoint,
 }));

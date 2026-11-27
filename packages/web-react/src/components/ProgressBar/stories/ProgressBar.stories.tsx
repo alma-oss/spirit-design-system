@@ -1,9 +1,8 @@
-import { accentColors } from '@alma-oss/spirit-design-tokens';
+import { accentColorNames } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { EmotionColors, Sizes, ValidationStates } from '../../../constants';
-import { type AccentColorNamesType } from '../../../types';
 import ReadMe from '../README.md?raw';
 import { ProgressBar, ProgressBarColorsExtended } from '..';
 
@@ -19,11 +18,7 @@ const meta: Meta<typeof ProgressBar> = {
   argTypes: {
     color: {
       control: 'select',
-      options: [
-        ...Object.values(EmotionColors),
-        ...Object.values(ProgressBarColorsExtended),
-        ...(Object.keys(accentColors) as AccentColorNamesType[]),
-      ],
+      options: [...Object.values(EmotionColors), ...Object.values(ProgressBarColorsExtended), ...accentColorNames],
       table: {
         defaultValue: { summary: 'informative' },
       },

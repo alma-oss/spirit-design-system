@@ -1,4 +1,4 @@
-import { accentColors } from '@alma-oss/spirit-design-tokens';
+import { accentColorNames } from '@alma-oss/spirit-design-tokens';
 import { renderHook } from '@testing-library/react';
 import { EmotionColors } from '../../../constants';
 import type { IconBoxColorsType } from '../../../types';
@@ -21,7 +21,7 @@ describe('useIconBoxColors', () => {
     expect(result.current.colors.text).toBe('emotion-informative-subtle');
   });
 
-  it('should use accent prefix when provided color is in accentColors', () => {
+  it('should use accent prefix when provided color is an accent color name', () => {
     const { result } = renderHook(() => useIconBoxColors('01'));
 
     expect(result.current.colors.background).toBe('accent-01-subtle');
@@ -29,7 +29,7 @@ describe('useIconBoxColors', () => {
     expect(result.current.colors.text).toBe('accent-01-basic');
   });
 
-  it('should use emotion prefix when provided color is not in accentColors', () => {
+  it('should use emotion prefix when provided color is not an accent color name', () => {
     const { result } = renderHook(() => useIconBoxColors(EmotionColors.INFORMATIVE));
 
     expect(result.current.colors.background).toBe('emotion-informative-subtle');
@@ -45,7 +45,7 @@ describe('useIconBoxColors', () => {
     expect(result.current.colors.text).toBe(`emotion-${color}-basic`);
   });
 
-  it.each([...Object.keys(accentColors)])('should return correct colors for %s accent colors', (color) => {
+  it.each([...accentColorNames])('should return correct colors for %s accent colors', (color) => {
     const { result } = renderHook(() => useIconBoxColors(color as IconBoxColorsType));
 
     expect(result.current.colors.background).toBe(`accent-${color}-subtle`);

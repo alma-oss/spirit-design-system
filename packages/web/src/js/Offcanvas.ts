@@ -1,4 +1,8 @@
-import { breakpoints } from '@alma-oss/spirit-design-tokens';
+// eslint-disable-next-line import/no-extraneous-dependencies -- `spirit-common` is workspace-only and bundled, not a consumer dependency
+import { cssLengthToPixels } from '@alma-oss/spirit-common/utilities/cssLengthToPixels';
+// eslint-disable-next-line import/no-extraneous-dependencies -- `spirit-common` is workspace-only and bundled, not a consumer dependency
+import { getRootCssVariable } from '@alma-oss/spirit-common/utilities/getRootCssVariable';
+import { cssVariablePrefix } from '@alma-oss/spirit-design-tokens';
 import BaseComponent from './BaseComponent';
 import { warning } from './common/utilities';
 import { CLASS_NAME_OPEN, EVENT_KEY_ESCAPE } from './constants';
@@ -21,36 +25,34 @@ const EVENT_SHOWN = `shown${EVENT_KEY}`;
 const EVENT_HIDE = `hide${EVENT_KEY}`;
 const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
 
-const OFFCANVAS_BREAKPOINT = parseInt(breakpoints.desktop, 10);
-
-const VARIABLE_BREAKPOINT_DESKTOP = '--spirit-breakpoint-desktop';
+const VARIABLE_BREAKPOINT_DESKTOP = `--${cssVariablePrefix}breakpoint-desktop`;
 
 const CLASS_NAME_NON_MODAL = 'is-non-modal';
 
 const ARIA_ATTRIBUTE_MODAL = 'aria-modal';
 
 type Config = {
+  breakpointDesktop?: number;
   closableOnBackdropClick: boolean;
   closableOnEscapeKey: boolean;
   modal: boolean;
 };
 
 const Default = {
-  breakpointDesktop: OFFCANVAS_BREAKPOINT,
   closableOnBackdropClick: true,
   closableOnEscapeKey: true,
   modal: true,
 };
 
 const DefaultType = {
-  breakpointDesktop: 'number',
+  breakpointDesktop: '(number|undefined)',
   closableOnBackdropClick: 'boolean',
   closableOnEscapeKey: 'boolean',
   modal: 'boolean',
 };
 
 class Offcanvas extends BaseComponent {
-  breakpoint: number;
+  breakpoint: number | undefined;
   isShown: boolean;
   scrollControl: ScrollControl;
 
@@ -75,11 +77,9 @@ class Offcanvas extends BaseComponent {
     this.breakpoint = this.getBreakpoint();
   }
 
-  getBreakpoint() {
+  getBreakpoint(): number | undefined {
     return (
-      parseInt(getComputedStyle(document.documentElement).getPropertyValue(VARIABLE_BREAKPOINT_DESKTOP), 10) ||
-      // @ts-ignore Object is of type 'unknown'.
-      this.config?.breakpointDesktop
+      (this.config as Config)?.breakpointDesktop ?? cssLengthToPixels(getRootCssVariable(VARIABLE_BREAKPOINT_DESKTOP))
     );
   }
 
@@ -101,7 +101,7 @@ class Offcanvas extends BaseComponent {
   }
 
   onWindowResize(event: Event & { target: Window }) {
-    if (event.target.innerWidth >= this.breakpoint) {
+    if (this.breakpoint !== undefined && event.target.innerWidth >= this.breakpoint) {
       this.hide();
     }
   }

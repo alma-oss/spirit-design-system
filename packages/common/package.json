@@ -34,6 +34,10 @@
       "types": "./src/utilities/cssLengthToPixels.ts",
       "default": "./src/utilities/cssLengthToPixels.ts"
     },
+    "./utilities/getRootCssVariable": {
+      "types": "./src/utilities/getRootCssVariable.ts",
+      "default": "./src/utilities/getRootCssVariable.ts"
+    },
     "./utilities/kebabToTitleCase": {
       "types": "./src/utilities/kebabToTitleCase.ts",
       "default": "./src/utilities/kebabToTitleCase.ts"

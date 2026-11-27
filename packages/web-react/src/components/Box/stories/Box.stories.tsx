@@ -1,4 +1,4 @@
-import { accentColors, emotionColors, shadows } from '@alma-oss/spirit-design-tokens';
+import { accentColorNames, emotionColorNames, shadows } from '@alma-oss/spirit-design-tokens';
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
@@ -30,10 +30,10 @@ const boxColorSchemeOptions: ColorSchemeType[] = [
   'neutral-subtle',
   'selected-basic',
   'selected-subtle',
-  ...(Object.keys(accentColors) as Array<keyof typeof accentColors>).flatMap((key) =>
+  ...accentColorNames.flatMap((key) =>
     colorSchemeSurfaceIntensities.map((intensity) => `accent-${key}-${intensity}` as ColorSchemeType),
   ),
-  ...(Object.keys(emotionColors) as Array<keyof typeof emotionColors>).flatMap((key) =>
+  ...emotionColorNames.flatMap((key) =>
     colorSchemeSurfaceIntensities.map((intensity) => `emotion-${key}-${intensity}` as ColorSchemeType),
   ),
 ];
