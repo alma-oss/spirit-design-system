@@ -17,13 +17,16 @@ Breakpoints: `mobile` from `0`, `tablet` from `48rem`, `desktop` from `80rem`. R
 | Equal-width columns in one row           | `Grid`       |
 | Vertical list, optional dividers         | `Stack`      |
 | Overflow region (horizontal or vertical) | `ScrollView` |
-| Surface only (color, padding, border)    | `Box`        |
-| Page/region with optional max-width      | `Section`    |
+| Local surface (color, padding, border)   | `Box`        |
+| Layout band (padding, background, width) | `Section`    |
 | Width constraint without Section         | `Container`  |
 
+A page band is `Section`, including when it renders `div`. `Box` is a local surface inside a band
+or component.
+
 Do not copy every Figma autolayout frame into a Spirit node. Skip frames that only name, clip, or
-group for the designer. Keep wrappers that create a real gap, alignment, max-width, or semantic
-region.
+group for the designer. Keep wrappers that create a real gap, alignment, max-width, padding,
+background, or semantic region.
 
 ## Flex
 
@@ -135,26 +138,28 @@ Box does not lay out children. Combine with Flex or Grid:
 
 ## Section and Container
 
-Section defaults: `elementType="section"`, `hasContainer={true}`. Container default size is
-`xlarge`. Section `backgroundColor` is only `primary` | `secondary` | `tertiary`.
+A layer named Section or Container is usually a detached or expanded Design block: a ready-made
+composition of `Section` and `Container`. Use that name to pick the component. Choose the element
+from what the band contains.
 
+Section defaults: `elementType="section"`, `hasContainer={true}`. Container default size is
+`xlarge`. Section `backgroundColor` is only `primary` | `secondary` | `tertiary`. Omit
+`elementType` when the default is the right element.
+
+- Content worth jumping to, such as a headed region: keep `<section>`. Prefer a visible heading
+  (`h2` and below) and set `aria-labelledby` to its id. With no visible heading, set `aria-label`.
+- Background stripe, breadcrumb strip, padding wrapper, or the band that holds the page `h1`:
+  set `elementType="div"`. Leave the `h1` inside that `Section`. It heads the page.
+- Start a new `Section` only where the background changes or a new headed region begins.
+  Otherwise keep one `Section` and space the content inside it.
+- Keep sibling bands as siblings. A nested Figma frame is not a reason to nest `Section`.
 - One container layer: keep the default inner Container. If the layer is not XLarge, set
   `containerProps={{ size: 'medium' }}` (or the named size). Omit `containerProps` for XLarge.
 - Two or more Container layers with **distinct** widths: `hasContainer={false}` and render that many
   `Container` components. Do not nest a second Container inside Section’s default one.
 - Full-bleed backgrounds stay on Section; constrained content goes in Container.
 
-## Multiple Sections on a Page
-
-A Figma frame named "Section" is not automatically a Spirit `Section`. `Section` defaults to
-`<section>` and is a landmark only when it has an accessible name (usually its heading).
-
-- Keep the page's `h1` out of an anonymous `<section>`. If the title is the document heading, render
-  it outside `Section`, or use `elementType="div"` for a visual-only wrapper.
-- Sibling Figma Section frames that are distinct regions become sibling Spirit `Section`s, each
-  with its own heading (`h2`+). Do not nest them just to match Figma's layer tree.
-- One full-page "Section" frame with a background is often a visual wrapper — `Box` or a single
-  `Section` with `elementType="div"` — not a landmark around the whole page.
+See the Semantics section in `packages/web-react/src/components/Section/README.md`.
 
 ## Spacing
 
