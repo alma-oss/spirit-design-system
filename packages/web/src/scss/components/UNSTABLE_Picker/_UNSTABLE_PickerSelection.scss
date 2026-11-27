@@ -1,5 +1,5 @@
 // 1. Elevate interactive elements above the trigger overlay.
-// 2. Keep selection tags within the field; pair with `text-word-break-long-words`
+// 2. Keep selection tags within the field; pair with `text-hyphens-none text-word-break-long-words`
 //    on the tag so long labels wrap.
 
 @use '@tokens' as tokens;

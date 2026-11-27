@@ -221,7 +221,7 @@ Place a hidden `<span>` with a unique `id` anywhere in the `<body>` and referenc
     tabindex="0"
     aria-label="Czech"
     aria-describedby="picker-tag-description"
-    class="Tag text-word-break-long-words Tag--selected Tag--small color-scheme-on-selected-basic"
+    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic text-hyphens-none text-word-break-long-words"
   >
     <!-- Tag content start -->
     <div role="gridcell" aria-colindex="1" class="d-contents">
@@ -430,7 +430,7 @@ so anything you add is applied as-is.
   aria-label="Czech"
   aria-describedby="picker-tag-description"
   data-my-attr="value"
-  class="Tag text-word-break-long-words Tag--selected Tag--small color-scheme-on-selected-basic bg-accent-01-subtle"
+  class="Tag Tag--selected Tag--small color-scheme-on-selected-basic bg-accent-01-subtle text-hyphens-none text-word-break-long-words"
 >
   <!-- Tag content -->
 </div>
@@ -459,7 +459,7 @@ Each size expects a specific Tag and ControlButton size inside the selection are
           role="row"
           tabindex="0"
           aria-label="Czech"
-          class="Tag text-word-break-long-words Tag--selected Tag--medium color-scheme-on-selected-basic"
+          class="Tag Tag--selected Tag--medium color-scheme-on-selected-basic text-hyphens-none text-word-break-long-words"
         >
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>
@@ -562,7 +562,7 @@ inside the selection area (remove buttons) to disable the Picker. Disable the co
           role="row"
           tabindex="0"
           aria-label="Czech"
-          class="Tag text-word-break-long-words Tag--selected Tag--small disabled"
+          class="Tag Tag--selected Tag--small disabled text-hyphens-none text-word-break-long-words"
         >
           <div role="gridcell" aria-colindex="1" class="d-contents">
             <span>Czech</span>

@@ -123,12 +123,23 @@ Disabled link Tag:
 
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
+## Text Hyphens
+
+Use the `text-hyphens-*` utility classes to set how words should be hyphenated when text wraps across multiple lines.
+
+```html
+<span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic text-hyphens-auto"
+  >Hyphens applied automatically when text wraps across multiple lines.</span
+>
+```
+
 ## Word Break
 
 Use the `text-word-break-*` utility classes to set how words should break when reaching the end of a line.
+It's crucial to combine them with [Text Hyphens](#text-hyphens) to maintain readability.
 
 ```html
-<span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic text-word-break-long-words"
+<span class="Tag Tag--neutral Tag--medium color-scheme-on-neutral-basic text-hyphens-auto text-word-break-long-words"
   >longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces</span
 >
 ```

@@ -4,7 +4,7 @@
 // 3. Likewise, only pad the end when nothing follows this element in InputContainer
 //    (no endSlot InputAddon).
 // 4. Keep selection tags (and SplitTag rows) within the field; pair with
-//    `text-word-break-long-words` on the tag so long labels wrap.
+//    `text-hyphens-none text-word-break-long-words` on the tag so long labels wrap.
 
 @use '@tokens' as tokens;
 @use '../../tools/nested-radius';

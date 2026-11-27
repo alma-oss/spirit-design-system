@@ -1,14 +1,15 @@
 // 1. Stay within a width-constrained selection row (e.g. Combobox) so the label
 //    segment can wrap instead of overflowing the field.
 // 2. Override Tag's `flex-shrink: 0` on the first segment so long labels wrap
-//    when the shell is capped by `max-width`.
+//    when the shell is capped by `max-width`. Keep `max-width: 100%` on the
+//    child: flex items default to `min-width: auto`, so the parent's
+//    `max-width` alone does not let the label shrink below its content size.
 // 3. Stretch the wrapped button (e.g. inside Dropdown) to the full height of the
 //    split tag, so it matches the label segment when the label wraps.
 // 4. Never shrink the trailing segments (e.g. the distance button), so only the
 //    label wraps and the button always stays fully visible.
-// 5. Raise the open dropdown popover above the following split tags, so it is not
-//    covered by them (e.g. buttons elevated with `z-index: 1` in a Combobox selection).
-//    Keep it higher than that `z-index`.
+// 5. Temporary stacking workaround until Dropdown uses the Popover API top layer.
+//    @see https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
 
 @use '@tokens' as tokens;
 @use 'theme';
@@ -27,10 +28,9 @@
     max-width: 100%;
 }
 
-// 3.
 .UNSTABLE_SplitTag > :not(:is(a, button, span)) {
     display: inline-flex;
-    align-items: stretch;
+    align-items: stretch; // 3.
 }
 
 // 4.
@@ -39,7 +39,8 @@
 }
 
 // 5.
-.UNSTABLE_SplitTag:has([aria-expanded='true']) [role='dialog'] {
+.UNSTABLE_SplitTag:has(.DropdownPopover.is-open) {
+    position: relative;
     z-index: 2;
 }
 
