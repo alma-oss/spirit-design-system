@@ -1,3 +1,4 @@
+import type { TokenGroup } from '@supernovaio/sdk-exporters';
 import { exampleGroups } from '../../../../../tests/fixtures/supernova/exampleGroups';
 import { mapGroup } from '../groupMapper';
 
@@ -18,7 +19,7 @@ describe('groupMapper', () => {
     });
 
     it('omits parentId when the group has no parent', () => {
-      const group = { ...exampleGroups[0], parentGroupId: null };
+      const group = { ...exampleGroups[0], parentGroupId: null } as unknown as TokenGroup;
 
       const result = mapGroup(group);
 

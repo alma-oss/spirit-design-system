@@ -1,29 +1,21 @@
-import { TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
+import { type TokenGroup, TokenType } from '@supernovaio/sdk-exporters';
 
 type TokenGroupRemoteModel = ReturnType<TokenGroup['toWriteObject']>;
 
 export const groupFunctions = {
   addChild(): void {},
   addChildren(): void {},
+  copyWith(this: TokenGroup): TokenGroup {
+    return this;
+  },
   setParentGroupId(): void {},
   setPath(): void {},
   setSortOrder(): void {},
-  toMutatedObject(): TokenGroup {
-    return new TokenGroup({
-      id: this.id,
-      parentId: this.parentGroupId,
-      brandId: this.brandId,
-      tokenType: this.tokenType,
-      designSystemVersionId: this.designSystemVersionId,
-      isRoot: this.isRoot,
-      meta: {
-        name: this.name,
-        description: this.description,
-      },
-      childrenIds: this.childrenIds,
-    });
+  // The SDK exports `TokenGroup` as a type only, so the fixture cannot construct a real one.
+  toMutatedObject(this: TokenGroup): TokenGroup {
+    return this;
   },
-  toWriteObject(): TokenGroupRemoteModel {
+  toWriteObject(this: TokenGroup): TokenGroupRemoteModel {
     return {
       id: this.id,
       brandId: this.brandId,
@@ -31,8 +23,8 @@ export const groupFunctions = {
       isRoot: this.isRoot,
       tokenType: this.tokenType,
       childrenIds: this.childrenIds,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
+      createdAt: this.createdAt?.toISOString(),
+      updatedAt: this.updatedAt?.toISOString(),
       meta: {
         name: this.name,
         description: this.description,
