@@ -151,6 +151,18 @@ describe('Checkbox', () => {
     expect(input).toHaveAttribute('aria-details', 'checkbox-details');
   });
 
+  it('should set label font weight to lighter', () => {
+    render(<Checkbox id="checkbox-font-weight" label="Label" />);
+
+    expect(screen.getByText('Label')).toHaveClass('Label--lighter');
+  });
+
+  it('should keep the lighter label font weight when the checkbox is an item', () => {
+    render(<Checkbox id="checkbox-item-font-weight" label="Label" isItem />);
+
+    expect(screen.getByText('Label')).toHaveClass('Label--lighter');
+  });
+
   it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
     render(<Checkbox id="checkbox-size" label="Label" size={size} />);
 

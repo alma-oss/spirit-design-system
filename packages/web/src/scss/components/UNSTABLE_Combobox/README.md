@@ -55,7 +55,7 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium" id="combobox-label" for="combobox-input">Languages</label>
     <div class="Dropdown">
       <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
         <div class="UNSTABLE_ComboboxSelection">
@@ -114,13 +114,13 @@ The selection wrapper (`.UNSTABLE_ComboboxSelection`) is a container holding two
             aria-selected="true"
             class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
           >
-            <span class="Label Label--medium element-stretched cursor-pointer">Spanish</span>
+            <span class="Label Label--base Label--medium element-stretched cursor-pointer">Spanish</span>
           </div>
           <div role="option" id="opt-cs" aria-selected="false" class="Item Item--medium">
-            <span class="Label Label--medium element-stretched cursor-pointer">Czech</span>
+            <span class="Label Label--base Label--medium element-stretched cursor-pointer">Czech</span>
           </div>
           <div role="option" id="opt-en" aria-selected="false" class="Item Item--medium">
-            <span class="Label Label--medium element-stretched cursor-pointer">English</span>
+            <span class="Label Label--base Label--medium element-stretched cursor-pointer">English</span>
           </div>
           <!-- More options… -->
         </div>
@@ -168,7 +168,7 @@ Set `aria-selected="true"` on any option to pre-select it on page load.
   aria-selected="true"
   class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
 >
-  <span class="Label Label--medium element-stretched cursor-pointer">Czech</span>
+  <span class="Label Label--base Label--medium element-stretched cursor-pointer">Czech</span>
 </div>
 ```
 
@@ -257,7 +257,7 @@ Combobox supports the following variant modifiers on `InputContainer`:
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium" id="combobox-label" for="combobox-input">Fill (default)</label>
+    <label class="Label Label--base Label--medium" id="combobox-label" for="combobox-input">Fill (default)</label>
     <div class="Dropdown">
       <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Fill (default)">
         <!-- … -->
@@ -269,7 +269,7 @@ Combobox supports the following variant modifiers on `InputContainer`:
 
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium" id="combobox-label" for="combobox-input">Outline</label>
+    <label class="Label Label--base Label--medium" id="combobox-label" for="combobox-input">Outline</label>
     <div class="Dropdown">
       <div class="InputContainer InputContainer--outline InputContainer--medium" role="group" aria-label="Outline">
         <!-- … -->
@@ -335,7 +335,7 @@ shown nor available to assistive technology.
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
     <div class="Flex Flex--horizontal Flex--alignmentYCenter" style="--flex-spacing-x: var(--spirit-space-100);">
-      <label class="Label Label--medium" id="combobox-label" for="combobox-input">Languages</label>
+      <label class="Label Label--base Label--medium" id="combobox-label" for="combobox-input">Languages</label>
       <div class="Tooltip" data-spirit-element="tooltip">
         <button
           type="button"
@@ -373,7 +373,9 @@ wrap that label in the Flex, and do not include ContextualHelp.
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium accessibility-hidden" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium accessibility-hidden" id="combobox-label" for="combobox-input"
+      >Languages</label
+    >
     <div class="Dropdown"><!-- … --></div>
   </div>
 </div>
@@ -388,7 +390,7 @@ when the user focuses the field.
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium" id="combobox-label" for="combobox-input">Languages</label>
     <div class="Dropdown">
       <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
         <div class="UNSTABLE_ComboboxSelection">
@@ -419,7 +421,9 @@ value, so browser constraint validation would not reflect whether an option is s
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--required" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium Label--required" id="combobox-label" for="combobox-input"
+      >Languages</label
+    >
     <div class="Dropdown">
       <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
         <div class="UNSTABLE_ComboboxSelection">
@@ -452,7 +456,9 @@ Available validation states: `danger`, `warning`, `success`.
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--danger" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium Label--danger" id="combobox-label" for="combobox-input"
+      >Languages</label
+    >
     <div class="Dropdown">
       <div
         class="InputContainer InputContainer--fill InputContainer--medium InputContainer--danger"
@@ -488,7 +494,9 @@ and the `disabled` attribute on the input to disable the Combobox. Disable the c
 ```html
 <div class="UNSTABLE_Combobox UNSTABLE_Combobox--disabled">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium Label--disabled" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium Label--disabled" id="combobox-label" for="combobox-input"
+      >Languages</label
+    >
     <div class="Dropdown">
       <div
         class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled"
@@ -576,7 +584,7 @@ The following example positions the popover at `bottom-start` and expands it to 
 ```html
 <div class="UNSTABLE_Combobox">
   <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
-    <label class="Label Label--medium" id="combobox-label" for="combobox-input">Languages</label>
+    <label class="Label Label--base Label--medium" id="combobox-label" for="combobox-input">Languages</label>
     <div class="Dropdown">
       <div class="InputContainer InputContainer--fill InputContainer--medium" role="group" aria-label="Languages">
         <!-- … -->

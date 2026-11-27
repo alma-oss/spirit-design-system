@@ -111,6 +111,18 @@ describe('Radio', () => {
     expect(screen.getByRole('radio', { name: 'Radio Label' })).toBeInTheDocument();
   });
 
+  it('should set label font weight to lighter', () => {
+    render(<Radio id="radio-font-weight" label="Label" />);
+
+    expect(screen.getByText('Label')).toHaveClass('Label--lighter');
+  });
+
+  it('should keep the lighter label font weight when the radio is an item', () => {
+    render(<Radio id="radio-item-font-weight" label="Label" isItem />);
+
+    expect(screen.getByText('Label')).toHaveClass('Label--lighter');
+  });
+
   it.each(Object.values(Sizes))('should set label size %s through context props', (size) => {
     render(<Radio id="radio-size" label="Label" size={size} />);
 

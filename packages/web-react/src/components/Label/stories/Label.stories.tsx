@@ -1,7 +1,7 @@
 import { Markdown } from '@storybook/addon-docs/blocks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { SizesExtended } from '../../../constants';
+import { FontWeight, SizesExtended } from '../../../constants';
 import ReadMe from '../README.md?raw';
 import { Label } from '..';
 
@@ -21,6 +21,13 @@ const meta: Meta<typeof Label> = {
       control: 'text',
       table: {
         defaultValue: { summary: 'label' },
+      },
+    },
+    fontWeight: {
+      control: 'select',
+      options: [FontWeight.BASE, FontWeight.LIGHTER, FontWeight.BOLDER],
+      table: {
+        defaultValue: { summary: FontWeight.BASE },
       },
     },
     hasPointerCursor: {
@@ -49,6 +56,7 @@ const meta: Meta<typeof Label> = {
   args: {
     children: 'Label text',
     elementType: 'label',
+    fontWeight: FontWeight.BASE,
     hasPointerCursor: false,
     htmlFor: 'example-input',
     isDisabled: false,

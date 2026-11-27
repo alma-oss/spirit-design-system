@@ -98,10 +98,14 @@ export const Emphasis = {
 } as const;
 
 /* Font Weight */
+// `regular`, `semibold`, and `bold` are deprecated.
 export const FontWeight = {
   REGULAR: 'regular',
   SEMIBOLD: 'semibold',
   BOLD: 'bold',
+  BASE: 'base',
+  LIGHTER: 'lighter',
+  BOLDER: 'bolder',
 } as const;
 
 /* Gradient */

@@ -9,7 +9,7 @@ To distribute fields inside the FieldGroup, use the [Flex][readme-flex] componen
 ```html
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--medium" aria-hidden="true">Label</div>
+  <div class="Label Label--base Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
@@ -24,7 +24,7 @@ To distribute fields inside the FieldGroup, use the [Flex][readme-flex] componen
 Set the group label size with `Label--small`, `Label--medium`, or `Label--large`. **Grouped controls keep their own size.** Medium is the default.
 
 ```html
-<div class="Label Label--small" aria-hidden="true">Small</div>
+<div class="Label Label--base Label--small" aria-hidden="true">Small</div>
 ```
 
 ## HTML Semantics
@@ -49,7 +49,7 @@ element.
 ```html
 <fieldset class="border-0">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--medium Label--required" aria-hidden="true">Label</div>
+  <div class="Label Label--base Label--medium Label--required" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
@@ -91,7 +91,7 @@ To render helper text, use the [HelperText][readme-helper-text] component:
 ```html
 <fieldset class="border-0" aria-describedby="field-group-helper-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--medium" aria-hidden="true">Label</div>
+  <div class="Label Label--base Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
@@ -129,13 +129,13 @@ disabled styling on all elements.
 ```html
 <fieldset class="border-0" disabled>
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--medium" aria-hidden="true">Label</div>
+  <div class="Label Label--base Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"
   >
     <div>
-      <label for="text-field" class="Label Label--medium Label--disabled">Label</label>
+      <label for="text-field" class="Label Label--base Label--medium Label--disabled">Label</label>
       <div class="InputContainer InputContainer--fill InputContainer--medium InputContainer--disabled">
         <input type="text" id="text-field" name="textField" placeholder="Placeholder" disabled />
       </div>
@@ -151,7 +151,7 @@ See Validation state [dictionary][dictionary-validation] and [ValidationText][re
 ```html
 <fieldset class="border-0" aria-describedby="field-group-success-validation-text">
   <legend class="accessibility-hidden">Label</legend>
-  <div class="Label Label--medium" aria-hidden="true">Label</div>
+  <div class="Label Label--base Label--medium" aria-hidden="true">Label</div>
   <div
     class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical"
     style="--flex-spacing-y: var(--spirit-space-500);"

@@ -8,9 +8,10 @@ export interface LabelStyles {
 }
 
 export function useLabelStyleProps(props: LabelStyleProps): LabelStyles {
-  const { hasPointerCursor, isDisabled, isStretched, isLabelHidden, isRequired, size } = props;
+  const { fontWeight, hasPointerCursor, isDisabled, isStretched, isLabelHidden, isRequired, size } = props;
 
   const prefix = useClassNamePrefix('Label');
+  const fontWeightClass = `${prefix}--${fontWeight}`;
   const sizeClass = `${prefix}--${size}`;
   const requiredClass = `${prefix}--required`;
   const disabledClass = `${prefix}--disabled`;
@@ -19,11 +20,12 @@ export function useLabelStyleProps(props: LabelStyleProps): LabelStyles {
   const pointerCursorClass = useClassNamePrefix('cursor-pointer');
 
   const classProps = classNames(prefix, {
-    [pointerCursorClass]: hasPointerCursor,
-    [elementStretchedClass]: isStretched,
-    [requiredClass]: isRequired,
     [disabledClass]: isDisabled,
+    [elementStretchedClass]: isStretched,
+    [fontWeightClass]: fontWeight,
     [hiddenClass]: isLabelHidden,
+    [pointerCursorClass]: hasPointerCursor,
+    [requiredClass]: isRequired,
     [sizeClass]: size,
   });
 

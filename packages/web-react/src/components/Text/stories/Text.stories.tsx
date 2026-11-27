@@ -52,7 +52,7 @@ const meta: Meta<typeof Text> = {
     },
     fontWeight: {
       control: 'select',
-      options: [...Object.values(FontWeight), undefined],
+      options: [FontWeight.REGULAR, FontWeight.SEMIBOLD, FontWeight.BOLD, undefined],
       table: {
         defaultValue: { summary: FontWeight.REGULAR },
       },
