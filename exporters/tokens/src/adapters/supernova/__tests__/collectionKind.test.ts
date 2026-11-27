@@ -33,10 +33,12 @@ describe('collectionKind', () => {
       expect(getCollectionKind(device)).toBe(CollectionKind.Devices);
     });
 
-    it('should leave the kind of a lookup-only collection unset', () => {
+    it('should map a token of any other collection to the lookup kind', () => {
       const primitive = token('primitive', 'primitives-id');
 
-      expect(createCollectionKindResolver([token('global', 'global-tokens-id'), primitive])(primitive)).toBeUndefined();
+      expect(createCollectionKindResolver([token('global', 'global-tokens-id'), primitive])(primitive)).toBe(
+        CollectionKind.Lookup,
+      );
     });
   });
 

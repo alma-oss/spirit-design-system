@@ -13,7 +13,7 @@ import {
   StylesObjectType,
   type FontSizeBaseMap,
 } from '../core/types';
-import { getOriginName, tokenVariableName } from '../helpers/tokenHelper';
+import { compareDevices, getOriginName, tokenVariableName } from '../helpers/tokenHelper';
 import { formatTypographyName, getBreakpoint, typographyStyle } from '../helpers/typographyHelper';
 import { getFontSizeBaseForBreakpoint, isPxValue } from '../helpers/unitHelper';
 import { toCamelCase } from '../helpers/stringHelper';
@@ -118,7 +118,9 @@ const getDeviceKeys = (
   const baseKeys = deviceTypographyValues ? deviceTypographyValues.keys() : (fontSizeBaseMap?.keys() ?? []);
 
   // The current breakpoint and `mobile` are always present, even when the device data does not mention them
-  return Array.from(new Set([...baseKeys, breakpoint, 'mobile'])).filter(Boolean);
+  return Array.from(new Set([...baseKeys, breakpoint, 'mobile']))
+    .filter(Boolean)
+    .sort(compareDevices);
 };
 
 /**

@@ -79,8 +79,16 @@ To support another source, implement the `SourceAdapter` interface (`src/adapter
 
 ## Sorting
 
-Tokens are sorted alphabetically by their origin name (Figma) or their Supernova name.
-Exceptions include Borders, Radii, Spacing, Other tokens, and all tokens from the Device collection which are sorted numerically by their value.
+Tokens are sorted alphabetically by their variable name, with numbers compared by their value (`radius-200` comes before `radius-1000`).
+Exceptions include Borders, Radii, Spacing, Other tokens, and all tokens from the Device collection which are sorted numerically by their value first and by name second.
+
+Sorting the Device collection by value is what the breakpoints need: the `$breakpoints` map (and the `breakpoints` object in JS) lists them from `0` to the widest.
+The breakpoint tools of the web package (`packages/web/src/scss/tools/_breakpoint.scss`) iterate the map in that order and take the next breakpoint as the upper bound of a media query, so a narrower breakpoint must always come first.
+
+Device variants of a token that end up next to each other (the same value and name), and the device keys of a typography style map, follow the fixed order mobile, tablet, desktop (`DEVICE_ORDER` in `src/constants.ts`).
+It is the order of the breakpoints, but it does not change the CSS: it puts the variants in the same order whatever order a source lists its devices in (Figma has desktop first, Supernova mobile first), so switching the source does not reorder them.
+
+A device missing from `DEVICE_ORDER` has no fixed place. Its variants are ordered by their value and otherwise keep the source order, and next to the known devices the fixed order is not guaranteed, so add a new device to `DEVICE_ORDER`.
 
 ## Development
 
@@ -89,6 +97,54 @@ Once activated, the original data will be generated alongside other outputs and 
 
 - \_original-tokens.json
 - \_original-groups.json
+
+## Source Adapters
+
+The exporter reads tokens through a source adapter (`src/adapters`) that maps the source's own format to the internal
+token model (`src/core/types`). The Supernova adapter is the one the pipeline runs on today.
+
+### Figma Adapter
+
+`FigmaAdapter` (`src/adapters/figma`) reads a Figma Config file through the Figma REST API: local variables, style
+metadata, and the style nodes (properties and variable bindings). One file is one brand. It is not wired into the
+pipeline yet.
+
+```ts
+const adapter = new FigmaAdapter({ token: process.env.FIGMA_ACCESS_TOKEN, onWarning: console.warn });
+const collection = await adapter.fetchTokens({ source: { fileKey: 'BXRF3VABXQm2TGkL0nwS4i' } });
+```
+
+The token needs the `file_content:read`, `file_variables:read` and `library_content:read` scopes. The file key is not a
+secret.
+
+- Only the `Global tokens`, `Theme tokens` and `Device` collections are exported. `Primitives` and remote variables
+  are alias sources; remote variables, deleted variables and other collections are skipped with a warning.
+- Figma has four generic variable types, so the token type is inferred from the variable's scopes and the group it
+  lives in. Ambiguous or conflicting definitions are errors.
+- `tokens` has one token per variable (its id is the id of the variable) in the default mode of every collection.
+  `themedTokens` has the tokens for each mode of the theme collection (the default one first, tagged with
+  `metadata.theme`), and `deviceTokens` the device variables for each mode of the device collection (tagged with
+  `metadata.device`, listed in `devices`). Every token carries the kind of its collection in `metadata.collection`.
+- A color alias to another exported token becomes a `reference` carrying the value resolved in that mode. An alias to a
+  token that is not exported (Primitives) and any numeric or string alias is a plain value, so every reference left can
+  be followed through a `TokenIndex` built from the collection.
+- Dimensions are emitted in `px`; the px-to-rem rule converts them.
+- Malformed names, ambiguous scopes, missing aliases, alias cycles and styles without their node are reported together
+  in one error, so a run shows every problem of the file. Unused effect and paint styles only produce warnings.
+
+#### Running Locally
+
+The `figma:export` script runs the adapter from Node.js and writes the generated files to `.build-figma/`, the way the
+Supernova run fills `.build/`. Font replacements are not applied yet.
+
+The `fileKey` is the part of the Figma file URL after `/design/`. The token is read from `FIGMA_ACCESS_TOKEN`, either
+set in the shell or in an `exporters/tokens/.env` file (`FIGMA_ACCESS_TOKEN=...`, ignored by Git).
+
+```shell
+yarn workspace @alma-oss/spirit-tokens-exporter figma:export <fileKey> [brandId]
+
+yarn workspace @alma-oss/spirit-tokens-exporter figma:export BXRF3VABXQm2TGkL0nwS4i # Spirit Config
+```
 
 ## Naming Rules for Themes
 
@@ -131,7 +187,7 @@ The configuration for these invariant aliases is defined in the `src/config/inva
 
 These exceptions are carefully managed to prevent errors and provide a reliable token structure.
 
-### Font Family Replacement
+### Font Family Replacement (Supernova)
 
 The `fontFamily` in Typography can be replaced using Supernova pipeline fields defined in `config.json` and their corresponding types in `config.ts`.
 This allows replacement for up to **5** font families.
@@ -165,5 +221,25 @@ This allows replacement for up to **5** font families.
 - Multiword font names **must** be wrapped in **single quotes** to ensure proper parsing and handling of spaces.
 - **Double quotes** will be removed.
 
+### TODO: Font Family Replacement (Figma Adapter)
+
+**TODO ([DS-2877][ds-2877]):** this is not implemented yet, so a Figma run keeps the plain font names from the file.
+
+The Figma adapter has no pipeline fields, so the replacements are planned to come from the Spirit config file instead.
+The proposed shape is a `tokens` section with any number of pairs, applied in order, where `search` is a regular
+expression. The final file name, lookup and shape are decided in [DS-2877][ds-2877]:
+
+```json
+{
+  "tokens": {
+    "fontReplacements": [
+      { "search": "Inter", "replace": "General Sans" },
+      { "search": "'Roboto Mono', sans-serif", "replace": "'Roboto Mono', monospace" }
+    ]
+  }
+}
+```
+
 [alma-career]: https://github.com/lmc-eu
+[ds-2877]: https://almacareer.atlassian.net/browse/DS-2877
 [supernova-studio]: https://github.com/Supernova-Studio

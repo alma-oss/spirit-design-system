@@ -21,6 +21,7 @@ export default [
       '**/dist/**',
       '**/build/**',
       '**/.build/**',
+      '**/.build-figma/**',
       '**/generated/**',
       '**/.coverage/**',
 

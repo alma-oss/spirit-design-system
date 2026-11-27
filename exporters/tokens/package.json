@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
+    "figma:export": "tsx --env-file-if-exists=.env ./src/bin/figma-export.ts",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "test": "npm-run-all lint test:unit:coverage types",
@@ -36,6 +37,7 @@
     "jest-config-spirit": "workspace:^",
     "npm-run-all2": "catalog:script",
     "prettier-config-spirit": "workspace:^",
+    "tsx": "catalog:script",
     "typescript": "catalog:types"
   }
 }

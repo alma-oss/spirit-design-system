@@ -5,6 +5,11 @@ export const COLOR_SCSS_SUFFIX = '-colors';
 export const CSS_LAYER_SEPARATOR = ', ';
 export const DEFAULT_DECIMALS = 4;
 export const DEVICES_DIRECTORY = 'devices';
+/**
+ * Fixed order of the device variants of a token, the order of the breakpoints. It keeps the output the same whatever
+ * order a source lists its devices in. A device missing here has no fixed place, so add every new device.
+ */
+export const DEVICE_ORDER = ['mobile', 'tablet', 'desktop'];
 export const FONT_SIZE_BASE = 'font-size-base';
 export const FONT_SIZE_BASE_DEFAULT = 16;
 /**

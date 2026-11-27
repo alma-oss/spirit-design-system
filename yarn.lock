@@ -431,6 +431,7 @@ __metadata:
     jest-config-spirit: "workspace:^"
     npm-run-all2: "catalog:script"
     prettier-config-spirit: "workspace:^"
+    tsx: "catalog:script"
     typescript: "catalog:types"
     vite: "catalog:build"
   languageName: unknown

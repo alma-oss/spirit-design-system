@@ -89,6 +89,25 @@ describe('typographyObjectProcessor', () => {
       });
     });
 
+    it('should list the devices as mobile, tablet, desktop whatever order the device data has', () => {
+      const token = exampleTypographyTokens.get('typographyRef1')!;
+      const stylesObject: StylesObjectType = {};
+      const deviceDimensions: DeviceDimensionMap = new Map([
+        [
+          'font-size-id',
+          {
+            desktop: { measure: 40, unit: 'px' },
+            tablet: { measure: 40, unit: 'px' },
+            mobile: { measure: 36, unit: 'px' },
+          },
+        ],
+      ]);
+
+      handleTypographyTokens(['Heading', 'XLarge', 'Bold'], token, true, stylesObject, false, deviceDimensions);
+
+      expect(Object.keys(stylesObject['$heading-xlarge-bold'] as object)).toEqual(['mobile', 'tablet', 'desktop']);
+    });
+
     it('should keep a single-sized style on one breakpoint', () => {
       const base = exampleTypographyTokens.get('typographyRef1')!;
       const token: DesignToken = {

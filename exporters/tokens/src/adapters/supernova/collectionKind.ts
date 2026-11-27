@@ -19,11 +19,11 @@ export const getDeviceCollectionId = (tokens: Token[]): string | boolean | numbe
 
 /**
  * Supernova tells the collections apart by the `Collection` property of a token. Returns a function that maps a
- * token to the source-neutral kind of its collection, leaving lookup-only collections (e.g. primitives) unset.
+ * token to the source-neutral kind of its collection; any other collection (e.g. primitives) is lookup-only.
  *
  * @param tokens - All tokens of the design system
  */
-export const createCollectionKindResolver = (tokens: Token[]): ((token: Token) => CollectionKind | undefined) => {
+export const createCollectionKindResolver = (tokens: Token[]): ((token: Token) => CollectionKind) => {
   const deviceTokenIds = new Set(filterDeviceCollections(tokens).map(({ id }) => id));
   const colorTokenIds = new Set(filterCollections(tokens, TOKEN_COLLECTION_THEMES_NAME).map(({ id }) => id));
   const globalTokenIds = new Set(filterGlobalCollections(tokens).map(({ id }) => id));
@@ -37,6 +37,6 @@ export const createCollectionKindResolver = (tokens: Token[]): ((token: Token) =
       return CollectionKind.Color;
     }
 
-    return globalTokenIds.has(id) ? CollectionKind.Global : undefined;
+    return globalTokenIds.has(id) ? CollectionKind.Global : CollectionKind.Lookup;
   };
 };

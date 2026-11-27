@@ -1,4 +1,4 @@
-import { FONT_SIZE_BASE_DEFAULT } from '../constants';
+import { DEVICE_ORDER, FONT_SIZE_BASE_DEFAULT } from '../constants';
 import { type DesignToken, TokenTypeEnum } from '../core/types';
 import { getDesignTokenVariableName } from './namingHelper';
 import { toCamelCase } from './stringHelper';
@@ -103,30 +103,52 @@ const getSortValue = ({ type, value }: DesignToken): number | string => {
   return Number.NaN;
 };
 
+const withoutDevice = (token: DesignToken): DesignToken => ({
+  ...token,
+  metadata: { ...token.metadata, device: undefined },
+});
+
+/**
+ * Orders devices as `DEVICE_ORDER` lists them. A device missing from `DEVICE_ORDER`, or no device, has no rank and
+ * compares as equal, so the caller's next criterion (or the source order) decides. Next to known devices that order
+ * is not guaranteed, because an unranked device is "equal" to all of them.
+ *
+ * @param a
+ * @param b
+ */
+export const compareDevices = (a: string | undefined, b: string | undefined): number => {
+  const aRank = a === undefined ? -1 : DEVICE_ORDER.indexOf(a);
+  const bRank = b === undefined ? -1 : DEVICE_ORDER.indexOf(b);
+
+  return aRank === -1 || bRank === -1 ? 0 : aRank - bRank;
+};
+
+const compareNumValues = (a: DesignToken, b: DesignToken): number => {
+  const aNumeric = Number(getSortValue(a));
+  const bNumeric = Number(getSortValue(b));
+
+  // Only perform numeric comparison when both values are valid finite numbers.
+  return Number.isFinite(aNumeric) && Number.isFinite(bNumeric) ? aNumeric - bNumeric : 0;
+};
+
 export const sortTokens = (tokens: DesignToken[], hasParentPrefix: boolean, sortByNumValue: boolean) => {
   const sortedTokens = tokens.sort((a, b) => {
-    if (sortByNumValue) {
-      const aNumMatch = getSortValue(a);
-      const bNumMatch = getSortValue(b);
-
-      // Convert values to numbers for comparison
-      const aNumeric = Number(aNumMatch);
-      const bNumeric = Number(bNumMatch);
-
-      // Only perform numeric comparison when both values are valid finite numbers.
-      if (Number.isFinite(aNumeric) && Number.isFinite(bNumeric)) {
-        const numericComparison = aNumeric - bNumeric;
-        if (numericComparison !== 0) {
-          return numericComparison;
-        }
-      }
+    const numericComparison = sortByNumValue ? compareNumValues(a, b) : 0;
+    if (numericComparison !== 0) {
+      return numericComparison;
     }
 
-    // Fall back to alphabetical sorting when numeric comparison didn't determine order (equal or non-numeric values)
-    const aCompare = tokenVariableName(a, hasParentPrefix);
-    const bCompare = tokenVariableName(b, hasParentPrefix);
+    // Fall back to alphabetical sorting when numeric comparison didn't determine order (equal or non-numeric values),
+    // the device variants of one token in the device order, and variants of an unknown device by their value
+    const aCompare = tokenVariableName(withoutDevice(a), hasParentPrefix);
+    const bCompare = tokenVariableName(withoutDevice(b), hasParentPrefix);
 
-    return aCompare.localeCompare(bCompare);
+    // Numbers in names compare by their value, so `radius-200` comes before `radius-1000`
+    return (
+      aCompare.localeCompare(bCompare, undefined, { numeric: true }) ||
+      compareDevices(a.metadata.device, b.metadata.device) ||
+      compareNumValues(a, b)
+    );
   });
 
   return sortedTokens;

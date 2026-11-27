@@ -26,7 +26,11 @@ export enum TokenTypeEnum {
 
 export type TokenMetadata = {
   brandId?: string;
-  /** Kind of the collection the token belongs to. */
+  /**
+   * Kind of the collection the token belongs to, `lookup` for tokens that are only referenced. Every source adapter
+   * must set this: `splitTokens` throws when it is missing, otherwise a token quietly drops out of the global and
+   * theme outputs.
+   */
   collection?: CollectionKind;
   theme?: string;
   /** e.g. 'mobile', 'tablet', 'desktop'. Adapter-resolved, source-specific detection. */
