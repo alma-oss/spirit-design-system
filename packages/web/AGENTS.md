@@ -4,7 +4,9 @@
 
 A component lives in `src/scss/components/<Component>/`. Use `Button` as the reference:
 
-- `_<Component>.scss` with styles and `_theme.scss` with theme tokens
+- `_<Component>.scss` with styles
+- `_theme.scss` with theme tokens
+- `_tools.scss` with the component's mixins, loaded through `@use 'tools'`
 - `index.scss` forwards the partials; register the component in `src/scss/components/index.scss`
 - `README.md` documents the markup; keep its examples identical to the `web-react` package README
 - `preview.html` holds the bare demo content, the docsite reads it directly
