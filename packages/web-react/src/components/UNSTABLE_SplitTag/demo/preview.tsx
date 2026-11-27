@@ -7,12 +7,16 @@ import { IconsProvider } from '../../../context';
 import SplitTagColorsAndSizes from './SplitTagColorsAndSizes';
 import SplitTagDisabled from './SplitTagDisabled';
 import SplitTagLocationRadius from './SplitTagLocationRadius';
+import SplitTagLongText from './SplitTagLongText';
 
 export const Preview = () => (
   <StrictMode>
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <SplitTagLocationRadius />
+      </DocsSection>
+      <DocsSection title="Long Text">
+        <SplitTagLongText />
       </DocsSection>
       <DocsSection title="Colors and Sizes">
         <SplitTagColorsAndSizes />

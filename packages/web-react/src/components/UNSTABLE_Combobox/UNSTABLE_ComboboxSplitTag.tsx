@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { TextHyphens, TextWordBreaks } from '../../constants';
 import { ControlButton } from '../ControlButton';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../Dropdown';
 import { Icon } from '../Icon';
@@ -61,6 +62,8 @@ const UNSTABLE_ComboboxSplitTag = (props: SpiritUnstableComboboxSplitTagProps) =
           aria-label={`${labelText} filter, ${selectedLabelText}`}
           color="selected"
           isDisabled={isDisabled}
+          textHyphens={TextHyphens.NONE}
+          textWordBreak={TextWordBreaks.LONG_WORDS}
         >
           <Tag>
             <span>{label}</span>

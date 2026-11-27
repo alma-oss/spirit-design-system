@@ -8,6 +8,7 @@ import TagDefault from './TagDefault';
 import TagDisabled from './TagDisabled';
 import TagInteractive from './TagInteractive';
 import TagWithCloseButton from './TagWithCloseButton';
+import TagWordBreak from './TagWordBreak';
 
 export const Preview = () => (
   <StrictMode>
@@ -23,6 +24,9 @@ export const Preview = () => (
       </DocsSection>
       <DocsSection title="Disabled">
         <TagDisabled />
+      </DocsSection>
+      <DocsSection title="Word Break">
+        <TagWordBreak />
       </DocsSection>
     </IconsProvider>
   </StrictMode>

@@ -117,17 +117,38 @@ Disabled link Tag:
 
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
+## Text Hyphens
+
+Use the `textHyphens` prop to set how words should be hyphenated when text wraps across multiple lines.
+
+```tsx
+<Tag textHyphens="auto">Hyphens applied automatically when text wraps across multiple lines.</Tag>
+```
+
+## Word Break
+
+Use the `textWordBreak` prop to set how words should break when reaching the end of a line.
+It's crucial to combine it with [Text Hyphens](#text-hyphens) to maintain readability.
+
+```tsx
+<Tag textHyphens="auto" textWordBreak="long-words">
+  longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces
+</Tag>
+```
+
 ## API
 
-| Name          | Type                                                                     | Default   | Required | Description                     |
-| ------------- | ------------------------------------------------------------------------ | --------- | -------- | ------------------------------- |
-| `children`    | `ReactNode`                                                              | —         | ✓        | Content of the Tag              |
-| `color`       | \[[EmotionColorType][readme-generated-types] \| `neutral` \| `selected`] | `neutral` | ✕        | Color of the component          |
-| `elementType` | `React.Element`                                                          | `span`    | ✕        | HTML tag                        |
-| `isDisabled`  | `bool`                                                                   | `false`   | ✕        | Whether the tag is disabled     |
-| `isSubtle`    | `bool`                                                                   | `false`   | ✕        | If is Subtle color variant used |
-| `ref`         | `ForwardedRef<HTMLSpanElement>`                                          | —         | ✕        | Tag element reference           |
-| `size`        | [Size Extended dictionary][dictionary-size]                              | `medium`  | ✕        | Size of the Tag                 |
+| Name            | Type                                                                     | Default   | Required | Description                                    |
+| --------------- | ------------------------------------------------------------------------ | --------- | -------- | ---------------------------------------------- |
+| `children`      | `ReactNode`                                                              | —         | ✓        | Content of the Tag                             |
+| `color`         | \[[EmotionColorType][readme-generated-types] \| `neutral` \| `selected`] | `neutral` | ✕        | Color of the component                         |
+| `elementType`   | `React.Element`                                                          | `span`    | ✕        | HTML tag                                       |
+| `isDisabled`    | `bool`                                                                   | `false`   | ✕        | Whether the tag is disabled                    |
+| `isSubtle`      | `bool`                                                                   | `false`   | ✕        | If is Subtle color variant used                |
+| `ref`           | `ForwardedRef<HTMLSpanElement>`                                          | —         | ✕        | Tag element reference                          |
+| `size`          | [Size Extended dictionary][dictionary-size]                              | `medium`  | ✕        | Size of the Tag                                |
+| `textHyphens`   | \[`none` \| `auto` \| `manual`]                                          | —         | ✕        | Hyphens strategy applied to the tag content    |
+| `textWordBreak` | \[`normal` \| `anywhere` \| `long-words`]                                | —         | ✕        | Word break strategy applied to the tag content |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]

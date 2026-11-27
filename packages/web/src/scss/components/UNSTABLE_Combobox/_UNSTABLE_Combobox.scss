@@ -1,6 +1,6 @@
 // 1. Sized to comfortably fit the default placeholder copy ("+ Add more…", ~11 characters).
-// 2. Temporary stacking workaround until Dropdown uses the Popover API top layer.
-//    @see https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
+// 2. Temporary stacking workaround until Dropdown uses the Popover API top layer — remove with DS-2968.
+//    @see https://almacareer.atlassian.net/browse/DS-2968
 
 @use '@tokens' as tokens;
 @use 'theme';

@@ -14,6 +14,7 @@ import ComboboxHelperText from './ComboboxHelperText';
 import ComboboxLastSearchesGrid from './ComboboxLastSearchesGrid';
 import ComboboxLoading from './ComboboxLoading';
 import ComboboxLocations from './ComboboxLocations';
+import ComboboxLongText from './ComboboxLongText';
 import ComboboxRequired from './ComboboxRequired';
 import ComboboxSearchResults from './ComboboxSearchResults';
 import ComboboxSizes from './ComboboxSizes';
@@ -27,6 +28,9 @@ export const Preview = () => (
     <IconsProvider value={icons}>
       <DocsSection title="Default">
         <ComboboxDefault />
+      </DocsSection>
+      <DocsSection title="Long Tag Text">
+        <ComboboxLongText />
       </DocsSection>
       <DocsSection title="Locations (with SplitTag)">
         <ComboboxLocations />

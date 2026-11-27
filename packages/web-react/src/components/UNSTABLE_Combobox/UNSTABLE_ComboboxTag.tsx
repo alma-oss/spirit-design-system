@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import { TextHyphens, TextWordBreaks } from '../../constants';
 import { useI18n } from '../../hooks';
 import { resolveComponentString } from '../../translations';
 import { CloseButton } from '../CloseButton';
@@ -16,6 +17,8 @@ const UNSTABLE_ComboboxTag = ({
   label,
   onRemove,
   removeLabel,
+  textHyphens = TextHyphens.NONE,
+  textWordBreak = TextWordBreaks.LONG_WORDS,
   ...restProps
 }: SpiritUnstableComboboxTagProps) => {
   const { t } = useI18n();
@@ -44,6 +47,8 @@ const UNSTABLE_ComboboxTag = ({
       isDisabled={isDisabled}
       role="row"
       tabIndex={isDisabled ? -1 : (tagKeyboardProps?.tabIndex ?? 0)}
+      textHyphens={textHyphens}
+      textWordBreak={textWordBreak}
       aria-label={getNodeText(label)}
       {...tagKeyboardEventProps}
       {...(tagDescriptionId ? { 'aria-describedby': tagDescriptionId } : {})}

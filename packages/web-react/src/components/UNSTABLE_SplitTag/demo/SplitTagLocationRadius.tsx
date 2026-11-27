@@ -16,13 +16,15 @@ import { radiusOptions } from './constants';
 
 export interface SplitTagLocationRadiusProps extends Pick<
   SpiritUnstableSplitTagProps,
-  'color' | 'isDisabled' | 'isSubtle' | 'size'
+  'color' | 'isDisabled' | 'isSubtle' | 'size' | 'textHyphens' | 'textWordBreak'
 > {
   id?: string;
+  label?: string;
 }
 
 const SplitTagLocationRadius = ({
   id = 'split-tag-location-radius',
+  label = 'Prague',
   size = 'medium',
   ...splitTagProps
 }: SplitTagLocationRadiusProps) => {
@@ -55,12 +57,12 @@ const SplitTagLocationRadius = ({
   return (
     <UNSTABLE_SplitTag
       {...splitTagProps}
-      aria-label={`Prague distance filter, radius ${selectedRadius}`}
+      aria-label={`${label} distance filter, radius ${selectedRadius}`}
       id={id}
       role="group"
       size={size}
     >
-      <Tag>Prague</Tag>
+      <Tag>{label}</Tag>
       <Dropdown id={`${id}-dropdown`} isOpen={isDropdownOpen} onToggle={toggleDropdown} placement="bottom-start">
         <DropdownTrigger elementType={Tag} aria-label={`Select distance, selected ${selectedRadius}`}>
           {selectedRadius}
@@ -103,7 +105,7 @@ const SplitTagLocationRadius = ({
         >
           <Icon name="close" />
         </ControlButton>
-        <VisuallyHidden>Remove Prague distance filter</VisuallyHidden>
+        <VisuallyHidden>Remove {label} distance filter</VisuallyHidden>
       </Tag>
     </UNSTABLE_SplitTag>
   );

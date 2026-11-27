@@ -1,4 +1,10 @@
-import type { ChildrenProps, SpiritDivElementProps, StyleProps } from '../../types/shared';
+import type {
+  ChildrenProps,
+  SpiritDivElementProps,
+  StyleProps,
+  TextHyphensType,
+  TextWordBreakType,
+} from '../../types/shared';
 import type { TagColor, TagSize } from '../../types/tag';
 
 export interface UnstableSplitTagProps<C = void, S = void>
@@ -7,6 +13,10 @@ export interface UnstableSplitTagProps<C = void, S = void>
   isDisabled?: boolean;
   isSubtle?: boolean;
   size?: TagSize<S>;
+  /** Default hyphens strategy for nested Tag segments. */
+  textHyphens?: TextHyphensType;
+  /** Default word break strategy for nested Tag segments. */
+  textWordBreak?: TextWordBreakType;
 }
 
 export type SpiritUnstableSplitTagProps<C = void, S = void> = UnstableSplitTagProps<C, S>;

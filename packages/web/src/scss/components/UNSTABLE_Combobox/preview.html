@@ -17,7 +17,7 @@
     role="row"
     data-spirit-combobox-tag-row
     tabindex="0"
-    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
+    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic text-hyphens-none text-word-break-long-words"
   >
     <div
       role="gridcell"
@@ -60,7 +60,7 @@
         role="group"
         data-spirit-combobox-split-tag
       >
-        <span class="Tag Tag--selected Tag--small color-scheme-on-selected-basic">
+        <span class="Tag Tag--selected Tag--small color-scheme-on-selected-basic text-hyphens-none text-word-break-long-words">
           <span data-spirit-combobox-tag-label></span>
         </span>
         <div class="Dropdown">
@@ -445,6 +445,129 @@
               >Nothing found</div>
             </div>
 
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-900 py-tablet-1000">
+  <div class="Container">
+
+    <h2 class="docs-Heading">Long Tag Text</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div style="width: 18rem;">
+        <div class="UNSTABLE_Combobox" data-spirit-element="combobox">
+
+          <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+            <label
+              class="Label Label--medium"
+              id="combobox-long-text-label"
+              for="combobox-long-text-input"
+            >Skills</label>
+
+            <div class="Dropdown">
+
+              <div
+                class="InputContainer InputContainer--fill InputContainer--medium"
+                role="group"
+                aria-label="Skills"
+              >
+
+                <div class="UNSTABLE_ComboboxSelection">
+                  <div
+                    role="group"
+                    id="combobox-long-text-selection"
+                    class="d-contents"
+                    aria-label="Selected Skills"
+                    aria-live="off"
+                    aria-atomic="false"
+                    aria-relevant="additions"
+                    data-spirit-combobox-selection
+                  ></div>
+                  <input
+                    type="text"
+                    id="combobox-long-text-input"
+                    role="combobox"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                    aria-controls="combobox-long-text-listbox"
+                    aria-autocomplete="list"
+                    autocomplete="off"
+                    placeholder="Skills"
+                    class="UNSTABLE_Combobox__input"
+                    data-spirit-combobox-input
+                  />
+                </div>
+
+              </div>
+
+              <div
+                class="DropdownPopover placement-bottom-start"
+                role="dialog"
+                aria-labelledby="combobox-long-text-label"
+                data-spirit-fullwidthmode="mobile-only"
+                data-spirit-combobox-listbox
+              >
+                <div
+                  class="Stack Stack--spacing"
+                  style="--stack-spacing: var(--spirit-space-300);"
+                  role="listbox"
+                  id="combobox-long-text-listbox"
+                  aria-labelledby="combobox-long-text-label"
+                  aria-multiselectable="true"
+                >
+                  <div
+                    role="option"
+                    id="combobox-long-text-long-multi-word"
+                    aria-selected="true"
+                    class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
+                  >
+                    <span class="Label Label--medium element-stretched cursor-pointer"><span class="text-hyphens-none text-word-break-long-words">International business administration and intercultural communication studies</span></span>
+                  </div>
+                  <div
+                    role="option"
+                    id="combobox-long-text-longtextwithoutspaces"
+                    aria-selected="true"
+                    class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
+                  >
+                    <span class="Label Label--medium element-stretched cursor-pointer"><span class="text-hyphens-none text-word-break-long-words">longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces</span></span>
+                  </div>
+                  <div
+                    role="option"
+                    id="combobox-long-text-split-multi-word"
+                    aria-selected="true"
+                    data-spirit-combobox-split-tag
+                    class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
+                  >
+                    <span class="Label Label--medium element-stretched cursor-pointer"><span class="text-hyphens-none text-word-break-long-words">Horní Rokytnice, Rokytnice nad Jizerou</span></span>
+                  </div>
+                  <div
+                    role="option"
+                    id="combobox-long-text-split-longtextwithoutspaces"
+                    aria-selected="true"
+                    data-spirit-combobox-split-tag
+                    class="Item Item--medium color-scheme-on-selected-subtle bg-color-scheme"
+                  >
+                    <span class="Label Label--medium element-stretched cursor-pointer"><span class="text-hyphens-none text-word-break-long-words">longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces</span></span>
+                  </div>
+                </div>
+
+                <div
+                  data-spirit-combobox-empty-state
+                  role="status"
+                  aria-live="polite"
+                  class="UNSTABLE_Combobox__emptyState"
+                  hidden
+                >Nothing found</div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>

@@ -6,6 +6,8 @@ import type {
   PolymorphicComponentProps,
   SizeExtendedDictionaryType,
   StyleProps,
+  TextHyphensType,
+  TextWordBreakType,
 } from './shared';
 
 export type TagColorsExtendedNamesType = (typeof TagColorsExtended)[keyof typeof TagColorsExtended];
@@ -20,6 +22,10 @@ export interface TagProps<C = void, S = void> extends ChildrenProps, StyleProps 
   isDisabled?: boolean;
   isSubtle?: boolean;
   size?: TagSize<S>;
+  /** Hyphens strategy applied to the tag content. */
+  textHyphens?: TextHyphensType;
+  /** Word break strategy applied to the tag content. */
+  textWordBreak?: TextWordBreakType;
 }
 
 /** ===== PUBLIC API ===== */

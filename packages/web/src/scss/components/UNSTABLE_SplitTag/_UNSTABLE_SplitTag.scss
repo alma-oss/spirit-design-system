@@ -1,3 +1,16 @@
+// 1. Stay within a width-constrained selection row (e.g. Combobox) so the label
+//    segment can wrap instead of overflowing the field.
+// 2. Override Tag's `flex-shrink: 0` on the first segment so long labels wrap
+//    when the shell is capped by `max-width`. Keep `max-width: 100%` on the
+//    child: flex items default to `min-width: auto`, so the parent's
+//    `max-width` alone does not let the label shrink below its content size.
+// 3. Stretch the wrapped button (e.g. inside Dropdown) to the full height of the
+//    split tag, so it matches the label segment when the label wraps.
+// 4. Never shrink the trailing segments (e.g. the distance button), so only the
+//    label wraps and the button always stays fully visible.
+// 5. Temporary stacking workaround until Dropdown uses the Popover API top layer — remove with DS-2968.
+//    @see https://almacareer.atlassian.net/browse/DS-2968
+
 @use '@tokens' as tokens;
 @use 'theme';
 
@@ -6,11 +19,29 @@
     --#{tokens.$css-variable-prefix}unstable-split-tag-inner-border-radius: #{theme.$inner-border-radius};
 
     display: inline-flex;
+    max-width: 100%; // 1.
+}
+
+// 2.
+.UNSTABLE_SplitTag > :first-child {
+    flex-shrink: 1;
+    max-width: 100%;
 }
 
 .UNSTABLE_SplitTag > :not(:is(a, button, span)) {
     display: inline-flex;
-    align-items: center;
+    align-items: stretch; // 3.
+}
+
+// 4.
+.UNSTABLE_SplitTag > :not(:first-child) {
+    flex-shrink: 0;
+}
+
+// 5.
+.UNSTABLE_SplitTag:has(.DropdownPopover.is-open) {
+    position: relative;
+    z-index: 2;
 }
 
 .UNSTABLE_SplitTag > :not(:first-child):is(a, button, span),

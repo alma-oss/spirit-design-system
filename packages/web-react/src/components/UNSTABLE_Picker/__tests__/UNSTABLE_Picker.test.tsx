@@ -187,12 +187,18 @@ describe('UNSTABLE_Picker', () => {
   });
 
   it('should forward tagProps to Tag elements', () => {
-    render(<TestPicker selectedKeys={['cs', 'dk']} tagProps={{ UNSAFE_className: 'custom-tag-class' }} />);
+    render(
+      <TestPicker
+        selectedKeys={['cs', 'dk']}
+        tagProps={{ UNSAFE_className: 'custom-tag-class', textWordBreak: 'anywhere' }}
+      />,
+    );
 
     const tags = screen.getAllByRole('row');
 
     tags.forEach((tag) => {
-      expect(tag).toHaveClass('custom-tag-class');
+      expect(tag).toHaveClass('custom-tag-class', 'text-word-break-anywhere');
+      expect(tag).not.toHaveClass('text-word-break-long-words');
     });
   });
 

@@ -19,6 +19,9 @@ import type {
 
 export type UnstablePickerSelectionMode = SelectionMode;
 
+/** Props forwarded from Picker onto each default selection `Tag`. */
+export type UnstablePickerDefaultTagProps = StyleProps & Pick<SpiritTagProps<'div'>, 'textHyphens' | 'textWordBreak'>;
+
 export type UnstablePickerStrings = {
   addAria?: TranslatableString;
   closeAria?: TranslatableString;
@@ -83,8 +86,11 @@ export interface UnstablePickerBaseProps<S = void>
   labelProps?: StyleProps;
   /** Props for the inner `DropdownPopover`. */
   popoverProps?: StyleProps;
-  /** Props for the inner `Tag` elements (style props; `UNSAFE_className` is merged with tag classes). */
-  tagProps?: StyleProps;
+  /**
+   * Props for the inner `Tag` elements (style props plus `textHyphens` / `textWordBreak`).
+   * Defaults: `textHyphens: 'none'`, `textWordBreak: 'long-words'`. Ignored when `renderTags` is used.
+   */
+  tagProps?: UnstablePickerDefaultTagProps;
   renderTags?: (options: UnstablePickerRenderTagsOptions) => ReactNode;
   selectionMode?: UnstablePickerSelectionMode;
   size?: SizesDictionaryType<S>;

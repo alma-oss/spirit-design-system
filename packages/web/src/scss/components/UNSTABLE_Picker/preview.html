@@ -42,7 +42,7 @@
     data-tag-row
     tabindex="0"
     aria-describedby="picker-tag-description"
-    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic"
+    class="Tag Tag--selected Tag--small color-scheme-on-selected-basic text-hyphens-none text-word-break-long-words"
   >
     <div
       role="gridcell"
@@ -366,6 +366,143 @@
 
   </div>
 
+</section>
+
+<section class="py-900 py-tablet-1000">
+
+  <div class="Container">
+
+    <h2 class="docs-Heading">Long Tag Text</h2>
+
+    <div class="docs-Stack docs-Stack--start">
+
+      <div style="width: 16rem;">
+        <div class="Stack Stack--spacing" style="--stack-spacing: var(--spirit-space-400);">
+
+          <span class="Label Label--medium">Skills</span>
+
+          <div
+            class="Dropdown"
+            data-spirit-toggle="picker"
+            data-picker-label="Skills"
+          >
+
+            <div
+              role="group"
+              aria-label="Skills"
+              class="InputContainer InputContainer--fill InputContainer--medium"
+            >
+
+              <div
+                role="group"
+                tabindex="-1"
+                aria-atomic="false"
+                aria-label="Selected skills"
+                aria-live="off"
+                aria-relevant="additions"
+                id="picker-long-text-selection"
+                class="UNSTABLE_PickerSelection"
+                data-spirit-element="selection"
+              >
+                <span
+                  class="UNSTABLE_PickerSelection__empty"
+                  data-spirit-element="selection-label"
+                  aria-hidden="true"
+                >Skills</span>
+              </div>
+
+              <button
+                data-spirit-toggle="dropdown"
+                data-spirit-target="#picker-long-text"
+                class="UNSTABLE_PickerTrigger"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="picker-long-text"
+              >
+                <span class="accessibility-hidden">Add</span>
+                <svg
+                  class="Icon"
+                  width="20"
+                  height="20"
+                  aria-hidden="true"
+                >
+                  <use href="/assets/icons/svg/sprite.svg#chevron-down" />
+                </svg>
+              </button>
+            </div>
+
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Skills"
+              class="DropdownPopover placement-bottom-start theme-light-default"
+              data-spirit-placement="bottom-start"
+              data-spirit-fullwidthmode="mobile-only"
+              id="picker-long-text"
+              style="width: 15rem;"
+            >
+
+              <fieldset class="border-0">
+                <legend class="accessibility-hidden">Skills</legend>
+                <div class="Flex Flex--noWrap Flex--alignmentXStretch Flex--alignmentYStretch Flex--vertical" style="--flex-spacing-y: var(--spirit-space-500);">
+
+                  <div class="Item Item--medium" data-spirit-element="checkbox">
+                    <div class="Item__slot" role="presentation">
+                      <input
+                        type="checkbox"
+                        id="picker-long-text-long-multi-word"
+                        class="Checkbox Checkbox--item"
+                        name="picker-long-text"
+                        autocomplete="off"
+                        checked
+                      />
+                    </div>
+                    <div class="Item__content" role="presentation">
+                      <label
+                        class="Label Label--medium element-stretched cursor-pointer"
+                        data-spirit-element="checkbox-label"
+                        for="picker-long-text-long-multi-word"
+                      >
+                        <span class="text-word-break-long-words">International business administration and intercultural communication studies</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="Item Item--medium" data-spirit-element="checkbox">
+                    <div class="Item__slot" role="presentation">
+                      <input
+                        type="checkbox"
+                        id="picker-long-text-longtextwithoutspaces"
+                        class="Checkbox Checkbox--item"
+                        name="picker-long-text"
+                        autocomplete="off"
+                        checked
+                      />
+                    </div>
+                    <div class="Item__content" role="presentation">
+                      <label
+                        class="Label Label--medium element-stretched cursor-pointer"
+                        data-spirit-element="checkbox-label"
+                        for="picker-long-text-longtextwithoutspaces"
+                      >
+                        <span class="text-word-break-long-words">longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces</span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </fieldset>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
 <!-- Hidden from visual tests: no React counterpart yet (DS-2770), and both previews share one screenshot. -->
