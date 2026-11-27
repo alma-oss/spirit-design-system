@@ -16,7 +16,7 @@
     "test:unit": "jest",
     "test:unit:watch": "yarn test:unit --watchAll",
     "test:unit:coverage": "yarn test:unit --coverage",
-    "types": "true"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@supernovaio/export-helpers": "catalog:design-tools",

@@ -9,7 +9,7 @@ const collectionOptionIdCache = new Map<string, string>();
 
 const cacheCollectionOptions = (collectionProperty?: {
   name: string;
-  options?: Array<{ id: string; name: string }>;
+  options?: Array<{ id: string; name: string }> | null;
 }) => {
   if (!collectionProperty?.options) {
     return;

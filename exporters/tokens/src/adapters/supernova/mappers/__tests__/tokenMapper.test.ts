@@ -7,6 +7,7 @@ import {
   type ShadowToken,
   ShadowType,
   type Token,
+  type TokenGroup,
   Unit,
   type DimensionToken,
   type FontSizeToken,
@@ -88,7 +89,7 @@ describe('tokenMapper', () => {
       const token = {
         ...(exampleDimensionAndStringTokens.get('dimensionRef') as DimensionToken),
         value: { measure: undefined, unit: 'Pixels', referencedTokenId: null },
-      };
+      } as unknown as Token;
 
       const result = mapToken(token, exampleGroups);
 
@@ -635,7 +636,7 @@ describe('tokenMapper', () => {
       const token = {
         ...(exampleDimensionAndStringTokens.get('stringRef') as StringToken),
         parentGroupId: 'missing-group',
-      };
+      } as unknown as Token;
 
       const result = mapToken(token, exampleGroups);
 
@@ -647,8 +648,8 @@ describe('tokenMapper', () => {
       const token = {
         ...(exampleDimensionAndStringTokens.get('stringRef') as StringToken),
         parentGroupId: 'root-group',
-      };
-      const rootGroup = { ...createGroup('root-group', 'Color', []), isRoot: true };
+      } as unknown as Token;
+      const rootGroup = { ...createGroup('root-group', 'Color', []), isRoot: true } as unknown as TokenGroup;
 
       const result = mapToken(token, [rootGroup]);
 
