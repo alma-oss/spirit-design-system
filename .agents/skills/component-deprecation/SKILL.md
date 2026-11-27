@@ -180,6 +180,9 @@ Reverse the above in **both** packages when the API is removed or renamed:
 5. Update stories/demos/tests to final API only.
 6. Add a concise migration guide in the breaking-change commit/PR text.
 
+When preparing a major release, also check for feature flags that become the default (`enable-v<N>-*`) and remove them with
+`spirit:feature-flag` (Remove).
+
 Before merge, verify no stale references remain by searching for:
 
 - deprecated component/prop names
