@@ -39,6 +39,7 @@ export * from './Item';
 export * from './Label';
 export * from './Link';
 export * from './Matrix';
+export * from './Menu';
 export * from './Modal';
 export * from './Navigation';
 export * from './NoSsr';

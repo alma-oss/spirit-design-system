@@ -294,6 +294,32 @@ describe('Toolbar', () => {
     expect(screen.getByRole('button', { name: 'Share' })).toHaveFocus();
   });
 
+  it('should skip a link marked with aria-disabled', async () => {
+    const user = userEvent.setup();
+    render(
+      <Toolbar aria-label="CV actions">
+        <Navigation>
+          <NavigationItem>
+            <NavigationAction href="#">Edit</NavigationAction>
+          </NavigationItem>
+          <NavigationItem>
+            <a href="/download" aria-disabled="true">
+              Download
+            </a>
+          </NavigationItem>
+          <NavigationItem>
+            <Button>Share</Button>
+          </NavigationItem>
+        </Navigation>
+      </Toolbar>,
+    );
+
+    await user.tab();
+    await user.keyboard('{ArrowRight}');
+
+    expect(screen.getByRole('button', { name: 'Share' })).toHaveFocus();
+  });
+
   it('should include ButtonLink, NavigationAvatar and a native button', async () => {
     const user = userEvent.setup();
     render(

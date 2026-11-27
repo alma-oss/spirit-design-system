@@ -1,7 +1,7 @@
 'use client';
 
 import { type RefObject } from 'react';
-import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
+import { useRovingFocusItem } from '../rovingFocus';
 import { useToolbarContext } from './ToolbarContext';
 
 export interface UseToolbarItemReturn {
@@ -18,17 +18,7 @@ export interface UseToolbarItemReturn {
  */
 export const useToolbarItem = <T extends HTMLElement>(ref: RefObject<T | null>): UseToolbarItemReturn => {
   const context = useToolbarContext();
-  const register = context?.register;
-
-  useIsomorphicLayoutEffect(() => {
-    const item = ref.current;
-
-    if (!register || !item) {
-      return undefined;
-    }
-
-    return register(item);
-  }, [ref, register]);
+  useRovingFocusItem(ref, context?.register);
 
   return { isInToolbar: context != null };
 };

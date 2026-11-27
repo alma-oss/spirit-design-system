@@ -5,6 +5,7 @@ import React, { type KeyboardEventHandler, type MutableRefObject, useCallback, u
 import { useOverlay, useStyleProps } from '../../hooks';
 import { type SpiritDropdownProps } from '../../types';
 import { DropdownProvider } from './DropdownContext';
+import { useDropdownClose } from './useDropdownClose';
 import { useDropdownStyleProps } from './useDropdownStyleProps';
 
 const Dropdown = (props: SpiritDropdownProps) => {
@@ -28,17 +29,7 @@ const Dropdown = (props: SpiritDropdownProps) => {
   const internalTriggerRef = useRef<HTMLElement | null>(null);
   const triggerRef: MutableRefObject<HTMLElement | null | undefined> = externalTriggerRef ?? internalTriggerRef;
 
-  const closeOverlay = useCallback(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    onToggle();
-
-    queueMicrotask(() => {
-      triggerRef.current?.focus();
-    });
-  }, [isOpen, onToggle, triggerRef]);
+  const { closeOverlay, ...closeContext } = useDropdownClose({ isOpen, onToggle, triggerRef });
 
   const closeOverlayFromOutside = useCallback(
     (event: Event) => {
@@ -70,7 +61,9 @@ const Dropdown = (props: SpiritDropdownProps) => {
   const mergedProps = { ...otherProps, onKeyDown: handleKeyDown };
 
   return (
-    <DropdownProvider value={{ id, isOpen, fullWidthMode, placement, onToggle, dropdownRef, triggerRef }}>
+    <DropdownProvider
+      value={{ ...closeContext, id, isOpen, fullWidthMode, placement, onToggle, dropdownRef, triggerRef }}
+    >
       <div
         ref={dropdownRef}
         className={classNames(classProps.root, styleProps.className)}

@@ -146,24 +146,29 @@ and [escape hatches][readme-escape-hatches].
 Keyboard behavior is applied automatically: **Escape** closes the popover and returns focus to the
 trigger, and **Tab** / **Shift+Tab** out of the popover close it as focus leaves the dialog.
 
-When you override `role` (e.g. `role="menu"`), also pass the matching `aria-haspopup` value to
-`DropdownTrigger` to keep the trigger and popover semantics consistent:
+For a list of actions, put a [`Menu`][menu] inside the popover instead of overriding `role`. The `Menu` makes the
+trigger point at it with `aria-haspopup="menu"`, makes the popover presentational, and brings the menu keyboard
+interaction: arrow keys, Home/End, and typeahead. Name the `Menu`, not the popover:
 
 ```tsx
 <Dropdown …>
-  <DropdownTrigger aria-haspopup="menu" elementType="button">Trigger</DropdownTrigger>
-  <DropdownPopover role="menu">…</DropdownPopover>
+  <DropdownTrigger elementType="button">Actions</DropdownTrigger>
+  <DropdownPopover>
+    <Menu aria-label="Actions">
+      <Item>Edit</Item>
+      <Item>Download</Item>
+    </Menu>
+  </DropdownPopover>
 </Dropdown>
 ```
 
 Widgets that manage focus themselves (e.g. a combobox keeping focus in its input) can opt out of the
 focus move on open with `enableAutoFocus={false}`.
 
-| Name              | Type                       | Default    | Required | Description                                                         |
-| ----------------- | -------------------------- | ---------- | -------- | ------------------------------------------------------------------- |
-| `children`        | \[`string` \| `ReactNode`] | —          | ✓        | Content of the popover                                              |
-| `enableAutoFocus` | `bool`                     | `true`     | ✕        | Moves focus to the first interactive element inside it when opening |
-| `role`            | `string`                   | `"dialog"` | ✕        | Override the ARIA role                                              |
+| Name              | Type                       | Default | Required | Description                                                         |
+| ----------------- | -------------------------- | ------- | -------- | ------------------------------------------------------------------- |
+| `children`        | \[`string` \| `ReactNode`] | —       | ✓        | Content of the popover                                              |
+| `enableAutoFocus` | `bool`                     | `true`  | ✕        | Moves focus to the first interactive element inside it when opening |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].
 If you need more control over the styling of a component, you can use [style props][readme-style-props]
@@ -189,6 +194,7 @@ and [escape hatches][readme-escape-hatches].
 [dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
 [dropdown-fullwidth-mode]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/types/dropdown.ts#L19
 [item]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Item/README.md
+[menu]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/src/components/Menu/README.md
 [readme-additional-attributes]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#additional-attributes
 [readme-escape-hatches]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#escape-hatches
 [readme-style-props]: https://github.com/alma-oss/spirit-design-system/blob/main/packages/web-react/README.md#style-props

@@ -1,6 +1,7 @@
 export * from './collection';
 export * from './disclosure';
 export * from './gridKeyboardNavigation';
+export * from './menu';
 export * from './selection';
 export * from './styleProps';
 export * from './toolbar';

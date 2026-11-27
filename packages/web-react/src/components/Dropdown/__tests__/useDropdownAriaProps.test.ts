@@ -53,6 +53,17 @@ describe('useDropdownAriaProps', () => {
     expect(result.current.contentProps).toEqual(defaultContentPropsResult);
   });
 
+  it('should point the trigger at a menu and make the popover presentational', () => {
+    const { result } = renderHook(() => useDropdownAriaProps({ ...defaultProps, menuId: 'test-menu-id' }));
+
+    expect(result.current.triggerProps).toEqual({
+      ...defaultTriggerPropsResult,
+      'aria-controls': 'test-menu-id',
+      'aria-haspopup': 'menu',
+    });
+    expect(result.current.contentProps).toEqual({ ...defaultContentPropsResult, role: 'presentation' });
+  });
+
   it('should allow overriding aria-haspopup', () => {
     const props = {
       ...defaultProps,

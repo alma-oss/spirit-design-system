@@ -1,6 +1,7 @@
 'use client';
 
-import React, { type ElementType } from 'react';
+import React, { type ElementType, type KeyboardEvent } from 'react';
+import { KeyboardKey } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { useOpenOnArrowDown, useStyleProps } from '../../hooks';
 import { type DropdownTriggerProps } from '../../types';
@@ -17,7 +18,7 @@ const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTrigge
   const propsWithDefaults = { ...defaultProps, ...props };
   const { elementType, children, ...rest } = propsWithDefaults;
   const Component = elementType as ElementType;
-  const { id, isOpen, onToggle, fullWidthMode, triggerRef } = useDropdownContext();
+  const { id, isOpen, onToggle, fullWidthMode, menuFocusRef, menuId, triggerRef } = useDropdownContext();
   const { classProps, props: modifiedProps } = useDropdownStyleProps({ isOpen, ...rest });
   const { styleProps: triggerStyleProps, props: transferProps } = useStyleProps(modifiedProps);
   const { onKeyDown: onUserKeyDown, ...otherProps } = transferProps;
@@ -28,13 +29,30 @@ const DropdownTrigger = <E extends ElementType = 'button'>(props: DropdownTrigge
     isOpen,
     toggleHandler: onToggle,
     fullWidthMode,
+    menuId,
     hasPopup: typeof hasPopup === 'string' || typeof hasPopup === 'boolean' ? hasPopup : undefined,
   });
+
+  // A menu opens on its last item with ArrowUp, and on the first item otherwise.
+  const handleMenuKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    onUserKeyDown?.(event);
+
+    if (!menuFocusRef || event.defaultPrevented) {
+      return;
+    }
+
+    menuFocusRef.current = event.key === KeyboardKey.ArrowUp ? 'last' : 'first';
+
+    if (menuId && !isOpen && event.key === KeyboardKey.ArrowUp) {
+      event.preventDefault();
+      onToggle();
+    }
+  };
 
   const handleKeyDown = useOpenOnArrowDown({
     isOpen,
     onToggle,
-    onKeyDown: onUserKeyDown,
+    onKeyDown: handleMenuKeyDown,
   });
   const mergedProps = { ...otherProps, ...triggerProps, onKeyDown: handleKeyDown };
 

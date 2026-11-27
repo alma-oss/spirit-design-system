@@ -22,6 +22,7 @@ import {
   Icon,
   Item,
   Link,
+  Menu,
   Navigation,
   NavigationAction,
   NavigationItem,
@@ -209,26 +210,7 @@ export const CvEditor = () => {
                   >
                     Osobní údaje
                   </Heading>
-                  {/* Shipped as Dropdown's built-in dialog pattern: the trigger gets
-                      `aria-haspopup="dialog"` and the popover `role="dialog"`, both by default, so the
-                      `aria-label` below still names it. The prototype uses a menu instead, parked in the
-                      TODO — Spirit cannot honour that role's keyboard contract yet. */}
-                  {/* TODO: DS-2751 — Allow the `menu` pattern for Dropdown
-
-                      The menu role is a good fit for transient, dismissible contextual actions.
-
-                      Using the `menu` role implies a keyboard accessibility contract Spirit does not
-                      implement (roving tabindex, arrow keys, Home/End, typeahead), see:
-                      https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role#keyboard_interactions
-                      https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
-                      https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
-
-                      Once it is in place, this becomes:
-
-                      <DropdownTrigger elementType={ControlButton} size="large" isSymmetrical aria-haspopup="menu">
-                      <DropdownPopover role="menu" aria-label="Možnosti">
-                        <Item elementType="button" role="menuitem" startSlot={<Icon name="edit" />}>
-                   */}
+                  {/* Transient contextual actions: a menu button, not a dialog. */}
                   <Dropdown
                     id="personal-details-actions"
                     isOpen={isPersonalDetailsDropdownOpen}
@@ -239,13 +221,11 @@ export const CvEditor = () => {
                       <VisuallyHidden>Zobrazit akce</VisuallyHidden>
                       <Icon name="more" />
                     </DropdownTrigger>
-                    <DropdownPopover aria-label="Možnosti">
-                      <Item elementType="button" startSlot={<Icon name="edit" />}>
-                        Upravit položku
-                      </Item>
-                      <Item elementType="button" startSlot={<Icon name="placeholder" />}>
-                        Smazat položku
-                      </Item>
+                    <DropdownPopover>
+                      <Menu aria-label="Možnosti">
+                        <Item startSlot={<Icon name="edit" />}>Upravit položku</Item>
+                        <Item startSlot={<Icon name="placeholder" />}>Smazat položku</Item>
+                      </Menu>
                     </DropdownPopover>
                   </Dropdown>
                 </Flex>

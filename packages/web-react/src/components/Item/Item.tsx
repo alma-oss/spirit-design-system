@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ElementType, useContext } from 'react';
+import React, { type ElementType, useContext, useRef } from 'react';
 import { SizesExtended } from '../../constants';
 import {
   ContextPropsProvider,
@@ -9,7 +9,7 @@ import {
   UniversalProvider,
   useContextProps,
 } from '../../context';
-import { useStyleProps } from '../../hooks';
+import { useMenuItem, useStyleProps } from '../../hooks';
 import { type SpiritItemProps } from '../../types';
 import { filterDOMProps, mergeProps, mergeStyleProps } from '../../utils';
 import { useItemStyleProps } from './useItemStyleProps';
@@ -25,6 +25,7 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
   const propsWithDefaults = mergeProps(defaultProps, listItemsProps, mergedProps);
   const { children, elementType, endSlot, isDisabled, isSelected, size, startSlot, ...restProps } = propsWithDefaults;
   const Component = elementType as ElementType;
+  const itemRef = useRef<HTMLElement>(null);
   const { classProps, props: modifiedProps } = useItemStyleProps({
     isSelected,
     isDisabled,
@@ -33,6 +34,7 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
   });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
   const mergedStyleProps = mergeStyleProps(Component, { classProps: classProps.root, styleProps, otherProps });
+  const { isInMenu } = useMenuItem(itemRef);
 
   return (
     <ContextPropsProvider
@@ -46,6 +48,8 @@ const Item = <E extends ElementType = 'div'>(props: SpiritItemProps<E>): JSX.Ele
           {...filterDOMProps(otherProps)}
           {...mergedStyleProps}
           disabled={!!isDisabled && Component === 'button'}
+          // A custom `elementType` may not take a ref, so it only gets one where a menu needs it.
+          ref={isInMenu ? itemRef : undefined}
         >
           {startSlot && (
             <span className={classProps.slot} role="presentation">

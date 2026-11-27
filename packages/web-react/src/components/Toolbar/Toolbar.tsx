@@ -1,11 +1,11 @@
 'use client';
 
-import React, { type ForwardedRef, forwardRef, useCallback, useMemo, useRef } from 'react';
+import React, { type ForwardedRef, forwardRef, useMemo, useRef } from 'react';
 import { Direction } from '../../constants';
 import { ContextPropsProvider } from '../../context';
 import { ToolbarContextProvider, useStyleProps, useToolbarAria, useToolbarState } from '../../hooks';
 import { type ForwardRefComponent, type SpiritToolbarProps } from '../../types';
-import { mergeStyleProps } from '../../utils';
+import { mergeRefs, mergeStyleProps } from '../../utils';
 
 // The list and its items are presentational, so they are not announced on top of the toolbar.
 const PRESENTATION_PROPS = { role: 'presentation' };
@@ -20,19 +20,7 @@ const _Toolbar = (props: SpiritToolbarProps, ref: ForwardedRef<HTMLDivElement>) 
   const mergedStyleProps = mergeStyleProps('div', { styleProps, otherProps });
   const contextValue = useMemo(() => ({ register: state.register }), [state.register]);
 
-  const setRef = useCallback(
-    (element: HTMLDivElement | null) => {
-      toolbarRef.current = element;
-
-      if (typeof ref === 'function') {
-        ref(element);
-      } else if (ref) {
-        // eslint-disable-next-line no-param-reassign -- forwarding the element to the consumer's ref object
-        ref.current = element;
-      }
-    },
-    [ref],
-  );
+  const setRef = useMemo(() => mergeRefs(toolbarRef, ref), [ref]);
 
   return (
     <div {...otherProps} {...mergedStyleProps} {...toolbarProps} ref={setRef}>

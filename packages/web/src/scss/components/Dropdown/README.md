@@ -279,6 +279,58 @@ See the [Item][item] component for more information.
 </div>
 ```
 
+## Menu
+
+For a list of actions, make the popover a menu button. Put a `div` with `role="menu"` inside the popover, make the
+popover presentational with `role="presentation"`, and point the trigger at the menu with `aria-haspopup="menu"` and
+`aria-controls`. Give each item `role="menuitem"` and name the menu, not the popover. Use a menu only for actions; for
+other content, keep the dialog.
+
+```html
+<div class="Dropdown">
+  <button
+    type="button"
+    data-spirit-toggle="dropdown"
+    data-spirit-target="#dropdown-menu"
+    class="Button Button--primary Button--medium"
+    aria-expanded="false"
+    aria-controls="dropdown-menu-list"
+    aria-haspopup="menu"
+  >
+    Actions
+  </button>
+  <div
+    class="DropdownPopover placement-bottom-start"
+    role="presentation"
+    data-spirit-placement="bottom-start"
+    id="dropdown-menu"
+  >
+    <div role="menu" aria-label="Actions" aria-orientation="vertical" id="dropdown-menu-list">
+      <button role="menuitem" class="Item Item--medium" tabindex="0">
+        <span class="Item__content" role="presentation">Edit</span>
+      </button>
+      <button role="menuitem" class="Item Item--medium" tabindex="-1">
+        <span class="Item__content" role="presentation">Download</span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+The Dropdown JavaScript plugin finds the menu inside the popover and implements the
+[menu button keyboard interaction][apg-menu-button]:
+
+- **Enter**, **Space**, or **Arrow Down** on the trigger opens the menu and moves focus to the first item.
+  **Arrow Up** opens it and moves focus to the last item.
+- **Arrow Down/Up** move focus between items and wrap around, **Home/End** move focus to the first/last item.
+- Typing a character moves focus to the next item whose label starts with it.
+- Activating an item closes the menu and returns focus to the trigger. **Escape** does the same.
+- **Tab** and **Shift+Tab** close the menu and move focus on, out of the menu.
+- Disabled items are skipped. The plugin keeps one item in the Tab order with `tabindex="0"` and sets
+  `tabindex="-1"` on the others.
+
+Menu buttons are set up when the page loads, so they can be opened from the keyboard before the first click.
+
 ## Placement
 
 `DropdownPopover` follows the non-modal anchored dialog pattern (`role="dialog"`). Provide an accessible name via
@@ -381,6 +433,7 @@ myDropdownEl.addEventListener('hidden.dropdown', () => {
 dropdown.hide();
 ```
 
+[apg-menu-button]: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
 [dictionary-alignment]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#alignment
 [dictionary-placement]: https://github.com/alma-oss/spirit-design-system/tree/main/docs/DICTIONARIES.md#placement
 [item]: https://github.com/alma-oss/spirit-design-system/tree/main/packages/web/src/scss/components/Item/README.md

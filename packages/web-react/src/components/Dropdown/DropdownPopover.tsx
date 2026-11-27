@@ -19,14 +19,20 @@ interface DropdownPopoverProps extends SpiritDivElementProps {
 
 const DropdownPopover = (props: DropdownPopoverProps) => {
   const { children, enableAutoFocus = true, ...rest } = props;
-  const { id, isOpen, onToggle, fullWidthMode, placement, triggerRef } = useDropdownContext();
+  const { id, isOpen, onToggle, fullWidthMode, menuId, placement, triggerRef } = useDropdownContext();
   const { classProps, props: modifiedProps } = useDropdownStyleProps({ isOpen, placement, ...rest });
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps);
-  const { contentProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, fullWidthMode });
-  const { onPopoverKeyDownCapture } = useDropdownPopoverDialogKeyboard({ isOpen, onToggle, triggerRef });
+  const { contentProps } = useDropdownAriaProps({ id, isOpen, toggleHandler: onToggle, fullWidthMode, menuId });
+  // A `Menu` inside owns the keyboard and the focus on open.
+  const isDialog = !menuId;
+  const { onPopoverKeyDownCapture } = useDropdownPopoverDialogKeyboard({
+    isOpen: isOpen && isDialog,
+    onToggle,
+    triggerRef,
+  });
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  useAutoFocus({ isActive: isOpen && enableAutoFocus, containerRef: popoverRef });
+  useAutoFocus({ isActive: isOpen && enableAutoFocus && isDialog, containerRef: popoverRef });
 
   return (
     <div

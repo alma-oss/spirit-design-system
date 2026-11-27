@@ -5,6 +5,8 @@ const NAME_ARIA_EXPANDED = 'aria-expanded';
 const NAME_ARIA_HASPOPUP = 'aria-haspopup';
 const NAME_DATA_FULLWIDTHMODE = 'data-spirit-fullwidthmode';
 const DIALOG_ROLE = 'dialog';
+const MENU_ROLE = 'menu';
+const PRESENTATION_ROLE = 'presentation';
 
 export enum fullWidthModeKeys {
   off = 'off',
@@ -22,6 +24,8 @@ export interface UseDropdownAriaPropsProps {
   toggleHandler: (event?: ClickEvent) => void;
   /** trigger's aria-haspopup override */
   hasPopup?: Booleanish | string;
+  /** ID of the `Menu` inside the popover; the trigger then controls the menu and the popover is presentational */
+  menuId?: string | null;
 }
 
 export interface UseDropdownAriaPropsReturn {
@@ -41,17 +45,19 @@ export interface UseDropdownAriaPropsReturn {
 }
 
 export const useDropdownAriaProps = (props: UseDropdownAriaPropsProps): UseDropdownAriaPropsReturn => {
-  const { fullWidthMode, hasPopup = DIALOG_ROLE, id, isOpen, toggleHandler } = props;
+  const { fullWidthMode, id, isOpen, menuId, toggleHandler } = props;
+  const { hasPopup = menuId ? MENU_ROLE : DIALOG_ROLE } = props;
 
   const triggerProps = {
     [NAME_ARIA_EXPANDED]: isOpen,
-    [NAME_ARIA_CONTROLS]: String(id),
+    [NAME_ARIA_CONTROLS]: String(menuId ?? id),
     [NAME_ARIA_HASPOPUP]: hasPopup,
     onClick: toggleHandler,
   };
   const contentProps = {
     id,
-    role: DIALOG_ROLE,
+    // The menu inside is the popup, so the popover does not announce a dialog around it.
+    role: menuId ? PRESENTATION_ROLE : DIALOG_ROLE,
     [NAME_DATA_FULLWIDTHMODE]: fullWidthMode,
   };
 

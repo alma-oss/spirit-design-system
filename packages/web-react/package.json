@@ -512,6 +512,14 @@
       "require": "./dist/components/Matrix/index.cjs",
       "default": "./dist/components/Matrix/index.js"
     },
+    "./components/Menu": {
+      "types": "./dist/components/Menu/index.d.ts",
+      "development": "./src/components/Menu/index.ts",
+      "production": "./dist/components/Menu/index.js",
+      "import": "./dist/components/Menu/index.js",
+      "require": "./dist/components/Menu/index.cjs",
+      "default": "./dist/components/Menu/index.js"
+    },
     "./components/Modal": {
       "types": "./dist/components/Modal/index.d.ts",
       "development": "./src/components/Modal/index.ts",
