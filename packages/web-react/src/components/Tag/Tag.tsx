@@ -30,6 +30,7 @@ const _Tag = <E extends ElementType = 'span', C = void, S = void>(
 
   const { classProps, props: modifiedProps } = useTagStyleProps(restProps);
   const { styleProps, props: otherProps } = useStyleProps(modifiedProps, {
+    textHyphens: TextStyleProps.textHyphens,
     textWordBreak: TextStyleProps.textWordBreak,
   });
   const mergedStyleProps = mergeStyleProps(Component, { classProps, styleProps, otherProps });

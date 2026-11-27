@@ -117,12 +117,23 @@ Disabled link Tag:
 
 ℹ️ Read more about this pattern at [Scott O'Hara's blog][scott-o-hara-disabling-a-link].
 
+## Text Hyphens
+
+Use the `textHyphens` prop to set how words should be hyphenated when text wraps across multiple lines.
+
+```tsx
+<Tag textHyphens="auto">Hyphens applied automatically when text wraps across multiple lines.</Tag>
+```
+
 ## Word Break
 
 Use the `textWordBreak` prop to set how words should break when reaching the end of a line.
+It's crucial to combine it with [Text Hyphens](#text-hyphens) to maintain readability.
 
 ```tsx
-<Tag textWordBreak="long-words">longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces</Tag>
+<Tag textHyphens="auto" textWordBreak="long-words">
+  longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces
+</Tag>
 ```
 
 ## API
@@ -136,6 +147,7 @@ Use the `textWordBreak` prop to set how words should break when reaching the end
 | `isSubtle`      | `bool`                                                                   | `false`   | ✕        | If is Subtle color variant used                |
 | `ref`           | `ForwardedRef<HTMLSpanElement>`                                          | —         | ✕        | Tag element reference                          |
 | `size`          | [Size Extended dictionary][dictionary-size]                              | `medium`  | ✕        | Size of the Tag                                |
+| `textHyphens`   | \[`none` \| `auto` \| `manual`]                                          | —         | ✕        | Hyphens strategy applied to the tag content    |
 | `textWordBreak` | \[`normal` \| `anywhere` \| `long-words`]                                | —         | ✕        | Word break strategy applied to the tag content |
 
 On top of the API options, the components accept [additional attributes][readme-additional-attributes].

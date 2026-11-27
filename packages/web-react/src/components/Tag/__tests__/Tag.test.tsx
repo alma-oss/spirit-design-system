@@ -10,6 +10,7 @@ import {
   restPropsTest,
   sizeExtendedPropsTest,
   stylePropsTest,
+  textHyphensPropsTest,
   textWordBreakPropsTest,
   validHtmlAttributesTest,
 } from '@local/tests';
@@ -28,6 +29,8 @@ describe('Tag', () => {
   sizeExtendedPropsTest(Tag);
 
   stylePropsTest(Tag);
+
+  textHyphensPropsTest(Tag);
 
   textWordBreakPropsTest(Tag);
 
