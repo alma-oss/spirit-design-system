@@ -1,0 +1,25 @@
+/**
+ * ruby-overhang
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-overhang
+ * Reference: https://developer.chrome.com/blog/chrome-151-beta
+ * WebStatus: ruby-overhang
+ * Baseline: 🟡 Limited Availability
+ * Support: Chrome —, Firefox —, Safari 18.2+
+ * Release note: Chrome 151, announced 2026-07
+ * Last verified: 2026-08-11
+ *
+ * Task: Control whether ruby annotations may overhang adjacent base text.
+ */
+
+ruby {
+  ruby-overhang: auto;
+}
+
+.ruby-no-overhang {
+  ruby-overhang: none;
+}
+
+.ruby-space-only {
+  ruby-overhang: spaces;
+}

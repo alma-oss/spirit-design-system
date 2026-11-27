@@ -1,0 +1,27 @@
+/**
+ * Installed-app accent system colors
+ *
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Baseline: 🟣 Experimental / unknown for these system colors
+ * Support: Chrome 150+ in installed web apps on the initial profile
+ * Last verified: 2026-08-10
+ *
+ * Task: Match controls to the user's operating-system accent color.
+ */
+
+.accent-button {
+  background: Highlight;
+  color: HighlightText;
+}
+
+@supports (color: AccentColor) {
+  .accent-button {
+    background: AccentColor;
+    color: AccentColorText;
+  }
+}
+
+.accent-outline:focus-visible {
+  outline: 0.2rem solid AccentColor;
+  outline-offset: 0.2rem;
+}

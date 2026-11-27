@@ -1,0 +1,261 @@
+/**
+ * @scope — Scoped Styles
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@scope
+ * WebStatus: scope
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 143+, Firefox 146+, Safari 26.2+
+ *
+ * Task: Scope styles to DOM subtrees and control specificity with proximity
+ * Why: @scope restricts selector matching to a subtree, avoids leaking
+ *      styles, and uses proximity-based resolution instead of specificity wars
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   1. BASIC SCOPE — style only within a root element
+   ========================================================================== */
+
+/* Styles apply only inside .card — won't leak to other .title elements */
+@scope (.card) {
+  .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-block-end: 0.5rem;
+  }
+
+  .body {
+    color: light-dark(#444, #bbb);
+    line-height: 1.6;
+  }
+}
+
+/* ==========================================================================
+   2. DONUT SCOPE — scope with exclusion boundary
+   ========================================================================== */
+
+/* Style .article-body content but stop at nested .sidebar or figure */
+@scope (.article-body) to (.sidebar, figure) {
+  p {
+    max-inline-size: 65ch;
+    margin-block-end: 1rem;
+  }
+
+  a {
+    color: light-dark(#0066cc, #66b3ff);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+  }
+
+  img {
+    border-radius: 0.5rem;
+    margin-block: 1rem;
+  }
+}
+
+/* ==========================================================================
+   3. :scope PSEUDO-CLASS — target the scope root itself
+   ========================================================================== */
+
+@scope (.feature-card) {
+  /* :scope targets the .feature-card element itself */
+  :scope {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background: light-dark(#f8f8f8, #1a1a1a);
+    border: 1px solid light-dark(#e0e0e0, #333);
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .label {
+    font-weight: 600;
+  }
+}
+
+/* ==========================================================================
+   4. SPECIFICITY BEHAVIOR — @scope keeps specificity low
+   ========================================================================== */
+
+/* Bare selector inside @scope: specificity is 0-0-1 (just the element)
+   The scope root acts like :where() — adds zero specificity weight */
+@scope (.nav) {
+  a {
+    /* Specificity: 0-0-1 — easy to override */
+    color: inherit;
+    text-decoration: none;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+  }
+
+  /* :scope a has specificity 0-1-1 (pseudo-class + element) */
+  :scope a {
+    font-weight: 600;
+  }
+}
+
+/* ==========================================================================
+   5. SCOPING PROXIMITY — closer scope root wins
+   ========================================================================== */
+
+/* When nested scopes match the same element, the closest scope root wins.
+   This overrides source order but is itself overridden by specificity. */
+
+@scope (.light-theme) {
+  p {
+    color: #1a1a1a;
+  }
+}
+
+@scope (.dark-section) {
+  p {
+    color: #f0f0f0;
+  }
+}
+
+/* If .dark-section is nested inside .light-theme,
+   <p> inside .dark-section gets color: #f0f0f0
+   because .dark-section is the closer scope root. */
+
+/* ==========================================================================
+   6. COMPONENT SCOPING — isolate component styles
+   ========================================================================== */
+
+@scope (.tabs) {
+  :scope {
+    display: flex;
+    border-block-end: 2px solid light-dark(#e0e0e0, #333);
+  }
+
+  .tab {
+    padding-block: 0.75rem;
+    padding-inline: 1.25rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    color: light-dark(#666, #999);
+    border-block-end: 2px solid transparent;
+    margin-block-end: -2px;
+  }
+
+  .tab[aria-selected='true'] {
+    color: light-dark(#0066cc, #3399ff);
+    border-block-end-color: currentColor;
+    font-weight: 600;
+  }
+}
+
+@scope (.tab-panel) {
+  :scope {
+    padding: 1.5rem;
+  }
+
+  :scope[hidden] {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   7. DONUT SCOPE FOR SLOTS — scope around nested components
+   ========================================================================== */
+
+/* Style modal chrome but leave content slot unstyled */
+@scope (.modal) to (.modal__content) {
+  :scope {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(0 0 0 / 0.5);
+  }
+
+  .modal__dialog {
+    background: light-dark(#fff, #222);
+    border-radius: 1rem;
+    padding: 2rem;
+    max-inline-size: min(90vw, 500px);
+    max-block-size: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal__close {
+    position: absolute;
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+  }
+}
+
+/* ==========================================================================
+   8. SCOPE + NESTING — combine with native CSS nesting
+   ========================================================================== */
+
+@scope (.accordion) {
+  :scope {
+    display: grid;
+    gap: 1px;
+    background: light-dark(#e0e0e0, #333);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .item {
+    background: light-dark(#fff, #1a1a1a);
+
+    & summary {
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+
+      &::marker {
+        content: '';
+      }
+    }
+
+    & .content {
+      padding-inline: 1rem;
+      padding-block-end: 1rem;
+    }
+  }
+}
+
+/* ==========================================================================
+   9. @scope vs @layer — complementary specificity tools
+   ========================================================================== */
+
+/*
+ * @layer controls CASCADE ORDER (which origin wins)
+ * @scope controls SELECTOR REACH (where selectors match)
+ *
+ * They work together:
+ */
+
+@layer components {
+  @scope (.alert) {
+    :scope {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border-inline-start: 4px solid;
+    }
+
+    &.--info {
+      background: light-dark(#e8f4fd, #0a2540);
+      border-color: light-dark(#0066cc, #3399ff);
+    }
+
+    &.--error {
+      background: light-dark(#fde8e8, #400a0a);
+      border-color: light-dark(#cc0000, #ff4444);
+    }
+
+    &.--success {
+      background: light-dark(#e8fde8, #0a400a);
+      border-color: light-dark(#008800, #44ff44);
+    }
+  }
+}

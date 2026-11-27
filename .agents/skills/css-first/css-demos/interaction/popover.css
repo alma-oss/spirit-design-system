@@ -1,0 +1,120 @@
+/**
+ * Popover API with CSS
+ *
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover
+ * MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:popover-open
+ * WebStatus: popover
+ * Baseline: 🔵 Newly Available
+ * Support: Chrome 116+, Firefox 125+, Safari 17+
+ *
+ * Task: Create popovers, dropdowns, and tooltips with HTML + CSS only
+ * Why: The popover attribute handles show/hide, light dismiss, top layer,
+ *      and focus management natively — no JavaScript needed
+ * Last verified: 2026-08-11
+ */
+
+/* ==========================================================================
+   HTML STRUCTURE (for reference):
+
+   <button popovertarget="menu">Open Menu</button>
+   <div id="menu" popover>Popover content</div>
+
+   popover="auto"   — light dismiss (click outside closes)
+   popover="manual" — must be explicitly closed
+   popover="hint"   — for tooltips, auto-dismisses other hints
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BASIC POPOVER STYLING
+   Core: :popover-open pseudo-class, ::backdrop
+   ========================================================================== */
+
+[popover] {
+  /* Popover is in the top layer — no z-index needed */
+  margin: auto; /* centered by default */
+  border: none;
+  padding: 0;
+}
+
+[popover]:popover-open {
+  /* visible state */
+  display: block;
+}
+
+[popover]::backdrop {
+  /* overlay behind popover */
+  background: rgb(0 0 0 / 0.3);
+}
+
+/* ==========================================================================
+   2. ENTRY/EXIT ANIMATION — combine with @starting-style
+   ========================================================================== */
+
+[popover] {
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity 0.2s,
+    scale 0.2s,
+    display 0.2s,
+    overlay 0.2s;
+  transition-behavior: allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+[popover]:not(:popover-open) {
+  opacity: 0;
+  scale: 0.95;
+}
+
+/* ==========================================================================
+   3. ANCHORED POPOVER — position relative to trigger
+   Core: anchor-name on trigger, position-anchor on popover
+   ========================================================================== */
+
+.trigger {
+  anchor-name: --trigger;
+}
+
+[popover].dropdown {
+  position: fixed;
+  position-anchor: --trigger;
+  inset: unset;
+  inset-block-start: anchor(end);
+  inset-inline-start: anchor(start);
+  position-try-fallbacks: flip-block; /* flip above if no space below */
+}
+
+/* ==========================================================================
+   4. INVOKER COMMANDS — HTML attributes replace JavaScript event handlers
+   Core: commandfor + command attributes (experimental)
+   ========================================================================== */
+
+/*
+   <button commandfor="my-dialog" command="show-modal">Open</button>
+   <dialog id="my-dialog">
+     <button commandfor="my-dialog" command="close">Close</button>
+   </dialog>
+
+   command values:
+   - "show-popover" / "hide-popover" / "toggle-popover" — for popovers
+   - "show-modal" / "close" — for dialogs
+*/
+
+/* ==========================================================================
+   5. DIALOG closedby ATTRIBUTE — control light dismiss
+   Core: closedby="any" | "closerequest" | "none"
+   ========================================================================== */
+
+/*
+   <dialog closedby="any">      — close on click outside or Escape
+   <dialog closedby="closerequest"> — close on Escape only (default)
+   <dialog closedby="none">     — must be closed programmatically
+
+   CSS for dialog entry/exit — see animation/starting-style.css
+*/

@@ -1,0 +1,27 @@
+/**
+ * Printable-area safety for paged media
+ *
+ * Spec: https://drafts.csswg.org/css-page-3/#page-margin-safety
+ * Reference: https://developer.chrome.com/release-notes/150
+ * Baseline: 🟣 Experimental / unknown
+ * Support: Chrome 150+
+ * Last verified: 2026-08-10
+ *
+ * Task: Keep print margin-box content out of a printer's unprintable edge area.
+ */
+
+@page {
+  margin: 12mm;
+
+  @top-center {
+    content: 'Quarterly report';
+    page-margin-safety: clamp;
+  }
+
+  @bottom-center {
+    content: 'Page ' counter(page);
+    page-margin-safety: add;
+  }
+}
+
+/* Values: none | clamp | add. The browser supplies the safe printable inset. */

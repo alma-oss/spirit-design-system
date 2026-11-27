@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "css-first": {
+      "source": "depthark/css-first-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "e2ccd2aaa9457d030c6071c7e6526d267712977647aed6ab8641ba7dcb758398"
+    }
+  }
+}
