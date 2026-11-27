@@ -8,8 +8,8 @@
 //    split tag, so it matches the label segment when the label wraps.
 // 4. Never shrink the trailing segments (e.g. the distance button), so only the
 //    label wraps and the button always stays fully visible.
-// 5. Temporary stacking workaround until Dropdown uses the Popover API top layer.
-//    @see https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
+// 5. Temporary stacking workaround until Dropdown uses the Popover API top layer — remove with DS-2968.
+//    @see https://almacareer.atlassian.net/browse/DS-2968
 
 @use '@tokens' as tokens;
 @use 'theme';
