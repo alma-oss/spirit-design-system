@@ -1,8 +1,7 @@
 import path from 'node:path';
+import { getContentRoot } from '@local/config/paths';
 
-export const getRepoRoot = (cwd = process.cwd()): string => path.resolve(cwd, '../..');
-
-export const getContentRoot = (cwd = process.cwd()): string => path.join(getRepoRoot(cwd), 'docs');
+export { getContentRoot, getRepoRoot } from '@local/config/paths';
 
 export const isPathInside = (filePath: string, root: string): boolean => {
   const resolved = path.resolve(filePath);

@@ -14,7 +14,7 @@
 
 ## Docsite Skills
 
-- `/spirit:docsite-composition`: building or refactoring any docsite page, section, or component in TSX, assets, and content.
+- `/spirit:docsite-composition`: building or refactoring any docsite page, section, or component in TSX, assets, and content. Domain boundaries are in that skill.
 - `/spirit:docsite-styles`: writing or reviewing any docsite SCSS.
 - `/spirit:docsite-component-detail`: the component page header, playground, tabs, and documentation blocks.
 

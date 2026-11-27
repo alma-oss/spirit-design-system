@@ -23,6 +23,19 @@ How to build docsite pages and components from Spirit components and props. The 
   Follow the same `ui/` and `features/<name>/` split when another domain grows into separate sections.
 - Do not put a flat pile of section files in a domain root.
 
+## Domain Boundaries
+
+Code flows one way: shared layer, then features, then pages in `src/app/`. Never the reverse.
+
+- Shared code (`src/config`, `src/utils`, `src/hooks`, `src/ui`) imports from no domain. Domains import shared code, never `app/`.
+- A feature exposes only its `index.ts`. Do not import a feature's internals, and do not import another feature from a feature.
+- Domains do not import each other, except `routing` and documented aggregators (`content/features/llms`, which reads icons and helpers).
+- Code used by one feature stays in that feature. Once two or more features or domains use it, move it to the shared layer.
+- Site title, description, and origin live in `src/config`. The documentation menu lives in `routing`. Llms pages live in `content/features/llms`, and routes import that feature's `index.ts` only.
+- ESLint `import/no-restricted-paths` keeps `src/config` and `src/utils` free of domain imports, and keeps `src/app` on the llms feature's `index.ts`. The wider ban on domains importing each other is not linted yet, because existing pages still cross domains.
+
+Deleting a domain should break only the `app/` pages that compose it.
+
 ## Decision Order
 
 Before writing anything custom, check the [Known Spirit Limits](#known-spirit-limits). Then pick the first option that works:

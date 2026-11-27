@@ -1,8 +1,8 @@
 import { COMPONENTS_BAND_VARIANTS, ComponentsBand } from '@local/domains/components';
+import { isComponentTabHidden } from '@local/domains/components/repositories/componentDocsRepository';
 import { getComponentViewsAvailability } from '@local/domains/components/repositories/componentsRepository';
 import { isValidComponentSlug, slugToComponentName } from '@local/domains/components/utils/componentSlug';
 import { guardMissingModule } from '@local/domains/components/utils/guardMissingModule';
-import { isComponentTabHidden } from '@local/domains/content/componentDocsRepository';
 import { componentSegments } from '@local/domains/routing/routes';
 import { notFound } from 'next/navigation';
 import React from 'react';

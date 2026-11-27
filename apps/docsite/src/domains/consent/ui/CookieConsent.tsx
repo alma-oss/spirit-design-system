@@ -1,11 +1,10 @@
 'use client';
 
 import { CookieConsentManager, DisplayMode } from '@almacareer/cookie-consent-manager';
+import { SITE_SERVICE_NAME } from '@local/config/siteConfig';
 import { setCookieConsentApi } from '@local/domains/consent/cookieConsentApi';
 import { createDocsiteConsentConfig, limitConsentToTechnicalAndAnalytics } from '@local/domains/consent/docsiteConsent';
 import { useEffect } from 'react';
-
-const SERVICE_NAME = 'spiritdesignsystem.com';
 
 let isInitialized = false;
 
@@ -17,7 +16,7 @@ export const CookieConsent = () => {
 
     isInitialized = true;
 
-    const api = CookieConsentManager(SERVICE_NAME, {
+    const api = CookieConsentManager(SITE_SERVICE_NAME, {
       // The docsite is English-only, so browser language should not switch the banner.
       autodetectLang: false,
       config: createDocsiteConsentConfig(),

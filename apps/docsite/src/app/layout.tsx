@@ -1,4 +1,6 @@
 import { Stack } from '@alma-oss/spirit-web-react';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@local/config/siteConfig';
+import { getSiteOrigin } from '@local/config/siteOrigin';
 import { GoogleTagManager } from '@local/domains/analytics/ui/GoogleTagManager';
 import { CookieConsent } from '@local/domains/consent/ui/CookieConsent';
 import Footer from '@local/domains/footer/ui/Footer';
@@ -13,11 +15,11 @@ interface RootLayoutProps extends ChildrenProps {}
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Spirit Design System',
-    default: 'Spirit Design System',
+    template: `%s | ${SITE_TITLE}`,
+    default: SITE_TITLE,
   },
-  description: 'Documentation for the Spirit Design System',
-  metadataBase: new URL('https://spiritdesignsystem.com'),
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(getSiteOrigin()),
 };
 
 const RootLayout = ({ children }: RootLayoutProps) => (

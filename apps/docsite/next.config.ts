@@ -2,6 +2,7 @@ import { dirname, resolve, join } from 'path';
 import { fileURLToPath } from 'url';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
+import { DOCUMENTATION_MENU } from './src/domains/routing/documentationMenu';
 
 const pathDir = dirname(fileURLToPath(import.meta.url));
 
@@ -22,6 +23,24 @@ const mdxPluginOptions: { remarkPlugins: StringPluginTuple[]; rehypePlugins: Str
     ['rehype-pretty-code', rehypePrettyCodeOptions],
   ],
 };
+
+const documentedMarkdownTracing = [
+  '../../docs/introduction/**/*.md',
+  '../../docs/design/**/*.md',
+  '../../docs/development/**/*.md',
+  '../../docs/migrations/**/*.md',
+  '../../docs/decisions/**/*.md',
+  '../../docs/contribution/**/*.md',
+  '../../packages/codemods/README.md',
+  '../../packages/web/CHANGELOG.md',
+  '../../packages/web-react/CHANGELOG.md',
+  '../../packages/web-react/src/components/**/docs/*.md',
+  '../../packages/web-react/src/components/**/docs/*.json',
+  '../../packages/web-react/src/components/*/README.md',
+  '../../packages/web/src/scss/components/**/README.md',
+  '../../packages/icons/src/svg/*.svg',
+  '../../packages/web/src/scss/helpers/**/preview.html',
+];
 
 const nextConfig: NextConfig = {
   // Spirit keeps its own agent instructions in `AGENTS.md`, so `next dev` must not generate or update them.
@@ -70,6 +89,10 @@ const nextConfig: NextConfig = {
       '../../packages/web-react/src/components/**/docs/*.json',
       '../../packages/web-react/src/components/*/README.md',
     ],
+    '/md': documentedMarkdownTracing,
+    '/md/**': documentedMarkdownTracing,
+    '/llms.txt': documentedMarkdownTracing,
+    '/llms-full.txt': documentedMarkdownTracing,
   },
   transpilePackages: ['@alma-oss/spirit-web-react'],
   serverExternalPackages: ['next-mdx-remote'],
@@ -115,6 +138,27 @@ const nextConfig: NextConfig = {
     };
 
     return config;
+  },
+  // Existing pages are static, so a query param cannot change their body.
+  // beforeFiles runs before those pages and only when format=md is present.
+  // Only documented sections are rewritten, so /md, /llms.txt, /_next, and /api stay untouched.
+  async rewrites() {
+    const markdownQuery = [{ type: 'query' as const, key: 'format', value: 'md' }];
+
+    return {
+      beforeFiles: DOCUMENTATION_MENU.flatMap(({ id }) => [
+        {
+          source: `/${id}`,
+          has: markdownQuery,
+          destination: `/md/${id}`,
+        },
+        {
+          source: `/${id}/:path*`,
+          has: markdownQuery,
+          destination: `/md/${id}/:path*`,
+        },
+      ]),
+    };
   },
 };
 

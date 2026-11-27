@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { getRepoRoot } from '@local/domains/content/paths';
+import { getRepoRoot } from '@local/config/paths';
 import { parse as parseYaml } from 'yaml';
 import type { ComponentCategories } from '../features/component-catalog';
 import { isRecord } from '../utils/isRecord';

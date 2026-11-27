@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { getRepoRoot } from '@local/domains/content/paths';
+import { getRepoRoot } from '@local/config/paths';
 import { componentDocsDirectory } from '@local/domains/routing/routes';
 import { isValidComponentSlug, slugToComponentName } from '../../../utils/componentSlug';
 import { parsePlaygroundFile, type PlaygroundFile } from '../playgroundConfig';

@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { getComponentPlayground } from '../components/features/component-playground/repositories/componentPlaygroundRepository';
-import { isValidComponentSlug, slugToComponentName } from '../components/utils/componentSlug';
-import { componentDocsDirectory, componentDocTabs, type ComponentDocTab } from '../routing/routes';
-import { fileExists } from './contentRepository';
-import { getRepoRoot } from './paths';
+import { getRepoRoot } from '@local/config/paths';
+import { fileExists } from '@local/utils/fileExists';
+import { componentDocsDirectory, componentDocTabs, type ComponentDocTab } from '../../routing/routes';
+import { getComponentPlayground } from '../features/component-playground/repositories/componentPlaygroundRepository';
+import { isValidComponentSlug, slugToComponentName } from '../utils/componentSlug';
 
 export interface ComponentTabAvailability {
   overview: boolean;
