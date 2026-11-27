@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '../../Box';
+import { DEFAULT_POPOVER_PROPS } from '../constants';
 import { UNSTABLE_PickerGroup, UNSTABLE_PickerItem, UNSTABLE_UncontrolledPicker } from '..';
 
 const LONG_TEXT_OPTIONS = [
@@ -17,9 +18,9 @@ const PickerLongText = () => (
   <Box UNSAFE_style={{ maxWidth: '16rem' }}>
     <UNSTABLE_UncontrolledPicker
       id="demo-picker-long-text"
-      defaultSelectedKeys={LONG_TEXT_OPTIONS.map((option) => option.value)}
-      dropdownProps={{ fullWidthMode: 'mobile-only' }}
+      defaultSelectedKeys={LONG_TEXT_OPTIONS.map((option) => option.value)}      
       label="Skills"
+      popoverProps={{ ...DEFAULT_POPOVER_PROPS, UNSAFE_style: { width: '15rem' } }}
     >
       <UNSTABLE_PickerGroup label="Skills">
         {LONG_TEXT_OPTIONS.map(({ value, label }) => (
