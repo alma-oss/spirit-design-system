@@ -964,23 +964,26 @@ describe('UNSTABLE_Combobox', () => {
   });
 
   it('should break long words in selected tag rows', () => {
-    render(
-      <TestCombobox
-        selectedKeys={['cs']}
-        renderTags={({ getKeyboardGridRowProps, removeTagAtIndex }) => (
-          <UNSTABLE_ComboboxTag
-            label="Custom Czech"
-            tagKeyboardProps={getKeyboardGridRowProps(0)}
-            onRemove={() => removeTagAtIndex(0)}
-          />
-        )}
-      />,
-    );
+    render(<TestCombobox selectedKeys={['cs']} />);
 
-    expect(screen.getByRole('row', { name: 'Custom Czech' })).toHaveClass('text-word-break-long-words');
+    expect(screen.getByRole('row', { name: 'Czech' })).toHaveClass(
+      'text-hyphens-none',
+      'text-word-break-long-words',
+    );
   });
 
-  it('should allow overriding the word break strategy of a tag row', () => {
+  it('should allow overriding wrap strategy via tagProps', () => {
+    render(
+      <TestCombobox selectedKeys={['cs']} tagProps={{ textWordBreak: 'anywhere' }} />,
+    );
+
+    const row = screen.getByRole('row', { name: 'Czech' });
+
+    expect(row).toHaveClass('text-word-break-anywhere');
+    expect(row).not.toHaveClass('text-word-break-long-words');
+  });
+
+  it('should allow overriding the word break strategy of a custom tag row', () => {
     render(
       <TestCombobox
         selectedKeys={['cs']}

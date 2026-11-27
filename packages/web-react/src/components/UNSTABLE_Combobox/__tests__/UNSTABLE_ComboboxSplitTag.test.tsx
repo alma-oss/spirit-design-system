@@ -196,7 +196,7 @@ describe('UNSTABLE_ComboboxSplitTag', () => {
     const row = screen.getByRole('row', { name: 'Praha, +5 km' });
     const labelTag = within(row).getByText('Praha').closest('.Tag');
 
-    expect(labelTag).toHaveClass('text-word-break-long-words');
+    expect(labelTag).toHaveClass('text-hyphens-none', 'text-word-break-long-words');
   });
 
   it('should open the nested select on ArrowDown from the distance trigger', () => {

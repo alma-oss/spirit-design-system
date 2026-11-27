@@ -29,7 +29,7 @@ const UNSTABLE_SplitTag = <C = void, S = void>(props: SpiritUnstableSplitTagProp
     defaultProps,
     mergedProps as Record<string, unknown>,
   ) as SpiritUnstableSplitTagProps<C, S>;
-  const { children, color, isDisabled, isSubtle, size, ...restProps } = propsWithDefaults;
+  const { children, color, isDisabled, isSubtle, size, textHyphens, textWordBreak, ...restProps } = propsWithDefaults;
   const controlButtonSize =
     UNSTABLE_SPLIT_TAG_CONTROL_BUTTON_SIZE_MAP[size as NonNullable<SizeExtendedDictionaryType>] ?? size;
   const { classProps } = useSplitTagStyleProps();
@@ -42,7 +42,7 @@ const UNSTABLE_SplitTag = <C = void, S = void>(props: SpiritUnstableSplitTagProp
         controlButton: { size: controlButtonSize },
         isDisabled,
         item: { size },
-        tag: { color, isSubtle, size },
+        tag: { color, isSubtle, size, textHyphens, textWordBreak },
       }}
     >
       <div {...styleProps} {...filterDOMProps(otherProps)} className={classNames(classProps, styleProps.className)}>

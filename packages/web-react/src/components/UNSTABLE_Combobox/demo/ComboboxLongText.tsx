@@ -48,6 +48,7 @@ const ComboboxLongText = () => {
   return (
     <Box UNSAFE_style={{ maxWidth: '18rem' }}>
       <UNSTABLE_Combobox
+        dropdownProps={{ fullWidthMode: 'mobile-only' }}
         hasEmptyState
         id="demo-combobox-long-text"
         inputValue={inputValue}
@@ -91,7 +92,7 @@ const ComboboxLongText = () => {
       >
         {filteredOptions.map((option) => (
           <UNSTABLE_ComboboxOption key={option.id} value={option.id}>
-            <Label>{option.label}</Label>
+            <Label><span className="text-word-break-long-words">{option.label}</span></Label>
           </UNSTABLE_ComboboxOption>
         ))}
       </UNSTABLE_Combobox>

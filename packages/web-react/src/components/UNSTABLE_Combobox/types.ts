@@ -18,6 +18,10 @@ import type { ComboboxSelectedItem } from './useComboboxItems';
 /** Popup options widget role. `null` on the prop means no options widget (tip-only / auxiliary content). */
 export type ComboboxOptionsRole = 'listbox' | 'grid';
 
+/** Props forwarded from Combobox onto each default selection `Tag`. */
+export type UnstableComboboxDefaultTagProps = StyleProps &
+  Pick<SpiritTagProps<'div'>, 'textHyphens' | 'textWordBreak'>;
+
 export type UnstableComboboxStrings = {
   addMore?: {
     descriptionAria?: TranslatableString;
@@ -125,8 +129,11 @@ export interface UnstableComboboxBaseProps<S = void>
   optionsRole?: ComboboxOptionsRole | null;
   /** Props for the inner `DropdownPopover`. */
   popoverProps?: StyleProps;
-  /** Props for the inner `Tag` elements (style props; `UNSAFE_className` is merged with tag classes). */
-  tagProps?: StyleProps;
+  /**
+   * Props for the inner `Tag` elements (style props plus `textHyphens` / `textWordBreak`).
+   * Defaults: `textHyphens: 'none'`, `textWordBreak: 'long-words'`. Ignored when `renderTags` is used.
+   */
+  tagProps?: UnstableComboboxDefaultTagProps;
   renderTags?: (options: UnstableComboboxRenderTagsOptions) => ReactNode;
   /** Content rendered before the input, e.g. an icon. Provide full markup, usually an `InputAddon`. */
   startSlot?: ReactNode;

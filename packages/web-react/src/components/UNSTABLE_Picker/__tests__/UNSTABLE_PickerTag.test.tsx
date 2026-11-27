@@ -50,13 +50,21 @@ describe('UNSTABLE_PickerTag', () => {
       </PickerContextProvider>,
     );
 
-    expect(screen.getByRole('row', { name: 'Czech' })).toHaveClass('text-word-break-long-words');
+    expect(screen.getByRole('row', { name: 'Czech' })).toHaveClass(
+      'text-hyphens-none',
+      'text-word-break-long-words',
+    );
   });
 
   it('should allow overriding the word break strategy', () => {
     render(
       <PickerContextProvider value={{ size: 'medium' }}>
-        <UNSTABLE_PickerTag label="Czech" onRemove={jest.fn()} removeLabel="Remove Czech" textWordBreak="anywhere" />
+        <UNSTABLE_PickerTag
+          label="Czech"
+          onRemove={jest.fn()}
+          removeLabel="Remove Czech"
+          textWordBreak="anywhere"
+        />
       </PickerContextProvider>,
     );
 

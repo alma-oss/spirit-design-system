@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextWordBreaks } from '../../../constants';
+import { TextHyphens, TextWordBreaks } from '../../../constants';
 import { Box } from '../../Box';
 import { Stack } from '../../Stack';
 import SplitTagLocationRadius from './SplitTagLocationRadius';
@@ -10,11 +10,13 @@ const SplitTagLongText = () => (
       <SplitTagLocationRadius
         id="split-tag-long-multi-word"
         label="Horní Rokytnice, Rokytnice nad Jizerou"
+        textHyphens={TextHyphens.NONE}
         textWordBreak={TextWordBreaks.LONG_WORDS}
       />
       <SplitTagLocationRadius
         id="split-tag-long-single-word"
         label="longtextwithoutspaceslongtextwithoutspaceslongtextwithoutspaces"
+        textHyphens={TextHyphens.NONE}
         textWordBreak={TextWordBreaks.LONG_WORDS}
       />
     </Stack>

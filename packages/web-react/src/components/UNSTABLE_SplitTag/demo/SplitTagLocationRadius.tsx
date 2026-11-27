@@ -1,6 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useToggle } from '../../../hooks';
-import type { TextWordBreakType } from '../../../types';
 import { ControlButton } from '../../ControlButton';
 import { Dropdown, DropdownPopover, DropdownTrigger } from '../../Dropdown';
 import { Icon } from '../../Icon';
@@ -17,18 +16,16 @@ import { radiusOptions } from './constants';
 
 export interface SplitTagLocationRadiusProps extends Pick<
   SpiritUnstableSplitTagProps,
-  'color' | 'isDisabled' | 'isSubtle' | 'size'
+  'color' | 'isDisabled' | 'isSubtle' | 'size' | 'textHyphens' | 'textWordBreak'
 > {
   id?: string;
   label?: string;
-  textWordBreak?: TextWordBreakType;
 }
 
 const SplitTagLocationRadius = ({
   id = 'split-tag-location-radius',
   label = 'Prague',
   size = 'medium',
-  textWordBreak,
   ...splitTagProps
 }: SplitTagLocationRadiusProps) => {
   const [selectedRadius, setSelectedRadius] = useState(radiusOptions[0]);
@@ -65,7 +62,7 @@ const SplitTagLocationRadius = ({
       role="group"
       size={size}
     >
-      <Tag textWordBreak={textWordBreak}>{label}</Tag>
+      <Tag>{label}</Tag>
       <Dropdown id={`${id}-dropdown`} isOpen={isDropdownOpen} onToggle={toggleDropdown} placement="bottom-start">
         <DropdownTrigger elementType={Tag} aria-label={`Select distance, selected ${selectedRadius}`}>
           {selectedRadius}

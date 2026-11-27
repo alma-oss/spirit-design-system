@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import { Sizes, TextWordBreaks } from '../../constants';
+import { Sizes, TextHyphens, TextWordBreaks } from '../../constants';
 import { useI18n } from '../../hooks';
 import { resolveComponentString } from '../../translations';
 import { CloseButton } from '../CloseButton';
@@ -18,6 +18,7 @@ const UNSTABLE_PickerTag = ({
   label,
   onRemove,
   removeLabel,
+  textHyphens = TextHyphens.NONE,
   textWordBreak = TextWordBreaks.LONG_WORDS,
   ...restProps
 }: SpiritUnstablePickerTagProps) => {
@@ -49,6 +50,7 @@ const UNSTABLE_PickerTag = ({
       isDisabled={isDisabled}
       role="row"
       tabIndex={isDisabled ? -1 : (tagKeyboardProps?.tabIndex ?? 0)}
+      textHyphens={textHyphens}
       textWordBreak={textWordBreak}
       aria-label={getNodeText(label)}
       {...tagKeyboardEventProps}
