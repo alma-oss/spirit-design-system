@@ -92,7 +92,9 @@ const ComboboxLongText = () => {
       >
         {filteredOptions.map((option) => (
           <UNSTABLE_ComboboxOption key={option.id} value={option.id}>
-            <Label><span className="text-word-break-long-words">{option.label}</span></Label>
+            <Label>
+              <span className="text-word-break-long-words">{option.label}</span>
+            </Label>
           </UNSTABLE_ComboboxOption>
         ))}
       </UNSTABLE_Combobox>

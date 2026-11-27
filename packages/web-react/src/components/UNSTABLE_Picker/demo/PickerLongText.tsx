@@ -16,7 +16,7 @@ const LONG_TEXT_OPTIONS = [
 const PickerLongText = () => (
   <Box UNSAFE_style={{ maxWidth: '16rem' }}>
     <UNSTABLE_UncontrolledPicker
-      id="demo-picker-long-text"      
+      id="demo-picker-long-text"
       defaultSelectedKeys={LONG_TEXT_OPTIONS.map((option) => option.value)}
       dropdownProps={{ fullWidthMode: 'mobile-only' }}
       label="Skills"

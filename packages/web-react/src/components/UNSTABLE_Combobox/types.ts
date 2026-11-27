@@ -19,8 +19,7 @@ import type { ComboboxSelectedItem } from './useComboboxItems';
 export type ComboboxOptionsRole = 'listbox' | 'grid';
 
 /** Props forwarded from Combobox onto each default selection `Tag`. */
-export type UnstableComboboxDefaultTagProps = StyleProps &
-  Pick<SpiritTagProps<'div'>, 'textHyphens' | 'textWordBreak'>;
+export type UnstableComboboxDefaultTagProps = StyleProps & Pick<SpiritTagProps<'div'>, 'textHyphens' | 'textWordBreak'>;
 
 export type UnstableComboboxStrings = {
   addMore?: {

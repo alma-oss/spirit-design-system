@@ -966,16 +966,11 @@ describe('UNSTABLE_Combobox', () => {
   it('should break long words in selected tag rows', () => {
     render(<TestCombobox selectedKeys={['cs']} />);
 
-    expect(screen.getByRole('row', { name: 'Czech' })).toHaveClass(
-      'text-hyphens-none',
-      'text-word-break-long-words',
-    );
+    expect(screen.getByRole('row', { name: 'Czech' })).toHaveClass('text-hyphens-none', 'text-word-break-long-words');
   });
 
   it('should allow overriding wrap strategy via tagProps', () => {
-    render(
-      <TestCombobox selectedKeys={['cs']} tagProps={{ textWordBreak: 'anywhere' }} />,
-    );
+    render(<TestCombobox selectedKeys={['cs']} tagProps={{ textWordBreak: 'anywhere' }} />);
 
     const row = screen.getByRole('row', { name: 'Czech' });
 

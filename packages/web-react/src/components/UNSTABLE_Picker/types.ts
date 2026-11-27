@@ -20,8 +20,7 @@ import type {
 export type UnstablePickerSelectionMode = SelectionMode;
 
 /** Props forwarded from Picker onto each default selection `Tag`. */
-export type UnstablePickerDefaultTagProps = StyleProps &
-  Pick<SpiritTagProps<'div'>, 'textHyphens' | 'textWordBreak'>;
+export type UnstablePickerDefaultTagProps = StyleProps & Pick<SpiritTagProps<'div'>, 'textHyphens' | 'textWordBreak'>;
 
 export type UnstablePickerStrings = {
   addAria?: TranslatableString;

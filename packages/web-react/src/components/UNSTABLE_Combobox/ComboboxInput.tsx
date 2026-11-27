@@ -7,11 +7,7 @@ import type { SelectionGridRowProps } from '../../hooks';
 import type { TranslatableString } from '../../types';
 import { InputContainer } from '../InputContainer';
 import { VisuallyHidden } from '../VisuallyHidden';
-import type {
-  ComboboxOptionsRole,
-  UnstableComboboxRenderTagsOptions,
-  UnstableComboboxDefaultTagProps,
-} from './types';
+import type { ComboboxOptionsRole, UnstableComboboxDefaultTagProps, UnstableComboboxRenderTagsOptions } from './types';
 import UNSTABLE_ComboboxSelection from './UNSTABLE_ComboboxSelection';
 import UNSTABLE_ComboboxTag from './UNSTABLE_ComboboxTag';
 import type { ComboboxSelectedItem } from './useComboboxItems';
